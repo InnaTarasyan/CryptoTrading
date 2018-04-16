@@ -37,3 +37,9 @@ tr.odd:hover td.sorting_2 {
 tr.odd:hover td.sorting_3 {
     background-color: #DBFF70;
 }
+.danger{
+    color:red;
+}
+.success{
+    color:blue;
+}

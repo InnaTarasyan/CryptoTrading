@@ -21,10 +21,6 @@ CoinmarketCap.prototype.init = function () {
             {data: 'last_updated', name: 'last_updated'}
         ],
         "columnDefs" : [{
-            "targets" : 2,
-            "render" : function ( url, type, full) {
-                return  (url != null) ? url.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : url;
-            }}, {
             "targets" : 3 ,
             "render" : function ( url, type, full) {
                 return  (url != null) ? url.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : url;
