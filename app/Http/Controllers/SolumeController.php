@@ -32,6 +32,9 @@ class SolumeController extends Controller
     {
         return Datatables::of(Solume::all())
                    ->editColumn('change_24h', function ($coin){
+                       if(!isset($coin->change_24h)){
+                           return 'Not Set';
+                       }
                        if($coin->change_24h < 0){
                            return "<p class='danger'>$coin->change_24h</p>";
                        } else {
@@ -39,6 +42,9 @@ class SolumeController extends Controller
                        }
                    })
                    ->editColumn('reddit_change_24h', function ($coin){
+                       if(!isset($coin->reddit_change_24h)){
+                           return 'Not Set';
+                       }
                        if($coin->reddit_change_24h < 0){
                            return "<p class='danger'>$coin->reddit_change_24h</p>";
                        } else {
@@ -46,6 +52,9 @@ class SolumeController extends Controller
                        }
                    })
                    ->editColumn('sentiment_change_24h', function ($coin){
+                       if(!isset($coin->sentiment_change_24h)){
+                           return 'Not Set';
+                       }
                        if($coin->sentiment_change_24h < 0){
                            return "<p class='danger'>$coin->sentiment_change_24h</p>";
                        } else {
@@ -53,6 +62,9 @@ class SolumeController extends Controller
                        }
                    })
                    ->editColumn('twitter_change_24h', function ($coin){
+                        if(!isset($coin->twitter_change_24h)){
+                            return 'Not Set';
+                        }
                         if($coin->twitter_change_24h < 0){
                             return "<p class='danger'>$coin->twitter_change_24h</p>";
                         } else {

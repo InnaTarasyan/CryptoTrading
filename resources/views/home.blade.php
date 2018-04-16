@@ -19,7 +19,6 @@
                 <th>Percent Change(1h)</th>
                 <th>Percent Change(24h)</th>
                 <th>Percent Change(7d)</th>
-                <th>Last updated</th>
             </tr>
             </thead>
         </table>

@@ -34,6 +34,9 @@ class HomeController extends Controller
     {
         return Datatables::of(Coinmarketcap::all())
                      ->editColumn('percent_change_1h', function ($coin){
+                         if(!isset($coin->percent_change_1h)){
+                             return 'Not Set';
+                         }
                          if($coin->percent_change_1h < 0){
                              return "<p class='danger'>$coin->percent_change_1h</p>";
                          } else {
@@ -41,6 +44,9 @@ class HomeController extends Controller
                          }
                      })
                      ->editColumn('percent_change_24h', function ($coin){
+                        if(!isset($coin->percent_change_24h)){
+                             return 'Not Set';
+                        }
                         if($coin->percent_change_24h < 0){
                             return "<p class='danger'>$coin->percent_change_24h</p>";
                         } else {
@@ -48,14 +54,14 @@ class HomeController extends Controller
                         }
                      })
                     ->editColumn('percent_change_7d', function ($coin){
+                        if(!isset($coin->percent_change_7d)){
+                            return 'Not Set';
+                        }
                         if($coin->percent_change_7d < 0){
                             return "<p class='danger'>$coin->percent_change_7d</p>";
                         } else {
                             return "<p class='success'>$coin->percent_change_7d</p>";
                         }
-                    })
-                    ->editColumn('last_updated', function ($coin){
-                        return Carbon::createFromTimestamp($coin->last_updated)->format('d.m.Y, H:i:s');
                     })
                      ->rawColumns(['percent_change_1h', 'percent_change_24h', 'percent_change_7d'])
                      ->make(true);
