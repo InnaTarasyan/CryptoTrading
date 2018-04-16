@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/solume', 'SolumeController@index');
+Route::get('/coinbin', 'CoinbinController@index');
+Route::get('/worldcoinindex','WorldCoinIndexController@index');
+Auth::routes();
+
+Route::get('/getcoinmarketcap', ['as'=>'datatable.getcoinmarketcap','uses'=>'HomeController@getCoinmarketcapData']);
+Route::get('/getsolume', ['as'=>'datatable.getsolume','uses'=>'SolumeController@getSolumeData']);
+Route::get('/getcoinbin', ['as'=>'datatable.getcoinbin','uses'=>'CoinbinController@getCoinbinData']);
+Route::get('/getworldcoinindex', ['as'=>'datatable.getworldcoinindex','uses'=>'WorldCoinIndexController@getWorldCoinIndexData']);

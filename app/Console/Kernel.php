@@ -13,7 +13,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\CoinmarketCap',
+        'App\Console\Commands\Coindar',
+        'App\Console\Commands\Coinbin',
+        'App\Console\Commands\Solume',
+        'App\Console\Commands\WorldCoinIndex',
     ];
 
     /**
@@ -24,8 +28,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+         $schedule->command('coinbin:start')
+                  ->hourly();
+
+         $schedule->command('coindar:start')
+                  ->hourly();
+
+         $schedule->command('coinmarketcap:start')
+                  ->hourly();
+
+         $schedule->command('solume:start')
+                  ->hourly();
+
+         $schedule->command('worldcoinindex:start')
+                  ->hourly();
+
     }
 
     /**
