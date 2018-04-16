@@ -23,13 +23,13 @@ Information is displayed in <i>Laravel Datatables</i>, which includes table
  After you have cloned or downloaded the project, navigate to the corresponding directory
   <ul>
      <li>
-     Install all the dependencies as specified in the composer.lock file (in your terminal). <br/>
+     Install all the dependencies as specified in the <i>composer.lock</i> file (in your terminal). <br/>
      cd cryptoTrading <br/>
      composer install 
      </li>
-     <li>Copy the .env.example file to the .env file, and set the corresponding keys</li>
+     <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys</li>
      <li> Run the site <br/> php artisan serve --host=your_host --port=your_port <br/> Alternatively, create a virtual host. <br/>
      </li>
      <li>Execute the migrations <br/> php artisan migrate</li>
-     <li>For the Linux system cron, add the following Cron entry to your server: <br/> * * * * * php /path-to-the-project/artisan schedule:run >> /dev/null 2>&1 <br/> Windows has GUI equivalent called Task Scheduler, that can be made to perform similar function. <br/> You can run schedules by hand, by using this command in Command Prompt: <br/> php artisan schedule:run <br/> (Remember to navigate to project directory first.)</li>
+     <li>For the <i>Linux</i> system cron, add the following Cron entry to your server: <br/> * * * * * php /path-to-the-project/artisan schedule:run >> /dev/null 2>&1 <br/> <i>Windows</i> has GUI equivalent called <i>Task Scheduler</i>, that can be made to perform similar function. <br/> You can <i>run schedules by hand</i>, by using this command in Command Prompt: <br/> php artisan schedule:run <br/> (Remember to navigate to project directory first.)</li>
   </ul>
