@@ -4,19 +4,27 @@
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
 @endsection
 @section('content')
-    <input type="hidden" id="coinbin_route" value="{{ route('datatable.getcoinbin') }}">
-    <div class="table-responsive">
-        <table id="coinbin" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
-            <thead>
-            <tr>
-                <th>Ticker</th>
-                <th>Rank</th>
-                <th>BTC</th>
-                <th>Name</th>
-                <th>USD</th>
-            </tr>
-            </thead>
-        </table>
+    <div class="m-content">
+        <!--Begin::Section-->
+        <div class="m-portlet" >
+            <div class="m-portlet__body  m-portlet__body--no-padding">
+                <input type="hidden" id="coinbin_route" value="{{ route('datatable.getcoinbin') }}">
+                <div class="table-responsive">
+                    <table id="coinbin" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Rank</th>
+                                <th>BTC</th>
+                                <th>Name</th>
+                                <th>USD</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--End::Section-->
     </div>
 @endsection
 @section('scripts')

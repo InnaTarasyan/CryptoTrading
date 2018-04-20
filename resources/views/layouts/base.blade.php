@@ -42,15 +42,7 @@
         @include('layouts.menu')
         <div class="m-grid__item m-grid__item--fluid m-wrapper">
             @include('layouts.subheader')
-            <div class="m-content">
-                <!--Begin::Section-->
-                <div class="m-portlet" >
-                    <div class="m-portlet__body  m-portlet__body--no-padding">
-                        @yield('content')
-                    </div>
-                </div>
-                <!--End::Section-->
-            </div>
+            @yield('content')
         </div>
     </div>
     <!-- end:: Body -->

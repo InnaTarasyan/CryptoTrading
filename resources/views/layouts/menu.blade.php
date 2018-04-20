@@ -404,11 +404,12 @@
                     </ul>
                 </div>
             </li>
+
             <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom" aria-haspopup="true"  data-menu-submenu-toggle="click" data-redirect="true">
                 <a  href="#" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-stopwatch"></i>
+                    <i class="m-menu__link-icon socicon-twitter"></i>
                     <span class="m-menu__link-text">
-						Customers
+						Twitter
 					</span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
@@ -418,17 +419,17 @@
                         <li class="m-menu__item  m-menu__item--parent m-menu__item--bottom" aria-haspopup="true"  data-redirect="true">
                             <span class="m-menu__link">
                                 <span class="m-menu__link-text">
-                                    Customers
+                                    Twitter
                                 </span>
                             </span>
                         </li>
                         <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
-                            <a  href="inner.html" class="m-menu__link ">
+                            <a  href="/twitter" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
-									Reports
+									Twitter Account
 								</span>
                             </a>
                         </li>

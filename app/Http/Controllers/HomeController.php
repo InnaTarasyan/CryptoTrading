@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Coinmarketcap;
-use Carbon\Carbon;
 
 class HomeController extends Controller
 {

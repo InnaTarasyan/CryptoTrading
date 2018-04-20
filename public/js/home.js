@@ -36,7 +36,13 @@ CoinmarketCap.prototype.init = function () {
             "render" : function ( url, type, full) {
                 return  (url != null) ? url.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : url;
             }}],
-        "aaSorting": [[ 1, "asc" ]]
+        "aaSorting": [[ 1, "asc" ]],
+        "fnDrawCallback": function() {
+            $('#coinmarketcap tbody tr').click(function () {
+                var coin = $(this).find('td:first').text();
+                window.location.href = "/details/" + coin;
+            });
+        }
     });
 };
 

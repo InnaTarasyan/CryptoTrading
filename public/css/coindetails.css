@@ -1,0 +1,15 @@
+.m-stack.m-stack--general.m-stack--ver.m-stack--demo {
+    height: 45px;
+}
+
+.m-stack__item--middle{
+    border:0px !important;
+    font-weight: 400 !important;
+    padding: 5px !important;
+}
+
+.m-demo .m-demo__preview {
+    background: white;
+    border: 0px ;
+    padding: 0px;
+}

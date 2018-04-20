@@ -43,3 +43,6 @@ tr.odd:hover td.sorting_3 {
 .success{
     color:blue;
 }
+tr {
+    cursor: pointer;
+}

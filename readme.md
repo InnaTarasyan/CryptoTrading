@@ -14,7 +14,10 @@ Information is displayed in <i>Laravel Datatables</i>, which includes table
  Also, site includes basic <i>login/logout/register functionality</i>. <br/>
  <i>Metronic</i> theme is integrated.
  <br/>
+ Twitter integration implemented. User can configure Twitter account
+ and the corresponding tweets will be retrieved.
  <br/>
+ <br/> 
  <b>Prerequisits</b>
  <ul>
    <li>Ensure you have PHP version 7.1.* </li>
