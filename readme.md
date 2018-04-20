@@ -14,8 +14,10 @@ Information is displayed in <i>Laravel Datatables</i>, which includes table
  Also, site includes basic <i>login/logout/register functionality</i>. <br/>
  <i>Metronic</i> theme is integrated.
  <br/>
- Twitter integration implemented. User can configure Twitter account
+ <i>Twitter</i> integration implemented. User can configure <i>Twitter account</i> </a>
  and the corresponding tweets will be retrieved.
+ <br/>
+ <i>Coin Events</i> are shown in the calendar.
  <br/>
  <br/> 
  <b>Prerequisits</b>
