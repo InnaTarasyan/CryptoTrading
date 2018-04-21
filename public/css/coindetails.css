@@ -13,3 +13,9 @@
     border: 0px ;
     padding: 0px;
 }
+
+.m-timeline-2__item-time{
+    width: 0;
+    overflow: visible;
+    font-size: 14px !important;
+}

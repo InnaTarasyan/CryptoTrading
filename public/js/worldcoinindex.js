@@ -19,7 +19,13 @@ WorldCoinIndex.prototype.init = function () {
             {data: 'Volume_24h', name: 'Volume_24h'},
 
         ],
-        "aaSorting": [[0, "asc"]]
+        "aaSorting": [[8, "desc"]],
+        "fnDrawCallback": function() {
+            $('#worldcoinindex tbody tr').click(function () {
+                var coin = $(this).find('td:first').text().split('/')[0];
+                window.location.href = "/details/" + coin;
+            });
+        }
     });
 };
 

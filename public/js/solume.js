@@ -51,6 +51,12 @@ Solume.prototype.init = function () {
                     return  (url != null) ? url.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : url;
             }}
         ],
+       "fnDrawCallback": function() {
+           $('#solume tbody tr').click(function () {
+               var coin = $(this).find('td:first').text();
+               window.location.href = "/details/" + coin;
+           });
+       }
     });
 };
 

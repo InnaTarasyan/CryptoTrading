@@ -31,22 +31,26 @@ class DetailsController extends Controller
      */
     public function index($symbol)
     {
-        $screenName = TwitterAccount::where('coin', $symbol)->first()->account;
+        $twitter = TwitterAccount::where('coin', $symbol)->first();
+        $data = [
+            'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
+            'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
+            'coinbin' => Coinbin::where('ticker', $symbol)->first(),
+            'solume'=> Solume::where('symbol', $symbol)->first(),
+            'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first(),
+        ];
 
-        $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 20, 'format' => 'json']), true);
-        foreach ($tweets as &$tweet){
-          $tweet['text'] = $this->parse_tweet($tweet['text']);
+        if($twitter){
+            $screenName = $twitter->account;
+            $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 20, 'format' => 'json']), true);
+            foreach ($tweets as &$tweet){
+                $tweet['text'] = $this->parse_tweet($tweet['text']);
+            }
+            $data['tweets'] = $tweets;
         }
 
         return view('coindetails')
-            ->with([
-                'events' => Coindar::all()->where('coin_symbol', $symbol),
-                'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
-                'coinbin' => Coinbin::where('ticker', $symbol)->first(),
-                'solume'=> Solume::where('symbol', $symbol)->first(),
-                'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first(),
-                'tweets' => $tweets
-            ]);
+            ->with($data);
     }
 
 

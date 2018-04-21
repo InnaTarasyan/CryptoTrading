@@ -14,7 +14,13 @@ Coinbin.prototype.init = function () {
             {data: 'name', name: 'name'},
             {data: 'usd', name: 'usd'}
         ],
-        "aaSorting": [[1, "asc"]]
+        "aaSorting": [[1, "asc"]],
+        "fnDrawCallback": function() {
+            $('#coinbin tbody tr').click(function () {
+                var coin = $(this).find('td:first').text();
+                window.location.href = "/details/" + coin;
+            });
+        }
     });
 };
 
