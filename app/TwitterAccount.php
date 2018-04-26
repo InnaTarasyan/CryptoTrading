@@ -15,6 +15,7 @@ class TwitterAccount extends Model
      */
     protected $fillable = [
             'coin',
+            'rel_coins',
             'account'
     ];
 }

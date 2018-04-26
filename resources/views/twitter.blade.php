@@ -1,7 +1,9 @@
 @extends('layouts.base')
 @section('styles')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
+    <link href="{{url('css/twitter.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 
@@ -22,6 +24,7 @@
                             <tr>
                                 <th>Coin</th>
                                 <th>Account</th>
+                                <th>Related Coins</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -34,7 +37,7 @@
 
 
     <!--begin::Modal-->
-    <div class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="m_modal_1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -48,6 +51,46 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <form>
+                        <input type="hidden" id="coin_id" >
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="recipient-name" class="form-control-label">
+                                        Coin: *
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <select  name="state" id="coin" style="width: 100%">
+                                    @foreach($coins as $coin)
+                                        <option value="{{$coin->symbol}}"> {{$coin->symbol}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="recipient-name" class="form-control-label">
+                                    Related Coins:
+                                </label>
+                            </div>
+                            <div class="col-lg-12">
+                                <select class="coins-multiple" name="states" multiple="multiple" id="rel_coins">
+                                    @foreach($coins as $coin)
+                                        <option value="{{$coin->symbol }}"> {{$coin->symbol}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <br/>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="message-text" class="form-control-label">
+                                        Twitter Account: *
+                                    </label>
+                                    <textarea class="form-control" id="twitter_account"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -64,6 +107,7 @@
 
 @endsection
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>
     <script src="{{ url('assets/demo/default/custom/components/base/sweetalert2.js') }}" type="text/javascript" defer></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

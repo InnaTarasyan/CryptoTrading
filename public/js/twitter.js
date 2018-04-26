@@ -2,25 +2,9 @@ function Twitter(){
   var oTable;
 }
 
-Twitter.prototype.modalContent = function (id, coin, account) {
-
-    return '<form>' +
-              '<input type="hidden" id="coin_id" value="' + id + '">' +
-              '<div class="form-group">' +
-                 '<label for="recipient-name" class="form-control-label">' +
-                      'Coin:' +
-                 '</label>' +
-                 '<input type="text" class="form-control" id="coin" value="' + coin + '">' +
-              '</div>' +
-              '<div class="form-group">' +
-                  '<label for="message-text" class="form-control-label">' +
-                      'Twitter Account:' +
-                  '</label>' +
-                  '<textarea class="form-control" id="twitter_account">' + account + '</textarea>' +
-              '</div>' +
-           '</form>'
-};
-
+/*
+   Initializes the datatable
+ */
 Twitter.prototype.init = function () {
     this.oTable = $('#twitter').DataTable({
         "processing": true,
@@ -29,6 +13,7 @@ Twitter.prototype.init = function () {
         "columns": [
             {data: 'coin', name: 'coin', "defaultContent" : 'Not Set'},
             {data: 'account', name: 'account', "defaultContent" : 'Not Set'},
+            {data: 'rel_coins', name: 'rel_coins', "defaultContent" : 'Not Set'},
             {data: 'action', name: 'action'},
         ],
         "aaSorting": [[ 1, "asc" ]]
@@ -43,15 +28,40 @@ Twitter.prototype.bindEvents = function () {
    $(document).on('click', '.update', this.updateAccount.bind(this));
 };
 
+/*
+   Stores the updated data in the database
+ */
 Twitter.prototype.updateAccount = function () {
 
     var self = this;
     var id  = $('#coin_id').val();
 
+    var coin = $('#coin').val();
+    var account = $('#twitter_account').val();
+
+    if(!coin){
+        swal({
+            title: 'Error!',
+            text: "Coin is mandatory!",
+            type: 'warning'
+        });
+        return;
+    }
+
+    if(!account){
+        swal({
+            title: 'Error!',
+            text: "Account is mandatory!",
+            type: 'warning'
+        });
+        return;
+    }
+
     var fd = new FormData();
     fd.append('id', id);
-    fd.append('coin', $('#coin').val());
-    fd.append('account', $('#twitter_account').val());
+    fd.append('coin', coin);
+    fd.append('rel_coins', $('#rel_coins').val());
+    fd.append('account', account);
     fd.append('_token', $('meta[name="_token"]').attr('content'));
     fd.append('_method', 'PATCH');
 
@@ -73,12 +83,13 @@ Twitter.prototype.updateAccount = function () {
         }
     });
 
-
 };
 
+/*
+   Brings the corresponding coin related data from database
+ */
 Twitter.prototype.editAccount = function (event) {
 
-    var self = this;
     var id = $(event.target).attr('data-url');
 
     var fd = new FormData();
@@ -94,9 +105,17 @@ Twitter.prototype.editAccount = function (event) {
         contentType: false,
         success: function (res) {
             if(res.data){
-                $(document).find('.modal-body').html(self.modalContent(res.data.id, res.data.coin, res.data.account));
+
                 $('.account_action').addClass('update');
                 $('.account_action').removeClass('save');
+
+                var related_coins =  (res.data.rel_coins)?  res.data.rel_coins.split(','): '';
+
+                $('#coin').select2().select2('val', res.data.coin);
+                $('#rel_coins').select2().select2('val', related_coins);
+
+                $('#coin_id').val(res.data.id);
+                $('#twitter_account').val(res.data.account);
             }
         },
         error: function (res) {
@@ -141,18 +160,41 @@ Twitter.prototype.deleteAccount = function (event) {
                     console.log(data);
                 }
             });
-            
         }
     });
-
 };
 
+/*
+   Stores data in database
+ */
 Twitter.prototype.saveAccount = function () {
     var self = this;
 
+    var coin =  $('#coin').val();
+    var account = $('#twitter_account').val();
+
+    if(!coin){
+        swal({
+            title: 'Error!',
+            text: "Coin is mandatory!",
+            type: 'warning'
+        });
+        return;
+    }
+
+    if(!account){
+        swal({
+            title: 'Error!',
+            text: "Account is mandatory!",
+            type: 'warning'
+        });
+        return;
+    }
+
     var fd = new FormData();
-    fd.append('coin', $('#coin').val());
-    fd.append('account', $('#twitter_account').val());
+    fd.append('coin', coin);
+    fd.append('rel_coins', $('#rel_coins').val());
+    fd.append('account', account);
     fd.append('_token', $('meta[name="_token"]').attr('content'));
 
     $.ajax({
@@ -165,8 +207,14 @@ Twitter.prototype.saveAccount = function () {
         success: function (data) {
             if(data.status == 'ok'){
                 self.oTable.ajax.reload();
-                $('#m_modal_1').modal('toggle');
+            } else {
+                swal({
+                    title: 'Error',
+                    text: "Account already Exists!",
+                    type: 'warning'
+                })
             }
+            $('#m_modal_1').modal('toggle');
         },
         error: function (data) {
             console.log(data);
@@ -176,9 +224,18 @@ Twitter.prototype.saveAccount = function () {
 };
 
 Twitter.prototype.addAccount = function () {
-  $(document).find('.modal-body').html(this.modalContent('', '', ''));
+
   $('.account_action').removeClass('update');
   $('.account_action').addClass('save');
+
+  $('#coin').select2();
+  $('#rel_coins').select2();
+
+  $('#coin').select2().select2('val', '');
+  $('#rel_coins').select2().select2('val', '');
+
+  $('#coin_id').val('');
+  $('#twitter_account').val('');
 };
 
 $(document).ready(function() {

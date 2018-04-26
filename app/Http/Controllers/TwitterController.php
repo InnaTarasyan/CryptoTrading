@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Thujohn\Twitter\Twitter;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\TwitterAccount;
+use App\Coinmarketcap;
 
 class TwitterController extends Controller
 {
@@ -36,6 +37,7 @@ class TwitterController extends Controller
             $data['id'] = $account->id;
             $data['coin'] = $account->coin;
             $data['account'] = $account->account;
+            $data['rel_coins'] = $account->rel_coins;
         }
         return response()->json(['status' => $status, 'data' => $data]);
     }
@@ -48,7 +50,8 @@ class TwitterController extends Controller
      */
     public function index()
     {
-        return view('twitter');
+        return view('twitter')
+            ->with(['coins' => Coinmarketcap::all()]);
     }
 
     /**
@@ -64,6 +67,7 @@ class TwitterController extends Controller
 
         $data = [
             'coin' => $request->coin,
+            'rel_coins' => $request->rel_coins,
             'account' => $request->account
         ];
 
@@ -120,15 +124,20 @@ class TwitterController extends Controller
     {
         $status = 'fail';
 
-        $data = [
-            'coin' => $request->coin,
-            'account' => $request->account
-        ];
+        $exists = TwitterAccount::where('coin', $request->coin)->first();
+        if(!$exists){
+            $data = [
+                'coin' => $request->coin,
+                'rel_coins' => $request->rel_coins,
+                'account' => $request->account
+            ];
 
-        $account = TwitterAccount::create($data);
-        if ($account->exists){
-            $status = 'ok';
+            $account = TwitterAccount::create($data);
+            if ($account->exists){
+                $status = 'ok';
+            }
         }
+
         return response()->json(['status' => $status]);
 
     }

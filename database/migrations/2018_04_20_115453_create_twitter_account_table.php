@@ -16,6 +16,7 @@ class CreateTwitterAccountTable extends Migration
         Schema::create('twitter_account', function (Blueprint $table) {
             $table->increments('id');
             $table->string('coin');
+            $table->string('rel_coins')->nullable();
             $table->string('account');
             $table->timestamps();
         });
