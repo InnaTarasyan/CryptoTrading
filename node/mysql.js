@@ -1,5 +1,5 @@
 // reading data from config.json file
-var config = require('./config.json');
+var config = require('./mysql_config.json');
 
 /**
  * MySQL connection

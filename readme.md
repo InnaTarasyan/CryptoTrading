@@ -52,6 +52,9 @@ background, using <i>laravel Task Scheduling</i>):
      composer install 
      </li>
      <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys</li>
+     <li> Run the following and add the corresponding keys to .env file<br/>
+     php artisan vendor:publish --provider="Thujohn\Twitter\TwitterServiceProvider"
+     </li>
      <li> Run the site <br/> php artisan serve --host=your_host --port=your_port <br/> Alternatively, create a virtual host. <br/>
      </li>
      <li>Execute the migrations <br/> php artisan migrate</li>
