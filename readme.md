@@ -16,6 +16,7 @@ background, using <i>laravel Task Scheduling</i>):
              views (datagrids) with <i>pagination</i>, <i>searching</i> and 
              <i>sorting</i> capabilities. 
          </li>
+         <li>TradingView Charts</li>
          <li>
              Site includes basic <i>login/logout/register functionality</i>. <br/>
          </li>

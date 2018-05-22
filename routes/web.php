@@ -28,4 +28,8 @@ Route::get('/twitter', ['as' => 'twitter', 'uses' => 'TwitterController@index'])
 Route::resource('twitter', 'TwitterController');
 Route::get('/gettwitter', ['as' => 'datatable.gettwitter','uses' => 'TwitterController@getTweets']);
 
+Route::get('/tradingPairs', ['as' => 'tradingPairs', 'uses' => 'TradingPairsController@index']);
+Route::resource('tradingPairs', 'TradingPairsController');
+Route::get('/gettradingPairs', ['as' => 'datatable.gettradingPairs','uses' => 'TradingPairsController@getTradingPairsData']);
+
 Route::get('/chat', 'ChatController@index');

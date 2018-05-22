@@ -1,5 +1,5 @@
 .m-stack.m-stack--general.m-stack--ver.m-stack--demo {
-    height: 45px;
+    height: 25px;
 }
 
 .m-stack__item--middle{
@@ -18,4 +18,8 @@
     width: 0;
     overflow: visible;
     font-size: 14px !important;
+}
+
+.m-body .m-content {
+    padding: 15px 15px;
 }

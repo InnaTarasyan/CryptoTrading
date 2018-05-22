@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\TwitterAccount;
 use Illuminate\Http\Request;
 use App\Coindar;
 use App\Coinmarketcap;
 use App\Coinbin;
 use App\Solume;
 use App\WorldCoinIndex;
+use App\TradingPair;
+use App\TwitterAccount;
 
 use Twitter;
 
@@ -32,12 +33,16 @@ class DetailsController extends Controller
     public function index($symbol)
     {
         $twitter = TwitterAccount::where('coin', $symbol)->first();
+        $tradingPair = TradingPair::where('coin', $symbol)->first();
+
         $data = [
+            'symbol' => $symbol,
+            'coin' => Coinmarketcap::where('symbol', $symbol)->first()->name,
             'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
             'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
             'coinbin' => Coinbin::where('ticker', $symbol)->first(),
             'solume'=> Solume::where('symbol', $symbol)->first(),
-            'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first(),
+            'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first()
         ];
 
         if($twitter){
@@ -47,6 +52,10 @@ class DetailsController extends Controller
                 $tweet['text'] = $this->parse_tweet($tweet['text']);
             }
             $data['tweets'] = $tweets;
+        }
+
+        if($tradingPair){
+            $data['tradingPair'] = TradingPair::where('coin', $symbol)->first()->trading_pair;
         }
 
         return view('coindetails')

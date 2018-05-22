@@ -20,6 +20,7 @@ WorldCoinIndex.prototype.init = function () {
             {data: 'Volume_24h', name: 'Volume_24h'},
 
         ],
+        "iDisplayLength": 5,
         "aaSorting": [[8, "desc"]],
         "fnDrawCallback": function() {
             $('#worldcoinindex tbody tr').click(function () {

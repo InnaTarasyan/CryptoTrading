@@ -21,6 +21,7 @@ Solume.prototype.init = function () {
             {data: 'twitter_volume_24h', name: 'twitter_volume_24h', "defaultContent" : 'Not Set'},
 
         ],
+       "iDisplayLength": 5,
         "aaSorting": [[ 1, "asc" ]],
         "columnDefs" : [{
            "targets" : 2,

@@ -15,6 +15,7 @@ Coinbin.prototype.init = function () {
             {data: 'name', name: 'name'},
             {data: 'usd', name: 'usd'}
         ],
+        "iDisplayLength": 5,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coinbin tbody tr').click(function () {
