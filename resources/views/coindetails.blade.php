@@ -316,35 +316,44 @@
                            </div>
                        </div>
                        <div class="m-portlet__body" style="padding: 0rem;">
-                           <!-- TradingView Widget BEGIN -->
-                               <div class="tradingview-widget-container">
-                                   <div id="tradingview_ffbfc"></div>
-                                   <div class="tradingview-widget-copyright">
-                                       <a href="https://www.tradingview.com/symbols/BITFINEX-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">BTCUSD chart</span></a> by TradingView</div>
-                                   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                                   <script type="text/javascript">
-                                       var symbol = '{{$tradingPair}}';
-                                   </script>
-                                   <script type="text/javascript">
-                                       new TradingView.widget(
-                                           {
-                                               "width": '100%',
-                                               "height": 410,
-                                               "symbol": symbol? symbol: "BITFINEX:BTCUSD",
-                                               "interval": "D",
-                                               "timezone": "Etc/UTC",
-                                               "theme": "Light",
-                                               "style": "1",
-                                               "locale": "en",
-                                               "toolbar_bg": "#f1f3f6",
-                                               "enable_publishing": false,
-                                               "allow_symbol_change": true,
-                                               "container_id": "tradingview_ffbfc"
-                                           }
-                                       );
-                                   </script>
+                           @if(!isset($tradingPair))
+                               <div style="padding-top: 10px; padding-bottom: 10px;">
+                                   Please add a Trading Pair <a href="/tradingPairs">Here</a>:
                                </div>
-                               <!-- TradingView Widget END -->
+                               <script type="text/javascript">
+                                   var symbol = '';
+                               </script>
+                           @else
+                               <script type="text/javascript">
+                                   var symbol = '{{$tradingPair}}';
+                               </script>
+                           @endif
+                           <!-- TradingView Widget BEGIN -->
+                           <div class="tradingview-widget-container">
+                               <div id="tradingview_ffbfc" ></div>
+                               <div class="tradingview-widget-copyright">
+                                   <a href="https://www.tradingview.com/symbols/BITFINEX-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">BTCUSD chart</span></a> by TradingView</div>
+                               <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                               <script type="text/javascript">
+                                   new TradingView.widget(
+                                       {
+                                           "width": '100%',
+                                           "height": '100%',
+                                           "symbol": symbol ? symbol: "BITFINEX:BTCUSD",
+                                           "interval": "D",
+                                           "timezone": "Etc/UTC",
+                                           "theme": "Light",
+                                           "style": "1",
+                                           "locale": "en",
+                                           "toolbar_bg": "#f1f3f6",
+                                           "enable_publishing": true,
+                                           "allow_symbol_change": true,
+                                           "container_id": "tradingview_ffbfc"
+                                       }
+                                   );
+                               </script>
+                           </div>
+                           <!-- TradingView Widget END -->
                        </div>
                    </div>
                </div>
@@ -414,6 +423,31 @@
                     </div>
                 </div>
                 <!--end::Portlet-->
+            </div>
+            <div class="col-xl-8 col-lg-12" >
+                @if(!isset($tradingPair))
+                <div style="padding-top: 10px; padding-bottom: 10px;">
+                    Please add a Trading Pair <a href="/tradingPairs">Here</a>:
+                </div>
+                @else
+                <!-- TradingView Widget BEGIN -->
+                <div id="tv-chatwidget" ></div>
+                <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                <script type="text/javascript" >
+                    new TradingView.IdeasStreamWidget({
+                        "container_id": "tv-ideas-stream-9ecf7",
+                        "startingCount": 1,
+                        "width": '100%',
+                        "height": '100%',
+                        "mode": "integrate",
+                        "bgColor": "#f2f5f8",
+                        "headerColor": "#4BC2E9",
+                        "borderColor": "#dce1e6",
+                        "symbol": symbol ? symbol: "BITFINEX:BTCUSD",
+                    });
+                </script>
+                <!-- TradingView Widget END -->
+                @endif
             </div>
         </div>
         <!--End::Section-->

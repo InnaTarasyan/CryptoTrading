@@ -55,7 +55,7 @@ class DetailsController extends Controller
         }
 
         if($tradingPair){
-            $data['tradingPair'] = TradingPair::where('coin', $symbol)->first()->trading_pair;
+            $data['tradingPair'] = $tradingPair->trading_pair;
         }
 
         return view('coindetails')

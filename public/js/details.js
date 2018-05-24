@@ -17,6 +17,8 @@ CoinDetails.prototype.init = function () {
         ev_list.push(elem);
   });
 
+    $('#tradingview_ffbfc').css('height', '400px');
+
     var todayDate = moment().startOf('day');
     $('#m_portlet_calendar').find('.m-portlet__body').append('<div id="m_calendar"></div>');
 
@@ -55,6 +57,17 @@ CoinDetails.prototype.init = function () {
    $('.fc-agendaWeek-button').hide();
    $('.fc-agendaDay-button').hide();
    $('.fc-listWeek-button').hide();
+
+
+    var portlet = $('#m_portlet_tools_2').mPortlet();
+    portlet.on('afterFullscreenOn', function(portlet) {
+       $('#tradingview_ffbfc').css('height', '100%');
+    });
+
+    portlet.on('afterFullscreenOff', function(portlet) {
+       $('#tradingview_ffbfc').css('height', '400px');
+    });
+
 };
 
 $(document).ready(function() {
