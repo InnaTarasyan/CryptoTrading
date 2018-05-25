@@ -93,7 +93,7 @@ background, using <i>laravel Task Scheduling</i>):
  ![ScreenShot](https://i.imgur.com/8HBKjp8.png)   
  ![ScreenShot](https://i.imgur.com/yQVg091.png)
  ![ScreenShot](https://i.imgur.com/oz4d8bA.png)
- ![ScreenShot](https://i.imgur.com/ytEeWvA.png)
+ ![ScreenShot](https://i.imgur.com/VpQ7u9y.png)
  ![ScreenShot](https://i.imgur.com/TLVsns3.png)
  ![ScreenShot](https://i.imgur.com/OenBeHT.png)
   
