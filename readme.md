@@ -56,6 +56,12 @@ background, using <i>laravel Task Scheduling</i>):
      <li> Run the following and add the corresponding keys to .env file<br/>
      php artisan vendor:publish --provider="Thujohn\Twitter\TwitterServiceProvider"
      </li>
+     <li>Now open up /config/app.php and add the service provider to your providers array. <br/> 'providers' => [
+                                                                                           	Thujohn\Twitter\TwitterServiceProvider::class,
+                                                                                           ] <br/> 
+                                                                                           Now add the alias. <br/>'aliases' => [
+                                                                                                                   	'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+                                                                                                                   ]</li>
      <li> Run the site <br/> php artisan serve --host=your_host --port=your_port <br/> Alternatively, create a virtual host. <br/>
      </li>
      <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
@@ -80,6 +86,7 @@ background, using <i>laravel Task Scheduling</i>):
     <li>Laravel Datatables</li>
     <li>Twitter API Integration</li>
     <li>select2.js JQuery Technology</li>
+    <li>Markdown Parser</li>
     <li>Websocket API</li>
     <li>node-mysql node package</li>
     <li>http node package</li>
