@@ -33,3 +33,5 @@ Route::resource('tradingPairs', 'TradingPairsController');
 Route::get('/gettradingPairs', ['as' => 'datatable.gettradingPairs','uses' => 'TradingPairsController@getTradingPairsData']);
 
 Route::get('/chat', 'ChatController@index');
+
+Route::match(['get', 'post'], '/about', ['uses' => 'HomeController@about', 'as' => 'about']);

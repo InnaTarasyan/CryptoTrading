@@ -361,39 +361,7 @@
 											</span>
                                         </a>
                                     </li>
-                                    <li class="m-nav__item">
-                                        <a href="profile.html" class="m-nav__link">
-                                            <i class="m-nav__link-icon flaticon-share"></i>
-                                            <span class="m-nav__link-text">
-												Activity
-											</span>
-                                        </a>
-                                    </li>
-                                    <li class="m-nav__item">
-                                        <a href="profile.html" class="m-nav__link">
-                                            <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                            <span class="m-nav__link-text">
-												Messages
-											</span>
-                                        </a>
-                                    </li>
-                                    <li class="m-nav__separator m-nav__separator--fit"></li>
-                                    <li class="m-nav__item">
-                                        <a href="profile.html" class="m-nav__link">
-                                            <i class="m-nav__link-icon flaticon-info"></i>
-                                            <span class="m-nav__link-text">
-												FAQ
-											</span>
-                                        </a>
-                                    </li>
-                                    <li class="m-nav__item">
-                                        <a href="profile.html" class="m-nav__link">
-                                            <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                            <span class="m-nav__link-text">
-												Support
-											</span>
-                                        </a>
-                                    </li>
+
                                     <li class="m-nav__separator m-nav__separator--fit"></li>
                                     <li class="m-nav__item">
                                         <a class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder" href="{{ route('logout') }}"

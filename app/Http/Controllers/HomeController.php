@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Coinmarketcap;
+use Validator;
+use Mail;
+use Config;
+use Parsedown;
 
 class HomeController extends Controller
 {
@@ -27,6 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+
     }
 
     public function getCoinmarketcapData()
@@ -64,5 +69,45 @@ class HomeController extends Controller
                     })
                      ->rawColumns(['percent_change_1h', 'percent_change_24h', 'percent_change_7d'])
                      ->make(true);
+    }
+
+    public function about(Request $request){
+
+        if($request->isMethod('post')){
+            $input = $request->except('_token');
+
+            $messages = [
+                'required' => 'Field :attribute is required'
+            ];
+
+            $validator = Validator::make($input, [
+                'name' => 'required|max:100',
+                'email' => 'required|email|max:100',
+                'text' => 'required|max:255'
+            ], $messages);
+
+            if($validator->fails()){
+                return redirect()->route('about')->withErrors($validator)->withInput();
+            }
+
+            $data = $request->all();
+            $data['text'] = (new Parsedown())->line($data['text']);
+
+            $result = Mail::send('layouts.email', ['data' => $data], function ($message) use ($data){
+                $mail_admin = Config::get('settings.mail_admin');
+                $message->from($data['email'], $data['name']);
+                $message->to($mail_admin)->subject('Feedback');
+            });
+            if($result){
+                return redirect()->route('home')->with('status', 'Email is sent');
+            }
+
+        }
+
+        if(view()->exists('about')){
+            return view('about')->with('key', Config::get('settings.googleapis_key'));
+        }
+        abort(404);
+
     }
 }
