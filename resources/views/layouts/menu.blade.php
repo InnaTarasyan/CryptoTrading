@@ -104,32 +104,6 @@
                     </ul>
                 </div>
             </li>
-            <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom-2" aria-haspopup="true"  data-menu-submenu-toggle="click">
-                <a  href="#" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-settings"></i>
-                    <span class="m-menu__link-text">
-						Settings
-					</span>
-                    <i class="m-menu__ver-arrow la la-angle-right"></i>
-                </a>
-                <div class="m-menu__submenu m-menu__submenu--up">
-                    <span class="m-menu__arrow"></span>
-                </div>
-            </li>
-            <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom-1" aria-haspopup="true"  data-menu-submenu-toggle="click">
-                <a  href="#" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-info"></i>
-                    <span class="m-menu__link-text">
-						Help
-					</span>
-                    <i class="m-menu__ver-arrow la la-angle-right"></i>
-                </a>
-                <div class="m-menu__submenu m-menu__submenu--up">
-                    <span class="m-menu__arrow"></span>
-                    <ul class="m-menu__subnav">
-                    </ul>
-                </div>
-            </li>
         </ul>
     </div>
     <!-- END: Aside Menu -->

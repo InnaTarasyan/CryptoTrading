@@ -27,7 +27,8 @@ class TradingPairsController extends Controller
     public function index()
     {
         return view('trading_pairs')
-                ->with(['coins' => Coinmarketcap::all()]);;
+                ->with(['coins' => Coinmarketcap::all(),
+                        'title' => 'Trading Pair']);
     }
 
     public function getTradingPairsData(){

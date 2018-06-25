@@ -14,7 +14,7 @@ TradingPairs.prototype.init = function () {
             {data: 'action', name: 'action'}
 
         ],
-        "iDisplayLength": 5,
+        "iDisplayLength": 10,
         "aaSorting": [[ 1, "asc" ]]
     });
 };

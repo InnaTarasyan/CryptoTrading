@@ -20,7 +20,7 @@ CoinmarketCap.prototype.init = function () {
             {data: 'percent_change_24h', name: 'percent_change_24h', "defaultContent" : 'Not Set'},
             {data: 'percent_change_7d', name: 'percent_change_7d',  "defaultContent" : 'Not Set'}
         ],
-        "iDisplayLength": 5,
+        "iDisplayLength": 10,
         "columnDefs" : [{
             "targets" : 3 ,
             "render" : function ( url, type, full) {

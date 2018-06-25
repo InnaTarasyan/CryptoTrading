@@ -51,7 +51,8 @@ class TwitterController extends Controller
     public function index()
     {
         return view('twitter')
-            ->with(['coins' => Coinmarketcap::all()]);
+            ->with(['coins' => Coinmarketcap::all(),
+                    'title' => 'Twitter']);
     }
 
     /**

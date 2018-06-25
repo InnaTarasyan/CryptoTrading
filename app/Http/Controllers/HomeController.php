@@ -105,7 +105,9 @@ class HomeController extends Controller
         }
 
         if(view()->exists('about')){
-            return view('about')->with('key', Config::get('settings.googleapis_key'));
+            return view('about')->with([
+                'key' =>  Config::get('settings.googleapis_key'),
+                'title' => 'About Us']);
         }
         abort(404);
 

@@ -31,13 +31,6 @@
                         </a>
                     </li>
                     <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
-                        <a  href="/coinbin" class="m-menu__link ">
-                            <span class="m-menu__link-text">
-                                Coinbin.org data
-							</span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
                         <a  href="/worldcoinindex" class="m-menu__link ">
                             <span class="m-menu__link-text">
 								Worldcoinindex.com data
@@ -48,39 +41,11 @@
             </div>
         </li>
         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
-            <a  href="#" class="m-menu__link m-menu__toggle">
-                <span class="m-menu__item-here"></span>
-                <span class="m-menu__link-text">
-					Customer Feedback
-				</span>
-                <i class="m-menu__hor-arrow la la-angle-down"></i>
-                <i class="m-menu__ver-arrow la la-angle-right"></i>
+            <a href="{{route('about')}}" class="m-nav__link">
+                    <span class="m-nav__link-text">
+                        About
+                    </span>
             </a>
-            <div class="m-menu__submenu  m-menu__submenu--fixed m-menu__submenu--left" style="width:600px">
-                <span class="m-menu__arrow m-menu__arrow--adjust"></span>
-                <div class="m-menu__subnav">
-                    <ul class="m-menu__content">
-                        <li class="m-menu__item">
-                            <h3 class="m-menu__heading m-menu__toggle">
-                                <span class="m-menu__link-text">
-                                </span>
-                                <i class="m-menu__ver-arrow la la-angle-right"></i>
-                            </h3>
-                            <ul class="m-menu__inner">
-                            </ul>
-                        </li>
-                        <li class="m-menu__item">
-                            <h3 class="m-menu__heading m-menu__toggle">
-                                <span class="m-menu__link-text">
-                                </span>
-                                <i class="m-menu__ver-arrow la la-angle-right"></i>
-                            </h3>
-                            <ul class="m-menu__inner">
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </li>
 
     </ul>

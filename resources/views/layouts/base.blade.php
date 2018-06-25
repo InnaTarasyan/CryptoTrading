@@ -66,6 +66,25 @@
     <!--begin::Page Snippets -->
     <script src="{{ url('assets/app/js/dashboard.js') }}" type="text/javascript"></script>
     @yield('scripts')
+    <script type="text/javascript">
+        $(function(){
+
+            $('.m-subheader__breadcrumbs a'). each(function(){
+                var current_page_URL = location.href;
+
+                if ($(this).attr("href") !== "#") {
+                    var target_URL = $(this).prop("href");
+                    if (target_URL == current_page_URL) {
+                        $(this).find('span:first').css('color', '#22b9ff');
+                        $(this).find('i:first').css('color','#22b9ff');
+
+                    }
+                }
+            });
+
+
+        });
+    </script>
 <!--end::Page Snippets -->
 </body>
 <!-- end::Body -->
