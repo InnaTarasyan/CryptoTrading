@@ -69,7 +69,7 @@
     <script type="text/javascript">
         $(function(){
 
-            $('.m-subheader__breadcrumbs a'). each(function(){
+            $('.m-subheader__breadcrumbs a, .m-menu__subnav a'). each(function(){
                 var current_page_URL = location.href;
 
                 if ($(this).attr("href") !== "#") {
