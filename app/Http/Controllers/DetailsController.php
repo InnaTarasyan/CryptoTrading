@@ -11,7 +11,7 @@ use App\WorldCoinIndex;
 use App\TradingPair;
 use App\TwitterAccount;
 
-use Twitter;
+use Thujohn\Twitter\Facades\Twitter;
 
 class DetailsController extends Controller
 {

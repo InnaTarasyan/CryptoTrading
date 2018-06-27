@@ -63,6 +63,9 @@ background, using <i>laravel Task Scheduling</i>):
        	'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
        ]
      </li>
+     <li>You need to create an application and create your access token in the <a href="https://apps.twitter.com/">Application Management.</a></li>
+     <li>You need to register to <a href="https://solume.io/api">Solume.io</a> and get the key.</li>
+     <li>Get the key from <a href="https://www.worldcoinindex.com/apiservice">worldcoinindex.com</a></li>
      <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys: <br/>
        <ul>
          <li>COIN_MARKET_CAP</li>
@@ -85,6 +88,15 @@ background, using <i>laravel Task Scheduling</i>):
      ]
      </li>
      <li>For the <i>Linux</i> system cron, add the following Cron entry to your server: <br/> * * * * * php /path-to-the-project/artisan schedule:run >> /dev/null 2>&1 <br/> <i>Windows</i> has GUI equivalent called <i>Task Scheduler</i>, that can be made to perform similar function. <br/> You can <i>run schedules by hand</i>, by using this command in Command Prompt: <br/> php artisan schedule:run <br/> (however in this case, you've to run the command on your own for multiple times.)</li>
+     <li>In order to get some initial data run the following:
+         <ul>
+           <li>php artisan coinmarketcap:start</li>
+           <li>php artisan solume:start</li>
+           <li>php artisan worldcoinindex:start</li>
+           <li>php artisan coindar:start</li>
+           <li>php artisan coinbin:start</li>
+         </ul>
+     </li>
      <li>In your root directory, run this command in your terminal/command prompt. This will
       install all the corresponding node packages listed in 
       package.json file
@@ -122,4 +134,5 @@ background, using <i>laravel Task Scheduling</i>):
  ![ScreenShot](https://i.imgur.com/VpQ7u9y.png)
  ![ScreenShot](https://i.imgur.com/TLVsns3.png)
  ![ScreenShot](https://i.imgur.com/OenBeHT.png)
+  
   
