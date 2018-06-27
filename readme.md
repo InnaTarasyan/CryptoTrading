@@ -65,12 +65,12 @@ background, using <i>laravel Task Scheduling</i>):
      </li>
      <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys: <br/>
        <ul>
-         <li>COIN_MARKET_CAP=https://api.coinmarketcap.com/v1/ticker/</li>
-         <li>COINDAR=https://coindar.org/api/v1/lastEvents</li>
-         <li>SOLUME=https://api.solume.io/api/coins </li>
+         <li>COIN_MARKET_CAP</li>
+         <li>COINDAR</li>
+         <li>SOLUME</li>
          <li>SOLUME_KEY (Register to Solume.io and get the key)</li>
-         <li>COINBIN=https://coinbin.org/coins</li>
-         <li> WORLD_COIN_INDEX=https://www.worldcoinindex.com/apiservice/json</li>
+         <li>COINBIN</li>
+         <li> WORLD_COIN_INDEX</li>
          <li> WORLD_COIN_INDEX_KEY (Register to www.worldcoinindex.com and get the key) </li>
          <li> TWITTER_CONSUMER_KEY (Get Twitter Developer Access Tokens)</li>
          <li>TWITTER_CONSUMER_SECRET (Get Twitter Developer Access Tokens)</li>
