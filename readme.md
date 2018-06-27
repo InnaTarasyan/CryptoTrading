@@ -71,7 +71,7 @@ background, using <i>laravel Task Scheduling</i>):
          <li>SOLUME_KEY (Register to Solume.io and get the key)</li>
          <li>COINBIN</li>
          <li> WORLD_COIN_INDEX</li>
-         <li> WORLD_COIN_INDEX_KEY (Register to www.worldcoinindex.com and get the key) </li>
+         <li> WORLD_COIN_INDEX_KEY (Register to worldcoinindex.com and get the key) </li>
          <li> TWITTER_CONSUMER_KEY (Get Twitter Developer Access Tokens)</li>
          <li>TWITTER_CONSUMER_SECRET (Get Twitter Developer Access Tokens)</li>
          <li> TWITTER_ACCESS_TOKEN (Get Twitter Developer Access Tokens)</li>
