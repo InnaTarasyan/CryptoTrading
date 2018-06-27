@@ -48,25 +48,40 @@ background, using <i>laravel Task Scheduling</i>):
  After you have cloned or downloaded the project, navigate to the corresponding directory
   <ul>
      <li>
-     Install all the dependencies as specified in the <i>composer.lock</i> file (in your terminal). <br/>
-     cd cryptoTrading <br/>
-     composer install 
+     Install all the dependencies as specified in the <i>composer.json</i> file: <br/>
+     composer install <br/>
+     composer require thujohn/twitter <br/>
+     php artisan vendor:publish <br/>
      </li>
-     <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys</li>
-     <li> Run the following and add the corresponding keys to .env file<br/>
-     php artisan vendor:publish --provider="Thujohn\Twitter\TwitterServiceProvider"
+     <li>
+       Now open up /config/app.php and add the service provider to your providers array: <br/>
+       'providers' => [ <br/>
+       	Thujohn\Twitter\TwitterServiceProvider::class,
+       ]
+       <br/><br/>
+       'aliases' => [ <br/>
+       	'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+       ]
      </li>
-     <li>Now open up /config/app.php and add the service provider to your providers array. <br/> 'providers' => [
-                                                                                           	Thujohn\Twitter\TwitterServiceProvider::class,
-                                                                                           ] <br/> 
-                                                                                           Now add the alias. <br/>'aliases' => [
-                                                                                                                   	'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
-                                                                                                                   ]</li>
-     <li> Run the site <br/> php artisan serve --host=your_host --port=your_port <br/> Alternatively, create a virtual host. <br/>
+     <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys: <br/>
+       <ul>
+         <li>COIN_MARKET_CAP=https://api.coinmarketcap.com/v1/ticker/</li>
+         <li>COINDAR=https://coindar.org/api/v1/lastEvents</li>
+         <li>SOLUME=https://api.solume.io/api/coins </li>
+         <li>SOLUME_KEY (Register to Solume.io and get the key)</li>
+         <li>COINBIN=https://coinbin.org/coins</li>
+         <li> WORLD_COIN_INDEX=https://www.worldcoinindex.com/apiservice/json</li>
+         <li> WORLD_COIN_INDEX_KEY (Register to www.worldcoinindex.com and get the key) </li>
+         <li> TWITTER_CONSUMER_KEY (Get Twitter Developer Access Tokens)</li>
+         <li>TWITTER_CONSUMER_SECRET (Get Twitter Developer Access Tokens)</li>
+         <li> TWITTER_ACCESS_TOKEN (Get Twitter Developer Access Tokens)</li>
+         <li>TWITTER_ACCESS_TOKEN_SECRET (Get Twitter Developer Access Tokens)</li>
+       </ul>
      </li>
-     <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
-     <br/>composer dump-autoload
-     <br/>php artisan db:seed
+    <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
+         <br/>composer dump-autoload
+         <br/>php artisan db:seed
+     ]
      </li>
      <li>For the <i>Linux</i> system cron, add the following Cron entry to your server: <br/> * * * * * php /path-to-the-project/artisan schedule:run >> /dev/null 2>&1 <br/> <i>Windows</i> has GUI equivalent called <i>Task Scheduler</i>, that can be made to perform similar function. <br/> You can <i>run schedules by hand</i>, by using this command in Command Prompt: <br/> php artisan schedule:run <br/> (however in this case, you've to run the command on your own for multiple times.)</li>
      <li>In your root directory, run this command in your terminal/command prompt. This will
