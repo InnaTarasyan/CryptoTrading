@@ -72,10 +72,10 @@ background, using <i>laravel Task Scheduling</i>):
          <li>COINBIN</li>
          <li> WORLD_COIN_INDEX</li>
          <li> WORLD_COIN_INDEX_KEY (Register to worldcoinindex.com and get the key) </li>
-         <li> TWITTER_CONSUMER_KEY (Get Twitter Developer Access Tokens)</li>
-         <li>TWITTER_CONSUMER_SECRET (Get Twitter Developer Access Tokens)</li>
-         <li> TWITTER_ACCESS_TOKEN (Get Twitter Developer Access Tokens)</li>
-         <li>TWITTER_ACCESS_TOKEN_SECRET (Get Twitter Developer Access Tokens)</li>
+         <li> TWITTER_CONSUMER_KEY (Get Twitter Developer Consumer Key)</li>
+         <li>TWITTER_CONSUMER_SECRET (Get Twitter Developer Consumer Secret)</li>
+         <li> TWITTER_ACCESS_TOKEN (Get Twitter Developer Access Token)</li>
+         <li>TWITTER_ACCESS_TOKEN_SECRET (Get Twitter Developer Access Token Secret)</li>
        </ul>
      </li>
     <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
