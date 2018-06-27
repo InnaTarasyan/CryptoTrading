@@ -85,7 +85,6 @@ background, using <i>laravel Task Scheduling</i>):
     <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
          <br/>composer dump-autoload
          <br/>php artisan db:seed
-     ]
      </li>
      <li>For the <i>Linux</i> system cron, add the following Cron entry to your server: <br/> * * * * * php /path-to-the-project/artisan schedule:run >> /dev/null 2>&1 <br/> <i>Windows</i> has GUI equivalent called <i>Task Scheduler</i>, that can be made to perform similar function. <br/> You can <i>run schedules by hand</i>, by using this command in Command Prompt: <br/> php artisan schedule:run <br/> (however in this case, you've to run the command on your own for multiple times.)</li>
      <li>In order to get some initial data run the following:
