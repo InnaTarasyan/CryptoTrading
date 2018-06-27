@@ -78,6 +78,7 @@ background, using <i>laravel Task Scheduling</i>):
          <li>TWITTER_ACCESS_TOKEN_SECRET (Get Twitter Developer Access Token Secret)</li>
        </ul>
      </li>
+    <li>Run the following: <br/> php artisan key:generate</li> 
     <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
          <br/>composer dump-autoload
          <br/>php artisan db:seed
