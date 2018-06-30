@@ -101,6 +101,7 @@ background, using <i>laravel Task Scheduling</i>):
       package.json file
      <br/> npm install
      </li>
+     <li>In node/mysql_config.json file put your corresponding database connection settings</li>
      <li>In your root directory run the server using terminal / command prompt with this syntax :  
      <br/>node node/server.js
      </li>
