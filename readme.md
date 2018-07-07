@@ -48,32 +48,60 @@ background, using <i>laravel Task Scheduling</i>):
  After you have cloned or downloaded the project, navigate to the corresponding directory
   <ul>
      <li>
-     Install all the dependencies as specified in the <i>composer.lock</i> file (in your terminal). <br/>
-     cd cryptoTrading <br/>
-     composer install 
+     Install all the dependencies as specified in the <i>composer.json</i> file: <br/>
+     composer install <br/>
+     composer require thujohn/twitter <br/>
+     php artisan vendor:publish <br/>
      </li>
-     <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys</li>
-     <li> Run the following and add the corresponding keys to .env file<br/>
-     php artisan vendor:publish --provider="Thujohn\Twitter\TwitterServiceProvider"
+     <li>
+       Now open up /config/app.php and add the service provider to your providers array: <br/>
+       'providers' => [ <br/>
+       	Thujohn\Twitter\TwitterServiceProvider::class,
+       ]
+       <br/><br/>
+       'aliases' => [ <br/>
+       	'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+       ]
      </li>
-     <li>Now open up /config/app.php and add the service provider to your providers array. <br/> 'providers' => [
-                                                                                           	Thujohn\Twitter\TwitterServiceProvider::class,
-                                                                                           ] <br/> 
-                                                                                           Now add the alias. <br/>'aliases' => [
-                                                                                                                   	'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
-                                                                                                                   ]</li>
-     <li> Run the site <br/> php artisan serve --host=your_host --port=your_port <br/> Alternatively, create a virtual host. <br/>
+     <li>You need to create an application and create your access token in the <a href="https://apps.twitter.com/">Application Management.</a></li>
+     <li>You need to register to <a href="https://solume.io/api">Solume.io</a> and get the key.</li>
+     <li>Get the key from <a href="https://www.worldcoinindex.com/apiservice">worldcoinindex.com</a></li>
+     <li>Copy the <i>.env.example</i> file to the <i>.env</i> file, and set the corresponding keys: <br/>
+       <ul>
+         <li>COIN_MARKET_CAP</li>
+         <li>COINDAR</li>
+         <li>SOLUME</li>
+         <li>SOLUME_KEY (Register to Solume.io and get the key)</li>
+         <li>COINBIN</li>
+         <li> WORLD_COIN_INDEX</li>
+         <li> WORLD_COIN_INDEX_KEY (Register to worldcoinindex.com and get the key) </li>
+         <li> TWITTER_CONSUMER_KEY (Get Twitter Developer Consumer Key)</li>
+         <li>TWITTER_CONSUMER_SECRET (Get Twitter Developer Consumer Secret)</li>
+         <li> TWITTER_ACCESS_TOKEN (Get Twitter Developer Access Token)</li>
+         <li>TWITTER_ACCESS_TOKEN_SECRET (Get Twitter Developer Access Token Secret)</li>
+       </ul>
      </li>
-     <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
-     <br/>composer dump-autoload
-     <br/>php artisan db:seed
+    <li>Run the following: <br/> php artisan key:generate</li> 
+    <li>Execute the <i>migrations</i> and run the <i>seeders</i> <br/> php artisan migrate
+         <br/>composer dump-autoload
+         <br/>php artisan db:seed
      </li>
      <li>For the <i>Linux</i> system cron, add the following Cron entry to your server: <br/> * * * * * php /path-to-the-project/artisan schedule:run >> /dev/null 2>&1 <br/> <i>Windows</i> has GUI equivalent called <i>Task Scheduler</i>, that can be made to perform similar function. <br/> You can <i>run schedules by hand</i>, by using this command in Command Prompt: <br/> php artisan schedule:run <br/> (however in this case, you've to run the command on your own for multiple times.)</li>
+     <li>In order to get some initial data run the following:
+         <ul>
+           <li>php artisan coinmarketcap:start</li>
+           <li>php artisan solume:start</li>
+           <li>php artisan worldcoinindex:start</li>
+           <li>php artisan coindar:start</li>
+           <li>php artisan coinbin:start</li>
+         </ul>
+     </li>
      <li>In your root directory, run this command in your terminal/command prompt. This will
       install all the corresponding node packages listed in 
       package.json file
      <br/> npm install
      </li>
+     <li>In node/mysql_config.json file put your corresponding database connection settings</li>
      <li>In your root directory run the server using terminal / command prompt with this syntax :  
      <br/>node node/server.js
      </li>
@@ -106,4 +134,5 @@ background, using <i>laravel Task Scheduling</i>):
  ![ScreenShot](https://i.imgur.com/VpQ7u9y.png)
  ![ScreenShot](https://i.imgur.com/TLVsns3.png)
  ![ScreenShot](https://i.imgur.com/OenBeHT.png)
+  
   
