@@ -55,7 +55,7 @@
     <i class="la la-arrow-up"></i>
 </div>
 <!-- end::Scroll Top -->
-@include('layouts.quick_nav')
+{{--@include('layouts.quick_nav')--}}
 <!--begin::Base Scripts -->
     <script src="{{ url('assets/vendors/base/vendors.bundle.js') }}" type="text/javascript"></script>
     <script src=" {{  url('assets/demo/demo7/base/scripts.bundle.js')}}" type="text/javascript"></script>

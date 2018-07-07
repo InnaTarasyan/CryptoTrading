@@ -13,20 +13,43 @@
         </div>
     @endif
 
-
-    <div class="m-content">
-        <!--Begin::Section-->
-        <div class="m-portlet" >
-            <div class="m-portlet__body  m-portlet__body--no-padding">
-                <div id="map" style="width:100%;height:400px;background:yellow"></div>
-            </div>
-        </div>
-        <!--End::Section-->
-    </div>
-
     <div class="m-content">
         <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-3">
+                <div class="m-portlet m-portlet--full-height  ">
+                    <div class="m-portlet__body">
+                        <div class="m-card-profile">
+                            <div class="m-card-profile__title m--hide">
+                                About
+                            </div>
+                            <div class="m-card-profile__pic">
+                                <div class="m-card-profile__pic-wrapper">
+                                    <img src="{{ asset('img/inna.jpg') }}" alt="" style="width: 100%; height: 100%;">
+                                </div>
+                            </div>
+                            <div class="m-card-profile__details">
+                                <span class="m-card-profile__name">
+                                    Inna Tarasyan
+                                </span>
+                                <a href="" class="m-card-profile__email m-link">
+                                    innatarasyanmail@gmail.com
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+                            <li class="m-nav__separator m-nav__separator--fit"></li>
+                            <li class="m-nav__section m--hide">
+                                <span class="m-nav__section-text">
+                                    Section
+                                </span>
+                            </li>
+                        </ul>
+                        <div class="m-portlet__body-separator"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9">
                 <!--begin::Portlet-->
                 <div class="m-portlet m-portlet--tab">
                     <div class="m-portlet__head">
@@ -45,12 +68,15 @@
                         <!--begin::Section-->
                         <div class="m-section">
                             <span class="m-section__sub">
-                                 <b>My Coin Trading Project</b> connects to the following Crypto-Currency Market
+                                <i>Dear All,</i><br/>
+                                 At first I want to introduce myself. I am Inna Tarasyan, I live in Armenia, in Yerevan, and I am web developer. <br/> <br/>
+                                 <b>My Coin Trading Project</b> allows online tracking of the changes in key indicators of the Crypto-currency,
+                                including the Social Volume Changes in the Reddit and Twitter, etc.
+                                Site connects to the following Crypto-Currency Market
                                 Capitalization sites via api:
                             </span>
                             <div class="m-section__content">
                                 <ul>
-                                    <li>coinbin.org</li>
                                     <li>worldcoinindex.com </li>
                                     <li>coindar.org</li>
                                     <li>solume.io</li>
@@ -59,7 +85,7 @@
                             </div>
                             <div class="m--space-30"></div>
                             <div class="m-section__content">
-                                <b>General Information </b>
+                                <b>These are the <i>Web Technologies</i> used for constructing the site: </b>
                                 <ul>
                                     <li>
                                         Information is displayed in <i>Laravel Datatables</i>, which includes table
@@ -84,9 +110,20 @@
                                         <i>select2.js JQuery plugin</i> is used to search for a coin.
                                     </li>
                                     <li>
+                                        Gravatar Service Integrated
+                                    </li>
+                                    <li>
+                                        Laravel Email Integrated
+                                    </li>
+                                    <li>
                                         Project has a <i>chat</i> implemented using <i>node.js framework</i>
                                     </li>
                                 </ul>
+                                <br/>
+                                On the other hand, I'm sure <b>My Coin Trading Project</b> site will help traders of  Cryptocurrency to better navigate the dynamics of market changes. <br/> <br/>
+                                I will accept with gratitude all your remarks both in terms of  functional purpose of site and the software. Please write :) Welcome ! <br/>  <br/>
+                                With Best Regards <br/>
+                                Inna Tarasyan
                             </div>
                         </div>
                         <!--end::Section-->
@@ -94,7 +131,21 @@
                 </div>
                 <!--end::Portlet-->
             </div>
-            <div class="col-xl-6">
+        </div>
+    </div>
+
+    <div class="m-content">
+        <div class="row">
+            <div class="col-xl-3">
+                <!--Begin::Section-->
+                <div class="m-portlet" >
+                    <div class="m-portlet__body  m-portlet__body--no-padding">
+                        <div id="map" style="width:100%;height:50em;background:yellow"></div>
+                    </div>
+                </div>
+                <!--End::Section-->
+            </div>
+            <div class="col-xl-9">
                 <!--begin::Portlet-->
                 <div class="m-portlet m-portlet--tab">
                     <div class="m-portlet__head">
