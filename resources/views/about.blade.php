@@ -24,7 +24,7 @@
                             </div>
                             <div class="m-card-profile__pic">
                                 <div class="m-card-profile__pic-wrapper">
-                                    <img src="{{ asset('img/inna.jpg') }}" alt="" style="width: 100%; height: 100%;">
+                                    <img src="{{ asset('img/inna_photo.jpg') }}" alt="" style="width: 100%; height: 100%;">
                                 </div>
                             </div>
                             <div class="m-card-profile__details">
@@ -117,13 +117,18 @@
                                     </li>
                                     <li>
                                         Project has a <i>chat</i> implemented using <i>node.js framework</i>
+                                        <br/>
+                                        (Unfortunately for now my Server does not support node.js)
                                     </li>
                                 </ul>
                                 <br/>
                                 On the other hand, I'm sure <b>My Coin Trading Project</b> site will help traders of  Cryptocurrency to better navigate the dynamics of market changes. <br/> <br/>
                                 I will accept with gratitude all your remarks both in terms of  functional purpose of site and the software. Please write :) Welcome ! <br/>  <br/>
                                 With Best Regards <br/>
-                                Inna Tarasyan
+                                Inna Tarasyan <br/>
+                                My Web Site is <i>
+                                                  <a href="http://www.innatarasyan.online"> www.innatarasyan.online </a>
+                                               </i>
                             </div>
                         </div>
                         <!--end::Section-->
@@ -213,7 +218,7 @@
 @section('scripts')
     <script>
         function myMap() {
-            var myCenter = new google.maps.LatLng(40.177200, 44.503490);
+            var myCenter = new google.maps.LatLng(40.182344, 44.513337);
             var mapCanvas = document.getElementById("map");
             var mapOptions = {center: myCenter, zoom: 5};
             var map = new google.maps.Map(mapCanvas, mapOptions);
