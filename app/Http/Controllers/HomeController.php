@@ -10,6 +10,7 @@ use Validator;
 use Mail;
 use Config;
 use Parsedown;
+use Session;
 
 class HomeController extends Controller
 {
@@ -97,9 +98,10 @@ class HomeController extends Controller
                 $mail_admin = Config::get('settings.mail_admin');
                 $message->from($data['email'], $data['name']);
                 $message->to($mail_admin)->subject('Feedback');
+                Session::flash('status', 'Email is sent!');
             });
             if($result){
-                return redirect()->route('home')->with('status', 'Email is sent');
+                return redirect()->route('home');
             }
 
         }

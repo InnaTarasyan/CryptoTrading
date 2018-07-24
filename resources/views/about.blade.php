@@ -174,6 +174,11 @@
                         </span>
                         <div class="m-section__content">
                             <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+                                @if(session('status'))
+                                    <div class="alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
                                 <form action="{{route('about')}}" method="post">
                                     {{csrf_field()}}
                                     <div class="m-demo__preview">
