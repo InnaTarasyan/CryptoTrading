@@ -3,16 +3,6 @@
 @endsection
 @section('content')
 
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div class="m-content">
         <div class="row">
             <div class="col-xl-3">
@@ -172,14 +162,23 @@
                         <span class="m-section__sub">
                             Provide Your Feedback:
                         </span>
-                        <div class="m-section__content">
+                        <div class="m-section__content" id="contactUs">
                             <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
                                 @if(session('status'))
                                     <div class="alert alert-success">
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <form action="{{route('about')}}" method="post">
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                <form action={{route('about','#contactUs')}} method="post">
                                     {{csrf_field()}}
                                     <div class="m-demo__preview">
                                         <div class="form-group m-form__group">
