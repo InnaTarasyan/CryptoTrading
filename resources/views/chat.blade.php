@@ -34,9 +34,5 @@
   </div>
 @endsection
 @section('scripts')
-  <script>
-     var user_id =  '{{Auth::id()}}';
-     var user_name = '{{Auth::user()->name}}';
-  </script>
   <script src="{{ url('js/chat.js') }}"></script>
 @endsection

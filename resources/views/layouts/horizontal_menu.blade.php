@@ -31,13 +31,6 @@
                         </a>
                     </li>
                     <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
-                        <a  href="/solume" class="m-menu__link ">
-                            <span class="m-menu__link-text">
-                               Solume.io data
-							</span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
                         <a  href="/worldcoinindex" class="m-menu__link ">
                             <span class="m-menu__link-text">
 								Worldcoinindex.com data

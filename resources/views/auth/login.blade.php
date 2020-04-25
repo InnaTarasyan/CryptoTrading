@@ -172,7 +172,7 @@
     <script src="{{ url('assets/demo/default/base/scripts.bundle.js') }}" type="text/javascript"></script>
     <!--end::Base Scripts -->
     <!--begin::Page Snippets -->
-    <script src="{{ url('js/login.js') }}" type="text/javascript"></script>
+    {{--<script src="{{ url('js/login.js') }}" type="text/javascript"></script>--}}
     <!--end::Page Snippets -->
 </body>
 <!-- end::Body -->

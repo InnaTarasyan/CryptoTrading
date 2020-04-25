@@ -7,8 +7,8 @@ use App\Library\Services\Base\BaseService;
 
 class CoindarService extends  BaseService {
 
-    public function get(){
-
+    public function get()
+    {
         $response = $this->retrieveData(config('coindar.url'), []);
 
         Coindar::truncate();

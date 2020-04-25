@@ -74,13 +74,13 @@
                 </div>
             </li>
             <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom" aria-haspopup="true"  data-menu-submenu-toggle="click" data-redirect="true">
-                <a  href="#" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon fa fa-bitcoin"></i>
-                    <span class="m-menu__link-text">
-						Trading Pair
-					</span>
-                    <i class="m-menu__ver-arrow la la-angle-right"></i>
-                </a>
+                {{--<a  href="#" class="m-menu__link m-menu__toggle">--}}
+                    {{--<i class="m-menu__link-icon fa fa-bitcoin"></i>--}}
+                    {{--<span class="m-menu__link-text">--}}
+						{{--Trading Pair--}}
+					{{--</span>--}}
+                    {{--<i class="m-menu__ver-arrow la la-angle-right"></i>--}}
+                {{--</a>--}}
                 <div class="m-menu__submenu ">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">

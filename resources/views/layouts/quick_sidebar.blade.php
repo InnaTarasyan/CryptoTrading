@@ -44,8 +44,7 @@
 <!-- end::Quick Sidebar -->
 
 <script>
-    var user_id =  '{{Auth::id()}}';
-    var user_name = '{{Auth::user()->name}}';
+
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{ url('js/chat.js') }}"></script>
