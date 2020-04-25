@@ -37,63 +37,65 @@
                                 <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
                                     <div class="m-demo__preview">
                                         <div class="m-stack m-stack--ver m-stack--desktop m-stack--demo">
-                                            <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                <i>
-                                                    <u>Price</u>
-                                                </i>
-                                                @if(isset($coinmarketcap))
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> BTC </b>
+                                            @if(isset($coinmarketcap) or isset($worldcoinindex))
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
+                                                    <i>
+                                                        <u>Price</u>
+                                                    </i>
+                                                    @if(isset($coinmarketcap))
+                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                <b> BTC </b>
+                                                            </div>
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                {{$coinmarketcap->price_btc}}
+                                                            </div>
                                                         </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$coinmarketcap->price_btc}}
+                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                <b> USD </b>
+                                                            </div>
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                {{$coinmarketcap->price_usd}}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> USD </b>
+                                                    @endif
+                                                    @if(isset($worldcoinindex))
+                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                <b> CNY </b>
+                                                            </div>
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                {{$worldcoinindex->Price_cny}}
+                                                            </div>
                                                         </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$coinmarketcap->price_usd}}
+                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                <b> EUR </b>
+                                                            </div>
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                {{ number_format($worldcoinindex->Price_eur, 2, '.', ',')}}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @endif
-                                                @if(isset($worldcoinindex))
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> CNY </b>
+                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                <b> GBP </b>
+                                                            </div>
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                {{ number_format($worldcoinindex->Price_gbp, 2, '.', ',')}}
+                                                            </div>
                                                         </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$worldcoinindex->Price_cny}}
+                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                <b> RUR </b>
+                                                            </div>
+                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                                {{ number_format($worldcoinindex->Price_rur, 2, '.', ',')}}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> EUR </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($worldcoinindex->Price_eur, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> GBP </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($worldcoinindex->Price_gbp, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> RUR </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($worldcoinindex->Price_rur, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                 @endif
-                                            </div>
+                                                     @endif
+                                                </div>
+                                            @endif
                                             @if(isset($coinmarketcap))
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--top">
                                                     <i>

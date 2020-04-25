@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('coinbin:start')
-                  ->hourly();
+//         $schedule->command('coinbin:start')
+//                  ->hourly();
 
          $schedule->command('coindar:start')
                   ->hourly();

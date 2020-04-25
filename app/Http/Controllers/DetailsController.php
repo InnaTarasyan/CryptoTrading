@@ -37,7 +37,7 @@ class DetailsController extends Controller
 
         $data = [
             'symbol' => $symbol,
-            'coin' => Coinmarketcap::where('symbol', $symbol)->first()->name,
+            'coin' => Coinmarketcap::where('symbol', $symbol)->first() ? Coinmarketcap::where('symbol', $symbol)->first()->name : Solume::where('symbol', $symbol)->first()->name,
             'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
             'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
             'coinbin' => Coinbin::where('ticker', $symbol)->first(),
