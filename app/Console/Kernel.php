@@ -31,14 +31,14 @@ class Kernel extends ConsoleKernel
 //         $schedule->command('coinbin:start')
 //                  ->hourly();
 
-         $schedule->command('coindar:start')
-                  ->hourly();
+//         $schedule->command('coindar:start')
+//                  ->hourly();
 
          $schedule->command('coinmarketcap:start')
                   ->hourly();
 
-         $schedule->command('solume:start')
-                  ->hourly();
+//         $schedule->command('solume:start')
+//                  ->hourly();
 
          $schedule->command('worldcoinindex:start')
                   ->hourly();

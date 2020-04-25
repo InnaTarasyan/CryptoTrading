@@ -46,12 +46,13 @@ class DetailsController extends Controller
         ];
 
         if($twitter){
+            /**
             $screenName = $twitter->account;
             $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 20, 'format' => 'json']), true);
             foreach ($tweets as &$tweet){
                 $tweet['text'] = $this->parse_tweet($tweet['text']);
             }
-            $data['tweets'] = $tweets;
+            $data['tweets'] = $tweets; **/
         }
 
         if($tradingPair){
