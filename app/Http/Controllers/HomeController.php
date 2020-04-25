@@ -67,9 +67,7 @@ class HomeController extends Controller
                             return "<p class='success'>$coin->percent_change_7d</p>";
                         }
                     })
-                    ->editColumn('last_updated', function ($coin){
-                        return (new \DateTime($coin->last_updated))->format('Y-m-d H:i:s');
-                    })
+
                      ->rawColumns(['percent_change_1h', 'percent_change_24h', 'percent_change_7d', 'last_updated'])
                      ->make(true);
     }
