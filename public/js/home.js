@@ -14,11 +14,12 @@ CoinmarketCap.prototype.init = function () {
             {data: 'price_usd', name: 'price_usd', "defaultContent" : 'Not Set'},
             {data: '24h_volume_usd', name: '24h_volume_usd', "defaultContent" : 'Not Set'},
             {data: 'market_cap_usd', name: 'market_cap_usd', "defaultContent" : 'Not Set'},
-            {data: 'available_supply', name: 'available_supply', "defaultContent" : 'Not Set'},
+            {data: 'max_supply', name: 'max_supply', "defaultContent" : 'Not Set'},
             {data: 'total_supply', name: 'total_supply', "defaultContent" : 'Not Set'},
             {data: 'percent_change_1h', name: 'percent_change_1h', "defaultContent" : 'Not Set'},
             {data: 'percent_change_24h', name: 'percent_change_24h', "defaultContent" : 'Not Set'},
-            {data: 'percent_change_7d', name: 'percent_change_7d',  "defaultContent" : 'Not Set'}
+            {data: 'percent_change_7d', name: 'percent_change_7d',  "defaultContent" : 'Not Set'},
+            {data: 'last_updated', name: 'last_updated', "defaultContent" : 'Not Set'}
         ],
         "iDisplayLength": 10,
         "columnDefs" : [{

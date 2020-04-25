@@ -18,11 +18,12 @@
                                 <th>Price (USD)</th>
                                 <th>Volume (24h)$</th>
                                 <th>Market Cap($)</th>
-                                <th>Available Supply</th>
+                                <th>Max Supply</th>
                                 <th>Total Supply</th>
                                 <th>Percent Change(1h)</th>
                                 <th>Percent Change(24h)</th>
                                 <th>Percent Change(7d)</th>
+                                <th>Last Updated</th>
                             </tr>
                         </thead>
                     </table>
