@@ -33,6 +33,8 @@
     <!--end::Base Styles -->
     <link rel="shortcut icon" href="{{url('assets/demo/demo6/media/img/logo/favicon.ico')}}" />
     @yield('styles')
+
+    {!! Analytics::render() !!}
 </head>
 <!-- end::Head -->
 <!-- end::Body -->
