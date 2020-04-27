@@ -34,5 +34,5 @@
   </div>
 @endsection
 @section('scripts')
-  <script src="{{ url('js/chat.js') }}"></script>
+  {{--<script src="{{ url('js/chat.js') }}"></script>--}}
 @endsection
