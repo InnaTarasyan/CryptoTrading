@@ -8,7 +8,8 @@
     </title>
     <meta name="description" content="My Coin Trading Project allows online tracking of the changes in key indicators of the Crypto-currency,
                                 including the Social Volume Changes in the Reddit and Twitter, etc. ">
-    <meta name="keywords" content="Coins, CryptoCoins, worldcoinindex.com, coindar.org, solume.io, coinmarketcap.org, TradingView Charts, Twitter, CoinPais, CryptoCurrency, Reddit">
+    <meta name="keywords" content="Coins, CryptoCoins, worldcoinindex.com, coindar.org, solume.io, coinmarketcap.org, TradingView Charts, Twitter, CoinPais, CryptoCurrency, Reddit,
+    Bitcoin, Ethereum, XRP, Coin Events, Tether USDT">
     <meta name="author" content="Inna Tarasyan">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
