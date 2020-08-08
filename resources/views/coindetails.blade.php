@@ -403,7 +403,7 @@
                                             <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
                                                 <div class="m-timeline-2__item">
                                                     <span class="m-timeline-2__item-time">
-                                                        {{\Carbon\Carbon::parse($tweet['created_at'])->format('y, M, d, H:i:s')}}
+                                                        {{\Carbon\Carbon::parse($tweet['created_at'])->format('d-M-Y, H:i:s')}}
                                                     </span>
                                                     <div class="m-timeline-2__item-cricle">
                                                         <i class="fa fa-genderless m--font-danger"></i>
