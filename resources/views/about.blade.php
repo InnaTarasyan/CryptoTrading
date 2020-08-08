@@ -117,7 +117,7 @@
                                 With Best Regards <br/>
                                 Inna Tarasyan <br/>
                                 My Web Site is <i>
-                                                  <a href="http://www.innatarasyan.online"> www.innatarasyan.online </a>
+                                                  <a href="http://innatarasyan.site">  innatarasyan.site </a>
                                                </i>
                             </div>
                         </div>
