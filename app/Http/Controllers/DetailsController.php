@@ -47,7 +47,12 @@ class DetailsController extends Controller
 
         if($twitter){
             $screenName = $twitter->account;
-            $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 100, 'format' => 'json']), true);
+            try {
+                $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 100, 'format' => 'json']), true);
+            } catch (\Exception $e) {
+                $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => 'TodayCrypto', 'count' => 200, 'format' => 'json']), true);
+            }
+
             foreach ($tweets as &$tweet){
                 $tweet['text'] = $this->parse_tweet($tweet['text']);
             }
