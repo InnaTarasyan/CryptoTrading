@@ -10,7 +10,7 @@ class CoinMarketService extends  BaseService {
 
     public function get(){
 
-        $url = env('COIN_MARKET_CAP_URL');
+        $url = config('coinmarketcap.url');
         $parameters = [
             'start' => '1',
             'limit' => '5000',
@@ -19,7 +19,7 @@ class CoinMarketService extends  BaseService {
 
         $headers = [
             'Accepts: application/json',
-            'X-CMC_PRO_API_KEY: '.env('COIN_MARKET_KEY'),
+            'X-CMC_PRO_API_KEY: '.config('coinmarketcap.key'),
 
         ];
         $qs = http_build_query($parameters); // query string encode the parameters
