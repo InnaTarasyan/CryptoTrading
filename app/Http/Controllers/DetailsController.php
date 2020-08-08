@@ -45,19 +45,19 @@ class DetailsController extends Controller
             'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first()
         ];
 
-        if($twitter){
-            $screenName = $twitter->account;
-            try {
-                $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 100, 'format' => 'json']), true);
-            } catch (\Exception $e) {
-                $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => 'TodayCrypto', 'count' => 200, 'format' => 'json']), true);
-            }
 
-            foreach ($tweets as &$tweet){
-                $tweet['text'] = $this->parse_tweet($tweet['text']);
-            }
-            $data['tweets'] = $tweets;
+        $screenName = $twitter->account ?? 'TodayCrypto';
+        try {
+            $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 100, 'format' => 'json']), true);
+        } catch (\Exception $e) {
+            $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => 'TodayCrypto', 'count' => 200, 'format' => 'json']), true);
         }
+
+        foreach ($tweets as &$tweet){
+            $tweet['text'] = $this->parse_tweet($tweet['text']);
+        }
+        $data['tweets'] = $tweets;
+
 
         if($tradingPair){
             $data['tradingPair'] = $tradingPair->trading_pair;
