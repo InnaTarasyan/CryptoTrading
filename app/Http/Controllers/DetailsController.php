@@ -47,6 +47,7 @@ class DetailsController extends Controller
         ];
 
         $coindarCoin =  CoindarVersion2::query()->where('symbol', strtoupper($symbol))->first();
+
         if($coindarCoin) {
             $events = CoindarEventsVersion2::where('coin_id', $coindarCoin->id)->get();
         }

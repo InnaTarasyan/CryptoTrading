@@ -458,7 +458,7 @@
 @endsection
 @section('scripts')
     <script>
-        var events = {!! $events !!};
+        var events = {!! !empty($events) ? $events : "null"  !!};
     </script>
     <script src="{{ url('js/details.js') }}"></script>
 @endsection

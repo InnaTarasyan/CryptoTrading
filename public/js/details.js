@@ -6,16 +6,19 @@ function CoinDetails() {
 CoinDetails.prototype.init = function () {
 
   var ev_list = [];
-  $.each(events, function(key, value) {
-        var elem = {
-            'title': this['caption'],
-            'start': new Date(this['date_start']),
-            'description': this['caption'],
-            'className': "m-fc-event--accent"
+  if(typeof events !== 'undefined') {
+      $.each(events, function(key, value) {
+          var elem = {
+              'title': this['caption'],
+              'start': new Date(this['date_start']),
+              'description': this['caption'],
+              'className': "m-fc-event--accent"
 
-        };
-        ev_list.push(elem);
-  });
+          };
+          ev_list.push(elem);
+      });
+
+  }
 
     $('#tradingview_ffbfc').css('height', '400px');
 
