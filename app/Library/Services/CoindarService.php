@@ -11,7 +11,7 @@ class CoindarService extends  BaseService {
 
     public function get()
     {
-        $this->obtainCoindarCoins();
+       // $this->obtainCoindarCoins();
         $this->obtainCoindarEvents();
     }
 
@@ -41,10 +41,8 @@ class CoindarService extends  BaseService {
     protected function obtainCoindarEvents()
     {
         $now = Carbon::now();
-
-        $url = config('coindar.events_url').'?access_token='.config('coindar.token') .
-            '&page_size=30&filter_date_start='.$now->subMonth()->format('Y-m-d').
-            '&filter_date_end='.$now->format('Y-m-d').'&sort_by=views';
+        $url = config('coindar.events_url').'?access_token='.config('coindar.token').'&page_size=100'.
+        '&filter_date_start='.$now->format('Y-m-d');
 
         $request = "{$url}"; // create the request URL
 
@@ -61,17 +59,18 @@ class CoindarService extends  BaseService {
 
         foreach (json_decode($response) as $data) {
             CoindarEventsVersion2::create([
-                "caption"            => $data->caption,
-                "source"             => $data->source,
-                "source_reliable"    => (boolean) $data->source_reliable,
-                "important"          => (boolean) $data->important,
-                "date_public"        => $data->date_public,
-                "date_start"         => $data->date_start,
-                "date_end"           => !empty($data->date_end) ? $data->date_end : null,
-                "coin_id"            => $data->coin_id,
-                "coin_price_changes" => $data->coin_price_changes,
-                "tags"               => $data->tags,
+                "caption" => $data->caption,
+                "source" => $data->source,
+                "source_reliable" => (boolean)$data->source_reliable,
+                "important" => (boolean)$data->important,
+                "date_public" => !empty($data->date_public) ? $data->date_public : null,
+              //  "date_start" => !empty($data->date_start) ? $data->date_start : null,
+                "date_end" => !empty($data->date_end) ? $data->date_end : null,
+                "coin_id" => !empty($data->coin_id) ? $data->coin_id : null,
+                "coin_price_changes" => !empty($data->coin_price_changes) ? $data->coin_price_changes : null,
+                "tags" => !empty($data->tags) ? $data->tags : null,
             ]);
+
         }
 
     }

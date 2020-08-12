@@ -10,7 +10,7 @@ CoinDetails.prototype.init = function () {
       $.each(events, function(key, value) {
           var elem = {
               'title': this['caption'],
-              'start': new Date(this['date_start']),
+              'start': new Date(this['date_public']),
               'description': this['caption'],
               'className': "m-fc-event--accent"
 
