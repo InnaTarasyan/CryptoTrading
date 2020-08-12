@@ -45,9 +45,9 @@ CoinDetails.prototype.init = function () {
                 element.data('placement', 'top');
                 mApp.initPopover(element);
             } else if (element.hasClass('fc-time-grid-event')) {
-                element.find('.fc-title').append('<div class="fc-description">' + event.caption + '</div>');
+                element.find('.fc-title').append('<div class="fc-description">' + event.description + '</div>');
             } else if (element.find('.fc-list-item-title').lenght !== 0) {
-                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.caption + '</div>');
+                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.description + '</div>');
             }
         }
     });
