@@ -11,8 +11,9 @@ CoinDetails.prototype.init = function () {
 
           var elem = {
               'title': this['caption'],
-              'start': moment(this['date_public']),
+              'start': new Date(this['date_public']),
               'description': this['caption'],
+              'link': this['source'],
               'className': "m-fc-event--accent"
 
           };
@@ -49,9 +50,9 @@ CoinDetails.prototype.init = function () {
                 element.data('placement', 'top');
                 mApp.initPopover(element);
             } else if (element.hasClass('fc-time-grid-event')) {
-                element.find('.fc-title').append('<div class="fc-description">' + event.description + '</div>');
+                element.find('.fc-title').append('<a href="' +  event.link +'"><div class="fc-description">' + event.description + '</div></a>');
             } else if (element.find('.fc-list-item-title').lenght !== 0) {
-                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.description + '</div>');
+                element.find('.fc-list-item-title').append('<a href="' + event.link +'"><div class="fc-description">' + event.link + '</div></a>');
             }
         }
     });
