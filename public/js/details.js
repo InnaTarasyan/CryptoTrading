@@ -8,9 +8,10 @@ CoinDetails.prototype.init = function () {
   var ev_list = [];
   if(typeof events !== 'undefined') {
       $.each(events, function(key, value) {
+
           var elem = {
               'title': this['caption'],
-              'start': new Date(this['date_public']),
+              'start': moment(this['date_public']),
               'description': this['caption'],
               'className': "m-fc-event--accent"
 

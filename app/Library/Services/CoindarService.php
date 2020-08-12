@@ -41,37 +41,48 @@ class CoindarService extends  BaseService {
     protected function obtainCoindarEvents()
     {
         $now = Carbon::now();
-        $url = config('coindar.events_url').'?access_token='.config('coindar.token').'&page_size=100'.
-        '&filter_date_start='.$now->format('Y-m-d');
+        $page=1;
+        while (true) {
+            $url = config('coindar.events_url').'?access_token='.config('coindar.token').'&page_size=100&page='.$page.
+                '&filter_date_start='.$now->format('Y-m-d');
 
-        $request = "{$url}"; // create the request URL
+            $page++;
 
-        $curl = curl_init(); // Get cURL resource
-        // Set cURL options
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $request,            // set the request URL
-            CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
-        ));
+            $request = "{$url}"; // create the request URL
 
-        $response = curl_exec($curl); // Send the request, save the response
-        print_r(json_decode($response)); // print json decoded response
-        curl_close($curl); // Close request
+            $curl = curl_init(); // Get cURL resource
+            // Set cURL options
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $request,            // set the request URL
+                CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
+            ));
 
-        foreach (json_decode($response) as $data) {
-            CoindarEventsVersion2::create([
-                "caption" => $data->caption,
-                "source" => $data->source,
-                "source_reliable" => (boolean)$data->source_reliable,
-                "important" => (boolean)$data->important,
-                "date_public" => !empty($data->date_public) ? $data->date_public : null,
-              //  "date_start" => !empty($data->date_start) ? $data->date_start : null,
-                "date_end" => !empty($data->date_end) ? $data->date_end : null,
-                "coin_id" => !empty($data->coin_id) ? $data->coin_id : null,
-                "coin_price_changes" => !empty($data->coin_price_changes) ? $data->coin_price_changes : null,
-                "tags" => !empty($data->tags) ? $data->tags : null,
-            ]);
+            $response = curl_exec($curl); // Send the request, save the response
+            print_r(json_decode($response)); // print json decoded response
+            curl_close($curl); // Close request
+
+            if(empty(json_decode($response))) {
+                return;
+            }
+
+            foreach (json_decode($response) as $data) {
+                CoindarEventsVersion2::create([
+                    "caption" => $data->caption,
+                    "source" => $data->source,
+                    "source_reliable" => (boolean)$data->source_reliable,
+                    "important" => (boolean)$data->important,
+                    "date_public" => !empty($data->date_public) ? $data->date_public : null,
+                    //  "date_start" => !empty($data->date_start) ? $data->date_start : null,
+                    "date_end" => !empty($data->date_end) ? $data->date_end : null,
+                    "coin_id" => !empty($data->coin_id) ? $data->coin_id : null,
+                    "coin_price_changes" => !empty($data->coin_price_changes) ? $data->coin_price_changes : null,
+                    "tags" => !empty($data->tags) ? $data->tags : null,
+                ]);
+
+            }
 
         }
+
 
     }
 }
