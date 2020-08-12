@@ -9,8 +9,8 @@ CoinDetails.prototype.init = function () {
   $.each(events, function(key, value) {
         var elem = {
             'title': this['caption'],
-            'start': new Date(this['start_date']),
-            'description': this['caption_ru'],
+            'start': new Date(this['date_start']),
+            'description': this['caption'],
             'className': "m-fc-event--accent"
 
         };
@@ -45,9 +45,9 @@ CoinDetails.prototype.init = function () {
                 element.data('placement', 'top');
                 mApp.initPopover(element);
             } else if (element.hasClass('fc-time-grid-event')) {
-                element.find('.fc-title').append('<div class="fc-description">' + event.description + '</div>');
+                element.find('.fc-title').append('<div class="fc-description">' + event.caption + '</div>');
             } else if (element.find('.fc-list-item-title').lenght !== 0) {
-                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.description + '</div>');
+                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.caption + '</div>');
             }
         }
     });

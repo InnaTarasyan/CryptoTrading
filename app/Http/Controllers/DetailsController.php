@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CoindarEventsVersion2;
+use App\CoindarVersion2;
 use Illuminate\Http\Request;
 use App\Coindar;
 use App\Coinmarketcap;
@@ -38,14 +40,18 @@ class DetailsController extends Controller
         $data = [
             'symbol' => $symbol,
             'coin' => Coinmarketcap::where('symbol', $symbol)->first() ? Coinmarketcap::where('symbol', $symbol)->first()->name : Solume::where('symbol', $symbol)->first()->name,
-            'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
             'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
             'coinbin' => Coinbin::where('ticker', $symbol)->first(),
             'solume'=> Solume::where('symbol', $symbol)->first(),
             'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first()
         ];
 
+        $coindarCoin =  CoindarVersion2::query()->where('symbol', strtoupper($symbol))->first();
+        if($coindarCoin) {
+            $events = CoindarEventsVersion2::where('coin_id', $coindarCoin->id)->get();
+        }
 
+        $data['events'] = $events ?? [];
         $screenName = $twitter->account ?? 'TodayCrypto';
         try {
             $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 100, 'format' => 'json']), true);
