@@ -10,11 +10,12 @@ CoinDetails.prototype.init = function () {
       $.each(events, function(key, value) {
 
           var elem = {
-              'title': this['caption'],
-              'start': new Date(this['date_public']),
-              'description': this['caption'],
-              'link': this['source'],
-              'className': "m-fc-event--accent"
+              'title':         this['caption'],
+              'start':         new Date(this['date_public']),
+              'description':   this['caption'],
+              'link':          this['source'],
+              'price_change':  this['coin_price_changes'],
+              'className':     "m-fc-event--accent"
 
           };
           ev_list.push(elem);
@@ -50,9 +51,15 @@ CoinDetails.prototype.init = function () {
                 element.data('placement', 'top');
                 mApp.initPopover(element);
             } else if (element.hasClass('fc-time-grid-event')) {
-                element.find('.fc-title').append('<a href="' +  event.link +'"><div class="fc-description">' + event.description + '</div></a>');
+                element.find('.fc-title').append('<a href="' +  event.link +'">' +
+                      '<div class="fc-description">' + event.description + '</div>' +
+                      '<div class="fc-description"><b>Coin Price Changes  &nbsp;&nbsp;<i>' + event.price_change + '%</i></b></div>' +
+                    '</a>');
             } else if (element.find('.fc-list-item-title').lenght !== 0) {
-                element.find('.fc-list-item-title').append('<a href="' + event.link +'"><div class="fc-description">' + event.link + '</div></a>');
+                element.find('.fc-list-item-title').append('<a href="' + event.link +'">' +
+                        '<div class="fc-description">' + event.link + '</div>' +
+                        '<div class="fc-description"><b>Coin Price Changes  &nbsp;&nbsp; <i>' + event.price_change + '%</i></b></div>' +
+                    '</a>');
             }
         }
     });
