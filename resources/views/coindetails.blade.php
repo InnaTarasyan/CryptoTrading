@@ -16,7 +16,7 @@
                                    <i class="flaticon-coins"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    {{ $coin }} {{ $symbol }}
+                                    {{ isset($coin) ? $coin : null }} {{ $symbol }}
                                 </h3>
                             </div>
                         </div>

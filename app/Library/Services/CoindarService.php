@@ -65,7 +65,10 @@ class CoindarService extends  BaseService {
                 return;
             }
 
+            CoindarEventsVersion2::truncate();
+
             foreach (json_decode($response) as $data) {
+                try {
                 CoindarEventsVersion2::create([
                     "caption" => $data->caption,
                     "source" => $data->source,
@@ -78,6 +81,10 @@ class CoindarService extends  BaseService {
                     "coin_price_changes" => !empty($data->coin_price_changes) ? $data->coin_price_changes : null,
                     "tags" => !empty($data->tags) ? $data->tags : null,
                 ]);
+                } catch (\Exception $e) {
+                    continue;
+                }
+
 
             }
 
