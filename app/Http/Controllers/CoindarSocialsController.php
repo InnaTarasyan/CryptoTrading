@@ -99,8 +99,33 @@ class CoindarSocialsController extends Controller
                 $substr = substr($coin->youtube, 0, 12).'...';
                 return '<a href="'.$coin->youtube.'">'.$substr.'</a>';
             })
+            ->editColumn('twitter_count', function ($coin) {
+                if($coin->twitter_count > 0) {
+                    return '<p class=\'success\'>'.$coin->twitter_count.'</p>';
+                }
+                return $coin->twitter_count;
+            })
+            ->editColumn('reddit_count', function ($coin) {
+                if($coin->reddit_count > 0) {
+                    return '<p class=\'success\'>'.$coin->reddit_count.'</p>';
+                }
+                return $coin->reddit_count;
+            })
+            ->editColumn('telegram_count', function ($coin) {
+                if($coin->telegram_count > 0) {
+                    return '<p class=\'success\'>'.$coin->telegram_count.'</p>';
+                }
+                return $coin->telegram_count;
+            })
+            ->editColumn('facebook_count', function ($coin) {
+                if($coin->facebook_count > 0) {
+                    return '<p class=\'success\'>'.$coin->facebook_count.'</p>';
+                }
+                return $coin->facebook_count;
+            })
             ->rawColumns(['website', 'bitcointalk', 'twitter', 'reddit', 'telegram',
-                'facebook', 'github', 'explorer', 'youtube'])
+                'facebook', 'github', 'explorer', 'youtube', 'twitter_count', 'reddit_count',
+                'telegram_count', 'facebook_count'])
             ->make(true);
     }
 }
