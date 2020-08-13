@@ -15,14 +15,14 @@
                             <tr>
                                 <th> Coin Name </th>
                                 <th> Website </th>
-                                <th> Bitcointalk </th>
-                                <th> Twitter </th>
-                                <th> Reddit </th>
-                                <th> Telegram </th>
-                                <th> Facebook </th>
-                                <th> Github </th>
-                                <th> Explorer </th>
-                                <th> Youtube </th>
+                                <th> Bitcointalk Link</th>
+                                <th> Twitter Link</th>
+                                <th> Reddit Link</th>
+                                <th> Telegram Link</th>
+                                <th> Facebook Link</th>
+                                <th> Github Link</th>
+                                <th> Explorer Link</th>
+                                <th> Youtube Link</th>
                                 <th> Twitter Count </th>
                                 <th> Reddit Count </th>
                                 <th> Telegram Count </th>

@@ -32,55 +32,65 @@ class CoindarSocialsController extends Controller
                 if(empty($coin->website)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->website.'">'.$coin->website.'</a>';
+
+                $substr = substr($coin->website, 0, 12).'...';
+                return '<a href="'.$coin->website.'">'.$substr.'</a>';
             })
             ->editColumn('bitcointalk', function ($coin){
                 if(empty($coin->bitcointalk)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->bitcointalk.'">'.$coin->bitcointalk.'</a>';
+                $substr = substr($coin->bitcointalk, 0, 12).'...';
+                return '<a href="'.$coin->bitcointalk.'">'.$substr.'</a>';
             })
             ->editColumn('twitter', function ($coin){
                 if(empty($coin->twitter)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->twitter.'">'.$coin->twitter.'</a>';
+                $substr = substr($coin->twitter, 0, 12).'...';
+                return '<a href="'.$coin->twitter.'">'.$substr.'</a>';
             })
             ->editColumn('reddit', function ($coin){
                 if(empty($coin->reddit)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->reddit.'">'.$coin->reddit.'</a>';
+                $substr = substr($coin->reddit, 0, 12).'...';
+                return '<a href="'.$coin->reddit.'">'.$substr.'</a>';
             })
             ->editColumn('telegram', function ($coin){
                 if(empty($coin->telegram)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->telegram.'">'.$coin->telegram.'</a>';
+                $substr = substr($coin->telegram, 0, 12).'...';
+                return '<a href="'.$coin->telegram.'">'.$substr.'</a>';
             })
             ->editColumn('facebook', function ($coin){
                 if(empty($coin->facebook)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->facebook.'">'.$coin->facebook.'</a>';
+                $substr = substr($coin->facebook, 0, 12).'...';
+                return '<a href="'.$coin->facebook.'">'.$substr.'</a>';
             })
             ->editColumn('github', function ($coin){
                 if(empty($coin->github)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->github.'">'.$coin->github.'</a>';
+                $substr = substr($coin->github, 0, 12).'...';
+                return '<a href="'.$coin->github.'">'.$substr.'</a>';
             })
             ->editColumn('explorer', function ($coin){
                 if(empty($coin->github)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->explorer.'">'.$coin->explorer.'</a>';
+                $substr = substr($coin->explorer, 0, 12).'...';
+                return '<a href="'.$coin->explorer.'">'.$substr.'</a>';
             })
             ->editColumn('youtube', function ($coin){
                 if(empty($coin->youtube)){
                     return 'Not Set';
                 }
-                return '<a href="'.$coin->youtube.'">'.$coin->youtube.'</a>';
+                $substr = substr($coin->youtube, 0, 12).'...';
+                return '<a href="'.$coin->youtube.'">'.$substr.'</a>';
             })
             ->rawColumns(['website', 'bitcointalk', 'twitter', 'reddit', 'telegram',
                 'facebook', 'github', 'explorer', 'youtube'])
