@@ -13,6 +13,7 @@
                     <table id="coindar_socials" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                             <tr>
+                                <th> Coin Symbol</th>
                                 <th> Coin Name </th>
                                 <th> Website </th>
                                 <th> Bitcointalk Link</th>

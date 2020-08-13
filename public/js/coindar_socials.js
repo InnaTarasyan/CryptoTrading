@@ -9,6 +9,7 @@ CoindarSocials.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coindar_socials_route').val(),
         "columns": [
+            {data: 'symbol', name: 'symbol'},
             {data: 'coin_id', name: 'coin_id'},
             {data: 'website', name: 'website'},
             {data: 'bitcointalk', name: 'bitcointalk'},
@@ -28,7 +29,9 @@ CoindarSocials.prototype.init = function () {
         "fnDrawCallback": function() {
             $('#coindar_socials tbody tr').click(function () {
                 var coin = $(this).find('td:first').text();
-                window.location.href = "/details/" + coin;
+                if(coin.length) {
+                    window.location.href = "/details/" + coin;
+                }
             });
         }
     });

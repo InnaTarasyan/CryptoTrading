@@ -22,12 +22,19 @@ class CoindarSocialsController extends Controller
     {
         $coins = CoindarSocials::query()
             ->join('coindar2_coins', 'coindar2_coins.id', '=', 'coindar_socials.coin_id')
-            ->select('coindar2_coins.name as coin_id', 'website', 'bitcointalk', 'twitter', 'reddit', 'telegram',
+            ->select('coindar2_coins.symbol', 'coindar2_coins.name as coin_id', 'website', 'bitcointalk', 'twitter', 'reddit', 'telegram',
                 'facebook', 'github', 'explorer',
                 'youtube', 'twitter_count', 'reddit_count', 'telegram_count', 'facebook_count')
             ->get();
 
         return Datatables::of($coins)
+            ->editColumn('symbol', function ($coin){
+                if(empty($coin->symbol)){
+                    return 'Not Set';
+                }
+
+                return $coin->symbol;
+            })
             ->editColumn('website', function ($coin){
                 if(empty($coin->website)){
                     return 'Not Set';
