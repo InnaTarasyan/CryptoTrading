@@ -40,6 +40,8 @@ class CoindarService extends  BaseService {
 
     protected function obtainCoindarEvents()
     {
+        CoindarEventsVersion2::truncate();
+
         $now = Carbon::now();
         $page=1;
         while (true) {
@@ -64,8 +66,6 @@ class CoindarService extends  BaseService {
             if(empty(json_decode($response))) {
                 return;
             }
-
-            CoindarEventsVersion2::truncate();
 
             foreach (json_decode($response) as $data) {
                 try {
