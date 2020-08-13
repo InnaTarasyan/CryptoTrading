@@ -35,13 +35,13 @@ class Kernel extends ConsoleKernel
 //                  ->hourly();
 
          $schedule->command('coinmarketcap:start')
-                  ->hourly();
+                  ->daily();
 
 //         $schedule->command('solume:start')
 //                  ->hourly();
 
          $schedule->command('worldcoinindex:start')
-                  ->hourly();
+                  ->daily();
 
         $schedule->command('coindar:start')
             ->daily();
