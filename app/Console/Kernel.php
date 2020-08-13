@@ -43,6 +43,9 @@ class Kernel extends ConsoleKernel
          $schedule->command('worldcoinindex:start')
                   ->hourly();
 
+        $schedule->command('coindar-socials:import')
+            ->daily();
+
     }
 
     /**
