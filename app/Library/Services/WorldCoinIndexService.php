@@ -10,9 +10,10 @@ class WorldCoinIndexService extends BaseService{
     public function get(){
 
         $params = [
-            'key' => config('worldcoinindex.key')
+            'key'  => env('WORLD_COIN_INDEX_KEY'),
+            'fiat' => 'btc',
         ];
-        $response = $this->retrieveData(config('worldcoinindex.url'), $params)['Markets'];
+        $response = $this->retrieveData(env('WORLD_COIN_INDEX'), $params);
 
         WorldCoinIndex::truncate();
         foreach ($response as $index => $data){

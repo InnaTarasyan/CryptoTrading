@@ -8,6 +8,7 @@ class BaseService{
 
     public function retrieveData($url, $params){
         $client = new GuzzleHttp\Client();
+
         $response = json_decode($client->get(
             $url,
             [

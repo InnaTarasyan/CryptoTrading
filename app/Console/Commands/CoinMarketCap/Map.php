@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\CoinMarketCap;
 
-use Illuminate\Console\Command;
 use App\Library\Services\CoinMarketService;
+use Illuminate\Console\Command;
 
-
-class CoinmarketCap extends Command
+class Map extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'coinmarketcap:start';
+    protected $signature = 'coinmarketcap:map';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'retrieves data from coinmarketcap.com';
+    protected $description = 'coinmarketcap map';
+
 
     /**
      * Execute the console command.
@@ -29,6 +29,6 @@ class CoinmarketCap extends Command
      */
     public function handle(CoinMarketService $service)
     {
-        $service->get();
+        $service->map();
     }
 }
