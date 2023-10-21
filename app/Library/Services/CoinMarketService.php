@@ -273,6 +273,55 @@ class CoinMarketService extends  BaseService {
         $this->retrieveCoinMarketcapData($url, $params);
     }
 
+    public function contentLatest()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'content/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function trendingToken()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'community/trending/token';
+        $this->retrieveCoinMarketcapData($url, null);
+    }
+
+
+    public function trendingTopic()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'community/trending/topic';
+        $this->retrieveCoinMarketcapData($url, null);
+    }
+
+    public function postsComments()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'content/posts/comments';
+        $params = [
+           'post_id' => '325670123',
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function postsLatest()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'content/posts/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function postsTop()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'content/posts/top';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
     protected function retrieveCoinMarketcapData($url, $params)
     {
         $headers = [
