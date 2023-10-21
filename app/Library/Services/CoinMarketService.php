@@ -140,6 +140,24 @@ class CoinMarketService extends  BaseService {
         $this->retrieveCoinMarketcapData($url, $params);
     }
 
+    public function quotesHistorical()
+    {
+        $url = env('COIN_MARKET_CAP_URL_V2').'quotes/historical';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function quotesLatest()
+    {
+        $url = env('COIN_MARKET_CAP_URL_V2').'quotes/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
     protected function retrieveCoinMarketcapData($url, $params)
     {
         $headers = [
