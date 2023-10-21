@@ -98,6 +98,48 @@ class CoinMarketService extends  BaseService {
         $this->retrieveCoinMarketcapData($url, null);
     }
 
+    public function mostVisited()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'trending/most-visited';
+        $this->retrieveCoinMarketcapData($url, null);
+    }
+
+    public function marketPairsLatest()
+    {
+        $url = env('COIN_MARKET_CAP_URL_V2').'market-pairs/latest';
+        $params = [
+            'slug' => 'bitcoin',
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function ohlcvHistorical()
+    {
+        $url = env('COIN_MARKET_CAP_URL_V2').'ohlcv/historical';
+        $params = [
+            'slug' => 'bitcoin',
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function ohlcvLatest()
+    {
+        $url = env('COIN_MARKET_CAP_URL_V2').'ohlcv/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function pricePerformanceStatsLatest()
+    {
+        $url = env('COIN_MARKET_CAP_URL_V2').'price-performance-stats/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
     protected function retrieveCoinMarketcapData($url, $params)
     {
         $headers = [
