@@ -10,7 +10,7 @@ class CoinMarketService extends  BaseService {
 
     public function latest(){
 
-        $url = env('COIN_MARKET_CAP_URL').'listings/latest';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'listings/latest';
         $parameters = [
             'start' => '1',
             'limit' => '5000',
@@ -37,19 +37,19 @@ class CoinMarketService extends  BaseService {
 
     public function airDrops()
     {
-        $url = env('COIN_MARKET_CAP_URL').'airdrops';
+        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'airdrops';
         $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function categories()
     {
-        $url = env('COIN_MARKET_CAP_URL').'categories';
+        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'categories';
         $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function category()
     {
-        $url = env('COIN_MARKET_CAP_URL').'category';
+        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'category';
         $params = [
            'id' => '605e2ce9d41eae1066535f7c',
         ];
@@ -58,13 +58,13 @@ class CoinMarketService extends  BaseService {
 
     public function map()
     {
-        $url = env('COIN_MARKET_CAP_URL').'map';
+        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'map';
         $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function info()
     {
-        $url = env('COIN_MARKET_CAP_URL').'info';
+        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'info';
         $params = [
             'slug' => 'bitcoin',
         ];
@@ -73,7 +73,7 @@ class CoinMarketService extends  BaseService {
 
     public function historical()
     {
-        $url = env('COIN_MARKET_CAP_URL').'listings/historical';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'listings/historical';
         $params = [
             'date' => '2019-10-10',
         ];
@@ -82,31 +82,31 @@ class CoinMarketService extends  BaseService {
 
     public function newItems()
     {
-        $url = env('COIN_MARKET_CAP_URL').'listings/new';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'listings/new';
         $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function gainersLosers()
     {
-        $url = env('COIN_MARKET_CAP_URL').'trending/gainers-losers';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'trending/gainers-losers';
         $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function trendingLatest()
     {
-        $url = env('COIN_MARKET_CAP_URL').'trending/latest';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'trending/latest';
         $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function mostVisited()
     {
-        $url = env('COIN_MARKET_CAP_URL').'trending/most-visited';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'trending/most-visited';
         $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function marketPairsLatest()
     {
-        $url = env('COIN_MARKET_CAP_URL_V2').'market-pairs/latest';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL_V2').'market-pairs/latest';
         $params = [
             'slug' => 'bitcoin',
         ];
@@ -115,7 +115,7 @@ class CoinMarketService extends  BaseService {
 
     public function ohlcvHistorical()
     {
-        $url = env('COIN_MARKET_CAP_URL_V2').'ohlcv/historical';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL_V2').'ohlcv/historical';
         $params = [
             'slug' => 'bitcoin',
         ];
@@ -124,7 +124,7 @@ class CoinMarketService extends  BaseService {
 
     public function ohlcvLatest()
     {
-        $url = env('COIN_MARKET_CAP_URL_V2').'ohlcv/latest';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL_V2').'ohlcv/latest';
         $params = [
             "symbol" => "BTC",
         ];
@@ -133,7 +133,7 @@ class CoinMarketService extends  BaseService {
 
     public function pricePerformanceStatsLatest()
     {
-        $url = env('COIN_MARKET_CAP_URL_V2').'price-performance-stats/latest';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL_V2').'price-performance-stats/latest';
         $params = [
             "symbol" => "BTC",
         ];
@@ -142,7 +142,16 @@ class CoinMarketService extends  BaseService {
 
     public function quotesHistorical()
     {
-        $url = env('COIN_MARKET_CAP_URL_V2').'quotes/historical';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL_V2').'quotes/historical';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function quotesHistoricalV3()
+    {
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL_V3').'quotes/historical';
         $params = [
             "symbol" => "BTC",
         ];
@@ -151,7 +160,113 @@ class CoinMarketService extends  BaseService {
 
     public function quotesLatest()
     {
-        $url = env('COIN_MARKET_CAP_URL_V2').'quotes/latest';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL_V2').'quotes/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function fiatMap()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'fiat/map';
+        $this->retrieveCoinMarketcapData($url, null);
+    }
+
+    public function exchangeAssets()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'exchange/assets';
+        $params = [
+           'id' => '3564'
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function exchangeInfo()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'exchange/info';
+        $params = [
+            'id' => '3564'
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function exchangeMap()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'exchange/map';
+        $this->retrieveCoinMarketcapData($url, null);
+    }
+
+    public function exchangeListingLatest()
+    {
+        $url = env('COIN_MARKET_CAP_URL').'exchange/listings/latest';
+        $this->retrieveCoinMarketcapData($url, null);
+    }
+
+    public function marketPairsLatestV1()
+    {
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'market-pairs/latest';
+        $params = [
+            'slug' => 'bitcoin',
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function ohlcvHistoricalV1()
+    {
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'ohlcv/historical';
+        $params = [
+            'slug' => 'bitcoin',
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+
+    public function ohlcvLatestV1()
+    {
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'ohlcv/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function pricePerformanceStatsLatestV1()
+    {
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'price-performance-stats/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function quotesHistoricalV1()
+    {
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'quotes/historical';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function quotesLatestV1()
+    {
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'quotes/latest';
+        $params = [
+            "symbol" => "BTC",
+        ];
+        $this->retrieveCoinMarketcapData($url, $params);
+    }
+
+    public function listingsLatest()
+    {
+        $url = env('COIN_MARKET_CAP_PARTNER_URL').'flipside-crypto/fcas/listings/latest';
+        $this->retrieveCoinMarketcapData($url, null);
+    }
+
+    public function quotesLatestPartner()
+    {
+        $url = env('COIN_MARKET_CAP_PARTNER_URL').'flipside-crypto/fcas/quotes/latest';
         $params = [
             "symbol" => "BTC",
         ];
