@@ -8,7 +8,7 @@ use App\Library\Services\Base\BaseService;
 
 class CoinMarketService extends  BaseService {
 
-    public function get(){
+    public function latest(){
 
         $url = env('COIN_MARKET_CAP_URL').'listings/latest';
         $parameters = [

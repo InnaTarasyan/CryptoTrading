@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\CoinmarketCap',
+        'App\Console\Commands\CoinmarketCap\Latest',
         'App\Console\Commands\Coindar',
         'App\Console\Commands\Coinbin',
         'App\Console\Commands\Solume',
