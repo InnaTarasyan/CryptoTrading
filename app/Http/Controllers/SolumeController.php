@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
-use App\Solume;
+use App\Models\Solume;
 
 class SolumeController extends Controller
 {

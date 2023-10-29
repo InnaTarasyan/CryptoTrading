@@ -2,7 +2,7 @@
 
 namespace App\Library\Services;
 
-use App\Coindar;
+use App\Models\Coindar;
 use App\Library\Services\Base\BaseService;
 
 class CoindarService extends  BaseService {

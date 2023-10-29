@@ -2,7 +2,7 @@
 
 namespace App\Library\Services;
 
-use App\Coinmarketcap;
+use App\Models\Coinmarketcap;
 use App\Library\Services\Base\BaseService;
 
 

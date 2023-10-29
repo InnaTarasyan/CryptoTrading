@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
-use App\Coinmarketcap;
+use App\Models\Coinmarketcap;
 use Validator;
 use Mail;
 use Config;

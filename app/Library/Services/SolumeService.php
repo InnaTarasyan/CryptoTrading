@@ -2,7 +2,7 @@
 
 namespace App\Library\Services;
 use App\Library\Services\Base\BaseService;
-use App\Solume;
+use App\Models\Solume;
 
 class SolumeService extends BaseService{
 

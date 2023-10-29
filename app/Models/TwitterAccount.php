@@ -1,23 +1,21 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Coinbin extends Model
+class TwitterAccount extends Model
 {
-    protected $table = 'coinbin';
+    protected $table = 'twitter_account';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
     protected $fillable = [
-        'btc',
-        'name',
-        'rank',
-        'ticker',
-        'usd'
+            'coin',
+            'rel_coins',
+            'account'
     ];
 }

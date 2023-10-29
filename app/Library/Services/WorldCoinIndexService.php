@@ -3,7 +3,7 @@
 namespace App\Library\Services;
 use App\Library\Services\Base\BaseService;
 
-use App\WorldCoinIndex;
+use App\Models\WorldCoinIndex;
 
 class WorldCoinIndexService extends BaseService{
 

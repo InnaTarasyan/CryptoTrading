@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Thujohn\Twitter\Twitter;
 use Yajra\DataTables\Facades\DataTables as Datatables;
-use App\TwitterAccount;
-use App\Coinmarketcap;
+use App\Models\TwitterAccount;
+use App\Models\Coinmarketcap;
 
 class TwitterController extends Controller
 {

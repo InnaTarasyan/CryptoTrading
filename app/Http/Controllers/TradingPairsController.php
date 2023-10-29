@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
-use App\TradingPair;
-use App\Coinmarketcap;
+use App\Models\TradingPair;
+use App\Models\Coinmarketcap;
 
 class TradingPairsController extends Controller
 {

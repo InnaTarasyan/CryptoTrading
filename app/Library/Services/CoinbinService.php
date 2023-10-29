@@ -3,7 +3,7 @@
 namespace App\Library\Services;
 
 use App\Library\Services\Base\BaseService;
-use App\Coinbin;
+use App\Models\Coinbin;
 
 class CoinbinService extends BaseService{
 

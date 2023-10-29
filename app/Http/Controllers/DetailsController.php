@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Coindar;
-use App\Coinmarketcap;
-use App\Coinbin;
-use App\Solume;
-use App\WorldCoinIndex;
-use App\TradingPair;
-use App\TwitterAccount;
+use App\Models\Coindar;
+use App\Models\Coinmarketcap;
+use App\Models\Coinbin;
+use App\Models\Solume;
+use App\Models\WorldCoinIndex;
+use App\Models\TradingPair;
+use App\Models\TwitterAccount;
 
 use Thujohn\Twitter\Facades\Twitter;
 
