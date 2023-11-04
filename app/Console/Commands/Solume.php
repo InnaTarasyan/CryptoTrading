@@ -19,7 +19,7 @@ class Solume extends Command
      *
      * @var string
      */
-    protected $description = 'retrieves data from solume.io';
+    protected $description = 'retrieves data from solume.io site';
 
     /**
      * Create a new command instance.
