@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('most_visiteds', function (Blueprint $table) {
+        Schema::create('new_items', function (Blueprint $table) {
             $table->id();
             $table->string('api_id');
             $table->string('name')->nullable();
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('most_visiteds');
+        Schema::dropIfExists('new_items');
     }
 };

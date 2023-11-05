@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GainersLosers extends Model
+class ExchangeMap extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    protected $table = 'gainers_losers';
+    protected $table = 'exchange_map';
 }

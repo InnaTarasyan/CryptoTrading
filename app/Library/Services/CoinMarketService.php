@@ -2,8 +2,14 @@
 
 namespace App\Library\Services;
 
+use App\Models\ExchangeMap;
+use App\Models\NewItems;
+use App\Models\GainersLosers;
+use App\Models\TrandingLatest;
 use App\Models\Coinmarketcap;
 use App\Library\Services\Base\BaseService;
+use App\Models\MostVisited;
+use Carbon\Carbon;
 
 
 class CoinMarketService extends  BaseService {
@@ -59,7 +65,7 @@ class CoinMarketService extends  BaseService {
     public function map()
     {
         $url = env('COIN_MARKET_CURRENCY_CAP_URL').'map';
-        $this->retrieveCoinMarketcapData($url, null);
+        $map = $this->retrieveCoinMarketcapData($url, null);
     }
 
     public function info()
@@ -83,25 +89,106 @@ class CoinMarketService extends  BaseService {
     public function newItems()
     {
         $url = env('COIN_MARKET_CAP_CURRENCY_URL').'listings/new';
-        $this->retrieveCoinMarketcapData($url, null);
+        $newItems = $this->retrieveCoinMarketcapData($url, null);
+        $data = $newItems->data;
+        foreach ($data as $item) {
+            NewItems::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'name'               => $item->name,
+                'symbol'             => $item->symbol,
+                'slug'               => $item->slug,
+                'cmc_rank'           => $item->cmc_rank,
+                'num_market_pairs'   => $item->num_market_pairs,
+                'circulating_supply' => $item->circulating_supply,
+                'total_supply'       => $item->total_supply,
+                'max_supply'         => $item->max_supply,
+                'last_updated'       => new Carbon($item->last_updated),
+                'date_added'         => new Carbon($item->date_added),
+                'tags'               => json_encode($item->tags, true),
+                'platform'           => $item->platform,
+                'quote'              => json_encode($item->quote, true),
+            ]);
+        }
     }
 
     public function gainersLosers()
     {
         $url = env('COIN_MARKET_CAP_CURRENCY_URL').'trending/gainers-losers';
-        $this->retrieveCoinMarketcapData($url, null);
+        $gainersLosers = $this->retrieveCoinMarketcapData($url, null);
+        $data = $gainersLosers->data->data;
+        foreach ($data as $item) {
+            GainersLosers::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'name'               => $item->name,
+                'symbol'             => $item->symbol,
+                'slug'               => $item->slug,
+                'cmc_rank'           => $item->cmc_rank,
+                'num_market_pairs'   => $item->num_market_pairs,
+                'circulating_supply' => $item->circulating_supply,
+                'total_supply'       => $item->total_supply,
+                'max_supply'         => $item->max_supply,
+                'last_updated'       => new Carbon($item->last_updated),
+                'date_added'         => new Carbon($item->date_added),
+                'tags'               => json_encode($item->tags, true),
+                'platform'           => $item->platform,
+                'quote'              => json_encode($item->quote, true),
+            ]);
+        }
     }
 
     public function trendingLatest()
     {
         $url = env('COIN_MARKET_CAP_CURRENCY_URL').'trending/latest';
-        $this->retrieveCoinMarketcapData($url, null);
+        $trandingLatest = $this->retrieveCoinMarketcapData($url, null);
+        $data = $trandingLatest->data->data;
+        foreach ($data as $item) {
+            TrandingLatest::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'name'               => $item->name,
+                'symbol'             => $item->symbol,
+                'slug'               => $item->slug,
+                'cmc_rank'           => $item->cmc_rank,
+                'is_active'          => $item->is_active,
+                'is_fiat'            => $item->is_fiat ?? false,
+                'self_reported_circulating_supply' => $item->self_reported_circulating_supply,
+                'self_reported_market_cap' => $item->self_reported_market_cap,
+                'num_market_pairs'   => $item->num_market_pairs,
+                'circulating_supply' => $item->circulating_supply,
+                'total_supply'       => $item->total_supply,
+                'max_supply'         => $item->max_supply,
+                'last_updated'       => new Carbon($item->last_updated),
+                'date_added'         => new Carbon($item->date_added),
+                'tags'               => json_encode($item->tags, true),
+                'platform'           => $item->platform,
+                'quote'              => json_encode($item->quote, true),
+            ]);
+        }
     }
 
     public function mostVisited()
     {
         $url = env('COIN_MARKET_CAP_CURRENCY_URL').'trending/most-visited';
-        $this->retrieveCoinMarketcapData($url, null);
+        $mostVisited = $this->retrieveCoinMarketcapData($url, null);
+        $data = $mostVisited->data->data;
+
+        foreach ($data as $item) {
+            MostVisited::updateOrCreate(['api_id' => $item->id],[
+              'api_id'             => $item->id,
+              'name'               => $item->name,
+              'symbol'             => $item->symbol,
+              'slug'               => $item->slug,
+              'cmc_rank'           => $item->cmc_rank,
+              'num_market_pairs'   => $item->num_market_pairs,
+              'circulating_supply' => $item->circulating_supply,
+              'total_supply'       => $item->total_supply,
+              'max_supply'         => $item->max_supply,
+              'last_updated'       => new Carbon($item->last_updated),
+              'date_added'         => new Carbon($item->date_added),
+              'tags'               => json_encode($item->tags, true),
+              'platform'           => $item->platform,
+              'quote'              => json_encode($item->quote, true),
+            ]);
+        }
     }
 
     public function marketPairsLatest()
@@ -194,7 +281,18 @@ class CoinMarketService extends  BaseService {
     public function exchangeMap()
     {
         $url = env('COIN_MARKET_CAP_URL').'exchange/map';
-        $this->retrieveCoinMarketcapData($url, null);
+        $exchangeMap = $this->retrieveCoinMarketcapData($url, null);
+        $data = $exchangeMap->data;
+        foreach ($data as $item) {
+            ExchangeMap::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'name'               => $item->name,
+                'slug'               => $item->slug,
+                'is_active'          => $item->is_active,
+                'first_historical_data' => new Carbon($item->first_historical_data),
+                'last_historical_data'  => new Carbon($item->last_historical_data),
+            ]);
+        }
     }
 
     public function exchangeListingLatest()
@@ -346,9 +444,9 @@ class CoinMarketService extends  BaseService {
         ));
 
         $response = curl_exec($curl); // Send the request, save the response
-        print_r(json_decode($response)); // print json decoded response
+       // print_r(json_decode($response)); // print json decoded response
         curl_close($curl); // Close request
 
-        return $response;
+        return json_decode($response);
     }
 }
