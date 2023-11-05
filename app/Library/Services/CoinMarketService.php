@@ -2,6 +2,7 @@
 
 namespace App\Library\Services;
 
+use App\Models\ExchangeListingLatest;
 use App\Models\ExchangeMap;
 use App\Models\NewItems;
 use App\Models\GainersLosers;
@@ -298,7 +299,22 @@ class CoinMarketService extends  BaseService {
     public function exchangeListingLatest()
     {
         $url = env('COIN_MARKET_CAP_URL').'exchange/listings/latest';
-        $this->retrieveCoinMarketcapData($url, null);
+        $exchangeListingLatest = $this->retrieveCoinMarketcapData($url, null);
+        $data = $exchangeListingLatest->data;
+        foreach ($data as $item) {
+            ExchangeListingLatest::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'name'               => $item->name,
+                'slug'               => $item->slug,
+                'fiats'              => json_encode($item->fiats),
+                'traffic_score'      => $item->traffic_score,
+                'rank'               => $item->rank,
+                'exchange_score'     => $item->exchange_score,
+                'liquidity_score'    => $item->liquidity_score,
+                'last_updated'       => new Carbon($item->last_updated),
+                'quote'              => json_encode($item->quote),
+            ]);
+        }
     }
 
     public function marketPairsLatestV1()
