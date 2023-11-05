@@ -10,6 +10,8 @@ use App\Models\TrandingLatest;
 use App\Models\Coinmarketcap;
 use App\Library\Services\Base\BaseService;
 use App\Models\MostVisited;
+use App\Models\TrendingTokens;
+use App\Models\TrendingTopic;
 use Carbon\Carbon;
 
 
@@ -399,14 +401,35 @@ class CoinMarketService extends  BaseService {
     public function trendingToken()
     {
         $url = env('COIN_MARKET_CAP_URL').'community/trending/token';
-        $this->retrieveCoinMarketcapData($url, null);
+        $trendingTokens = $this->retrieveCoinMarketcapData($url, null);
+        $data = $trendingTokens->data;
+        foreach ($data as $item) {
+          TrendingTokens::updateOrCreate(['api_id' => $item->id],[
+              'api_id'             => $item->id,
+              'name'               => $item->name,
+              'slug'               => $item->slug,
+              'symbol'             => $item->symbol,
+              'cmc_rank'           => $item->cmc_rank,
+              'rank'               => $item->rank,
+          ]);
+        }
     }
 
 
     public function trendingTopic()
     {
         $url = env('COIN_MARKET_CAP_URL').'community/trending/topic';
-        $this->retrieveCoinMarketcapData($url, null);
+        $trendingTopics = $this->retrieveCoinMarketcapData($url, null);
+        $data = $trendingTopics->data;
+        foreach ($data as $item) {
+            TrendingTopic::updateOrCreate([
+                'rank'               => $item->rank,
+                'topic'              => $item->topic,
+            ],[
+                'rank'               => $item->rank,
+                'topic'              => $item->topic,
+            ]);
+        }
     }
 
     public function postsComments()
