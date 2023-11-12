@@ -12,7 +12,7 @@ class Categories extends Command
      *
      * @var string
      */
-    protected $signature = 'comarketcap:categories';
+    protected $signature = 'comarketcap:categories {--id=}';
 
     /**
      * The console command description.
@@ -29,6 +29,12 @@ class Categories extends Command
      */
     public function handle(CoinMarketService $service)
     {
+        $id = $this->option('id');
+        if ($id) {
+            $service->category($id);
+            return Command::SUCCESS;
+        }
+
         $service->categories();
     }
 }

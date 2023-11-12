@@ -2,9 +2,14 @@
 
 namespace App\Library\Services;
 
+use App\Models\Airdrops;
+use App\Models\Category;
+use App\Models\CategoryDetails;
+use App\Models\CategoryItems;
 use App\Models\ExchangeListingLatest;
 use App\Models\ExchangeMap;
 use App\Models\ListingsLatest;
+use App\Models\Map;
 use App\Models\NewItems;
 use App\Models\GainersLosers;
 use App\Models\TrandingLatest;
@@ -47,34 +52,98 @@ class CoinMarketService extends  BaseService {
 
     public function airDrops()
     {
-        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'airdrops';
-        $this->retrieveCoinMarketcapData($url, null);
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'airdrops';
+        $airdrops = $this->retrieveCoinMarketcapData($url, null);
+        foreach ($airdrops->data->data as $item) {
+            Airdrops::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'project_name'       => $item->project_name,
+                'description'        => $item->description,
+                'status'             => $item->status,
+                'coin'               => json_encode($item->coin, true),
+                'start_date'         => new Carbon($item->start_date),
+                'end_date'           => new Carbon($item->end_date),
+                'total_prize'        => $item->total_prize,
+                'winner_count'       => $item->winner_count,
+                'link'               => $item->link,
+            ]);
+        }
     }
 
     public function categories()
     {
-        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'categories';
-        $this->retrieveCoinMarketcapData($url, null);
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'categories';
+        $categories = $this->retrieveCoinMarketcapData($url, null);
+
+        foreach ($categories->data->data as $item) {
+            Category::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'name'               => $item->name,
+                'title'              => $item->title,
+                'description'        => $item->description,
+                'num_tokens'         => $item->num_tokens,
+                'avg_price_change'   => $item->avg_price_change,
+                'market_cap'         => $item->market_cap,
+                'market_cap_change'  => $item->market_cap_change,
+                'volume'             => $item->volume,
+                'volume_change'      => $item->volume_change,
+                'last_updated'       => $item->last_updated,
+            ]);
+        }
     }
 
-    public function category()
+    public function category($id)
     {
-        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'category';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'category';
+
         $params = [
-           'id' => '605e2ce9d41eae1066535f7c',
+            'id' => $id,
         ];
-        $this->retrieveCoinMarketcapData($url, $params);
+
+        $data = $this->retrieveCoinMarketcapData($url, $params);
+        foreach ($data->data as $index => $item) {
+            if(!$item->id) {
+                continue;
+            }
+
+            Category::updateOrCreate(['api_id' => $item->id],[
+                'api_id'             => $item->id,
+                'name'               => $item->name,
+                'title'              => $item->title,
+                'description'        => $item->description,
+                'num_tokens'         => $item->num_tokens,
+                'avg_price_change'   => $item->avg_price_change,
+                'market_cap'         => $item->market_cap,
+                'market_cap_change'  => $item->market_cap_change,
+                'volume'             => $item->volume,
+                'volume_change'      => $item->volume_change,
+                'coins'              => json_encode($item->coins, true),
+            ]);
+        }
     }
 
     public function map()
     {
-        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'map';
-        $map = $this->retrieveCoinMarketcapData($url, null);
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'map';
+        $data = $this->retrieveCoinMarketcapData($url, null);
+        foreach ($data->data as $item) {
+            Map::updateOrCreate(['api_id' => $item->id],[
+                'api_id'                => $item->id,
+                'rank'                  => $item->rank,
+                'name'                  => $item->name,
+                'symbol'                => $item->symbol,
+                'slug'                  => $item->slug,
+                'is_active'             => boolval($item->is_active),
+                'first_historical_data' => new Carbon($item->first_historical_data),
+                'last_historical_data'  => new Carbon($item->last_historical_data),
+                'platform'              => json_encode($item->platform),
+             ]);
+        }
     }
 
     public function info()
     {
-        $url = env('COIN_MARKET_CURRENCY_CAP_URL').'info';
+        $url = env('COIN_MARKET_CAP_CURRENCY_URL').'info';
         $params = [
             'slug' => 'bitcoin',
         ];

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double('total_prize');
             $table->integer('winner_count');
             $table->string('link');
+            $table->timestamps();
         });
     }
 
