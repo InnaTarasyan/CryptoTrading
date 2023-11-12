@@ -12,7 +12,7 @@ class QuotesLatestPartner extends Command
      *
      * @var string
      */
-    protected $signature = 'coinmarketcap:listings-latest';
+    protected $signature = 'quotes:latest_partner';
 
     /**
      * The console command description.

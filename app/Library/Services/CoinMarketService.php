@@ -4,6 +4,7 @@ namespace App\Library\Services;
 
 use App\Models\ExchangeListingLatest;
 use App\Models\ExchangeMap;
+use App\Models\ListingsLatest;
 use App\Models\NewItems;
 use App\Models\GainersLosers;
 use App\Models\TrandingLatest;
@@ -377,7 +378,18 @@ class CoinMarketService extends  BaseService {
     public function listingsLatest()
     {
         $url = env('COIN_MARKET_CAP_PARTNER_URL').'flipside-crypto/fcas/listings/latest';
-        $this->retrieveCoinMarketcapData($url, null);
+        $data = $this->retrieveCoinMarketcapData($url, null);
+        foreach ($data->data as $item) {
+           ListingsLatest::updateOrCreate(['api_id' => $item->id],[
+               'api_id'             => $item->id,
+               'name'               => $item->name,
+               'slug'               => $item->slug,
+               'symbol'             => $item->symbol,
+               'score'              => $item->score,
+               'grade'              => $item->grade,
+               'last_updated'       => new Carbon($item->last_updated),
+           ]);
+        }
     }
 
     public function quotesLatestPartner()
