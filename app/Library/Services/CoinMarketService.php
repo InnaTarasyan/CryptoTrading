@@ -6,12 +6,14 @@ use App\Models\Airdrops;
 use App\Models\Category;
 use App\Models\CategoryDetails;
 use App\Models\CategoryItems;
+use App\Models\Content;
 use App\Models\ExchangeListingLatest;
 use App\Models\ExchangeMap;
 use App\Models\ListingsLatest;
 use App\Models\Map;
 use App\Models\NewItems;
 use App\Models\GainersLosers;
+use App\Models\Posts;
 use App\Models\TrandingLatest;
 use App\Models\Coinmarketcap;
 use App\Library\Services\Base\BaseService;
@@ -144,10 +146,16 @@ class CoinMarketService extends  BaseService {
     public function info()
     {
         $url = env('COIN_MARKET_CAP_CURRENCY_URL').'info';
-        $params = [
-            'slug' => 'bitcoin',
-        ];
-        $this->retrieveCoinMarketcapData($url, $params);
+        $slugs = MostVisited::pluck('slug')->toArray();
+
+        foreach ($slugs as $slug) {
+            $params = [
+                "symbol" => 'bitcoin',
+            ];
+
+            $data = $this->retrieveCoinMarketcapData($url, $params);
+            dd($data);
+        }
     }
 
     public function historical()
@@ -270,7 +278,8 @@ class CoinMarketService extends  BaseService {
         $params = [
             'slug' => 'bitcoin',
         ];
-        $this->retrieveCoinMarketcapData($url, $params);
+        $data = $this->retrieveCoinMarketcapData($url, $params);
+        dump($data);
     }
 
     public function ohlcvHistorical()
@@ -473,10 +482,31 @@ class CoinMarketService extends  BaseService {
     public function contentLatest()
     {
         $url = env('COIN_MARKET_CAP_URL').'content/latest';
-        $params = [
-            "symbol" => "BTC",
-        ];
-        $this->retrieveCoinMarketcapData($url, $params);
+        $symbols = MostVisited::pluck('symbol')->toArray();
+
+        foreach ($symbols as $symbol) {
+            $params = [
+                "symbol" => $symbol,
+            ];
+
+            $data = $this->retrieveCoinMarketcapData($url, $params);
+
+            foreach ($data->data as $datum) {
+                foreach ($datum as $item) {
+                    Content::create([
+                        'cover'              => $item->cover,
+                        'assets'             => json_encode($item->assets, true),
+                        'released_at'        => new Carbon($item->released_at),
+                        'title'              => $item->title,
+                        'subtitle'           => $item->subtitle,
+                        'created_at'         => new Carbon($item->created_at),
+                        'type'               => $item->type,
+                        'source_name'        => $item->source_name,
+                        'source_url'         => $item->source_url,
+                    ]);
+                }
+            }
+        }
     }
 
     public function trendingToken()
@@ -516,28 +546,76 @@ class CoinMarketService extends  BaseService {
     public function postsComments()
     {
         $url = env('COIN_MARKET_CAP_URL').'content/posts/comments';
-        $params = [
-           'post_id' => '325670123',
-        ];
-        $this->retrieveCoinMarketcapData($url, $params);
+
+        $posts = Posts::all();
+        foreach ($posts as $post) {
+            $params = [
+                'post_id' => $post->post_id,
+            ];
+
+            $data = $this->retrieveCoinMarketcapData($url, $params);
+            dump($data);
+        }
     }
 
     public function postsLatest()
     {
         $url = env('COIN_MARKET_CAP_URL').'content/posts/latest';
-        $params = [
-            "symbol" => "BTC",
-        ];
-        $this->retrieveCoinMarketcapData($url, $params);
+        $slugs = MostVisited::pluck('slug')->toArray();
+
+        foreach ($slugs as $slug) {
+            $params = [
+                "symbol" => $slug,
+            ];
+
+            $data = $this->retrieveCoinMarketcapData($url, $params);
+            foreach ($data->data as $index => $datum) {
+                foreach ($datum->list as $indexInner => $item) {
+                    Posts::updateOrCreate(['post_id' => $item->post_id],[
+                        'post_id'            => $item->post_id,
+                        'comments_url'       => $item->comments_url,
+                        'owner'              => json_encode($item->owner),
+                        'text_content'       => $item->text_content,
+                        'photos'             => json_encode($item->photos),
+                        'comment_count'      => $item->comment_count,
+                        'like_count'         => $item->like_count,
+                        'post_time'          => $item->post_time,
+                        'currencies'         => json_encode($item->currencies),
+                        'language_code'      => $item->language_code,
+                    ]);
+                }
+            }
+        }
     }
 
     public function postsTop()
     {
         $url = env('COIN_MARKET_CAP_URL').'content/posts/top';
-        $params = [
-            "symbol" => "BTC",
-        ];
-        $this->retrieveCoinMarketcapData($url, $params);
+        $slugs = MostVisited::pluck('slug')->toArray();
+
+        foreach ($slugs as $slug) {
+            $params = [
+                "symbol" => $slug,
+            ];
+
+            $data = $this->retrieveCoinMarketcapData($url, $params);
+            foreach ($data->data as $index => $datum) {
+              foreach ($datum->list as $indexInner => $item) {
+                  Posts::updateOrCreate(['post_id' => $item->post_id],[
+                      'post_id'            => $item->post_id,
+                      'comments_url'       => $item->comments_url,
+                      'owner'              => json_encode($item->owner),
+                      'text_content'       => $item->text_content,
+                      'photos'             => json_encode($item->photos),
+                      'comment_count'      => $item->comment_count,
+                      'like_count'         => $item->like_count,
+                      'post_time'          => $item->post_time,
+                      'currencies'         => json_encode($item->currencies),
+                      'language_code'      => $item->language_code,
+                  ]);
+              }
+            }
+        }
     }
 
     protected function retrieveCoinMarketcapData($url, $params)
