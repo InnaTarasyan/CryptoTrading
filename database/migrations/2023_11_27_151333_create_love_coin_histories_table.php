@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('symbol')->nullable();
             $table->integer('rank');
-            $table->integer('age');
+            $table->integer('age')->nullable();
             $table->string('color');
             $table->string('png32')->nullable();
             $table->string('png64')->nullable();
