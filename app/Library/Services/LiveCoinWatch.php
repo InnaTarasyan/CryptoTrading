@@ -8,7 +8,7 @@ class LiveCoinWatch
 {
     public function handle()
     {
-       // $this->getCoins();
+        $this->getCoins();
         $this->getHistory();
     }
     public function getCoins()
@@ -71,7 +71,7 @@ class LiveCoinWatch
                'circulatingSupply' => $datum['circulatingSupply'],
                'totalSupply' => $datum['totalSupply'],
                'maxSupply' => $datum['maxSupply'],
-               'categories' => json_encode($datum['categories'], true),
+               'categories' => array_key_exists('categories', $datum) ? json_encode($datum['categories'], true) : null,
                'history' => json_encode('history', true),
            ]);
        }
