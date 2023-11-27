@@ -35,6 +35,7 @@ class CoinMarketService extends  BaseService {
         ];
 
         $response = $this->retrieveCoinMarketcapData($url, $parameters);
+        dd($response);
 
         Coinmarketcap::truncate();
 

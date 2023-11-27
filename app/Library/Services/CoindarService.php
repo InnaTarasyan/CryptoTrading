@@ -9,8 +9,8 @@ class CoindarService extends  BaseService {
 
     public function get()
     {
-        $response = $this->retrieveData(config('coindar.url'), []);
-
+        $url = env('COINDAR_API').'?access_token='.env('COINDAR_TOKEN');
+        $response = $this->retrieveData($url, []);
         Coindar::truncate();
         foreach ($response as $data){
             Coindar::create($data);
