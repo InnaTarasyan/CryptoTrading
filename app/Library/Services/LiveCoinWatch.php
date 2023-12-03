@@ -16,6 +16,9 @@ class LiveCoinWatch
         $this->getFiats();
         $this->platforms();
         $this->exchanges();
+        $this->credits();
+        $this->overview();
+        $this->overviewHistory();
     }
     public function getCoins()
     {
@@ -165,5 +168,53 @@ class LiveCoinWatch
                 'volumePerVisitor' => $datum['volumePerVisitor'],
             ]);
         }
+    }
+
+    public function credits()
+    {
+        $data = json_encode(array('currency' => 'USD'));
+        $context_options = array (
+            'http' => array (
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\n"
+                    . "x-api-key: ".env('LIVE') . "\r\n",
+                'content' => $data
+            )
+        );
+        $context = stream_context_create($context_options);
+        $fp = fopen('https://api.livecoinwatch.com/overview', 'r', false, $context);
+        print_r(stream_get_contents($fp));
+    }
+
+    public function overview()
+    {
+        $data = json_encode(array('currency' => 'USD'));
+        $context_options = array (
+            'http' => array (
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\n"
+                    . "x-api-key: ".env('LIVE') . "\r\n",
+                'content' => $data
+            )
+        );
+        $context = stream_context_create($context_options);
+        $fp = fopen('https://api.livecoinwatch.com/overview', 'r', false, $context);
+        print_r(stream_get_contents($fp));
+    }
+
+    public function overviewHistory()
+    {
+        $data = json_encode(array('currency' => 'USD', 'start' => 1606232700000, 'end' => 1606233000000));
+        $context_options = array (
+            'http' => array (
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\n"
+                    . "x-api-key: ".env('LIVE') . "\r\n",
+                'content' => $data
+            )
+        );
+        $context = stream_context_create($context_options);
+        $fp = fopen('https://api.livecoinwatch.com/overview/history', 'r', false, $context);
+        print_r(stream_get_contents($fp));
     }
 }
