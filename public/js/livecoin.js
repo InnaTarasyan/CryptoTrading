@@ -10,7 +10,7 @@ LiveCoin.prototype.init = function () {
         "ajax": $('#livecoin_route').val(),
         "columns": [
             {data: 'code', name: 'code'},
-            {data: 'symbol', name: 'symbol'},
+            // {data: 'symbol', name: 'symbol'},
             {data: 'rate', name: 'rate'},
             {data: 'volume', name: 'volume'},
             {data: 'cap', name: 'cap'},

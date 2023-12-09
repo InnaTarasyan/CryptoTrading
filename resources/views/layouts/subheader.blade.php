@@ -30,6 +30,13 @@
                         </span>
                     </a>
                 </li>
+                <li class="m-nav__item">
+                    <a href="/exchangesindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Exchanges data
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div>
