@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LiveCoinWatch;
 use Illuminate\Http\Request;
 use App\Models\Coindar;
 use App\Models\Coinmarketcap;
@@ -37,7 +38,9 @@ class DetailsController extends Controller
 
         $data = [
             'symbol' => $symbol,
-            'coin' => Coinmarketcap::where('symbol', $symbol)->first() ? Coinmarketcap::where('symbol', $symbol)->first()->name : Solume::where('symbol', $symbol)->first()->name,
+            'coin' => LiveCoinWatch::where('code', $symbol)->first() ?
+                LiveCoinWatch::where('code', $symbol)->first()->name :
+                Solume::where('symbol', $symbol)->first()->name,
             'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
             'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
             'coinbin' => Coinbin::where('ticker', $symbol)->first(),
