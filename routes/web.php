@@ -17,6 +17,7 @@ Route::get('/coinbin', 'CoinbinController@index');
 Route::get('/worldcoinindex','WorldCoinIndexController@index');
 Route::get('/livecoinwatch','LiveCoinController@index');
 Route::get('/exchangesindex','ExchangesController@index');
+Route::get('/fiatsindex','FiatsController@index');
 
 Route::get('/getcoinmarketcap', ['as' => 'datatable.getcoinmarketcap','uses' => 'HomeController@getCoinmarketcapData']);
 Route::get('/getsolume', ['as' => 'datatable.getsolume','uses' => 'SolumeController@getSolumeData']);
@@ -24,7 +25,7 @@ Route::get('/getcoinbin', ['as' => 'datatable.getcoinbin','uses' => 'CoinbinCont
 Route::get('/getworldcoinindex', ['as' => 'datatable.getworldcoinindex','uses' => 'WorldCoinIndexController@getWorldCoinIndexData']);
 Route::get('/getlivecoin', ['as' => 'datatable.getlivecoin','uses' => 'LiveCoinController@getLiveCoinData']);
 Route::get('/exchanges', ['as' => 'datatable.exchanges','uses' => 'ExchangesController@getExchangesData']);
-
+Route::get('/fiats', ['as' => 'datatable.fiats','uses' => 'FiatsController@getFiatsData']);
 
 
 Route::get('/details/{coin}', 'DetailsController@index');

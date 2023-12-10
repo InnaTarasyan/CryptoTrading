@@ -37,6 +37,13 @@
                         </span>
                     </a>
                 </li>
+                <li class="m-nav__item">
+                    <a href="/fiatsindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Fiats
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div>

@@ -8,21 +8,16 @@
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">
-                <input type="hidden" id="livecoin_route" value="{{ route('datatable.getlivecoin') }}">
+                <input type="hidden" id="fiats_route" value="{{ route('datatable.fiats') }}">
                 <div class="table-responsive">
-                    <table id="livecoin" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                    <table id="fiats" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                           <th>Code</th>
-                           {{--<th>Symbol</th>--}}
-                           <th>Rate</th>
-                           <th>Volume</th>
-                           <th>Cap</th>
-                           <th>Rank</th>
-                           <th>Markets</th>
-                           <th>Total Supply</th>
-                           <th>Max Supply</th>
-                           <th>Categories</th>
+                            <th>Code</th>
+                            <th>Countries</th>
+                            <th>Flag</th>
+                            <th>Name</th>
+                            <th>Symbol</th>
                         </tr>
                         </thead>
                     </table>
@@ -34,5 +29,5 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('js/livecoin.js') }}"></script>
+    <script src="{{ url('js/fiats.js') }}"></script>
 @endsection
