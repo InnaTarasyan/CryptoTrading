@@ -40,6 +40,8 @@ class CoinMarketService extends  BaseService {
         Coinmarketcap::truncate();
 
         foreach (json_decode($response)->data as  $data){
+            dump($data);
+            continue;
             $data->native_id = $data->id;
             $data->rank = $data->cmc_rank;
             $data->{'24h_volume_usd'} = $data->quote->USD->volume_24h;

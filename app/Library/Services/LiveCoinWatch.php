@@ -104,7 +104,7 @@ class LiveCoinWatch
                 'code' => $datum['code'],
                 'name' => $datum['name'],
                 'symbol' => array_key_exists('symbol', $datum) ? $datum['symbol'] : null,
-                'countries' => json_encode($datum['countries'], true),
+                'countries' => $datum['countries'] ? json_encode($datum['countries'], true) : null,
                 'flag' => $datum['flag'],
             ]);
         }

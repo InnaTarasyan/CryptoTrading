@@ -15,7 +15,7 @@ Fiats.prototype.init = function () {
             {data: 'name', name: 'name'},
             {data: 'symbol', name: 'symbol'},
         ],
-        "iDisplayLength": 5,
+        "iDisplayLength": 20,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#fiats tbody tr').click(function () {

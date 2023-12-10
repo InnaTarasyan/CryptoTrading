@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fiats', function (Blueprint $table) {
+        Schema::create('coin_gecko_coins', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->json('countries')->nullable();
-            $table->string('flag')->nullable();
+            $table->string('api_id');
+            $table->string('symbol');
             $table->string('name');
-            $table->string('symbol')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fiats');
+        Schema::dropIfExists('coin_gecko_coins');
     }
 };

@@ -21,7 +21,7 @@ LiveCoin.prototype.init = function () {
             {data: 'categories', name: 'categories'},
             // {data: 'delta', name: 'delta'}
         ],
-        "iDisplayLength": 5,
+        "iDisplayLength": 20,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#livecoin tbody tr').click(function () {

@@ -6,41 +6,17 @@
                 Dashboard
             </h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-                {{--<li class="m-nav__item">--}}
-                    {{--<a href="/" class="m-nav__link">--}}
-                        {{--<span class="m-nav__link-text">--}}
-                            {{--Coinmarketcap.com data--}}
-                        {{--</span>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--<li class="m-nav__separator">--}}
-                    {{-----}}
-                {{--</li>--}}
-                {{--<li class="m-nav__item">--}}
-                    {{--<a href="/worldcoinindex" class="m-nav__link">--}}
-                        {{--<span class="m-nav__link-text">--}}
-                            {{--Worldcoinindex.com data--}}
-                        {{--</span>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
                 <li class="m-nav__item">
                     <a href="/livecoinwatch" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Live Coin Watch data
+                            Live Coin Watch
                         </span>
                     </a>
                 </li>
                 <li class="m-nav__item">
-                    <a href="/exchangesindex" class="m-nav__link">
+                    <a href="/coingeckoindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Exchanges data
-                        </span>
-                    </a>
-                </li>
-                <li class="m-nav__item">
-                    <a href="/fiatsindex" class="m-nav__link">
-                        <span class="m-nav__link-text">
-                            Fiats
+                           Coingecko
                         </span>
                     </a>
                 </li>

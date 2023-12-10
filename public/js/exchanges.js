@@ -19,7 +19,7 @@ Exchanges.prototype.init = function () {
             {data: 'visitors', name: 'visitors'},
             {data: 'volumePerVisitor', name: 'volumePerVisitor'}
         ],
-        "iDisplayLength": 5,
+        "iDisplayLength": 20,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#exchanges tbody tr').click(function () {

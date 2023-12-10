@@ -5,6 +5,30 @@
 @endsection
 @section('content')
     <div class="m-content">
+        <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+            <li class="m-nav__item">
+                <a href="/livecoinwatch" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Live Coin Watch data
+                        </span>
+                </a>
+            </li>
+            <li class="m-nav__item">
+                <a href="/exchangesindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Exchanges data
+                        </span>
+                </a>
+            </li>
+            <li class="m-nav__item">
+                <a href="/fiatsindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Fiats
+                        </span>
+                </a>
+            </li>
+        </ul>
+
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">

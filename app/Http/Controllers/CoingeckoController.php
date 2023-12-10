@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fiats;
+use App\Models\CoinGeckoMarkets;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 
-class FiatsController extends Controller
+class CoingeckoController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,12 +24,16 @@ class FiatsController extends Controller
      */
     public function index()
     {
-        return view('fiats');
+        return view('coingecko');
     }
 
-    public function getFiatsData()
+    public function getCoingeckoData()
     {
-        return Datatables::of(Fiats::where('countries', '<>', null)->get())
+        return Datatables::of(CoinGeckoMarkets::all())
+            ->editColumn('image', function ($image) {
+                return '<img src="'.$image->image.'" height=50 width=50>';
+            })
+            ->rawColumns(['image'])
             ->make(true);
     }
 
