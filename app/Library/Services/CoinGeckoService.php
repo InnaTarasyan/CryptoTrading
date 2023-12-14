@@ -5,6 +5,7 @@ use App\Library\Services\Base\BaseService;
 use App\Models\CoinGeckoCoin;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
+use App\Models\CoinGeckoTrending;
 use Carbon\Carbon;
 
 class CoinGeckoService extends  BaseService
@@ -14,7 +15,8 @@ class CoinGeckoService extends  BaseService
         //$this->ping();
        // $this->coins();
       //  $this->markets();
-        $this->exchanges();
+      //  $this->exchanges();
+        $this->trending();
     }
 
     protected function ping()
@@ -113,6 +115,32 @@ class CoinGeckoService extends  BaseService
                 'trade_volume_24h_btc' => $item['trade_volume_24h_btc'],
                 'trade_volume_24h_btc_normalized' => $item['trade_volume_24h_btc_normalized'],
             ]);
+        }
+    }
+
+    public function trending()
+    {
+        $params = [
+            'api_key' => env('COIN_GECKO_KEY'),
+        ];
+
+        $response = $this->retrieveData(env('COIN_GECKO_URL').'search/trending', $params);
+        foreach ($response['coins'] as $item) {
+           $item = $item['item'];
+           CoinGeckoTrending::updateOrCreate(['api_id' => $item['id']], [
+               'api_id'  => $item['id'],
+               'coin_id' => $item['coin_id'],
+               'name'    => $item['name'],
+               'symbol'  => $item['symbol'],
+               'market_cap_rank' => $item['market_cap_rank'],
+               'thumb'  => $item['thumb'],
+               'small'  => $item['small'],
+               'large'  => $item['large'],
+               'slug'   => $item['slug'],
+               'price_btc' => $item['price_btc'],
+               'score'  => $item['score'],
+               'data'   => json_encode($item['data'], true),
+           ]);
         }
     }
 }

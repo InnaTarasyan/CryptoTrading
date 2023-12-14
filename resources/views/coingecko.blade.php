@@ -21,7 +21,15 @@
                         </span>
                 </a>
             </li>
+            <li class="m-nav__item">
+                <a href="/coingeckotrendingsindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                           Coingecko Trendings
+                        </span>
+                </a>
+            </li>
         </ul>
+
 
 
         <!--Begin::Section-->
