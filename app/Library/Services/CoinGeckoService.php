@@ -3,6 +3,7 @@
 namespace App\Library\Services;
 use App\Library\Services\Base\BaseService;
 use App\Models\CoinGeckoCoin;
+use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use Carbon\Carbon;
 
@@ -12,7 +13,8 @@ class CoinGeckoService extends  BaseService
     {
         //$this->ping();
        // $this->coins();
-        $this->markets();
+      //  $this->markets();
+        $this->exchanges();
     }
 
     protected function ping()
@@ -85,6 +87,31 @@ class CoinGeckoService extends  BaseService
                 'atl_date' => new Carbon($item['atl_date']),
                 'roi' => json_encode($item['roi']),
                 'last_updated' => new Carbon($item['last_updated']),
+            ]);
+        }
+    }
+
+    public function exchanges()
+    {
+        $params = [
+            'api_key' => env('COIN_GECKO_KEY'),
+        ];
+
+        $response = $this->retrieveData(env('COIN_GECKO_URL').'exchanges', $params);
+        foreach ($response as $item) {
+            CoingeckoExchanges::updateOrCreate(['api_id' => $item['id']], [
+                'api_id' => $item['id'],
+                'name'   => $item['name'],
+                'year_established' => $item['year_established'],
+                'country' => $item['country'],
+                'description' => $item['description'],
+                'url' => $item['url'],
+                'image' => $item['image'],
+                'has_trading_incentive' => $item['has_trading_incentive'],
+                'trust_score' => $item['trust_score'],
+                'trust_score_rank' => $item['trust_score_rank'],
+                'trade_volume_24h_btc' => $item['trade_volume_24h_btc'],
+                'trade_volume_24h_btc_normalized' => $item['trade_volume_24h_btc_normalized'],
             ]);
         }
     }
