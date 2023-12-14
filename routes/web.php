@@ -21,6 +21,7 @@ Route::get('/fiatsindex','FiatsController@index');
 Route::get('/coingeckoindex', 'CoingeckoController@index');
 Route::get('/coingeckoexchangesindex', 'CoingeckoController@indexExchanges');
 Route::get('/coingeckotrendingsindex', 'CoingeckoController@indexTrendings');
+Route::get('/coingeckoexchangeratesindex', 'CoingeckoController@indexRates');
 
 Route::get('/getcoinmarketcap', ['as' => 'datatable.getcoinmarketcap','uses' => 'HomeController@getCoinmarketcapData']);
 Route::get('/getsolume', ['as' => 'datatable.getsolume','uses' => 'SolumeController@getSolumeData']);
@@ -32,6 +33,7 @@ Route::get('/fiats', ['as' => 'datatable.fiats','uses' => 'FiatsController@getFi
 Route::get('/coingecko', ['as' => 'datatable.coingecko','uses' => 'CoingeckoController@getCoingeckoData']);
 Route::get('/coingeckoexchanges', ['as' => 'datatable.coingecko_exchanges','uses' => 'CoingeckoController@getCoingeckoExchangesData']);
 Route::get('/coingeckotrendings', ['as' => 'datatable.coingecko_trendings','uses' => 'CoingeckoController@getCoingeckoTrendingsData']);
+Route::get('/coingeckoexchangerates', ['as' => 'datatable.coingecko_exchange_rates','uses' => 'CoingeckoController@getCoingeckoExchangeRatesData']);
 
 
 Route::get('/details/{coin}', 'DetailsController@index');

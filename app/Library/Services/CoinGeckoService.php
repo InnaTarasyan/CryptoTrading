@@ -3,6 +3,7 @@
 namespace App\Library\Services;
 use App\Library\Services\Base\BaseService;
 use App\Models\CoinGeckoCoin;
+use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
@@ -16,7 +17,8 @@ class CoinGeckoService extends  BaseService
        // $this->coins();
       //  $this->markets();
       //  $this->exchanges();
-        $this->trending();
+       // $this->trending();
+        $this->exchangeRates();
     }
 
     protected function ping()
@@ -140,6 +142,24 @@ class CoinGeckoService extends  BaseService
                'price_btc' => $item['price_btc'],
                'score'  => $item['score'],
                'data'   => json_encode($item['data'], true),
+           ]);
+        }
+    }
+
+    public function exchangeRates()
+    {
+        $params = [
+            'api_key' => env('COIN_GECKO_KEY'),
+        ];
+
+        $response = $this->retrieveData(env('COIN_GECKO_URL').'exchange_rates', $params);
+        foreach ($response['rates'] as $index => $item) {
+           CoinGeckoExchangeRates::updateOrCreate(['symbol' => $index], [
+               'symbol' => $index,
+               'name'   => $item['name'],
+               'unit'   => $item['unit'],
+               'value'  => $item['value'],
+               'type'   => $item['type'],
            ]);
         }
     }

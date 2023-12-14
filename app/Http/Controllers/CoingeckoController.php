@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
@@ -20,7 +21,7 @@ class CoingeckoController extends Controller
     }
 
     /**
-     * Show the coinbin dashboard.
+     *
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,7 +31,7 @@ class CoingeckoController extends Controller
     }
 
     /**
-     * Show the coinbin dashboard.
+     *
      *
      * @return \Illuminate\Http\Response
      */
@@ -40,13 +41,18 @@ class CoingeckoController extends Controller
     }
 
     /**
-     * Show the coinbin dashboard.
+     *
      *
      * @return \Illuminate\Http\Response
      */
     public function indexTrendings()
     {
         return view('coingeckotrendings');
+    }
+
+    public function indexRates()
+    {
+        return view('coingeckoexchangesrates');
     }
 
     public function getCoingeckoData()
@@ -85,6 +91,13 @@ class CoingeckoController extends Controller
                 return '<img src="'.$item->large.'" height=50 width=50>';
             })
             ->rawColumns(['thumb', 'small', 'large'])
+            ->make(true);
+    }
+
+
+    public function getCoingeckoExchangeRatesData()
+    {
+        return Datatables::of(CoinGeckoExchangeRates::all())
             ->make(true);
     }
 }
