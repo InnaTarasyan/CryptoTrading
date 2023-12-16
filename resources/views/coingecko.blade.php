@@ -42,6 +42,13 @@
                         </span>
                 </a>
             </li>
+            <li class="m-nav__item">
+                <a href="/coingeckoderivativesindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Derivatives
+                        </span>
+                </a>
+            </li>
         </ul>
 
 

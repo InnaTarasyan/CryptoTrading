@@ -6,6 +6,7 @@ use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
+use App\Models\Derivatives;
 use App\Models\Nfts;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 
@@ -110,6 +111,17 @@ class CoingeckoController extends Controller
     public function getCoingeckoNftsData()
     {
         return Datatables::of(Nfts::all())
+            ->make(true);
+    }
+
+    public function indexDerivatives()
+    {
+        return view('derivatives');
+    }
+
+    public function getDerivativesData()
+    {
+        return Datatables::of(Derivatives::all())
             ->make(true);
     }
 }

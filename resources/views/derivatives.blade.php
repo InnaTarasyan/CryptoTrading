@@ -52,37 +52,39 @@
             </li>
         </ul>
 
-
-
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">
-                <input type="hidden" id="coingecko_exchanges_route" value="{{ route('datatable.coingecko_exchanges') }}">
+                <input type="hidden" id="derivatives_route" value="{{ route('datatable.coingecko_derivatives') }}">
                 <div class="table-responsive">
-                    <table id="coingecko_exchanges" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                    <table id="derivatives" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Year Established</th>
-                            <th>Country</th>
-                            <th>Description</th>
-                            <th>URL</th>
-                            <th>Image</th>
-                            <th>Has trading incentive</th>
-                            <th>Trust score</th>
-                            <th>Trust score rank</th>
-                            <th>Trade volume 24h btc normalized</th>
+                            <th>Market</th>
+                            <th>Symbol</th>
+                            <th>Index Id</th>
+                            <th>Price</th>
+                            <th>Price percentage change 24h</th>
+                            <th>Contract type</th>
+                            <th>Index</th>
+                            <th>Basis</th>
+                            <th>Spread</th>
+                            <th>Funding rate</th>
+                            <th>Open interest</th>
+                            <th>Volume 24h</th>
+                            <th>Last traded at</th>
+                            <th>Expired at</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
             </div>
         </div>
+
         <!--End::Section-->
     </div>
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('js/coingecko_exchanges.js') }}"></script>
+    <script src="{{ url('js/derivatives.js') }}"></script>
 @endsection

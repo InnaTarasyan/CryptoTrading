@@ -7,6 +7,7 @@ use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
+use App\Models\Derivatives;
 use App\Models\Nfts;
 use Carbon\Carbon;
 
@@ -20,7 +21,8 @@ class CoinGeckoService extends  BaseService
       //  $this->exchanges();
        // $this->trending();
        // $this->exchangeRates();
-        $this->nfts();
+      //  $this->nfts();
+        $this->getDerivatives();
     }
 
     protected function ping()
@@ -195,6 +197,35 @@ class CoinGeckoService extends  BaseService
             }
 
             sleep(5);
+        }
+    }
+
+    public function getDerivatives()
+    {
+        $params = [
+            'api_key' => env('COIN_GECKO_KEY'),
+        ];
+
+        $response = $this->retrieveData(env('COIN_GECKO_URL').'derivatives', $params);
+        foreach ($response as $item) {
+            Derivatives::updateOrCreate([
+                'symbol'  => $item['symbol'],
+            ], [
+                'symbol'  => $item['symbol'],
+                'market' => $item['market'],
+                'index_id' => $item['index_id'],
+                'price' => $item['price'],
+                'price_percentage_change_24h' => $item['price_percentage_change_24h'],
+                'contract_type' => $item['contract_type'],
+                'index' => $item['index'],
+                'basis' => $item['basis'],
+                'spread' => $item['spread'],
+                'funding_rate' => $item['funding_rate'],
+                'open_interest' => $item['open_interest'],
+                'volume_24h' => $item['volume_24h'],
+                'last_traded_at' => new Carbon($item['last_traded_at']),
+                'expired_at' => new Carbon($item['expired_at']),
+            ]);
         }
     }
 }
