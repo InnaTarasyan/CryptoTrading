@@ -6,6 +6,7 @@
 @section('content')
     <div class="m-content">
 
+
         <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
             <li class="m-nav__item">
                 <a href="/coingeckoindex" class="m-nav__link">
@@ -58,51 +59,39 @@
             </li>
         </ul>
 
-
-
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">
-                <input type="hidden" id="coingecko_route" value="{{ route('datatable.coingecko') }}">
+                <input type="hidden" id="derivatives_exchanges_route" value="{{ route('datatable.coingecko_derivatives_exchanges') }}">
                 <div class="table-responsive">
-                    <table id="coingecko" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                    <table id="derivatives_exchanges" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                           <th>ID</th>
-                           <th>Name</th>
-                           <th>Image</th>
-                           <th>Current price</th>
-                           <th>Market cap</th>
-                           <th>Market cap rank</th>
-                           <th>Fully diluted Valuation</th>
-                           <th>Total Volume</th>
-                           <th>High 24h</th>
-                           <th>Low 24h</th>
-                           <th>Price change 24h</th>
-                           <th>Price change percentage 24h</th>
-                           <th>Market cap change 24h</th>
-                           <th>Market cap change percentage 24h</th>
-                           <th>Circulating supply</th>
-                           <th>Total supply</th>
-                           <th>Max supply</th>
-                           <th>Ath</th>
-                           <th>Ath change percentage</th>
-                           <th>Ath date</th>
-                           <th>Atl</th>
-                           <th>Atl change percentage</th>
-                           <th>Atl date</th>
-                           <th>Roi</th>
-                           <th>Last updated</th>
+                            <th>Market</th>
+                            <th>Symbol</th>
+                            <th>Index Id</th>
+                            <th>Price</th>
+                            <th>Price percentage change 24h</th>
+                            <th>Contract type</th>
+                            <th>Index</th>
+                            <th>Basis</th>
+                            <th>Spread</th>
+                            <th>Funding rate</th>
+                            <th>Open interest</th>
+                            <th>Volume 24h</th>
+                            <th>Last traded at</th>
+                            <th>Expired at</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
             </div>
         </div>
+
         <!--End::Section-->
     </div>
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('js/coingecko.js') }}"></script>
+    <script src="{{ url('js/derivativesexchanges.js') }}"></script>
 @endsection

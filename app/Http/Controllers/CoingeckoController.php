@@ -7,6 +7,7 @@ use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
 use App\Models\Derivatives;
+use App\Models\DerivativesExchanges;
 use App\Models\Nfts;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 
@@ -122,6 +123,20 @@ class CoingeckoController extends Controller
     public function getDerivativesData()
     {
         return Datatables::of(Derivatives::all())
+            ->make(true);
+    }
+
+    public function indexDerivativesExchanges()
+    {
+        return view('derivativesExchanges');
+    }
+
+    public function getDerivativesExchangesData()
+    {
+        return Datatables::of(DerivativesExchanges::all())
+            ->editColumn('description', function ($item) {
+                return substr($item->description, 0, 30).' .... ';
+            })
             ->make(true);
     }
 }

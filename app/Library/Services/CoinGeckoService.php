@@ -8,6 +8,7 @@ use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
 use App\Models\Derivatives;
+use App\Models\DerivativesExchanges;
 use App\Models\Nfts;
 use Carbon\Carbon;
 
@@ -22,7 +23,8 @@ class CoinGeckoService extends  BaseService
        // $this->trending();
        // $this->exchangeRates();
       //  $this->nfts();
-        $this->getDerivatives();
+       // $this->getDerivatives();
+        $this->getDerivativesExchanges();
     }
 
     protected function ping()
@@ -225,6 +227,32 @@ class CoinGeckoService extends  BaseService
                 'volume_24h' => $item['volume_24h'],
                 'last_traded_at' => new Carbon($item['last_traded_at']),
                 'expired_at' => new Carbon($item['expired_at']),
+            ]);
+        }
+    }
+
+    public function getDerivativesExchanges()
+    {
+        $params = [
+            'api_key' => env('COIN_GECKO_KEY'),
+        ];
+
+        $response = $this->retrieveData(env('COIN_GECKO_URL').'derivatives/exchanges', $params);
+        foreach ($response as $item) {
+            DerivativesExchanges::updateOrCreate([
+                'api_id' => $item['id']
+            ], [
+                'api_id' => $item['id'],
+                'name'   => $item['name'],
+                'open_interest_btc' => $item['open_interest_btc'],
+                'trade_volume_24h_btc' => $item['trade_volume_24h_btc'],
+                'number_of_perpetual_pairs' => $item['number_of_perpetual_pairs'],
+                'number_of_futures_pairs' => $item['number_of_futures_pairs'],
+                'image' => $item['image'],
+                'year_established' => new Carbon($item['year_established']),
+                'country' => $item['country'],
+                'description' => $item['description'],
+                'url' => $item['url']
             ]);
         }
     }
