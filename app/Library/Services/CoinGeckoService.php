@@ -7,6 +7,7 @@ use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
+use App\Models\Nfts;
 use Carbon\Carbon;
 
 class CoinGeckoService extends  BaseService
@@ -18,7 +19,8 @@ class CoinGeckoService extends  BaseService
       //  $this->markets();
       //  $this->exchanges();
        // $this->trending();
-        $this->exchangeRates();
+       // $this->exchangeRates();
+        $this->nfts();
     }
 
     protected function ping()
@@ -149,7 +151,7 @@ class CoinGeckoService extends  BaseService
     public function exchangeRates()
     {
         $params = [
-            'api_key' => env('COIN_GECKO_KEY'),
+            'api_key'  => env('COIN_GECKO_KEY'),
         ];
 
         $response = $this->retrieveData(env('COIN_GECKO_URL').'exchange_rates', $params);
@@ -161,6 +163,38 @@ class CoinGeckoService extends  BaseService
                'value'  => $item['value'],
                'type'   => $item['type'],
            ]);
+        }
+    }
+
+    public function nfts()
+    {
+        $page = 1;
+        while(true) {
+            $params = [
+                'api_key' => env('COIN_GECKO_KEY'),
+                'per_page' => 100,
+                'page'     => $page++,
+            ];
+
+            $response = $this->retrieveData(env('COIN_GECKO_URL').'nfts/list', $params);
+
+            foreach ($response as $item) {
+                Nfts::updateOrCreate([
+                    'api_id' => $item['id']
+                ], [
+                    'api_id' => $item['id'],
+                    'contract_address' => $item['contract_address'],
+                    'name' => $item['name'],
+                    'asset_platform_id' => $item['asset_platform_id'],
+                    'symbol' => $item['symbol'],
+                ]);
+            }
+
+            if($page > 5) {
+                return;
+            }
+
+            sleep(5);
         }
     }
 }

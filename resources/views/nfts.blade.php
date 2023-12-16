@@ -6,7 +6,6 @@
 @section('content')
     <div class="m-content">
 
-
         <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
             <li class="m-nav__item">
                 <a href="/coingeckoindex" class="m-nav__link">
@@ -46,26 +45,19 @@
             </li>
         </ul>
 
-
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">
-                <input type="hidden" id="coingecko_trendings_route" value="{{ route('datatable.coingecko_trendings') }}">
+                <input type="hidden" id="nfts_route" value="{{ route('datatable.coingecko_nfts') }}">
                 <div class="table-responsive">
-                    <table id="coingecko_trendings" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                    <table id="nfts" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Coin ID</th>
+                            <th>Contract Address</th>
                             <th>Name</th>
+                            <th>Asset platform id</th>
                             <th>Symbol</th>
-                            <th>Market cap rank</th>
-                            <th>Thumb</th>
-                            <th>Small</th>
-                            {{--<th>Large</th>--}}
-                            <th>Slug</th>
-                            <th>Price btc</th>
-                            <th>Score</th>
                         </tr>
                         </thead>
                     </table>
@@ -77,5 +69,5 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('js/coingecko_trendings.js') }}"></script>
+    <script src="{{ url('js/nfts.js') }}"></script>
 @endsection

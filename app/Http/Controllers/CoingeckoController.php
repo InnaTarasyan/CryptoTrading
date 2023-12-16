@@ -6,6 +6,7 @@ use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
 use App\Models\CoinGeckoTrending;
+use App\Models\Nfts;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 
 class CoingeckoController extends Controller
@@ -98,6 +99,17 @@ class CoingeckoController extends Controller
     public function getCoingeckoExchangeRatesData()
     {
         return Datatables::of(CoinGeckoExchangeRates::all())
+            ->make(true);
+    }
+
+    public function indexNfts()
+    {
+        return view('nfts');
+    }
+
+    public function getCoingeckoNftsData()
+    {
+        return Datatables::of(Nfts::all())
             ->make(true);
     }
 }

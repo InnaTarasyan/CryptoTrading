@@ -36,6 +36,13 @@
                         </span>
             </a>
         </li>
+        <li class="m-nav__item">
+            <a href="/coingeckonftsindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Nfts
+                        </span>
+            </a>
+        </li>
     </ul>
 
 
