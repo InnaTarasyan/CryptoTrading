@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoinGeckoCategories;
 use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoMarkets;
@@ -137,6 +138,17 @@ class CoingeckoController extends Controller
             ->editColumn('description', function ($item) {
                 return substr($item->description, 0, 30).' .... ';
             })
+            ->make(true);
+    }
+
+    public function indexCategories()
+    {
+        return view('coingeckocategories');
+    }
+
+    public function getCategoriesData()
+    {
+        return Datatables::of(CoinGeckoCategories::all())
             ->make(true);
     }
 }

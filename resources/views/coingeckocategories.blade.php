@@ -29,7 +29,6 @@
                         </span>
                 </a>
             </li>
-
             <li class="m-nav__item">
                 <a href="/coingeckoexchangeratesindex" class="m-nav__link">
                         <span class="m-nav__link-text">
@@ -68,25 +67,17 @@
         </ul>
 
 
+
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">
-                <input type="hidden" id="coingecko_trendings_route" value="{{ route('datatable.coingecko_trendings') }}">
+                <input type="hidden" id="coingecko_categories_route" value="{{ route('datatable.coingecko_categories') }}">
                 <div class="table-responsive">
-                    <table id="coingecko_trendings" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                    <table id="coingecko_categories" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Coin ID</th>
                             <th>Name</th>
-                            <th>Symbol</th>
-                            <th>Market cap rank</th>
-                            <th>Thumb</th>
-                            <th>Small</th>
-                            {{--<th>Large</th>--}}
-                            <th>Slug</th>
-                            <th>Price btc</th>
-                            <th>Score</th>
+                            <th>Category ID</th>
                         </tr>
                         </thead>
                     </table>
@@ -98,5 +89,5 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('js/coingecko_trendings.js') }}"></script>
+    <script src="{{ url('js/coingeckocategories.js') }}"></script>
 @endsection

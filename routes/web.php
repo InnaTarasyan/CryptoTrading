@@ -25,6 +25,7 @@ Route::get('/coingeckoexchangeratesindex', 'CoingeckoController@indexRates');
 Route::get('/coingeckonftsindex', 'CoingeckoController@indexNfts');
 Route::get('/coingeckoderivativesindex', 'CoingeckoController@indexDerivatives');
 Route::get('/coingeckoderivativesexchangesindex', 'CoingeckoController@indexDerivativesExchanges');
+Route::get('/coingeckocategoriesindex', 'CoingeckoController@indexCategories');
 
 
 Route::get('/getcoinmarketcap', ['as' => 'datatable.getcoinmarketcap','uses' => 'HomeController@getCoinmarketcapData']);
@@ -41,6 +42,7 @@ Route::get('/coingeckoexchangerates', ['as' => 'datatable.coingecko_exchange_rat
 Route::get('/coingeckonfts', ['as' => 'datatable.coingecko_nfts','uses' => 'CoingeckoController@getCoingeckoNftsData']);
 Route::get('/coingeckonderivatives', ['as' => 'datatable.coingecko_derivatives','uses' => 'CoingeckoController@getDerivativesData']);
 Route::get('/coingeckonderivativesexchanges', ['as' => 'datatable.coingecko_derivatives_exchanges','uses' => 'CoingeckoController@getDerivativesExchangesData']);
+Route::get('/coingeckocategories', ['as' => 'datatable.coingecko_categories','uses' => 'CoingeckoController@getCategoriesData']);
 
 
 Route::get('/details/{coin}', 'DetailsController@index');

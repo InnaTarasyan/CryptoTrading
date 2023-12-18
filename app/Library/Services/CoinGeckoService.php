@@ -2,6 +2,7 @@
 
 namespace App\Library\Services;
 use App\Library\Services\Base\BaseService;
+use App\Models\CoinGeckoCategories;
 use App\Models\CoinGeckoCoin;
 use App\Models\CoinGeckoExchangeRates;
 use App\Models\CoingeckoExchanges;
@@ -24,7 +25,8 @@ class CoinGeckoService extends  BaseService
        // $this->exchangeRates();
       //  $this->nfts();
        // $this->getDerivatives();
-        $this->getDerivativesExchanges();
+       // $this->getDerivativesExchanges();
+        $this->getCategories();
     }
 
     protected function ping()
@@ -254,6 +256,24 @@ class CoinGeckoService extends  BaseService
                 'description' => $item['description'],
                 'url' => $item['url']
             ]);
+        }
+    }
+
+    public function getCategories()
+    {
+        $params = [
+            'api_key' => env('COIN_GECKO_KEY'),
+        ];
+
+        $response = $this->retrieveData(env('COIN_GECKO_URL').'coins/categories/list', $params);
+        foreach ($response as $item) {
+          CoinGeckoCategories::updateOrCreate([
+              'name'   => $item['name'],
+              'category_id' => $item['category_id'],
+          ],[
+              'name'   => $item['name'],
+              'category_id' => $item['category_id'],
+          ]);
         }
     }
 }

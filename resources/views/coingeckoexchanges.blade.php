@@ -57,6 +57,13 @@
                         </span>
                 </a>
             </li>
+            <li class="m-nav__item">
+                <a href="/coingeckocategoriesindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                           Coin Gecko Categories
+                        </span>
+                </a>
+            </li>
         </ul>
 
 
