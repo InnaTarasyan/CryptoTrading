@@ -28,6 +28,13 @@
                         </span>
                 </a>
             </li>
+            <li class="m-nav__item">
+                <a href="/livecoinplatformsindex" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Platforms
+                        </span>
+                </a>
+            </li>
         </ul>
 
         <!--Begin::Section-->
