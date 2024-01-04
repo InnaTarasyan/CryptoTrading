@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LiveCoinWatch;
+use App\Models\Platforms;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 
 class LiveCoinController extends Controller
@@ -35,4 +36,14 @@ class LiveCoinController extends Controller
             ->make(true);
     }
 
+    public function platforms()
+    {
+        return view('livecoinplatforms');
+    }
+
+    public function getLiveCoinPlatformData()
+    {
+        return Datatables::of(Platforms::query())
+            ->make(true);
+    }
 }

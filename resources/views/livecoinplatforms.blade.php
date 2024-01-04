@@ -39,21 +39,14 @@
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">
-                <input type="hidden" id="livecoin_route" value="{{ route('datatable.getlivecoin') }}">
+                <input type="hidden" id="livecoinplatforms_route"
+                       value="{{ route('datatable.getlivecoinplatforms') }}">
                 <div class="table-responsive">
-                    <table id="livecoin" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                    <table id="livecoinplatforms" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
                            <th>Code</th>
-                           {{--<th>Symbol</th>--}}
-                           <th>Rate</th>
-                           <th>Volume</th>
-                           <th>Cap</th>
-                           <th>Rank</th>
-                           <th>Markets</th>
-                           <th>Total Supply</th>
-                           <th>Max Supply</th>
-                           <th>Categories</th>
+                           <th>Name</th>
                         </tr>
                         </thead>
                     </table>
@@ -65,5 +58,5 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('js/livecoin.js') }}"></script>
+    <script src="{{ url('js/livecoinplatforms.js') }}"></script>
 @endsection
