@@ -9,16 +9,15 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#derivatives_exchanges_route').val(),
         "columns": [
-            {data: 'api_id', name: 'api_id'},
             {data: 'name', name: 'name'},
+            {data: 'image', name: 'image'},
+            {data: 'description', name: 'description'},
             {data: 'open_interest_btc', name: 'open_interest_btc'},
             {data: 'trade_volume_24h_btc', name: 'trade_volume_24h_btc'},
             {data: 'number_of_perpetual_pairs', name: 'number_of_perpetual_pairs'},
             {data: 'number_of_futures_pairs', name: 'number_of_futures_pairs'},
-            {data: 'image', name: 'image'},
             {data: 'year_established', name: 'year_established'},
             {data: 'country', name: 'country'},
-            {data: 'description', name: 'description'},
             {data: 'url', name: 'url'}
         ],
         "iDisplayLength": 20,

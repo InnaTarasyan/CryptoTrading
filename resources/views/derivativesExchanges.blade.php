@@ -74,20 +74,16 @@
                     <table id="derivatives_exchanges" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>Market</th>
-                            <th>Symbol</th>
-                            <th>Index Id</th>
-                            <th>Price</th>
-                            <th>Price percentage change 24h</th>
-                            <th>Contract type</th>
-                            <th>Index</th>
-                            <th>Basis</th>
-                            <th>Spread</th>
-                            <th>Funding rate</th>
-                            <th>Open interest</th>
-                            <th>Volume 24h</th>
-                            <th>Last traded at</th>
-                            <th>Expired at</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Open Interest Btc</th>
+                            <th>Trade Volume 24h Btc</th>
+                            <th>Number of Perpetual Pairs</th>
+                            <th>Number of Futures Pairs</th>
+                            <th>Year Established</th>
+                            <th>Country</th>
+                            <th>Url</th>
                         </tr>
                         </thead>
                     </table>
