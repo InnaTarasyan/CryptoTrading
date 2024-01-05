@@ -16,7 +16,7 @@
             <li class="m-nav__item">
                 <a href="/exchangesindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Exchanges data
+                            Exchanges
                         </span>
                 </a>
             </li>
@@ -47,6 +47,8 @@
                            <th>Code</th>
                            <th>Image</th>
                            <th>Rate</th>
+                           <th>Age</th>
+                           <th>Pairs</th>
                            <th>Volume</th>
                            <th>Cap</th>
                            <th>Rank</th>
@@ -55,6 +57,7 @@
                            <th>Max Supply</th>
                            <th>Circulating Supply</th>
                            <th>All Time High USD</th>
+                           <th>Categories</th>
                         </tr>
                         </thead>
                     </table>

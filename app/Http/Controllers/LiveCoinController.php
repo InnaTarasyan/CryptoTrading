@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LiveCoinWatch;
 use App\Models\Platforms;
+use function Monolog\Formatter\format;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 
 class LiveCoinController extends Controller
@@ -41,8 +42,10 @@ class LiveCoinController extends Controller
                     return $item->code;
                 }
 
-                return "<p style='font-size: 20px; text-decoration: underline solid ".
-                    $item->color." 4px'>$item->code</p>";
+                return "<span style='font-size: 20px;'>
+                           <p style='text-decoration: underline solid ". $item->color." 4px'>$item->code</p>
+                           <p>".(isset($item->symbol) ? '('.$item->symbol.')' : '')."</p>
+                        </span>";
 
             })
             ->editColumn('png64', function ($image) {
@@ -66,7 +69,19 @@ class LiveCoinController extends Controller
             ->editColumn('allTimeHighUSD', function ($item) {
                 return number_format((float)$item->allTimeHighUSD, 2, ',', ' ');
             })
-            ->rawColumns(['code', 'png64', 'maxSupply', 'totalSupply', 'circulatingSupply'])
+            ->editColumn('categories', function ($item) {
+                if(empty($item->categories)) {
+                    return '';
+                }
+                $categoriesList = json_decode($item->categories, true);
+                $str =  '<ul>';
+                  foreach($categoriesList as $category) {
+                      $str.= '<li>'.$category.'</li>';
+                  }
+                $str.=  '</ul>';
+                return $str;
+            })
+            ->rawColumns(['code', 'png64', 'maxSupply', 'totalSupply', 'circulatingSupply', 'categories'])
             ->make(true);
     }
 
