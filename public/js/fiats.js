@@ -10,10 +10,9 @@ Fiats.prototype.init = function () {
         "ajax": $('#fiats_route').val(),
         "columns": [
             {data: 'code', name: 'code'},
+            {data: 'name', name: 'name'},
             {data: 'countries', name: 'countries'},
             {data: 'flag', name: 'flag'},
-            {data: 'name', name: 'name'},
-            {data: 'symbol', name: 'symbol'},
         ],
         "iDisplayLength": 20,
         "aaSorting": [[1, "asc"]],

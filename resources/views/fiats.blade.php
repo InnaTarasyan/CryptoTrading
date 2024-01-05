@@ -46,10 +46,9 @@
                         <thead>
                         <tr>
                             <th>Code</th>
+                            <th>Name</th>
                             <th>Countries</th>
                             <th>Flag</th>
-                            <th>Name</th>
-                            <th>Symbol</th>
                         </tr>
                         </thead>
                     </table>
