@@ -64,7 +64,7 @@ class CoingeckoController extends Controller
         return Datatables::of(CoinGeckoMarkets::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name.'('.$item->api_id.')'."</p>
+                           <p>".$item->name .'('.$item->api_id.')'."</p>
                         </span>";
 
             })
@@ -162,10 +162,10 @@ class CoingeckoController extends Controller
     public function getCoingeckoExchangesData()
     {
         return Datatables::of(CoingeckoExchanges::all())
-            ->editColumn('api_id', function ($item){
-                return "<p style='font-size: 18px;'>
-                          $item->api_id
-                        </p>";
+            ->editColumn('name', function ($item){
+                return "<span style='font-size: 18px;'>
+                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                        </span>";
 
             })
             ->editColumn('trade_volume_24h_btc_normalized', function ($item) {
@@ -188,6 +188,7 @@ class CoingeckoController extends Controller
                 return $item->has_trading_incentive ? 'Yes' : 'No';
             })
             ->rawColumns([
+                'name',
                 'image',
                 'url',
                 'trade_volume_24h_btc_normalized',
@@ -199,16 +200,52 @@ class CoingeckoController extends Controller
     public function getCoingeckoTrendingsData()
     {
         return Datatables::of(CoinGeckoTrending::all())
-            ->editColumn('thumb', function ($item) {
-                return '<img src="'.$item->thumb.'" height=50 width=50>';
+            ->editColumn('name', function ($item){
+                return "<span style='font-size: 18px;'>
+                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                        </span>";
+
             })
             ->editColumn('small', function ($item) {
                 return '<img src="'.$item->small.'" height=50 width=50>';
             })
-            ->editColumn('large', function ($item) {
-                return '<img src="'.$item->large.'" height=50 width=50>';
+            ->editColumn('price_btc', function ($item) {
+                return "<p class='warning'>".$item->price_btc."</p>";
             })
-            ->rawColumns(['thumb', 'small', 'large'])
+            ->editColumn('data', function ($item) {
+                if(empty($item->data)) {
+                    return ' - ';
+                }
+                $json = json_decode($item->data, true);
+                $str = '<ul>';
+
+                foreach ($json as $key => $inner) {
+                    $innerValue = $inner;
+                    if(is_array($inner)) {
+                       $innerValue = '<ul>';
+                       $counter = 1;
+                       foreach ($inner as  $value) {
+                           $innerValue.= '<li>'.substr($value, 0, 150).'.....'.'</li>';
+                           if($counter >= 5) {
+                               $innerValue.= '......';
+                               break;
+                           }
+                           $counter++;
+                       }
+                       $innerValue.= '</ul>';
+                    }
+                    $str.= '<li>'.$key.' : '.$innerValue.'</li>';
+                }
+
+                $str.= '</ul>';
+                return $str;
+            })
+            ->rawColumns([
+                'name',
+                'small',
+                'price_btc',
+                'data'
+            ])
             ->make(true);
     }
 

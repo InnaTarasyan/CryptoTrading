@@ -9,7 +9,6 @@ CoingeckoExchanges.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_exchanges_route').val(),
         "columns": [
-            {data: 'api_id', name: 'api_id'},
             {data: 'name', name: 'name'},
             {data: 'image', name: 'image'},
             {data: 'url', name: 'url'},

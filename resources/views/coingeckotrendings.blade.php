@@ -25,7 +25,7 @@
             <li class="m-nav__item">
                 <a href="/coingeckotrendingsindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                           Coingecko Trendings
+                           Trendings
                         </span>
                 </a>
             </li>
@@ -76,17 +76,14 @@
                     <table id="coingecko_trendings" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Coin ID</th>
                             <th>Name</th>
                             <th>Symbol</th>
+                            <th>Image</th>
                             <th>Market cap rank</th>
-                            <th>Thumb</th>
-                            <th>Small</th>
-                            {{--<th>Large</th>--}}
                             <th>Slug</th>
                             <th>Price btc</th>
                             <th>Score</th>
+                            <th>Data</th>
                         </tr>
                         </thead>
                     </table>

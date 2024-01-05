@@ -25,7 +25,7 @@
             <li class="m-nav__item">
                 <a href="/coingeckotrendingsindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                           Coingecko Trendings
+                           Trendings
                         </span>
                 </a>
             </li>
@@ -76,7 +76,6 @@
                     <table id="coingecko_exchanges" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Image</th>
                             <th>URL</th>

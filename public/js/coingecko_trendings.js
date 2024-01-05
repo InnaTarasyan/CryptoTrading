@@ -9,19 +9,16 @@ CoingeckoTrendings.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_trendings_route').val(),
         "columns": [
-            {data: 'api_id', name: 'api_id'},
-            {data: 'coin_id', name: 'coin_id'},
             {data: 'name', name: 'name'},
             {data: 'symbol', name: 'symbol'},
-            {data: 'market_cap_rank', name: 'market_cap_rank'},
-            {data: 'thumb', name: 'thumb'},
             {data: 'small', name: 'small'},
-            // {date: 'large', name: 'large'},
+            {data: 'market_cap_rank', name: 'market_cap_rank'},
             {data: 'slug', name: 'slug'},
             {data: 'price_btc', name: 'price_btc'},
             {data: 'score', name: 'score'},
+            {data: 'data', name: 'data'},
         ],
-        "iDisplayLength": 20,
+        "iDisplayLength": 2,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_trendings tbody tr').click(function () {
