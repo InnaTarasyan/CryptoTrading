@@ -8,9 +8,9 @@
 
         <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
             <li class="m-nav__item">
-                <a href="/livecoinwatch" class="m-nav__link">
+                <a href="/" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Live Coin Watch data
+                            History
                         </span>
                 </a>
             </li>

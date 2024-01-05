@@ -10,6 +10,7 @@ use Mail;
 use Config;
 use Parsedown;
 use Session;
+use App\Models\LiveCoinWatch;
 
 class HomeController extends Controller
 {
@@ -30,8 +31,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('livecoinwatch');
 
+    }
+
+    public function getLiveCoinData()
+    {
+        return Datatables::of(LiveCoinWatch::query()
+            ->join('love_coin_histories', 'love_coin_histories.code', '=', 'live_coin_watches.code')
+            ->where('rate', '>', 0)->get())
+            ->make(true);
     }
 
     public function getCoinmarketcapData()

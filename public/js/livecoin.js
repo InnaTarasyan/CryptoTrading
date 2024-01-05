@@ -10,7 +10,7 @@ LiveCoin.prototype.init = function () {
         "ajax": $('#livecoin_route').val(),
         "columns": [
             {data: 'code', name: 'code'},
-            // {data: 'symbol', name: 'symbol'},
+            {data: 'png64', name: 'png64'},
             {data: 'rate', name: 'rate'},
             {data: 'volume', name: 'volume'},
             {data: 'cap', name: 'cap'},
@@ -18,8 +18,8 @@ LiveCoin.prototype.init = function () {
             {data: 'markets', name: 'markets'},
             {data: 'totalSupply', name: 'totalSupply'},
             {data: 'maxSupply', name: 'maxSupply'},
-            {data: 'categories', name: 'categories'},
-            // {data: 'delta', name: 'delta'}
+            {data: 'circulatingSupply', name: 'circulatingSupply'},
+            {data: 'allTimeHighUSD', name: 'allTimeHighUSD'},
         ],
         "iDisplayLength": 20,
         "aaSorting": [[1, "asc"]],

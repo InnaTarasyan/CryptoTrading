@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
 Route::get('/solume', 'SolumeController@index');
 Route::get('/coinbin', 'CoinbinController@index');
 Route::get('/worldcoinindex','WorldCoinIndexController@index');
-Route::get('/livecoinwatch','LiveCoinController@index');
+Route::get('/','LiveCoinController@index');
 Route::get('/exchangesindex','ExchangesController@index');
 Route::get('/fiatsindex','FiatsController@index');
 Route::get('/coingeckoindex', 'CoingeckoController@index');

@@ -7,9 +7,9 @@
     <div class="m-content">
         <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
             <li class="m-nav__item">
-                <a href="/livecoinwatch" class="m-nav__link">
+                <a href="/" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Live Coin Watch data
+                           History
                         </span>
                 </a>
             </li>
@@ -45,7 +45,7 @@
                         <thead>
                         <tr>
                            <th>Code</th>
-                           {{--<th>Symbol</th>--}}
+                           <th>Image</th>
                            <th>Rate</th>
                            <th>Volume</th>
                            <th>Cap</th>
@@ -53,7 +53,8 @@
                            <th>Markets</th>
                            <th>Total Supply</th>
                            <th>Max Supply</th>
-                           <th>Categories</th>
+                           <th>Circulating Supply</th>
+                           <th>All Time High USD</th>
                         </tr>
                         </thead>
                     </table>

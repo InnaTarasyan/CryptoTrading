@@ -43,6 +43,9 @@ tr.odd:hover td.sorting_3 {
 .success{
     color:blue;
 }
+.warning{
+    color:darkgoldenrod;
+}
 tr {
     cursor: pointer;
 }
