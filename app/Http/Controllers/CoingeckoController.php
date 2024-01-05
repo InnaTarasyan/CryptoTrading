@@ -253,6 +253,24 @@ class CoingeckoController extends Controller
     public function getCoingeckoExchangeRatesData()
     {
         return Datatables::of(CoinGeckoExchangeRates::all())
+            ->editColumn('symbol', function ($item){
+                return "<span style='font-size: 18px;'>
+                          $item->symbol
+                        </span>";
+
+            })
+            ->editColumn('value', function ($item) {
+                return "<p class='warning'>".
+                    number_format((float)$item->value, 2, ',', ' ')."</p>";
+            })
+            ->editColumn('type', function ($item) {
+                return "<p class='success'>".$item->type."</p>";
+            })
+            ->rawColumns([
+                'symbol',
+                'value',
+                'type'
+            ])
             ->make(true);
     }
 
