@@ -282,6 +282,15 @@ class CoingeckoController extends Controller
     public function getCoingeckoNftsData()
     {
         return Datatables::of(Nfts::all())
+            ->editColumn('name', function ($item){
+                return "<span style='font-size: 18px;'>
+                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                        </span>";
+
+            })
+            ->rawColumns([
+               'name'
+            ])
             ->make(true);
     }
 
@@ -293,6 +302,42 @@ class CoingeckoController extends Controller
     public function getDerivativesData()
     {
         return Datatables::of(Derivatives::all())
+            ->editColumn('market', function ($item){
+                return "<span style='font-size: 18px;'>
+                          $item->market
+                        </span>";
+
+            })
+            ->editColumn('volume_24h', function ($item) {
+                return "<p class='warning'>".number_format((float)$item->volume_24h, 2, ',', ' ')."</p>";
+            })
+            ->editColumn('price_percentage_change_24h', function ($item) {
+                return "<p class='success'>".number_format((float)$item->price_percentage_change_24h, 2, ',', ' ')."</p>";
+            })
+            ->editColumn('price', function ($item) {
+                return "<p class='danger'>".number_format((float)$item->price, 2, ',', ' ')."</p>";
+            })
+            ->editColumn('funding_rate', function ($item) {
+                return number_format((float)$item->funding_rate, 2, ',', ' ');
+            })
+            ->editColumn('open_interest', function ($item) {
+                return number_format((float)$item->open_interest, 2, ',', ' ');
+            })
+            ->editColumn('spread', function ($item) {
+                return number_format((float)$item->spread, 2, ',', ' ');
+            })
+            ->editColumn('basis', function ($item) {
+                return number_format((float)$item->basis, 2, ',', ' ');
+            })
+            ->editColumn('index', function ($item) {
+                return number_format((float)$item->index, 2, ',', ' ');
+            })
+            ->rawColumns([
+                'market',
+                'price',
+                'volume_24h',
+                'price_percentage_change_24h'
+            ])
             ->make(true);
     }
 

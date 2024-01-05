@@ -74,11 +74,9 @@
                     <table id="nfts" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Contract Address</th>
                             <th>Name</th>
-                            <th>Asset platform id</th>
                             <th>Symbol</th>
+                            <th>Asset platform id</th>
                         </tr>
                         </thead>
                     </table>

@@ -9,11 +9,9 @@ Nfts.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#nfts_route').val(),
         "columns": [
-            {data: 'api_id', name: 'api_id'},
-            {data: 'contract_address', name: 'contract_address'},
             {data: 'name', name: 'name'},
+            {data: 'symbol', name: 'symbol'},
             {data: 'asset_platform_id', name: 'asset_platform_id'},
-            {data: 'symbol', name: 'symbol'}
         ],
         "iDisplayLength": 20,
         "aaSorting": [[1, "asc"]],
