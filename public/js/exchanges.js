@@ -11,11 +11,14 @@ Exchanges.prototype.init = function () {
         "columns": [
             {data: 'name', name: 'name'},
             {data: 'code', name: 'code'},
+            {data: 'png128', name: 'png128'},
             {data: 'markets', name: 'markets'},
             {data: 'volume', name: 'volume'},
             {data: 'bidTotal', name: 'bidTotal'},
             {data: 'askTotal', name: 'askTotal'},
             {data: 'depth', name: 'depth'},
+            {data: 'centralized', name: 'centralized'},
+            {data: 'usCompliant', name: 'usCompliant'},
             {data: 'visitors', name: 'visitors'},
             {data: 'volumePerVisitor', name: 'volumePerVisitor'}
         ],

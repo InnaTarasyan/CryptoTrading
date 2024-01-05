@@ -35,7 +35,7 @@ class LiveCoinController extends Controller
             ->join('love_coin_histories', 'love_coin_histories.code', '=', 'live_coin_watches.code')
             ->where('rate', '>', 0)->get())
             ->editColumn('rate', function ($item) {
-                return  number_format((float)$item->rate, 2, '.', '');
+                return  "<p class='success'>".number_format((float)$item->rate, 2, '.', '')."</p>";
             })
             ->editColumn('code', function ($item){
                 if(!isset($item->color)){
@@ -81,7 +81,7 @@ class LiveCoinController extends Controller
                 $str.=  '</ul>';
                 return $str;
             })
-            ->rawColumns(['code', 'png64', 'maxSupply', 'totalSupply', 'circulatingSupply', 'categories'])
+            ->rawColumns(['code', 'rate', 'png64', 'maxSupply', 'totalSupply', 'circulatingSupply', 'categories'])
             ->make(true);
     }
 

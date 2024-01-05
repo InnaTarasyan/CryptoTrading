@@ -47,11 +47,14 @@
                         <tr>
                            <th>Name</th>
                            <th>Code</th>
+                           <th>Image</th>
                            <th>Markets</th>
                            <th>Volume</th>
                            <th>BidTotal</th>
                            <th>AskTotal</th>
                            <th>Depth</th>
+                           <th>Centralized</th>
+                           <th>UsCompliant</th>
                            <th>Visitors</th>
                            <th>Volume Per Visitor</th>
                         </tr>
