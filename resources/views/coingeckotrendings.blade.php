@@ -33,7 +33,7 @@
             <li class="m-nav__item">
                 <a href="/coingeckoexchangeratesindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                           Coingecko Exchange Rates
+                           Exchange Rates
                         </span>
                 </a>
             </li>
