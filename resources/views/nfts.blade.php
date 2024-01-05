@@ -10,7 +10,7 @@
             <li class="m-nav__item">
                 <a href="/coingeckoindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                           Coingecko
+                           Markets
                         </span>
                 </a>
             </li>

@@ -10,7 +10,7 @@
             <li class="m-nav__item">
                 <a href="/coingeckoindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                           Coingecko
+                           Markets
                         </span>
                 </a>
             </li>
@@ -75,7 +75,6 @@
                     <table id="coingecko" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                           <th>ID</th>
                            <th>Name</th>
                            <th>Image</th>
                            <th>Current price</th>
@@ -94,11 +93,11 @@
                            <th>Max supply</th>
                            <th>Ath</th>
                            <th>Ath change percentage</th>
-                           <th>Ath date</th>
                            <th>Atl</th>
                            <th>Atl change percentage</th>
-                           <th>Atl date</th>
                            <th>Roi</th>
+                           <th>Ath date</th>
+                           <th>Atl date</th>
                            <th>Last updated</th>
                         </tr>
                         </thead>

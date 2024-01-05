@@ -9,7 +9,6 @@ Coingecko.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_route').val(),
         "columns": [
-            {data: 'api_id', name: 'api_id'},
             {data: 'name', name: 'name'},
             {data: 'image', name: 'image'},
             {data: 'current_price', name: 'current_price'},
@@ -28,14 +27,14 @@ Coingecko.prototype.init = function () {
             {data: 'max_supply', name: 'max_supply'},
             {data: 'ath', name: 'ath'},
             {data: 'ath_change_percentage', name: 'ath_change_percentage'},
-            {data: 'ath_date', name: 'ath_date'},
             {data: 'atl', name: 'atl'},
             {data: 'atl_change_percentage', name: 'atl_change_percentage'},
-            {data: 'atl_date', name: 'atl_date'},
             {data: 'roi', name: 'roi'},
+            {data: 'ath_date', name: 'ath_date'},
+            {data: 'atl_date', name: 'atl_date'},
             {data: 'last_updated', name: 'last_updated'},
         ],
-        "iDisplayLength": 20,
+        "iDisplayLength": 5,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko tbody tr').click(function () {

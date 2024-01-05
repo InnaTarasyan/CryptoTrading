@@ -35,7 +35,6 @@ return new class extends Migration
             $table->dateTime('ath_date')->nullable();
             $table->double('atl')->nullable();
             $table->double('atl_change_percentage')->nullable();
-            $table->dateTime('atl_date')->nullable();
             $table->json('roi')->nullable();
             $table->dateTime('last_updated');
             $table->timestamps();

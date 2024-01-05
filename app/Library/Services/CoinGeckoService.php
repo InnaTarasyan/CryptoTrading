@@ -97,7 +97,7 @@ class CoinGeckoService extends  BaseService
                 'atl' => $item['atl'],
                 'atl_change_percentage' => $item['atl_change_percentage'],
                 'atl_date' => new Carbon($item['atl_date']),
-                'roi' => json_encode($item['roi']),
+                'roi' => isset($item['roi']) ? json_encode($item['roi']) : null,
                 'last_updated' => new Carbon($item['last_updated']),
             ]);
         }
