@@ -62,8 +62,11 @@ class CoingeckoController extends Controller
     public function getCoingeckoData()
     {
         return Datatables::of(CoinGeckoMarkets::all())
-            ->editColumn('name', function ($item) {
-                return $item->name.'('.$item->api_id.')';
+            ->editColumn('name', function ($item){
+                return "<span style='font-size: 18px;'>
+                           <p>".$item->name.'('.$item->api_id.')'."</p>
+                        </span>";
+
             })
             ->editColumn('image', function ($image) {
                 return '<img src="'.$image->image.'" height=50 width=50>';
@@ -143,6 +146,7 @@ class CoingeckoController extends Controller
                 return $str;
             })
             ->rawColumns([
+                'name',
                 'image',
                 'market_cap',
                 'current_price',
@@ -158,13 +162,37 @@ class CoingeckoController extends Controller
     public function getCoingeckoExchangesData()
     {
         return Datatables::of(CoingeckoExchanges::all())
+            ->editColumn('api_id', function ($item){
+                return "<p style='font-size: 18px;'>
+                          $item->api_id
+                        </p>";
+
+            })
+            ->editColumn('trade_volume_24h_btc_normalized', function ($item) {
+                return "<p class='warning'>".
+                    number_format((float)$item->trade_volume_24h_btc_normalized, 2, ',', ' ')."</p>";
+            })
             ->editColumn('image', function ($item) {
                 return '<img src="'.$item->image.'" height=50 width=50>';
             })
             ->editColumn('description', function($item) {
-                return substr($item->description, 0, 30).'.....';
+                return substr($item->description, 0, 150).'.....';
             })
-            ->rawColumns(['image'])
+            ->editColumn('url', function($item) {
+                return '<a href="'.$item->url.'">'.$item->url.'</a>';
+            })
+            ->editColumn('country', function($item) {
+                return isset($item->country) ? $item->country : ' - ';
+            })
+            ->editColumn('has_trading_incentive', function($item) {
+                return $item->has_trading_incentive ? 'Yes' : 'No';
+            })
+            ->rawColumns([
+                'image',
+                'url',
+                'trade_volume_24h_btc_normalized',
+                'api_id',
+                ])
             ->make(true);
     }
 

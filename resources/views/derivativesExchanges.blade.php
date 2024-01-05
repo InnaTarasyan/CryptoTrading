@@ -18,7 +18,7 @@
             <li class="m-nav__item">
                 <a href="/coingeckoexchangesindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                           Coingecko Exchanges
+                           Exchanges
                         </span>
                 </a>
             </li>

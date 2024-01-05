@@ -18,7 +18,7 @@
             <li class="m-nav__item">
                 <a href="/coingeckoexchangesindex" class="m-nav__link">
                         <span class="m-nav__link-text">
-                           Coingecko Exchanges
+                           Exchanges
                         </span>
                 </a>
             </li>
@@ -78,15 +78,15 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Image</th>
+                            <th>URL</th>
                             <th>Year Established</th>
                             <th>Country</th>
                             <th>Description</th>
-                            <th>URL</th>
-                            <th>Image</th>
-                            <th>Has trading incentive</th>
                             <th>Trust score</th>
                             <th>Trust score rank</th>
                             <th>Trade volume 24h btc normalized</th>
+                            <th>Has trading incentive</th>
                         </tr>
                         </thead>
                     </table>
