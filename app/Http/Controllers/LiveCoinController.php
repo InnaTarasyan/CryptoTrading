@@ -93,6 +93,10 @@ class LiveCoinController extends Controller
     public function getLiveCoinPlatformData()
     {
         return Datatables::of(Platforms::query())
+            ->editColumn('code', function ($item) {
+                return "<p class='success'>".$item->code."</p>";
+            })
+            ->rawColumns(['code'])
             ->make(true);
     }
 }
