@@ -36,14 +36,11 @@
                             <div class="m-section__content">
                                 <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
                                     <div class="m-demo__preview">
-                                        <div class="p-5 m-stack m-stack--ver m-stack--desktop m-stack--demo">
-                                            {!! $derivativesExchanges !!}
-                                            {!! $trendings !!}
-
+                                        <div class="m-stack m-stack--ver m-stack--desktop m-stack--demo">
                                             @if(isset($coinmarkecal) or isset($coingecko))
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--top">
                                                     <i>
-                                                        <u>Price</u>
+                                                        <u>Coin gecko</u>
                                                     </i>
                                                     @if(isset($coinmarketcal))
                                                         <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
@@ -162,6 +159,10 @@
                                                     </div>
                                                 </div>
                                             @endif
+                                        </div>
+                                        <div class="p-5">
+                                            {!! $derivativesExchanges !!}
+                                            {!! $trendings !!}
                                         </div>
                                     </div>
                                 </div>
