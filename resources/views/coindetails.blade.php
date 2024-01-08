@@ -36,125 +36,112 @@
                             <div class="m-section__content">
                                 <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
                                     <div class="m-demo__preview">
-                                        <div class="m-stack m-stack--ver m-stack--desktop m-stack--demo">
-                                            @if(isset($coinmarketcap) or isset($worldcoinindex))
+                                        <div class="p-5 m-stack m-stack--ver m-stack--desktop m-stack--demo">
+                                            {!! $derivativesExchanges !!}
+                                            {!! $trendings !!}
+
+                                            @if(isset($coinmarkecal) or isset($coingecko))
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--top">
                                                     <i>
                                                         <u>Price</u>
                                                     </i>
-                                                    @if(isset($coinmarketcap))
+                                                    @if(isset($coinmarketcal))
                                                         <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> BTC </b>
+                                                                <b> Rand </b>
                                                             </div>
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{$coinmarketcap->price_btc}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> USD </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{$coinmarketcap->price_usd}}
+                                                                {{$coinmarketcal->rank}}
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if(isset($worldcoinindex))
+                                                    @if(isset($coingecko))
                                                         <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> CNY </b>
+                                                                <b> Price </b>
                                                             </div>
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{$worldcoinindex->Price_cny}}
+                                                                {{ number_format($coingecko->current_price, 2, '.', ',')}}
                                                             </div>
                                                         </div>
                                                         <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> EUR </b>
+                                                                <b> Rank </b>
                                                             </div>
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($worldcoinindex->Price_eur, 2, '.', ',')}}
+                                                              {{ $coingecko->market_cap_rank  }}
                                                             </div>
                                                         </div>
                                                         <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> GBP </b>
+                                                                <b> High 24 </b>
                                                             </div>
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($worldcoinindex->Price_gbp, 2, '.', ',')}}
+                                                                {{ number_format($coingecko->high_24h, 2, '.', ',')}}
                                                             </div>
                                                         </div>
                                                         <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> RUR </b>
+                                                                <b> Low 24 </b>
                                                             </div>
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($worldcoinindex->Price_rur, 2, '.', ',')}}
+                                                                {{ number_format($coingecko->low_24h, 2, '.', ',')}}
                                                             </div>
                                                         </div>
-                                                     @endif
+                                                    @endif
                                                 </div>
                                             @endif
-                                            @if(isset($coinmarketcap))
+                                            @if(isset($livecoin))
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--top">
                                                     <i>
-                                                        <u>Percent Changes</u>
-                                                    </i>
-                                                    @if(isset($coinmarketcap->percent_change_1h))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                1h
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$coinmarketcap->percent_change_1h < 0 ? "m--font-danger" : "m--font-success"}} ">
-                                                                {{$coinmarketcap->percent_change_1h}} %
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if(isset($coinmarketcap->percent_change_24h))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                24h
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$coinmarketcap->percent_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                                {{$coinmarketcap->percent_change_24h}} %
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if(isset($coinmarketcap->percent_change_7d))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                7d
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$coinmarketcap->percent_change_7d < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                                {{$coinmarketcap->percent_change_7d}} %
-                                                            </div>
-                                                        </div>
-                                                     @endif
-                                                </div>
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Trade volume (24 h)</u>
+                                                        <u>Live coin watch Data (24h)</u>
                                                     </i>
                                                     <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> USD </b>
+                                                            Rate
                                                         </div>
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($coinmarketcap->{'24h_volume_usd'}) }}
+                                                            {{$livecoin->rate}}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>General information</u>
-                                                    </i>
                                                     <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Max Supply
+                                                            Age
                                                         </div>
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($coinmarketcap->max_supply) }}
+                                                            {{$livecoin->age}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            Pairs
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{$livecoin->pairs}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            Volume
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($livecoin->volume, 2, '.', ',')}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            Cap
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($livecoin->cap, 2, '.', ',')}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            Rank
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($livecoin->rank, 2, '.', ',')}}
                                                         </div>
                                                     </div>
                                                     <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
@@ -162,78 +149,15 @@
                                                             Total Supply
                                                         </div>
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($coinmarketcap->total_supply) }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            @if(isset($solume))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Solume.io Data (24h)</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Change
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->change_24h}} %
+                                                            {{ number_format($livecoin->total_supply, 2, '.', ',')}}
                                                         </div>
                                                     </div>
                                                     <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Reddit
+                                                            Max Supply
                                                         </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->reddit_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->reddit_change_24h}} %
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Reddit Vol.
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->reddit_volume_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->reddit_volume_24h}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Sentiment
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->sentiment_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->sentiment_24h}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Sentiment Change
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle  {{$solume->sentiment_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->sentiment_change_24h}} %
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Twitter
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->twitter_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->twitter_change_24h}} %
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Twitter Vol.
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->twitter_volume_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->twitter_volume_24h }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Vol.
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->volume_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->volume_24h}}
+                                                            {{ number_format($livecoin->max_supply, 2, '.', ',')}}
                                                         </div>
                                                     </div>
                                                 </div>

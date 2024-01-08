@@ -58,13 +58,6 @@
                         </span>
                 </a>
             </li>
-            <li class="m-nav__item">
-                <a href="/coingeckocategoriesindex" class="m-nav__link">
-                        <span class="m-nav__link-text">
-                           Coin Gecko Categories
-                        </span>
-                </a>
-            </li>
         </ul>
 
 
@@ -76,8 +69,8 @@
                     <table id="coingecko_trendings" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>Name</th>
                             <th>Symbol</th>
+                            <th>Name</th>
                             <th>Image</th>
                             <th>Market cap rank</th>
                             <th>Slug</th>

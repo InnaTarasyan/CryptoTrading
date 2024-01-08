@@ -9,8 +9,8 @@ CoingeckoTrendings.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_trendings_route').val(),
         "columns": [
-            {data: 'name', name: 'name'},
             {data: 'symbol', name: 'symbol'},
+            {data: 'name', name: 'name'},
             {data: 'small', name: 'small'},
             {data: 'market_cap_rank', name: 'market_cap_rank'},
             {data: 'slug', name: 'slug'},

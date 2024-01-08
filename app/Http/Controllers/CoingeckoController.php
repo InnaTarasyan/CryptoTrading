@@ -11,6 +11,7 @@ use App\Models\Derivatives;
 use App\Models\DerivativesExchanges;
 use App\Models\Nfts;
 use Yajra\DataTables\Facades\DataTables as Datatables;
+use App\Models\CoinGeckoCoin;
 
 class CoingeckoController extends Controller
 {
@@ -61,10 +62,11 @@ class CoingeckoController extends Controller
 
     public function getCoingeckoData()
     {
-        return Datatables::of(CoinGeckoMarkets::all())
+        return Datatables::of( CoinGeckoCoin::join('coin_gecko_markets',
+            'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')->get())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                           <p>".$item->symbol ."</p>
                         </span>";
 
             })
@@ -164,7 +166,7 @@ class CoingeckoController extends Controller
         return Datatables::of(CoingeckoExchanges::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                           <p>".$item->name ."</p>
                         </span>";
 
             })
@@ -202,7 +204,7 @@ class CoingeckoController extends Controller
         return Datatables::of(CoinGeckoTrending::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                           <p>".$item->name ."</p>
                         </span>";
 
             })
@@ -351,7 +353,7 @@ class CoingeckoController extends Controller
         return Datatables::of(DerivativesExchanges::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                           <p>".$item->name ."</p>
                         </span>";
 
             })

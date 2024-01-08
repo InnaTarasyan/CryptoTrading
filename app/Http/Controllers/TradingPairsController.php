@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoinGeckoCoin;
+use App\Models\LiveCoinWatch;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Models\TradingPair;
@@ -27,7 +29,7 @@ class TradingPairsController extends Controller
     public function index()
     {
         return view('trading_pairs')
-                ->with(['coins' => Coinmarketcap::all(),
+                ->with(['coins' => CoinGeckoCoin::all(),
                         'title' => 'Trading Pair']);
     }
 

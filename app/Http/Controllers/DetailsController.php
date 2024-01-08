@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoinGeckoCoin;
+use App\Models\CoinGeckoTrending;
+use App\Models\Coinmarketcal;
+use App\Models\DerivativesExchanges;
 use App\Models\LiveCoinWatch;
 use Illuminate\Http\Request;
 use App\Models\Coindar;
@@ -33,19 +37,49 @@ class DetailsController extends Controller
      */
     public function index($symbol)
     {
+        $symbol = trim($symbol);
         $twitter = TwitterAccount::where('coin', $symbol)->first();
         $tradingPair = TradingPair::where('coin', $symbol)->first();
+
+        $trendings = CoinGeckoTrending::where('symbol', $symbol)->first() ?
+            json_decode(CoinGeckoTrending::where('symbol', $symbol)->first()->data, true) : [];
+
+        $str = '<ul>';
+
+        foreach ($trendings as $key => $inner) {
+            $innerValue = $inner;
+            if(is_array($inner)) {
+                $innerValue = '<ul>';
+                foreach ($inner as  $value) {
+                    $innerValue.= '<li>'.$value.'</li>';
+                }
+                $innerValue.= '</ul>';
+            }
+            $str.= '<li>'.$key.' : '.$innerValue.'</li>';
+        }
+
+        $str.= '</ul>';
+
+        $derivativesExchanges = DerivativesExchanges::where('name', $symbol)->first();
 
         $data = [
             'symbol' => $symbol,
             'coin' => LiveCoinWatch::where('code', $symbol)->first() ?
                 LiveCoinWatch::where('code', $symbol)->first()->name :
-                Solume::where('symbol', $symbol)->first()->name,
+                (CoinGeckoCoin::where('symbol', $symbol)->first() ?
+                    CoinGeckoCoin::where('symbol', $symbol)->first()->name : ''),
             'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
             'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
             'coinbin' => Coinbin::where('ticker', $symbol)->first(),
             'solume'=> Solume::where('symbol', $symbol)->first(),
-            'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first()
+            'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first(),
+            'livecoin' => LiveCoinWatch::where('code', $symbol)->first(),
+            'coingecko' => CoinGeckoCoin::join('coin_gecko_markets',
+                'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')
+                              ->where('symbol', $symbol)->first(),
+            'coinmarkecal' => Coinmarketcal::where('symbol', $symbol)->first(),
+            'trendings' => $str,
+            'derivativesExchanges' => $derivativesExchanges ? $derivativesExchanges->description : '',
         ];
 
         if($twitter){

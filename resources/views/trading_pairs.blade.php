@@ -57,7 +57,7 @@
                             </label>
                             <select  name="state" id="coin" style="width: 100%">
                                 @foreach($coins as $coin)
-                                    <option value="{{$coin->symbol}}"> {{$coin->symbol}}</option>
+                                    <option value="{{$coin->symbol}}"> {{$coin->name}}</option>
                                 @endforeach
                             </select>
                         </div>
