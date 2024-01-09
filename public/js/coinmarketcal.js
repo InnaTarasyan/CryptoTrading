@@ -9,9 +9,9 @@ CoingeckoExchangeRates.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coinmarketcal_route').val(),
         "columns": [
+            {data: 'symbol', name: 'symbol'},
             {data: 'name', name: 'name'},
             {data: 'rank', name: 'rank'},
-            {data: 'symbol', name: 'symbol'},
             {data: 'fullname', name: 'fullname'},
         ],
         "iDisplayLength": 20,

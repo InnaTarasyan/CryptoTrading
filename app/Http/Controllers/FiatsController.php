@@ -45,7 +45,6 @@ class FiatsController extends Controller
             ->editColumn('code', function ($item){
                 return "<span style='font-size: 20px;'>
                            <p class='success'>$item->code</p>
-                           <p>".(isset($item->symbol) ? '('.$item->symbol.')' : '')."</p>
                         </span>";
 
             })

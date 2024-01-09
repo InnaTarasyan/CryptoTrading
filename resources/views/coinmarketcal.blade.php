@@ -13,9 +13,9 @@
                     <table id="coinmarketcal" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
+                            <th>Symbol</th>
                             <th>Name</th>
                             <th>Rank</th>
-                            <th>Symbol</th>
                             <th>Fullname</th>
                         </tr>
                         </thead>

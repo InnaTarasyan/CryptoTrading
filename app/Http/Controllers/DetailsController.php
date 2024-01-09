@@ -6,6 +6,8 @@ use App\Models\CoinGeckoCoin;
 use App\Models\CoinGeckoTrending;
 use App\Models\Coinmarketcal;
 use App\Models\DerivativesExchanges;
+use App\Models\Exchanges;
+use App\Models\Fiats;
 use App\Models\LiveCoinWatch;
 use Illuminate\Http\Request;
 use App\Models\Coindar;
@@ -62,6 +64,7 @@ class DetailsController extends Controller
 
         $derivativesExchanges = DerivativesExchanges::where('name', $symbol)->first();
 
+
         $data = [
             'symbol' => $symbol,
             'coin' => LiveCoinWatch::where('code', $symbol)->first() ?
@@ -73,14 +76,23 @@ class DetailsController extends Controller
             'coinbin' => Coinbin::where('ticker', $symbol)->first(),
             'solume'=> Solume::where('symbol', $symbol)->first(),
             'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first(),
-            'livecoin' => LiveCoinWatch::where('code', $symbol)->first(),
+            'livecoin' => LiveCoinWatch::join('love_coin_histories', 'love_coin_histories.code', '=', 'live_coin_watches.code')
+                        ->where('live_coin_watches.code', $symbol)->first(),
             'coingecko' => CoinGeckoCoin::join('coin_gecko_markets',
                 'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')
                               ->where('symbol', $symbol)->first(),
-            'coinmarkecal' => Coinmarketcal::where('symbol', $symbol)->first(),
+            'coinmarketcal' => Coinmarketcal::where('symbol', $symbol)->first(),
             'trendings' => $str,
             'derivativesExchanges' => $derivativesExchanges ? $derivativesExchanges->description : '',
         ];
+
+        if(empty($data['livecoin']) && empty($data['coingecko']) && empty($data['coinmarketcal'])) {
+            $data['fiats'] = Fiats::where('code', $symbol)->first();
+        }
+
+        if(empty($data['livecoin']) && empty($data['coingecko']) && empty($data['coinmarketcal'])) {
+            $data['exchanges'] = Exchanges::where('code', $symbol)->first();
+        }
 
         if($twitter){
             /**

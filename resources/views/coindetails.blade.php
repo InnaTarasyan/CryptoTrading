@@ -16,7 +16,7 @@
                                    <i class="flaticon-coins"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    {{ $coin }} {{ $symbol }}
+                                    {{ $coinmarketcal ? $coinmarketcal->fullname : ($coin.' '.$symbol) }}
                                 </h3>
                             </div>
                         </div>
@@ -37,21 +37,11 @@
                                 <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
                                     <div class="m-demo__preview">
                                         <div class="m-stack m-stack--ver m-stack--desktop m-stack--demo">
-                                            @if(isset($coinmarkecal) or isset($coingecko))
+                                            @if(isset($coingecko))
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--top">
                                                     <i>
-                                                        <u>Coin gecko</u>
+                                                        <u>Coingecko data</u>
                                                     </i>
-                                                    @if(isset($coinmarketcal))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Rand </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{$coinmarketcal->rank}}
-                                                            </div>
-                                                        </div>
-                                                    @endif
                                                     @if(isset($coingecko))
                                                         <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
@@ -88,10 +78,128 @@
                                                     @endif
                                                 </div>
                                             @endif
+                                            @if(isset($coinmarketcal))
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
+                                                    <i>
+                                                        <u>Coinmarketcal data</u>
+                                                    </i>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> Symbol </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{$coinmarketcal->symbol}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> Rank </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{$coinmarketcal->rank}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if(isset($fiats))
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
+                                                    <i>
+                                                        <u>Live Coin Watch data</u>
+                                                    </i>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                            <b> Countries </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            @php
+                                                                $str = '<ul>';
+
+                                                                 foreach (json_decode($fiats->countries, true) as $key => $inner) {
+                                                                     $innerValue = $inner;
+                                                                     if(is_array($inner)) {
+                                                                         $innerValue = '<ul>';
+                                                                         foreach ($inner as  $value) {
+                                                                             $innerValue.= '<li>'.$value.'</li>';
+                                                                         }
+                                                                         $innerValue.= '</ul>';
+                                                                     }
+                                                                     $str.= '<li>'.$innerValue.'</li>';
+                                                                 }
+
+                                                                 $str.= '</ul>';
+                                                            @endphp
+                                                            {!! $str !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if(isset($exchanges))
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
+                                                    <i>
+                                                        <u>Live Coin Watch data</u>
+                                                    </i>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> Markets </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($exchanges->markets, 2, '.', ',')}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> Volume </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($exchanges->volume, 2, '.', ',')}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> BidTotal </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($exchanges->bidTotal, 2, '.', ',')}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> AskTotal </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($exchanges->askTotal, 2, '.', ',')}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> Depth </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ number_format($exchanges->depth, 2, '.', ',')}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> Visitors </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ $exchanges->visitors}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            <b> Volume Per Visitor </b>
+                                                        </div>
+                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+                                                            {{ $exchanges->volumePerVisitor}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
                                             @if(isset($livecoin))
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--top">
                                                     <i>
-                                                        <u>Live coin watch Data (24h)</u>
+                                                        <u>Livecoinwatch Data (24h)</u>
                                                     </i>
                                                     <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
@@ -99,22 +207,6 @@
                                                         </div>
                                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle">
                                                             {{$livecoin->rate}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Age
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$livecoin->age}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Pairs
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$livecoin->pairs}}
                                                         </div>
                                                     </div>
                                                     <div class="m-stack m-stack--ver m-stack--general m-stack--demo">

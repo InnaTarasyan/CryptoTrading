@@ -9,8 +9,8 @@ Exchanges.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#exchanges_route').val(),
         "columns": [
-            {data: 'name', name: 'name'},
             {data: 'code', name: 'code'},
+            {data: 'name', name: 'name'},
             {data: 'png128', name: 'png128'},
             {data: 'markets', name: 'markets'},
             {data: 'volume', name: 'volume'},

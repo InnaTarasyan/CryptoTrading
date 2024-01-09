@@ -30,9 +30,15 @@ class ExchangesController extends Controller
     public function getExchangesData()
     {
         return Datatables::of(Exchanges::orderBy('code')
-            ->where('markets', '>', 0)
             ->orderBy('markets', 'DESC')
             ->get())
+            ->editColumn('code', function ($item){
+                return "<span style='font-size: 20px;'>
+                           <p>$item->code</p>
+                           "."
+                        </span>";
+
+            })
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 16px;'>
                            <p class='success'>$item->name</p>
@@ -60,7 +66,7 @@ class ExchangesController extends Controller
             ->editColumn('volume', function ($item) {
                 return number_format((float)$item->volume, 2, ',', ' ');
             })
-            ->rawColumns(['name', 'png128', 'bidTotal', 'askTotal', 'depth'])
+            ->rawColumns(['code', 'name', 'png128', 'bidTotal', 'askTotal', 'depth'])
             ->make(true);
     }
 

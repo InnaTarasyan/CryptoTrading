@@ -38,8 +38,8 @@
                     <table id="exchanges" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                           <th>Name</th>
                            <th>Code</th>
+                           <th>Name</th>
                            <th>Image</th>
                            <th>Markets</th>
                            <th>Volume</th>

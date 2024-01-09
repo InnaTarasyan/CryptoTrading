@@ -67,8 +67,8 @@
                     <table id="derivatives" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>Market</th>
                             <th>Symbol</th>
+                            <th>Market</th>
                             <th>Index Id</th>
                             <th>Price</th>
                             <th>Price percentage change 24h</th>

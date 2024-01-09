@@ -9,8 +9,8 @@ Derivatives.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#derivatives_route').val(),
         "columns": [
-            {data: 'market', name: 'market'},
             {data: 'symbol', name: 'symbol'},
+            {data: 'market', name: 'market'},
             {data: 'index_id', name: 'index_id'},
             {data: 'price', name: 'price'},
             {data: 'price_percentage_change_24h', name: 'price_percentage_change_24h'},

@@ -23,18 +23,25 @@
             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
                 <span class="m-menu__arrow m-menu__arrow--adjust"></span>
                 <ul class="m-menu__subnav">
-                    <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
-                        <a  href="/" class="m-menu__link ">
-                            <span class="m-menu__link-text">
-                               Coinmarketcap data
-							</span>
+                    <li class="m-menu__item ">
+                        <a href="/" class="m-menu__link">
+                        <span class="m-nav__link-text">
+                            Live Coin Watch
+                        </span>
                         </a>
                     </li>
-                    <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
-                        <a  href="/worldcoinindex" class="m-menu__link ">
-                            <span class="m-menu__link-text">
-								Worldcoinindex.com data
-							</span>
+                    <li class="m-menu__item ">
+                        <a href="/coingeckoindex" class="m-menu__link">
+                        <span class="m-nav__link-text">
+                           Coingecko
+                        </span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item ">
+                        <a href="/coinmarketcalindex" class="m-menu__link">
+                        <span class="m-nav__link-text">
+                           Coin market Cal
+                        </span>
                         </a>
                     </li>
                 </ul>
