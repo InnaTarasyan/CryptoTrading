@@ -9,7 +9,6 @@ Nfts.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#nfts_route').val(),
         "columns": [
-            {data: 'symbol', name: 'symbol'},
             {data: 'name', name: 'name'},
             {data: 'asset_platform_id', name: 'asset_platform_id'},
         ],
@@ -17,7 +16,7 @@ Nfts.prototype.init = function () {
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#nfts tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('td:first').find('.pointer').data('id');
                 window.location.href = "/details/" + coin;
             });
         }

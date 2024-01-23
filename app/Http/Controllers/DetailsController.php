@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\CoinGeckoCoin;
+use App\Models\CoingeckoExchanges;
 use App\Models\CoinGeckoTrending;
 use App\Models\Coinmarketcal;
+use App\Models\Derivatives;
 use App\Models\DerivativesExchanges;
 use App\Models\Exchanges;
 use App\Models\Fiats;
 use App\Models\LiveCoinWatch;
+use App\Models\Nfts;
 use Illuminate\Http\Request;
 use App\Models\Coindar;
 use App\Models\Coinmarketcap;
@@ -62,8 +65,8 @@ class DetailsController extends Controller
 
         $str.= '</ul>';
 
-        $derivativesExchanges = DerivativesExchanges::where('name', $symbol)->first();
-
+        $derivativesExchanges = DerivativesExchanges::where('api_id', $symbol)->first();
+        $derivatives = Derivatives::where('symbol', $symbol)->first();
 
         $data = [
             'symbol' => $symbol,
@@ -82,7 +85,11 @@ class DetailsController extends Controller
                 'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')
                               ->where('symbol', $symbol)->first(),
             'coinmarketcal' => Coinmarketcal::where('symbol', $symbol)->first(),
-            'trendings' => $str,
+            'trendings' => $trendings,
+            'trendingsText' => $str,
+            'nfts' => Nfts::where('api_id', $symbol)->first(),
+            'derivatives' => $derivatives,
+            'coingeckoexchanges' => CoingeckoExchanges::where('api_id', $symbol)->first(),
             'derivativesExchanges' => $derivativesExchanges ? $derivativesExchanges->description : '',
         ];
 

@@ -24,7 +24,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#derivatives_exchanges tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('td:first').find('.pointer').data('id');
                 window.location.href = "/details/" + coin;
             });
         }

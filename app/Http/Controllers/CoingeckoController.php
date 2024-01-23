@@ -166,7 +166,7 @@ class CoingeckoController extends Controller
         return Datatables::of(CoingeckoExchanges::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name ."</p>
+                           <p class='pointer' data-id='".$item->api_id."'>".$item->name ."</p>
                         </span>";
 
             })
@@ -286,7 +286,7 @@ class CoingeckoController extends Controller
         return Datatables::of(Nfts::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name .'('.$item->api_id.')'."</p>
+                           <p class='pointer' data-id='".$item->api_id."'>".$item->name .'('.$item->api_id.')'."</p>
                         </span>";
 
             })
@@ -353,7 +353,7 @@ class CoingeckoController extends Controller
         return Datatables::of(DerivativesExchanges::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name ."</p>
+                           <p class='pointer' data-id='".$item->api_id."'>".$item->name ."</p>
                         </span>";
 
             })
