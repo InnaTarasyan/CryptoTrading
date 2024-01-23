@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Coinmarketcal;
+use App\Models\Events;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use GuzzleHttp;
 
@@ -27,7 +29,8 @@ class CommandMarketCal extends Command
      */
     public function handle()
     {
-      $this->coins();
+      //$this->coins();
+        $this->getEvents();
     }
 
     protected function coins()
@@ -137,7 +140,25 @@ class CommandMarketCal extends Command
         curl_close($curl); // Close request
 
         print_r($response);
-        print_r(json_decode($response));
+
+        $data = json_decode($response);
+        print_r($data);
+
+
+        foreach ($data->body as $item) {
+            Events::updateOrCreate(['api_id' => $item->id], [
+                'api_id' => $item->id,
+                'title'  => json_encode($item->title),
+                'coins'  => json_encode($item->coins),
+                'date_event' => new Carbon($item->date_event),
+                'displayed_date' => $item->displayed_date,
+                'can_occur_before' => $item->can_occur_before ?? false,
+                'created_date' => new Carbon($item->created_date),
+                'categories' => json_encode($item->categories),
+                'proof' => $item->proof,
+                'source' => $item->source,
+            ]);
+        }
 
         // print_r($response);
     }

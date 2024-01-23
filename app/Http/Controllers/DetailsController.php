@@ -8,6 +8,7 @@ use App\Models\CoinGeckoTrending;
 use App\Models\Coinmarketcal;
 use App\Models\Derivatives;
 use App\Models\DerivativesExchanges;
+use App\Models\Events;
 use App\Models\Exchanges;
 use App\Models\Fiats;
 use App\Models\LiveCoinWatch;
@@ -43,6 +44,13 @@ class DetailsController extends Controller
     public function index($symbol)
     {
         $symbol = trim($symbol);
+
+        $events = Events::whereJsonContains('coins', [["symbol" => $symbol]])
+            ->orWhereJsonContains('coins', [["name" => $symbol]])
+            ->orWhereJsonContains('coins', [["fullname" => $symbol]])
+            ->orWhereJsonContains('coins', [["id" => $symbol]])
+            ->get();
+
         $twitter = TwitterAccount::where('coin', $symbol)->first();
         $tradingPair = TradingPair::where('coin', $symbol)->first();
 
@@ -74,7 +82,8 @@ class DetailsController extends Controller
                 LiveCoinWatch::where('code', $symbol)->first()->name :
                 (CoinGeckoCoin::where('symbol', $symbol)->first() ?
                     CoinGeckoCoin::where('symbol', $symbol)->first()->name : ''),
-            'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
+           // 'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
+            'events' => $events,
             'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
             'coinbin' => Coinbin::where('ticker', $symbol)->first(),
             'solume'=> Solume::where('symbol', $symbol)->first(),
