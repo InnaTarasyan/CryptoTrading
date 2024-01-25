@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Thujohn\Twitter\Twitter;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Models\TwitterAccount;
+use App\Models\CoinGeckoCoin;
 use App\Models\Coinmarketcap;
 
 class TwitterController extends Controller
@@ -51,7 +52,7 @@ class TwitterController extends Controller
     public function index()
     {
         return view('twitter')
-            ->with(['coins' => Coinmarketcap::all(),
+            ->with(['coins' => CoinGeckoCoin::all(),
                     'title' => 'Twitter']);
     }
 
