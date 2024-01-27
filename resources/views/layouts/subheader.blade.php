@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li class="m-nav__item">
-                    <a href="/coingeckoindex" class="m-nav__link">
+                    <a href="/coingeckomarketsindex" class="m-nav__link">
                         <span class="m-nav__link-text">
                            Coingecko
                         </span>

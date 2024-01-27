@@ -2,27 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoinGeckoCoin;
-use App\Models\CoingeckoExchanges;
-use App\Models\CoinGeckoTrending;
-use App\Models\Coinmarketcal;
-use App\Models\Derivatives;
-use App\Models\DerivativesExchanges;
-use App\Models\Events;
-use App\Models\Exchanges;
-use App\Models\Fiats;
-use App\Models\LiveCoinWatch;
-use App\Models\Nfts;
-use Illuminate\Http\Request;
-use App\Models\Coindar;
-use App\Models\Coinmarketcap;
-use App\Models\Coinbin;
-use App\Models\Solume;
-use App\Models\WorldCoinIndex;
+use App\Models\CoinGecko\CoinGeckoCoin;
+use App\Models\CoinGecko\CoingeckoExchanges;
+use App\Models\CoinGecko\CoinGeckoTrending;
+use App\Models\CoinMarketCal\CoinMarketCal;
+use App\Models\CoinMarketCal\CoinMarketCalEvents;
+use App\Models\CoinGecko\Derivatives;
+use App\Models\CoinGecko\DerivativesExchanges;
+use App\Models\LiveCoinWatch\Exchanges;
+use App\Models\LiveCoinWatch\Fiats;
+use App\Models\LiveCoinWatch\LiveCoinWatch;
+use App\Models\CoinGecko\Nfts;
 use App\Models\TradingPair;
 use App\Models\TwitterAccount;
-
-use Thujohn\Twitter\Facades\Twitter;
 
 class DetailsController extends Controller
 {
@@ -45,7 +37,7 @@ class DetailsController extends Controller
     {
         $symbol = trim($symbol);
 
-        $events = Events::whereJsonContains('coins', [["symbol" => $symbol]])
+        $events = CoinMarketCalEvents::whereJsonContains('coins', [["symbol" => $symbol]])
             ->orWhereJsonContains('coins', [["name" => $symbol]])
             ->orWhereJsonContains('coins', [["fullname" => $symbol]])
             ->orWhereJsonContains('coins', [["id" => $symbol]])
@@ -84,11 +76,7 @@ class DetailsController extends Controller
                     CoinGeckoCoin::where('symbol', $symbol)->first()->name : ''),
            // 'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
             'events' => $events,
-            'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
-            'coinbin' => Coinbin::where('ticker', $symbol)->first(),
-            'solume'=> Solume::where('symbol', $symbol)->first(),
-            'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first(),
-            'livecoin' => LiveCoinWatch::join('love_coin_histories', 'love_coin_histories.code', '=', 'live_coin_watches.code')
+            'livecoin' => LiveCoinWatch::join('live_coin_histories', 'live_coin_histories.code', '=', 'live_coin_watches.code')
                         ->where('live_coin_watches.code', $symbol)->first(),
             'coingecko' => CoinGeckoCoin::join('coin_gecko_markets',
                 'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')

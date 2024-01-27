@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Library\Services;
-use App\Models\Exchanges;
-use App\Models\Fiats;
-use App\Models\LiveCoinWatch as LiveCoinWatchModel;
-use App\Models\LoveCoinHistory;
-use App\Models\Platforms;
+use App\Models\LiveCoinWatch\Exchanges;
+use App\Models\LiveCoinWatch\Fiats;
+use App\Models\LiveCoinWatch\LiveCoinWatch as LiveCoinWatchModel;
+use App\Models\LiveCoinWatch\LiveCoinHistory;
 
 class LiveCoinWatch
 {
@@ -14,11 +13,10 @@ class LiveCoinWatch
         $this->getCoins();
         $this->getHistory();
         $this->getFiats();
-        $this->platforms();
         $this->exchanges();
-        $this->credits();
+       /** $this->credits();
         $this->overview();
-        $this->overviewHistory();
+        $this->overviewHistory();**/
     }
     public function getCoins()
     {
@@ -62,13 +60,13 @@ class LiveCoinWatch
            $fp = fopen('https://api.livecoinwatch.com/coins/single/history', 'r', false, $context);
            $datum = json_decode(stream_get_contents($fp), true);
 
-           LoveCoinHistory::updateOrCreate(['code' => $datum['code']], [
+           LiveCoinHistory::updateOrCreate(['code' => $datum['code']], [
                'code' => $datum['code'],
                'name' => $datum['name'],
                'symbol' => array_key_exists('symbol', $datum) ? $datum['symbol'] : null,
                'rank'   => $datum['rank'],
                'age'    => $datum['age'],
-               'color'  => $datum['color'],
+               'color'  => array_key_exists('color', $datum) ? $datum['color'] : null,
                'png32'  => $datum['png32'],
                'png64'  => $datum['png64'],
                'webp32' => $datum['webp32'],
@@ -106,28 +104,6 @@ class LiveCoinWatch
                 'symbol' => array_key_exists('symbol', $datum) ? $datum['symbol'] : null,
                 'countries' => $datum['countries'] ? json_encode($datum['countries'], true) : null,
                 'flag' => $datum['flag'],
-            ]);
-        }
-    }
-
-    public function platforms()
-    {
-        $context_options = array (
-            'http' => array (
-                'method' => 'POST',
-                'header' => "Content-type: application/json\r\n"
-                    . "x-api-key: ".env('LIVE') . "\r\n"
-            )
-        );
-        $context = stream_context_create($context_options);
-        $fp = fopen('https://api.livecoinwatch.com/platforms/all', 'r', false, $context);
-        $fp = stream_get_contents($fp);
-
-        $data = json_decode($fp, true);
-        foreach ($data as $datum) {
-            Platforms::updateOrCreate(['code' => $datum['code']], [
-                'code' => $datum['code'],
-                'name' => $datum['name']
             ]);
         }
     }

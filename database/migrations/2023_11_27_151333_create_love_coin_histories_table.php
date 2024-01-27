@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('love_coin_histories', function (Blueprint $table) {
+        Schema::create('live_coin_histories', function (Blueprint $table) {
             $table->id();
             $table->string('code');
             $table->string('name');
             $table->string('symbol')->nullable();
             $table->integer('rank');
             $table->integer('age')->nullable();
-            $table->string('color');
+            $table->string('color')->nullable();
             $table->string('png32')->nullable();
             $table->string('png64')->nullable();
             $table->string('webp32')->nullable();
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('love_coin_histories');
+        Schema::dropIfExists('live_coin_histories');
     }
 };

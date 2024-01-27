@@ -2,15 +2,15 @@
 
 namespace App\Library\Services;
 use App\Library\Services\Base\BaseService;
-use App\Models\CoinGeckoCategories;
-use App\Models\CoinGeckoCoin;
-use App\Models\CoinGeckoExchangeRates;
-use App\Models\CoingeckoExchanges;
-use App\Models\CoinGeckoMarkets;
-use App\Models\CoinGeckoTrending;
-use App\Models\Derivatives;
-use App\Models\DerivativesExchanges;
-use App\Models\Nfts;
+use App\Models\CoinGecko\CoinGeckoCategories;
+use App\Models\CoinGecko\CoinGeckoCoin;
+use App\Models\CoinGecko\CoinGeckoExchangeRates;
+use App\Models\CoinGecko\CoingeckoExchanges;
+use App\Models\CoinGecko\CoinGeckoMarkets;
+use App\Models\CoinGecko\CoinGeckoTrending;
+use App\Models\CoinGecko\Derivatives;
+use App\Models\CoinGecko\DerivativesExchanges;
+use App\Models\CoinGecko\Nfts;
 use Carbon\Carbon;
 
 class CoinGeckoService extends  BaseService
@@ -18,15 +18,31 @@ class CoinGeckoService extends  BaseService
     public function handle()
     {
         //$this->ping();
-       // $this->coins();
-      //  $this->markets();
-      //  $this->exchanges();
-       // $this->trending();
-       // $this->exchangeRates();
-      //  $this->nfts();
-       // $this->getDerivatives();
-       // $this->getDerivativesExchanges();
-        $this->getCategories();
+        $this->coins();
+        sleep(60);
+
+        $this->markets();
+        sleep(60);
+
+        $this->exchanges();
+        sleep(60);
+
+        $this->trending();
+        sleep(60);
+
+        $this->exchangeRates();
+        sleep(60);
+
+        $this->nfts();
+        sleep(60);
+
+        $this->getDerivatives();
+        sleep(60);
+
+        $this->getDerivativesExchanges();
+        sleep(60);
+
+       // $this->getCategories();
     }
 
     protected function ping()

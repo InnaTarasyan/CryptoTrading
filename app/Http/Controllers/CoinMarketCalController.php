@@ -2,21 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Coinmarketcal;
+use App\Models\CoinMarketCal\CoinMarketCal;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 
 class CoinMarketCalController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
     /**
      * Show the coinbin dashboard.
      *

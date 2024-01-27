@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoinGeckoCoin;
-use App\Models\LiveCoinWatch;
+use App\Models\CoinGecko\CoinGeckoCoin;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Models\TradingPair;
-use App\Models\Coinmarketcap;
 
 class TradingPairsController extends Controller
 {
