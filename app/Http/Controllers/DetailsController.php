@@ -108,9 +108,11 @@ class DetailsController extends Controller
             $data['tweets'] = $tweets; **/
         }
 
-        if($tradingPair){
-            $data['tradingPair'] = $tradingPair->trading_pair;
-        }
+        $data['tradingPair'] = $symbol;
+
+//        if($tradingPair){
+//            $data['tradingPair'] = $symbol;
+//        }
 
         return view('coindetails')
             ->with($data);

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Thujohn\Twitter\Twitter;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Models\TwitterAccount;
-use App\Models\CoinGeckoCoin;
-use App\Models\Coinmarketcap;
+use App\Models\CoinGecko\CoinGeckoCoin;
+use App\Models\CoinGecko\Coinmarketcap;
 
 class TwitterController extends Controller
 {
