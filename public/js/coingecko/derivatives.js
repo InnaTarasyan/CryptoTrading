@@ -9,7 +9,6 @@ Derivatives.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_derivatives_route').val(),
         "columns": [
-            {data: 'symbol', name: 'symbol'},
             {data: 'market', name: 'market'},
             {data: 'index_id', name: 'index_id'},
             {data: 'price', name: 'price'},
@@ -28,7 +27,7 @@ Derivatives.prototype.init = function () {
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_derivatives tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         }

@@ -20,6 +20,13 @@ class FiatsController extends Controller
     public function getData()
     {
         return Datatables::of(Fiats::query()->where('countries', '<>', null)->get())
+            ->editColumn('name', function ($item){
+                return "<span style='font-size: 16px;'>
+                           <input type='hidden' class='id' value='".$item->code."'/>
+                           <p class='success'>$item->name</p>
+                        </span>";
+
+            })
             ->editColumn('countries', function ($item) {
                 if(empty($item->countries)) {
                     return '';
@@ -32,17 +39,11 @@ class FiatsController extends Controller
                 $str.=  '</ul>';
                 return $str;
             })
-            ->editColumn('code', function ($item){
-                return "<span style='font-size: 20px;'>
-                           <p class='success'>$item->code</p>
-                        </span>";
-
-            })
             ->editColumn('flag', function ($item){
                 return "<p class='danger'>".$item->flag."</p>";
 
             })
-            ->rawColumns(['countries', 'code', 'flag'])
+            ->rawColumns(['countries', 'name', 'flag'])
             ->make(true);
     }
 

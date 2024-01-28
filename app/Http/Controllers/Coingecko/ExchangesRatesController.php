@@ -21,6 +21,7 @@ class ExchangesRatesController extends Controller
         return Datatables::of(CoinGeckoExchangeRates::all())
             ->editColumn('symbol', function ($item){
                 return "<span style='font-size: 18px;'>
+                        <input type='hidden' class='id' value='".$item->symbol."'/>
                           $item->symbol
                         </span>";
 

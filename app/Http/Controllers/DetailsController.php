@@ -19,24 +19,11 @@ use App\Models\TwitterAccount;
 class DetailsController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @param $symbol
+     * @return $this
      */
     public function index($symbol)
     {
-        $symbol = trim($symbol);
-
         $events = CoinMarketCalEvents::whereJsonContains('coins', [["symbol" => $symbol]])
             ->orWhereJsonContains('coins', [["name" => $symbol]])
             ->orWhereJsonContains('coins', [["fullname" => $symbol]])
@@ -46,11 +33,10 @@ class DetailsController extends Controller
         $twitter = TwitterAccount::where('coin', $symbol)->first();
         $tradingPair = TradingPair::where('coin', $symbol)->first();
 
-        $trendings = CoinGeckoTrending::where('symbol', $symbol)->first() ?
-            json_decode(CoinGeckoTrending::where('symbol', $symbol)->first()->data, true) : [];
+        $trendings = CoinGeckoTrending::where('api_id', $symbol)->first() ?
+            json_decode(CoinGeckoTrending::where('api_id', $symbol)->first()->data, true) : [];
 
-        $str = '<ul>';
-
+        $trendingsStr = '<ul>';
         foreach ($trendings as $key => $inner) {
             $innerValue = $inner;
             if(is_array($inner)) {
@@ -60,30 +46,30 @@ class DetailsController extends Controller
                 }
                 $innerValue.= '</ul>';
             }
-            $str.= '<li>'.$key.' : '.$innerValue.'</li>';
+            $trendingsStr.= '<li>'.$key.' : '.$innerValue.'</li>';
         }
 
-        $str.= '</ul>';
+        $trendingsStr.= '</ul>';
 
         $derivativesExchanges = DerivativesExchanges::where('api_id', $symbol)->first();
         $derivatives = Derivatives::where('symbol', $symbol)->first();
 
+        $liveCoinWatch = LiveCoinWatch::where('code', $symbol)->first();
+        $coinGecko     = CoinGeckoCoin::where('symbol', $symbol)->first();
+
         $data = [
             'symbol' => $symbol,
-            'coin' => LiveCoinWatch::where('code', $symbol)->first() ?
-                LiveCoinWatch::where('code', $symbol)->first()->name :
-                (CoinGeckoCoin::where('symbol', $symbol)->first() ?
-                    CoinGeckoCoin::where('symbol', $symbol)->first()->name : ''),
-           // 'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
+            'coin' => $liveCoinWatch ? $liveCoinWatch->name :
+                ($coinGecko ? $coinGecko->name : ''),
             'events' => $events,
             'livecoin' => LiveCoinWatch::join('live_coin_histories', 'live_coin_histories.code', '=', 'live_coin_watches.code')
                         ->where('live_coin_watches.code', $symbol)->first(),
             'coingecko' => CoinGeckoCoin::join('coin_gecko_markets',
                 'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')
-                              ->where('symbol', $symbol)->first(),
+                              ->where('coin_gecko_markets.api_id', $symbol)->first(),
             'coinmarketcal' => Coinmarketcal::where('symbol', $symbol)->first(),
             'trendings' => $trendings,
-            'trendingsText' => $str,
+            'trendingsText' => $trendingsStr,
             'nfts' => Nfts::where('api_id', $symbol)->first(),
             'derivatives' => $derivatives,
             'coingeckoexchanges' => CoingeckoExchanges::where('api_id', $symbol)->first(),
@@ -91,7 +77,27 @@ class DetailsController extends Controller
         ];
 
         if(empty($data['livecoin']) && empty($data['coingecko']) && empty($data['coinmarketcal'])) {
-            $data['fiats'] = Fiats::where('code', $symbol)->first();
+            $fiats = Fiats::where('code', $symbol)->first();
+
+            if(!empty($fiats)) {
+                $str = '<ul>';
+
+                foreach (json_decode($fiats->countries, true) as $key => $inner) {
+                    $innerValue = $inner;
+                    if(is_array($inner)) {
+                        $innerValue = '<ul>';
+                        foreach ($inner as  $value) {
+                            $innerValue.= '<li>'.$value.'</li>';
+                        }
+                        $innerValue.= '</ul>';
+                    }
+                    $str.= '<li>'.$innerValue.'</li>';
+                }
+
+                $str.= '</ul>';
+
+                $data['fiats'] = $str;
+            }
         }
 
         if(empty($data['livecoin']) && empty($data['coingecko']) && empty($data['coinmarketcal'])) {
@@ -108,11 +114,9 @@ class DetailsController extends Controller
             $data['tweets'] = $tweets; **/
         }
 
-        $data['tradingPair'] = $symbol;
-
-//        if($tradingPair){
-//            $data['tradingPair'] = $symbol;
-//        }
+        if($tradingPair){
+            $data['tradingPair'] = $symbol;
+        }
 
         return view('coindetails')
             ->with($data);

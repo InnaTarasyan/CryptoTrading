@@ -21,8 +21,9 @@ class DerivativesExchangesController extends Controller
 
         return Datatables::of(DerivativesExchanges::all())
             ->editColumn('name', function ($item){
-                return "<span style='font-size: 18px;'>
-                           <p class='pointer' data-id='".$item->api_id."'>".$item->name ."</p>
+                return "<span style='font-size: 16px;'>
+                           <input type='hidden' class='id' value='".$item->api_id."'/>
+                           <p class='success'>".$item->name ."</p>
                         </span>";
 
             })

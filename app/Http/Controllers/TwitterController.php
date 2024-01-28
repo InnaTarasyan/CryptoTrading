@@ -12,17 +12,6 @@ use App\Models\CoinGecko\Coinmarketcap;
 class TwitterController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

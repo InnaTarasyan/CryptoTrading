@@ -21,7 +21,8 @@ class TrendingsController extends Controller
         return Datatables::of(CoinGeckoTrending::all())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 18px;'>
-                           <p>".$item->name ."</p>
+                           <input type='hidden' class='id' value='".$item->api_id."'/>
+                           <p class='success'>".$item->name ."</p>
                         </span>";
 
             })

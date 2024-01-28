@@ -20,16 +20,13 @@ class HistoryController extends Controller
     {
         return Datatables::of(LiveCoinWatch::query()
             ->join('live_coin_histories', 'live_coin_histories.code', '=', 'live_coin_watches.code')
-            ->where('rate', '>', 0)->get())
+            ->where('rate', '>', 0)->orderBy('rate', 'DESC')->get())
             ->editColumn('rate', function ($item) {
                 return  "<p class='success'>".number_format((float)$item->rate, 2, '.', '')."</p>";
             })
             ->editColumn('code', function ($item){
-                if(!isset($item->color)){
-                    return $item->code;
-                }
-
                 return "<span style='font-size: 20px;'>
+                           <input type='hidden' class='id' value='".$item->code."'/>
                            <p style='text-decoration: underline solid ". $item->color." 4px'>$item->code</p>
                            <p>".(isset($item->symbol) ? '('.$item->symbol.')' : '')."</p>
                         </span>";

@@ -204,7 +204,7 @@ TradingPairs.prototype.deleteTradingPair = function () {
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    if(data.status == 'ok'){
+                    if(data.status === 'ok'){
                         self.oTable.ajax.reload();
                         swal("Deleted!", "Success", "success");
                     }

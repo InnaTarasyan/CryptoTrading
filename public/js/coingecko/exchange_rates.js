@@ -19,7 +19,7 @@ CoingeckoExchangeRates.prototype.init = function () {
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_exchange_rates tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         }

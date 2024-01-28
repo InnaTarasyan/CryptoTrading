@@ -25,10 +25,10 @@ LiveCoin.prototype.init = function () {
             {data: 'categories', name: 'categories'},
         ],
         "iDisplayLength": 20,
-        "aaSorting": [[1, "asc"]],
+        "aaSorting": [[3, "desc"]],
         "fnDrawCallback": function() {
             $('#livecoin_history tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         }

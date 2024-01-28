@@ -21,7 +21,8 @@ class DerivativesController extends Controller
         return Datatables::of(Derivatives::all())
             ->editColumn('market', function ($item){
                 return "<span style='font-size: 18px;'>
-                          $item->market
+                         <input type='hidden' class='id' value='".$item->symbol."'/>
+                          $item->symbol
                         </span>";
 
             })

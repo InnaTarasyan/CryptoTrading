@@ -9,7 +9,6 @@ Fiats.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#livecoin_fiats_route').val(),
         "columns": [
-            {data: 'code', name: 'code'},
             {data: 'name', name: 'name'},
             {data: 'countries', name: 'countries'},
             {data: 'flag', name: 'flag'},
@@ -18,7 +17,7 @@ Fiats.prototype.init = function () {
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#livecoin_fiats tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         }

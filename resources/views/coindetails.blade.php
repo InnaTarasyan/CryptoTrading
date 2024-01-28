@@ -4,410 +4,55 @@
 @endsection
 @section('content')
 
-    <div class="m-content" >
-        <!--Begin::Section-->
-        <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_4">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon">
-                                   <i class="flaticon-coins"></i>
-                                </span>
-                                <h3 class="m-portlet__head-text">
-                                    {{ $coinmarketcal ? $coinmarketcal->fullname : ($coin.' '.$symbol) }}
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="m-portlet__head-tools">
-                            <ul class="m-portlet__nav">
-                                <li class="m-portlet__nav-item">
-                                    <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
-                                        <i class="la la-angle-down"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="m-portlet__body" style="padding: 0rem;">
-                        <!--begin::Section-->
-                        <div class="m-section">
-                            <div class="m-section__content">
-                                <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
-                                    <div class="m-demo__preview">
-                                        <div class="m-stack m-stack--ver m-stack--desktop m-stack--demo">
-                                            @if(isset($coingecko))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Coingecko data</u>
-                                                    </i>
-                                                    @if(isset($coingecko))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Price </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($coingecko->current_price, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Rank </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                              {{ $coingecko->market_cap_rank  }}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> High 24 </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($coingecko->high_24h, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Low 24 </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($coingecko->low_24h, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                            @endif
-                                            @if(isset($coinmarketcal))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Coinmarketcal data</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> Symbol </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$coinmarketcal->symbol}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> Rank </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$coinmarketcal->rank}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            @if(isset($fiats))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Live Coin Watch data</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <b> Countries </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            @php
-                                                                $str = '<ul>';
+    <div class="m-content">
+        @if($trendings)
+          @include('details.trendings')
+        @endif
 
-                                                                 foreach (json_decode($fiats->countries, true) as $key => $inner) {
-                                                                     $innerValue = $inner;
-                                                                     if(is_array($inner)) {
-                                                                         $innerValue = '<ul>';
-                                                                         foreach ($inner as  $value) {
-                                                                             $innerValue.= '<li>'.$value.'</li>';
-                                                                         }
-                                                                         $innerValue.= '</ul>';
-                                                                     }
-                                                                     $str.= '<li>'.$innerValue.'</li>';
-                                                                 }
 
-                                                                 $str.= '</ul>';
-                                                            @endphp
-                                                            {!! $str !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            @if($coingeckoexchanges)
-                                                    <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Name </b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ 	$coingeckoexchanges->name }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Country</b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ 	$coingeckoexchanges->country}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Description </b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {!! $coingeckoexchanges->description !!}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Trust score </b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ number_format($coingeckoexchanges->trust_score, 2, '.', ',') }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Trust score rank</b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ number_format($coingeckoexchanges->trust_score_rank, 2, '.', ',') }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Trade volume 24h btc</b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ number_format($coingeckoexchanges->trade_volume_24h_btc, 2, '.', ',') }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b>	Trade volume 24h btc normalized</b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ number_format($coingeckoexchanges->trade_volume_24h_btc_normalized, 2, '.', ',') }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            @endif
-                                            @if($nfts)
-                                                    <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Contract Address </b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ 	$nfts->contract_address }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Name </b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ 	$nfts->name }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    <b> Asset platform id </b>
-                                                                </div>
-                                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                    {{ 	$nfts->asset_platform_id }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            @endif
-                                            @if(isset($derivatives))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Derivatives</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Price </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($derivatives->price, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Price percentage change 24h </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($derivatives->price_percentage_change_24h, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Funding rate </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($derivatives->funding_rate, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Open interest </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($derivatives->open_interest, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> Volume 24h </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($derivatives->volume_24h, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            @if(isset($exchanges))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Live Coin Watch data</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> Markets </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($exchanges->markets, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> Volume </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($exchanges->volume, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> BidTotal </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($exchanges->bidTotal, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> AskTotal </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($exchanges->askTotal, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> Depth </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($exchanges->depth, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> Visitors </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ $exchanges->visitors}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> Volume Per Visitor </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ $exchanges->volumePerVisitor}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            @if(isset($livecoin))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Livecoinwatch Data (24h)</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Rate
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{$livecoin->rate}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Volume
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($livecoin->volume, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Cap
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($livecoin->cap, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Rank
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($livecoin->rank, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Total Supply
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($livecoin->total_supply, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Max Supply
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($livecoin->max_supply, 2, '.', ',')}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        @if($derivativesExchanges || $trendings)
-                                            <div class="p-2">
-                                                {!! $derivativesExchanges !!}
-                                                {!! $trendingsText !!}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Section-->
-                    </div>
-                </div>
-            </div>
-        </div>
+        @if($coinmarketcal)
+            @include('details.coinmarketcal')
+        @endif
+
+
+        @if(isset($coingecko))
+           @include('details.coingecko')
+        @endif
+
+
+
+        @if(isset($fiats))
+            @include('details.fiats')
+        @endif
+
+
+
+        @if(isset($coingeckoexchanges))
+            @include('details.coingeckoexchanges')
+        @endif
+
+
+
+        @if(isset($nfts))
+            @include('details.nfts')
+        @endif
+
+        @if(isset($derivatives))
+            @include('details.derivatives')
+        @endif
+
+
+
+        @if(isset($exchanges))
+            @include('details.exchanges')
+        @endif
+
+
+
+        @if(isset($livecoin))
+            @include('details.livecoin')
+        @endif
+
         <!--End::Section-->
     </div>
 

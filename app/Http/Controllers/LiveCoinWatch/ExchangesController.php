@@ -22,15 +22,9 @@ class ExchangesController extends Controller
         return Datatables::of(Exchanges::orderBy('code')
             ->orderBy('markets', 'DESC')
             ->get())
-            ->editColumn('code', function ($item){
-                return "<span style='font-size: 20px;'>
-                           <p>$item->code</p>
-                           "."
-                        </span>";
-
-            })
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 16px;'>
+                           <input type='hidden' class='id' value='".$item->code."'/>
                            <p class='success'>$item->name</p>
                         </span>";
 
@@ -56,7 +50,7 @@ class ExchangesController extends Controller
             ->editColumn('volume', function ($item) {
                 return number_format((float)$item->volume, 2, ',', ' ');
             })
-            ->rawColumns(['code', 'name', 'png128', 'bidTotal', 'askTotal', 'depth'])
+            ->rawColumns(['name', 'png128', 'bidTotal', 'askTotal', 'depth'])
             ->make(true);
     }
 

@@ -67,7 +67,6 @@
                     <table id="coingecko_derivatives" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>Symbol</th>
                             <th>Market</th>
                             <th>Index Id</th>
                             <th>Price</th>

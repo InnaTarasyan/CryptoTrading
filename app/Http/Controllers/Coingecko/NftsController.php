@@ -20,8 +20,9 @@ class NftsController extends Controller
     {
         return Datatables::of(Nfts::all())
             ->editColumn('name', function ($item){
-                return "<span style='font-size: 18px;'>
-                           <p class='pointer' data-id='".$item->api_id."'>".$item->name .'('.$item->api_id.')'."</p>
+                return "<span style='font-size: 16px;'>
+                           <input type='hidden' class='id' value='".$item->api_id."'/>
+                           <p class='success'>".$item->name ."</p>
                         </span>";
 
             })

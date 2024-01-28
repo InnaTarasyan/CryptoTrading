@@ -24,7 +24,7 @@ CoingeckoExchanges.prototype.init = function () {
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_exchanges tbody tr').click(function () {
-                var coin = $(this).find('td:first').find('.pointer').data('id');
+                var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         }

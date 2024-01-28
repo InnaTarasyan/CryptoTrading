@@ -9,7 +9,6 @@ CoingeckoTrendings.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_trendings_route').val(),
         "columns": [
-            {data: 'symbol', name: 'symbol'},
             {data: 'name', name: 'name'},
             {data: 'small', name: 'small'},
             {data: 'market_cap_rank', name: 'market_cap_rank'},
@@ -22,7 +21,7 @@ CoingeckoTrendings.prototype.init = function () {
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_trendings tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         }

@@ -21,8 +21,9 @@ class MarketsController extends Controller
         return Datatables::of( CoinGeckoCoin::join('coin_gecko_markets',
             'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')->get())
             ->editColumn('name', function ($item){
-                return "<span style='font-size: 18px;'>
-                           <p>".$item->symbol ."</p>
+                return "<span style='font-size: 16px;'>
+                           <input type='hidden' class='id' value='".$item->api_id."'/>
+                           <p class='success'>".$item->symbol ."</p>
                         </span>";
 
             })

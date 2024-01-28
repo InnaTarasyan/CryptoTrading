@@ -38,7 +38,6 @@
                     <table id="livecoin_fiats" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th>Code</th>
                             <th>Name</th>
                             <th>Countries</th>
                             <th>Flag</th>

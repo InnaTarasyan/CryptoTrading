@@ -9,7 +9,6 @@ Exchanges.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#livecoin_exchanges_route').val(),
         "columns": [
-            {data: 'code', name: 'code'},
             {data: 'name', name: 'name'},
             {data: 'png128', name: 'png128'},
             {data: 'markets', name: 'markets'},
@@ -23,10 +22,10 @@ Exchanges.prototype.init = function () {
             {data: 'volumePerVisitor', name: 'volumePerVisitor'}
         ],
         "iDisplayLength": 20,
-        "aaSorting": [[1, "asc"]],
+        "aaSorting": [[5, "desc"], [6, "desc"], [7, "desc"], [8, "desc"]],
         "fnDrawCallback": function() {
             $('#livecoin_exchanges tbody tr').click(function () {
-                var coin = $(this).find('td:first').text();
+                var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         }
