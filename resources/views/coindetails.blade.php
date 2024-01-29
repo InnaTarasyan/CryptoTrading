@@ -214,7 +214,7 @@
                                                         <i class="fa fa-genderless m--font-danger"></i>
                                                     </div>
                                                     <div class="m-timeline-2__item-text  m--padding-top-5">
-                                                        {!! $tweet['text'] !!}
+                                                        {!! $tweet['content'] !!}
                                                     </div>
                                                 </div>
                                             </div>

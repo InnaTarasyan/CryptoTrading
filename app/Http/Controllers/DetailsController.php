@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BitCoinTelegram;
 use App\Models\CoinGecko\CoinGeckoCoin;
 use App\Models\CoinGecko\CoingeckoExchanges;
 use App\Models\CoinGecko\CoinGeckoTrending;
@@ -113,6 +114,8 @@ class DetailsController extends Controller
             }
             $data['tweets'] = $tweets; **/
         }
+
+        $data['tweets'] = BitCoinTelegram::get();
 
         if($tradingPair){
             $data['tradingPair'] = $symbol;
