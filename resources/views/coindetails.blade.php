@@ -182,10 +182,10 @@
                             <div class="m-portlet__head-caption">
                                 <div class="m-portlet__head-title">
                                     <span class="m-portlet__head-icon">
-                                        <i class="socicon-twitter"></i>
+                                        <i class="socicon-telegram"></i>
                                     </span>
                                     <h3 class="m-portlet__head-text">
-                                        Tweets
+                                        Telegram Channel
                                     </h3>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@
                         </div>
                         <div class="m-portlet__body">
                             @if(isset($tweets))
-                                <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="380" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
+                                <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="600" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
                                     <!--Begin::Timeline 2 -->
                                     <div class="m-timeline-2">
                                         @foreach($tweets as $tweet)

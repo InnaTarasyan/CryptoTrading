@@ -115,7 +115,7 @@ class DetailsController extends Controller
             $data['tweets'] = $tweets; **/
         }
 
-        $data['tweets'] = BitCoinTelegram::get();
+        $data['tweets'] = BitCoinTelegram::take(10)->get();
 
         if($tradingPair){
             $data['tradingPair'] = $symbol;
