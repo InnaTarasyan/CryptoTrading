@@ -117,3 +117,9 @@ Route::get('/gettradingPairs', ['as' => 'datatable.gettradingPairs','uses' => 'T
 
 Route::match(['get', 'post'], '/about', ['uses' => 'HomeController@about', 'as' => 'about']);
 Route::match(['get', 'post'], '/profile', ['uses' => 'ProfileController@index', 'as' => 'profile']);
+
+
+Route::get('/ajaxGetCoins', [
+    'as'   => 'ajaxGetCoins',
+    'uses' => 'TradingPairsController@ajaxGetCoins'
+]);

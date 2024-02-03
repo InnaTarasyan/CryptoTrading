@@ -32,6 +32,7 @@ TradingPairs.prototype.updateTradingPair = function () {
     var id  = $('#coin_id').val();
 
     var coin =  $('#coin').val();
+
     var trading_pair = $('#trading_pair').val();
 
     if(!coin){
@@ -101,8 +102,12 @@ TradingPairs.prototype.editTradingPair = function () {
                 $('.account_action').removeClass('save');
 
                 $('#coin_id').val(res.data.id);
-                $('#coin').val(res.data.coin);
+
+               // $('#coin').val(res.data.coin);
                 $('#trading_pair').val(res.data.trading_pair);
+
+                $('#coin').select2('data', { id: res.data.id, name:  res.data.coin});
+
             }
         },
         error: function (res) {
@@ -117,8 +122,8 @@ TradingPairs.prototype.addTradingPair = function () {
     $('.account_action').removeClass('update');
     $('.account_action').addClass('save');
 
-    $('#coin').val('');
     $('#trading_pair').val('');
+    $('#coin').select2('data', null);
 };
 
 
@@ -127,6 +132,7 @@ TradingPairs.prototype.saveTradingPair = function () {
     var self = this;
 
     var coin =  $('#coin').val();
+
     var trading_pair = $('#trading_pair').val();
 
     if(!coin){
@@ -221,4 +227,27 @@ $(document).ready(function() {
     var coins = new TradingPairs();
     coins.init();
     coins.bindEvents();
+
+    $('#coin').select2({
+        placeholder: "Select an Option",
+        allowClear: true,
+        language: 'ru',
+        ajax: {
+            url: 'ajaxGetCoins',
+            data: function (term, page) {
+                return {
+                    q: term,
+                };
+            },
+            results: function (data, page) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        formatResult: function (item) { return item.name; },
+        formatSelection: function (item) { return item.name; },
+    });
+
 });

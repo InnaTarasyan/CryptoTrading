@@ -3,6 +3,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
+    <link href="{{url('css/trading_pairs.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 
@@ -55,11 +56,12 @@
                             <label class="form-control-label">
                                 Coin:
                             </label>
-                            <select  name="state" id="coin" style="width: 100%">
-                                @foreach($coins as $coin)
-                                    <option value="{{$coin->symbol}}"> {{$coin->name}}</option>
-                                @endforeach
-                            </select>
+                            <input type="hidden" id="coin" style="width: 100%" class="input-xlarge" />
+                            {{--<select  name="state" id="coin" style="width: 100%">--}}
+                                {{--@foreach($coins as $coin)--}}
+                                    {{--<option value="{{$coin->symbol}}"> {{$coin->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">
@@ -85,7 +87,6 @@
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>
     <script src="{{ url('assets/demo/default/custom/components/base/sweetalert2.js') }}" type="text/javascript" defer></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="{{ url('js/trading_pairs.js') }}"></script>
 @endsection
