@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TwitterAccount extends Model
+class TelegramAccount extends Model
 {
-    protected $table = 'twitter_account';
+    protected $table = 'telegram_account';
 
     /**
      * The attributes that are mass assignable.

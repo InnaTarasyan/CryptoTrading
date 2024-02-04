@@ -3,13 +3,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
-    <link href="{{url('css/twitter.css')}}" rel="stylesheet">
+    <link href="{{url('css/telegram.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 
     <div class="m-content">
         <button type="button" class="btn m-btn--pill btn-primary m-btn m-btn--custom add" data-toggle="modal" data-target="#m_modal_1">
-            Add Twitter Account
+            Add Telegram Account
         </button>
     </div>
 
@@ -17,9 +17,9 @@
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body  m-portlet__body--no-padding">
-                <input type="hidden" id="twitter_route" value="{{ route('datatable.gettwitter') }}">
+                <input type="hidden" id="telegram_route" value="{{ route('datatable.gettelegram') }}">
                 <div class="table-responsive">
-                    <table id="twitter" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
+                    <table id="telegram" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                             <tr>
                                 <th>Coin</th>
@@ -42,7 +42,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Twitter Account
+                        Telegram Account
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
@@ -54,39 +54,28 @@
                     <form>
                         <input type="hidden" id="coin_id" >
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <label for="recipient-name" class="form-control-label">
-                                        Coin: *
-                                    </label>
-                                </div>
+                            <div class="col-lg-12">
+                                <label for="recipient-name" class="form-control-label">
+                                    Coin: *
+                                </label>
                             </div>
                             <div class="col-lg-12">
-                                <select  name="state" id="coin" style="width: 100%">
-                                    @foreach($coins as $coin)
-                                        <option value="{{$coin->symbol}}"> {{$coin->symbol}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" id="coin" style="width: 100%" class="input-xlarge" />
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mt-3">
                                 <label for="recipient-name" class="form-control-label">
                                     Related Coins:
                                 </label>
                             </div>
                             <div class="col-lg-12">
-                                <select class="coins-multiple" name="states" multiple="multiple" id="rel_coins">
-                                    @foreach($coins as $coin)
-                                        <option value="{{$coin->symbol }}"> {{$coin->symbol}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" style="width: 100%" class="coins-multiple" name="states" multiple="multiple" id="rel_coins" />
                             </div>
-                            <br/>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mt-3">
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">
-                                        Twitter Account: *
+                                        Telegram Account: *
                                     </label>
-                                    <textarea class="form-control" id="twitter_account"></textarea>
+                                    <textarea class="form-control" id="telegram_account"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -111,5 +100,5 @@
     <script src="{{ url('assets/demo/default/custom/components/base/sweetalert2.js') }}" type="text/javascript" defer></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('js/twitter.js') }}"></script>
+    <script src="{{ url('js/telegram.js') }}"></script>
 @endsection

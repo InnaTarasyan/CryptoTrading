@@ -1,27 +1,27 @@
 "use strict";
-function Twitter(){
+function Telegram(){
   var oTable;
 }
 
 /*
    Initializes the datatable
  */
-Twitter.prototype.init = function () {
-    this.oTable = $('#twitter').DataTable({
+Telegram.prototype.init = function () {
+    this.oTable = $('#telegram').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": $('#twitter_route').val(),
+        "ajax": $('#telegram_route').val(),
         "columns": [
             {data: 'coin', name: 'coin', "defaultContent" : 'Not Set'},
             {data: 'account', name: 'account', "defaultContent" : 'Not Set'},
             {data: 'rel_coins', name: 'rel_coins', "defaultContent" : 'Not Set'},
-            {data: 'action', name: 'action'},
+            {data: 'action', name: 'action'}
         ],
         "aaSorting": [[ 1, "asc" ]]
     });
 };
 
-Twitter.prototype.bindEvents = function () {
+Telegram.prototype.bindEvents = function () {
    $(document).on('click', '.edit', this.editAccount.bind(this));
    $(document).on('click', '.delete', this.deleteAccount.bind(this));
    $(document).on('click', '.add', this.addAccount.bind(this));
@@ -32,13 +32,13 @@ Twitter.prototype.bindEvents = function () {
 /*
    Stores the updated data in the database
  */
-Twitter.prototype.updateAccount = function () {
+Telegram.prototype.updateAccount = function () {
 
     var self = this;
     var id  = $('#coin_id').val();
 
     var coin = $('#coin').val();
-    var account = $('#twitter_account').val();
+    var account = $('#telegram_account').val();
 
     if(!coin){
         swal({
@@ -72,7 +72,7 @@ Twitter.prototype.updateAccount = function () {
         processData: false,
         contentType: false,
         data: fd,
-        url: "twitter/" + id,
+        url: "telegram/" + id,
         success: function (data) {
             if(data.status == 'ok'){
                 self.oTable.ajax.reload();
@@ -89,7 +89,7 @@ Twitter.prototype.updateAccount = function () {
 /*
    Brings the corresponding coin related data from database
  */
-Twitter.prototype.editAccount = function (event) {
+Telegram.prototype.editAccount = function (event) {
 
     var id = $(event.target).attr('data-url');
 
@@ -101,7 +101,7 @@ Twitter.prototype.editAccount = function (event) {
         type: 'Get',
         dataType: 'json',
         data: fd,
-        url: "twitter/" + id + '/edit',
+        url: "telegram/" + id + '/edit',
         processData: false,
         contentType: false,
         success: function (res) {
@@ -110,13 +110,11 @@ Twitter.prototype.editAccount = function (event) {
                 $('.account_action').addClass('update');
                 $('.account_action').removeClass('save');
 
-                var related_coins =  (res.data.rel_coins)?  res.data.rel_coins.split(','): '';
+                $('#coin_id').val(res.data.account_id);
+                $('#telegram_account').val(res.data.account);
 
-                $('#coin').select2().select2('val', res.data.coin);
-                $('#rel_coins').select2().select2('val', related_coins);
-
-                $('#coin_id').val(res.data.id);
-                $('#twitter_account').val(res.data.account);
+                $('#coin').select2('data', { id: res.data.id, name:  res.data.coin});
+                $('#rel_coins').select2('data', res.data.rel_coins);
             }
         },
         error: function (res) {
@@ -126,7 +124,7 @@ Twitter.prototype.editAccount = function (event) {
 
 };
 
-Twitter.prototype.deleteAccount = function (event) {
+Telegram.prototype.deleteAccount = function (event) {
 
     var self = this;
     var id = $(event.target).attr('data-url');
@@ -148,7 +146,7 @@ Twitter.prototype.deleteAccount = function (event) {
                 type: 'POST',
                 dataType: 'json',
                 data: fd,
-                url: "twitter/" + id,
+                url: "telegram/" + id,
                 processData: false,
                 contentType: false,
                 success: function (data) {
@@ -168,11 +166,11 @@ Twitter.prototype.deleteAccount = function (event) {
 /*
    Stores data in database
  */
-Twitter.prototype.saveAccount = function () {
+Telegram.prototype.saveAccount = function () {
     var self = this;
 
     var coin =  $('#coin').val();
-    var account = $('#twitter_account').val();
+    var account = $('#telegram_account').val();
 
     if(!coin){
         swal({
@@ -202,7 +200,7 @@ Twitter.prototype.saveAccount = function () {
         type: 'POST',
         dataType: 'json',
         data: fd,
-        url: "twitter",
+        url: "telegram",
         processData: false,
         contentType: false,
         success: function (data) {
@@ -224,23 +222,65 @@ Twitter.prototype.saveAccount = function () {
 
 };
 
-Twitter.prototype.addAccount = function () {
+Telegram.prototype.addAccount = function () {
 
   $('.account_action').removeClass('update');
   $('.account_action').addClass('save');
 
-  $('#coin').select2();
-  $('#rel_coins').select2();
-
-  $('#coin').select2().select2('val', '');
-  $('#rel_coins').select2().select2('val', '');
+  //$('#rel_coins').select2().select2('val', '');
 
   $('#coin_id').val('');
-  $('#twitter_account').val('');
+  $('#telegram_account').val('');
 };
 
 $(document).ready(function() {
-    var coins = new Twitter();
+    var coins = new Telegram();
     coins.init();
     coins.bindEvents();
+
+    $('#coin').select2({
+        placeholder: "Select an Option",
+        allowClear: true,
+        language: 'ru',
+        ajax: {
+            url: 'ajaxGetCoins',
+            data: function (term, page) {
+                return {
+                    q: term,
+                };
+            },
+            results: function (data, page) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        formatResult: function (item) { return item.name; },
+        formatSelection: function (item) { return item.name; },
+    });
+
+
+    $('#rel_coins').select2({
+        placeholder: "Select an Option",
+        multiple: true,
+        allowClear: true,
+        language: 'ru',
+        ajax: {
+            url: 'ajaxGetCoins',
+            data: function (term, page) {
+                return {
+                    q: term,
+                };
+            },
+            results: function (data, page) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        formatResult: function (item) { return item.name; },
+        formatSelection: function (item) { return item.name; },
+    });
 });

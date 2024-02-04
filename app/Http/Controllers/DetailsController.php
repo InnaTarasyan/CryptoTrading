@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BitCoinTelegram;
 use App\Models\CoinGecko\CoinGeckoCoin;
 use App\Models\CoinGecko\CoingeckoExchanges;
 use App\Models\CoinGecko\CoinGeckoTrending;
@@ -14,8 +13,8 @@ use App\Models\LiveCoinWatch\Exchanges;
 use App\Models\LiveCoinWatch\Fiats;
 use App\Models\LiveCoinWatch\LiveCoinWatch;
 use App\Models\CoinGecko\Nfts;
+use App\Models\TelegramMessages;
 use App\Models\TradingPair;
-use App\Models\TwitterAccount;
 
 class DetailsController extends Controller
 {
@@ -31,7 +30,6 @@ class DetailsController extends Controller
             ->orWhereJsonContains('coins', [["id" => $symbol]])
             ->get();
 
-        $twitter = TwitterAccount::where('coin', $symbol)->first();
         $tradingPair = TradingPair::where('coin', $symbol)->first();
 
         $trendings = CoinGeckoTrending::where('api_id', $symbol)->first() ?
@@ -105,17 +103,7 @@ class DetailsController extends Controller
             $data['exchanges'] = Exchanges::where('code', $symbol)->first();
         }
 
-        if($twitter){
-            /**
-            $screenName = $twitter->account;
-            $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 20, 'format' => 'json']), true);
-            foreach ($tweets as &$tweet){
-                $tweet['text'] = $this->parse_tweet($tweet['text']);
-            }
-            $data['tweets'] = $tweets; **/
-        }
-
-        $data['tweets'] = BitCoinTelegram::take(10)->get();
+        $data['tweets'] = TelegramMessages::take(10)->get();
 
         if($tradingPair){
             $data['tradingPair'] = $symbol;

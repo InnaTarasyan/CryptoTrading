@@ -6,7 +6,7 @@ use danog\MadelineProto\Settings;
 use danog\MadelineProto\Settings\AppInfo;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use App\Models\BitCoinTelegram;
+use App\Models\TelegramMessages;
 
 class Telegram extends Command
 {
@@ -113,7 +113,7 @@ class Telegram extends Command
                             }
                         }
 
-                       BitCoinTelegram::create([
+                       TelegramMessages::create([
                             'title'          => $data['title'],
                             'slug'           => Str::slug($data['title']),
                             'company'        => $data['post_author'],

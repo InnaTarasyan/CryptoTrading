@@ -77,6 +77,7 @@ class TradingPairsController extends Controller
         $coingeckoCoin = CoinGeckoCoin::find($tradingPair->coin);
         if($tradingPair && $coingeckoCoin){
             $status = 'ok';
+            $data['trading_pair_id'] = $tradingPair->id;
             $data['id'] = $coingeckoCoin->id;
             $data['coin'] = $coingeckoCoin->name;
             $data['trading_pair'] = $tradingPair->trading_pair;
@@ -117,7 +118,7 @@ class TradingPairsController extends Controller
             'trading_pair' => $request->trading_pair,
         ];
 
-        $tradingPair = TradingPair::where('coin', $request->id)->first();
+        $tradingPair = TradingPair::where('id', $request->id)->first();
         if($tradingPair) {
             $tradingPair
                 ->update($data);

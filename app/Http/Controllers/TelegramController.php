@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Thujohn\Twitter\Twitter;
 use Yajra\DataTables\Facades\DataTables as Datatables;
-use App\Models\TwitterAccount;
+use App\Models\TelegramAccount;
 use App\Models\CoinGecko\CoinGeckoCoin;
-use App\Models\CoinGecko\Coinmarketcap;
 
-class TwitterController extends Controller
+class TelegramController extends Controller
 {
     /**
      * Show the form for editing the specified resource.
@@ -21,28 +19,36 @@ class TwitterController extends Controller
     {
         $status = 'fail';
         $data = [];
-        $account = TwitterAccount::where('id' ,$id)->first();
+        $account = TelegramAccount::where('id' ,$id)->first();
+        $coingeckoCoin = CoinGeckoCoin::find($account->coin);
+        $relatedCoinIds = explode(',', $account->rel_coins);
+        $related = [];
+        if(!empty($relatedCoinIds)) {
+            $data = CoinGeckoCoin::whereIn('id', $relatedCoinIds)->select('id', 'name')->get();
+            foreach ($data as $datum) {
+              $related[] = [
+                  'id' => $datum->id,
+                  'name' => $datum->name,
+              ];
+            }
+        }
+
         if($account){
             $status = 'ok';
-            $data['id'] = $account->id;
-            $data['coin'] = $account->coin;
             $data['account'] = $account->account;
-            $data['rel_coins'] = $account->rel_coins;
+            $data['account_id'] = $account->id;
+            $data['id'] = $coingeckoCoin->id;
+            $data['coin'] = $coingeckoCoin->name;
+            $data['rel_coins'] = $related;
         }
         return response()->json(['status' => $status, 'data' => $data]);
     }
 
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('twitter')
+        return view('telegram')
             ->with(['coins' => CoinGeckoCoin::all(),
-                    'title' => 'Twitter']);
+                    'title' => 'Telegram']);
     }
 
     /**
@@ -62,7 +68,8 @@ class TwitterController extends Controller
             'account' => $request->account
         ];
 
-        $account = TwitterAccount::where('id', $request->id)->first();
+        $account = TelegramAccount::where('id', $request->id)->first();
+
         if($account) {
             $account
                 ->update($data);
@@ -82,7 +89,7 @@ class TwitterController extends Controller
     public function destroy($id)
     {
         $status = 'fail';
-        $account = TwitterAccount::where('id', $id)->first();
+        $account = TelegramAccount::where('id', $id)->first();
         if($account){
             $account->delete();
             $status = 'ok';
@@ -91,8 +98,17 @@ class TwitterController extends Controller
     }
 
 
-    public function getTweets(){
-        return Datatables::of(TwitterAccount::all())
+    public function getMessages(){
+        return Datatables::of(TelegramAccount::all())
+            ->editColumn('coin', function($coin){
+                $currentCoin = CoinGeckoCoin::find($coin->coin);
+                return $currentCoin ? $currentCoin->name : ' - ';
+            })
+            ->editColumn('rel_coins', function($coin){
+                $relCoinNames = explode(',', $coin->rel_coins);
+                $currentCoin = CoinGeckoCoin::whereIn('id', $relCoinNames)->pluck('name')->toArray();
+                return $currentCoin ? implode(', ', $currentCoin) : ' - ';
+            })
             ->editColumn('action', function ($account){
                 return '<button type="button" class="btn m-btn--pill btn-outline-success m-btn m-btn--custom edit" data-toggle="modal" data-target="#m_modal_1" data-url="'.$account->id.'">
 							Edit
@@ -115,7 +131,7 @@ class TwitterController extends Controller
     {
         $status = 'fail';
 
-        $exists = TwitterAccount::where('coin', $request->coin)->first();
+        $exists = TelegramAccount::where('coin', $request->coin)->first();
         if(!$exists){
             $data = [
                 'coin' => $request->coin,
@@ -123,7 +139,7 @@ class TwitterController extends Controller
                 'account' => $request->account
             ];
 
-            $account = TwitterAccount::create($data);
+            $account = TelegramAccount::create($data);
             if ($account->exists){
                 $status = 'ok';
             }

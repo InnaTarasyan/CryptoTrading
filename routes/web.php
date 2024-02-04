@@ -99,11 +99,11 @@ Route::get('/details/{coin}', 'DetailsController@index');
 
 
 
-/** ===== Twitter ====== */
+/** ===== Telegram ====== */
 
-Route::get('/twitter', ['as' => 'twitter', 'uses' => 'TwitterController@index']);
-Route::resource('twitter', 'TwitterController');
-Route::get('/gettwitter', ['as' => 'datatable.gettwitter','uses' => 'TwitterController@getTweets']);
+Route::get('/telegram', ['as' => 'telegram', 'uses' => 'TelegramController@index']);
+Route::resource('telegram', 'TelegramController');
+Route::get('/gettelegram', ['as' => 'datatable.gettelegram','uses' => 'TelegramController@getMessages']);
 
 
 /** ===== Trading Pairs ====== */

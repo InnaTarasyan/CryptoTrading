@@ -101,7 +101,7 @@ TradingPairs.prototype.editTradingPair = function () {
                 $('.account_action').addClass('update');
                 $('.account_action').removeClass('save');
 
-                $('#coin_id').val(res.data.id);
+                $('#coin_id').val(res.data.trading_pair_id);
 
                // $('#coin').val(res.data.coin);
                 $('#trading_pair').val(res.data.trading_pair);

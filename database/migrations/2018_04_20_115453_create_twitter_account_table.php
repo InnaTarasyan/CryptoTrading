@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTwitterAccountTable extends Migration
+class CreateTelegramAccountTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTwitterAccountTable extends Migration
      */
     public function up()
     {
-        Schema::create('twitter_account', function (Blueprint $table) {
+        Schema::create('telegram_account', function (Blueprint $table) {
             $table->increments('id');
             $table->string('coin');
             $table->string('rel_coins')->nullable();
@@ -29,6 +29,6 @@ class CreateTwitterAccountTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('twitter_account');
+        Schema::dropIfExists('telegram_account');
     }
 }
