@@ -14,7 +14,7 @@
 /** ===== Live Coin Watch ====== */
 
 // live coin watch history
-Route::get('/','LiveCoinWatch\HistoryController@index');
+Route::get('/','LiveCoinWatch\HistoryController@index')->name('home');
 Route::get('/getlivecoinhistory',
     ['as' => 'datatable.livecoin.history',
         'uses' => 'LiveCoinWatch\HistoryController@getData']);
