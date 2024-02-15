@@ -123,3 +123,5 @@ Route::get('/ajaxGetCoins', [
     'as'   => 'ajaxGetCoins',
     'uses' => 'TradingPairsController@ajaxGetCoins'
 ]);
+
+Route::get('/reloadData', 'HomeController@reloadData');
