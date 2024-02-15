@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\Services\CoinMarketCalService;
+use App\Library\Services\LiveCoinWatch;
 use Illuminate\Http\Request;
 use Validator;
 use Mail;
 use Config;
 use Parsedown;
 use Session;
+
 
 class HomeController extends Controller
 {
@@ -52,5 +55,19 @@ class HomeController extends Controller
         }
         abort(404);
 
+    }
+
+    public function reloadData()
+    {
+        $status = 'success';
+
+        try {
+            CoinMarketCalService::getEvents();
+            LiveCoinWatch::getCoins();
+        } catch (\Exception $exception) {
+            $status = 'fail';
+        }
+
+        return $status;
     }
 }

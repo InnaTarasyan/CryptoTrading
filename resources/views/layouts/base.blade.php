@@ -88,6 +88,7 @@
 
         });
     </script>
+    <script src="{{ url('js/base.js') }}"></script>
 <!--end::Page Snippets -->
 </body>
 <!-- end::Body -->

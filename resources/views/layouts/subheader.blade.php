@@ -30,7 +30,9 @@
             </ul>
         </div>
         <div>
-
+            <button type="button" id="updateAllData" class="btn m-btn--pill btn-primary m-btn m-btn--custom">
+                Update All Data
+            </button>
         </div>
     </div>
 </div>
