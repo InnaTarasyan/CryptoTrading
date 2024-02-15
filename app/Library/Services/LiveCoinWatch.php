@@ -18,7 +18,8 @@ class LiveCoinWatch
         $this->overview();
         $this->overviewHistory();**/
     }
-    public function getCoins()
+
+    public static function getCoins()
     {
         $data = json_encode(array('currency' => 'USD', 'sort' => 'rank', 'order' => 'ascending', 'offset' => 0, 'limit' => 2500,'meta' => false));
         $context_options = array (

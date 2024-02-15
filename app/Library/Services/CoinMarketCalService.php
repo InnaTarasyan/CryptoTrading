@@ -59,7 +59,7 @@ class CoinMarketCalService
     }
 
 
-    protected function getEvents()
+    public static function getEvents()
     {
         $params = [];
         $url = 'https://developers.coinmarketcal.com/v1/events';
