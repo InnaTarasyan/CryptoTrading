@@ -225,7 +225,7 @@
                 gap: 6px;
             }
             .datatable-info-beautiful .datatable-info-icon {
-                font-size: 1.2rem;
+            font-size: 1.2rem;
                 padding: 6px;
                 margin-right: 0;
                 margin-bottom: 4px;
@@ -332,7 +332,7 @@
             }
             .modern-tab {
                 width: 100%;
-                text-align: center;
+            text-align: center;
                 border: 1px solid #dee2e6;
                 border-radius: 8px;
             bottom: 0;
@@ -355,10 +355,206 @@
             font-weight: bold;
             border-right: 2px solid #ffd200;
         }
+
+        /* --- DARK MODE OVERRIDES --- */
+        body.dark-mode, .dark-mode .m-content {
+            background: #181a20 !important;
+            color: #eaeaea !important;
+        }
+        .dark-mode .m-portlet, .dark-mode .table-responsive, .dark-mode #livecoin_history tr {
+            background: #23272f !important;
+            color: #eaeaea !important;
+        }
+        .dark-mode #livecoin_history thead th {
+            background-color: #23272f !important;
+            color: #ffd200 !important;
+            border-bottom: 2px solid #23272f !important;
+            border-top: 1px solid #23272f !important;
+        }
+        .dark-mode #livecoin_history tbody td {
+            background: #23272f !important;
+            color: #eaeaea !important;
+            border-bottom: 1px solid #23272f !important;
+        }
+        .dark-mode #livecoin_history th:first-child,
+        .dark-mode #livecoin_history td:first-child {
+            background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+            color: #ffd200 !important;
+            border-right: 2px solid #ffd200 !important;
+        }
+        .dark-mode .modern-tab {
+            background: #23272f !important;
+            color: #ffd200 !important;
+            border-color: #23272f !important;
+        }
+        .dark-mode .modern-tab.active {
+            background: linear-gradient(90deg, #23272f 0%, #181a20 100%) !important;
+            color: #ffd200 !important;
+            border-color: #ffd200 #ffd200 #23272f !important;
+        }
+        .dark-mode .dataTables_filter input[type="search"] {
+            background: #23272f !important;
+            color: #ffd200 !important;
+            border: 1.5px solid #ffd200 !important;
+        }
+        .dark-mode .dataTables_filter input[type="search"]:focus {
+            background: #181a20 !important;
+            border: 1.5px solid #f7971e !important;
+        }
+        .dark-mode .dataTables_filter #clear-search {
+            background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+            color: #ffd200 !important;
+        }
+        .dark-mode .dataTables_filter #clear-search:hover {
+            background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+            color: #23272f !important;
+        }
+        .dark-mode .dataTables_wrapper .dataTables_length {
+            background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+            color: #ffd200 !important;
+        }
+        .dark-mode .dataTables_wrapper .dataTables_length select {
+            background: #23272f !important;
+            color: #ffd200 !important;
+            border: 1.5px solid #ffd200 !important;
+        }
+        .dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+            color: #ffd200 !important;
+        }
+        .dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+            color: #23272f !important;
+        }
+        .dark-mode .datatable-info-beautiful {
+            background: linear-gradient(90deg, #23272f 0%, #181a20 100%) !important;
+            color: #ffd200 !important;
+        }
+        .dark-mode .datatable-info-beautiful .datatable-info-icon {
+            background: linear-gradient(135deg, #23272f 0%, #ffd200 100%) !important;
+            color: #ffd200 !important;
+        }
+        .dark-mode .datatable-info-beautiful .datatable-info-text {
+            color: #ffd200 !important;
+        }
+        .dark-mode .datatable-info-beautiful strong {
+            color: #f7971e !important;
+        }
+        /* SVG color tweaks for dark mode */
+        .dark-mode #livecoin_history thead th .datatable-header-icon svg {
+            filter: brightness(0.8) contrast(1.2);
+        }
+        .darkmode-switch {
+            display: flex !important;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(90deg, #ffd200 0%, #f7971e 100%);
+            color: #333;
+            border: none;
+            border-radius: 999px;
+            padding: 8px 24px 8px 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.10);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            position: relative;
+                min-width: 120px;
+            outline: none;
+        }
+        .darkmode-switch:focus {
+            box-shadow: 0 0 0 3px #ffd20055;
+        }
+        .darkmode-switch:hover {
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            color: #fff;
+        }
+        .darkmode-switch .darkmode-switch-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fffbe7;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.10);
+            margin-right: 8px;
+            transition: background 0.2s;
+            position: relative;
+                overflow: hidden;
+        }
+        .darkmode-switch .icon-moon,
+        .darkmode-switch .icon-sun {
+            position: absolute;
+            left: 0;
+            top: 0;
+                width: 100%;
+            height: 100%;
+                opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            }
+        .darkmode-switch .icon-moon {
+                opacity: 1;
+            transform: scale(1);
+        }
+        .darkmode-switch.active .icon-moon {
+            opacity: 0;
+            transform: scale(0.7);
+        }
+        .darkmode-switch .icon-sun {
+            opacity: 0;
+            transform: scale(0.7);
+        }
+        .darkmode-switch.active .icon-sun {
+            opacity: 1;
+                transform: scale(1);
+            }
+        .darkmode-switch .darkmode-switch-label {
+            transition: color 0.2s;
+        }
+        .dark-mode .darkmode-switch {
+            background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+            color: #ffd200 !important;
+        }
+        .dark-mode .darkmode-switch .darkmode-switch-icon {
+            background: #23272f !important;
+        }
+        .dark-mode .darkmode-switch:focus {
+            box-shadow: 0 0 0 3px #ffd20055;
+        }
+        .dark-mode .darkmode-switch:hover {
+            background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+            color: #23272f !important;
+        }
     </style>
 @endsection
 @section('content')
     <div class="m-content">
+        <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1rem;">
+            <button id="darkModeToggle" class="modern-tab darkmode-switch" style="margin-left: auto;" title="Toggle dark mode" role="switch" aria-checked="false">
+                <span class="darkmode-switch-icon" id="darkModeIcon">
+                    <!-- Sun & Moon SVG for animation -->
+                    <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
+                    </svg>
+                    <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" fill="#ffb300"/>
+                        <g stroke="#ffb300" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </g>
+                    </svg>
+                </span>
+                <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
+            </button>
+        </div>
         <div class="modern-tabs-container">
             <div class="modern-tabs">
                 <a href="/" class="modern-tab {{ request()->is('/') ? 'active' : '' }}">
@@ -449,4 +645,29 @@
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="{{ url('js/livecoin/history.js') }}"></script>
+    <script>
+        // Dark mode toggle logic
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').classList.add('active');
+                document.getElementById('darkModeToggle').setAttribute('aria-checked', 'true');
+                document.getElementById('darkModeText').textContent = 'Light Mode';
+                } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkModeToggle').classList.remove('active');
+                document.getElementById('darkModeToggle').setAttribute('aria-checked', 'false');
+                document.getElementById('darkModeText').textContent = 'Dark Mode';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModePref = localStorage.getItem('darkMode') === 'true';
+            setDarkMode(darkModePref);
+            document.getElementById('darkModeToggle').addEventListener('click', function() {
+                const isDark = !document.body.classList.contains('dark-mode');
+                setDarkMode(isDark);
+                localStorage.setItem('darkMode', isDark);
+            });
+        });
+    </script>
 @endsection
