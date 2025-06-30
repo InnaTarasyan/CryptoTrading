@@ -527,6 +527,83 @@
             background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
             color: #23272f !important;
         }
+        #datatableFullscreenContainer:fullscreen {
+            background: #fff;
+            z-index: 9999;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            padding: 2vw;
+            overflow: auto;
+        }
+        body.dark-mode #datatableFullscreenContainer:fullscreen {
+            background: #181a20;
+        }
+        #datatableFullscreenContainer:fullscreen table {
+            width: 100% !important;
+            font-size: 1.1em;
+        }
+        .fullscreen-switch {
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 10px 28px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(67,206,162,0.12);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+            outline: none;
+            position: relative;
+            min-width: 160px;
+        }
+        .fullscreen-switch:focus {
+            box-shadow: 0 0 0 3px #43cea255;
+        }
+        .fullscreen-switch:hover {
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+            color: #fff;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .fullscreen-switch.active {
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+            color: #fff;
+        }
+        .fullscreen-switch-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #fffbe7;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.10);
+            margin-right: 8px;
+            transition: background 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .fullscreen-switch-label {
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        @media (max-width: 600px) {
+            .fullscreen-switch {
+                width: 100%;
+                justify-content: center;
+                font-size: 0.98rem;
+                padding: 10px 10px;
+            }
+            .fullscreen-switch-label {
+                font-size: 1em;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -569,11 +646,42 @@
             </div>
         </div>
 
+        <!-- Fullscreen Button -->
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+            <button id="fullscreenToggle"
+                    class="modern-tab fullscreen-switch"
+                    style="margin-left: auto;"
+                    title="Toggle Fullscreen"
+                    aria-label="Toggle Fullscreen"
+                    aria-pressed="false"
+                    role="button">
+                <span class="fullscreen-switch-icon" id="fullscreenIcon">
+                    <!-- Enter Fullscreen SVG -->
+                    <svg class="icon-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="3" width="7" height="2" rx="1" fill="#0d6efd"/>
+                        <rect x="3" y="3" width="2" height="7" rx="1" fill="#0d6efd"/>
+                        <rect x="14" y="3" width="7" height="2" rx="1" fill="#0d6efd"/>
+                        <rect x="19" y="3" width="2" height="7" rx="1" fill="#0d6efd"/>
+                        <rect x="3" y="19" width="7" height="2" rx="1" fill="#0d6efd"/>
+                        <rect x="3" y="14" width="2" height="7" rx="1" fill="#0d6efd"/>
+                        <rect x="14" y="19" width="7" height="2" rx="1" fill="#0d6efd"/>
+                        <rect x="19" y="14" width="2" height="7" rx="1" fill="#0d6efd"/>
+                    </svg>
+                    <!-- Exit Fullscreen SVG (hidden by default) -->
+                    <svg class="icon-exit-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+                        <rect x="5" y="11" width="14" height="2" rx="1" fill="#ff512f"/>
+                        <rect x="11" y="5" width="2" height="14" rx="1" fill="#ff512f"/>
+                    </svg>
+                </span>
+                <span id="fullscreenText" class="fullscreen-switch-label">Fullscreen</span>
+            </button>
+        </div>
         <!--Begin::Section-->
         <div class="m-portlet" >
-            <div class="m-portlet__body">
+            <div class="m-portlet__body mt-5">
                 <input type="hidden" id="livecoin_history_route" value="{{ route('datatable.livecoin.history') }}">
-                <div class="table-responsive">
+                <!-- Fullscreen Container Start -->
+                <div id="datatableFullscreenContainer" class="table-responsive">
                     <table id="livecoin_history" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
@@ -667,6 +775,55 @@
                 const isDark = !document.body.classList.contains('dark-mode');
                 setDarkMode(isDark);
                 localStorage.setItem('darkMode', isDark);
+            });
+
+            // Fullscreen logic
+            const fsBtn = document.getElementById('fullscreenToggle');
+            const fsContainer = document.getElementById('datatableFullscreenContainer');
+            const fsIconEnter = fsBtn.querySelector('.icon-fullscreen');
+            const fsIconExit = fsBtn.querySelector('.icon-exit-fullscreen');
+            const fsText = document.getElementById('fullscreenText');
+
+            function isFullscreen() {
+                return document.fullscreenElement === fsContainer;
+            }
+
+            function toggleFullscreen() {
+                if (!isFullscreen()) {
+                    if (fsContainer.requestFullscreen) {
+                        fsContainer.requestFullscreen();
+                    } else if (fsContainer.webkitRequestFullscreen) { /* Safari */
+                        fsContainer.webkitRequestFullscreen();
+                    } else if (fsContainer.msRequestFullscreen) { /* IE11 */
+                        fsContainer.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) { /* Safari */
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) { /* IE11 */
+                        document.msExitFullscreen();
+                    }
+                }
+            }
+
+            fsBtn.addEventListener('click', toggleFullscreen);
+
+            document.addEventListener('fullscreenchange', function() {
+                if (isFullscreen()) {
+                    fsBtn.classList.add('active');
+                    fsBtn.setAttribute('aria-pressed', 'true');
+                    fsText.textContent = 'Exit Fullscreen';
+                    fsIconEnter.style.display = 'none';
+                    fsIconExit.style.display = '';
+                } else {
+                    fsBtn.classList.remove('active');
+                    fsBtn.setAttribute('aria-pressed', 'false');
+                    fsText.textContent = 'Fullscreen';
+                    fsIconEnter.style.display = '';
+                    fsIconExit.style.display = 'none';
+                }
             });
         });
     </script>
