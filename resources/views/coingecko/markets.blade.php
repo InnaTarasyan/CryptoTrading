@@ -90,7 +90,6 @@
                            <th>Atl change percentage</th>
                            <th>Roi</th>
                            <th>Ath date</th>
-                           <th>Atl date</th>
                            <th>Last updated</th>
                         </tr>
                         </thead>

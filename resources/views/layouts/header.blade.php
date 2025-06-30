@@ -7,7 +7,7 @@
                 <div class="m-stack m-stack--ver m-stack--general">
                     <div class="m-stack__item m-stack__item--middle m-brand__logo">
                         <a href="/" class="m-brand__logo-wrapper">
-                            <img alt="" src="{{url('assets/demo/demo7/media/img/logo/logo.png')}}"/>
+                            <img alt="" src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG47.png"/>
                         </a>
                     </div>
                     <div class="m-stack__item m-stack__item--middle m-brand__tools">

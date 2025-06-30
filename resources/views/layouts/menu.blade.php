@@ -6,7 +6,7 @@
     <!-- BEGIN: Brand -->
     <div class="m-brand  m-brand--skin-light ">
         <a href="/" class="m-brand__logo">
-            <img alt="" src="{{ url('assets/demo/demo7/media/img/logo/logo.png')}}"/>
+            <img alt="" src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG47.png"/>
         </a>
     </div>
     <!-- END: Brand -->

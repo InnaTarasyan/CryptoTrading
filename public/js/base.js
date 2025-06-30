@@ -7,16 +7,25 @@ Base.prototype.bindEvents = function () {
 };
 
 Base.prototype.updateAll = function (event) {
-    $('#updateAllData').text('Updating Data ...');
+    var btn = $('#updateAllData');
+    var spinner = $('#updateAllDataSpinner');
+    var btnText = $('#updateAllDataText');
+    btn.attr('aria-busy', 'true').prop('disabled', true);
+    spinner.show();
+    btnText.text('Updating Data ...');
 
     $.ajax({
         type: 'Get',
         url: 'reloadData',
         success: function (res) {
-            $('#updateAllData').text('Update All Data');
+            btn.attr('aria-busy', 'false').prop('disabled', false);
+            spinner.hide();
+            btnText.text('Update All Data');
         },
         error: function (res) {
-
+            btn.attr('aria-busy', 'false').prop('disabled', false);
+            spinner.hide();
+            btnText.text('Update All Data');
         }
     });
 };

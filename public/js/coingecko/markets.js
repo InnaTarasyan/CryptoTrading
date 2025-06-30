@@ -31,7 +31,6 @@ Coingecko.prototype.init = function () {
             {data: 'atl_change_percentage', name: 'atl_change_percentage'},
             {data: 'roi', name: 'roi'},
             {data: 'ath_date', name: 'ath_date'},
-            {data: 'atl_date', name: 'atl_date'},
             {data: 'last_updated', name: 'last_updated'},
         ],
         "iDisplayLength": 5,
