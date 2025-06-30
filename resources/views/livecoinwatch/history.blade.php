@@ -231,76 +231,83 @@
                 margin-bottom: 4px;
             }
         }
-        /* Responsive and User-Friendly m-portlet__body */
-        .m-portlet__body {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(67, 206, 162, 0.08);
-            padding: 32px 32px 24px 32px;
-            margin-bottom: 24px;
-            transition: box-shadow 0.2s;
+
+        /* Modern Tabs Navigation */
+        .modern-tabs-container {
+            margin-bottom: 1.5rem;
         }
-        .m-portlet__body--no-padding {
-            padding: 0 !important;
+
+        .modern-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-bottom: 1px solid #dee2e6;
         }
-        @media (max-width: 991px) {
-            .m-portlet__body {
-                padding: 18px 8px 12px 8px;
-                border-radius: 12px;
-            }
+
+        .modern-tab {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            text-decoration: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            bottom: -1px;
         }
-        @media (max-width: 600px) {
-            .m-portlet__body {
-                padding: 8px 2px 6px 2px;
-                border-radius: 8px;
-                box-shadow: 0 1px 4px rgba(67, 206, 162, 0.10);
-            }
+
+        .modern-tab:hover {
+            background-color: #f8f9fa;
+            border-color: #e9ecef #e9ecef #dee2e6;
+            color: #0d6efd;
         }
-        /* Make table horizontally scrollable on small screens */
-        .table-responsive {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+
+        .modern-tab.active {
+            color: #0d6efd;
+            background-color: #fff;
+            border-color: #dee2e6 #dee2e6 #fff;
         }
+
+        /* Responsive Styles */
         @media (max-width: 767px) {
-            .table-responsive {
-                border-radius: 8px;
-                box-shadow: 0 1px 4px rgba(67, 206, 162, 0.10);
-                background: #fff;
-                padding: 0.5rem 0.25rem;
+            .modern-tabs {
+                flex-direction: column;
+                border-bottom: none;
+                gap: 5px;
             }
-        }
-        /* Add subtle hover effect for table rows */
-        #livecoin_history tbody tr:hover {
-            background: #fffbe7;
-            transition: background 0.2s;
+            .modern-tab {
+                width: 100%;
+                text-align: center;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                bottom: 0;
+            }
+            .modern-tab.active {
+                background: linear-gradient(90deg, #0d6efd 0%, #007bff 100%);
+                color: #fff;
+                border-color: transparent;
+            }
         }
     </style>
 @endsection
 @section('content')
     <div class="m-content">
-        <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-            <li class="m-nav__item">
-                <a href="/" class="m-nav__link">
-                        <span class="m-nav__link-text">
-                           History
-                        </span>
+        <div class="modern-tabs-container">
+            <div class="modern-tabs">
+                <a href="/" class="modern-tab {{ request()->is('/') ? 'active' : '' }}">
+                    History
                 </a>
-            </li>
-            <li class="m-nav__item">
-                <a href="/livecoinexchangesindex" class="m-nav__link">
-                        <span class="m-nav__link-text">
-                            Exchanges
-                        </span>
+                <a href="/livecoinexchangesindex" class="modern-tab {{ request()->is('livecoinexchangesindex') ? 'active' : '' }}">
+                    Exchanges
                 </a>
-            </li>
-            <li class="m-nav__item">
-                <a href="/livecoinfiatsindex" class="m-nav__link">
-                        <span class="m-nav__link-text">
-                            Fiats
-                        </span>
+                <a href="/livecoinfiatsindex" class="modern-tab {{ request()->is('livecoinfiatsindex') ? 'active' : '' }}">
+                    Fiats
                 </a>
-            </li>
-        </ul>
+            </div>
+        </div>
 
         <!--Begin::Section-->
         <div class="m-portlet" >
