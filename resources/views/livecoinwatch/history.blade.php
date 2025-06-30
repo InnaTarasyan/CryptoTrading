@@ -163,7 +163,7 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
             border: none;
-            border-radius: 8px;
+                border-radius: 8px;
             margin: 0 4px;
             color: #fff !important;
             padding: 8px 18px;
@@ -232,6 +232,58 @@
             }
         }
 
+        /* Beautiful DataTable Headers */
+            #livecoin_history thead th {
+            background-color: #f4f6f9;
+            color: #525f7f;
+            font-weight: 600;
+            border-bottom: 2px solid #e9ecef;
+            border-top: 1px solid #e9ecef;
+            padding: 1rem 1.25rem;
+                font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        .datatable-header-icon {
+            display: inline-flex;
+            align-items: center;
+                justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd200 0%, #f7971e 100%);
+            box-shadow: 0 2px 8px rgba(255,215,0,0.10);
+            margin-right: 0.5em;
+            font-size: 1.35em;
+            color: #fff;
+            border: 2px solid #fffbe7;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        #livecoin_history thead th .datatable-header-icon {
+            vertical-align: middle;
+        }
+        #livecoin_history thead th .datatable-header-icon i {
+            color: #fff;
+            font-size: 1.25em;
+        }
+        .datatable-header-text {
+            font-size: 1.15em;
+            vertical-align: middle;
+            margin-left: 0.35em;
+        }
+        #livecoin_history thead th.sorting,
+        #livecoin_history thead th.sorting_asc,
+        #livecoin_history thead th.sorting_desc {
+            cursor: pointer;
+        }
+
+        #livecoin_history thead th.sorting:hover,
+        #livecoin_history thead th.sorting_asc:hover,
+        #livecoin_history thead th.sorting_desc:hover {
+            background-color: #e9ecef;
+        }
+
         /* Modern Tabs Navigation */
         .modern-tabs-container {
             margin-bottom: 1.5rem;
@@ -240,7 +292,7 @@
         .modern-tabs {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+                gap: 8px;
             border-bottom: 1px solid #dee2e6;
         }
 
@@ -283,13 +335,25 @@
                 text-align: center;
                 border: 1px solid #dee2e6;
                 border-radius: 8px;
-                bottom: 0;
+            bottom: 0;
             }
             .modern-tab.active {
                 background: linear-gradient(90deg, #0d6efd 0%, #007bff 100%);
                 color: #fff;
                 border-color: transparent;
             }
+            }
+
+            #livecoin_history tbody td {
+            font-style: italic;
+        }
+
+        #livecoin_history th:first-child,
+        #livecoin_history td:first-child {
+            background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%);
+            color: #333;
+            font-weight: bold;
+            border-right: 2px solid #ffd200;
         }
     </style>
 @endsection
@@ -311,26 +375,68 @@
 
         <!--Begin::Section-->
         <div class="m-portlet" >
-            <div class="m-portlet__body  m-portlet__body--no-padding">
+            <div class="m-portlet__body">
                 <input type="hidden" id="livecoin_history_route" value="{{ route('datatable.livecoin.history') }}">
                 <div class="table-responsive">
                     <table id="livecoin_history" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                           <th>Code</th>
-                           <th>Image</th>
-                           <th>Rate</th>
-                           <th>Age</th>
-                           <th>Pairs</th>
-                           <th>Volume</th>
-                           <th>Cap</th>
-                           <th>Rank</th>
-                           <th>Markets</th>
-                           <th>Total Supply</th>
-                           <th>Max Supply</th>
-                           <th>Circulating Supply</th>
-                           <th>All Time High USD</th>
-                           <th>Categories</th>
+                           <th><span class="datatable-header-icon">  
+                              <!-- Coin SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" fill="#43cea2"/><circle cx="16" cy="16" r="10" fill="#fff"/><circle cx="16" cy="16" r="7" fill="#43cea2"/></svg>
+                           </span> <span class="datatable-header-text">Coin</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Logo SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="6" fill="#ff512f"/><circle cx="16" cy="16" r="8" fill="#fff"/></svg>
+                           </span> <span class="datatable-header-text">Logo</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Dollar SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="12" fill="#ffd200"/><text x="16" y="21" text-anchor="middle" font-size="16" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text></svg>
+                           </span> <span class="datatable-header-text">Price</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Hourglass SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="12" fill="#a8edea"/><path d="M10 8h12M10 24h12M12 8c0 6 8 6 8 0M12 24c0-6 8-6 8 0" stroke="#185a9d" stroke-width="2" stroke-linecap="round"/></svg>
+                           </span> <span class="datatable-header-text">Age</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Pairs SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="12" fill="#f7971e"/><path d="M12 16h8M16 12v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                           </span> <span class="datatable-header-text">Pairs</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Exchange SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="12" fill="#43cea2"/><path d="M10 16h12M16 10v12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                           </span> <span class="datatable-header-text">Volume (24h)</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Pie Chart SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="12" fill="#ff512f"/><path d="M16 16V8A8 8 0 1 1 8 24" fill="#fff"/></svg>
+                           </span> <span class="datatable-header-text">Market Cap</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Trophy SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="12" fill="#ffd200"/><path d="M12 20h8M16 20v4M10 8h12v4a6 6 0 0 1-12 0V8z" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                           </span> <span class="datatable-header-text">Rank</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- List SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="12" fill="#6a11cb"/><rect x="10" y="10" width="12" height="2" fill="#fff"/><rect x="10" y="15" width="12" height="2" fill="#fff"/><rect x="10" y="20" width="12" height="2" fill="#fff"/></svg>
+                           </span> <span class="datatable-header-text">Markets</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Database SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><ellipse cx="16" cy="10" rx="10" ry="4" fill="#11998e"/><rect x="6" y="10" width="20" height="12" rx="6" fill="#fff"/><ellipse cx="16" cy="22" rx="10" ry="4" fill="#11998e"/></svg>
+                           </span> <span class="datatable-header-text">Total Supply</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Cubes SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="6" fill="#f7971e"/><rect x="10" y="10" width="4" height="4" fill="#fff"/><rect x="18" y="10" width="4" height="4" fill="#fff"/><rect x="10" y="18" width="4" height="4" fill="#fff"/><rect x="18" y="18" width="4" height="4" fill="#fff"/></svg>
+                           </span> <span class="datatable-header-text">Max Supply</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Circle SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="12" fill="#43cea2"/><circle cx="16" cy="16" r="7" fill="#fff"/></svg>
+                           </span> <span class="datatable-header-text">Circulating Supply</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Line Chart SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="12" fill="#ff512f"/><polyline points="8,24 14,18 18,22 24,10" stroke="#fff" stroke-width="2" fill="none"/></svg>
+                           </span> <span class="datatable-header-text">All-Time High</span></th>
+                           <th><span class="datatable-header-icon">
+                              <!-- Tags SVG -->
+                              <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="8" fill="#6a11cb"/><rect x="10" y="10" width="12" height="4" rx="2" fill="#fff"/><rect x="10" y="18" width="8" height="4" rx="2" fill="#fff"/></svg>
+                           </span> <span class="datatable-header-text">Categories</span></th>
                         </tr>
                         </thead>
                     </table>
