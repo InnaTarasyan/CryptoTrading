@@ -1,0 +1,88 @@
+body, .m-content, .m-portlet.custom-modern {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+    color: #f1f1f1 !important;
+}
+
+#coinmarketcal {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+    color: #f1f1f1 !important;
+    display: block !important;
+}
+
+#coinmarketcal thead th {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+    color: #ffd700 !important;
+    border-bottom: 3px solid #444;
+}
+
+#coinmarketcal tbody tr:hover, #coinmarketcal tbody tr:focus {
+    background: linear-gradient(90deg, #ffd70033 0%, #ff512f33 100%) !important;
+    color: #232526 !important;
+    transition: background 0.2s, color 0.2s;
+}
+
+#coinmarketcal td, #coinmarketcal th {
+    color: #ffd700 !important;
+    background: none !important;
+}
+
+#coinmarketcal td:hover {
+    background: #ffd70022 !important;
+    color: #ff512f !important;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+#coinmarketcal td:first-child {
+    background: linear-gradient(90deg, #434343 0%, #232526 100%) !important;
+    color: #ffd700 !important;
+    border-left: 6px solid #ffd700 !important;
+    text-shadow: 0 2px 8px rgba(255, 215, 0, 0.12);
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+    color: #ffd700 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: linear-gradient(90deg, #ffd700 0%, #ff512f 100%) !important;
+    color: #232526 !important;
+}
+
+.dataTables_wrapper .dataTables_filter .search-wrapper input[type="search"] {
+    background: #232526 !important;
+    color: #ffd700 !important;
+    border: 1.5px solid #ffd700 !important;
+}
+
+.dataTables_wrapper .dataTables_filter .search-wrapper input[type="search"]:focus {
+    border: 1.5px solid #ff512f !important;
+    background: #333 !important;
+}
+
+.dataTables_wrapper .dataTables_filter .search-wrapper .search-icon {
+    color: #ffd700 !important;
+}
+
+.dataTables_wrapper .dataTables_filter .search-wrapper #clear-search {
+    background: linear-gradient(90deg, #ffd700 0%, #ff512f 100%) !important;
+    color: #232526 !important;
+}
+
+.dataTables_wrapper .highlight {
+    background-color: #333 !important;
+    color: #ffd700 !important;
+}
+
+.modern-update-btn {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+    color: #ffd700 !important;
+}
+
+.modern-update-btn:hover:not(:disabled):not([aria-busy="true"]) {
+    background: linear-gradient(90deg, #ffd700 0%, #ff512f 100%) !important;
+    color: #232526 !important;
+} 
