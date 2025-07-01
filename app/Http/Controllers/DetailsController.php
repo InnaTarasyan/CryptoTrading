@@ -2,61 +2,111 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Coindar;
-use App\Coinmarketcap;
-use App\Coinbin;
-use App\Solume;
-use App\WorldCoinIndex;
-use App\TradingPair;
-use App\TwitterAccount;
-
-use Thujohn\Twitter\Facades\Twitter;
+use App\Models\CoinGecko\CoinGeckoCoin;
+use App\Models\CoinGecko\CoingeckoExchanges;
+use App\Models\CoinGecko\CoinGeckoTrending;
+use App\Models\CoinMarketCal\CoinMarketCal;
+use App\Models\CoinMarketCal\CoinMarketCalEvents;
+use App\Models\CoinGecko\Derivatives;
+use App\Models\CoinGecko\DerivativesExchanges;
+use App\Models\LiveCoinWatch\Exchanges;
+use App\Models\LiveCoinWatch\Fiats;
+use App\Models\LiveCoinWatch\LiveCoinWatch;
+use App\Models\CoinGecko\Nfts;
+use App\Models\TelegramMessages;
+use App\Models\TradingPair;
 
 class DetailsController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @param $symbol
+     * @return $this
      */
     public function index($symbol)
     {
-        $twitter = TwitterAccount::where('coin', $symbol)->first();
+        $events = CoinMarketCalEvents::whereJsonContains('coins', [["symbol" => $symbol]])
+            ->orWhereJsonContains('coins', [["name" => $symbol]])
+            ->orWhereJsonContains('coins', [["fullname" => $symbol]])
+            ->orWhereJsonContains('coins', [["id" => $symbol]])
+            ->get();
+
         $tradingPair = TradingPair::where('coin', $symbol)->first();
+
+        $trendings = CoinGeckoTrending::where('api_id', $symbol)->first() ?
+            json_decode(CoinGeckoTrending::where('api_id', $symbol)->first()->data, true) : [];
+
+        $trendingsStr = '<ul>';
+        foreach ($trendings as $key => $inner) {
+            $innerValue = $inner;
+            if(is_array($inner)) {
+                $innerValue = '<ul>';
+                foreach ($inner as  $value) {
+                    $innerValue.= '<li>'.$value.'</li>';
+                }
+                $innerValue.= '</ul>';
+            }
+            $trendingsStr.= '<li>'.$key.' : '.$innerValue.'</li>';
+        }
+
+        $trendingsStr.= '</ul>';
+
+        $derivativesExchanges = DerivativesExchanges::where('api_id', $symbol)->first();
+        $derivatives = Derivatives::where('symbol', $symbol)->first();
+
+        $liveCoinWatch = LiveCoinWatch::where('code', $symbol)->first();
+        $coinGecko     = CoinGeckoCoin::where('symbol', $symbol)->first();
 
         $data = [
             'symbol' => $symbol,
-            'coin' => Coinmarketcap::where('symbol', $symbol)->first() ? Coinmarketcap::where('symbol', $symbol)->first()->name : Solume::where('symbol', $symbol)->first()->name,
-            'events' => Coindar::all()->where('coin_symbol', strtoupper($symbol)),
-            'coinmarketcap' => Coinmarketcap::where('symbol', $symbol)->first(),
-            'coinbin' => Coinbin::where('ticker', $symbol)->first(),
-            'solume'=> Solume::where('symbol', $symbol)->first(),
-            'worldcoinindex' => WorldCoinIndex::where('Label', 'Like', $symbol.'/%')->first()
+            'coin' => $liveCoinWatch ? $liveCoinWatch->name :
+                ($coinGecko ? $coinGecko->name : ''),
+            'events' => $events,
+            'livecoin' => LiveCoinWatch::join('live_coin_histories', 'live_coin_histories.code', '=', 'live_coin_watches.code')
+                        ->where('live_coin_watches.code', $symbol)->first(),
+            'coingecko' => CoinGeckoCoin::join('coin_gecko_markets',
+                'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')
+                              ->where('coin_gecko_markets.api_id', $symbol)->first(),
+            'coinmarketcal' => Coinmarketcal::where('symbol', $symbol)->first(),
+            'trendings' => $trendings,
+            'trendingsText' => $trendingsStr,
+            'nfts' => Nfts::where('api_id', $symbol)->first(),
+            'derivatives' => $derivatives,
+            'coingeckoexchanges' => CoingeckoExchanges::where('api_id', $symbol)->first(),
+            'derivativesExchanges' => $derivativesExchanges ? $derivativesExchanges->description : '',
         ];
 
-        if($twitter){
-            /**
-            $screenName = $twitter->account;
-            $tweets =  json_decode(Twitter::getUserTimeline(['screen_name' => $screenName, 'count' => 20, 'format' => 'json']), true);
-            foreach ($tweets as &$tweet){
-                $tweet['text'] = $this->parse_tweet($tweet['text']);
+        if(empty($data['livecoin']) && empty($data['coingecko']) && empty($data['coinmarketcal'])) {
+            $fiats = Fiats::where('code', $symbol)->first();
+
+            if(!empty($fiats)) {
+                $str = '<ul>';
+
+                foreach (json_decode($fiats->countries, true) as $key => $inner) {
+                    $innerValue = $inner;
+                    if(is_array($inner)) {
+                        $innerValue = '<ul>';
+                        foreach ($inner as  $value) {
+                            $innerValue.= '<li>'.$value.'</li>';
+                        }
+                        $innerValue.= '</ul>';
+                    }
+                    $str.= '<li>'.$innerValue.'</li>';
+                }
+
+                $str.= '</ul>';
+
+                $data['fiats'] = $str;
             }
-            $data['tweets'] = $tweets; **/
         }
 
+        if(empty($data['livecoin']) && empty($data['coingecko']) && empty($data['coinmarketcal'])) {
+            $data['exchanges'] = Exchanges::where('code', $symbol)->first();
+        }
+
+        $data['tweets'] = TelegramMessages::take(10)->get();
+
         if($tradingPair){
-            $data['tradingPair'] = $tradingPair->trading_pair;
+            $data['tradingPair'] = $symbol;
         }
 
         return view('coindetails')

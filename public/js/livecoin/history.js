@@ -1,0 +1,309 @@
+"use strict";
+function LiveCoin(){
+    this.currentColumnGroup = 0;
+    this.columnsPerGroup = 5; // Additional columns to show (excluding code column)
+    this.totalColumns = 13;
+    this.totalGroups = Math.ceil((this.totalColumns - 1) / this.columnsPerGroup); // -1 because code column is always visible
+}
+
+LiveCoin.prototype.init = function () {
+    var self = this;
+    var oTable = $('#livecoin_history').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": $('#livecoin_history_route').val(),
+        "columns": [
+            {data: 'code', name: 'code'},
+            {data: 'png64', name: 'png64'},
+            {data: 'rate', name: 'rate'},
+            {data: 'age', name: 'age'},
+            {data: 'pairs', name: 'pairs'},
+            {data: 'volume', name: 'volume'},
+            {data: 'cap', name: 'cap'},
+            {data: 'rank', name: 'rank'},
+            {data: 'markets', name: 'markets'},
+            {data: 'totalSupply', name: 'totalSupply'},
+            {data: 'maxSupply', name: 'maxSupply'},
+            {data: 'circulatingSupply', name: 'circulatingSupply'},
+            {data: 'allTimeHighUSD', name: 'allTimeHighUSD'},
+            {data: 'categories', name: 'categories'},
+        ],
+        "iDisplayLength": 20,
+        pageLength: 10,
+        "aaSorting": [[3, "desc"]],
+        "createdRow": function(row, data, dataIndex) {
+            var labels = [
+                'Code', 'Image', 'Rate', 'Age', 'Pairs', 'Volume', 'Cap', 'Rank',
+                'Markets', 'Total Supply', 'Max Supply', 'Circulating Supply', 'All Time High USD', 'Categories'
+            ];
+            $('td', row).each(function(index) {
+                $(this).attr('data-label', labels[index]);
+            });
+        },
+        "fnDrawCallback": function() {
+            $('#livecoin_history tbody tr').click(function () {
+                var coin = $(this).find('.id').val();
+                window.location.href = "/details/" + coin;
+            });
+            
+            // Add error handling for images
+            $('#livecoin_history tbody td:nth-child(2) img').on('error', function() {
+                var $img = $(this);
+                var $td = $img.closest('td');
+                $img.hide();
+                $td.html('<div style="width: 32px; height: 32px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #64748b; margin: 0 auto;">🪙</div>');
+            });
+            
+            highlightSearchResults();
+            self.updateColumnVisibility();
+        },
+        "fnInitComplete": function() {
+            self.updateColumnVisibility();
+            self.bindColumnNavigation();
+        },
+        infoCallback: function(settings, start, end, max, total, pre) {
+            return `\n            <div class=\"datatable-info-beautiful\">\n                <span class=\"datatable-info-icon\">📊</span>\n                <span class=\"datatable-info-text\">\n                    Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                </span>\n            </div>\n        `;
+        }
+    });
+    
+    this.table = oTable;
+    
+    // Replace default DataTables filter with custom search bar
+    replaceCustomSearchBar(this.table);
+    
+    // Keyboard shortcuts
+    $(document).on('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'f') {
+            e.preventDefault();
+            $('.dataTables_filter input[type="search"]').focus();
+        }
+    });
+
+    // Enhanced search experience
+    $('.dataTables_filter input[type="search"]').on('input', function() {
+        var $input = $(this);
+        var searchTerm = $input.val();
+        
+        if (searchTerm.length > 0) {
+            $('.dataTables_filter').addClass('searching');
+        } else {
+            $('.dataTables_filter').removeClass('searching');
+        }
+    });
+
+    // Remove searching class when search is complete
+    this.table.on('search.dt', function() {
+        $('.dataTables_filter').removeClass('searching');
+    });
+};
+
+LiveCoin.prototype.updateColumnVisibility = function() {
+    var self = this;
+    var startCol = this.currentColumnGroup * this.columnsPerGroup + 1; // +1 because we start after code column
+    var endCol = Math.min(startCol + this.columnsPerGroup, this.totalColumns);
+    
+    // Add loading state
+    $('#livecoin_history').addClass('updating');
+    
+    // Hide all columns first
+    for (var i = 0; i < this.totalColumns; i++) {
+        this.table.column(i).visible(false);
+    }
+    
+    // Always show the code column (first column)
+    this.table.column(0).visible(true);
+    
+    // Show the current group of additional columns
+    for (var i = startCol; i < endCol; i++) {
+        this.table.column(i).visible(true);
+    }
+    
+    // Update the column range indicator to show total visible columns
+    var visibleColumns = 1 + (endCol - startCol); // code column + additional columns
+    $('#column-range').text('1-' + visibleColumns);
+    
+    // Update navigation buttons
+    $('#prev-columns').prop('disabled', this.currentColumnGroup === 0);
+    $('#next-columns').prop('disabled', this.currentColumnGroup >= this.totalGroups - 1);
+    
+    // Remove loading state after a short delay
+    setTimeout(function() {
+        $('#livecoin_history').removeClass('updating');
+    }, 300);
+    
+    // Add visual feedback for the current group
+    $('.column-indicator').addClass('pulse');
+    setTimeout(function() {
+        $('.column-indicator').removeClass('pulse');
+    }, 500);
+};
+
+LiveCoin.prototype.bindColumnNavigation = function() {
+    var self = this;
+    
+    $('#prev-columns').on('click', function() {
+        if (self.currentColumnGroup > 0) {
+            self.currentColumnGroup--;
+            self.updateColumnVisibility();
+            self.table.draw();
+        }
+    });
+    
+    $('#next-columns').on('click', function() {
+        if (self.currentColumnGroup < self.totalGroups - 1) {
+            self.currentColumnGroup++;
+            self.updateColumnVisibility();
+            self.table.draw();
+        }
+    });
+    
+    // Add keyboard navigation
+    $(document).on('keydown', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            if (e.keyCode === 37) { // Left arrow
+                e.preventDefault();
+                $('#prev-columns').click();
+            } else if (e.keyCode === 39) { // Right arrow
+                e.preventDefault();
+                $('#next-columns').click();
+            }
+        }
+    });
+};
+
+LiveCoin.prototype.bindEvents = function () {
+    // Add search results counter
+    var self = this;
+    this.table.on('search.dt', function() {
+        var searchTerm = self.table.search();
+        var info = self.table.page.info();
+        var totalRecords = info.recordsTotal;
+        var filteredRecords = info.recordsDisplay;
+        
+        if (searchTerm && filteredRecords !== totalRecords) {
+            if (!$('.search-results-info').length) {
+                $('.dataTables_filter').after('<div class="search-results-info">Showing ' + filteredRecords + ' of ' + totalRecords + ' results for "' + searchTerm + '"</div>');
+            } else {
+                $('.search-results-info').text('Showing ' + filteredRecords + ' of ' + totalRecords + ' results for "' + searchTerm + '"');
+            }
+            $('.search-results-info').addClass('show');
+        } else {
+            $('.search-results-info').removeClass('show');
+        }
+    });
+};
+
+$(document).ready(function() {
+    var coins = new LiveCoin();
+    coins.init();
+    coins.bindEvents();
+
+    // Image preview logic
+    var $imgPreview = $('<div id="img-hover-preview"></div>').css({
+        'position': 'fixed',
+        'z-index': 9999,
+        'display': 'none',
+        'pointer-events': 'none',
+        'box-shadow': '0 8px 32px rgba(0,0,0,0.18)',
+        'border-radius': '16px',
+        'background': '#fff',
+        'padding': '12px',
+        'border': '2px solid #e2e8f0',
+        'transition': 'transform 0.15s cubic-bezier(.4,2,.6,1), opacity 0.15s',
+        'opacity': 0
+    });
+    $('body').append($imgPreview);
+
+    $(document).on('mouseenter', '.previewable-img', function(e) {
+        var src = $(this).attr('src');
+        var alt = $(this).attr('alt') || '';
+        $imgPreview.html('<img src="'+src+'" alt="'+alt+'" style="width:96px;height:96px;object-fit:contain;display:block;margin:auto;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.10);">');
+        $imgPreview.css({
+            'display': 'block',
+            'opacity': 1,
+            'transform': 'scale(1.08)'
+        });
+    });
+    $(document).on('mousemove', '.previewable-img', function(e) {
+        var previewWidth = $imgPreview.outerWidth();
+        var previewHeight = $imgPreview.outerHeight();
+        var left = e.clientX + 24;
+        var top = e.clientY - previewHeight/2;
+        // Prevent overflow
+        var maxLeft = $(window).width() - previewWidth - 16;
+        var maxTop = $(window).height() - previewHeight - 16;
+        if(left > maxLeft) left = maxLeft;
+        if(top < 8) top = 8;
+        if(top > maxTop) top = maxTop;
+        $imgPreview.css({ left: left, top: top });
+    });
+    $(document).on('mouseleave', '.previewable-img', function() {
+        $imgPreview.css({
+            'display': 'none',
+            'opacity': 0,
+            'transform': 'scale(0.98)'
+        });
+    });
+});
+function highlightSearchResults() {
+    var table = $('#livecoin_history').DataTable();
+    var searchTerm = table.search();
+    if (!searchTerm) {
+        $('#livecoin_history tbody td').each(function() {
+            $(this).html($(this).text());
+        });
+        return;
+    }
+    var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\\]\]/g, '\\$&')+')', 'gi');
+    $('#livecoin_history tbody tr').each(function() {
+        var row = $(this);
+        var found = false;
+        row.find('td').each(function(idx) {
+            var cell = $(this);
+            var original = cell.text();
+            // Skip highlighting for png64 column (index 1)
+            if (idx === 1) {
+                cell.html(original);
+                return;
+            }
+            if (searchTerm && original.match(regex)) {
+                var newHtml = original.replace(regex, '<span class="highlight">$1</span>');
+                cell.html(newHtml);
+                found = true;
+            } else {
+                cell.html(original);
+            }
+        });
+        if (found) {
+            row.addClass('highlight-row');
+        } else {
+            row.removeClass('highlight-row');
+        }
+    });
+}
+
+// Replace default DataTables filter with custom search bar
+function replaceCustomSearchBar(table) {
+    const filter = $('.dataTables_filter');
+    const customSearch = `
+        <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="#f7971e" stroke-width="2"/><line x1="16.018" y1="16.4853" x2="21" y2="21.4673" stroke="#f7971e" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="search" class="form-control" placeholder="Search coins..." aria-controls="livecoin_history" style="padding-left:44px;" />
+            <button id="clear-search" class="ml-2" type="button">Clear</button>
+        </div>
+    `;
+    filter.html(customSearch);
+
+    // Bind search input
+    const searchBox = filter.find('input[type="search"]');
+    searchBox.on('input', function() {
+        table.search(searchBox.val()).draw();
+    });
+
+    // Bind clear button
+    filter.on('click', '#clear-search', function() {
+        searchBox.val('');
+        table.search('').draw();
+    });
+}
+

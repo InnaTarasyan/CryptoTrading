@@ -6,7 +6,7 @@
     <!-- BEGIN: Brand -->
     <div class="m-brand  m-brand--skin-light ">
         <a href="/" class="m-brand__logo">
-            <img alt="" src="{{ url('assets/demo/demo7/media/img/logo/logo.png')}}"/>
+            <img alt="" src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG47.png"/>
         </a>
     </div>
     <!-- END: Brand -->
@@ -44,9 +44,9 @@
 
             <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom" aria-haspopup="true"  data-menu-submenu-toggle="click" data-redirect="true">
                 <a  href="#" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon socicon-twitter"></i>
+                    <i class="m-menu__link-icon socicon-telegram"></i>
                     <span class="m-menu__link-text">
-						Twitter
+						Telegram
 					</span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
@@ -56,17 +56,17 @@
                         <li class="m-menu__item  m-menu__item--parent m-menu__item--bottom" aria-haspopup="true"  data-redirect="true">
                             <span class="m-menu__link">
                                 <span class="m-menu__link-text">
-                                    Twitter
+                                    Telegram
                                 </span>
                             </span>
                         </li>
                         <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
-                            <a  href="/twitter" class="m-menu__link ">
+                            <a  href="/telegram" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
-									Twitter Account
+									Telegram Account
 								</span>
                             </a>
                         </li>
@@ -74,13 +74,13 @@
                 </div>
             </li>
             <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom" aria-haspopup="true"  data-menu-submenu-toggle="click" data-redirect="true">
-                {{--<a  href="#" class="m-menu__link m-menu__toggle">--}}
-                    {{--<i class="m-menu__link-icon fa fa-bitcoin"></i>--}}
-                    {{--<span class="m-menu__link-text">--}}
-						{{--Trading Pair--}}
-					{{--</span>--}}
-                    {{--<i class="m-menu__ver-arrow la la-angle-right"></i>--}}
-                {{--</a>--}}
+                <a  href="#" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon fa fa-bitcoin"></i>
+                    <span class="m-menu__link-text">
+						Trading Pair
+					</span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                </a>
                 <div class="m-menu__submenu ">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">

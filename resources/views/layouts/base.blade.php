@@ -31,7 +31,8 @@
     <link href="{{url('assets/vendors/base/vendors.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/demo/demo7/base/style.bundle.css')}}" rel="stylesheet" type="text/css" />
     <!--end::Base Styles -->
-    <link rel="shortcut icon" href="{{url('assets/demo/demo6/media/img/logo/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{ url('assets/demo/demo7/media/img/logo/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ url('assets/demo/default/media/img/logo/favicon.ico') }}" />
     @yield('styles')
 </head>
 <!-- end::Head -->
@@ -88,6 +89,7 @@
 
         });
     </script>
+    <script src="{{ url('js/base.js') }}"></script>
 <!--end::Page Snippets -->
 </body>
 <!-- end::Body -->

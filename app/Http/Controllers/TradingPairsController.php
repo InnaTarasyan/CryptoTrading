@@ -2,37 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoinGecko\CoinGeckoCoin;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
-use App\TradingPair;
-use App\Coinmarketcap;
+use App\Models\TradingPair;
 
 class TradingPairsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
 
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('trading_pairs')
-                ->with(['coins' => Coinmarketcap::all(),
-                        'title' => 'Trading Pair']);
+                ->with([
+                    'coins' => CoinGeckoCoin::all(),
+                    'title' => 'Trading Pair',
+                ]);
     }
 
     public function getTradingPairsData(){
         return Datatables::of(TradingPair::all())
+            ->editColumn('coin', function($coin){
+                $currentCoin = CoinGeckoCoin::find($coin->coin);
+                return $currentCoin ? $currentCoin->name : ' - ';
+            })
             ->addColumn('action', function ($coin){
                 return '<button type="button" class="btn m-btn--pill btn-outline-success m-btn m-btn--custom edit" data-toggle="modal" data-target="#m_modal_1" data-url="'.$coin->id.'">
 							Edit
@@ -81,11 +73,13 @@ class TradingPairsController extends Controller
     {
         $status = 'fail';
         $data = [];
-        $tradingPair = TradingPair::where('id' ,$id)->first();
-        if($tradingPair){
+        $tradingPair = TradingPair::where('id',$id)->first();
+        $coingeckoCoin = CoinGeckoCoin::find($tradingPair->coin);
+        if($tradingPair && $coingeckoCoin){
             $status = 'ok';
-            $data['id'] = $tradingPair->id;
-            $data['coin'] = $tradingPair->coin;
+            $data['trading_pair_id'] = $tradingPair->id;
+            $data['id'] = $coingeckoCoin->id;
+            $data['coin'] = $coingeckoCoin->name;
             $data['trading_pair'] = $tradingPair->trading_pair;
         }
         return response()->json(['status' => $status, 'data' => $data]);
@@ -133,5 +127,17 @@ class TradingPairsController extends Controller
 
         return response()->json(['status' => $status]);
 
+    }
+
+    public function ajaxGetCoins(Request $request)
+    {
+        $search = $request->get('q');
+        $coins = CoinGeckoCoin::query();
+        if($search) {
+            $coins = $coins->where('name', 'like', '%'.$search.'%');
+        }
+
+        return response()->json($coins->orderBy('name')
+            ->get());
     }
 }

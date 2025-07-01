@@ -4,250 +4,55 @@
 @endsection
 @section('content')
 
-    <div class="m-content" >
-        <!--Begin::Section-->
-        <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_4">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon">
-                                   <i class="flaticon-coins"></i>
-                                </span>
-                                <h3 class="m-portlet__head-text">
-                                    {{ $coin }} {{ $symbol }}
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="m-portlet__head-tools">
-                            <ul class="m-portlet__nav">
-                                <li class="m-portlet__nav-item">
-                                    <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
-                                        <i class="la la-angle-down"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="m-portlet__body" style="padding: 0rem;">
-                        <!--begin::Section-->
-                        <div class="m-section">
-                            <div class="m-section__content">
-                                <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
-                                    <div class="m-demo__preview">
-                                        <div class="m-stack m-stack--ver m-stack--desktop m-stack--demo">
-                                            @if(isset($coinmarketcap) or isset($worldcoinindex))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Price</u>
-                                                    </i>
-                                                    @if(isset($coinmarketcap))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> BTC </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{$coinmarketcap->price_btc}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> USD </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{$coinmarketcap->price_usd}}
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if(isset($worldcoinindex))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> CNY </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{$worldcoinindex->Price_cny}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> EUR </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($worldcoinindex->Price_eur, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> GBP </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($worldcoinindex->Price_gbp, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                <b> RUR </b>
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                {{ number_format($worldcoinindex->Price_rur, 2, '.', ',')}}
-                                                            </div>
-                                                        </div>
-                                                     @endif
-                                                </div>
-                                            @endif
-                                            @if(isset($coinmarketcap))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Percent Changes</u>
-                                                    </i>
-                                                    @if(isset($coinmarketcap->percent_change_1h))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                1h
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$coinmarketcap->percent_change_1h < 0 ? "m--font-danger" : "m--font-success"}} ">
-                                                                {{$coinmarketcap->percent_change_1h}} %
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if(isset($coinmarketcap->percent_change_24h))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                24h
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$coinmarketcap->percent_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                                {{$coinmarketcap->percent_change_24h}} %
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if(isset($coinmarketcap->percent_change_7d))
-                                                        <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                                7d
-                                                            </div>
-                                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$coinmarketcap->percent_change_7d < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                                {{$coinmarketcap->percent_change_7d}} %
-                                                            </div>
-                                                        </div>
-                                                     @endif
-                                                </div>
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Trade volume (24 h)</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            <b> USD </b>
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($coinmarketcap->{'24h_volume_usd'}) }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>General information</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Max Supply
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($coinmarketcap->max_supply) }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Total Supply
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            {{ number_format($coinmarketcap->total_supply) }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            @if(isset($solume))
-                                                <div class="m-stack__item m-stack__item--center m-stack__item--top">
-                                                    <i>
-                                                        <u>Solume.io Data (24h)</u>
-                                                    </i>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Change
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->change_24h}} %
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Reddit
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->reddit_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->reddit_change_24h}} %
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Reddit Vol.
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->reddit_volume_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->reddit_volume_24h}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Sentiment
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->sentiment_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->sentiment_24h}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Sentiment Change
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle  {{$solume->sentiment_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->sentiment_change_24h}} %
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Twitter
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->twitter_change_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->twitter_change_24h}} %
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Twitter Vol.
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->twitter_volume_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->twitter_volume_24h }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-stack m-stack--ver m-stack--general m-stack--demo">
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                                            Vol.
-                                                        </div>
-                                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle {{$solume->volume_24h < 0 ? "m--font-danger" : "m--font-success"}}">
-                                                            {{$solume->volume_24h}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Section-->
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="m-content">
+        @if($trendings)
+          @include('details.trendings')
+        @endif
+
+
+        @if($coinmarketcal)
+            @include('details.coinmarketcal')
+        @endif
+
+
+        @if(isset($coingecko))
+           @include('details.coingecko')
+        @endif
+
+
+
+        @if(isset($fiats))
+            @include('details.fiats')
+        @endif
+
+
+
+        @if(isset($coingeckoexchanges))
+            @include('details.coingeckoexchanges')
+        @endif
+
+
+
+        @if(isset($nfts))
+            @include('details.nfts')
+        @endif
+
+        @if(isset($derivatives))
+            @include('details.derivatives')
+        @endif
+
+
+
+        @if(isset($exchanges))
+            @include('details.exchanges')
+        @endif
+
+
+
+        @if(isset($livecoin))
+            @include('details.livecoin')
+        @endif
+
         <!--End::Section-->
     </div>
 
@@ -377,10 +182,10 @@
                             <div class="m-portlet__head-caption">
                                 <div class="m-portlet__head-title">
                                     <span class="m-portlet__head-icon">
-                                        <i class="socicon-twitter"></i>
+                                        <i class="socicon-telegram"></i>
                                     </span>
                                     <h3 class="m-portlet__head-text">
-                                        Tweets
+                                        Telegram Channel
                                     </h3>
                                 </div>
                             </div>
@@ -396,7 +201,7 @@
                         </div>
                         <div class="m-portlet__body">
                             @if(isset($tweets))
-                                <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="380" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
+                                <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="600" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
                                     <!--Begin::Timeline 2 -->
                                     <div class="m-timeline-2">
                                         @foreach($tweets as $tweet)
@@ -409,7 +214,7 @@
                                                         <i class="fa fa-genderless m--font-danger"></i>
                                                     </div>
                                                     <div class="m-timeline-2__item-text  m--padding-top-5">
-                                                        {!! $tweet['text'] !!}
+                                                        {!! $tweet['content'] !!}
                                                     </div>
                                                 </div>
                                             </div>

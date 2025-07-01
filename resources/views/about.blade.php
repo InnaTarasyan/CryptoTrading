@@ -59,23 +59,54 @@
                         <div class="m-section">
                             <span class="m-section__sub">
                                 <i>Dear All,</i><br/>
-                                 At first I want to introduce myself. I am Inna Tarasyan, I live in Armenia, in Yerevan, and I am web developer. <br/> <br/>
-                                 <b>My Coin Trading Project</b> allows online tracking of the changes in key indicators of the Crypto-currency,
-                                including the Social Volume Changes in the Reddit and Twitter, etc.
-                                Site connects to the following Crypto-Currency Market
-                                Capitalization sites via api:
+                                 At first, I would lke to introduce myself. I am Inna Tarasyan and I am a web developer from Armenia.<br/> <br/>
+                                 <b>Coin Trading Project</b> is designed to combine Crypto-currency information from different major sources.
+                                 It allows online tracking of all changes in key indicators of the Crypto-currency,
+                                 including the Social Volume Changes in Telegram, Live Coin Watch, CoinGecko, CoinMarketCal, and more.
                             </span>
+                            On the main page you can see information from the following Crypto-Currency Market Capitalization sites:
+
                             <div class="m-section__content">
                                 <ul>
-                                    <li>worldcoinindex.com </li>
-                                    <li>coindar.org</li>
-                                    <li>solume.io</li>
-                                    <li>coinmarketcap.org</li>
+                                    <li>livecoinwatch.com</li>
+                                    <li>coingecko.com</li>
+                                    <li>coinmarketcal.com</li>
                                 </ul>
                             </div>
                             <div class="m--space-30"></div>
                             <div class="m-section__content">
-                                <b>These are the <i>Web Technologies</i> used for constructing the site: </b>
+                                Information is being updated automatically every 3 hours, however,
+                                you can get the latest updates when you click "Update All Data" button on any page.
+                                The system update will take about one minute and provide you with up-to-date
+                                Crypto-currency capitalization results. You can see detailed information about a
+                                particular crypto coin when you click on a row in data tables.
+                            </div>
+                            <div class="m--space-30"></div>
+                            <div class="m-section__content">
+                                On the Crypto-coin details page you can see trading view charts, tweets about
+                                corresponding coin, ideas, coin events (the list of major events in the crypto and
+                                blockchain ecosystems). Crypto charts are a series of lines and candlestick patterns
+                                that illustrate the historic price performance of a cryptocurrency.
+                                The time span is variable. Presented information can help you predict upcoming trends
+                                and changes in market conditions, helping you make better investment decisions
+                                along the way. This information is simple for beginners and is also effective for
+                                technical analysis experts. It is good for traders and investors.
+                            </div>
+                            <div class="m--space-30"></div>
+                            <div class="m-section__content">
+                                This site is not responsible for your financial losses, if any.
+                                Though I will be happy, if this site helps you make money.
+                            </div>
+
+                            <div class="m--space-30"></div>
+                            <div class="m-section__content">
+                                This site can also be considered as a tutorial of Laravel framework web
+                                application and other major web technologies.
+                            </div>
+
+                            <div class="m--space-30"></div>
+                            <div class="m-section__content">
+                                <b> The following <i>Web Technologies</i> were used to construct this site:</b>
                                 <ul>
                                     <li>
                                         Information is displayed in <i>Laravel Datatables</i>, which includes table
@@ -84,41 +115,40 @@
                                     </li>
                                     <li>TradingView Charts</li>
                                     <li>
-                                        Site includes basic <i>login/logout/register functionality</i>. <br/>
+                                        <i>Metronic</i> theme is integrated
                                     </li>
                                     <li>
-                                        <i>Metronic</i> theme is integrated.
-                                    </li>
-                                    <li>
-                                        <i>Twitter</i> integration implemented. User can configure <i>Twitter account</i> </a>
-                                        and the corresponding tweets will be retrieved.
+                                        <i>Telegram</i> integration implemented.
+                                        User can configure Telegram account and the corresponding messages
+                                        will be retrieved.
                                     </li>
                                     <li>
                                         <i>Coin Events</i> are shown in the calendar.
                                     </li>
                                     <li>
                                         <i>select2.js JQuery plugin</i> is used to search for a coin.
-                                    </li>
-                                    <li>
-                                        Gravatar Service Integrated
-                                    </li>
-                                    <li>
-                                        Laravel Email Integrated
-                                    </li>
-                                    <li>
-                                        Project has a <i>chat</i> implemented using <i>node.js framework</i>
-                                        <br/>
-                                        (Unfortunately for now my Server does not support node.js)
+
                                     </li>
                                 </ul>
+                                <div class="m--space-30"></div>
+                                <div class="m-section__content">
+                                    On the other hand, I'm sure <i>Coin Trading Project</i> site will help
+                                    traders of <i>Cryptocurrency</i> to better navigate the dynamics of market
+                                    changes.
+                                </div>
+
+                                <div class="m--space-30"></div>
+                                <div class="m-section__content">
+                                    I would highly appreciate it if this site becomes a
+                                    reference book for financial analysts. With gratitude, I will accept all your
+                                    remarks, both in terms of functional purposes of this site and the software.
+                                    Please contact me via the “feedback” feature found in this website,
+                                    if you have any questions.
+                                </div>
+
+                                With Best Regards,
                                 <br/>
-                                On the other hand, I'm sure <b>My Coin Trading Project</b> site will help traders of  Cryptocurrency to better navigate the dynamics of market changes. <br/> <br/>
-                                I will accept with gratitude all your remarks both in terms of  functional purpose of site and the software. Please write :) Welcome ! <br/>  <br/>
-                                With Best Regards <br/>
                                 Inna Tarasyan <br/>
-                                My Web Site is <i>
-                                                  <a href="http://www.innatarasyan.online"> www.innatarasyan.online </a>
-                                               </i>
                             </div>
                         </div>
                         <!--end::Section-->
