@@ -604,6 +604,20 @@
                 font-size: 1em;
             }
         }
+        /* Highlight search results (CoinMarketCal style) */
+        .dataTables_wrapper .highlight {
+            background: #fffbe7 !important;
+            color: #ff512f !important;
+            font-weight: bold;
+            border-radius: 4px;
+            padding: 2px 2px;
+            box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+            transition: background 0.2s, color 0.2s;
+        }
+        body.dark-mode .dataTables_wrapper .highlight {
+            background: #333 !important;
+            color: #ffd200 !important;
+        }
     </style>
 @endsection
 @section('content')
