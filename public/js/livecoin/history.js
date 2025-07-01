@@ -6,6 +6,18 @@ function LiveCoin(){
     this.totalGroups = Math.ceil((this.totalColumns - 1) / this.columnsPerGroup); // -1 because code column is always visible
 }
 
+// Helper to format big numbers with abbreviations (K, M, B) and thousands separators
+function formatBigNumber(num) {
+    if (num === null || num === undefined || num === "") return '';
+    let n = Number(num);
+    if (isNaN(n)) return num;
+    if (Math.abs(n) >= 1e12) return (n / 1e12).toFixed(2) + 'T';
+    if (Math.abs(n) >= 1e9) return (n / 1e9).toFixed(2) + 'B';
+    if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+    if (Math.abs(n) >= 1e3) return n.toLocaleString();
+    return n.toString();
+}
+
 LiveCoin.prototype.init = function () {
     var self = this;
     var oTable = $('#livecoin_history').DataTable({
@@ -15,17 +27,17 @@ LiveCoin.prototype.init = function () {
         "columns": [
             {data: 'code', name: 'code'},
             {data: 'png64', name: 'png64'},
-            {data: 'rate', name: 'rate'},
+            {data: 'rate', name: 'rate', render: function(data){ return formatBigNumber(data); }},
             {data: 'age', name: 'age'},
-            {data: 'pairs', name: 'pairs'},
-            {data: 'volume', name: 'volume'},
-            {data: 'cap', name: 'cap'},
-            {data: 'rank', name: 'rank'},
-            {data: 'markets', name: 'markets'},
-            {data: 'totalSupply', name: 'totalSupply'},
-            {data: 'maxSupply', name: 'maxSupply'},
-            {data: 'circulatingSupply', name: 'circulatingSupply'},
-            {data: 'allTimeHighUSD', name: 'allTimeHighUSD'},
+            {data: 'pairs', name: 'pairs', render: function(data){ return formatBigNumber(data); }},
+            {data: 'volume', name: 'volume', render: function(data){ return formatBigNumber(data); }},
+            {data: 'cap', name: 'cap', render: function(data){ return formatBigNumber(data); }},
+            {data: 'rank', name: 'rank', render: function(data){ return formatBigNumber(data); }},
+            {data: 'markets', name: 'markets', render: function(data){ return formatBigNumber(data); }},
+            {data: 'totalSupply', name: 'totalSupply', render: function(data){ return formatBigNumber(data); }},
+            {data: 'maxSupply', name: 'maxSupply', render: function(data){ return formatBigNumber(data); }},
+            {data: 'circulatingSupply', name: 'circulatingSupply', render: function(data){ return formatBigNumber(data); }},
+            {data: 'allTimeHighUSD', name: 'allTimeHighUSD', render: function(data){ return formatBigNumber(data); }},
             {data: 'categories', name: 'categories'},
         ],
         "iDisplayLength": 20,
