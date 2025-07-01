@@ -116,10 +116,10 @@
                         </svg>
                     </span>
                     <span id="fullscreenText" class="fullscreen-switch-label">Fullscreen</span>
-                </button>
+                    </button>
+                </div>
             </div>
-        </div>
-
+            
         {{-- ======================== DataTable Section ======================== --}}
         <div class="m-portlet">
             <div class="m-portlet__body mt-5">
@@ -289,6 +289,117 @@
             </div>
         </div>
         {{-- ======================== End DataTable Section ======================== --}}
+
+        {{-- ======================== Live Coin Watch Info Section ======================== --}}
+        <style>
+        .lcw-info-card {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 2.5em 2em;
+            background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+            border-radius: 2em;
+            box-shadow: 0 6px 32px rgba(67, 206, 162, 0.13), 0 1.5px 6px rgba(67, 206, 162, 0.08);
+            color: #222;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2em;
+            transition: box-shadow 0.2s, transform 0.2s;
+            margin: 2em 0;
+        }
+        .lcw-info-card:hover {
+            box-shadow: 0 12px 48px rgba(67, 206, 162, 0.18), 0 3px 12px rgba(67, 206, 162, 0.12);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .lcw-info-card .lcw-icon {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.18);
+            border-radius: 50%;
+            padding: 1em;
+            box-shadow: 0 2px 8px rgba(67, 206, 162, 0.10);
+        }
+        .lcw-info-card .lcw-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2em;
+        }
+        .lcw-info-card h2 {
+            margin: 0;
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #222;
+        }
+        .lcw-info-card p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin: 0;
+            max-width: 900px;
+            color: #222;
+        }
+        .lcw-info-card a {
+            display: inline-block !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            align-self: flex-start;
+            background: #222;
+            color: #ffd200;
+            padding: 0.85em 1.2em;
+            border-radius: 2em;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(34,34,34,0.08);
+            transition: background 0.2s, color 0.2s;
+            box-sizing: border-box;
+        }
+        .lcw-info-card a:hover {
+            background: #ffd200;
+            color: #222;
+        }
+        @media (max-width: 900px) {
+            .lcw-info-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2em 1em;
+                gap: 1.2em;
+            }
+            .lcw-info-card .lcw-icon {
+                margin-bottom: 0.5em;
+            }
+        }
+        </style>
+        <div class="lcw-info-card">
+            <div class="lcw-icon">
+                <svg width="64" height="64" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="16" cy="16" r="16" fill="url(#lcwGradient)"/>
+                    <path d="M16 8v8l6 3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="lcwGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#ffd200"/>
+                            <stop offset="1" stop-color="#43cea2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lcw-content">
+                <h2>About Live Coin Watch</h2>
+                <p>
+                    <strong>Live Coin Watch</strong> is a real-time cryptocurrency market tracking platform, offering a clean and convenient interface for monitoring prices, market capitalizations, trading volumes, and rankings of hundreds of digital assets. Unlike many competitors, Live Coin Watch updates information in real time, making it ideal for users who want to see price changes as they happen.<br><br>
+                    The platform allows users to view prices in various fiat and cryptocurrencies, track the total market capitalization, and explore detailed data for each coin and exchange. Live Coin Watch also offers portfolio tracking features for registered users, all within a modern, easy-to-navigate layout.<br><br>
+                    As a community-driven project, Live Coin Watch operates on donations and aims to provide a transparent, user-friendly alternative to other crypto market aggregators.
+                </p>
+                <p>
+                    <strong>Change History:</strong> The table above provides a comprehensive record of historical changes for various cryptocurrencies as tracked by Live Coin Watch. Each entry reflects updates in price, market capitalization, trading volume, and other key metrics over time. This change history enables users to analyze trends, monitor market movements, and make informed decisions based on past performance and data transparency. The regularly updated datatable ensures that users always have access to the latest and most accurate historical information available.
+                </p>
+                <a href="https://www.livecoinwatch.com" target="_blank" rel="noopener">Visit Live Coin Watch</a>
+            </div>
+        </div>
     </div>
 @endsection
 
