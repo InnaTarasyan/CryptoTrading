@@ -31,6 +31,47 @@ LiveCoin.prototype.init = function () {
         "iDisplayLength": 20,
         pageLength: 10,
         "aaSorting": [[3, "desc"]],
+        responsive: true,
+        dom: "<'datatable-toolbar'B>lfrtip",
+        buttons: [
+            {
+                extend: 'copy',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2" fill="#ffd200"/><rect x="3" y="3" width="10" height="14" rx="2" fill="#43cea2"/></svg></span> <span>Copy</span>'
+            },
+            {
+                extend: 'csv',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#43cea2"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">CSV</text></svg></span> <span>CSV</span>'
+            },
+            {
+                extend: 'excel',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#11998e"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">XLS</text></svg></span> <span>Excel</span>'
+            },
+            {
+                extend: 'pdf',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#ff512f"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">PDF</text></svg></span> <span>PDF</span>'
+            },
+            {
+                extend: 'print',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" fill="#ffd200"/><rect x="7" y="3" width="10" height="4" rx="1" fill="#43cea2"/></svg></span> <span>Print</span>'
+            },
+            {
+                extend: 'colvis',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#6a11cb"/><rect x="7" y="7" width="10" height="2" fill="#fff"/><rect x="7" y="11" width="10" height="2" fill="#fff"/><rect x="7" y="15" width="10" height="2" fill="#fff"/></svg></span> <span>Columns</span>'
+            }
+        ],
+        fixedHeader: true,
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search coins, markets, etc...",
+            lengthMenu: "Show _MENU_ entries",
+            info: "Showing _START_ to _END_ of _TOTAL_ entries"
+        },
         "createdRow": function(row, data, dataIndex) {
             var labels = [
                 'Code', 'Image', 'Rate', 'Age', 'Pairs', 'Volume', 'Cap', 'Rank',
@@ -56,6 +97,12 @@ LiveCoin.prototype.init = function () {
             
             highlightSearchResults();
             self.updateColumnVisibility();
+            // Add row highlight on hover
+            $('#livecoin_history tbody tr').on('mouseenter', function () {
+                $(this).addClass('table-row-hover');
+            }).on('mouseleave', function () {
+                $(this).removeClass('table-row-hover');
+            });
         },
         "fnInitComplete": function() {
             self.updateColumnVisibility();
@@ -94,6 +141,11 @@ LiveCoin.prototype.init = function () {
     // Remove searching class when search is complete
     this.table.on('search.dt', function() {
         $('.dataTables_filter').removeClass('searching');
+    });
+
+    // Loading spinner logic
+    $('#livecoin_history').on('processing.dt', function (e, settings, processing) {
+        $('#datatableLoading').css('display', processing ? 'block' : 'none');
     });
 };
 
