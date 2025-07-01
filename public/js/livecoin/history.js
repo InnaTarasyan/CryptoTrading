@@ -244,6 +244,13 @@ $(document).ready(function() {
             'transform': 'scale(0.98)'
         });
     });
+
+    // Add refresh button handler
+    $('#refreshTable').on('click', function() {
+        if (coins.table) {
+            coins.table.ajax.reload(null, false); // false = keep current page
+        }
+    });
 });
 function highlightSearchResults() {
     var table = $('#livecoin_history').DataTable();

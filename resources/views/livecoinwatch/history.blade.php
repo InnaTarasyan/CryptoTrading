@@ -868,7 +868,18 @@
         </div>
 
         <!-- Fullscreen Button -->
-        <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem; gap: 0.5rem;">
+            <button id="refreshTable" class="modern-tab fullscreen-switch" title="Refresh Table" aria-label="Refresh Table" style="min-width: 120px;">
+                <span class="fullscreen-switch-icon">
+                    <!-- Refresh SVG (modern circular arrow) -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="#43cea2" stroke-width="2" fill="none"/>
+                        <path d="M16.24 7.76A6 6 0 1 0 18 12" stroke="#ff512f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18 8v4h-4" stroke="#ffd200" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span>Refresh</span>
+            </button>
             <button id="fullscreenToggle"
                     class="modern-tab fullscreen-switch"
                     style="margin-left: auto;"
