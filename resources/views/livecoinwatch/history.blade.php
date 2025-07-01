@@ -618,6 +618,100 @@
             background: #333 !important;
             color: #ffd200 !important;
         }
+        /* --- Beautiful Tabs Redesign --- */
+        .beautiful-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: none;
+            background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%);
+            border-radius: 16px;
+            padding: 8px 10px;
+            box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+            justify-content: flex-start;
+        }
+        .beautiful-tab {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 26px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+            background: #fff;
+            border: none;
+            border-radius: 12px 12px 0 0;
+            position: relative;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+            box-shadow: 0 1px 4px rgba(255,215,0,0.04);
+            outline: none;
+        }
+        .beautiful-tab .tab-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #fffbe7;
+            border-radius: 50%;
+            box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+        }
+        .beautiful-tab .tab-label {
+            margin-left: 2px;
+        }
+        .beautiful-tab.active, .beautiful-tab:focus {
+            background: linear-gradient(90deg, #ffd200 0%, #f7971e 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(247,151,30,0.12);
+            z-index: 2;
+            transform: translateY(-2px) scale(1.04);
+        }
+        .beautiful-tab.active .tab-icon, .beautiful-tab:focus .tab-icon {
+            background: #fff;
+        }
+        .beautiful-tab:hover:not(.active) {
+            background: #fffbe7;
+            color: #0d6efd;
+            transform: translateY(-1px) scale(1.02);
+        }
+        @media (max-width: 767px) {
+            .beautiful-tabs {
+                flex-direction: column;
+                gap: 8px;
+                padding: 6px 2px;
+                border-radius: 12px;
+            }
+            .beautiful-tab {
+                width: 100%;
+                border-radius: 10px;
+                justify-content: flex-start;
+                font-size: 1rem;
+                padding: 12px 12px;
+            }
+            .beautiful-tab .tab-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        /* Dark mode for beautiful tabs */
+        body.dark-mode .beautiful-tabs {
+            background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+        }
+        body.dark-mode .beautiful-tab {
+            background: #23272f !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus {
+            background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+            color: #23272f !important;
+        }
+        body.dark-mode .beautiful-tab .tab-icon {
+            background: #23272f !important;
+        }
+        body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:focus .tab-icon {
+            background: #ffd200 !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -647,17 +741,29 @@
             </button>
         </div>
         <div class="modern-tabs-container">
-            <div class="modern-tabs">
-                <a href="/" class="modern-tab {{ request()->is('/') ? 'active' : '' }}">
-                    History
+            <nav class="modern-tabs beautiful-tabs" aria-label="Main navigation">
+                <a href="/" class="modern-tab beautiful-tab {{ request()->is('/') ? 'active' : '' }}" tabindex="0">
+                    <span class="tab-icon">
+                        <!-- History Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 7v5l4 2" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span class="tab-label">History</span>
                 </a>
-                <a href="/livecoinexchangesindex" class="modern-tab {{ request()->is('livecoinexchangesindex') ? 'active' : '' }}">
-                    Exchanges
+                <a href="/livecoinexchangesindex" class="modern-tab beautiful-tab {{ request()->is('livecoinexchangesindex') ? 'active' : '' }}" tabindex="0">
+                    <span class="tab-icon">
+                        <!-- Exchange Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#43cea2"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                    <span class="tab-label">Exchanges</span>
                 </a>
-                <a href="/livecoinfiatsindex" class="modern-tab {{ request()->is('livecoinfiatsindex') ? 'active' : '' }}">
-                    Fiats
+                <a href="/livecoinfiatsindex" class="modern-tab beautiful-tab {{ request()->is('livecoinfiatsindex') ? 'active' : '' }}" tabindex="0">
+                    <span class="tab-icon">
+                        <!-- Fiat Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff512f"/><text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text></svg>
+                    </span>
+                    <span class="tab-label">Fiats</span>
                 </a>
-            </div>
+            </nav>
         </div>
 
         <!-- Fullscreen Button -->
