@@ -59,7 +59,7 @@
                 gap: 0.7rem;
             }
             .m-portlet__head-title.custom-modern {
-                font-size: 1.2rem;
+            font-size: 1.2rem;
                 gap: 0.7rem;
             }
             .modern-title-icon {
@@ -784,6 +784,17 @@
         }
         body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:focus .tab-icon {
             background: #ffd200 !important;
+        }
+        /* Beautiful very light gradient background for m-portlet */
+        .m-portlet {
+            background: linear-gradient(135deg, #fffbe7 0%, #f7faff 100%);
+            /* fallback for old browsers */
+            box-shadow: 0 2px 16px rgba(255,215,0,0.04);
+        }
+        /* Dark mode override for m-portlet gradient */
+        body.dark-mode .m-portlet {
+            background: linear-gradient(135deg, #23272f 0%, #23272f 100%) !important;
+            /* keep it subtle in dark mode */
         }
     </style>
 @endsection
