@@ -3,6 +3,79 @@
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
     <style>
+        /* --- Modern Title Bar Styles --- */
+        .modern-title-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #43cea2 100%);
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+            padding: 1.1rem 2.2rem 1.1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        .m-portlet__head-title.custom-modern {
+            display: flex;
+            align-items: center;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #333;
+            gap: 1.1rem;
+            letter-spacing: 0.5px;
+            font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+        .modern-title-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd200 0%, #43cea2 100%);
+            box-shadow: 0 2px 8px rgba(255,215,0,0.10);
+            margin-right: 0.7em;
+        }
+        .modern-title-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+        .modern-title-text {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+        .modern-title-bar .darkmode-switch {
+            margin-left: auto;
+            min-width: 140px;
+        }
+        @media (max-width: 767px) {
+            .modern-title-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem 0.7rem 1rem 0.7rem;
+                gap: 0.7rem;
+            }
+            .m-portlet__head-title.custom-modern {
+                font-size: 1.2rem;
+                gap: 0.7rem;
+            }
+            .modern-title-icon {
+                width: 36px;
+                height: 36px;
+                margin-right: 0.5em;
+            }
+            .modern-title-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            .modern-title-bar .darkmode-switch {
+                min-width: 100px;
+                align-self: flex-end;
+            }
+        }
         /* Responsive DataTable for mobile */
         @media (max-width: 767px) {
             #livecoin_history thead {
@@ -495,7 +568,7 @@
             transition: opacity 0.3s, transform 0.3s;
             }
         .darkmode-switch .icon-moon {
-                opacity: 1;
+            opacity: 1;
             transform: scale(1);
         }
         .darkmode-switch.active .icon-moon {
@@ -586,7 +659,7 @@
             margin-right: 8px;
             transition: background 0.2s;
             position: relative;
-            overflow: hidden;
+                overflow: hidden;
         }
         .fullscreen-switch-label {
             font-size: 1.1em;
@@ -595,7 +668,7 @@
         }
         @media (max-width: 600px) {
             .fullscreen-switch {
-            width: 100%;
+                width: 100%;
                 justify-content: center;
                 font-size: 0.98rem;
                 padding: 10px 10px;
@@ -650,7 +723,7 @@
         .beautiful-tab .tab-icon {
             display: flex;
             align-items: center;
-            justify-content: center;
+                justify-content: center;
             width: 28px;
             height: 28px;
             background: #fffbe7;
@@ -716,8 +789,25 @@
 @endsection
 @section('content')
     <div class="m-content">
-        <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1rem;">
-            <button id="darkModeToggle" class="modern-tab darkmode-switch" style="margin-left: auto;" title="Toggle dark mode" role="switch" aria-checked="false">
+        <!-- Modern Title Bar with Icon and Dark Mode Button -->
+        <div class="modern-title-bar">
+            <div class="m-portlet__head-title custom-modern">
+                <span class="modern-title-icon">
+                    <!-- History Icon SVG -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="16" fill="url(#historyGradient)"/>
+                        <path d="M16 8v8l6 3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="historyGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#ffd200"/>
+                                <stop offset="1" stop-color="#43cea2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <span class="modern-title-text">Livecoin History</span>
+            </div>
+            <button id="darkModeToggle" class="modern-tab darkmode-switch" title="Toggle dark mode" role="switch" aria-checked="false">
                 <span class="darkmode-switch-icon" id="darkModeIcon">
                     <!-- Sun & Moon SVG for animation -->
                     <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
