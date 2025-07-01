@@ -595,7 +595,7 @@
         }
         @media (max-width: 600px) {
             .fullscreen-switch {
-                width: 100%;
+            width: 100%;
                 justify-content: center;
                 font-size: 0.98rem;
                 padding: 10px 10px;
@@ -688,8 +688,8 @@
                     </svg>
                 </span>
                 <span id="fullscreenText" class="fullscreen-switch-label">Fullscreen</span>
-            </button>
-        </div>
+                    </button>
+                </div>
         <!--Begin::Section-->
         <div class="m-portlet" >
             <div class="m-portlet__body mt-5">
@@ -831,7 +831,7 @@
                     fsText.textContent = 'Exit Fullscreen';
                     fsIconEnter.style.display = 'none';
                     fsIconExit.style.display = '';
-                } else {
+                        } else {
                     fsBtn.classList.remove('active');
                     fsBtn.setAttribute('aria-pressed', 'false');
                     fsText.textContent = 'Fullscreen';
