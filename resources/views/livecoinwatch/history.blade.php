@@ -401,6 +401,249 @@
             </div>
         </div>
     </div>
+    {{-- ======================== Reviews Section ======================== --}}
+    <style>
+    .modern-reviews-section {
+        margin-top: 3em;
+        margin-bottom: 3em;
+        background: linear-gradient(120deg, #ffd200 0%, #43cea2 100%);
+        border-radius: 2em;
+        box-shadow: 0 4px 32px rgba(67, 206, 162, 0.10), 0 1.5px 6px rgba(67, 206, 162, 0.08);
+        padding: 2.5em 1.5em;
+        max-width: 100%;
+    }
+    .modern-reviews-title {
+        font-weight: 800;
+        font-size: 2.2rem;
+        margin-bottom: 1.5em;
+        color: #222;
+            display: flex;
+            align-items: center;
+        gap: 0.7em;
+    }
+    .modern-reviews-title svg {
+        width: 2.2em;
+        height: 2.2em;
+        flex-shrink: 0;
+    }
+    .modern-review-card {
+        background: linear-gradient(100deg, #fffbe6 0%, #eafff7 100%);
+        border-radius: 1.2em;
+        margin-bottom: 1.5em;
+        padding: 1.5em 1.7em;
+        box-shadow: 0 2px 12px rgba(67,206,162,0.08);
+        display: flex;
+        gap: 1.2em;
+        align-items: flex-start;
+        transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .modern-review-card:hover {
+        box-shadow: 0 6px 24px rgba(67,206,162,0.13);
+        transform: translateY(-2px) scale(1.01);
+    }
+    .modern-review-avatar {
+        width: 3.2em;
+        height: 3.2em;
+            border-radius: 50%;
+        background: linear-gradient(135deg, #ffd200 0%, #43cea2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.5em;
+            font-weight: 700;
+        box-shadow: 0 2px 8px rgba(67,206,162,0.10);
+        flex-shrink: 0;
+    }
+    .modern-review-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3em;
+    }
+    .modern-review-header {
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+        margin-bottom: 0.2em;
+    }
+    .modern-review-name {
+            font-weight: 700;
+        color: #43cea2;
+        font-size: 1.1em;
+    }
+    .modern-review-date {
+        color: #888;
+        font-size: 0.98em;
+    }
+    .modern-review-rating {
+        margin-left: auto;
+        color: #ffd200;
+        font-size: 1.2em;
+        display: flex;
+        align-items: center;
+        gap: 0.1em;
+    }
+    .modern-review-title {
+            font-weight: 600;
+        font-size: 1.15em;
+        margin-bottom: 0.2em;
+        color: #222;
+    }
+    .modern-review-comment {
+        color: #222;
+        font-size: 1.05em;
+        line-height: 1.6;
+    }
+    .modern-review-form-container {
+        max-width: 600px;
+        margin: 2.5em auto 0 auto;
+        background: linear-gradient(100deg, #fffbe6 0%, #eafff7 100%);
+        border-radius: 1.2em;
+        box-shadow: 0 2px 12px rgba(67,206,162,0.08);
+        padding: 2em 2em 1.5em 2em;
+    }
+    .modern-review-form-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 1.2em;
+        color: #222;
+            display: flex;
+            align-items: center;
+        gap: 0.5em;
+    }
+    .modern-form-group {
+        margin-bottom: 1.1em;
+        position: relative;
+    }
+    .modern-form-group label {
+            font-weight: 600;
+        color: #185a9d;
+        margin-bottom: 0.3em;
+            display: flex;
+            align-items: center;
+        gap: 0.4em;
+    }
+    .modern-form-group svg {
+        width: 1.1em;
+        height: 1.1em;
+        vertical-align: middle;
+    }
+    .modern-form-group input,
+    .modern-form-group select,
+    .modern-form-group textarea {
+        width: 100%;
+        border-radius: 1.2em;
+        border: 1.5px solid #43cea2;
+        padding: 0.7em 1.1em;
+        font-size: 1.05em;
+        background: #fff;
+        color: #222;
+        transition: border 0.2s;
+        box-shadow: 0 1px 4px rgba(67,206,162,0.04);
+    }
+    .modern-form-group input:focus,
+    .modern-form-group select:focus,
+    .modern-form-group textarea:focus {
+        border: 1.5px solid #ffd200;
+        outline: none;
+    }
+    .modern-review-form-btn {
+        background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+        color: #222;
+            font-weight: 700;
+        border: none;
+        border-radius: 2em;
+        padding: 0.7em 2em;
+        font-size: 1.1em;
+        box-shadow: 0 2px 8px rgba(34,34,34,0.08);
+        transition: background 0.2s, color 0.2s;
+    }
+    .modern-review-form-btn:hover {
+        background: #222;
+        color: #ffd200;
+    }
+    @media (max-width: 700px) {
+        .modern-reviews-section {
+            padding: 1.2em 0.3em;
+            border-radius: 1em;
+        }
+        .modern-review-card {
+                flex-direction: column;
+                align-items: flex-start;
+            padding: 1.1em 1em;
+            gap: 0.7em;
+        }
+        .modern-review-avatar {
+            width: 2.2em;
+            height: 2.2em;
+            font-size: 1.1em;
+        }
+        .modern-review-form-container {
+            padding: 1.2em 0.7em 1em 0.7em;
+            border-radius: 1em;
+            }
+        }
+    </style>
+    <div class="modern-reviews-section">
+        <h2 class="modern-reviews-title">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16" fill="url(#reviewGradient)"/><path d="M10 22l2-2 4 4 8-8-2-2-6 6-2-2-2 2z" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="reviewGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd200"/><stop offset="1" stop-color="#43cea2"/></linearGradient></defs></svg>
+            User Reviews
+        </h2>
+        <div id="reviews-list" class="reviews-list"></div>
+        <div class="modern-review-form-container">
+            <h3 class="modern-review-form-title">
+                Leave a Review
+            </h3>
+            <form id="reviewForm" method="POST" action="{{ url('/livecoinwatch/history/reviews') }}">
+                @csrf
+                <div class="modern-form-group">
+                    <label for="name">
+                        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ffd200"/><path d="M4 20c0-4 8-4 8-4s8 0 8 4" stroke="#43cea2" stroke-width="2"/></svg>
+                        Name
+                    </label>
+                    <input type="text" class="form-control" id="name" name="name" required maxlength="255">
+            </div>
+                <div class="modern-form-group">
+                    <label for="email">
+                        <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="4" fill="#43cea2"/><path d="M2 6l10 7 10-7" stroke="#ffd200" stroke-width="2"/></svg>
+                        Email
+                    </label>
+                    <input type="email" class="form-control" id="email" name="email" required maxlength="255">
+        </div>
+                <div class="modern-form-group">
+                    <label for="rating">
+                        <svg viewBox="0 0 24 24" fill="none"><polygon points="12,2 15,9 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,9" fill="#ffd200"/></svg>
+                        Rating
+                    </label>
+                    <select class="form-control" id="rating" name="rating" required>
+                        <option value="">Select</option>
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+            </div>
+                <div class="modern-form-group">
+                    <label for="title">
+                        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" fill="#ffd200"/><path d="M8 12h8M8 16h4" stroke="#43cea2" stroke-width="2"/></svg>
+                        Title
+                    </label>
+                    <input type="text" class="form-control" id="title" name="title" required maxlength="255">
+                </div>
+                <div class="modern-form-group">
+                    <label for="comment">
+                        <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="4" fill="#43cea2"/><path d="M6 8h12M6 12h8" stroke="#ffd200" stroke-width="2"/></svg>
+                        Comment
+                    </label>
+                    <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn modern-review-form-btn">Submit Review</button>
+                <div id="reviewFormMsg" style="margin-top: 1em;"></div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 {{-- ======================== Scripts Section ======================== --}}
@@ -415,4 +658,70 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="{{ url('js/livecoin/history.js') }}"></script>
+    <script>
+        function getInitials(name) {
+            if (!name) return '';
+            const parts = name.trim().split(' ');
+            if (parts.length === 1) return parts[0][0].toUpperCase();
+            return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+        }
+        function renderReviews(reviews) {
+            let html = '';
+            if (reviews.length === 0) {
+                html = '<div class="alert alert-info">No reviews yet. Be the first to review!</div>';
+                } else {
+                html = reviews.map(r => `
+                    <div class="modern-review-card">
+                        <div class="modern-review-avatar">${getInitials(r.name)}</div>
+                        <div class="modern-review-content">
+                            <div class="modern-review-header">
+                                <span class="modern-review-name">${r.name}</span>
+                                <span class="modern-review-date"><svg style="width:1em;height:1em;vertical-align:middle;margin-right:0.2em;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 6v6l4 2" stroke="#43cea2" stroke-width="2" stroke-linecap="round"/></svg> ${new Date(r.created_at).toLocaleString()}</span>
+                                <span class="modern-review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                            </div>
+                            <div class="modern-review-title">${r.title}</div>
+                            <div class="modern-review-comment">${r.comment.replace(/\n/g, '<br>')}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('reviews-list').innerHTML = html;
+        }
+
+        function fetchReviews() {
+            fetch('/livecoinwatch/history/reviews')
+                .then(res => res.json())
+                .then(data => renderReviews(data));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchReviews();
+            document.getElementById('reviewForm').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                const form = e.target;
+                const formData = new FormData(form);
+                const csrfToken = document.querySelector('input[name="_token"]').value;
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        form.reset();
+                        document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-success">Thank you for your review!</div>';
+                        fetchReviews();
+                } else {
+                        document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
+                });
+            });
+        });
+    </script>
 @endsection

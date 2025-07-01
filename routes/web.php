@@ -31,8 +31,9 @@ Route::get('/getlivecoinfiats',
     ['as' => 'datatable.livecoin.fiats',
         'uses' => 'LiveCoinWatch\FiatsController@getData']);
 
-
-
+// Live Coin Watch History Reviews
+Route::get('/livecoinwatch/history/reviews', [App\Http\Controllers\LiveCoinWatchHistoryReviewController::class, 'index']);
+Route::post('/livecoinwatch/history/reviews', [App\Http\Controllers\LiveCoinWatchHistoryReviewController::class, 'store']);
 
 /** ===== Coin Gecko ====== */
 
