@@ -599,19 +599,44 @@ body.dark-mode, .dark-mode .m-content {
 #datatableFullscreenContainer:fullscreen {
     background: #fff;
     z-index: 9999;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    padding: 2vw;
-    overflow: auto;
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.15);
+    padding: 2vw 2vw 2vw 2vw;
+    border-radius: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 body.dark-mode #datatableFullscreenContainer:fullscreen {
-    background: #181a20;
+    background: #181c1f;
 }
 #datatableFullscreenContainer:fullscreen table {
-    width: 100% !important;
-    font-size: 1.1em;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Custom class for JS fullscreen fallback or extra styling */
+.datatable-fullscreen {
+    background: #fff !important;
+    z-index: 9999 !important;
+    position: fixed !important;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.15);
+    padding: 2vw 2vw 2vw 2vw !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    overflow: auto !important;
+}
+body.dark-mode .datatable-fullscreen {
+    background: #181c1f !important;
 }
 .fullscreen-switch {
     background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);

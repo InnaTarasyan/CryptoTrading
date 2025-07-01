@@ -315,6 +315,90 @@ $(document).ready(function() {
             coins.table.ajax.reload(null, false); // false = keep current page
         }
     });
+
+    // ======================== Fullscreen Button Logic ========================
+    const fullscreenBtn = $('#fullscreenToggle');
+    const fullscreenIcon = fullscreenBtn.find('.icon-fullscreen');
+    const exitFullscreenIcon = fullscreenBtn.find('.icon-exit-fullscreen');
+    const fullscreenText = $('#fullscreenText');
+    const fullscreenContainer = document.getElementById('datatableFullscreenContainer');
+
+    function isFullscreen() {
+        return document.fullscreenElement === fullscreenContainer;
+    }
+
+    function enterFullscreen() {
+        if (fullscreenContainer.requestFullscreen) {
+            fullscreenContainer.requestFullscreen();
+            fullscreenContainer.classList.add('datatable-fullscreen');
+        }
+    }
+
+    function exitFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+            fullscreenContainer.classList.remove('datatable-fullscreen');
+        }
+    }
+
+    fullscreenBtn.on('click', function() {
+        if (!isFullscreen()) {
+            enterFullscreen();
+        } else {
+            exitFullscreen();
+        }
+    });
+
+    document.addEventListener('fullscreenchange', function() {
+        if (isFullscreen()) {
+            fullscreenIcon.hide();
+            exitFullscreenIcon.show();
+            fullscreenText.text('Exit Fullscreen');
+            fullscreenBtn.attr('aria-pressed', 'true');
+            fullscreenContainer.classList.add('datatable-fullscreen');
+        } else {
+            fullscreenIcon.show();
+            exitFullscreenIcon.hide();
+            fullscreenText.text('Fullscreen');
+            fullscreenBtn.attr('aria-pressed', 'false');
+            fullscreenContainer.classList.remove('datatable-fullscreen');
+        }
+        if (window.coins && window.coins.table) {
+            setTimeout(function() {
+                window.coins.table.columns.adjust().draw(false);
+            }, 200);
+        }
+    });
+    // Initialize icon state
+    exitFullscreenIcon.hide();
+
+    // ======================== Dark Mode Button Logic ========================
+    const darkModeBtn = $('#darkModeToggle');
+    const darkModeIcon = $('#darkModeIcon');
+    const darkModeText = $('#darkModeText');
+    const body = $('body');
+
+    function setDarkMode(enabled) {
+        if (enabled) {
+            body.addClass('dark-mode');
+            darkModeBtn.attr('aria-checked', 'true');
+            darkModeText.text('Light Mode');
+        } else {
+            body.removeClass('dark-mode');
+            darkModeBtn.attr('aria-checked', 'false');
+            darkModeText.text('Dark Mode');
+        }
+    }
+
+    // Optionally, persist dark mode in localStorage
+    const darkModePref = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(darkModePref);
+
+    darkModeBtn.on('click', function() {
+        const enabled = !body.hasClass('dark-mode');
+        setDarkMode(enabled);
+        localStorage.setItem('darkMode', enabled);
+    });
 });
 function highlightSearchResults() {
     var table = $('#livecoin_history').DataTable();
