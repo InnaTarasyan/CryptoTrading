@@ -29,9 +29,9 @@ class ExchangesController extends Controller
                         </span>";
 
             })
-            ->editColumn('png128', function ($image) {
-                return '<img src="'.$image->png128.'" height=50 width=50>';
-            })
+//            ->editColumn('png128', function ($image) {
+//                return '<img src="'.$image->png128.'" height=50 width=50>';
+//            })
             ->editColumn('bidTotal', function ($item) {
                 return "<p class='success'>".number_format((float)$item->bidTotal, 2, ',', ' ')."</p>";
             })
@@ -50,7 +50,7 @@ class ExchangesController extends Controller
             ->editColumn('volume', function ($item) {
                 return number_format((float)$item->volume, 2, ',', ' ');
             })
-            ->rawColumns(['name', 'png128', 'bidTotal', 'askTotal', 'depth'])
+            ->rawColumns(['name',  'bidTotal', 'askTotal', 'depth'])
             ->make(true);
     }
 

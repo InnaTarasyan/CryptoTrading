@@ -10,7 +10,10 @@ Exchanges.prototype.init = function () {
         "ajax": $('#livecoin_exchanges_route').val(),
         "columns": [
             {data: 'name', name: 'name'},
-            {data: 'png128', name: 'png128'},
+            {data: 'png128', name: 'png128', render: function(data, type, row) {
+                if (!data) return '<div style="width:32px;height:32px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:16px;color:#64748b;margin:0 auto;">🪙</div>';
+                return '<img src="'+data+'" alt="Exchange Logo" class="previewable-img" style="width:32px;height:32px;object-fit:contain;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.07);margin:0 auto;display:block;" onerror="this.style.display=\'none\';this.parentNode.innerHTML=\'<div style=\\\'width:32px;height:32px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:16px;color:#64748b;margin:0 auto;\\\'>🪙</div>\';">';
+            }},
             {data: 'markets', name: 'markets'},
             {data: 'volume', name: 'volume'},
             {data: 'bidTotal', name: 'bidTotal'},
@@ -50,6 +53,9 @@ Exchanges.prototype.init = function () {
     // Remove searching class when search is complete
     this.table.on('search.dt', function() {
         $('.dataTables_filter').removeClass('searching');
+    });
+    // Always highlight after draw (pagination, search, etc)
+    this.table.on('draw.dt', function() {
         highlightSearchResults();
     });
     // Initial highlight
@@ -66,8 +72,12 @@ function highlightSearchResults() {
     var searchTerm = table.search();
     if (!searchTerm) {
         $('#livecoin_exchanges tbody td').each(function() {
-            $(this).html($(this).text());
+            // Only reset text for non-image columns
+            if ($(this).index() !== 1) {
+                $(this).html($(this).text());
+            }
         });
+        $('#livecoin_exchanges tbody tr').removeClass('highlight-row');
         return;
     }
     var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\\]\]/g, '\\$&')+')', 'gi');
@@ -79,7 +89,7 @@ function highlightSearchResults() {
             var original = cell.text();
             // Skip highlighting for logo column (index 1)
             if (idx === 1) {
-                cell.html(original);
+                // If cell contains an image, leave as is
                 return;
             }
             if (searchTerm && original.match(regex)) {
@@ -202,4 +212,51 @@ $(document).ready(function() {
     var coins = new Exchanges();
     coins.init();
     coins.bindEvents();
+
+    // Image preview logic (copied from history.js for consistency)
+    var $imgPreview = $('<div id="img-hover-preview"></div>').css({
+        'position': 'fixed',
+        'z-index': 9999,
+        'display': 'none',
+        'pointer-events': 'none',
+        'box-shadow': '0 8px 32px rgba(0,0,0,0.18)',
+        'border-radius': '16px',
+        'background': '#fff',
+        'padding': '12px',
+        'border': '2px solid #e2e8f0',
+        'transition': 'transform 0.15s cubic-bezier(.4,2,.6,1), opacity 0.15s',
+        'opacity': 0
+    });
+    $('body').append($imgPreview);
+
+    $(document).on('mouseenter', '.previewable-img', function(e) {
+        var src = $(this).attr('src');
+        var alt = $(this).attr('alt') || '';
+        $imgPreview.html('<img src="'+src+'" alt="'+alt+'" style="width:96px;height:96px;object-fit:contain;display:block;margin:auto;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.10);">');
+        $imgPreview.css({
+            'display': 'block',
+            'opacity': 1,
+            'transform': 'scale(1.08)'
+        });
+    });
+    $(document).on('mousemove', '.previewable-img', function(e) {
+        var previewWidth = $imgPreview.outerWidth();
+        var previewHeight = $imgPreview.outerHeight();
+        var left = e.clientX + 24;
+        var top = e.clientY - previewHeight/2;
+        // Prevent overflow
+        var maxLeft = $(window).width() - previewWidth - 16;
+        var maxTop = $(window).height() - previewHeight - 16;
+        if(left > maxLeft) left = maxLeft;
+        if(top < 8) top = 8;
+        if(top > maxTop) top = maxTop;
+        $imgPreview.css({ left: left, top: top });
+    });
+    $(document).on('mouseleave', '.previewable-img', function() {
+        $imgPreview.css({
+            'display': 'none',
+            'opacity': 0,
+            'transform': 'scale(0.98)'
+        });
+    });
 });
