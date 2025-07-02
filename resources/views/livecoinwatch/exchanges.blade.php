@@ -50,21 +50,21 @@
                     <span class="tab-icon">
                         <!-- History Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 7v5l4 2" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">History</span>
                 </a>
                 <a href="/livecoinexchangesindex" class="modern-tab beautiful-tab {{ request()->is('livecoinexchangesindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- Exchange Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#43cea2"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Exchanges</span>
                 </a>
                 <a href="/livecoinfiatsindex" class="modern-tab beautiful-tab {{ request()->is('livecoinfiatsindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- Fiat Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff512f"/><text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Fiats</span>
                 </a>
             </nav>

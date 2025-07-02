@@ -4,6 +4,9 @@ function Exchanges(){
 }
 
 Exchanges.prototype.init = function () {
+    var columnLabels = [
+        'Name', 'Image', 'Markets', 'Volume', 'BidTotal', 'AskTotal', 'Depth', 'Centralized', 'UsCompliant', 'Visitors', 'Volume Per Visitor'
+    ];
     var oTable = $('#livecoin_exchanges').DataTable({
         "processing": true,
         "serverSide": true,
@@ -27,6 +30,13 @@ Exchanges.prototype.init = function () {
         "iDisplayLength": 20,
         pageLength: 10,
         "aaSorting": [[5, "desc"], [6, "desc"], [7, "desc"], [8, "desc"]],
+        responsive: false,
+        "createdRow": function(row, data, dataIndex) {
+            // Add data-label attributes for mobile view
+            $('td', row).each(function(index) {
+                $(this).attr('data-label', columnLabels[index]);
+            });
+        },
         "fnDrawCallback": function() {
             $('#livecoin_exchanges tbody tr').click(function () {
                 var coin = $(this).find('.id').val();

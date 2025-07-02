@@ -111,6 +111,32 @@
         font-weight: bold;
         color: #333;
         font-size: 0.95em;
+        display: block;
+    }
+    /* Remove left padding and align image left for the image column in mobile view */
+    #livecoin_exchanges td:nth-child(2) {
+        padding-left: 50% !important;
+        text-align: left !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 40px;
+    }
+    #livecoin_exchanges td:nth-child(2) img,
+    #livecoin_exchanges td:nth-child(2) .previewable-img {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: block;
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    /* Remove data-label for image column (optional, if you want no label for image) */
+    #livecoin_exchanges td:nth-child(2):before {
+        content: '' !important;
+        display: none !important;
     }
 }
 
@@ -380,8 +406,9 @@
 /* m-portlet overrides for modern look */
 .m-portlet {
     background: linear-gradient(135deg, #fffbe7 0%, #f7faff 100%);
+    /* fallback for old browsers */
+    box-shadow: 0 2px 16px rgba(255,215,0,0.04);
     border-radius: 18px;
-    box-shadow: 0 2px 12px rgba(67,206,162,0.08);
     padding: 1.5rem 1.2rem;
     margin-bottom: 2rem;
 }
@@ -457,6 +484,7 @@
 }
 .dark-mode .m-portlet {
     background: linear-gradient(135deg, #23272f 0%, #23272f 100%) !important;
+    /* keep it subtle in dark mode */
 }
 
 /* --- Fullscreen Styles --- */
@@ -593,7 +621,7 @@
 #livecoin_exchanges th:first-child,
 #livecoin_exchanges td:first-child,
 #livecoin_exchanges .datatable-highlight-first {
-    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%);
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%) !important;
     color: #333;
     font-weight: bold;
     border-right: 2px solid #ffd200;
@@ -608,10 +636,9 @@
 /* Gradient background for modern-tabs-container */
 .modern-tabs-container,
 .gradient-tabs-bg {
-    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%) !important;
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #43cea2 100%) !important;
     border-radius: 18px;
     box-shadow: 0 2px 12px rgba(255,215,0,0.08);
-    margin-bottom: 1.5rem;
 }
 .dark-mode .modern-tabs-container,
 .dark-mode .gradient-tabs-bg {
@@ -679,7 +706,7 @@
 /* --- Modern Tabs Container Gradient (matching history.css) --- */
 .modern-tabs-container,
 .gradient-tabs-bg {
-    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%) !important;
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #43cea2 100%) !important;
     border-radius: 18px;
     box-shadow: 0 2px 12px rgba(255,215,0,0.08);
     margin-bottom: 1.5rem;
