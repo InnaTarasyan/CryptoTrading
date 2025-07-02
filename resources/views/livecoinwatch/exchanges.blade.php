@@ -7,7 +7,7 @@
     <link href="{{ asset('css/exchanges.css') }}" rel="stylesheet">
     <style>
         .modern-refresh-btn-upgraded {
-            padding: 0.5em 1.2em 0.5em 0.8em;
+            padding: 0.9em 2.6em 0.9em 1.5em;
             border: none;
             border-radius: 2.2em;
             background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
@@ -73,7 +73,7 @@
         }
         /* Modern Fullscreen Button Styles */
         .modern-fullscreen-btn {
-            padding: 0.5em 1.1em 0.5em 0.7em;
+            padding: 0.9em 2.2em 0.9em 1.2em;
             border: none;
             border-radius: 2.2em;
             background: linear-gradient(90deg, #0d6efd 0%, #43cea2 100%);
@@ -147,7 +147,7 @@
         @media (max-width: 600px) {
             .modern-fullscreen-btn {
                 font-size: 0.98em;
-                padding: 0.4em 0.7em 0.4em 0.5em;
+                padding: 0.7em 1.2em 0.7em 0.8em;
             }
             .fullscreen-btn-label {
                 display: none;
@@ -408,6 +408,84 @@
                 </div>
             </div>
         </div>
+        <!-- Responsive Info Block: Live Coin Watch Exchanges -->
+        <div class="modern-info-block-upgraded upgraded-gradient-bg" style="border-radius: 1.5em; box-shadow: 0 8px 32px 0 rgba(67, 206, 162, 0.18), 0 3px 12px 0 rgba(24, 90, 157, 0.13); padding: 2.2em 2em 2.2em 2em; margin-top: 2.5em; margin-bottom: 2.5em; color: #fff;">
+            <!-- Paragraph 1: About Live Coin Watch Exchanges -->
+            <div class="info-paragraph" style="display: flex; align-items: flex-start; gap: 1.5em; margin-bottom: 2.2em; flex-wrap: wrap;">
+                <span style="flex-shrink:0; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.13); border-radius:50%; width:3.5em; height:3.5em; box-shadow:0 2px 8px 0 rgba(24,90,157,0.10);">
+                    <!-- Globe/Exchange Icon -->
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="19" fill="#43cea2" stroke="#ffd200" stroke-width="2"/>
+                        <path d="M12 20h16M20 12v16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <div style="min-width: 220px; flex: 1;">
+                    <p class="info-title" style="margin-bottom:0.5em; font-size:1.25em; font-weight:700; letter-spacing:0.01em;">
+                        <span style="color:#ffd200;">Live Coin Watch Exchanges</span>: Your Real-Time Crypto Exchange Dashboard
+                    </p>
+                    <p class="info-desc" style="margin-bottom:0; font-size:1.08em; line-height:1.7;">
+                        <span style="font-size:1.2em;">🌐</span> <b>Live Coin Watch Exchanges</b> is a powerful, real-time dashboard for comparing and monitoring the world's top cryptocurrency exchanges. Founded in 2013, it offers a user-friendly interface, supports 150+ cryptocurrencies and multiple fiat currencies, and provides up-to-date data on trading volume, liquidity, number of markets, and more.<br><br>
+                        <span style="font-size:1.2em;">🔒</span> <b>Security & Transparency:</b> Robust security, transparent data, and competitive fees.<br>
+                        <span style="font-size:1.2em;">🚀</span> <b>For Everyone:</b> Designed for both beginners and experienced traders to make informed decisions and discover the best platforms for their crypto journey.<br>
+                        <span style="font-size:1.2em;">📊</span> <b>Global Access:</b> Access exchange data from anywhere, anytime, on any device.
+                    </p>
+                </div>
+            </div>
+            <!-- Paragraph 2: Datatable Explanation and Column Details -->
+            <div class="info-paragraph" style="display: flex; align-items: flex-start; gap: 1.5em; flex-wrap: wrap;">
+                <span style="flex-shrink:0; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.13); border-radius:50%; width:3.5em; height:3.5em; box-shadow:0 2px 8px 0 rgba(24,90,157,0.10);">
+                    <!-- Table/Analytics Icon -->
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="7" y="12" width="26" height="16" rx="4" fill="#ffd200" stroke="#fff" stroke-width="2"/>
+                        <rect x="11" y="16" width="6" height="8" rx="2" fill="#fff"/>
+                        <rect x="19" y="16" width="6" height="8" rx="2" fill="#fff"/>
+                        <rect x="27" y="16" width="2" height="8" rx="1" fill="#fff"/>
+                    </svg>
+                </span>
+                <div style="min-width: 220px; flex: 1;">
+                    <p class="info-title" style="margin-bottom:0.5em; font-size:1.18em; font-weight:700; letter-spacing:0.01em;">
+                        <span style="color:#ffd200;">How to Use the Exchange Table</span>
+                    </p>
+                    <p style="font-size:1.08em; line-height:1.7; margin-bottom:1em;">
+                        The table above provides a comprehensive overview of each exchange's key statistics. Use the column explanations below to better understand the data and make smarter trading decisions.
+                    </p>
+                    <ul class="datatable-columns-list" style="margin-bottom:0; font-size:1.08em; line-height:1.7; padding-left:1.2em; list-style:none;">
+                        <li><span style="font-size:1.2em;">🔤</span> <b>Name:</b> The official name of the exchange.</li>
+                        <li><span style="font-size:1.2em;">🖼️</span> <b>Image:</b> The logo or icon representing the exchange.</li>
+                        <li><span style="font-size:1.2em;">📈</span> <b>Markets:</b> The number of active trading pairs or markets available on the exchange.</li>
+                        <li><span style="font-size:1.2em;">💸</span> <b>Volume:</b> The total 24-hour trading volume on the exchange, usually in USD or selected currency.</li>
+                        <li><span style="font-size:1.2em;">🟢</span> <b>BidTotal:</b> The total value of buy orders (bids) within 2% of the mid price in the order book, indicating liquidity on the buy side.</li>
+                        <li><span style="font-size:1.2em;">🔴</span> <b>AskTotal:</b> The total value of sell orders (asks) within 2% of the mid price in the order book, indicating liquidity on the sell side.</li>
+                        <li><span style="font-size:1.2em;">🌊</span> <b>Depth:</b> The combined value of bids and asks within 2% of the mid price, representing the order book depth and overall liquidity.</li>
+                        <li><span style="font-size:1.2em;">🏢</span> <b>Centralized:</b> Indicates whether the exchange is centralized (true) or decentralized (false).</li>
+                        <li><span style="font-size:1.2em;">🇺🇸</span> <b>UsCompliant:</b> Shows if the exchange complies with US regulations and is available to US users.</li>
+                        <li><span style="font-size:1.2em;">👥</span> <b>Visitors:</b> The estimated number of daily visitors to the exchange platform.</li>
+                        <li><span style="font-size:1.2em;">📊</span> <b>Volume Per Visitor:</b> The average trading volume per daily visitor, showing user activity and engagement.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <style>
+        /* Upgraded gradient background and responsive info block */
+        .upgraded-gradient-bg {
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+        }
+        @media (max-width: 700px) {
+            .modern-info-block-upgraded .info-paragraph {
+                flex-direction: column;
+                gap: 1em;
+            }
+            .modern-info-block-upgraded {
+                padding: 1.2em 0.7em 1.2em 0.7em !important;
+            }
+        }
+        .datatable-columns-list li {
+            margin-bottom: 0.5em;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5em;
+        }
+        </style>
     </div>
 @endsection
 @section('scripts')
