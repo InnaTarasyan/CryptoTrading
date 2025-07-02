@@ -30,7 +30,40 @@ Exchanges.prototype.init = function () {
         "iDisplayLength": 20,
         pageLength: 10,
         "aaSorting": [[5, "desc"], [6, "desc"], [7, "desc"], [8, "desc"]],
-        responsive: false,
+        responsive: true,
+        dom: "<'datatable-toolbar'B>lfrtip",
+        buttons: [
+            {
+                extend: 'copy',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2" fill="#ffd200"/><rect x="3" y="3" width="10" height="14" rx="2" fill="#43cea2"/></svg></span> <span>Copy</span>'
+            },
+            {
+                extend: 'csv',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#43cea2"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">CSV</text></svg></span> <span>CSV</span>'
+            },
+            {
+                extend: 'excel',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#11998e"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">XLS</text></svg></span> <span>Excel</span>'
+            },
+            {
+                extend: 'pdf',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#ff512f"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">PDF</text></svg></span> <span>PDF</span>'
+            },
+            {
+                extend: 'print',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" fill="#ffd200"/><rect x="7" y="3" width="10" height="4" rx="1" fill="#43cea2"/></svg></span> <span>Print</span>'
+            },
+            {
+                extend: 'colvis',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#6a11cb"/><rect x="7" y="7" width="10" height="2" fill="#fff"/><rect x="7" y="11" width="10" height="2" fill="#fff"/><rect x="7" y="15" width="10" height="2" fill="#fff"/></svg></span> <span>Columns</span>'
+            }
+        ],
         "createdRow": function(row, data, dataIndex) {
             // Add data-label attributes for mobile view
             $('td', row).each(function(index) {
@@ -209,12 +242,35 @@ Exchanges.prototype.bindEvents = function () {
         setDarkMode(!root.classList.contains('dark-mode'));
     });
 
-    // Refresh functionality
-    const refreshBtn = document.getElementById('refreshTable');
-    refreshBtn.addEventListener('click', function () {
-        if ($.fn.DataTable.isDataTable('#livecoin_exchanges')) {
-            $('#livecoin_exchanges').DataTable().ajax.reload();
+    // Modern Refresh button logic
+    var refreshBtn = $('#refreshTable');
+    var spinner = refreshBtn.find('.refresh-spinner');
+    var label = refreshBtn.find('.refresh-btn-label');
+    var icon = refreshBtn.find('.icon-refresh');
+    var table = $('#livecoin_exchanges').DataTable();
+
+    function setRefreshing(isRefreshing) {
+        if (isRefreshing) {
+            spinner.show();
+            icon.hide();
+            refreshBtn.attr('aria-busy', 'true').attr('aria-disabled', 'true').prop('disabled', true);
+        } else {
+            spinner.hide();
+            icon.show();
+            refreshBtn.attr('aria-busy', 'false').attr('aria-disabled', 'false').prop('disabled', false);
         }
+    }
+
+    refreshBtn.on('click', function() {
+        setRefreshing(true);
+        table.ajax.reload(function() {
+            setRefreshing(false);
+        }, false);
+    });
+
+    // Also listen to DataTable processing event for external reloads
+    table.on('processing.dt', function(e, settings, processing) {
+        setRefreshing(processing);
     });
 };
 

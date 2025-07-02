@@ -731,3 +731,132 @@
     background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
     box-shadow: 0 2px 12px rgba(0,0,0,0.18) !important;
 }
+
+/* DataTable Custom Button Styles (from history.css) */
+.datatable-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+}
+.datatable-btn {
+    background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+    color: #333;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 22px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(255,215,0,0.10);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.datatable-btn:hover, .datatable-btn:focus {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+}
+.datatable-btn-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+}
+@media (max-width: 600px) {
+    .datatable-toolbar {
+        flex-direction: column;
+        gap: 6px;
+    }
+    .datatable-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.98rem;
+        padding: 10px 10px;
+    }
+}
+@media (max-width: 400px) {
+    .datatable-btn span:not(.datatable-btn-icon) {
+        display: none;
+    }
+}
+
+.refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #43cea2 100%);
+    color: #0d6efd;
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(13,110,253,0.08);
+    padding: 0.5em 1.4em;
+    font-size: 1.08em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.2s;
+    position: relative;
+    outline: none;
+}
+.refresh-btn[aria-disabled="true"], .refresh-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.refresh-btn:hover, .refresh-btn:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+    color: #185a9d;
+    box-shadow: 0 4px 16px rgba(13,110,253,0.12);
+}
+.refresh-btn-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.refresh-spinner {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.3em;
+}
+.refresh-spinner svg {
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+.refresh-btn-label {
+    margin-left: 0.2em;
+}
+
+.modern-refresh-btn {
+    padding: 0.7em 2.2em !important;
+    border-radius: 32px !important;
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%) !important;
+    color: #fff !important;
+    font-size: 1.13em !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 18px rgba(67, 206, 162, 0.18), 0 1.5px 6px rgba(24, 90, 157, 0.10);
+    border: none !important;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+}
+.modern-refresh-btn:hover, .modern-refresh-btn:focus {
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%) !important;
+    color: #ffd200 !important;
+    box-shadow: 0 6px 24px rgba(24, 90, 157, 0.18), 0 2px 8px rgba(67, 206, 162, 0.10);
+}
+.modern-refresh-btn .refresh-btn-label {
+    font-size: 1.08em;
+    font-weight: 600;
+    margin-left: 0.3em;
+    letter-spacing: 0.02em;
+}
+.modern-refresh-btn .refresh-btn-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 0.1em;
+}
