@@ -44,7 +44,7 @@
             </button>
         </div>
         <!-- Navigation Tabs -->
-        <div class="modern-tabs-container">
+        <div class="modern-tabs-container gradient-tabs-bg">
             <nav class="modern-tabs beautiful-tabs" aria-label="Main navigation">
                 <a href="/" class="modern-tab beautiful-tab {{ request()->is('/') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
@@ -120,7 +120,7 @@
                     <table id="livecoin_exchanges" class="table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                         <thead>
                         <tr>
-                            <th title="Exchange name">
+                            <th class="datatable-highlight-first">
                                 <span class="datatable-header-icon">
                                     <!-- Exchange SVG -->
                                     <svg viewBox="0 0 32 32" fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">

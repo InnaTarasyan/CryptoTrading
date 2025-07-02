@@ -263,9 +263,9 @@
 /* Modern Tabs */
 .modern-tabs-container {
     margin-bottom: 1.2rem;
-    background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(67,206,162,0.08);
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #43cea2 100%);
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(255,215,0,0.08);
     padding: 0.5rem 0.5rem 0.5rem 1rem;
 }
 .modern-tabs {
@@ -379,7 +379,7 @@
 
 /* m-portlet overrides for modern look */
 .m-portlet {
-    background: #fff;
+    background: linear-gradient(135deg, #fffbe7 0%, #f7faff 100%);
     border-radius: 18px;
     box-shadow: 0 2px 12px rgba(67,206,162,0.08);
     padding: 1.5rem 1.2rem;
@@ -454,6 +454,9 @@
 .dark-mode .dataTables_filter #clear-search:hover {
     background: linear-gradient(90deg, #ffd200 0%, #185a9d 100%) !important;
     color: #23272a !important;
+}
+.dark-mode .m-portlet {
+    background: linear-gradient(135deg, #23272f 0%, #23272f 100%) !important;
 }
 
 /* --- Fullscreen Styles --- */
@@ -583,5 +586,121 @@
 
 .dark-mode .modern-tabs-container {
     background: linear-gradient(90deg, #23272a 0%, #185a9d 100%) !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18) !important;
+}
+
+/* Highlight first column header and cells */
+#livecoin_exchanges th:first-child,
+#livecoin_exchanges td:first-child,
+#livecoin_exchanges .datatable-highlight-first {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%);
+    color: #333;
+    font-weight: bold;
+    border-right: 2px solid #ffd200;
+}
+.dark-mode #livecoin_exchanges th:first-child,
+.dark-mode #livecoin_exchanges td:first-child,
+.dark-mode #livecoin_exchanges .datatable-highlight-first {
+    background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+    color: #ffd200 !important;
+    border-right: 2px solid #ffd200 !important;
+}
+/* Gradient background for modern-tabs-container */
+.modern-tabs-container,
+.gradient-tabs-bg {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%) !important;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+    margin-bottom: 1.5rem;
+}
+.dark-mode .modern-tabs-container,
+.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18) !important;
+}
+
+/* --- DataTable Header Styles (matching history.css) --- */
+#livecoin_exchanges thead th {
+    background-color: #f4f6f9;
+    color: #525f7f;
+    font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
+    border-top: 1px solid #e9ecef;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
+}
+#livecoin_exchanges thead th .datatable-header-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd200 0%, #f7971e 100%);
+    box-shadow: 0 2px 8px rgba(255,215,0,0.10);
+    margin-right: 0.5em;
+    font-size: 1.35em;
+    color: #fff;
+    border: 2px solid #fffbe7;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+#livecoin_exchanges thead th .datatable-header-icon i {
+    color: #fff;
+    font-size: 1.25em;
+}
+#livecoin_exchanges .datatable-header-text {
+    font-size: 1.15em;
+    vertical-align: middle;
+    margin-left: 0.35em;
+}
+#livecoin_exchanges thead th.sorting,
+#livecoin_exchanges thead th.sorting_asc,
+#livecoin_exchanges thead th.sorting_desc {
+    cursor: pointer;
+}
+#livecoin_exchanges thead th.sorting:hover,
+#livecoin_exchanges thead th.sorting_asc:hover,
+#livecoin_exchanges thead th.sorting_desc:hover {
+    background-color: #e9ecef;
+}
+
+#livecoin_exchanges th:first-child,
+#livecoin_exchanges td:first-child,
+#livecoin_exchanges .datatable-highlight-first {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%);
+    color: #333;
+    font-weight: bold;
+    border-right: 2px solid #ffd200;
+}
+
+/* --- Modern Tabs Container Gradient (matching history.css) --- */
+.modern-tabs-container,
+.gradient-tabs-bg {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 100%) !important;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+    margin-bottom: 1.5rem;
+}
+
+/* --- Dark Mode Overrides (matching history.css) --- */
+.dark-mode #livecoin_exchanges thead th {
+    background-color: #23272f !important;
+    color: #ffd200 !important;
+    border-bottom: 2px solid #23272f !important;
+    border-top: 1px solid #23272f !important;
+}
+.dark-mode #livecoin_exchanges th:first-child,
+.dark-mode #livecoin_exchanges td:first-child,
+.dark-mode #livecoin_exchanges .datatable-highlight-first {
+    background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
+    color: #ffd200 !important;
+    border-right: 2px solid #ffd200 !important;
+}
+.dark-mode .modern-tabs-container,
+.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ffd200 100%) !important;
     box-shadow: 0 2px 12px rgba(0,0,0,0.18) !important;
 }
