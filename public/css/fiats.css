@@ -916,44 +916,292 @@ body.dark-mode .refresh-icon-bg {
     background: #23272f !important;
 }
 
-/* --- Live Coin Watch Fiats Info Block Styles --- */
-.fiats-info-block {
-    background: linear-gradient(90deg, #ffd200 0%, #ff512f 100%);
-    color: #333;
+/* Gradient background for m-portlet */
+.fiat-gradient-bg {
+    background: linear-gradient(135deg, #fffefa 0%, #ffe680 60%, #ffd6b3 100%);
     border-radius: 1.5em;
-    box-shadow: 0 8px 32px 0 rgba(255, 81, 47, 0.13), 0 3px 12px 0 rgba(255, 210, 0, 0.10);
-    padding: 2.2em 2em 2.2em 2em;
+    box-shadow: 0 8px 32px 0 rgba(255, 81, 47, 0.08), 0 3px 12px 0 rgba(255, 210, 0, 0.07);
+}
+
+/* Modern Reviews Section */
+.modern-reviews-section {
     margin-top: 2.5em;
     margin-bottom: 2.5em;
-    font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+    border-radius: 1.5em;
+    background: linear-gradient(120deg, #fffbe7 0%, #ffd200 60%, #ff512f 100%);
+    box-shadow: 0 8px 32px 0 rgba(255, 81, 47, 0.13), 0 3px 12px 0 rgba(255, 210, 0, 0.10);
+    padding: 2.2em 2em 2.2em 2em;
+    color: #333;
 }
-.fiats-info-block strong {
+.modern-reviews-title {
+    font-size: 1.7em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin-bottom: 1.2em;
+    color: #ff512f;
+}
+.modern-reviews-title svg {
+    width: 2.2em;
+    height: 2.2em;
+}
+.reviews-list {
+    margin-bottom: 2em;
+}
+.modern-review-form-container {
+    background: rgba(255,255,255,0.13);
+    border-radius: 1.2em;
+    box-shadow: 0 2px 8px 0 rgba(255, 81, 47, 0.10);
+    padding: 2em 1.5em 1.5em 1.5em;
+    margin-bottom: 1.5em;
+}
+.modern-review-form-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 1.2em;
+    color: #ff512f;
+}
+.modern-form-group {
+    margin-bottom: 1.1em;
+}
+.modern-form-group label {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.4em;
+    color: #333;
+}
+.modern-form-group label svg {
+    width: 1.3em;
+    height: 1.3em;
+}
+.modern-form-group .form-control {
+    width: 100%;
+    border-radius: 0.7em;
+    border: 1.5px solid #ffd200;
+    padding: 0.7em 1em;
+    font-size: 1em;
+    background: #fffbe7;
+    color: #333;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(255,215,0,0.08);
+}
+.modern-form-group .form-control:focus {
+    border: 1.5px solid #ff512f;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(255,81,47,0.08);
+    outline: none;
+}
+.modern-review-form-btn {
+    background: linear-gradient(90deg, #ffd200 0%, #ff512f 100%);
+    color: #fff;
+    border: none;
+    border-radius: 1.2em;
+    padding: 0.8em 2.2em;
+    font-size: 1.1em;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255,81,47,0.12);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.modern-review-form-btn:hover {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+}
+/* Review Card Styles */
+.review-card {
+    background: #fff;
+    border-radius: 1.1em;
+    box-shadow: 0 2px 8px rgba(255,81,47,0.08);
+    padding: 1.2em 1.5em;
+    margin-bottom: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    border-left: 6px solid #ffd200;
+}
+.review-card .review-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.review-card .review-header .review-rating {
+    color: #ffd200;
+    font-size: 1.2em;
+    margin-right: 0.5em;
+}
+.review-card .review-header .review-title {
     color: #ff512f;
     font-weight: 700;
 }
-.fiats-info-paragraph {
+.review-card .review-meta {
+    font-size: 0.95em;
+    color: #888;
+    display: flex;
+    gap: 1.2em;
+    flex-wrap: wrap;
+}
+.review-card .review-body {
+    font-size: 1.08em;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+.review-card .review-pros, .review-card .review-cons {
+    font-size: 0.98em;
+    margin-top: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+.review-card .review-pros svg, .review-card .review-cons svg {
+    width: 1em;
+    height: 1em;
+}
+.review-card .review-pros {
+    color: #43cea2;
+}
+.review-card .review-cons {
+    color: #ff512f;
+}
+.review-card .review-footer {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    font-size: 0.95em;
+    color: #888;
+}
+.review-card .review-recommend {
+    font-weight: 600;
+    color: #43cea2;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+.review-card .review-recommend.no {
+    color: #ff512f;
+}
+@media (max-width: 767px) {
+    .modern-reviews-section, .modern-review-form-container {
+        padding: 1.2em 0.7em 1.2em 0.7em;
+    }
+    .review-card {
+        padding: 1em 0.7em;
+    }
+    .modern-reviews-title {
+        font-size: 1.1em;
+    }
+}
+/* Dark mode for reviews */
+body.dark-mode .modern-reviews-section, body.dark-mode .modern-review-form-container {
+    background: linear-gradient(120deg, #232526 0%, #414345 100%);
+    color: #fff;
+}
+body.dark-mode .review-card {
+    background: #232526;
+    color: #fff;
+    border-left: 6px solid #ffd200;
+}
+body.dark-mode .review-card .review-title {
+    color: #ffd200;
+}
+body.dark-mode .review-card .review-pros {
+    color: #43cea2;
+}
+body.dark-mode .review-card .review-cons {
+    color: #ff512f;
+}
+body.dark-mode .review-card .review-recommend {
+    color: #43cea2;
+}
+body.dark-mode .review-card .review-recommend.no {
+    color: #ff512f;
+}
+
+/* --- Fiats Info Block Styles --- */
+.fiats-info-block.upgraded-gradient-bg {
+    background: linear-gradient(120deg, #ff512f 0%, #ffd200 40%, #43cea2 100%);
+    color: #fff;
+    border-radius: 1.5em;
+    box-shadow: 0 8px 32px 0 rgba(255, 81, 47, 0.18), 0 3px 12px 0 rgba(255, 210, 0, 0.13);
+    padding: 2.2em 2em 2.2em 2em;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+    max-width: 100%;
+    transition: background 0.3s, color 0.3s;
+}
+.fiats-info-block .info-paragraph {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5em;
+    margin-bottom: 2.2em;
+    flex-wrap: wrap;
+}
+.fiats-info-block .info-paragraph:last-child {
+    margin-bottom: 0;
+}
+.fiats-info-block .info-title {
+    margin-bottom: 0.5em;
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+.fiats-info-block .info-desc {
+    margin-bottom: 0;
     font-size: 1.08em;
     line-height: 1.7;
-    margin-bottom: 1.5em;
 }
-.fiats-datatable-columns-list {
+.fiats-info-block ul.fiats-datatable-columns-list {
     margin-bottom: 0;
     font-size: 1.08em;
     line-height: 1.7;
     padding-left: 1.2em;
     list-style: none;
 }
-.fiats-datatable-columns-list li {
-    margin-bottom: 0.5em;
-    position: relative;
-    padding-left: 0.5em;
+.fiats-info-block ul.fiats-datatable-columns-list li {
+    margin-bottom: 0.4em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 }
-@media (max-width: 767px) {
-    .fiats-info-block {
+.fiats-info-block ul.fiats-datatable-columns-list li:last-child {
+    margin-bottom: 0;
+}
+.fiats-info-block .info-paragraph > span {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.13);
+    border-radius: 50%;
+    width: 3.5em;
+    height: 3.5em;
+    box-shadow: 0 2px 8px 0 rgba(255,81,47,0.10);
+}
+@media (max-width: 900px) {
+    .fiats-info-block.upgraded-gradient-bg {
         padding: 1.2em 0.7em 1.2em 0.7em;
-        font-size: 0.98em;
+        border-radius: 1em;
     }
-    .fiats-info-paragraph {
-        font-size: 1em;
+    .fiats-info-block .info-paragraph {
+        flex-direction: column;
+        gap: 0.7em;
+        margin-bottom: 1.2em;
     }
+    .fiats-info-block .info-title {
+        font-size: 1.1em;
+    }
+}
+body.dark-mode .fiats-info-block.upgraded-gradient-bg {
+    background: linear-gradient(120deg, #232526 0%, #414345 100%);
+    color: #fff;
+}
+body.dark-mode .fiats-info-block .info-title {
+    color: #ffd200;
+}
+body.dark-mode .fiats-info-block ul.fiats-datatable-columns-list li {
+    color: #fff;
 }
