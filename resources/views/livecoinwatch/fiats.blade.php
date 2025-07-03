@@ -20,7 +20,7 @@
                 </span>
                 <span class="modern-title-text">Livecoin Fiats</span>
             </div>
-            <button id="darkModeToggle" class="modern-tab darkmode-switch" title="Toggle dark mode (or press D)" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
+            <button id="darkModeToggle" class="modern-tab darkmode-switch" title="Toggle dark mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
                 <span class="darkmode-switch-icon" id="darkModeIcon">
                     <!-- Sun & Moon SVG for animation -->
                     <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
@@ -44,7 +44,6 @@
                 <span class="darkmode-switch-toggle" aria-hidden="true"></span>
             </button>
         </div>
-        <span class="darkmode-hint" style="margin-left:1em;font-size:0.95em;color:#888;">Tip: Press <b>D</b> to toggle dark mode</span>
         <!-- Navigation Tabs -->
         <div class="modern-tabs-container gradient-tabs-bg">
             <nav class="modern-tabs beautiful-tabs" aria-label="Main navigation">
@@ -400,12 +399,6 @@
                 var enabled = !document.body.classList.contains('dark-mode');
                 setDarkMode(enabled);
                 localStorage.setItem('darkMode', enabled ? '1' : '0');
-            });
-            // Keyboard shortcut for D
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'd' || e.key === 'D') {
-                    darkModeToggle.click();
-                }
             });
             // Fullscreen logic for datatable
             var fullscreenToggle = document.getElementById('fullscreenToggle');
