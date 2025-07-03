@@ -1011,87 +1011,90 @@ body.dark-mode .refresh-icon-bg {
     color: #fff;
 }
 /* Review Card Styles */
-.review-card {
-    background: #fff;
-    border-radius: 1.1em;
-    box-shadow: 0 2px 8px rgba(255,81,47,0.08);
-    padding: 1.2em 1.5em;
-    margin-bottom: 1.2em;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7em;
-    border-left: 6px solid #ffd200;
-}
-.review-card .review-header {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    font-size: 1.1em;
-    font-weight: 600;
-}
-.review-card .review-header .review-rating {
-    color: #ffd200;
-    font-size: 1.2em;
-    margin-right: 0.5em;
-}
-.review-card .review-header .review-title {
-    color: #ff512f;
-    font-weight: 700;
-}
-.review-card .review-meta {
-    font-size: 0.95em;
-    color: #888;
+.modern-review-card {
+    background: linear-gradient(100deg, #fffbe6 0%, #eafff7 100%);
+    border-radius: 1.2em;
+    margin-bottom: 1.5em;
+    padding: 1.5em 1.7em;
+    box-shadow: 0 2px 12px rgba(67,206,162,0.08);
     display: flex;
     gap: 1.2em;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
 }
-.review-card .review-body {
-    font-size: 1.08em;
-    color: #333;
-    margin-bottom: 0.5em;
+.modern-review-card:hover {
+    box-shadow: 0 6px 24px rgba(67,206,162,0.13);
+    transform: translateY(-2px) scale(1.01);
 }
-.review-card .review-pros, .review-card .review-cons {
-    font-size: 0.98em;
-    margin-top: 0.2em;
+.modern-review-avatar {
+    width: 3.2em;
+    height: 3.2em;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd200 0%, #ff512f 100%);
     display: flex;
     align-items: center;
-    gap: 0.4em;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(255,81,47,0.10);
+    flex-shrink: 0;
 }
-.review-card .review-pros svg, .review-card .review-cons svg {
-    width: 1em;
-    height: 1em;
-}
-.review-card .review-pros {
-    color: #43cea2;
-}
-.review-card .review-cons {
-    color: #ff512f;
-}
-.review-card .review-footer {
+.modern-review-content {
+    flex: 1;
     display: flex;
-    align-items: center;
-    gap: 1em;
-    font-size: 0.95em;
-    color: #888;
-}
-.review-card .review-recommend {
-    font-weight: 600;
-    color: #43cea2;
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 0.3em;
 }
-.review-card .review-recommend.no {
-    color: #ff512f;
+.modern-review-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin-bottom: 0.2em;
 }
-@media (max-width: 767px) {
-    .modern-reviews-section, .modern-review-form-container {
-        padding: 1.2em 0.7em 1.2em 0.7em;
+.modern-review-name {
+    font-weight: 700;
+    color: #ff512f;
+    font-size: 1.1em;
+}
+.modern-review-date {
+    color: #888;
+    font-size: 0.98em;
+}
+.modern-review-rating {
+    margin-left: auto;
+    color: #ffd200;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.1em;
+}
+.modern-review-title {
+    font-weight: 600;
+    font-size: 1.15em;
+    margin-bottom: 0.2em;
+    color: #222;
+}
+.modern-review-comment {
+    color: #222;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+.modern-review-extra {
+    font-size: 0.98em;
+    color: #ff512f;
+    margin-top: 0.2em;
+}
+@media (max-width: 700px) {
+    .modern-review-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.1em 1em;
+        gap: 0.7em;
     }
-    .review-card {
-        padding: 1em 0.7em;
-    }
-    .modern-reviews-title {
+    .modern-review-avatar {
+        width: 2.2em;
+        height: 2.2em;
         font-size: 1.1em;
     }
 }
@@ -1100,25 +1103,27 @@ body.dark-mode .modern-reviews-section, body.dark-mode .modern-review-form-conta
     background: linear-gradient(120deg, #232526 0%, #414345 100%);
     color: #fff;
 }
-body.dark-mode .review-card {
-    background: #232526;
+body.dark-mode .modern-review-card {
+    background: linear-gradient(100deg, #232526 0%, #414345 100%);
     color: #fff;
-    border-left: 6px solid #ffd200;
 }
-body.dark-mode .review-card .review-title {
+body.dark-mode .modern-review-name {
     color: #ffd200;
 }
-body.dark-mode .review-card .review-pros {
-    color: #43cea2;
+body.dark-mode .modern-review-date {
+    color: #fff;
 }
-body.dark-mode .review-card .review-cons {
-    color: #ff512f;
+body.dark-mode .modern-review-rating {
+    color: #ffd200;
 }
-body.dark-mode .review-card .review-recommend {
-    color: #43cea2;
+body.dark-mode .modern-review-title {
+    color: #ffd200;
 }
-body.dark-mode .review-card .review-recommend.no {
-    color: #ff512f;
+body.dark-mode .modern-review-comment {
+    color: #fff;
+}
+body.dark-mode .modern-review-extra {
+    color: #ffd200;
 }
 
 /* --- Fiats Info Block Styles --- */

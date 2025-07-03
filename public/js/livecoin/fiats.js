@@ -16,6 +16,39 @@ Fiats.prototype.init = function () {
         "iDisplayLength": 20,
         pageLength: 10,
         "aaSorting": [[1, "asc"]],
+        dom: "<'datatable-toolbar'B><'datatable-controls-row'lf>rtip",
+        buttons: [
+            {
+                extend: 'copy',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2" fill="#ffd200"/><rect x="3" y="3" width="10" height="14" rx="2" fill="#43cea2"/></svg></span> <span>Copy</span>'
+            },
+            {
+                extend: 'csv',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#43cea2"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">CSV</text></svg></span> <span>CSV</span>'
+            },
+            {
+                extend: 'excel',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#11998e"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">XLS</text></svg></span> <span>Excel</span>'
+            },
+            {
+                extend: 'pdf',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#ff512f"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">PDF</text></svg></span> <span>PDF</span>'
+            },
+            {
+                extend: 'print',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" fill="#ffd200"/><rect x="7" y="3" width="10" height="4" rx="1" fill="#43cea2"/></svg></span> <span>Print</span>'
+            },
+            {
+                extend: 'colvis',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#6a11cb"/><rect x="7" y="7" width="10" height="2" fill="#fff"/><rect x="7" y="11" width="10" height="2" fill="#fff"/><rect x="7" y="15" width="10" height="2" fill="#fff"/></svg></span> <span>Columns</span>'
+            }
+        ],
         "createdRow": function(row, data, dataIndex) {
             var labels = ['Fiat', 'Flag', 'Countries'];
             $('td', row).each(function(index) {
@@ -113,8 +146,85 @@ function highlightSearchResultsFiats() {
     });
 }
 
+// --- Review Section Logic ---
+function getInitials(name) {
+    if (!name) return '';
+    const parts = name.trim().split(' ');
+    if (parts.length === 1) return parts[0][0].toUpperCase();
+    return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+}
+
+function renderFiatReviews(reviews) {
+    let html = '';
+    if (!reviews || reviews.length === 0) {
+        html = '<div class="alert alert-info">No reviews yet. Be the first to review!</div>';
+    } else {
+        html = reviews.map(r => `
+            <div class="modern-review-card">
+                <div class="modern-review-avatar">${getInitials(r.name)}</div>
+                <div class="modern-review-content">
+                    <div class="modern-review-header">
+                        <span class="modern-review-name">${r.name}</span>
+                        <span class="modern-review-date"><svg style="width:1em;height:1em;vertical-align:middle;margin-right:0.2em;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 6v6l4 2" stroke="#ff512f" stroke-width="2" stroke-linecap="round"/></svg> ${new Date(r.created_at).toLocaleString()}</span>
+                        <span class="modern-review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                    </div>
+                    <div class="modern-review-title">${r.title}</div>
+                    <div class="modern-review-comment">${r.comment.replace(/\n/g, '<br>')}</div>
+                    <div class="modern-review-extra">
+                        ${r.country ? `<b>Country:</b> ${r.country} &nbsp;` : ''}
+                        ${r.experience_level ? `<b>Experience:</b> ${r.experience_level} &nbsp;` : ''}
+                        ${r.pros ? `<b>Pros:</b> ${r.pros} &nbsp;` : ''}
+                        ${r.cons ? `<b>Cons:</b> ${r.cons} &nbsp;` : ''}
+                        ${typeof r.recommend !== 'undefined' && r.recommend !== null ? `<b>Recommend:</b> ${r.recommend ? 'Yes' : 'No'}` : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+    const reviewsList = document.getElementById('fiat-reviews-list');
+    if (reviewsList) reviewsList.innerHTML = html;
+}
+
+function fetchFiatReviews() {
+    fetch('/livecoinwatch/fiats/reviews')
+        .then(res => res.json())
+        .then(data => renderFiatReviews(data));
+}
+
+function bindFiatReviewForm() {
+    const form = document.getElementById('fiatReviewForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const csrfToken = document.querySelector('input[name="_token"]').value;
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                form.reset();
+                document.getElementById('fiatReviewFormMsg').innerHTML = '<div class="alert alert-success">Thank you for your review!</div>';
+                fetchFiatReviews();
+            } else {
+                document.getElementById('fiatReviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
+            }
+        })
+        .catch(() => {
+            document.getElementById('fiatReviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
+        });
+    });
+}
+
 $(document).ready(function() {
     var coins = new Fiats();
     coins.init();
     coins.bindEvents();
+    fetchFiatReviews();
+    bindFiatReviewForm();
 });

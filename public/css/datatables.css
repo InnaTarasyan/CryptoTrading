@@ -115,3 +115,23 @@ tr:focus {
 .table-responsive::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
 }
+
+.datatable-controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+}
+.dataTables_length {
+    margin-bottom: 0 !important;
+}
+.dataTables_filter {
+    margin-bottom: 0 !important;
+}
+.datatable-toolbar {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+}
