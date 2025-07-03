@@ -35,6 +35,10 @@ Route::get('/getlivecoinfiats',
 Route::get('/livecoinwatch/history/reviews', [App\Http\Controllers\LiveCoinWatchHistoryReviewController::class, 'index']);
 Route::post('/livecoinwatch/history/reviews', [App\Http\Controllers\LiveCoinWatchHistoryReviewController::class, 'store']);
 
+// Live Coin Watch Exchanges Reviews
+Route::get('/livecoinwatch/exchanges/reviews', [App\Http\Controllers\LiveCoinWatch\ExchangesReviewController::class, 'index']);
+Route::post('/livecoinwatch/exchanges/reviews', [App\Http\Controllers\LiveCoinWatch\ExchangesReviewController::class, 'store']);
+
 /** ===== Coin Gecko ====== */
 
 // Coin Gecko Markets
