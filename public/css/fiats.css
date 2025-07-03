@@ -1205,3 +1205,17 @@ body.dark-mode .fiats-info-block .info-title {
 body.dark-mode .fiats-info-block ul.fiats-datatable-columns-list li {
     color: #fff;
 }
+
+.highlight {
+    background: linear-gradient(90deg, #ffd200 0%, #ff512f 100%);
+    color: #222;
+    border-radius: 4px;
+    padding: 0 2px;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(255,81,47,0.10);
+}
+/* Highlighted row for search match */
+.highlight-row {
+    background: #fffbe7 !important;
+    box-shadow: 0 2px 8px rgba(255,81,47,0.08);
+}
