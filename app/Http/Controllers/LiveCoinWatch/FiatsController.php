@@ -32,15 +32,18 @@ class FiatsController extends Controller
                     return '';
                 }
                 $countriesList = json_decode($item->countries, true);
+                $countryNames = config('countries');
                 $str =  '<ul>';
-                foreach($countriesList as $country) {
-                    $str.= '<li>'.$country.'</li>';
+                foreach($countriesList as $countryCode) {
+                    $name = $countryNames[$countryCode] ?? $countryCode;
+                    $str.= '<li>'.$name.'</li>';
                 }
                 $str.=  '</ul>';
                 return $str;
             })
             ->editColumn('flag', function ($item){
-                return "<p class='danger'>".$item->flag."</p>";
+                $countryNames = config('countries');
+                return "<p class='danger'>".($countryNames[$item->flag] ?? $item->flag)."</p>";
 
             })
             ->rawColumns(['countries', 'name', 'flag'])
