@@ -419,77 +419,7 @@
                 </form>
             </div>
         </div>
-        <script>
-        function getInitials(name) {
-            if (!name) return '';
-            const parts = name.trim().split(' ');
-            if (parts.length === 1) return parts[0][0].toUpperCase();
-            return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
-        }
-        function renderReviews(reviews) {
-            let html = '';
-            if (reviews.length === 0) {
-                html = '<div class="alert alert-info">No reviews yet. Be the first to review!</div>';
-            } else {
-                html = reviews.map(r => `
-                    <div class="modern-review-card">
-                        <div class="modern-review-avatar">${getInitials(r.name)}</div>
-                        <div class="modern-review-content">
-                            <div class="modern-review-header">
-                                <span class="modern-review-name">${r.name}</span>
-                                <span class="modern-review-date"><svg style="width:1em;height:1em;vertical-align:middle;margin-right:0.2em;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 6v6l4 2" stroke="#43cea2" stroke-width="2" stroke-linecap="round"/></svg> ${new Date(r.created_at).toLocaleString()}</span>
-                                <span class="modern-review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-                            </div>
-                            <div class="modern-review-title">${r.title}</div>
-                            <div class="modern-review-comment">${r.comment.replace(/\n/g, '<br>')}</div>
-                            <div class="modern-review-extra">
-                                ${r.country ? `<b>Country:</b> ${r.country} &nbsp;` : ''}
-                                ${r.experience_level ? `<b>Experience:</b> ${r.experience_level} &nbsp;` : ''}
-                                ${r.pros ? `<b>Pros:</b> ${r.pros} &nbsp;` : ''}
-                                ${r.cons ? `<b>Cons:</b> ${r.cons} &nbsp;` : ''}
-                                ${typeof r.recommend !== 'undefined' && r.recommend !== null ? `<b>Recommend:</b> ${r.recommend ? 'Yes' : 'No'}` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            document.getElementById('reviews-list').innerHTML = html;
-        }
-        function fetchReviews() {
-            fetch('/livecoinwatch/exchanges/reviews')
-                .then(res => res.json())
-                .then(data => renderReviews(data));
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchReviews();
-            document.getElementById('reviewForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const form = e.target;
-                const formData = new FormData(form);
-                const csrfToken = document.querySelector('input[name="_token"]').value;
-                fetch(form.action, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    body: formData
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        form.reset();
-                        document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-success">Thank you for your review!</div>';
-                        fetchReviews();
-                    } else {
-                        document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
-                    }
-                })
-                .catch(() => {
-                    document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
-                });
-            });
-        });
-        </script>
+        <!-- Review JS moved to public/js/livecoin/exchanges.js -->
     </div>
 @endsection
 @section('scripts')
