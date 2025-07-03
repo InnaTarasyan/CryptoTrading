@@ -860,3 +860,351 @@
     align-items: center;
     margin-right: 0.1em;
 }
+
+/* --- Moved from exchanges.blade.php --- */
+.modern-refresh-btn-upgraded {
+    padding: 0.9em 2.6em 0.9em 1.5em;
+    border: none;
+    border-radius: 2.2em;
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.15em;
+    box-shadow: 0 6px 24px 0 rgba(67, 206, 162, 0.18), 0 2px 8px 0 rgba(24, 90, 157, 0.13);
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    outline: none;
+}
+.modern-refresh-btn-upgraded:hover, .modern-refresh-btn-upgraded:focus {
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    box-shadow: 0 8px 32px 0 rgba(67, 206, 162, 0.25), 0 3px 12px 0 rgba(24, 90, 157, 0.18);
+    transform: translateY(-2px) scale(1.04);
+}
+.modern-refresh-btn-upgraded:active {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    box-shadow: 0 2px 8px 0 rgba(67, 206, 162, 0.10);
+    transform: scale(0.97);
+}
+.modern-refresh-btn-upgraded:focus-visible {
+    outline: 3px solid #ffd200;
+    outline-offset: 2px;
+}
+.icon-refresh-upgraded {
+    width: 2.1em;
+    height: 2.1em;
+    stroke-width: 4.5;
+    filter: drop-shadow(0 2px 4px rgba(24,90,157,0.18));
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1), stroke 0.2s;
+}
+.modern-refresh-btn-upgraded.spinning .icon-refresh-upgraded {
+    animation: spin-refresh 0.7s linear;
+}
+@keyframes spin-refresh {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.refresh-btn-label {
+    font-size: 1.13em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+.refresh-icon-bg {
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.7em;
+    height: 2.7em;
+    box-shadow: 0 2px 8px 0 rgba(24, 90, 157, 0.10);
+    margin-right: 0.5em;
+}
+.ripple-effect.show {
+    transform: scale(4);
+    opacity: 0;
+    animation: ripple-animate 0.5s linear;
+}
+/* Modern Fullscreen Button Styles */
+.modern-fullscreen-btn {
+    padding: 0.9em 2.2em 0.9em 1.2em;
+    border: none;
+    border-radius: 2.2em;
+    background: linear-gradient(90deg, #0d6efd 0%, #43cea2 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08em;
+    box-shadow: 0 6px 24px 0 rgba(13, 110, 253, 0.13), 0 2px 8px 0 rgba(67, 206, 162, 0.10);
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+.modern-fullscreen-btn:hover, .modern-fullscreen-btn:focus {
+    background: linear-gradient(90deg, #43cea2 0%, #0d6efd 100%);
+    box-shadow: 0 8px 32px 0 rgba(13, 110, 253, 0.18), 0 3px 12px 0 rgba(67, 206, 162, 0.18);
+    transform: translateY(-2px) scale(1.04);
+}
+.modern-fullscreen-btn:active {
+    background: linear-gradient(90deg, #0d6efd 0%, #43cea2 100%);
+    box-shadow: 0 2px 8px 0 rgba(13, 110, 253, 0.10);
+    transform: scale(0.97);
+}
+.modern-fullscreen-btn:focus-visible {
+    outline: 3px solid #ffd200;
+    outline-offset: 2px;
+}
+.fullscreen-btn-label {
+    font-size: 1.08em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+.fullscreen-icon-bg {
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5em;
+    height: 2.5em;
+    box-shadow: 0 2px 8px 0 rgba(13, 110, 253, 0.10);
+    margin-right: 0.5em;
+    transition: background 0.2s;
+}
+.modern-fullscreen-btn[aria-pressed="true"] .fullscreen-icon-bg {
+    background: #ff512f;
+}
+.icon-fullscreen, .icon-exit-fullscreen {
+    width: 2em;
+    height: 2em;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.icon-exit-fullscreen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+.modern-fullscreen-btn[aria-pressed="true"] .icon-fullscreen {
+    opacity: 0;
+    pointer-events: none;
+}
+.modern-fullscreen-btn[aria-pressed="true"] .icon-exit-fullscreen {
+    opacity: 1;
+    pointer-events: auto;
+    position: static;
+}
+@media (max-width: 600px) {
+    .modern-fullscreen-btn {
+        font-size: 0.98em;
+        padding: 0.7em 1.2em 0.7em 0.8em;
+    }
+    .fullscreen-btn-label {
+        display: none;
+    }
+    .fullscreen-icon-bg {
+        margin-right: 0;
+    }
+}
+.modern-info-block-upgraded.upgraded-gradient-bg {
+    background: linear-gradient(120deg, #43cea2 0%, #ffd200 40%, #ff512f 100%);
+    color: #fff;
+    border-radius: 1.5em;
+    box-shadow: 0 8px 32px 0 rgba(67, 206, 162, 0.18), 0 3px 12px 0 rgba(24, 90, 157, 0.13);
+    padding: 2.2em 2em 2.2em 2em;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+}
+/* --- Modern Reviews Section --- */
+.modern-reviews-section {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    background: linear-gradient(120deg, #43cea2 0%, #185a9d 100%);
+    border-radius: 2em;
+    box-shadow: 0 4px 32px rgba(67, 206, 162, 0.10), 0 1.5px 6px rgba(67, 206, 162, 0.08);
+    padding: 2.5em 1.5em;
+    max-width: 100%;
+}
+.modern-reviews-title {
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 1.5em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+}
+.modern-reviews-title svg {
+    width: 2.2em;
+    height: 2.2em;
+    flex-shrink: 0;
+}
+.modern-review-card {
+    background: linear-gradient(100deg, #fffbe6 0%, #eafff7 100%);
+    border-radius: 1.2em;
+    margin-bottom: 1.5em;
+    padding: 1.5em 1.7em;
+    box-shadow: 0 2px 12px rgba(67,206,162,0.08);
+    display: flex;
+    gap: 1.2em;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.modern-review-card:hover {
+    box-shadow: 0 6px 24px rgba(67,206,162,0.13);
+    transform: translateY(-2px) scale(1.01);
+}
+.modern-review-avatar {
+    width: 3.2em;
+    height: 3.2em;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd200 0%, #43cea2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(67,206,162,0.10);
+    flex-shrink: 0;
+}
+.modern-review-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.modern-review-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin-bottom: 0.2em;
+}
+.modern-review-name {
+    font-weight: 700;
+    color: #43cea2;
+    font-size: 1.1em;
+}
+.modern-review-date {
+    color: #888;
+    font-size: 0.98em;
+}
+.modern-review-rating {
+    margin-left: auto;
+    color: #ffd200;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.1em;
+}
+.modern-review-title {
+    font-weight: 600;
+    font-size: 1.15em;
+    margin-bottom: 0.2em;
+    color: #222;
+}
+.modern-review-comment {
+    color: #222;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+.modern-review-extra {
+    font-size: 0.98em;
+    color: #185a9d;
+    margin-top: 0.2em;
+}
+.modern-review-form-container {
+    max-width: 700px;
+    margin: 2.5em auto 0 auto;
+    background: linear-gradient(100deg, #fffbe6 0%, #eafff7 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 2px 12px rgba(67,206,162,0.08);
+    padding: 2em 2em 1.5em 2em;
+}
+.modern-review-form-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 1.2em;
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.modern-form-group {
+    margin-bottom: 1.1em;
+    position: relative;
+}
+.modern-form-group label {
+    font-weight: 600;
+    color: #185a9d;
+    margin-bottom: 0.3em;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+.modern-form-group svg {
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: middle;
+}
+.modern-form-group input,
+.modern-form-group select,
+.modern-form-group textarea {
+    width: 100%;
+    border-radius: 1.2em;
+    border: 1.5px solid #43cea2;
+    padding: 0.7em 1.1em;
+    font-size: 1.05em;
+    background: #fff;
+    color: #222;
+    transition: border 0.2s;
+    box-shadow: 0 1px 4px rgba(67,206,162,0.04);
+}
+.modern-form-group input:focus,
+.modern-form-group select:focus,
+.modern-form-group textarea:focus {
+    border: 1.5px solid #ffd200;
+    outline: none;
+}
+.modern-review-form-btn {
+    background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+    color: #222;
+    font-weight: 700;
+    border: none;
+    border-radius: 2em;
+    padding: 0.7em 2em;
+    font-size: 1.1em;
+    box-shadow: 0 2px 8px rgba(34,34,34,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+.modern-review-form-btn:hover {
+    background: #222;
+    color: #ffd200;
+}
+@media (max-width: 700px) {
+    .modern-reviews-section {
+        padding: 1.2em 0.3em;
+        border-radius: 1em;
+    }
+    .modern-review-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.1em 1em;
+        gap: 0.7em;
+    }
+    .modern-review-avatar {
+        width: 2.2em;
+        height: 2.2em;
+        font-size: 1.1em;
+    }
+    .modern-review-form-container {
+        padding: 1.2em 0.7em 1em 0.7em;
+        border-radius: 1em;
+    }
+}
