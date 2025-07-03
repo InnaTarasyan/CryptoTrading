@@ -30,7 +30,7 @@ Exchanges.prototype.init = function () {
         "iDisplayLength": 20,
         pageLength: 10,
         "aaSorting": [[5, "desc"], [6, "desc"], [7, "desc"], [8, "desc"]],
-        responsive: true,
+        responsive: false,
         dom: "<'datatable-toolbar'B>lfrtip",
         buttons: [
             {
