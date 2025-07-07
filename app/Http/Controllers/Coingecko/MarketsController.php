@@ -34,7 +34,19 @@ class MarketsController extends Controller
                 return "<p class='success'>".number_format((float)$item->market_cap, 2, ',', ' ')."</p>";
             })
             ->editColumn('current_price', function ($item) {
-                return "<p class='danger'>".number_format((float)$item->current_price, 2, ',', ' ')."</p>";
+                $full = number_format((float)$item->current_price, 2, '.', ',');
+                $value = (float)$item->current_price;
+                $compact = '';
+                if ($value >= 1_000_000_000) {
+                    $compact = '$' . number_format($value / 1_000_000_000, 2) . 'B';
+                } elseif ($value >= 1_000_000) {
+                    $compact = '$' . number_format($value / 1_000_000, 2) . 'M';
+                } elseif ($value >= 1_000) {
+                    $compact = '$' . number_format($value / 1_000, 2) . 'K';
+                } else {
+                    $compact = '$' . number_format($value, 2);
+                }
+                return "<span class='price-compact' title='$$full'>$compact</span>";
             })
             ->editColumn('circulatingSupply', function ($item) {
                 return "<p class='warning'>".number_format((float)$item->circulatingSupply, 2, ',', ' ')."</p>";

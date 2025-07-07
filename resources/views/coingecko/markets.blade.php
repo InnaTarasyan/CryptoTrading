@@ -47,6 +47,14 @@
             align-items: center;
             margin-bottom: 0;
         }
+        /* Fix Logo column width in DataTable */
+        #coingecko_markets th:nth-child(2),
+        #coingecko_markets td:nth-child(2) {
+            width: 60px !important;
+            min-width: 60px !important;
+            max-width: 60px !important;
+            text-align: center;
+        }
     </style>
 @endsection
 @section('content')
@@ -285,7 +293,8 @@
                             <thead class="enhanced-thead">
                                 <tr>
                                     <th class="datatable-highlight-first enhanced-th">
-                                        <span class="datatable-header-icon">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Coin</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
                                             <!-- Modern Cryptocurrency Icon with Gradient -->
                                             <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                                                 <defs>
@@ -299,10 +308,10 @@
                                                 <circle cx="12" cy="12" r="2" fill="#fff" opacity="0.3"/>
                                             </svg>
                                         </span>
-                                        <span class="datatable-header-text">Coin</span>
                                     </th>
                                     <th title="Official logo or icon of the cryptocurrency" class="enhanced-th">
-                                        <span class="datatable-header-icon">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Logo</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
                                             <!-- Modern Logo Icon with Gradient -->
                                             <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                                                 <defs>
@@ -316,10 +325,10 @@
                                                 <circle cx="12" cy="12" r="3" fill="url(#logoGradient)"/>
                                             </svg>
                                         </span>
-                                        <span class="datatable-header-text">Logo</span>
                                     </th>
                                     <th title="Current market price in USD" class="enhanced-th">
-                                        <span class="datatable-header-icon">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Price</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
                                             <!-- Modern Price Icon with Gradient -->
                                             <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                                                 <defs>
@@ -333,10 +342,10 @@
                                                 <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.2"/>
                                             </svg>
                                         </span>
-                                        <span class="datatable-header-text">Price</span>
                                     </th>
                                     <th title="Total market value of all circulating coins" class="enhanced-th">
-                                        <span class="datatable-header-icon">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Market Cap</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
                                             <!-- Modern Market Cap Icon with Gradient -->
                                             <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                                                 <defs>
@@ -350,7 +359,6 @@
                                                 <path d="M12 4v16" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/>
                                             </svg>
                                         </span>
-                                        <span class="datatable-header-text">Market Cap</span>
                                     </th>
                                     <th title="Rank by market capitalization (1 = highest)" class="enhanced-th">
                                         <span class="datatable-header-icon">

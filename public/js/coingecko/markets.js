@@ -60,6 +60,9 @@ Coingecko.prototype.init = function () {
             {data: 'ath_date', name: 'ath_date'},
             {data: 'last_updated', name: 'last_updated'},
         ],
+        "columnDefs": [
+            { "width": "60px", "targets": 1 }
+        ],
         "iDisplayLength": 10,
         pageLength: 10,
         "aaSorting": [[1, "asc"]],
