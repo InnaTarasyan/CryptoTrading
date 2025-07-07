@@ -85,31 +85,65 @@ class MarketsController extends Controller
                 return number_format((float)$item->atl, 2, ',', ' ');
             })
             ->editColumn('roi', function ($item) {
-                if($item->roi === 'null') {
-                    return ' - ';
-                }
-
-                if(!isset($item->roi)) {
+                if($item->roi === 'null' || !isset($item->roi) || $item->roi === null) {
                     return ' - ';
                 }
 
                 $json = json_decode($item->roi, true);
-                $str = '<ul>';
-
-                foreach ($json as $key => $inner) {
-                    $str.= '<li>'.$key.' : '.$inner.'</li>';
+                if (!$json || !is_array($json)) {
+                    return ' - ';
                 }
 
-                $str.= '</ul>';
-
-                return $str;
+                $labels = [
+                    'times' => 'Times',
+                    'currency' => 'Currency',
+                    'percentage' => 'Percentage',
+                ];
+                $order = ['times', 'currency', 'percentage'];
+                $parts = [];
+                foreach ($order as $key) {
+                    if (isset($json[$key]) && $json[$key] !== null) {
+                        $value = $json[$key];
+                        if ($key === 'currency') {
+                            $currency = strtolower($value);
+                            $iconHtml = '';
+                            // If the currency matches the coin's symbol, use the coin's image
+                            if (strtolower($item->symbol) === $currency && !empty($item->image)) {
+                                $iconHtml = '<img src="' . $item->image . '" alt="' . htmlspecialchars($item->symbol) . ' icon" style="width:16px;height:16px;vertical-align:middle;margin-right:3px;border-radius:50%;box-shadow:0 1px 2px #eee;">';
+                            } else {
+                                // For common fiats, use flagcdn or a generic icon
+                                $fiatFlags = [
+                                    'usd' => 'us', 'eur' => 'eu', 'gbp' => 'gb', 'jpy' => 'jp', 'cny' => 'cn',
+                                    'rub' => 'ru', 'aud' => 'au', 'cad' => 'ca', 'chf' => 'ch', 'inr' => 'in',
+                                ];
+                                if (isset($fiatFlags[$currency])) {
+                                    $flagCode = $fiatFlags[$currency];
+                                    $iconHtml = '<img src="https://flagcdn.com/16x12/' . $flagCode . '.png" alt="' . strtoupper($currency) . ' flag" style="width:16px;height:12px;vertical-align:middle;margin-right:3px;border-radius:2px;">';
+                                } else {
+                                    // fallback generic icon
+                                    $iconHtml = '<span style="font-size:1em;vertical-align:middle;margin-right:3px;">💱</span>';
+                                }
+                            }
+                            $value = $iconHtml . '$' . number_format((float)$value, 2);
+                        } elseif ($key === 'percentage') {
+                            $value = number_format((float)$value * 100, 2) . '%';
+                        } elseif ($key === 'times') {
+                            $value = number_format((float)$value, 2) . 'x';
+                        }
+                        $parts[] = "<span class='roi-label'>{$labels[$key]}:</span> <span class='roi-value'>{$value}</span>";
+                    }
+                }
+                if (empty($parts)) {
+                    return ' - ';
+                }
+                return '<div class="roi-compact">' . implode('  ', $parts) . '</div>';
             })
             ->rawColumns([
                 'name',
                 'market_cap',
                 'current_price',
                 'circulatingSupply',
-                'roi',
+               // 'roi',
                 'circulating_supply',
                 'market_cap_change_24h',
                 'market_cap_change_percentage_24h',
