@@ -597,4 +597,84 @@ $(document).ready(function() {
             'transform': 'scale(0.98)'
         });
     });
+
+    // ======================== Reviews AJAX Logic ========================
+    function getInitials(name) {
+        if (!name) return '';
+        const parts = name.trim().split(' ');
+        if (parts.length === 1) return parts[0][0].toUpperCase();
+        return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+    }
+    function renderStars(rating) {
+        rating = parseInt(rating) || 0;
+        return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    }
+    function renderReviews(reviews) {
+        let html = '';
+        if (!reviews.length) {
+            html = '<div class="alert alert-info">No reviews yet. Be the first to review!</div>';
+        } else {
+            html = reviews.map(r => `
+                <div class="modern-review-card">
+                    <div class="modern-review-avatar">${getInitials(r.name)}</div>
+                    <div class="modern-review-content">
+                        <div class="modern-review-header">
+                            <span class="modern-review-name">${r.name}</span>
+                            <span class="modern-review-date"><svg style="width:1em;height:1em;vertical-align:middle;margin-right:0.2em;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ff6a88"/><path d="M12 6v6l4 2" stroke="#ff99ac" stroke-width="2" stroke-linecap="round"/></svg> ${new Date(r.created_at).toLocaleString()}</span>
+                            <span class="modern-review-rating">${renderStars(r.rating)}</span>
+                        </div>
+                        <div class="modern-review-title">${r.title}</div>
+                        <div class="modern-review-comment">${r.comment ? r.comment.replace(/\n/g, '<br>') : ''}</div>
+                        <div style="margin-top:0.5em;">
+                            ${r.country ? `<span title="Country" style="margin-right:1em;"><svg style="width:1em;height:1em;vertical-align:middle;" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="4" fill="#ffd200"/><path d="M2 6l10 7 10-7" stroke="#ff6a88" stroke-width="2"/></svg> ${r.country}</span>` : ''}
+                            ${r.experience_level ? `<span title="Experience Level" style="margin-right:1em;"><svg style="width:1em;height:1em;vertical-align:middle;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ff99ac"/><path d="M12 6v6l4 2" stroke="#ff6a88" stroke-width="2" stroke-linecap="round"/></svg> ${r.experience_level}</span>` : ''}
+                            ${r.pros ? `<span title="Pros" style="margin-right:1em;"><svg style="width:1em;height:1em;vertical-align:middle;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M8 12h8M12 8v8" stroke="#ff6a88" stroke-width="2"/></svg> ${r.pros.replace(/\n/g, '<br>')}</span>` : ''}
+                            ${r.cons ? `<span title="Cons" style="margin-right:1em;"><svg style="width:1em;height:1em;vertical-align:middle;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ff99ac"/><path d="M8 12h8" stroke="#ff6a88" stroke-width="2"/></svg> ${r.cons.replace(/\n/g, '<br>')}</span>` : ''}
+                            ${typeof r.recommend !== 'undefined' && r.recommend !== null ? `<span title="Recommend"><svg style="width:1em;height:1em;vertical-align:middle;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M8 12l2 2 4-4" stroke="#ff6a88" stroke-width="2"/></svg> ${r.recommend ? 'Yes' : 'No'}</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        $('#reviews-list').html(html);
+    }
+    function fetchReviews() {
+        var coinId = $('#coin_id').val();
+        $.get('/coingecko/markets/reviews', { coin_id: coinId }, function(data) {
+            renderReviews(data);
+        });
+    }
+    fetchReviews();
+    $('#reviewForm').on('submit', function(e) {
+        e.preventDefault();
+        var form = this;
+        var formData = new FormData(form);
+        var csrfToken = $(form).find('input[name="_token"]').val();
+        $.ajax({
+            url: form.action,
+            method: 'POST',
+            headers: { 'X-CSRF-TOKEN': csrfToken },
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                if (data.success) {
+                    form.reset();
+                    $('#reviewFormMsg').html('<div class="alert alert-success">Thank you for your review!</div>');
+                    fetchReviews();
+                } else {
+                    $('#reviewFormMsg').html('<div class="alert alert-danger">There was an error submitting your review.</div>');
+                }
+            },
+            error: function(xhr) {
+                let msg = 'There was an error submitting your review.';
+                if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    msg += '<ul>';
+                    $.each(xhr.responseJSON.errors, function(k, v) { msg += `<li>${v}</li>`; });
+                    msg += '</ul>';
+                }
+                $('#reviewFormMsg').html('<div class="alert alert-danger">'+msg+'</div>');
+            }
+        });
+    });
 });

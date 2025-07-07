@@ -134,3 +134,7 @@ Route::get('/ajaxGetCoins', [
 ]);
 
 Route::get('/reloadData', 'HomeController@reloadData');
+
+// Coin Gecko Markets Reviews
+Route::get('/coingecko/markets/reviews', [App\Http\Controllers\Coingecko\MarketsCoingeckoReviewController::class, 'index']);
+Route::post('/coingecko/markets/reviews', [App\Http\Controllers\Coingecko\MarketsCoingeckoReviewController::class, 'store']);
