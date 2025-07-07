@@ -550,4 +550,51 @@ $(document).ready(function() {
     addRippleEffectToButton('#refreshTable', pinkRipple);
     addRippleEffectToButton('#fullscreenToggle', pinkRipple);
     addRippleEffectToButton('#darkModeToggle', pinkRipple);
+
+    // === Image preview logic (copied and adapted from history.js) ===
+    var $imgPreview = $('<div id="img-hover-preview"></div>').css({
+        'position': 'fixed',
+        'z-index': 9999,
+        'display': 'none',
+        'pointer-events': 'none',
+        'box-shadow': '0 8px 32px rgba(0,0,0,0.18)',
+        'border-radius': '16px',
+        'background': '#fff',
+        'padding': '12px',
+        'border': '2px solid #e2e8f0',
+        'transition': 'transform 0.15s cubic-bezier(.4,2,.6,1), opacity 0.15s',
+        'opacity': 0
+    });
+    $('body').append($imgPreview);
+
+    $(document).on('mouseenter', '.previewable-img', function(e) {
+        var src = $(this).attr('src');
+        var alt = $(this).attr('alt') || '';
+        $imgPreview.html('<img src="'+src+'" alt="'+alt+'" style="width:96px;height:96px;object-fit:contain;display:block;margin:auto;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.10);">');
+        $imgPreview.css({
+            'display': 'block',
+            'opacity': 1,
+            'transform': 'scale(1.08)'
+        });
+    });
+    $(document).on('mousemove', '.previewable-img', function(e) {
+        var previewWidth = $imgPreview.outerWidth();
+        var previewHeight = $imgPreview.outerHeight();
+        var left = e.clientX + 24;
+        var top = e.clientY - previewHeight/2;
+        // Prevent overflow
+        var maxLeft = $(window).width() - previewWidth - 16;
+        var maxTop = $(window).height() - previewHeight - 16;
+        if(left > maxLeft) left = maxLeft;
+        if(top < 8) top = 8;
+        if(top > maxTop) top = maxTop;
+        $imgPreview.css({ left: left, top: top });
+    });
+    $(document).on('mouseleave', '.previewable-img', function() {
+        $imgPreview.css({
+            'display': 'none',
+            'opacity': 0,
+            'transform': 'scale(0.98)'
+        });
+    });
 });
