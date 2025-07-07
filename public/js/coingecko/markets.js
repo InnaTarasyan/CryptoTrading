@@ -155,6 +155,54 @@ Coingecko.prototype.init = function () {
     hideTheadOnMobile();
     $(window).on('resize', hideTheadOnMobile);
     oTable.on('draw', hideTheadOnMobile);
+
+    // ======================== Highlight Search Results ========================
+    function highlightSearchResults() {
+        var table = $('#coingecko_markets').DataTable();
+        var searchTerm = table.search();
+        if (!searchTerm) {
+            $('#coingecko_markets tbody td').each(function() {
+                $(this).html($(this).text());
+            });
+            return;
+        }
+        var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\\]\]/g, '\\$&')+')', 'gi');
+        $('#coingecko_markets tbody tr').each(function() {
+            var row = $(this);
+            var found = false;
+            row.find('td').each(function(idx) {
+                var cell = $(this);
+                var original = cell.text();
+                // Skip highlighting for image column (index 1)
+                if (idx === 1) {
+                    cell.html(original);
+                    return;
+                }
+                if (searchTerm && original.match(regex)) {
+                    var newHtml = original.replace(regex, '<span class="highlight">$1</span>');
+                    cell.html(newHtml);
+                    found = true;
+                } else {
+                    cell.html(original);
+                }
+            });
+            if (found) {
+                row.addClass('highlight-row');
+            } else {
+                row.removeClass('highlight-row');
+            }
+        });
+    }
+
+    // Add highlight on table draw
+    oTable.on('draw', function() {
+        highlightSearchResults();
+    });
+    // Also highlight on search input change
+    searchBox.on('input', function() {
+        oTable.search(searchBox.val()).draw();
+        highlightSearchResults();
+    });
 };
 
 Coingecko.prototype.bindEvents = function () {
