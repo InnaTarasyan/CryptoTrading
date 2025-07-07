@@ -16,9 +16,9 @@ Coingecko.prototype.init = function () {
         'High 24h',
         'Low 24h',
         'Price change 24h',
-        'Price change percentage 24h',
+        (window.innerWidth <= 767 ? 'Price change<br>percentage 24h' : 'Price change percentage 24h'),
         'Market cap change 24h',
-        'Market cap change percentage 24h',
+        (window.innerWidth <= 767 ? 'Market cap change<br>percentage 24h' : 'Market cap change percentage 24h'),
         'Circulating supply',
         'Total supply',
         'Max supply',
@@ -109,6 +109,14 @@ Coingecko.prototype.init = function () {
             // Set data-label for each cell
             $(row).find('td').each(function(idx) {
                 $(this).attr('data-label', columnLabels[idx]);
+                // For mobile, add multiline label as HTML for long columns
+                if (window.innerWidth <= 767 && (idx === 10 || idx === 12)) {
+                    $(this).addClass('mobile-multiline-label');
+                    // Remove any previous label span to avoid duplicates
+                    $(this).find('.mobile-multiline-label').remove();
+                    // Insert the HTML label at the start of the cell
+                    $(this).prepend('<span class="mobile-multiline-label">' + columnLabels[idx] + '</span>');
+                }
             });
         }
     });

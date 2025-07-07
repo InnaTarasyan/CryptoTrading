@@ -2560,3 +2560,24 @@ body.dark-mode .footer-info {
     }
 }
 
+@media (max-width: 767px) {
+    /* Hide the default data-label for multiline columns */
+    td.mobile-multiline-label:before {
+        display: none !important;
+    }
+    .mobile-multiline-label {
+        display: block;
+        position: absolute;
+        left: 1rem;
+        top: 0.2em;
+        width: 45%;
+        font-weight: bold;
+        color: #ff6a88;
+        font-size: 0.98em;
+        letter-spacing: 0.01em;
+        line-height: 1.1;
+        white-space: normal;
+        z-index: 2;
+    }
+}
+
