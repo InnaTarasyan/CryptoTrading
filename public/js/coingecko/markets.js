@@ -681,3 +681,320 @@ $(document).ready(function() {
         });
     });
 });
+
+// --- BEGIN: Logic moved from markets.blade.php inline script ---
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced fullscreen button functionality with ripple effects and better UX
+    var refreshBtn = document.getElementById('refreshTable');
+    var fullscreenBtn = document.getElementById('fullscreenToggle');
+    var fullscreenContainer = document.getElementById('datatableFullscreenContainer');
+    var fullscreenText = document.getElementById('fullscreenText');
+    var iconFullscreen = fullscreenBtn ? fullscreenBtn.querySelector('.icon-fullscreen') : null;
+    var iconExitFullscreen = fullscreenBtn ? fullscreenBtn.querySelector('.icon-exit-fullscreen') : null;
+    // Enhanced table status elements
+    var tableStatusBar = document.getElementById('tableStatusBar');
+    var statusText = tableStatusBar ? tableStatusBar.querySelector('.status-text') : null;
+    var exportBtn = document.getElementById('exportData');
+    var printBtn = document.getElementById('printTable');
+    var scrollToTopBtn = document.getElementById('scrollToTop');
+
+    // Refresh button functionality (if not already handled by jQuery logic)
+    if (refreshBtn && !refreshBtn.classList.contains('js-moved')) {
+        refreshBtn.addEventListener('click', function() {
+            refreshBtn.classList.add('spinning');
+            updateTableStatus('Refreshing data...', '🔄');
+            setTimeout(function() {
+                refreshBtn.classList.remove('spinning');
+                updateTableStatus('Data refreshed successfully!', '✅');
+                setTimeout(() => {
+                    updateTableStatus('Ready to display market data', '📊');
+                }, 2000);
+            }, 700);
+        });
+        refreshBtn.classList.add('js-moved');
+    }
+
+    // Export data functionality
+    if (exportBtn && !exportBtn.classList.contains('js-moved')) {
+        exportBtn.addEventListener('click', function() {
+            updateTableStatus('Preparing export...', '📤');
+            setTimeout(() => {
+                // Trigger DataTables export (if available)
+                if (window.DataTable && window.DataTable.tables) {
+                    var table = window.DataTable.tables().container();
+                    if (table && table.buttons) {
+                        table.buttons.exportData();
+                    }
+                }
+                updateTableStatus('Export completed!', '✅');
+                setTimeout(() => {
+                    updateTableStatus('Ready to display market data', '📊');
+                }, 2000);
+            }, 1000);
+        });
+        exportBtn.classList.add('js-moved');
+    }
+
+    // Print table functionality
+    if (printBtn && !printBtn.classList.contains('js-moved')) {
+        printBtn.addEventListener('click', function() {
+            updateTableStatus('Preparing print...', '🖨️');
+            setTimeout(() => {
+                window.print();
+                updateTableStatus('Print dialog opened!', '✅');
+                setTimeout(() => {
+                    updateTableStatus('Ready to display market data', '📊');
+                }, 2000);
+            }, 500);
+        });
+        printBtn.classList.add('js-moved');
+    }
+
+    // Scroll to top functionality
+    if (scrollToTopBtn && !scrollToTopBtn.classList.contains('js-moved')) {
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        scrollToTopBtn.classList.add('js-moved');
+    }
+
+    // Update table status function
+    function updateTableStatus(text, icon) {
+        if (statusText) {
+            statusText.textContent = text;
+        }
+        var statusIcon = tableStatusBar ? tableStatusBar.querySelector('.status-icon') : null;
+        if (statusIcon) {
+            statusIcon.textContent = icon;
+        }
+    }
+
+    // Enhanced loading state management
+    function showLoading() {
+        var loadingElement = document.getElementById('datatableLoading');
+        if (loadingElement) {
+            loadingElement.style.display = 'flex';
+            updateTableStatus('Loading market data...', '⏳');
+        }
+    }
+    function hideLoading() {
+        var loadingElement = document.getElementById('datatableLoading');
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+            updateTableStatus('Data loaded successfully!', '✅');
+            setTimeout(() => {
+                updateTableStatus('Ready to display market data', '📊');
+            }, 2000);
+        }
+    }
+
+    // Enhanced fullscreen button functionality
+    if (fullscreenBtn && !fullscreenBtn.classList.contains('js-moved')) {
+        // Ripple effect function
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const ripple = button.querySelector('.ripple-effect');
+            if (ripple) {
+                const rect = button.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size / 2;
+                const y = event.clientY - rect.top - size / 2;
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('show');
+                setTimeout(() => {
+                    ripple.classList.remove('show');
+                }, 600);
+            }
+        }
+        // Fullscreen toggle function
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                if (fullscreenContainer.requestFullscreen) {
+                    fullscreenContainer.requestFullscreen();
+                } else if (fullscreenContainer.webkitRequestFullscreen) {
+                    fullscreenContainer.webkitRequestFullscreen();
+                } else if (fullscreenContainer.msRequestFullscreen) {
+                    fullscreenContainer.msRequestFullscreen();
+                }
+                fullscreenBtn.setAttribute('aria-pressed', 'true');
+                if (fullscreenText) fullscreenText.textContent = 'Exit Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'none';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'block';
+                fullscreenBtn.classList.add('success');
+                updateTableStatus('Entered fullscreen mode', '🖥️');
+                setTimeout(() => {
+                    fullscreenBtn.classList.remove('success');
+                }, 600);
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'block';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
+                updateTableStatus('Exited fullscreen mode', '📊');
+            }
+        }
+        fullscreenBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            createRipple(e);
+            toggleFullscreen();
+        });
+        fullscreenBtn.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'block';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
+            }
+        });
+        document.addEventListener('webkitfullscreenchange', function() {
+            if (!document.webkitFullscreenElement) {
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'block';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
+            }
+        });
+        document.addEventListener('MSFullscreenChange', function() {
+            if (!document.msFullscreenElement) {
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'block';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
+            }
+        });
+        fullscreenBtn.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('loading')) {
+                this.style.transform = 'translateY(-2px) scale(1.04)';
+            }
+        });
+        fullscreenBtn.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('loading')) {
+                this.style.transform = 'translateY(0) scale(1)';
+            }
+        });
+        fullscreenBtn.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        fullscreenBtn.addEventListener('touchend', function() {
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+        fullscreenBtn.classList.add('js-moved');
+    }
+
+    // Enhanced table interactions
+    var tableHeaders = document.querySelectorAll('.enhanced-th');
+    tableHeaders.forEach(function(header) {
+        header.addEventListener('click', function() {
+            this.classList.add('sorting');
+            setTimeout(() => {
+                this.classList.remove('sorting');
+            }, 300);
+        });
+        header.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // Enhanced responsive behavior
+    function handleResize() {
+        var isMobile = window.innerWidth <= 768;
+        var statusBar = document.getElementById('tableStatusBar');
+        if (statusBar) {
+            if (isMobile) {
+                statusBar.classList.add('mobile-layout');
+            } else {
+                statusBar.classList.remove('mobile-layout');
+            }
+        }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Enhanced accessibility
+    document.addEventListener('keydown', function(e) {
+        // Escape key to exit fullscreen
+        if (e.key === 'Escape' && document.fullscreenElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        // Ctrl/Cmd + P for print
+        if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+            e.preventDefault();
+            if (printBtn) {
+                printBtn.click();
+            }
+        }
+    });
+
+    // Initialize DataTable with enhanced callbacks (if not already handled)
+    if (typeof $ !== 'undefined' && $.fn && $.fn.DataTable && !$.fn.DataTable._enhancedInit) {
+        var originalDataTable = $.fn.DataTable;
+        $.fn.DataTable = function(settings) {
+            var table = originalDataTable.apply(this, arguments);
+            if (settings && settings.initComplete) {
+                var originalInitComplete = settings.initComplete;
+                settings.initComplete = function(settings, json) {
+                    hideLoading();
+                    if (originalInitComplete) {
+                        originalInitComplete.call(this, settings, json);
+                    }
+                };
+            }
+            return table;
+        };
+        $.fn.DataTable._enhancedInit = true;
+    }
+
+    // Add clear search button to DataTable search input
+    setTimeout(function() {
+        var filter = document.querySelector('.dataTables_filter');
+        if (filter && !document.getElementById('clear-search')) {
+            var input = filter.querySelector('input[type="search"]');
+            var btn = document.createElement('button');
+            btn.id = 'clear-search';
+            btn.type = 'button';
+            btn.innerHTML = '✕';
+            btn.setAttribute('aria-label', 'Clear search');
+            btn.style.marginLeft = '0.5em';
+            btn.style.fontSize = '1.1em';
+            btn.style.background = 'transparent';
+            btn.style.border = 'none';
+            btn.style.cursor = 'pointer';
+            btn.style.color = '#ff6a88';
+            btn.style.outline = 'none';
+            btn.addEventListener('click', function() {
+                if (input) {
+                    input.value = '';
+                    var event = new Event('keyup', { bubbles: true });
+                    input.dispatchEvent(event);
+                }
+            });
+            filter.appendChild(btn);
+        }
+    }, 500);
+});
+// --- END: Logic moved from markets.blade.php inline script ---
