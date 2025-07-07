@@ -2603,3 +2603,28 @@ body.dark-mode .highlight-row {
     background: #23272f !important;
 }
 
+.logo-fit-content {
+    height: 32px;
+    width: auto;
+    max-width: 48px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+/* Force fixed width for Logo (Image) column in DataTable */
+#coingecko_markets th:nth-child(2),
+#coingecko_markets td:nth-child(2) {
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+    text-align: center;
+    vertical-align: middle;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
