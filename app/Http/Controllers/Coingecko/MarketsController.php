@@ -28,7 +28,7 @@ class MarketsController extends Controller
 
             })
             ->editColumn('image', function ($image) {
-                return '<img src="'.$image->image.'" height=50 width=50 class="previewable-img">';
+                return '<img src="'.$image->image.'" height=25 width=25 class="previewable-img">';
             })
             ->editColumn('market_cap', function ($item) {
                 return "<p class='success'>".number_format((float)$item->market_cap, 2, ',', ' ')."</p>";
