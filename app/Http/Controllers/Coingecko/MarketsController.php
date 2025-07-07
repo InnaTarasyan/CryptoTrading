@@ -138,6 +138,34 @@ class MarketsController extends Controller
                 }
                 return '<div class="roi-compact">' . implode('  ', $parts) . '</div>';
             })
+            ->editColumn('ath_date', function ($item) {
+                if (empty($item->ath_date)) return ' - ';
+                $date = \Carbon\Carbon::parse($item->ath_date);
+                $now = \Carbon\Carbon::now();
+                if ($date->isToday()) {
+                    $label = 'Today';
+                } elseif ($date->isYesterday()) {
+                    $label = 'Yesterday';
+                } else {
+                    $label = $date->format('d M Y');
+                }
+                $time = $date->format('H:i');
+                return '<span style="white-space:nowrap;"><span style="font-size:1em;margin-right:3px;vertical-align:middle;">📅</span> ' . $label . ', ' . $time . '</span>';
+            })
+            ->editColumn('last_updated', function ($item) {
+                if (empty($item->last_updated)) return ' - ';
+                $date = \Carbon\Carbon::parse($item->last_updated);
+                $now = \Carbon\Carbon::now();
+                if ($date->isToday()) {
+                    $label = 'Today';
+                } elseif ($date->isYesterday()) {
+                    $label = 'Yesterday';
+                } else {
+                    $label = $date->format('d M Y');
+                }
+                $time = $date->format('H:i');
+                return '<span style="white-space:nowrap;"><span style="font-size:1em;margin-right:3px;vertical-align:middle;">⏰</span> ' . $label . ', ' . $time . '</span>';
+            })
             ->rawColumns([
                 'name',
                 'market_cap',
