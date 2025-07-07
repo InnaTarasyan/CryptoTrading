@@ -135,6 +135,18 @@ Coingecko.prototype.init = function () {
         searchBox.val('');
         oTable.search('').draw();
     });
+
+    // Force hide thead on mobile after DataTables draw (in case DataTables overrides CSS)
+    function hideTheadOnMobile() {
+        if (window.innerWidth <= 767) {
+            $('.enhanced-thead').css('display', 'none');
+        } else {
+            $('.enhanced-thead').css('display', '');
+        }
+    }
+    hideTheadOnMobile();
+    $(window).on('resize', hideTheadOnMobile);
+    oTable.on('draw', hideTheadOnMobile);
 };
 
 Coingecko.prototype.bindEvents = function () {

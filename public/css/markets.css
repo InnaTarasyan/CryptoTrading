@@ -1166,8 +1166,8 @@ body.dark-mode .table td:first-child {
 
 /* Responsive DataTable for mobile (pinky modern gradient) */
 @media (max-width: 767px) {
-    #coingecko_markets thead {
-        display: none;
+    .enhanced-thead {
+        display: none !important;
     }
     #coingecko_markets tbody, #coingecko_markets tr, #coingecko_markets td {
         display: block;
@@ -2225,6 +2225,7 @@ body.dark-mode .fullscreen-icon-bg {
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     min-width: max-content;
+    font-style: italic;
 }
 
 .enhanced-thead {
@@ -2243,13 +2244,12 @@ body.dark-mode .fullscreen-icon-bg {
 
 .enhanced-th:hover {
     background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
-    color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 106, 136, 0.3);
 }
 
 .enhanced-th:hover .datatable-header-icon svg {
-    filter: brightness(0) invert(1);
+    /* filter: brightness(0) invert(1); */
 }
 
 .sort-indicator {
@@ -2539,6 +2539,24 @@ body.dark-mode .footer-info {
     
     .enhanced-table {
         box-shadow: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .enhanced-table-container,
+    .table-wrapper {
+        overflow-x: unset !important;
+        /* Or use overflow-x: hidden if you want to completely prevent horizontal scroll */
+        /* overflow-x: hidden !important; */
+    }
+}
+
+@media (max-width: 480px) {
+    .enhanced-table-container,
+    .table-wrapper {
+        overflow-x: unset !important;
+        /* Or use overflow-x: hidden if you want to completely prevent horizontal scroll */
+        /* overflow-x: hidden !important; */
     }
 }
 
