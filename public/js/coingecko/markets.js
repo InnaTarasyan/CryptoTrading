@@ -145,6 +145,10 @@ Coingecko.prototype.bindEvents = function () {
     const darkModeStatus = $('#darkModeStatus');
     const themePreviewTooltip = $('#themePreviewTooltip');
     const body = $('body');
+    // Help modal elements
+    const helpBtn = $('#helpInfoBtn');
+    const helpModal = $('#helpInfoModal');
+    const helpClose = $('#closeHelpModal');
 
     // Check system preference
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
@@ -402,6 +406,39 @@ Coingecko.prototype.bindEvents = function () {
         $(this).addClass('touch-active');
     }).on('touchend touchcancel', function() {
         $(this).removeClass('touch-active');
+    });
+
+    // Help modal open/close logic
+    helpBtn.on('click keypress', function(e) {
+        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+            helpModal.show();
+            helpModal.find('.modern-help-modal-content').attr('tabindex', '-1').focus();
+        }
+    });
+    helpClose.on('click keypress', function(e) {
+        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+            helpModal.hide();
+            helpBtn.focus();
+        }
+    });
+    // Close modal on ESC
+    $(document).on('keydown', function(e) {
+        if (helpModal.is(':visible') && e.key === 'Escape') {
+            helpModal.hide();
+            helpBtn.focus();
+        }
+    });
+    // Trap focus in modal
+    helpModal.on('keydown', function(e) {
+        if (e.key === 'Tab') {
+            const focusable = helpModal.find('button, [tabindex]:not([tabindex="-1"])').filter(':visible');
+            const first = focusable.first()[0];
+            const last = focusable.last()[0];
+            if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+                e.preventDefault();
+                (e.shiftKey ? last : first).focus();
+            }
+        }
     });
 };
 

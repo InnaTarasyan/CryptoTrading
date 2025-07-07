@@ -9,59 +9,60 @@
 @section('content')
     <div class="m-content">
         <!-- Modern Title Bar with Icon and Enhanced Dark Mode Button -->
-        <div class="modern-title-bar">
-            <div class="m-portlet__head-title custom-modern">
-                <span class="modern-title-icon">
-                    <!-- Markets Icon SVG (Pink Gradient) -->
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="marketsGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#ff6a88"/>
-                                <stop offset="1" stop-color="#ff99ac"/>
-                            </linearGradient>
-                        </defs>
-                        <circle cx="16" cy="16" r="16" fill="url(#marketsGradient)"/>
-                        <path d="M10 16h12M16 10v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                </span>
-                <span class="modern-title-text">Coingecko Markets</span>
-            </div>
-            <!-- Enhanced Dark Mode Toggle with Better UX -->
-            <div class="dark-mode-container">
-                <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode">
-                    <div class="darkmode-switch-track">
-                        <div class="darkmode-switch-thumb">
-                            <span class="darkmode-switch-icon" id="darkModeIcon">
-                                <!-- Enhanced Sun & Moon SVG with smooth transitions -->
-                                <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
-                                    <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.8"/>
-                                </svg>
-                                <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="12" r="5" fill="#ffb300"/>
-                                    <g stroke="#ffb300" stroke-width="2" opacity="0.9">
-                                        <line x1="12" y1="1" x2="12" y2="3"/>
-                                        <line x1="12" y1="21" x2="12" y2="23"/>
-                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                                        <line x1="1" y1="12" x2="3" y2="12"/>
-                                        <line x1="21" y1="12" x2="23" y2="12"/>
-                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                                    </g>
-                                </svg>
-                            </span>
+        <div class="modern-title-bar" aria-labelledby="marketsTitle" role="banner">
+            <div class="modern-title-bar-row">
+                <div class="modern-title-main" style="display: flex; align-items: center; gap: 1em;">
+                    <span class="modern-title-icon" tabindex="0" title="Markets Overview">
+                        <!-- Markets Icon SVG (Pink Gradient) -->
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="marketsGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ff6a88"/>
+                                    <stop offset="1" stop-color="#ff99ac"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="16" cy="16" r="16" fill="url(#marketsGradient)"/>
+                            <path d="M10 16h12M16 10v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span class="modern-title-text" id="marketsTitle">Coingecko Markets</span>
+                </div>
+                <div class="dark-mode-container">
+                    <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
+                        <div class="darkmode-switch-track">
+                            <div class="darkmode-switch-thumb">
+                                <span class="darkmode-switch-icon" id="darkModeIcon">
+                                    <!-- Enhanced Sun & Moon SVG with smooth transitions -->
+                                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
+                                        <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.8"/>
+                                    </svg>
+                                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="5" fill="#ffb300"/>
+                                        <g stroke="#ffb300" stroke-width="2" opacity="0.9">
+                                            <line x1="12" y1="1" x2="12" y2="3"/>
+                                            <line x1="12" y1="21" x2="12" y2="23"/>
+                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                            <line x1="1" y1="12" x2="3" y2="12"/>
+                                            <line x1="21" y1="12" x2="23" y2="12"/>
+                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
-                    <!-- Status indicator -->
-                    <span class="darkmode-status-indicator" id="darkModeStatus"></span>
-                </button>
-                <!-- Quick theme preview tooltip -->
-                <div class="theme-preview-tooltip" id="themePreviewTooltip">
-                    <div class="tooltip-content">
-                        <span class="tooltip-icon">🌙</span>
-                        <span class="tooltip-text">Switch to Dark Mode</span>
+                        <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
+                        <!-- Status indicator -->
+                        <span class="darkmode-status-indicator" id="darkModeStatus" aria-live="polite"></span>
+                    </button>
+                    <!-- Quick theme preview tooltip -->
+                    <div class="theme-preview-tooltip" id="themePreviewTooltip">
+                        <div class="tooltip-content">
+                            <span class="tooltip-icon">🌙</span>
+                            <span class="tooltip-text">Switch to Dark Mode</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -730,6 +731,14 @@
                         <li><span style="font-size:1.2em;">⏰</span> <b>Last Updated:</b> The last time the data was updated.</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+        <!-- Help Modal -->
+        <div id="helpInfoModal" class="modern-help-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="helpInfoTitle">
+            <div class="modern-help-modal-content">
+                <button class="modern-help-modal-close" id="closeHelpModal" aria-label="Close Info">&times;</button>
+                <h2 id="helpInfoTitle">About This Page</h2>
+                <p>This page provides real-time cryptocurrency market data, including prices, market caps, and trends. Use the navigation tabs to explore different market sections. Toggle dark mode for a comfortable viewing experience.</p>
             </div>
         </div>
     </div>
