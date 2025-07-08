@@ -1,7 +1,5 @@
 "use strict";
-function CoingeckoTrendings(){
-
-}
+function CoingeckoTrendings(){}
 
 CoingeckoTrendings.prototype.init = function () {
     var oTable = $('#coingecko_trendings').DataTable({
@@ -17,8 +15,50 @@ CoingeckoTrendings.prototype.init = function () {
             {data: 'score', name: 'score'},
             {data: 'data', name: 'data'},
         ],
-        "iDisplayLength": 2,
+        "iDisplayLength": 10,
         pageLength: 10,
+        responsive: true,
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                text: '<span class="datatable-btn-icon">📋</span> Copy',
+                className: 'modern-tab beautiful-tab export-btn export-btn-copy',
+                exportOptions: { columns: ':visible' }
+            },
+            {
+                extend: 'csvHtml5',
+                text: '<span class="datatable-btn-icon">🗃️</span> CSV',
+                className: 'modern-tab beautiful-tab export-btn export-btn-csv',
+                exportOptions: { columns: ':visible' }
+            },
+            {
+                extend: 'excelHtml5',
+                text: '<span class="datatable-btn-icon">📊</span> Excel',
+                className: 'modern-tab beautiful-tab export-btn export-btn-excel',
+                exportOptions: { columns: ':visible' }
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<span class="datatable-btn-icon">📄</span> PDF',
+                className: 'modern-tab beautiful-tab export-btn export-btn-pdf',
+                exportOptions: { columns: ':visible' },
+                orientation: 'landscape',
+                pageSize: 'A4'
+            },
+            {
+                extend: 'print',
+                text: '<span class="datatable-btn-icon">🖨️</span> Print',
+                className: 'modern-tab beautiful-tab export-btn export-btn-print',
+                exportOptions: { columns: ':visible' }
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="datatable-btn-icon">🧩</span> Columns',
+                className: 'modern-tab beautiful-tab export-btn export-btn-colvis',
+                columns: ':not(:first-child)',
+            }
+        ],
         "aaSorting": [[1, "asc"]],
         "infoCallback": function(settings, start, end, max, total, pre) {
             return `\n                <div class=\"datatable-info-beautiful pinky-gradient\">\n                    <span class=\"datatable-info-icon\">💖</span>\n                    <span class=\"datatable-info-text\">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
@@ -58,13 +98,33 @@ CoingeckoTrendings.prototype.init = function () {
                 $input.trigger('input');
                 oTable.search('').draw();
             });
+
+            // Move export buttons to custom container
+            oTable.buttons().container().appendTo('#trendings-export-buttons');
+            // Style export buttons
+            $('#trendings-export-buttons .export-btn').css({
+                'margin-right': '0.5em',
+                'margin-bottom': '0.5em',
+                'border-radius': '2em',
+                'font-weight': 600,
+                'font-size': '1em',
+                'box-shadow': '0 2px 8px 0 rgba(255,106,136,0.10)',
+                'background': 'linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%)',
+                'color': '#fff',
+                'border': 'none',
+                'padding': '0.5em 1.5em',
+                'display': 'inline-flex',
+                'align-items': 'center',
+                'gap': '0.7em',
+                'cursor': 'pointer',
+                'transition': 'background 0.3s, color 0.3s, box-shadow 0.2s'
+            });
+            $('#trendings-export-buttons .export-btn:last-child').css({'margin-right': 0});
         }
     });
 };
 
-CoingeckoTrendings.prototype.bindEvents = function () {
-
-};
+CoingeckoTrendings.prototype.bindEvents = function () {};
 
 CoingeckoTrendings.prototype.reloadTable = function () {
     var oTable = $('#coingecko_trendings').DataTable();

@@ -57,6 +57,39 @@ CoingeckoExchanges.prototype.init = function () {
         "iDisplayLength": 5,
         pageLength: 10,
         "aaSorting": [[1, "asc"]],
+        "dom": "<'datatable-toolbar'B>lfrtip",
+        "buttons": [
+            {
+                extend: 'copy',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2" fill="#ffd200"/><rect x="3" y="3" width="10" height="14" rx="2" fill="#ff6a88"/></svg></span> <span>Copy</span>'
+            },
+            {
+                extend: 'csv',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#ff6a88"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">CSV</text></svg></span> <span>CSV</span>'
+            },
+            {
+                extend: 'excel',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#11998e"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">XLS</text></svg></span> <span>Excel</span>'
+            },
+            {
+                extend: 'pdf',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#ff512f"/><text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">PDF</text></svg></span> <span>PDF</span>'
+            },
+            {
+                extend: 'print',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" fill="#ffd200"/><rect x="7" y="3" width="10" height="4" rx="1" fill="#ff6a88"/></svg></span> <span>Print</span>'
+            },
+            {
+                extend: 'colvis',
+                className: 'datatable-btn',
+                text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#6a11cb"/><rect x="7" y="7" width="10" height="2" fill="#fff"/><rect x="7" y="11" width="10" height="2" fill="#fff"/><rect x="7" y="15" width="10" height="2" fill="#fff"/></svg></span> <span>Columns</span>'
+            }
+        ],
         "infoCallback": function(settings, start, end, max, total, pre) {
             return `\n                <div class=\"datatable-info-beautiful pinky-gradient\">\n                    <span class=\"datatable-info-icon\">💖</span>\n                    <span class=\"datatable-info-text\">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
         },
@@ -66,6 +99,14 @@ CoingeckoExchanges.prototype.init = function () {
                 window.location.href = "/details/" + coin;
             });
         }
+    });
+
+    // Wire up custom Export and Print buttons to DataTables actions
+    $('#exportData').on('click', function() {
+        oTable.button('.buttons-csv').trigger();
+    });
+    $('#printTable').on('click', function() {
+        oTable.button('.buttons-print').trigger();
     });
 
     // Custom search bar (match markets.js style)

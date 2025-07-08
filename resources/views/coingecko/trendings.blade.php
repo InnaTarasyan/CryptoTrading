@@ -1,6 +1,8 @@
 @extends('layouts.base')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
     <link href="{{ asset('css/trendings.css') }}" rel="stylesheet">
     <style>
@@ -340,6 +342,12 @@
         <div class="m-portlet enhanced-portlet">
             <div class="m-portlet__body mt-5 enhanced-portlet-body">
                 <input type="hidden" id="coingecko_trendings_route" value="{{ route('datatable.coingecko.trendings') }}">
+                <div class="action-buttons-row">
+                    <div class="action-buttons-left" id="trendings-export-buttons"></div>
+                    <div class="action-buttons-right">
+                        <!-- Refresh button removed from here -->
+                    </div>
+                </div>
                 <div class="table-responsive enhanced-table-container">
                     <table id="coingecko_trendings" class="table table-hover table-condensed table-striped enhanced-table">
                         <thead class="enhanced-thead">
@@ -461,6 +469,13 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="{{ url('js/coingecko/trendings.js') }}"></script>
     <script>
         // Responsive DataTable: Add data-labels to each td after table draw
