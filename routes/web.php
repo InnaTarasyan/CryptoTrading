@@ -138,3 +138,7 @@ Route::get('/reloadData', 'HomeController@reloadData');
 // Coin Gecko Markets Reviews
 Route::get('/coingecko/markets/reviews', [App\Http\Controllers\Coingecko\MarketsCoingeckoReviewController::class, 'index']);
 Route::post('/coingecko/markets/reviews', [App\Http\Controllers\Coingecko\MarketsCoingeckoReviewController::class, 'store']);
+
+// Coin Gecko Exchanges Reviews
+Route::get('/coingecko/exchanges/reviews', [\App\Http\Controllers\Coingecko\CoingeckoExchangesReviewController::class, 'index']);
+Route::post('/coingecko/exchanges/reviews', [\App\Http\Controllers\Coingecko\CoingeckoExchangesReviewController::class, 'store']);
