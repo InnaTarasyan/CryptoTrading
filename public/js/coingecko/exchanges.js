@@ -32,6 +32,9 @@ CoingeckoExchanges.prototype.init = function () {
         "iDisplayLength": 5,
         pageLength: 10,
         "aaSorting": [[1, "asc"]],
+        "infoCallback": function(settings, start, end, max, total, pre) {
+            return `\n                <div class=\"datatable-info-beautiful pinky-gradient\">\n                    <span class=\"datatable-info-icon\">💖</span>\n                    <span class=\"datatable-info-text\">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
+        },
         "fnDrawCallback": function() {
             $('#coingecko_exchanges tbody tr').click(function () {
                 var coin = $(this).find('.id').val();
