@@ -106,6 +106,27 @@ CoingeckoExchanges.prototype.init = function () {
     oTable.on('draw', highlightSearchResults);
     searchBox.on('input', highlightSearchResults);
     filter.on('click', '#clear-search', highlightSearchResults);
+
+    // ======================== Add data-labels for mobile responsiveness ========================
+    function setDataLabels() {
+        var columnLabels = [
+            'Name',
+            'Image',
+            'URL',
+            'Year Established',
+            'Country',
+            'Description',
+            'Trust score',
+            'Trust score rank',
+            'Has trading incentive'
+        ];
+        $('#coingecko_exchanges tbody tr').each(function() {
+            $(this).find('td').each(function(index) {
+                $(this).attr('data-label', columnLabels[index]);
+            });
+        });
+    }
+    oTable.on('draw', setDataLabels);
 };
 
 CoingeckoExchanges.prototype.bindEvents = function () {

@@ -392,3 +392,74 @@ body.dark-mode .dataTables_wrapper .dataTables_length select:focus {
     border: 1.5px solid #ffd200;
     box-shadow: 0 2px 8px rgba(255,153,172,0.13);
 }
+
+/* Responsive DataTable for mobile (adapted from markets.css) */
+@media (max-width: 767px) {
+    .enhanced-thead {
+        display: none !important;
+    }
+    #coingecko_exchanges tbody, #coingecko_exchanges tr, #coingecko_exchanges td {
+        display: block;
+        width: 100%;
+    }
+    #coingecko_exchanges tr {
+        margin-bottom: 1rem;
+        border: 1.5px solid #ff99ac;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+        background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%);
+        padding: 0.7rem 1rem;
+    }
+    #coingecko_exchanges td {
+        text-align: left;
+        padding-left: 48%;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #ffdde1;
+        min-height: 44px;
+        box-sizing: border-box;
+        font-size: 1em;
+        color: #d72660;
+        background: none;
+        word-break: break-word;
+    }
+    #coingecko_exchanges td:last-child {
+        border-bottom: none;
+    }
+    #coingecko_exchanges td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #ff6a88;
+        font-size: 0.98em;
+        letter-spacing: 0.01em;
+    }
+    #coingecko_exchanges {
+        width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed;
+    }
+    .table-wrapper {
+        padding: 0.5em;
+    }
+}
+
+@media (max-width: 767px) {
+    body.dark-mode #coingecko_exchanges tr {
+        background: #23272f !important;
+        border-color: #ff99ac;
+        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+    }
+    body.dark-mode #coingecko_exchanges td {
+        color: #ff99ac;
+        background: none;
+        border-bottom: 1px solid #23272f;
+    }
+    body.dark-mode #coingecko_exchanges td:before {
+        color: #ff6a88;
+    }
+}
