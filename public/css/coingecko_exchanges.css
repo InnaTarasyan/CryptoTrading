@@ -92,9 +92,17 @@
 }
 .table-wrapper {
     padding: 1.5em;
-    background: #fff;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 40%, #ff6a88 70%, #a1c4fd 100%);
     border-radius: 0 0 1.5em 1.5em;
     overflow-x: auto;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.10), 0 3px 12px 0 rgba(161, 196, 253, 0.10);
+    border: 1.5px solid rgba(255, 106, 136, 0.10);
+    transition: background 0.4s, box-shadow 0.4s;
+}
+body.dark-mode .table-wrapper {
+    background: linear-gradient(135deg, #232526 0%, #ff6a88 40%, #ff99ac 80%, #1e3c72 100%);
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(30, 60, 114, 0.13);
+    border: 1.5px solid rgba(255, 153, 172, 0.13);
 }
 .enhanced-table {
     border-radius: 1em;
