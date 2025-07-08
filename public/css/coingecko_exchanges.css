@@ -849,3 +849,15 @@ body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:fo
     background: #ffd200 !important;
 }
 
+#coingecko_exchanges td:first-child, #coingecko_exchanges th:first-child {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff99ac 100%);
+    font-weight: bold;
+    color: #d72660;
+    border-left: 3px solid #ff6a88;
+}
+body.dark-mode #coingecko_exchanges td:first-child, body.dark-mode #coingecko_exchanges th:first-child {
+    background: linear-gradient(90deg, #2d1e2f 0%, #ff6a88 100%);
+    color: #fff;
+    border-left: 3px solid #ff99ac;
+}
+

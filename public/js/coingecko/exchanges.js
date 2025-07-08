@@ -192,6 +192,8 @@ CoingeckoExchanges.prototype.init = function () {
             $(this).find('td').each(function(index) {
                 $(this).attr('data-label', columnLabels[index]);
             });
+            // Add highlight class to first column
+            $(this).find('td:first-child').addClass('highlight-first-col');
         });
     }
     oTable.on('draw', setDataLabels);
