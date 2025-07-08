@@ -352,114 +352,63 @@
                     <table id="coingecko_trendings" class="table table-hover table-condensed table-striped enhanced-table">
                         <thead class="enhanced-thead">
                             <tr>
-                                <th class="datatable-highlight-first enhanced-th">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Name</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="trendingNameGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ff6a88"/>
-                                                    <stop offset="1" stop-color="#ff99ac"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#trendingNameGradient)"/>
-                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
+                                <th class="datatable-highlight-first enhanced-th" aria-label="Name" title="The official name of the cryptocurrency">
+                                    <div class="datatable-header-flex">
+                                        <span class="datatable-header-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="trendingNameGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6a88"/><stop offset="1" stop-color="#ff99ac"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#trendingNameGradient)"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                                        </span>
+                                        <span class="datatable-header-text">Name</span>
+                                    </div>
                                 </th>
-                                <th class="enhanced-th">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Image</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="trendingLogoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ff99ac"/>
-                                                    <stop offset="1" stop-color="#ff6a88"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <rect x="3" y="3" width="18" height="18" rx="6" fill="url(#trendingLogoGradient)"/>
-                                            <circle cx="12" cy="12" r="6" fill="#fff"/>
-                                            <circle cx="12" cy="12" r="3" fill="url(#trendingLogoGradient)"/>
-                                        </svg>
-                                    </span>
+                                <th class="enhanced-th" aria-label="Image" title="The logo or icon representing the cryptocurrency">
+                                    <div class="datatable-header-flex">
+                                        <span class="datatable-header-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="trendingLogoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ff99ac"/><stop offset="1" stop-color="#ff6a88"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="6" fill="url(#trendingLogoGradient)"/><circle cx="12" cy="12" r="6" fill="#fff"/><circle cx="12" cy="12" r="3" fill="url(#trendingLogoGradient)"/></svg>
+                                        </span>
+                                        <span class="datatable-header-text">Image</span>
+                                    </div>
                                 </th>
-                                <th class="enhanced-th">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Market Cap Rank</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="trendingRankGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#f7971e"/>
-                                                    <stop offset="1" stop-color="#ffd200"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#trendingRankGradient)"/>
-                                            <path d="M8 6l2 4 3 1-2 2 1 3-4-2-4 2 1-3-2-2 3-1z" fill="#fff"/>
-                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">#</text>
-                                        </svg>
-                                    </span>
+                                <th class="enhanced-th" aria-label="Market Cap Rank" title="The ranking of the coin by total market capitalization">
+                                    <div class="datatable-header-flex">
+                                        <span class="datatable-header-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="trendingRankGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#f7971e"/><stop offset="1" stop-color="#ffd200"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#trendingRankGradient)"/><path d="M8 6l2 4 3 1-2 2 1 3-4-2-4 2 1-3-2-2 3-1z" fill="#fff"/><text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">#</text></svg>
+                                        </span>
+                                        <span class="datatable-header-text">Rank</span>
+                                    </div>
                                 </th>
-                                <th class="enhanced-th">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Slug</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="trendingSlugGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#43cea2"/>
-                                                    <stop offset="1" stop-color="#185a9d"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#trendingSlugGradient)"/>
-                                            <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
+                                <th class="enhanced-th" aria-label="Slug" title="The unique identifier or URL-friendly name for the cryptocurrency">
+                                    <div class="datatable-header-flex">
+                                        <span class="datatable-header-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="trendingSlugGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#43cea2"/><stop offset="1" stop-color="#185a9d"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#trendingSlugGradient)"/><path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                                        </span>
+                                        <span class="datatable-header-text">Slug</span>
+                                    </div>
                                 </th>
-                                <th class="enhanced-th">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Price BTC</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="trendingPriceGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ffd200"/>
-                                                    <stop offset="1" stop-color="#ffb300"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#trendingPriceGradient)"/>
-                                            <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">₿</text>
-                                        </svg>
-                                    </span>
+                                <th class="enhanced-th" aria-label="Price BTC" title="The current price of the cryptocurrency denominated in Bitcoin (BTC)">
+                                    <div class="datatable-header-flex">
+                                        <span class="datatable-header-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="trendingPriceGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd200"/><stop offset="1" stop-color="#ffb300"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#trendingPriceGradient)"/><text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">₿</text></svg>
+                                        </span>
+                                        <span class="datatable-header-text">BTC</span>
+                                    </div>
                                 </th>
-                                <th class="enhanced-th">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Score</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="trendingScoreGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ff6a88"/>
-                                                    <stop offset="1" stop-color="#ff99ac"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#trendingScoreGradient)"/>
-                                            <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">★</text>
-                                        </svg>
-                                    </span>
+                                <th class="enhanced-th" aria-label="Score" title="A composite score reflecting the trending status of the coin">
+                                    <div class="datatable-header-flex">
+                                        <span class="datatable-header-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="trendingScoreGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6a88"/><stop offset="1" stop-color="#ff99ac"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#trendingScoreGradient)"/><text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">★</text></svg>
+                                        </span>
+                                        <span class="datatable-header-text">Score</span>
+                                    </div>
                                 </th>
-                                <th class="enhanced-th">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Data</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="trendingDataGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#43cea2"/>
-                                                    <stop offset="1" stop-color="#185a9d"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#trendingDataGradient)"/>
-                                            <path d="M7 9h10M7 15h10M8 9c0 3 8 3 8 0M8 15c0-3 8-3 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
+                                <th class="enhanced-th" aria-label="Data" title="Additional relevant data or metrics about the cryptocurrency">
+                                    <div class="datatable-header-flex">
+                                        <span class="datatable-header-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="trendingDataGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#43cea2"/><stop offset="1" stop-color="#185a9d"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#trendingDataGradient)"/><path d="M7 9h10M7 15h10M8 9c0 3 8 3 8 0M8 15c0-3 8-3 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                                        </span>
+                                        <span class="datatable-header-text">Data</span>
+                                    </div>
                                 </th>
-                        </tr>
+                            </tr>
                         </thead>
                     </table>
                 </div>
