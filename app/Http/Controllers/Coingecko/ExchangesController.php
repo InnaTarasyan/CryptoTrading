@@ -26,12 +26,12 @@ class ExchangesController extends Controller
                         </span>";
 
             })
+            ->editColumn('image', function ($image) {
+                return '<img src="'.$image->image.'" height=25 width=25 class="previewable-img">';
+            })
             ->editColumn('trade_volume_24h_btc_normalized', function ($item) {
                 return "<p class='warning'>".
                     number_format((float)$item->trade_volume_24h_btc_normalized, 2, ',', ' ')."</p>";
-            })
-            ->editColumn('image', function ($item) {
-                return '<img src="'.$item->image.'" height=50 width=50>';
             })
             ->editColumn('description', function($item) {
                 return substr($item->description, 0, 150).'.....';
@@ -47,7 +47,6 @@ class ExchangesController extends Controller
             })
             ->rawColumns([
                 'name',
-                'image',
                 'url',
                 'trade_volume_24h_btc_normalized',
                 'api_id',
