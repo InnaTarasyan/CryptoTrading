@@ -183,18 +183,63 @@
                 <table id="coingecko_exchanges" class="table table-hover table-condensed table-striped enhanced-table" style="width:100%; padding-top:1%">
                     <thead class="enhanced-thead">
                         <tr>
-                            <th class="enhanced-th"><span class="datatable-header-text">Name</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">Image</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">URL</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">Year Established</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">Country</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">Description</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">Trust score</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">Trust score rank</span></th>
-                            <th class="enhanced-th"><span class="datatable-header-text">Has trading incentive</span></th>
+                            <th class="datatable-highlight-first enhanced-th" title="Official name of the exchange">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Name</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exNameGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6a88"/><stop offset="1" stop-color="#ff99ac"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="6" fill="url(#exNameGradient)"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Official logo or icon of the exchange">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Image</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exImgGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ff99ac"/><stop offset="1" stop-color="#ff6a88"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="6" fill="url(#exImgGradient)"/><circle cx="12" cy="12" r="6" fill="#fff"/><circle cx="12" cy="12" r="3" fill="url(#exImgGradient)"/></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Official website of the exchange">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">URL</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exUrlGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd200"/><stop offset="1" stop-color="#ffb300"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#exUrlGradient)"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Year the exchange was founded">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Year Established</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exYearGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#43cea2"/><stop offset="1" stop-color="#185a9d"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#exYearGradient)"/><text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">📅</text></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Country where the exchange is based">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Country</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exCountryGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6a88"/><stop offset="1" stop-color="#ff99ac"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="6" fill="url(#exCountryGradient)"/><text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">🌍</text></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Brief description of the exchange">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Description</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exDescGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd200"/><stop offset="1" stop-color="#ffb300"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#exDescGradient)"/><text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">📝</text></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Trust score assigned to the exchange">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Trust score</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exTrustGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#43cea2"/><stop offset="1" stop-color="#ffd200"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#exTrustGradient)"/><text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">🔒</text></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Rank of the exchange by trust score">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Trust score rank</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exRankGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ff99ac"/><stop offset="1" stop-color="#ff6a88"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#exRankGradient)"/><text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">🏅</text></svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th" title="Whether the exchange offers trading incentives">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Has trading incentive</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="exIncentiveGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd200"/><stop offset="1" stop-color="#ffb300"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#exIncentiveGradient)"/><text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">🎁</text></svg>
+                                </span>
+                            </th>
                         </tr>
-                        </thead>
-                    </table>
+                    </thead>
+                </table>
             </div>
         </div>
         <!-- Info Block: About Coingecko Exchanges -->
