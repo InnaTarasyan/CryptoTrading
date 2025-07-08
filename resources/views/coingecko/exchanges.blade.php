@@ -193,8 +193,8 @@
                             <th class="enhanced-th"><span class="datatable-header-text">Trust score rank</span></th>
                             <th class="enhanced-th"><span class="datatable-header-text">Has trading incentive</span></th>
                         </tr>
-                    </thead>
-                </table>
+                        </thead>
+                    </table>
             </div>
         </div>
         <!-- Info Block: About Coingecko Exchanges -->

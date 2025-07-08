@@ -342,10 +342,10 @@
         <div class="m-portlet enhanced-portlet">
             <div class="m-portlet__body mt-5 enhanced-portlet-body">
                 <input type="hidden" id="coingecko_trendings_route" value="{{ route('datatable.coingecko.trendings') }}">
-                <div class="action-buttons-row">
-                    <div class="action-buttons-left" id="trendings-export-buttons"></div>
-                    <div class="action-buttons-right">
-                        <!-- Refresh button removed from here -->
+                <div class="action-buttons-row" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 1em; gap: 1em;">
+                    <div class="action-buttons-left" id="trendings-export-buttons" style="flex: 1 1 auto; min-width: 220px;"></div>
+                    <div class="action-buttons-right" style="flex: 0 0 auto; min-width: 220px; display: flex; align-items: center; justify-content: flex-end;">
+                        <div id="trendings-search-container" style="width: 100%;"></div>
                     </div>
                 </div>
                 <div class="table-responsive enhanced-table-container">

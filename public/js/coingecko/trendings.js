@@ -89,7 +89,7 @@ CoingeckoTrendings.prototype.init = function () {
                 </svg>\
             </span>');
             $input.after('<button id="clear-search" type="button" tabindex="0">Clear</button>');
-            $filter.css({width: '100%', 'max-width': '400px', 'margin-bottom': '18px', float: 'right', display: 'flex', 'align-items': 'center', 'justify-content': 'flex-end', background: 'none', padding: 0});
+            $filter.css({width: '100%', 'max-width': '400px', 'margin-bottom': '0', float: 'none', display: 'flex', 'align-items': 'center', 'justify-content': 'flex-end', background: 'none', padding: 0});
             $filter.find('.search-wrapper').css({display: 'flex', 'align-items': 'center', width: '100%', position: 'relative'});
             $filter.find('.search-icon').css({position: 'absolute', left: '16px', width: '22px', height: '22px', 'pointer-events': 'none', top: '50%', transform: 'translateY(-50%)'});
             $input.css({'padding-left': '44px', 'padding-right': '44px'});
@@ -101,6 +101,8 @@ CoingeckoTrendings.prototype.init = function () {
 
             // Move export buttons to custom container
             oTable.buttons().container().appendTo('#trendings-export-buttons');
+            // Move search box to the right of export buttons
+            $('#trendings-search-container').append($filter);
             // Style export buttons
             $('#trendings-export-buttons .export-btn').css({
                 'margin-right': '0.5em',
