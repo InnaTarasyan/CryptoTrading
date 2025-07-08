@@ -376,6 +376,28 @@ body.dark-mode .datatable-info-beautiful strong {
     border-right: 2px solid #ff6a88;
 }
 
+/* Highlight search results (matching markets.css) */
+.dataTables_wrapper .highlight {
+    background: #fffbe7 !important;
+    color: #ff512f !important;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 2px 2px;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+body.dark-mode .dataTables_wrapper .highlight {
+    background: #333 !important;
+    color: #ffd200 !important;
+}
+.highlight-row {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd20022 100%) !important;
+    transition: background 0.2s;
+}
+body.dark-mode .highlight-row {
+    background: #23272f !important;
+}
+
 /* --- Begin nav tabs styles copied from markets.css --- */
 .modern-tabs-container, .gradient-tabs-bg {
     margin-bottom: 2em;

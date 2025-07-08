@@ -68,6 +68,7 @@ CoingeckoTrendings.prototype.init = function () {
                 var coin = $(this).find('.id').val();
                 window.location.href = "/details/" + coin;
             });
+            highlightSearchResults();
         },
         "initComplete": function() {
             // Remove the default label element and text from DataTables search
@@ -198,3 +199,41 @@ $(document).ready(function() {
     // Hide spinner initially
     $('#refreshTable .refresh-spinner').hide();
 });
+
+// ======================== Highlight Search Results ========================
+function highlightSearchResults() {
+    var table = $('#coingecko_trendings').DataTable();
+    var searchTerm = table.search();
+    if (!searchTerm) {
+        $('#coingecko_trendings tbody td').each(function() {
+            $(this).html($(this).text());
+        });
+        return;
+    }
+    var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')+')', 'gi');
+    $('#coingecko_trendings tbody tr').each(function() {
+        var row = $(this);
+        var found = false;
+        row.find('td').each(function(idx) {
+            var cell = $(this);
+            var original = cell.text();
+            // Skip highlighting for image column (index 1)
+            if (idx === 1) {
+                cell.html(original);
+                return;
+            }
+            if (searchTerm && original.match(regex)) {
+                var newHtml = original.replace(regex, '<span class="highlight">$1</span>');
+                cell.html(newHtml);
+                found = true;
+            } else {
+                cell.html(original);
+            }
+        });
+        if (found) {
+            row.addClass('highlight-row');
+        } else {
+            row.removeClass('highlight-row');
+        }
+    });
+}
