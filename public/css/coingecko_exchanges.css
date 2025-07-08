@@ -114,29 +114,51 @@ body.dark-mode .table-wrapper {
 .enhanced-thead {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
+/* --- DataTable Header Styles: Match Markets --- */
 .enhanced-th {
-    position: relative;
-    padding: 1.2em 1em;
+    background: #fff6fa;
+    color: #ff6a88;
     font-weight: 700;
-    color: #495057;
-    border-bottom: 2px solid #dee2e6;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    border-bottom: 2.5px solid #ff99ac;
+    vertical-align: middle;
+    padding: 0.7em 0.5em;
+    font-size: 1.08em;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
 }
 .enhanced-th:hover {
     background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
-    transform: translateY(-2px);
+    color: #fff;
     box-shadow: 0 4px 12px rgba(255, 106, 136, 0.3);
+    transform: translateY(-2px);
 }
 .datatable-header-text {
+    display: block;
+    text-align: center;
+    font-weight: 700;
     font-size: 1em;
-    font-weight: 600;
-    color: #495057;
+    letter-spacing: 0.01em;
+    color: #ff6a88;
 }
 .datatable-header-icon {
     display: block;
     text-align: center;
     margin-top: 2px;
+    width: 20px;
+    height: 20px;
+}
+@media (max-width: 480px) {
+    .enhanced-th {
+        padding: 0.8em 0.6em;
+        font-size: 0.8em;
+    }
+    .datatable-header-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .datatable-header-text {
+        font-size: 0.8em;
+    }
 }
 
 /* --- Info Block --- */
