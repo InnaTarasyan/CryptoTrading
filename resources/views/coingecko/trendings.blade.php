@@ -465,6 +465,56 @@
                 </div>
             </div>
         </div>
+        <!-- Info Block: About CoinGecko Trendings and Datatable -->
+        <div class="modern-info-block-upgraded upgraded-gradient-bg" style="border-radius: 1.5em; box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(255, 153, 172, 0.13); padding: 2.2em 2em 2.2em 2em; margin-top: 2.5em; margin-bottom: 2.5em; color: #fff; background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);">
+            <div class="info-paragraph" style="display: flex; align-items: flex-start; gap: 1.5em; margin-bottom: 2.2em; flex-wrap: wrap;">
+                <span style="flex-shrink:0; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.13); border-radius:50%; width:3.5em; height:3.5em; box-shadow:0 2px 8px 0 rgba(255,106,136,0.10);">
+                    <!-- Trending Icon -->
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="7" y="12" width="26" height="16" rx="4" fill="#ff99ac" stroke="#fff" stroke-width="2"/>
+                        <rect x="11" y="16" width="6" height="8" rx="2" fill="#fff"/>
+                        <rect x="19" y="16" width="6" height="8" rx="2" fill="#fff"/>
+                        <rect x="27" y="16" width="2" height="8" rx="1" fill="#fff"/>
+                    </svg>
+                </span>
+                <div style="min-width: 220px; flex: 1;">
+                    <p class="info-title" style="margin-bottom:0.5em; font-size:1.25em; font-weight:700; letter-spacing:0.01em;">
+                        <span style="color:#fff;">About CoinGecko Trendings</span>
+                    </p>
+                    <p class="info-desc" style="margin-bottom:0; font-size:1.08em; line-height:1.7;">
+                        CoinGecko Trendings is a feature that highlights the most popular and rapidly rising cryptocurrencies based on real-time user interest, trading activity, and market momentum. It aggregates trending tokens and coins across multiple blockchains, providing traders and enthusiasts with a snapshot of what s hot in the crypto market. By tracking trending assets, users can discover new opportunities, monitor market sentiment, and stay ahead of emerging trends. The trending list is updated frequently, reflecting the dynamic nature of the cryptocurrency space and helping users make informed decisions in a fast-moving market.
+                    </p>
+                </div>
+            </div>
+            <div class="info-paragraph" style="display: flex; align-items: flex-start; gap: 1.5em; flex-wrap: wrap;">
+                <span style="flex-shrink:0; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.13); border-radius:50%; width:3.5em; height:3.5em; box-shadow:0 2px 8px 0 rgba(255,106,136,0.10);">
+                    <!-- Table/Analytics Icon -->
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="7" y="12" width="26" height="16" rx="4" fill="#ff6a88" stroke="#fff" stroke-width="2"/>
+                        <rect x="11" y="16" width="6" height="8" rx="2" fill="#fff"/>
+                        <rect x="19" y="16" width="6" height="8" rx="2" fill="#fff"/>
+                        <rect x="27" y="16" width="2" height="8" rx="1" fill="#fff"/>
+                    </svg>
+                </span>
+                <div style="min-width: 220px; flex: 1;">
+                    <p class="info-title" style="margin-bottom:0.5em; font-size:1.18em; font-weight:700; letter-spacing:0.01em;">
+                        <span style="color:#fff;">About the Trending Datatable</span>
+                    </p>
+                    <p style="font-size:1.08em; line-height:1.7; margin-bottom:1em;">
+                        The datatable above provides a real-time overview of trending cryptocurrencies, allowing users to quickly compare key metrics and discover which coins are gaining traction. Each column in the table offers specific insights to help users analyze and act on market trends.
+                    </p>
+                    <ul class="datatable-columns-list" style="margin-bottom:0; font-size:1.08em; line-height:1.7; padding-left:1.2em; list-style:none;">
+                        <li><span style="font-size:1.2em;">🔤</span> <b>Name:</b> The official name of the cryptocurrency.</li>
+                        <li><span style="font-size:1.2em;">🖼️</span> <b>Image:</b> The logo or icon representing the cryptocurrency.</li>
+                        <li><span style="font-size:1.2em;">🏅</span> <b>Market Cap Rank:</b> The ranking of the coin by total market capitalization, indicating its relative size in the market.</li>
+                        <li><span style="font-size:1.2em;">🔗</span> <b>Slug:</b> The unique identifier or URL-friendly name for the cryptocurrency, often used for navigation or API queries.</li>
+                        <li><span style="font-size:1.2em;">₿</span> <b>Price BTC:</b> The current price of the cryptocurrency denominated in Bitcoin (BTC), showing its value relative to the leading digital asset.</li>
+                        <li><span style="font-size:1.2em;">★</span> <b>Score:</b> A composite score reflecting the trending status of the coin, based on factors like user interest, trading volume, and recent performance.</li>
+                        <li><span style="font-size:1.2em;">📊</span> <b>Data:</b> Additional relevant data or metrics about the cryptocurrency, such as recent changes, volume, or other analytics.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('scripts')
