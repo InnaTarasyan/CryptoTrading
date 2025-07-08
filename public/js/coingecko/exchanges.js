@@ -130,7 +130,75 @@ CoingeckoExchanges.prototype.init = function () {
 };
 
 CoingeckoExchanges.prototype.bindEvents = function () {
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function () {
+            const isDark = document.body.classList.toggle('dark-mode');
+            // Update icon and status
+            const iconMoon = darkModeToggle.querySelector('.icon-moon');
+            const iconSun = darkModeToggle.querySelector('.icon-sun');
+            if (isDark) {
+                iconMoon.style.display = 'none';
+                iconSun.style.display = '';
+                darkModeToggle.setAttribute('aria-checked', 'true');
+                document.getElementById('darkModeText').textContent = 'Light Mode';
+                document.getElementById('darkModeStatus').textContent = 'Dark mode enabled';
+            } else {
+                iconMoon.style.display = '';
+                iconSun.style.display = 'none';
+                darkModeToggle.setAttribute('aria-checked', 'false');
+                document.getElementById('darkModeText').textContent = 'Dark Mode';
+                document.getElementById('darkModeStatus').textContent = 'Light mode enabled';
+            }
+        });
+    }
 
+    // Refresh Button
+    const refreshBtn = document.getElementById('refreshTable');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
+            refreshBtn.setAttribute('aria-busy', 'true');
+            refreshBtn.setAttribute('aria-disabled', 'true');
+            // Show spinner if desired
+            const table = $('#coingecko_exchanges').DataTable();
+            table.ajax.reload(function () {
+                refreshBtn.setAttribute('aria-busy', 'false');
+                refreshBtn.setAttribute('aria-disabled', 'false');
+            }, false);
+        });
+    }
+
+    // Fullscreen Button
+    const fullscreenBtn = document.getElementById('fullscreenToggle');
+    const fullscreenContainer = document.getElementById('datatableFullscreenContainer');
+    if (fullscreenBtn && fullscreenContainer) {
+        fullscreenBtn.addEventListener('click', function () {
+            if (!document.fullscreenElement) {
+                if (fullscreenContainer.requestFullscreen) {
+                    fullscreenContainer.requestFullscreen();
+                }
+                fullscreenContainer.classList.add('fullscreen-active');
+                fullscreenBtn.setAttribute('aria-pressed', 'true');
+                fullscreenBtn.querySelector('.icon-fullscreen').style.display = 'none';
+                fullscreenBtn.querySelector('.icon-exit-fullscreen').style.display = '';
+                document.getElementById('fullscreenText').textContent = 'Exit Fullscreen';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+        document.addEventListener('fullscreenchange', function () {
+            if (!document.fullscreenElement) {
+                fullscreenContainer.classList.remove('fullscreen-active');
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                fullscreenBtn.querySelector('.icon-fullscreen').style.display = '';
+                fullscreenBtn.querySelector('.icon-exit-fullscreen').style.display = 'none';
+                document.getElementById('fullscreenText').textContent = 'Fullscreen';
+            }
+        });
+    }
 };
 
 $(document).ready(function() {

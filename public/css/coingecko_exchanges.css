@@ -73,17 +73,19 @@
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.8em;
-    color: #fff;
-    font-size: 0.9em;
+    color: #ff6a88;
+    font-size: 0.95em;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    outline: none;
 }
-.status-action-btn:hover {
+.status-action-btn:hover, .status-action-btn:focus {
     background: rgba(255, 255, 255, 0.3);
+    color: #ff99ac;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(255, 106, 136, 0.2);
 }
 .status-action-btn:active {
     transform: translateY(0);
@@ -463,3 +465,243 @@ body.dark-mode .dataTables_wrapper .dataTables_length select:focus {
         color: #ff6a88;
     }
 }
+/* --- Fullscreen Styles --- */
+#datatableFullscreenContainer.fullscreen-active {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    background: #fff !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
+#datatableFullscreenContainer.fullscreen-active .table-wrapper {
+    flex: 1 1 auto;
+    height: 100%;
+    padding: 2vw 2vw 2vw 2vw;
+    background: #fff;
+    border-radius: 0;
+}
+body.dark-mode #datatableFullscreenContainer.fullscreen-active,
+body.dark-mode #datatableFullscreenContainer.fullscreen-active .table-wrapper {
+    background: #181a20 !important;
+}
+
+/* --- Dark Mode Enhancements --- */
+body.dark-mode {
+    background: #181a20 !important;
+    color: #eaeaea !important;
+}
+body.dark-mode .modern-title-bar,
+body.dark-mode .table-status-bar {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+    color: #fff !important;
+}
+body.dark-mode .enhanced-table-container {
+    background: #23272f !important;
+    box-shadow: 0 8px 32px rgba(255, 153, 172, 0.08);
+}
+body.dark-mode .table-wrapper {
+    background: #23272f !important;
+}
+body.dark-mode .enhanced-table {
+    background: #23272f !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .enhanced-thead {
+    background: linear-gradient(135deg, #23272f 0%, #23272f 100%) !important;
+}
+body.dark-mode .enhanced-th,
+body.dark-mode .datatable-header-text {
+    color: #ffd200 !important;
+    background: transparent !important;
+}
+body.dark-mode .enhanced-th:hover {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+    box-shadow: 0 4px 12px rgba(30,30,30,0.3) !important;
+}
+body.dark-mode .dataTables_filter input[type="search"] {
+    background: #23272f !important;
+    color: #ffd200 !important;
+    border: 1.5px solid #ff99ac !important;
+}
+body.dark-mode .dataTables_filter input[type="search"]::placeholder {
+    color: #ff99ac !important;
+    opacity: 1;
+}
+body.dark-mode .dataTables_filter .search-icon {
+    filter: brightness(1.5) grayscale(1);
+}
+body.dark-mode .datatable-info-beautiful {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+    color: #fff !important;
+}
+body.dark-mode .datatable-info-beautiful strong {
+    color: #fff !important;
+}
+body.dark-mode .status-action-btn {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .status-action-btn:hover {
+    background: rgba(255,255,255,0.18) !important;
+    color: #fff !important;
+}
+body.dark-mode .highlight {
+    background: #ffd200 !important;
+    color: #23272f !important;
+}
+body.dark-mode .highlight-row {
+    background: #2d313a !important;
+}
+
+/* --- Modern Action Buttons: Dark Mode, Refresh, Full Screen --- */
+.modern-title-actions .modern-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.7em 1.5em;
+    border: none;
+    border-radius: 1.2em;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.13);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    outline: none;
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    user-select: none;
+}
+.modern-title-actions .modern-tab:focus {
+    box-shadow: 0 0 0 3px #ff99ac55;
+    z-index: 2;
+}
+.modern-title-actions .modern-tab:hover {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+}
+.modern-title-actions .modern-tab:active {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    transform: scale(0.98);
+}
+
+/* --- Dark Mode Button --- */
+.modern-title-actions .darkmode-switch {
+    background: linear-gradient(90deg, #232526 0%, #ff6a88 100%);
+    color: #fff;
+    border: 2px solid #ff6a88;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.7em 1.5em;
+    font-size: 1.08em;
+    font-weight: 700;
+    border-radius: 1.2em;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.modern-title-actions .darkmode-switch:hover,
+.modern-title-actions .darkmode-switch:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #232526 100%);
+    border-color: #ff99ac;
+    box-shadow: 0 0 0 3px #ff99ac55;
+}
+
+/* --- Refresh Button --- */
+.modern-title-actions .refresh-btn {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    color: #fff;
+    border: 2px solid #ff6a88;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.7em 1.5em;
+    font-size: 1.08em;
+    font-weight: 700;
+    border-radius: 1.2em;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.modern-title-actions .refresh-btn:hover,
+.modern-title-actions .refresh-btn:focus {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    border-color: #ff99ac;
+    box-shadow: 0 0 0 3px #ff6a8855;
+}
+
+/* --- Full Screen Button --- */
+.modern-title-actions .modern-fullscreen-btn {
+    background: linear-gradient(90deg, #ff6a88 0%, #fcb1e3 100%);
+    color: #fff;
+    border: 2px solid #ff99ac;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.7em 1.5em;
+    font-size: 1.08em;
+    font-weight: 700;
+    border-radius: 1.2em;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.modern-title-actions .modern-fullscreen-btn:hover,
+.modern-title-actions .modern-fullscreen-btn:focus {
+    background: linear-gradient(90deg, #fcb1e3 0%, #ff6a88 100%);
+    border-color: #ff6a88;
+    box-shadow: 0 0 0 3px #fcb1e355;
+}
+
+/* --- Button Icon Styling --- */
+.modern-title-actions .modern-tab svg {
+    margin-right: 0.5em;
+    vertical-align: middle;
+    width: 1.4em;
+    height: 1.4em;
+    display: inline-block;
+}
+
+/* --- Button Label Styling --- */
+.modern-title-actions .modern-tab span {
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+/* --- Responsive: Stack buttons on small screens --- */
+@media (max-width: 600px) {
+    .modern-title-actions {
+        flex-direction: column;
+        gap: 0.7em;
+        align-items: stretch;
+    }
+    .modern-title-actions .modern-tab {
+        width: 100%;
+        justify-content: center;
+        min-width: unset;
+        min-height: 44px;
+        font-size: 1em;
+    }
+}
+
+/* --- Dark Mode Styles for Buttons --- */
+body.dark-mode .modern-title-actions .modern-tab {
+    background: linear-gradient(90deg, #232526 0%, #ff6a88 100%);
+    color: #fff;
+    border-color: #ff99ac;
+}
+body.dark-mode .modern-title-actions .modern-tab:hover,
+body.dark-mode .modern-title-actions .modern-tab:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #232526 100%);
+    color: #fff;
+    border-color: #ff6a88;
+}
+

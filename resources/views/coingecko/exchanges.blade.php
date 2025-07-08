@@ -26,6 +26,74 @@
                     </span>
                     <span class="modern-title-text" id="exchangesTitle">Coingecko Exchanges</span>
                 </div>
+                <div class="modern-title-actions" style="display: flex; gap: 1em; align-items: center;">
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
+                        <div class="darkmode-switch-track">
+                            <div class="darkmode-switch-thumb">
+                                <span class="darkmode-switch-icon" id="darkModeIcon">
+                                    <!-- Sun & Moon SVG -->
+                                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
+                                        <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.8"/>
+                                    </svg>
+                                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                                        <circle cx="12" cy="12" r="5" fill="#ffb300"/>
+                                        <g stroke="#ffb300" stroke-width="2" opacity="0.9">
+                                            <line x1="12" y1="1" x2="12" y2="3"/>
+                                            <line x1="12" y1="21" x2="12" y2="23"/>
+                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                            <line x1="1" y1="12" x2="3" y2="12"/>
+                                            <line x1="21" y1="12" x2="23" y2="12"/>
+                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
+                        <span class="darkmode-status-indicator" id="darkModeStatus" aria-live="polite"></span>
+                    </button>
+                    <!-- Refresh Button -->
+                    <button id="refreshTable" class="modern-tab refresh-btn" title="Refresh Table" aria-label="Refresh Table" aria-busy="false" aria-disabled="false" tabindex="0" style="overflow:hidden; position:relative;">
+                        <span class="refresh-btn-icon" style="position:relative; display:inline-flex; align-items:center; justify-content:center;">
+                            <svg class="icon-refresh-upgraded" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="refreshGradientModernUpgradedPink" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#ff6a88"/>
+                                        <stop offset="1" stop-color="#ff99ac"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="16" cy="16" r="15" fill="#fff"/>
+                                <path d="M25 10A12 12 0 1 0 27 16h-2.5" stroke="url(#refreshGradientModernUpgradedPink)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="24 4 24 11 31 11" stroke="url(#refreshGradientModernUpgradedPink)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                        </span>
+                        <span class="refresh-btn-label">Refresh</span>
+                    </button>
+                    <!-- Fullscreen Button -->
+                    <button id="fullscreenToggle" class="modern-tab modern-fullscreen-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen" aria-pressed="false" role="button" tabindex="0">
+                        <span class="fullscreen-icon-bg">
+                            <svg class="icon-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                <rect x="3" y="3" width="2" height="7" rx="1" fill="#ff6a88"/>
+                                <rect x="14" y="3" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                <rect x="19" y="3" width="2" height="7" rx="1" fill="#ff6a88"/>
+                                <rect x="3" y="19" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                <rect x="3" y="14" width="2" height="7" rx="1" fill="#ff6a88"/>
+                                <rect x="14" y="19" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                <rect x="19" y="14" width="2" height="7" rx="1" fill="#ff6a88"/>
+                            </svg>
+                            <svg class="icon-exit-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+                                <rect x="5" y="11" width="14" height="2" rx="1" fill="#ff99ac"/>
+                                <rect x="11" y="5" width="2" height="14" rx="1" fill="#ff99ac"/>
+                            </svg>
+                        </span>
+                        <span id="fullscreenText" class="fullscreen-switch-label">Fullscreen</span>
+                    </button>
+                </div>
             </div>
         </div>
         <!-- Enhanced Table Container -->
