@@ -705,3 +705,139 @@ body.dark-mode .modern-title-actions .modern-tab:focus {
     border-color: #ff6a88;
 }
 
+/* Tabs */
+.modern-tabs-container, .gradient-tabs-bg {
+    margin-bottom: 2em;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10);
+    padding: 0.7em 1.2em;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+@media (max-width: 900px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.5em 0.3em;
+    }
+}
+@media (max-width: 600px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.3em 0.1em;
+        border-radius: 0.8em;
+    }
+}
+body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.modern-tabs {
+    display: flex;
+    gap: 1.2em;
+    flex-wrap: wrap;
+}
+.beautiful-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2em;
+    border-radius: 1em;
+    padding: 0.5em 0.5em;
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #ff6a88 100%);
+    box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+    justify-content: flex-start;
+}
+.modern-tab, .beautiful-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: #fff;
+    border: none;
+    color: #ff6a88;
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 1em 1em 0 0;
+    padding: 0.6em 1.3em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.04);
+    outline: none;
+}
+.modern-tab.active, .modern-tab:focus, .modern-tab:hover,
+.beautiful-tab.active, .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,106,136,0.12);
+    z-index: 2;
+    transform: translateY(-2px) scale(1.04);
+}
+.beautiful-tab .tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #fffbe7;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+}
+.beautiful-tab .tab-label {
+    margin-left: 2px;
+}
+.beautiful-tab:hover:not(.active) {
+    background: #fffbe7;
+    color: #ff6a88;
+    transform: translateY(-1px) scale(1.02);
+}
+@media (max-width: 900px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.5em 0.3em;
+    }
+}
+@media (max-width: 767px) {
+    .modern-tabs, .beautiful-tabs {
+        flex-direction: column;
+        gap: 0.7em;
+        border-radius: 1em;
+        padding: 0.3em 0.1em;
+    }
+    .modern-tab, .beautiful-tab {
+        width: 100%;
+        border-radius: 1em;
+        justify-content: flex-start;
+        font-size: 1em;
+        padding: 0.8em 1em;
+    }
+    .beautiful-tab .tab-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+@media (max-width: 600px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.2em 0.05em;
+        border-radius: 0.8em;
+    }
+}
+body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .modern-tab, body.dark-mode .beautiful-tab {
+    background: #23272f !important;
+    color: #ffd200 !important;
+}
+body.dark-mode .modern-tab.active, body.dark-mode .modern-tab:focus, body.dark-mode .modern-tab:hover,
+body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+    color: #23272f !important;
+}
+body.dark-mode .beautiful-tab .tab-icon {
+    background: #23272f !important;
+}
+body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:focus .tab-icon {
+    background: #ffd200 !important;
+}
+
