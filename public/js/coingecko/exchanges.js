@@ -132,6 +132,49 @@ CoingeckoExchanges.prototype.init = function () {
     searchBox.on('input', highlightSearchResults);
     filter.on('click', '#clear-search', highlightSearchResults);
 
+    // ======================== Custom Tooltip for Description ========================
+    // Remove any existing tooltip
+    $(document).off('mouseenter.descTooltip mouseleave.descTooltip');
+    $(document).on('mouseenter.descTooltip', '.desc-truncated', function(e) {
+        var fullText = $(this).attr('title');
+        if (!fullText) return;
+        var $tooltip = $('<div class="custom-desc-tooltip"></div>').text(fullText).css({
+            position: 'fixed',
+            'z-index': 9999,
+            'background': '#fff6fa',
+            'color': '#ff6a88',
+            'border': '1.5px solid #ff6a88',
+            'border-radius': '10px',
+            'padding': '12px 16px',
+            'box-shadow': '0 4px 16px rgba(255,106,136,0.13)',
+            'font-size': '1em',
+            'max-width': '350px',
+            'word-break': 'break-word',
+            'pointer-events': 'none',
+            'opacity': 0,
+            'transition': 'opacity 0.15s',
+        });
+        $('body').append($tooltip);
+        var left = e.clientX + 18;
+        var top = e.clientY + 8;
+        var maxLeft = $(window).width() - $tooltip.outerWidth() - 16;
+        var maxTop = $(window).height() - $tooltip.outerHeight() - 16;
+        if(left > maxLeft) left = maxLeft;
+        if(top > maxTop) top = maxTop;
+        $tooltip.css({ left: left, top: top, opacity: 1 });
+        $(this).on('mousemove.descTooltip', function(ev) {
+            var moveLeft = ev.clientX + 18;
+            var moveTop = ev.clientY + 8;
+            if(moveLeft > maxLeft) moveLeft = maxLeft;
+            if(moveTop > maxTop) moveTop = maxTop;
+            $tooltip.css({ left: moveLeft, top: moveTop });
+        });
+    });
+    $(document).on('mouseleave.descTooltip', '.desc-truncated', function() {
+        $('.custom-desc-tooltip').remove();
+        $(this).off('mousemove.descTooltip');
+    });
+
     // ======================== Add data-labels for mobile responsiveness ========================
     function setDataLabels() {
         var columnLabels = [

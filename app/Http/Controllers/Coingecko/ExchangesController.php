@@ -34,7 +34,20 @@ class ExchangesController extends Controller
                     number_format((float)$item->trade_volume_24h_btc_normalized, 2, ',', ' ')."</p>";
             })
             ->editColumn('description', function($item) {
-                return substr($item->description, 0, 150).'.....';
+                $desc = $item->description ?? '';
+                // Truncate at the last space before 150 chars to avoid cutting words
+                if (mb_strlen($desc) > 150) {
+                    $truncated = mb_substr($desc, 0, 150);
+                    $lastSpace = mb_strrpos($truncated, ' ');
+                    if ($lastSpace !== false) {
+                        $truncated = mb_substr($truncated, 0, $lastSpace);
+                    }
+                    $truncated .= '...';
+                } else {
+                    $truncated = $desc;
+                }
+                // Use title attribute for tooltip
+                return '<span class="desc-truncated" title="'.e($desc).'">'.e($truncated).'</span>';
             })
             ->editColumn('url', function($item) {
                 return '<a href="'.$item->url.'">'.$item->url.'</a>';
