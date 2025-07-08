@@ -1,0 +1,602 @@
+/* Modern DataTable and UI styles for Trendings page (pinky gradients) */
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff !important;
+    border-radius: 1em;
+    border: none;
+    margin: 0 0.2em;
+    padding: 0.4em 1em;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #fff !important;
+    color: #ff6a88 !important;
+}
+.dataTables_wrapper .dataTables_length {
+    margin-bottom: 18px;
+    float: left;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    padding: 8px 18px;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dataTables_wrapper .dataTables_length label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    color: #fff;
+}
+.dataTables_wrapper .dataTables_length select {
+    border-radius: 16px;
+    border: 1.5px solid #ff6a88;
+    padding: 6px 32px 6px 16px;
+    background: #fff6fa;
+    color: #ff6a88;
+    font-size: 15px;
+    margin-left: 8px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-weight: 600;
+}
+.dataTables_wrapper .dataTables_length select:focus {
+    border: 1.5px solid #ff99ac;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.08);
+}
+.dataTables_wrapper .dataTables_info {
+    color: #ff6a88;
+    font-weight: 600;
+    margin-top: 1em;
+}
+
+.dataTables_filter {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 18px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: none;
+    padding: 0;
+}
+.dataTables_filter .search-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+.dataTables_filter .search-icon {
+    position: absolute;
+    left: 16px;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.dataTables_filter input[type="search"] {
+    border-radius: 24px;
+    border: 1.5px solid #ff6a88;
+    padding: 8px 44px 8px 44px;
+    background: #fff6fa;
+    transition: border 0.2s, box-shadow 0.2s;
+    font-size: 15px;
+    outline: none;
+    color: #ff6a88;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+}
+.dataTables_filter input[type="search"]:focus {
+    border: 1.5px solid #ff99ac;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.08);
+}
+.dataTables_filter #clear-search {
+    margin-left: 8px;
+    border: none;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 8px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.12);
+}
+.dataTables_filter #clear-search:hover {
+    background: linear-gradient(90deg, #fff 0%, #ff6a88 100%);
+    color: #ff6a88;
+}
+
+/* Highlight first column in datatable (pinky modern gradient) */
+#coingecko_trendings th:first-child,
+#coingecko_trendings td:first-child {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff6a88 100%);
+    color: #d72660;
+    font-weight: bold;
+    border-right: 2px solid #ff6a88;
+}
+
+body.dark-mode #coingecko_trendings th:first-child,
+body.dark-mode #coingecko_trendings td:first-child {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+    color: #ff99ac !important;
+    border-right: 2px solid #ff6a88 !important;
+}
+
+/* Responsive DataTable for mobile (pinky modern gradient) */
+@media (max-width: 767px) {
+    .enhanced-thead {
+        display: none !important;
+    }
+    #coingecko_trendings tbody, #coingecko_trendings tr, #coingecko_trendings td {
+        display: block;
+        width: 100%;
+    }
+    #coingecko_trendings tr {
+        margin-bottom: 1rem;
+        border: 1.5px solid #ff99ac;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+        background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%);
+        padding: 0.7rem 1rem;
+    }
+    #coingecko_trendings td {
+        text-align: left;
+        padding-left: 48%;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #ffdde1;
+        min-height: 44px;
+        box-sizing: border-box;
+        font-size: 1em;
+        color: #d72660;
+        background: none;
+    }
+    #coingecko_trendings td:last-child {
+        border-bottom: none;
+    }
+    #coingecko_trendings td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #ff6a88;
+        font-size: 0.98em;
+        letter-spacing: 0.01em;
+    }
+}
+
+body.dark-mode {
+    background: linear-gradient(120deg, #23272f 0%, #3a3f51 100%) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #ff6a88 !important;
+    color: #fff !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_length {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_length label {
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_length select {
+    background: #23272f !important;
+    color: #ff99ac !important;
+    border: 1.5px solid #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_length select:focus {
+    border: 1.5px solid #ff6a88 !important;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+}
+body.dark-mode .dataTables_info {
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_filter input[type="search"] {
+    background: #23272f !important;
+    color: #ff99ac !important;
+    border: 1.5px solid #ff99ac !important;
+}
+body.dark-mode .dataTables_filter input[type="search"]:focus {
+    border: 1.5px solid #ff6a88 !important;
+    background: #23272f !important;
+}
+body.dark-mode .dataTables_filter #clear-search {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%) !important;
+    color: #23272f !important;
+}
+body.dark-mode .dataTables_filter #clear-search:hover {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%) !important;
+    color: #fff !important;
+}
+
+.modern-title-main {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.refresh-btn-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-spinner {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.icon-exit-fullscreen {
+    display: none;
+}
+
+.enhanced-table {
+    width: 100%;
+    padding-top: 1%;
+}
+
+/* --- DataTable Info (Markets Parity) --- */
+.datatable-info-beautiful {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75em;
+    font-size: 1.08em;
+    font-weight: 500;
+    border-radius: 1.2em;
+    padding: 0.5em 1.3em;
+    box-shadow: 0 4px 16px 0 rgba(255, 106, 136, 0.10), 0 1.5px 6px 0 rgba(255, 0, 128, 0.08);
+    background: #fff;
+    color: #ff2d55;
+    margin: 0.5em 0;
+    border: none;
+}
+.pinky-gradient {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff !important;
+    box-shadow: 0 4px 16px 0 rgba(255, 106, 136, 0.18), 0 1.5px 6px 0 rgba(255, 0, 128, 0.13);
+}
+.datatable-info-icon {
+    font-size: 1.3em;
+    margin-right: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    box-shadow: 0 2px 8px 0 rgba(255, 106, 136, 0.10);
+}
+.datatable-info-text {
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+.datatable-info-beautiful strong {
+    color: #ff2d55;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+@media (max-width: 600px) {
+    .datatable-info-beautiful {
+        font-size: 1em;
+        padding: 10px 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .datatable-info-icon {
+        font-size: 1.2em;
+        width: 1.8em;
+        height: 1.8em;
+        margin-right: 0;
+        margin-bottom: 4px;
+    }
+}
+body.dark-mode .datatable-info-beautiful {
+    background: linear-gradient(90deg, #23272f 0%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 2px 12px rgba(255,153,172,0.08);
+}
+body.dark-mode .datatable-info-icon {
+    color: #ff99ac;
+    background: linear-gradient(135deg, #23272f 0%, #ff99ac 100%);
+    box-shadow: 0 2px 8px rgba(255,153,172,0.10);
+}
+body.dark-mode .datatable-info-text {
+    color: #ff99ac;
+}
+body.dark-mode .datatable-info-beautiful strong {
+    color: #ffd200;
+}
+
+.datatable-header-text {
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1em;
+    letter-spacing: 0.01em;
+    color: #ff6a88;
+}
+
+.datatable-header-icon {
+    display: block;
+    text-align: center;
+    margin-top: 2px;
+}
+
+.enhanced-th {
+    background: #fff6fa;
+    color: #ff6a88;
+    font-weight: 700;
+    border-bottom: 2.5px solid #ff99ac;
+    vertical-align: middle;
+    padding: 0.7em 0.5em;
+    font-size: 1.08em;
+    text-align: center;
+}
+
+.enhanced-thead {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff99ac 100%);
+    border-radius: 1em 1em 0 0;
+}
+
+.datatable-highlight-first {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff6a88 100%);
+    color: #d72660;
+    font-weight: bold;
+    border-right: 2px solid #ff6a88;
+}
+
+/* --- Begin nav tabs styles copied from markets.css --- */
+.modern-tabs-container, .gradient-tabs-bg {
+    margin-bottom: 2em;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10);
+    padding: 0.7em 1.2em;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+@media (max-width: 900px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.5em 0.3em;
+    }
+}
+@media (max-width: 600px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.3em 0.1em;
+        border-radius: 0.8em;
+    }
+}
+body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.modern-tabs {
+    display: flex;
+    gap: 1.2em;
+    flex-wrap: wrap;
+}
+.beautiful-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2em;
+    border-radius: 1em;
+    padding: 0.5em 0.5em;
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #ff6a88 100%);
+    box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+    justify-content: flex-start;
+}
+.modern-tab, .beautiful-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: #fff;
+    border: none;
+    color: #ff6a88;
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 1em 1em 0 0;
+    padding: 0.6em 1.3em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.04);
+    outline: none;
+}
+.modern-tab.active, .modern-tab:focus, .modern-tab:hover,
+.beautiful-tab.active, .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,106,136,0.12);
+    z-index: 2;
+    transform: translateY(-2px) scale(1.04);
+}
+.beautiful-tab .tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #fffbe7;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+}
+.beautiful-tab .tab-label {
+    margin-left: 2px;
+}
+.beautiful-tab:hover:not(.active) {
+    background: #fffbe7;
+    color: #ff6a88;
+    transform: translateY(-1px) scale(1.02);
+}
+@media (max-width: 900px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.5em 0.3em;
+    }
+}
+@media (max-width: 767px) {
+    .modern-tabs, .beautiful-tabs {
+        flex-direction: column;
+        gap: 0.7em;
+        border-radius: 1em;
+        padding: 0.3em 0.1em;
+    }
+    .modern-tab, .beautiful-tab {
+        width: 100%;
+        border-radius: 1em;
+        justify-content: flex-start;
+        font-size: 1em;
+        padding: 0.8em 1em;
+    }
+    .beautiful-tab .tab-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+@media (max-width: 600px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.2em 0.05em;
+        border-radius: 0.8em;
+    }
+}
+body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .modern-tab, body.dark-mode .beautiful-tab {
+    background: #23272f !important;
+    color: #ffd200 !important;
+}
+body.dark-mode .modern-tab.active, body.dark-mode .modern-tab:focus, body.dark-mode .modern-tab:hover,
+body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+    color: #23272f !important;
+}
+body.dark-mode .beautiful-tab .tab-icon {
+    background: #23272f !important;
+}
+body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:focus .tab-icon {
+    background: #ffd200 !important;
+}
+/* --- End nav tabs styles copied from markets.css --- */
+
+/* --- Modern Title Bar (copied from markets.css for trending) --- */
+.modern-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%);
+    border-radius: 1.5em;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(255, 153, 172, 0.13);
+    padding: 1.5em 2em 1.5em 2em;
+    margin-bottom: 2em;
+    color: #fff;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.modern-title-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+}
+.modern-title-text {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #fff;
+}
+.modern-title-subtitle {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #fff6fa;
+    margin-top: 0.2em;
+    margin-left: 0.2em;
+    opacity: 0.85;
+}
+.modern-title-help {
+    background: none;
+    border: none;
+    margin-left: 1em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2em;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+.modern-title-help:focus, .modern-title-help:hover {
+    background: rgba(255,255,255,0.15);
+    outline: none;
+}
+@media (max-width: 700px) {
+    .modern-title-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1em 0.7em;
+        gap: 0.7em;
+        text-align: left;
+    }
+    .modern-title-help {
+        margin-left: 0;
+        margin-top: 0.5em;
+    }
+    .modern-title-subtitle {
+        margin-left: 0;
+    }
+}
+.modern-title-bar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2em;
+}
+@media (max-width: 700px) {
+    .modern-title-bar-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.7em;
+        width: 100%;
+    }
+}
+body.dark-mode .modern-title-bar {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .modern-title-text {
+    color: #ff99ac !important;
+}

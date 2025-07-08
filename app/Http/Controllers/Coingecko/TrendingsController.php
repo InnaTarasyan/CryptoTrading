@@ -27,7 +27,7 @@ class TrendingsController extends Controller
 
             })
             ->editColumn('small', function ($item) {
-                return '<img src="'.$item->small.'" height=50 width=50>';
+                return '<img src="'.$item->small.'" height=25 width=25 class="previewable-img">';
             })
             ->editColumn('price_btc', function ($item) {
                 return "<p class='warning'>".$item->price_btc."</p>";
