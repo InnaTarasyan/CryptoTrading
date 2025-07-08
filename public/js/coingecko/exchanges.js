@@ -24,8 +24,29 @@ CoingeckoExchanges.prototype.init = function () {
             //     return '<img src="'+data+'" alt="Exchange Logo" class="previewable-img" style="width:32px;height:32px;object-fit:contain;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.08);background:#fff;">';
             // }},
             {data: 'image', name: 'image'},
-            {data: 'url', name: 'url'},
-            {data: 'year_established', name: 'year_established'},
+            {data: 'url', name: 'url', render: function(data, type, row, meta) {
+                if (!data) return '-';
+                try {
+                    var urlObj = new URL(data);
+                    var domain = urlObj.hostname.replace('www.', '');
+                } catch (e) {
+                    var domain = data;
+                }
+                return '<a href="'+data+'" target="_blank" rel="noopener" style="color:#ff6a88; font-weight:500; text-decoration:none;">'
+                    + '<span style="vertical-align:middle;">' + domain + '</span>'
+                    + ' <svg style="vertical-align:middle; margin-left:2px;" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3h7v7" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L21 3" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5v14h14v-7" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+                    + '</a>';
+            }},
+            {data: 'year_established', name: 'year_established', render: function(data, type, row, meta) {
+                if (!data || data === 0 || data === '0' || data === null) {
+                    return '<span style="color:#bbb;">N/A</span>';
+                }
+                var year = parseInt(data);
+                var now = new Date().getFullYear();
+                var diff = now - year;
+                var yearsAgo = diff > 0 ? ` <span style=\"color:#888; font-size:0.95em;\">(${diff} year${diff > 1 ? 's' : ''} ago)</span>` : '';
+                return `<span style=\"font-size:1.1em;\">📅</span> <b>${year}</b>${yearsAgo}`;
+            }},
             {data: 'country', name: 'country'},
             {data: 'description', name: 'description'},
             {data: 'trust_score', name: 'trust_score'},
