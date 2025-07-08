@@ -516,6 +516,110 @@
             </div>
         </div>
     </div>
+    <!-- Add Review Block for Trendings -->
+    <div class="modern-reviews-section">
+        <h2 class="modern-reviews-title">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.3em;"><circle cx="11" cy="11" r="11" fill="url(#reviewGradient)"/><path d="M7 15l2-2 3 3 6-6-2-2-4 4-2-2-2 2z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="reviewGradient" x1="0" y1="0" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6a88"/><stop offset="1" stop-color="#ff99ac"/></linearGradient></defs></svg>
+            Trending Reviews
+        </h2>
+        <div id="reviews-list" class="reviews-list"></div>
+        <div class="modern-review-form-container">
+            <h3 class="modern-review-form-title">Add Your Review</h3>
+            <form id="reviewForm" method="POST" action="{{ url('/coingecko/trendings/reviews') }}">
+                @csrf
+                <input type="hidden" name="trending_code" value="all">
+                <div class="modern-form-group">
+                    <label for="name">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" fill="#ff6a88"/><path d="M2 14c0-3 6-3 6-3s6 0 6 3" stroke="#ff99ac" stroke-width="1.2"/></svg>
+                        Name
+                    </label>
+                    <input type="text" class="form-control" id="name" name="name" required maxlength="255">
+                </div>
+                <div class="modern-form-group">
+                    <label for="email">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="8" rx="3" fill="#ff99ac"/><path d="M1 4l7 5 7-5" stroke="#ff6a88" stroke-width="1.2"/></svg>
+                        Email
+                    </label>
+                    <input type="email" class="form-control" id="email" name="email" required maxlength="255">
+                </div>
+                <div class="modern-form-group">
+                    <label for="rating">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="8,1 10,6 15,6 11,9 12,15 8,12 4,15 5,9 1,6 6,6" fill="#ff6a88"/></svg>
+                        Rating
+                    </label>
+                    <select class="form-control" id="rating" name="rating" required>
+                        <option value="">Select</option>
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                </div>
+                <div class="modern-form-group">
+                    <label for="title">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3" fill="#ff99ac"/><path d="M4 8h8M4 12h5" stroke="#ff6a88" stroke-width="1.2"/></svg>
+                        Title
+                    </label>
+                    <input type="text" class="form-control" id="title" name="title" required maxlength="255">
+                </div>
+                <div class="modern-form-group">
+                    <label for="comment">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="3" fill="#ff99ac"/><path d="M3 5h10M3 9h7" stroke="#ff6a88" stroke-width="1.2"/></svg>
+                        Comment
+                    </label>
+                    <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
+                </div>
+                <div class="modern-form-group">
+                    <label for="country">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="8" rx="3" fill="#ff99ac"/><path d="M1 4l7 5 7-5" stroke="#ff6a88" stroke-width="1.2"/></svg>
+                        Country
+                    </label>
+                    <input type="text" class="form-control" id="country" name="country" maxlength="255">
+                </div>
+                <div class="modern-form-group">
+                    <label for="experience_level">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="8" height="8" rx="2" fill="#ff99ac"/><path d="M4 6h4M4 9h2.5" stroke="#ff6a88" stroke-width="1"/></svg>
+                        Experience Level
+                    </label>
+                    <select class="form-control" id="experience_level" name="experience_level">
+                        <option value="">Select</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Professional">Professional</option>
+                    </select>
+                </div>
+                <div class="modern-form-group">
+                    <label for="pros">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#ff99ac"/><path d="M4 8h8M4 12h5" stroke="#ff6a88" stroke-width="1.2"/></svg>
+                        Pros
+                    </label>
+                    <textarea class="form-control" id="pros" name="pros" rows="2"></textarea>
+                </div>
+                <div class="modern-form-group">
+                    <label for="cons">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#ff6a88"/><path d="M4 8h8M4 12h5" stroke="#ff99ac" stroke-width="1.2"/></svg>
+                        Cons
+                    </label>
+                    <textarea class="form-control" id="cons" name="cons" rows="2"></textarea>
+                </div>
+                <div class="modern-form-group">
+                    <label for="recommend">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#ff99ac"/><path d="M4 8h8M4 12h5" stroke="#ff6a88" stroke-width="1.2"/></svg>
+                        Would you recommend?
+                    </label>
+                    <select class="form-control" id="recommend" name="recommend">
+                        <option value="">Select</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn modern-review-form-btn">Submit Review</button>
+                <div id="reviewFormMsg" style="margin-top: 1em;"></div>
+            </form>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -639,6 +743,68 @@
                 if (isFullscreen && (e.key === 'Escape' || e.key === 'Esc')) {
                     exitFullscreen();
                 }
+            });
+        });
+    </script>
+    <script>
+        function renderReviews(reviews) {
+            let html = '';
+            if (reviews.length === 0) {
+                html = '<div class="alert alert-info">No reviews yet. Be the first to review!</div>';
+            } else {
+                html = reviews.map(r => `
+                    <div class="modern-review-card">
+                        <div class="modern-review-avatar">${r.name ? r.name.charAt(0).toUpperCase() : '?'}</div>
+                        <div class="modern-review-content">
+                            <div class="modern-review-header">
+                                <span class="modern-review-name">${r.name}</span>
+                                <span class="modern-review-date"><svg width="14" height="14" style="vertical-align:middle;margin-right:0.2em;" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#ff6a88"/><path d="M7 3v4l3 1.5" stroke="#ff99ac" stroke-width="1.2"/></svg> ${new Date(r.created_at).toLocaleDateString()}</span>
+                                <span class="modern-review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                            </div>
+                            <div class="modern-review-title">${r.title}</div>
+                            <div class="modern-review-comment">${r.comment.replace(/\n/g, '<br>')}</div>
+                            <div class="modern-review-meta">
+                                ${r.country ? `<span class="modern-review-country"><svg width="12" height="12" style="vertical-align:middle;margin-right:0.2em;" viewBox="0 0 12 12" fill="none"><rect x="1" y="3" width="10" height="6" rx="2" fill="#ff99ac"/><path d="M1 3l5 3.5 5-3.5" stroke="#ff6a88" stroke-width="1"/></svg> ${r.country}</span>` : ''}
+                                ${r.experience_level ? `<span class="modern-review-experience"><svg width="12" height="12" style="vertical-align:middle;margin-right:0.2em;" viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="8" height="8" rx="2" fill="#ff99ac"/><path d="M4 6h4M4 9h2.5" stroke="#ff6a88" stroke-width="1"/></svg> ${r.experience_level}</span>` : ''}
+                                ${r.pros ? `<span class="modern-review-pros"><b>Pros:</b> ${r.pros}</span>` : ''}
+                                ${r.cons ? `<span class="modern-review-cons"><b>Cons:</b> ${r.cons}</span>` : ''}
+                                ${typeof r.recommend !== 'undefined' && r.recommend !== null ? `<span class="modern-review-recommend">${r.recommend ? '👍 Recommended' : '👎 Not recommended'}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('reviews-list').innerHTML = html;
+        }
+        function fetchReviews() {
+            fetch('/coingecko/trendings/reviews')
+                .then(res => res.json())
+                .then(data => renderReviews(data));
+        }
+        fetchReviews();
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': form.querySelector('[name=_token]').value
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-success">Thank you for your review!</div>';
+                    form.reset();
+                    fetchReviews();
+                } else {
+                    document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
+                }
+            })
+            .catch(() => {
+                document.getElementById('reviewFormMsg').innerHTML = '<div class="alert alert-danger">There was an error submitting your review.</div>';
             });
         });
     </script>

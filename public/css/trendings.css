@@ -622,3 +622,230 @@ body.dark-mode .modern-title-bar {
 body.dark-mode .modern-title-text {
     color: #ff99ac !important;
 }
+
+/* --- Review Block Styles for Trendings --- */
+.modern-reviews-section {
+    margin: 2.5em auto 2.5em auto;
+    padding: 2em 2em 2.5em 2em;
+    border-radius: 1.5em;
+    background: linear-gradient(120deg, #ff6a88 0%, #ff99ac 100%);
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.13), 0 3px 12px 0 rgba(255, 153, 172, 0.10);
+    color: #fff;
+    max-width: 800px;
+}
+.modern-reviews-title {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+}
+.reviews-list {
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+}
+.modern-review-card {
+    background: linear-gradient(100deg, #fff6fa 0%, #ffe3ed 100%);
+    color: #333;
+    border-radius: 1.2em;
+    box-shadow: 0 2px 12px 0 rgba(255, 106, 136, 0.08);
+    padding: 1.2em 1.5em;
+    display: flex;
+    gap: 1.2em;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+}
+.modern-review-card:hover {
+    box-shadow: 0 6px 24px 0 rgba(255, 106, 136, 0.18);
+}
+.modern-review-avatar {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px 0 rgba(255,106,136,0.10);
+    flex-shrink: 0;
+}
+.modern-review-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.modern-review-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.modern-review-name {
+    font-weight: 700;
+    color: #ff6a88;
+    font-size: 1.1em;
+}
+.modern-review-date {
+    font-size: 0.95em;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+.modern-review-rating {
+    color: #ffd200;
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
+}
+.modern-review-title {
+    font-size: 1.15em;
+    font-weight: 600;
+    margin-top: 0.2em;
+    color: #ff6a88;
+}
+.modern-review-comment {
+    margin: 0.3em 0 0.2em 0;
+    font-size: 1.05em;
+    color: #444;
+}
+.modern-review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em;
+    font-size: 0.98em;
+    margin-top: 0.2em;
+}
+.modern-review-country, .modern-review-experience, .modern-review-pros, .modern-review-cons, .modern-review-recommend {
+    background: #fff6fa;
+    color: #ff6a88;
+    border-radius: 0.7em;
+    padding: 0.2em 0.7em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+.modern-review-recommend {
+    background: #ff99ac;
+    color: #fff;
+}
+
+/* --- Review Form --- */
+.modern-review-form-container {
+    background: linear-gradient(100deg, #fff6fa 0%, #ffe3ed 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 2px 12px 0 rgba(255, 106, 136, 0.08);
+    padding: 2em 1.5em 1.5em 1.5em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.modern-review-form-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #ff6a88;
+    margin-bottom: 1em;
+    text-align: center;
+}
+.modern-form-group {
+    margin-bottom: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.modern-form-group label {
+    font-weight: 600;
+    color: #ff6a88;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 1em;
+}
+.modern-form-group input,
+.modern-form-group select,
+.modern-form-group textarea {
+    border-radius: 0.7em;
+    border: 1.5px solid #ff99ac;
+    padding: 0.7em 1em;
+    font-size: 1em;
+    background: #fff;
+    color: #333;
+    transition: border 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.modern-form-group input:focus,
+.modern-form-group select:focus,
+.modern-form-group textarea:focus {
+    border-color: #ff6a88;
+    box-shadow: 0 0 0 2px #ff99ac33;
+}
+.btn.modern-review-form-btn {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.7em;
+    padding: 0.8em 2em;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(255,106,136,0.10);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    margin-top: 0.5em;
+    display: block;
+    width: 100%;
+}
+.btn.modern-review-form-btn:hover, .btn.modern-review-form-btn:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    box-shadow: 0 4px 16px 0 rgba(255,106,136,0.18);
+    transform: translateY(-2px);
+}
+#reviewFormMsg {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 1em;
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 900px) {
+    .modern-reviews-section {
+        padding: 1.2em 0.5em 2em 0.5em;
+    }
+    .modern-review-form-container {
+        padding: 1.2em 0.5em 1em 0.5em;
+    }
+}
+@media (max-width: 600px) {
+    .modern-reviews-section {
+        padding: 0.7em 0.1em 1.2em 0.1em;
+        border-radius: 1em;
+    }
+    .modern-review-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1em 0.7em;
+        gap: 0.7em;
+    }
+    .modern-review-avatar {
+        margin: 0 auto 0.5em auto;
+    }
+    .modern-review-form-container {
+        padding: 0.7em 0.2em 0.7em 0.2em;
+        border-radius: 1em;
+    }
+}
+
+.modern-form-group label svg {
+    width: 1.1em;
+    height: 1.1em;
+    min-width: 18px;
+    min-height: 18px;
+    vertical-align: middle;
+    margin-right: 0.3em;
+    display: inline-block;
+}
