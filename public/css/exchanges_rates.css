@@ -81,34 +81,77 @@ body.dark-mode .table td:first-child {
 /* Responsive adjustments */
 @media (max-width: 767px) {
     .enhanced-thead {
-        display: none;
+        display: none !important;
     }
     #coingecko_exchange_rates tbody, #coingecko_exchange_rates tr, #coingecko_exchange_rates td {
         display: block;
         width: 100%;
     }
     #coingecko_exchange_rates tr {
-        margin-bottom: 1em;
-        border-radius: 1em;
-        box-shadow: 0 2px 8px rgba(255, 106, 136, 0.06);
-        background: #fff6fa;
+        margin-bottom: 1rem;
+        border: 1.5px solid #ff99ac;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+        background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%);
+        padding: 0.7rem 1rem;
     }
     #coingecko_exchange_rates td {
-        padding: 1em 0.7em;
         text-align: left;
-        border: none;
+        padding-left: 48%;
         position: relative;
+        border: none;
+        border-bottom: 1px solid #ffdde1;
+        min-height: 44px;
+        box-sizing: border-box;
+        font-size: 1em;
+        color: #d72660;
+        background: none;
     }
     #coingecko_exchange_rates td:last-child {
         border-bottom: none;
     }
     #coingecko_exchange_rates td:before {
         content: attr(data-label);
-        font-weight: 700;
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
         color: #ff6a88;
-        display: block;
-        margin-bottom: 0.5em;
+        font-size: 0.98em;
+        letter-spacing: 0.01em;
     }
+    td.mobile-multiline-label:before {
+        white-space: normal;
+        word-break: break-word;
+    }
+    .mobile-multiline-label {
+        display: block;
+        font-weight: bold;
+        color: #ff6a88;
+        font-size: 0.98em;
+        margin-bottom: 0.2em;
+        white-space: normal;
+        word-break: break-word;
+    }
+}
+
+body.dark-mode #coingecko_exchange_rates tr {
+    background: #23272f !important;
+    color: #ff99ac !important;
+    border: 1.5px solid #ff6a88 !important;
+    box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+}
+body.dark-mode #coingecko_exchange_rates td {
+    color: #ff99ac !important;
+    background: none !important;
+}
+body.dark-mode #coingecko_exchange_rates td:before {
+    color: #ff6a88 !important;
+}
+body.dark-mode td.mobile-multiline-label {
+    color: #ff6a88 !important;
 }
 
 /* Dark mode styles */

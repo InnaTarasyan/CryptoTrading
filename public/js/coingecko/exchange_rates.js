@@ -2,6 +2,14 @@
 function CoingeckoExchangeRates(){}
 
 CoingeckoExchangeRates.prototype.init = function () {
+    // Column labels for data-label attributes (must match table header order)
+    var columnLabels = [
+        'Symbol',
+        'Name',
+        'Unit',
+        'Value',
+        'Type'
+    ];
     var oTable = $('#coingecko_exchange_rates').DataTable({
         "processing": true,
         "serverSide": true,
@@ -24,6 +32,12 @@ CoingeckoExchangeRates.prototype.init = function () {
         },
         "infoCallback": function(settings, start, end, max, total, pre) {
             return `\n                <div class=\"datatable-info-beautiful pinky-gradient\">\n                    <span class=\"datatable-info-icon\">💖</span>\n                    <span class=\"datatable-info-text\">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
+        },
+        "createdRow": function(row, data, dataIndex) {
+            // Set data-label for each cell
+            $(row).find('td').each(function(idx) {
+                $(this).attr('data-label', columnLabels[idx]);
+            });
         }
     });
 
@@ -62,7 +76,7 @@ CoingeckoExchangeRates.prototype.init = function () {
             });
             return;
         }
-        var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\\]\]/g, '\\$&')+')', 'gi');
+        var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')+')', 'gi');
         $('#coingecko_exchange_rates tbody tr').each(function() {
             var row = $(this);
             var found = false;
@@ -88,7 +102,19 @@ CoingeckoExchangeRates.prototype.init = function () {
     // Add highlight on table draw
     oTable.on('draw', function() {
         highlightSearchResults();
+        hideTheadOnMobile();
     });
+
+    // Hide thead on mobile after DataTables draw (in case DataTables overrides CSS)
+    function hideTheadOnMobile() {
+        if (window.innerWidth <= 767) {
+            $('.enhanced-thead').css('display', 'none');
+        } else {
+            $('.enhanced-thead').css('display', '');
+        }
+    }
+    hideTheadOnMobile();
+    $(window).on('resize', hideTheadOnMobile);
 };
 
 CoingeckoExchangeRates.prototype.bindEvents = function () {};
