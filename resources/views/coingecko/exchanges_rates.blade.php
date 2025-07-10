@@ -3,6 +3,86 @@
 <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="{{ url('css/datatables.css') }}" rel="stylesheet">
 <link href="{{ url('css/exchanges_rates.css') }}" rel="stylesheet">
+<style>
+    .modern-toolbar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #fff6fa;
+        background: none;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        box-shadow: 0 2px 8px rgba(255, 106, 136, 0.10);
+        transition: box-shadow 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
+        cursor: pointer;
+        outline: none;
+        position: relative;
+        z-index: 10;
+    }
+    .modern-toolbar-btn:focus, .modern-toolbar-btn:hover {
+        box-shadow: 0 4px 16px 0 rgba(255, 106, 136, 0.18), 0 1.5px 6px 0 rgba(255, 0, 128, 0.13);
+        background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+        border-color: #ffd200;
+        transform: translateY(-2px) scale(1.07);
+    }
+    .modern-toolbar-btn:focus {
+        outline: 2.5px solid #ffd200;
+        outline-offset: 2px;
+    }
+    .modern-toolbar-btn:active {
+        transform: scale(0.97);
+    }
+    .modern-toolbar-btn:focus svg circle,
+    .modern-toolbar-btn:hover svg circle {
+        filter: brightness(1.1) drop-shadow(0 0 6px #ff99ac88);
+    }
+    .toolbar-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+    }
+    .refresh-spinner {
+        animation: spin 0.8s linear infinite;
+        transform-origin: 50% 50%;
+    }
+    @keyframes spin {
+        100% { transform: rotate(360deg); }
+    }
+    .responsive-toolbar {
+        background: rgba(255,255,255,0.92);
+        border-radius: 1.5em;
+        box-shadow: 0 4px 24px rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10);
+        border: 2px solid #ffdde1;
+        padding: 0.3em 1.1em;
+        z-index: 20;
+        position: relative;
+    }
+    @media (max-width: 600px) {
+        .responsive-toolbar {
+            gap: 0.3em !important;
+            padding: 0.2em 0.3em;
+        }
+        .modern-toolbar-btn {
+            width: 38px;
+            height: 38px;
+        }
+        .toolbar-icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
+    body.dark-mode .responsive-toolbar {
+        background: rgba(35,39,47,0.98);
+        border: 2px solid #ff6a88;
+    }
+    body.dark-mode .modern-toolbar-btn {
+        border: 2px solid #23272f;
+        background: none;
+    }
+</style>
 @endsection
 @section('content')
 <div class="m-content">
@@ -24,6 +104,57 @@
                     </svg>
                 </span>
                 <span class="modern-title-text" id="exchangeRatesTitle">Coingecko Exchange Rates</span>
+            </div>
+            <!-- Toolbar Buttons -->
+            <div class="datatable-toolbar responsive-toolbar" style="gap: 0.7em; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end;">
+                <button id="darkModeToggle" class="modern-toolbar-btn" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+                    <span class="toolbar-icon">
+                        <svg id="darkModeSvg" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="moonGradient" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#ffd200"/>
+                                    <stop offset="100%" stop-color="#ff6a88"/>
+                                </radialGradient>
+                            </defs>
+                            <circle cx="13" cy="13" r="11" fill="url(#moonGradient)"/>
+                            <path id="moonPath" d="M18 13c0 3.31-2.69 6-6 6a6 6 0 0 1 0-12c.34 0 .67.03 1 .08A5 5 0 0 0 18 13z" fill="#fff"/>
+                        </svg>
+                    </span>
+                </button>
+                <button id="refreshTable" class="modern-toolbar-btn" title="Refresh Table" aria-label="Refresh Table">
+                    <span class="toolbar-icon">
+                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="refreshGradient" x1="0" y1="0" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#43cea2"/>
+                                    <stop offset="1" stop-color="#185a9d"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="13" cy="13" r="11" fill="url(#refreshGradient)"/>
+                            <path d="M19 13a6 6 0 1 1-2.47-4.85" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <polyline points="17 7 20 8 19 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                </button>
+                <button id="fullscreenToggle" class="modern-toolbar-btn" title="Full Screen Table" aria-label="Full Screen Table">
+                    <span class="toolbar-icon">
+                        <svg id="fullscreenSvg" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="fullscreenGradient" x1="0" y1="0" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ff6a88"/>
+                                    <stop offset="1" stop-color="#ff99ac"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="13" cy="13" r="11" fill="url(#fullscreenGradient)"/>
+                            <g id="fullscreenIconGroup">
+                                <polyline points="8 8 8 11 11 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <polyline points="18 8 15 8 15 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <polyline points="8 18 8 15 11 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <polyline points="18 18 15 18 15 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </g>
+                        </svg>
+                    </span>
+                </button>
             </div>
         </div>
     </div>
@@ -178,4 +309,90 @@
 @section('scripts')
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="{{ url('js/coingecko/exchange_rates.js') }}"></script>
+<script>
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById('darkModeToggle');
+const darkModeSvg = document.getElementById('darkModeSvg');
+darkModeToggle && darkModeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    // Optionally persist mode
+    if(document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', '1');
+        // Change moon to sun
+        darkModeSvg.querySelector('circle').setAttribute('fill', 'url(#moonGradient)');
+        darkModeSvg.querySelector('#moonPath').setAttribute('d', 'M13 7a6 6 0 1 1 0 12 6 6 0 0 1 0-12z');
+    } else {
+        localStorage.removeItem('darkMode');
+        // Change sun to moon
+        darkModeSvg.querySelector('circle').setAttribute('fill', 'url(#moonGradient)');
+        darkModeSvg.querySelector('#moonPath').setAttribute('d', 'M18 13c0 3.31-2.69 6-6 6a6 6 0 0 1 0-12c.34 0 .67.03 1 .08A5 5 0 0 0 18 13z');
+    }
+});
+// On load, restore dark mode
+if(localStorage.getItem('darkMode')) {
+    document.body.classList.add('dark-mode');
+    // Change moon to sun
+    if(darkModeSvg) {
+        darkModeSvg.querySelector('circle').setAttribute('fill', 'url(#moonGradient)');
+        darkModeSvg.querySelector('#moonPath').setAttribute('d', 'M13 7a6 6 0 1 1 0 12 6 6 0 0 1 0-12z');
+    }
+}
+
+// Refresh DataTable
+const refreshBtn = document.getElementById('refreshTable');
+refreshBtn && refreshBtn.addEventListener('click', function() {
+    if(window.$ && $.fn.DataTable) {
+        $('#coingecko_exchange_rates').DataTable().ajax.reload(null, false);
+    }
+});
+
+// Fullscreen Toggle
+const fullscreenBtn = document.getElementById('fullscreenToggle');
+const fsContainer = document.getElementById('datatableFullscreenContainer');
+const fullscreenSvg = document.getElementById('fullscreenSvg');
+fullscreenBtn && fullscreenBtn.addEventListener('click', function() {
+    if (!document.fullscreenElement) {
+        fsContainer.requestFullscreen();
+        // Change icon to exit fullscreen
+        fullscreenSvg.querySelector('#fullscreenIconGroup').innerHTML = `
+            <polyline points="8 11 8 8 11 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="15 8 18 8 18 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="8 15 8 18 11 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="15 18 18 18 18 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        `;
+    } else {
+        document.exitFullscreen();
+        // Change icon to enter fullscreen
+        fullscreenSvg.querySelector('#fullscreenIconGroup').innerHTML = `
+            <polyline points="8 8 8 11 11 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="18 8 15 8 15 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="8 18 8 15 11 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="18 18 15 18 15 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        `;
+    }
+});
+document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement) {
+        // Change icon to enter fullscreen
+        if(fullscreenSvg) {
+            fullscreenSvg.querySelector('#fullscreenIconGroup').innerHTML = `
+                <polyline points="8 8 8 11 11 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="18 8 15 8 15 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="8 18 8 15 11 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="18 18 15 18 15 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            `;
+        }
+    } else {
+        // Change icon to exit fullscreen
+        if(fullscreenSvg) {
+            fullscreenSvg.querySelector('#fullscreenIconGroup').innerHTML = `
+                <polyline points="8 11 8 8 11 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="15 8 18 8 18 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="8 15 8 18 11 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="15 18 18 18 18 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            `;
+        }
+    }
+});
+</script>
 @endsection
