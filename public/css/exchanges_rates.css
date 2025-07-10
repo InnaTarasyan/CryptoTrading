@@ -220,3 +220,71 @@ body.dark-mode .dataTables_filter #clear-search:hover {
 body.dark-mode .modern-title-bar, body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg { background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%); color: #ffd200; }
 body.dark-mode .modern-title-text { color: #ffd200; }
 body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus, body.dark-mode .beautiful-tab:hover { background: #ffd200; color: #ff6a88; }
+
+/* DataTable Pagination Styles (copied from markets.css for parity) */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff !important;
+    border-radius: 1em;
+    border: none;
+    margin: 0 0.2em;
+    padding: 0.4em 1em;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #fff !important;
+    color: #ff6a88 !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #ff99ac !important;
+    color: #23272f !important;
+}
+
+/* --- Enhanced Table Container and Pagination Styles for Full Parity with Markets --- */
+.enhanced-table-container {
+    position: relative;
+    border-radius: 1.5em;
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+    .enhanced-table-container,
+    .table-wrapper {
+        overflow-x: unset !important;
+    }
+}
+
+#datatableFullscreenContainer:fullscreen .dataTables_wrapper .dataTables_paginate .paginate_button {
+    font-size: 1.1em;
+    padding: 0.6em 1.5em;
+}
+body.dark-mode #datatableFullscreenContainer:fullscreen .dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #2d1b3d 0%, #4a2b5a 100%);
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #2d1b3d 0%, #4a2b5a 100%);
+    color: #e0e0e0 !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #e0e0e0 !important;
+    color: #2d1b3d !important;
+}
+
+@media (max-width: 767px) {
+    .dataTables_wrapper .dataTables_paginate {
+        text-align: center !important;
+        margin-top: 16px !important;
+    }
+}
