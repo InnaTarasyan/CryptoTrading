@@ -35,6 +35,23 @@
     background-color: #fff;
 }
 
+/* Highlight first column in datatable (pinky modern gradient) */
+.table th:first-child,
+.table td:first-child {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff6a88 100%);
+    color: #d72660;
+    font-weight: bold;
+    border-right: 2px solid #ff6a88;
+}
+
+/* Dark mode override for first column */
+body.dark-mode .table th:first-child,
+body.dark-mode .table td:first-child {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+    color: #ff99ac !important;
+    border-right: 2px solid #ff6a88 !important;
+}
+
 /* Enhanced Table Container */
 .enhanced-table-container {
     background: #fff;

@@ -86,11 +86,86 @@
                     <table id="coingecko_exchange_rates" class="table table-hover table-condensed table-striped enhanced-table" style="width:100%; padding-top:1%">
                         <thead class="enhanced-thead">
                         <tr>
-                            <th class="enhanced-th">Symbol</th>
-                            <th class="enhanced-th">Name</th>
-                            <th class="enhanced-th">Unit</th>
-                            <th class="enhanced-th">Value</th>
-                            <th class="enhanced-th">Type</th>
+                            <th class="datatable-highlight-first enhanced-th">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Symbol</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <!-- Modern Symbol Icon with Gradient -->
+                                    <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="symbolGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#ff6a88"/>
+                                                <stop offset="1" stop-color="#ff99ac"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="12" cy="12" r="11" fill="url(#symbolGradient)"/>
+                                        <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">S</text>
+                                    </svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Name</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <!-- Modern Name Icon with Gradient -->
+                                    <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="nameGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#43cea2"/>
+                                                <stop offset="1" stop-color="#185a9d"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="12" cy="12" r="11" fill="url(#nameGradient)"/>
+                                        <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">N</text>
+                                    </svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Unit</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <!-- Modern Unit Icon with Gradient -->
+                                    <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="unitGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#ffd200"/>
+                                                <stop offset="1" stop-color="#ffb300"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="12" cy="12" r="11" fill="url(#unitGradient)"/>
+                                        <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">U</text>
+                                    </svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Value</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <!-- Modern Value Icon with Gradient -->
+                                    <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="valueGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#ff6a88"/>
+                                                <stop offset="1" stop-color="#ff99ac"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="12" cy="12" r="11" fill="url(#valueGradient)"/>
+                                        <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">V</text>
+                                    </svg>
+                                </span>
+                            </th>
+                            <th class="enhanced-th">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Type</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <!-- Modern Type Icon with Gradient -->
+                                    <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="typeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#ff99ac"/>
+                                                <stop offset="1" stop-color="#ff6a88"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="12" cy="12" r="11" fill="url(#typeGradient)"/>
+                                        <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">T</text>
+                                    </svg>
+                                </span>
+                            </th>
                         </tr>
                         </thead>
                     </table>
