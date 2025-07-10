@@ -288,3 +288,57 @@ body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
         margin-top: 16px !important;
     }
 }
+
+/* DataTable Length (Show N entries) Styles - copied from markets.css for parity */
+.dataTables_wrapper .dataTables_length {
+    margin-bottom: 18px;
+    float: left;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    padding: 8px 18px;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dataTables_wrapper .dataTables_length label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    color: #fff;
+}
+.dataTables_wrapper .dataTables_length select {
+    border-radius: 16px;
+    border: 1.5px solid #ff6a88;
+    padding: 6px 32px 6px 16px;
+    background: #fff6fa;
+    color: #ff6a88;
+    font-size: 15px;
+    margin-left: 8px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-weight: 600;
+}
+.dataTables_wrapper .dataTables_length select:focus {
+    border: 1.5px solid #ff99ac;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.08);
+}
+body.dark-mode .dataTables_wrapper .dataTables_length {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_length select {
+    background: #2c2f3a !important;
+    color: #ff99ac !important;
+    border: 1.5px solid #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_length select:focus {
+    border: 1.5px solid #ff6a88 !important;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+}

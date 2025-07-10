@@ -14,6 +14,7 @@ CoingeckoExchangeRates.prototype.init = function () {
             {data: 'type', name: 'type'},
         ],
         "iDisplayLength": 20,
+        pageLength: 10,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_exchange_rates tbody tr').click(function () {
