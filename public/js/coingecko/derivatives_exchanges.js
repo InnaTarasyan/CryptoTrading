@@ -176,206 +176,189 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     oTable.on('draw', highlightSearchResults);
 
     // ======================== Dark Mode Functionality ========================
+    // Enhanced Dark Mode functionality with better UX
+    const darkModeBtn = $('#darkModeToggle');
+    const darkModeIcon = $('#darkModeIcon');
+    const darkModeText = $('#darkModeText');
+    const darkModeStatus = $('#darkModeStatus');
+    const themePreviewTooltip = $('#themePreviewTooltip');
+    const body = $('body');
+    
+    // Check system preference
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
     function setDarkMode(enabled) {
-        const body = document.body;
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeIcon = document.getElementById('darkModeIcon');
-        const darkModeText = document.getElementById('darkModeText');
-        const darkModeStatus = document.getElementById('darkModeStatus');
-
+        // Add transition class for smooth animation
+        body.addClass('theme-transitioning');
+        
         if (enabled) {
-            body.classList.add('dark-mode');
-            darkModeToggle.setAttribute('aria-checked', 'true');
-            darkModeIcon.querySelector('.icon-moon').style.display = 'none';
-            darkModeIcon.querySelector('.icon-sun').style.display = 'block';
-            darkModeText.textContent = 'Light Mode';
-            darkModeStatus.textContent = 'Dark mode enabled';
-            localStorage.setItem('darkMode', 'enabled');
+            body.addClass('dark-mode');
+            darkModeBtn.attr('aria-checked', 'true');
+            darkModeText.text('Light Mode');
+            darkModeStatus.text('🌙');
+            darkModeBtn.addClass('dark-mode-active');
+            
+            // Update tooltip
+            themePreviewTooltip.find('.tooltip-icon').text('☀️');
+            themePreviewTooltip.find('.tooltip-text').text('Switch to Light Mode');
+            
+            // Add success feedback
+            showThemeFeedback('Dark mode activated! 🌙', 'success');
         } else {
-            body.classList.remove('dark-mode');
-            darkModeToggle.setAttribute('aria-checked', 'false');
-            darkModeIcon.querySelector('.icon-moon').style.display = 'block';
-            darkModeIcon.querySelector('.icon-sun').style.display = 'none';
-            darkModeText.textContent = 'Dark Mode';
-            darkModeStatus.textContent = 'Light mode enabled';
-            localStorage.setItem('darkMode', 'disabled');
+            body.removeClass('dark-mode');
+            darkModeBtn.attr('aria-checked', 'false');
+            darkModeText.text('Dark Mode');
+            darkModeStatus.text('☀️');
+            darkModeBtn.removeClass('dark-mode-active');
+            
+            // Update tooltip
+            themePreviewTooltip.find('.tooltip-icon').text('🌙');
+            themePreviewTooltip.find('.tooltip-text').text('Switch to Dark Mode');
+            
+            // Add success feedback
+            showThemeFeedback('Light mode activated! ☀️', 'success');
         }
+        
+        // Remove transition class after animation
+        setTimeout(() => {
+            body.removeClass('theme-transitioning');
+        }, 300);
     }
 
-    // Initialize dark mode from localStorage
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'enabled') {
-        setDarkMode(true);
-    }
-
-    // Dark mode toggle event
-    document.getElementById('darkModeToggle').addEventListener('click', function() {
-        const isDarkMode = this.getAttribute('aria-checked') === 'true';
-        setDarkMode(!isDarkMode);
-        showThemeFeedback(isDarkMode ? 'Switched to Light Mode' : 'Switched to Dark Mode', 'success');
-    });
-
-    // ======================== Theme Feedback ========================
+    // Show theme feedback notification
     function showThemeFeedback(message, type) {
-        const feedback = document.createElement('div');
-        feedback.className = `theme-feedback ${type}`;
-        feedback.innerHTML = `
-            <div class="feedback-content">
-                <span class="feedback-icon">${type === 'success' ? '✅' : '❌'}</span>
+        const feedback = $(`
+            <div class="theme-feedback ${type}">
+                <span class="feedback-icon">${type === 'success' ? '✅' : 'ℹ️'}</span>
                 <span class="feedback-text">${message}</span>
             </div>
-        `;
-
-        document.body.appendChild(feedback);
-
+        `);
+        
+        $('body').append(feedback);
+        
         // Animate in
-        setTimeout(() => {
-            feedback.style.transform = 'translateY(0)';
-        feedback.style.opacity = '1';
-    }, 10);
-
+        setTimeout(() => feedback.addClass('show'), 100);
+        
         // Remove after 3 seconds
         setTimeout(() => {
-            feedback.style.transform = 'translateY(-100%)';
-        feedback.style.opacity = '0';
-        setTimeout(() => {
-            if (feedback.parentNode) {
-            feedback.parentNode.removeChild(feedback);
-        }
-    }, 300);
-    }, 3000);
+            feedback.removeClass('show');
+            setTimeout(() => feedback.remove(), 300);
+        }, 3000);
     }
 
-    // ======================== Fullscreen Functionality ========================
-    var fullscreenBtn = document.getElementById('fullscreenToggle');
-    var tableWrapper = document.querySelector('.table-wrapper');
-    var fullscreenText = document.getElementById('fullscreenText');
-    var fullscreenIcons = fullscreenBtn ? fullscreenBtn.querySelectorAll('.icon-fullscreen, .icon-exit-fullscreen') : null;
+    // Initialize dark mode based on stored preference or system preference
+    const storedDarkMode = localStorage.getItem('darkMode');
+    const shouldUseDarkMode = storedDarkMode !== null ? storedDarkMode === 'true' : prefersDarkScheme.matches;
+    setDarkMode(shouldUseDarkMode);
 
+    // Enhanced click handler with better feedback
+    darkModeBtn.on('click', function(e) {
+        e.preventDefault();
+        
+        // Add click animation
+        darkModeBtn.addClass('clicked');
+        setTimeout(() => darkModeBtn.removeClass('clicked'), 200);
+        
+        const enabled = !body.hasClass('dark-mode');
+        setDarkMode(enabled);
+        localStorage.setItem('darkMode', enabled);
+        
+        // Update DataTable theme if needed
+        const table = $('#coingecko_derivatives_exchanges').DataTable();
+        if (table) {
+            table.draw();
+        }
+    });
+
+    // Enhanced hover effects
+    darkModeBtn.on('mouseenter', function() {
+        themePreviewTooltip.addClass('show');
+    }).on('mouseleave', function() {
+        themePreviewTooltip.removeClass('show');
+    });
+
+    // Keyboard accessibility
+    darkModeBtn.on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            $(this).click();
+        }
+    });
+
+    // Listen for system theme changes
+    prefersDarkScheme.addEventListener('change', function(e) {
+        const storedPreference = localStorage.getItem('darkMode');
+        if (storedPreference === null) {
+            // Only auto-switch if user hasn't set a preference
+            setDarkMode(e.matches);
+            localStorage.setItem('darkMode', e.matches);
+        }
+    });
+
+    // Fullscreen functionality
+    const fullscreenBtn = document.getElementById('fullscreenToggle');
+    const fullscreenText = document.getElementById('fullscreenText');
+    const fullscreenContainer = document.getElementById('datatableFullscreenContainer');
+    const fullscreenIcons = fullscreenBtn ? fullscreenBtn.querySelectorAll('svg') : null;
     function isFullscreen() {
-        return !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+        return document.fullscreenElement === fullscreenContainer;
     }
-
-    function enterFullscreen(element) {
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen();
-        } else if (element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) {
-            element.msRequestFullscreen();
-        }
-    }
-
-    function exitFullscreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
-    }
-
-    if (fullscreenBtn && tableWrapper) {
+    if (fullscreenBtn && fullscreenContainer) {
         fullscreenBtn.addEventListener('click', function () {
             if (!isFullscreen()) {
-                // Prepare table wrapper for fullscreen
-                tableWrapper.style.background = '#fff';
-                tableWrapper.style.padding = '20px';
-                tableWrapper.style.borderRadius = '0';
-                tableWrapper.style.boxShadow = 'none';
-                tableWrapper.style.width = '100%';
-                tableWrapper.style.height = '100%';
-
-                enterFullscreen(tableWrapper);
+                fullscreenContainer.requestFullscreen();
             } else {
-                exitFullscreen();
+                document.exitFullscreen();
             }
         });
-
-        // Handle fullscreen change events
-        document.addEventListener('fullscreenchange', handleFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
-
-        function handleFullscreenChange() {
+        fullscreenContainer.addEventListener('fullscreenchange', function () {
             if (isFullscreen()) {
                 fullscreenBtn.classList.add('active');
                 fullscreenText.textContent = 'Exit Fullscreen';
                 if (fullscreenIcons) {
                     fullscreenIcons[0].style.display = 'none'; // icon-fullscreen
-                    fullscreenIcons[1].style.display = 'block'; // icon-exit-fullscreen
+                    fullscreenIcons[1].style.display = '';
                 }
-
-                // Ensure all DataTables elements are visible in fullscreen
-                const dataTablesWrapper = tableWrapper.querySelector('.dataTables_wrapper');
-                if (dataTablesWrapper) {
-                    dataTablesWrapper.style.width = '100%';
-                    dataTablesWrapper.style.height = '100%';
-                    dataTablesWrapper.style.display = 'flex';
-                    dataTablesWrapper.style.flexDirection = 'column';
-                }
-
-                // Make sure pagination and other controls are visible
-                const pagination = tableWrapper.querySelector('.dataTables_paginate');
-                const info = tableWrapper.querySelector('.dataTables_info');
-                const length = tableWrapper.querySelector('.dataTables_length');
-                const filter = tableWrapper.querySelector('.dataTables_filter');
-                const toolbar = tableWrapper.querySelector('.datatable-toolbar');
-
-                if (pagination) pagination.style.display = 'block';
-                if (info) info.style.display = 'block';
-                if (length) length.style.display = 'block';
-                if (filter) filter.style.display = 'block';
-                if (toolbar) toolbar.style.display = 'block';
-
             } else {
                 fullscreenBtn.classList.remove('active');
                 fullscreenText.textContent = 'Fullscreen';
                 if (fullscreenIcons) {
-                    fullscreenIcons[0].style.display = 'block'; // icon-fullscreen
+                    fullscreenIcons[0].style.display = '';
                     fullscreenIcons[1].style.display = 'none'; // icon-exit-fullscreen
                 }
-
-                // Restore normal table wrapper styling
-                tableWrapper.style.background = 'rgba(255,255,255,0.7)';
-                tableWrapper.style.padding = '';
-                tableWrapper.style.borderRadius = '1em';
-                tableWrapper.style.boxShadow = '0 2px 12px rgba(80,80,200,0.06)';
-                tableWrapper.style.width = '';
-                tableWrapper.style.height = '';
             }
-        }
+        });
     }
-
+    
+    // Refresh button logic with enhanced UX
+    var refreshBtn = $('#refreshTable');
+    var spinner = refreshBtn.find('.refresh-spinner');
+    var label = refreshBtn.find('.refresh-btn-label');
+    var icon = refreshBtn.find('.icon-refresh-upgraded');
+    var table = $('#coingecko_derivatives_exchanges').DataTable();
+    
     function setRefreshing(isRefreshing) {
-        const refreshBtn = document.getElementById('refreshTable');
-        const refreshIcon = refreshBtn.querySelector('.refresh-icon-bg');
-        const refreshSpinner = refreshBtn.querySelector('.refresh-spinner');
-        const refreshLabel = refreshBtn.querySelector('.refresh-btn-label');
-
         if (isRefreshing) {
-            refreshBtn.setAttribute('aria-busy', 'true');
-            refreshBtn.setAttribute('aria-disabled', 'true');
-            refreshIcon.style.display = 'none';
-            refreshSpinner.style.display = 'block';
-            refreshLabel.textContent = 'Refreshing...';
-            refreshBtn.style.pointerEvents = 'none';
+            refreshBtn.addClass('loading');
+            spinner.show();
+            icon.hide();
+            refreshBtn.attr('aria-busy', 'true').attr('aria-disabled', 'true').prop('disabled', true);
+            label.text('Refreshing...');
+            
+            // Add spinning animation to icon
+            icon.addClass('spinning');
         } else {
-            refreshBtn.setAttribute('aria-busy', 'false');
-            refreshBtn.setAttribute('aria-disabled', 'false');
-            refreshIcon.style.display = 'block';
-            refreshSpinner.style.display = 'none';
-            refreshLabel.textContent = 'Refresh';
-            refreshBtn.style.pointerEvents = 'auto';
+            refreshBtn.removeClass('loading');
+            spinner.hide();
+            icon.show();
+            refreshBtn.attr('aria-busy', 'false').attr('aria-disabled', 'false').prop('disabled', false);
+            label.text('Refresh');
+            
+            // Remove spinning animation
+            icon.removeClass('spinning');
         }
     }
-
+    
     function showRefreshFeedback(message, type = 'success') {
         const feedback = document.createElement('div');
         feedback.className = `refresh-feedback ${type}`;
