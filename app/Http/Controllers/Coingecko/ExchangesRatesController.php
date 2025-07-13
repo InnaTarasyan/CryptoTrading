@@ -231,7 +231,7 @@ class ExchangesRatesController extends Controller
             ->rawColumns([
                 'symbol',
                // 'name',
-                'value',
+               // 'value',
                 'type'
             ])
             ->make(true);

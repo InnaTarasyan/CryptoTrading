@@ -16,15 +16,10 @@ CoingeckoExchangeRates.prototype.init = function () {
         "ajax": $('#coingecko_exchange_rates_route').val(),
         "columns": [
             {data: 'symbol', name: 'symbol'},
-            {data: 'name', name: 'name', orderable: true, searchable: true}, // allow HTML
+            {data: 'name', name: 'name'},
             {data: 'unit', name: 'unit'},
             {data: 'value', name: 'value'},
             {data: 'type', name: 'type'},
-        ],
-        "columnDefs": [
-            { "targets": 1, "orderable": true, "searchable": true, "type": "html", "render": function(data, type, row, meta) {
-                return data;
-            }}
         ],
         "iDisplayLength": 20,
         pageLength: 10,
