@@ -1,6 +1,8 @@
 @extends('layouts.base')
 @section('styles')
 <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" rel="stylesheet">
 <link href="{{ url('css/datatables.css') }}" rel="stylesheet">
 <link href="{{ url('css/exchanges_rates.css') }}" rel="stylesheet">
 <style>
@@ -88,6 +90,45 @@
         background: rgba(255,255,255,0.95);
         border-radius: 1.2em;
         box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10);
+    }
+    .info-block {
+        background: rgba(255,255,255,0.97);
+        color: #23272f;
+    }
+    .info-title {
+        color: #ff6a88;
+        font-weight: 800;
+        font-size: 1.4em;
+        margin-bottom: 1em;
+    }
+    .info-desc {
+        font-size: 1.08em;
+        color: #444;
+        margin-bottom: 1.2em;
+        line-height: 1.7;
+    }
+    .info-columns-title {
+        color: #ff99ac;
+        font-weight: 700;
+        font-size: 1.15em;
+        margin-bottom: 0.7em;
+    }
+    body.dark-mode .info-block {
+        background: #23272f !important;
+        color: #f1f1f1 !important;
+    }
+    body.dark-mode .info-title,
+    body.dark-mode .info-columns-title {
+        color: #ffd200 !important;
+    }
+    body.dark-mode .info-desc,
+    body.dark-mode .datatable-columns-list li {
+        color: #f1f1f1 !important;
+    }
+    .datatable-columns-list li {
+        margin-bottom: 0.5em;
+        font-size: 1.08em;
+        line-height: 1.7;
     }
 </style>
 @endsection
@@ -314,27 +355,35 @@
 </div>
 <!-- BEGIN: Info Block Below DataTable -->
 <div class="enhanced-table-container info-block">
-    <h2 style="color:#ff6a88; font-weight:800; font-size:1.4em; margin-bottom:1em;">About Coingecko Exchange Rates</h2>
-    <p style="font-size:1.08em; color:#444; margin-bottom:1.2em;">
-        <b>Coingecko Exchange Rates</b> are part of CoinGecko's comprehensive cryptocurrency data aggregation service. CoinGecko is the world’s largest independent cryptocurrency data aggregator, tracking over 14,000 crypto assets from 1,200 exchanges worldwide. Its mission is to empower the cryptocurrency community with an in-depth, 360-degree overview of the market, delivering information such as price, trading volume, market capitalization, developer strength, and more. The Exchange Rates section provides up-to-date conversion rates for various cryptocurrencies and fiat currencies, helping users make informed trading and investment decisions. (Source: <a href="https://www.coingecko.com/" target="_blank" rel="noopener">CoinGecko</a>)
+    <h2 class="info-title">🌐 What Are Coingecko Exchange Rates?</h2>
+    <p class="info-desc">
+        <b>Coingecko Exchange Rates</b> provide real-time conversion rates for cryptocurrencies and fiat currencies, powered by CoinGecko—the world’s largest independent crypto data aggregator. With data from over 14,000 assets and 1,200+ exchanges, you get a 360° view of the market to make smarter trading and investment decisions. <a href="https://www.coingecko.com/" target="_blank" rel="noopener">Learn more</a>.
     </p>
-    <h2 style="color:#ff6a88; font-weight:800; font-size:1.4em; margin-bottom:1em;">About the DataTable Above</h2>
-    <p style="font-size:1.08em; color:#444; margin-bottom:1.2em;">
-        The table above is an interactive <b>DataTable</b>, a powerful JavaScript library that enhances standard HTML tables with advanced features such as instant search, multi-column sorting, pagination, and responsive design. DataTables are widely used in web development to make large datasets easily accessible and user-friendly. Users can quickly filter, sort, and navigate through the data, making it ideal for financial and market data presentations. (Source: <a href="https://datatables.net/" target="_blank" rel="noopener">DataTables.net</a>)
+    <h2 class="info-title">📊 How to Use the Table Above</h2>
+    <p class="info-desc">
+        The interactive <b>DataTable</b> lets you search, sort, and filter exchange rates instantly. Click on any column to sort, use the search box to find specific assets, and enjoy a responsive design that works on any device. <a href="https://datatables.net/" target="_blank" rel="noopener">About DataTables</a>
     </p>
-    <h3 style="color:#ff99ac; font-weight:700; font-size:1.15em; margin-bottom:0.7em;">Detailed Explanation of Each Column:</h3>
+    <h3 class="info-columns-title">📝 What Each Column Means:</h3>
     <ul class="datatable-columns-list">
-        <li><span class="datatable-columns-icon" aria-hidden="true">🔤</span> <b>Symbol:</b> The ticker symbol representing the currency or asset (e.g., BTC for Bitcoin, USD for US Dollar).</li>
-        <li><span class="datatable-columns-icon" aria-hidden="true">🏷️</span> <b>Name:</b> The full name of the currency or asset (e.g., Bitcoin, US Dollar).</li>
-        <li><span class="datatable-columns-icon" aria-hidden="true">💱</span> <b>Unit:</b> The unit in which the exchange rate is denominated (e.g., BTC, USD, EUR).</li>
-        <li><span class="datatable-columns-icon" aria-hidden="true">💲</span> <b>Value:</b> The current exchange rate value for the asset or currency, typically shown with two decimal places for clarity.</li>
-        <li><span class="datatable-columns-icon" aria-hidden="true">📦</span> <b>Type:</b> The category of the asset or currency (e.g., cryptocurrency, fiat, commodity), indicating its nature in the market.</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">🔤</span> <b>Symbol:</b> Ticker symbol for the asset (e.g., BTC, USD).</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">🏷️</span> <b>Name:</b> Full name of the asset (e.g., Bitcoin, US Dollar).</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">💱</span> <b>Unit:</b> The denomination unit (e.g., BTC, USD, EUR).</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">💲</span> <b>Value:</b> The current exchange rate, usually with two decimals.</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">📦</span> <b>Type:</b> Asset category (cryptocurrency, fiat, commodity).</li>
     </ul>
 </div>
 <!-- END: Info Block Below DataTable -->
 @endsection
 @section('scripts')
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="{{ url('js/coingecko/exchange_rates.js') }}"></script>
 <script>
 // Dark Mode Toggle

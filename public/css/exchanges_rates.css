@@ -1160,7 +1160,14 @@ body.dark-mode .enhanced-table-container,
 body.dark-mode .enhanced-table-container * {
     color: #ffd200 !important;
 }
-body.dark-mode .enhanced-table-container.info-block,
+body.dark-mode .enhanced-table-container.info-block {
+    background: linear-gradient(120deg, #fff6fa 0%, #ffe3ed 40%, #ffdde1 100%);
+    border-radius: 1.5em;
+    box-shadow: 0 6px 32px rgba(255, 106, 136, 0.10), 0 2px 8px rgba(252, 177, 227, 0.10);
+    padding: 2em;
+    margin-top: 2em;
+    transition: background 0.4s, box-shadow 0.4s;
+}
 body.dark-mode .enhanced-table-container.info-block * {
     color: #ff99ac !important;
 }
