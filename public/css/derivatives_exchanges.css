@@ -232,63 +232,61 @@
 
 .modern-tabs {
     display: flex;
-    gap: 0.5em;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    gap: 1.2em;
+    flex-wrap: wrap;
 }
-
 .beautiful-tabs {
     display: flex;
-    gap: 0.5em;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    flex-wrap: wrap;
+    gap: 1.2em;
+    border-radius: 1em;
+    padding: 0.5em 0.5em;
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #ff6a88 100%);
+    box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+    justify-content: flex-start;
 }
-
 .modern-tab, .beautiful-tab {
     display: flex;
     align-items: center;
     gap: 0.5em;
-    padding: 0.8em 1.2em;
-    background: rgba(255, 255, 255, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1em;
-    color: #fff;
+    background: #fff;
+    border: none;
+    color: #ff6a88;
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 1em 1em 0 0;
+    padding: 0.6em 1.3em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95em;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    white-space: nowrap;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 4px rgba(255,215,0,0.04);
+    outline: none;
 }
-
 .modern-tab.active, .modern-tab:focus, .modern-tab:hover,
-.beautiful-tab.active, .beautiful-tab:focus, .beautiful-tab:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.beautiful-tab.active, .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,106,136,0.12);
+    z-index: 2;
+    transform: translateY(-2px) scale(1.04);
 }
-
 .beautiful-tab .tab-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.5em;
-    height: 1.5em;
+    width: 28px;
+    height: 28px;
+    background: #fffbe7;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.08);
 }
-
 .beautiful-tab .tab-label {
-    font-weight: 600;
-    color: #fff;
+    margin-left: 2px;
 }
-
 .beautiful-tab:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.2);
+    background: #fffbe7;
+    color: #ff6a88;
+    transform: translateY(-1px) scale(1.02);
 }
 
 /* Action Buttons Row */
@@ -978,4 +976,56 @@ body.dark-mode .highlight-row {
         white-space: normal;
         z-index: 2;
     }
+}
+
+@media (max-width: 900px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.5em 0.3em;
+    }
+}
+@media (max-width: 767px) {
+    .modern-tabs, .beautiful-tabs {
+        flex-direction: column;
+        gap: 0.7em;
+        border-radius: 1em;
+        padding: 0.3em 0.1em;
+    }
+    .modern-tab, .beautiful-tab {
+        width: 100%;
+        border-radius: 1em;
+        justify-content: flex-start;
+        font-size: 1em;
+        padding: 0.8em 1em;
+    }
+    .beautiful-tab .tab-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+@media (max-width: 600px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.2em 0.05em;
+        border-radius: 0.8em;
+    }
+}
+body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .modern-tab, body.dark-mode .beautiful-tab {
+    background: #23272f !important;
+    color: #ffd200 !important;
+}
+body.dark-mode .modern-tab.active, body.dark-mode .modern-tab:focus, body.dark-mode .modern-tab:hover,
+body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+    color: #23272f !important;
+}
+body.dark-mode .beautiful-tab .tab-icon {
+    background: #23272f !important;
+}
+body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:focus .tab-icon {
+    background: #ffd200 !important;
 }
