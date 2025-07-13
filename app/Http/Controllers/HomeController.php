@@ -40,10 +40,10 @@ class HomeController extends Controller
                 $mail_admin = Config::get('settings.mail_admin');
                 $message->from($data['email'], $data['name']);
                 $message->to($mail_admin)->subject('Feedback');
-                Session::flash('status', 'Email is sent!');
+                Session::flash('status', 'Email sent successfully!');
             });
             if($result){
-                return redirect()->route('home');
+                return redirect()->route('about')->with('status', 'Email sent successfully!');
             }
 
         }
