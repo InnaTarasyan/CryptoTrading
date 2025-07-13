@@ -130,6 +130,61 @@
         font-size: 1.08em;
         line-height: 1.7;
     }
+    .toolbar-btn-with-label {
+        flex-direction: column;
+        min-width: 56px;
+        min-height: 56px;
+        padding: 0.3em 0.2em 0.2em 0.2em;
+        position: relative;
+    }
+    .toolbar-label {
+        font-size: 0.92em;
+        font-weight: 600;
+        color: #444;
+        margin-top: 0.18em;
+        letter-spacing: 0.01em;
+        text-align: center;
+        user-select: none;
+        pointer-events: none;
+    }
+    .toolbar-btn-with-label:focus .toolbar-label,
+    .toolbar-btn-with-label:hover .toolbar-label {
+        color: #ff6a88;
+    }
+    .toolbar-btn-with-label .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple-animate 0.5s linear;
+        background: rgba(255, 106, 136, 0.18);
+        pointer-events: none;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .toolbar-btn-with-label.rippling .ripple {
+        opacity: 1;
+        transform: scale(2.5);
+    }
+    @keyframes ripple-animate {
+        to {
+            opacity: 0;
+            transform: scale(2.5);
+        }
+    }
+    @media (max-width: 600px) {
+        .toolbar-btn-with-label {
+            min-width: 44px;
+            min-height: 44px;
+            padding: 0.1em 0.1em 0.1em 0.1em;
+        }
+        .toolbar-label {
+            font-size: 0.85em;
+        }
+    }
 </style>
 @endsection
 @section('content')
@@ -155,7 +210,7 @@
             </div>
             <!-- Toolbar Buttons -->
             <div class="datatable-toolbar responsive-toolbar" style="gap: 0.7em; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end;">
-                <button id="darkModeToggle" class="modern-toolbar-btn" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+                <button id="darkModeToggle" class="modern-toolbar-btn toolbar-btn-with-label" title="Toggle Dark Mode" aria-label="Toggle Dark Mode" tabindex="0">
                     <span class="toolbar-icon">
                         <svg id="darkModeSvg" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -168,8 +223,10 @@
                             <path id="moonPath" d="M18 13c0 3.31-2.69 6-6 6a6 6 0 0 1 0-12c.34 0 .67.03 1 .08A5 5 0 0 0 18 13z" fill="#fff"/>
                         </svg>
                     </span>
+                    <span class="toolbar-label">Dark</span>
+                    <span class="ripple"></span>
                 </button>
-                <button id="refreshTable" class="modern-toolbar-btn" title="Refresh Table" aria-label="Refresh Table">
+                <button id="refreshTable" class="modern-toolbar-btn toolbar-btn-with-label" title="Refresh Table" aria-label="Refresh Table" tabindex="0">
                     <span class="toolbar-icon">
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -183,8 +240,10 @@
                             <polyline points="17 7 20 8 19 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         </svg>
                     </span>
+                    <span class="toolbar-label">Reload</span>
+                    <span class="ripple"></span>
                 </button>
-                <button id="fullscreenToggle" class="modern-toolbar-btn" title="Full Screen Table" aria-label="Full Screen Table">
+                <button id="fullscreenToggle" class="modern-toolbar-btn toolbar-btn-with-label" title="Full Screen Table" aria-label="Full Screen Table" tabindex="0">
                     <span class="toolbar-icon">
                         <svg id="fullscreenSvg" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -202,6 +261,8 @@
                             </g>
                         </svg>
                     </span>
+                    <span class="toolbar-label">Full</span>
+                    <span class="ripple"></span>
                 </button>
             </div>
         </div>
@@ -469,6 +530,20 @@ document.addEventListener('fullscreenchange', function() {
             `;
         }
     }
+});
+
+// Add ripple effect to toolbar buttons
+window.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.toolbar-btn-with-label').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            btn.classList.remove('rippling');
+            void btn.offsetWidth; // trigger reflow
+            btn.classList.add('rippling');
+            setTimeout(function() {
+                btn.classList.remove('rippling');
+            }, 500);
+        });
+    });
 });
 </script>
 @endsection
