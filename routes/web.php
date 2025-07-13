@@ -146,3 +146,8 @@ Route::post('/coingecko/exchanges/reviews', [\App\Http\Controllers\Coingecko\Coi
 // Coin Gecko Trendings Reviews
 Route::get('/coingecko/trendings/reviews', [\App\Http\Controllers\Coingecko\CoinGeckoTrendingsReviewController::class, 'index']);
 Route::post('/coingecko/trendings/reviews', [\App\Http\Controllers\Coingecko\CoinGeckoTrendingsReviewController::class, 'store']);
+
+// Coin Gecko Exchanges Rates Reviews
+Route::get('/coingecko/exchanges_rates/reviews', [\App\Http\Controllers\Coingecko\ExchangesRatesReviewsController::class, 'index']);
+Route::post('/coingecko/exchanges_rates/reviews', [\App\Http\Controllers\Coingecko\ExchangesRatesReviewsController::class, 'store']);
+Route::get('/coingecko/exchanges_rates/reviews/list', [\App\Http\Controllers\Coingecko\ExchangesRatesReviewsController::class, 'listJson']);
