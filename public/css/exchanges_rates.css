@@ -516,20 +516,39 @@ body.dark-mode .dataTables_wrapper .dataTables_length select:focus {
 }
 
 @media (max-width: 767px) {
-    body.dark-mode #coingecko_exchange_rates tr {
-        background: #23272f !important;
-        border-color: #ff99ac;
-        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+    #coingecko_exchange_rates td {
+        font-size: 1.18em;
+        font-weight: 600;
+        color: #b80040;
+        padding-left: 52%;
+        line-height: 1.6;
+        background: #fff6fa;
+        text-shadow: 0 1px 2px #fff, 0 0 2px #ffdde1;
     }
-    body.dark-mode #coingecko_exchange_rates td {
-        color: #ff99ac;
-        background: none;
-        border-bottom: 1px solid #23272f;
-    }
-    body.dark-mode #coingecko_exchange_rates td:before {
-        color: #ff6a88;
+    #coingecko_exchange_rates td:before {
+        font-size: 1.08em;
+        font-weight: 700;
+        color: #ff267a;
+        text-shadow: 0 1px 2px #fff, 0 0 2px #ffdde1;
     }
 }
+
+@media (max-width: 767px) {
+    body.dark-mode #coingecko_exchange_rates td {
+        font-size: 1.18em;
+        font-weight: 600;
+        color: #ffd6e0;
+        background: #23272f;
+        text-shadow: 0 1px 2px #23272f, 0 0 2px #181a20;
+    }
+    body.dark-mode #coingecko_exchange_rates td:before {
+        font-size: 1.08em;
+        font-weight: 700;
+        color: #ffd200;
+        text-shadow: 0 1px 2px #23272f, 0 0 2px #181a20;
+    }
+}
+
 /* --- Fullscreen Styles --- */
 #datatableFullscreenContainer.fullscreen-active {
     position: fixed !important;
