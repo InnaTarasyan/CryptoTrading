@@ -82,6 +82,13 @@
         border: 2px solid #23272f;
         background: none;
     }
+    .info-block {
+        margin-top: 2em;
+        padding: 2em;
+        background: rgba(255,255,255,0.95);
+        border-radius: 1.2em;
+        box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10);
+    }
 </style>
 @endsection
 @section('content')
@@ -306,7 +313,7 @@
     </div>
 </div>
 <!-- BEGIN: Info Block Below DataTable -->
-<div class="enhanced-table-container" style="margin-top:2em; padding:2em; background:rgba(255,255,255,0.95); border-radius:1.2em; box-shadow:0 4px 24px rgba(255, 106, 136, 0.10);">
+<div class="enhanced-table-container info-block">
     <h2 style="color:#ff6a88; font-weight:800; font-size:1.4em; margin-bottom:1em;">About Coingecko Exchange Rates</h2>
     <p style="font-size:1.08em; color:#444; margin-bottom:1.2em;">
         <b>Coingecko Exchange Rates</b> are part of CoinGecko's comprehensive cryptocurrency data aggregation service. CoinGecko is the world’s largest independent cryptocurrency data aggregator, tracking over 14,000 crypto assets from 1,200 exchanges worldwide. Its mission is to empower the cryptocurrency community with an in-depth, 360-degree overview of the market, delivering information such as price, trading volume, market capitalization, developer strength, and more. The Exchange Rates section provides up-to-date conversion rates for various cryptocurrencies and fiat currencies, helping users make informed trading and investment decisions. (Source: <a href="https://www.coingecko.com/" target="_blank" rel="noopener">CoinGecko</a>)
@@ -316,12 +323,12 @@
         The table above is an interactive <b>DataTable</b>, a powerful JavaScript library that enhances standard HTML tables with advanced features such as instant search, multi-column sorting, pagination, and responsive design. DataTables are widely used in web development to make large datasets easily accessible and user-friendly. Users can quickly filter, sort, and navigate through the data, making it ideal for financial and market data presentations. (Source: <a href="https://datatables.net/" target="_blank" rel="noopener">DataTables.net</a>)
     </p>
     <h3 style="color:#ff99ac; font-weight:700; font-size:1.15em; margin-bottom:0.7em;">Detailed Explanation of Each Column:</h3>
-    <ul class="datatable-columns-list" style="font-size:1.08em; line-height:1.7; padding-left:1.2em; list-style:none;">
-        <li><b>Symbol:</b> The ticker symbol representing the currency or asset (e.g., BTC for Bitcoin, USD for US Dollar).</li>
-        <li><b>Name:</b> The full name of the currency or asset (e.g., Bitcoin, US Dollar).</li>
-        <li><b>Unit:</b> The unit in which the exchange rate is denominated (e.g., BTC, USD, EUR).</li>
-        <li><b>Value:</b> The current exchange rate value for the asset or currency, typically shown with two decimal places for clarity.</li>
-        <li><b>Type:</b> The category of the asset or currency (e.g., cryptocurrency, fiat, commodity), indicating its nature in the market.</li>
+    <ul class="datatable-columns-list">
+        <li><span class="datatable-columns-icon" aria-hidden="true">🔤</span> <b>Symbol:</b> The ticker symbol representing the currency or asset (e.g., BTC for Bitcoin, USD for US Dollar).</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">🏷️</span> <b>Name:</b> The full name of the currency or asset (e.g., Bitcoin, US Dollar).</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">💱</span> <b>Unit:</b> The unit in which the exchange rate is denominated (e.g., BTC, USD, EUR).</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">💲</span> <b>Value:</b> The current exchange rate value for the asset or currency, typically shown with two decimal places for clarity.</li>
+        <li><span class="datatable-columns-icon" aria-hidden="true">📦</span> <b>Type:</b> The category of the asset or currency (e.g., cryptocurrency, fiat, commodity), indicating its nature in the market.</li>
     </ul>
 </div>
 <!-- END: Info Block Below DataTable -->

@@ -1,228 +1,228 @@
-/* Enhanced DataTable styles for Exchange Rates page, adapted from Markets */
-
-.m-portlet {
-    background: #fff;
+/* --- Modern Title Bar --- */
+.modern-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%);
     border-radius: 1.5em;
-    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
-    padding: 2em 1.5em;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(255, 153, 172, 0.13);
+    padding: 1.5em 2em 1.5em 2em;
     margin-bottom: 2em;
+    color: #fff;
+    transition: background 0.3s, box-shadow 0.3s;
 }
-.table {
-    background: #fff;
-    border-radius: 1em;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(255, 106, 136, 0.06);
+.modern-title-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
 }
-.table thead th {
-    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
-    color: #ab1717;
-    font-weight: 700;
-    border: none;
-    vertical-align: middle;
-    font-size: 1.08em;
-    padding: 1.1em 0.7em;
+.modern-title-text {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #fff;
 }
-.table tbody tr {
-    transition: background 0.2s;
-}
-.table tbody tr:hover {
-    background: #ffe0ec;
-}
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #fff6fa;
-}
-.table-striped tbody tr:nth-of-type(even) {
-    background-color: #fff;
+.modern-title-bar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2em;
 }
 
-/* Highlight first column in datatable (pinky modern gradient) */
-.table th:first-child,
-.table td:first-child {
-    background: linear-gradient(90deg, #ffdde1 0%, #ff6a88 100%);
-    color: #d72660;
-    font-weight: bold;
-    border-right: 2px solid #ff6a88;
-}
-
-/* Dark mode override for first column */
-body.dark-mode .table th:first-child,
-body.dark-mode .table td:first-child {
-    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
-    color: #ff99ac !important;
-    border-right: 2px solid #ff6a88 !important;
-}
-
-/* Enhanced Table Container */
+/* --- Enhanced Table Container and Table --- */
 .enhanced-table-container {
-    background: linear-gradient(135deg, #fff 80%, #ffe0ec 100%);
+    position: relative;
     border-radius: 1.5em;
-    box-shadow: 0 8px 32px rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10);
-    padding: 2em 2.5em;
-    margin-bottom: 2em;
-    border: 1.5px solid #ffdde1;
-    transition: box-shadow 0.2s, border-color 0.2s, background 0.3s;
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+.table-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 1.5em;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border-radius: 1em 1em 0 0;
+    font-size: 0.95em;
+    font-weight: 600;
+}
+.status-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
+.status-icon {
+    font-size: 1.2em;
+}
+.status-text {
+    opacity: 0.9;
+}
+.status-actions {
+    display: flex;
+    gap: 0.8em;
+}
+.status-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.6em 1.2em;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.8em;
+    color: #ff6a88;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
     outline: none;
 }
-.enhanced-table-container:hover,
-.enhanced-table-container:focus-within {
-    box-shadow: 0 12px 40px 0 rgba(255, 106, 136, 0.18), 0 4px 20px 0 rgba(255, 153, 172, 0.13);
-    border-color: #ff99ac;
-    background: linear-gradient(135deg, #fff 60%, #ffd6e3 100%);
+.status-action-btn:hover, .status-action-btn:focus {
+    background: rgba(255, 255, 255, 0.3);
+    color: #ff99ac;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 106, 136, 0.2);
 }
-.enhanced-table-container:focus-visible {
-    outline: 3px solid #ff6a88;
-    outline-offset: 2px;
+.status-action-btn:active {
+    transform: translateY(0);
 }
-@media (max-width: 900px) {
-    .enhanced-table-container {
-        padding: 1.2em 0.7em;
-    }
+.table-wrapper {
+    padding: 1.5em;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 40%, #ff6a88 70%, #a1c4fd 100%);
+    border-radius: 0 0 1.5em 1.5em;
+    overflow-x: auto;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.10), 0 3px 12px 0 rgba(161, 196, 253, 0.10);
+    border: 1.5px solid rgba(255, 106, 136, 0.10);
+    transition: background 0.4s, box-shadow 0.4s;
 }
-@media (max-width: 600px) {
-    .enhanced-table-container {
-        padding: 0.7em 0.3em;
-        border-radius: 1em;
-    }
+body.dark-mode .table-wrapper {
+    background: linear-gradient(135deg, #232526 0%, #ff6a88 40%, #ff99ac 80%, #1e3c72 100%);
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(30, 60, 114, 0.13);
+    border: 1.5px solid rgba(255, 153, 172, 0.13);
 }
-body.dark-mode .enhanced-table-container {
-    background: linear-gradient(135deg, #23272f 80%, #2d2f3a 100%) !important;
-    border: 1.5px solid #ff6a88 !important;
-    box-shadow: 0 8px 32px rgba(255, 153, 172, 0.08);
-}
-body.dark-mode .enhanced-table-container:hover,
-body.dark-mode .enhanced-table-container:focus-within {
-    box-shadow: 0 12px 40px 0 rgba(255, 153, 172, 0.13), 0 4px 20px 0 rgba(255, 106, 136, 0.18);
-    border-color: #ffd200 !important;
-    background: linear-gradient(135deg, #23272f 60%, #181a20 100%) !important;
-}
-body.dark-mode .enhanced-table-container:focus-visible {
-    outline: 3px solid #ffd200;
-    outline-offset: 2px;
-}
-
-/* Enhanced Table */
 .enhanced-table {
-    width: 100%;
     border-radius: 1em;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(255, 106, 136, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    min-width: max-content;
+    font-style: italic;
 }
-.enhanced-thead th {
-    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
-    color: #ab1717;
+.enhanced-thead {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+/* --- DataTable Header Styles: Match Markets --- */
+.enhanced-th {
+    background: #fff6fa;
+    color: #ff6a88;
     font-weight: 700;
-    border: none;
+    border-bottom: 2.5px solid #ff99ac;
     vertical-align: middle;
+    padding: 0.7em 0.5em;
     font-size: 1.08em;
-    padding: 1.1em 0.7em;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+}
+.enhanced-th:hover {
+    background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 106, 136, 0.3);
+    transform: translateY(-2px);
+}
+.datatable-header-text {
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1em;
+    letter-spacing: 0.01em;
+    color: #ff6a88;
+}
+.datatable-header-icon {
+    display: block;
+    text-align: center;
+    margin-top: 2px;
+    width: 20px;
+    height: 20px;
+}
+@media (max-width: 480px) {
+    .enhanced-th {
+        padding: 0.8em 0.6em;
+        font-size: 0.8em;
+    }
+    .datatable-header-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .datatable-header-text {
+        font-size: 0.8em;
+    }
 }
 
-/* Responsive adjustments */
-@media (max-width: 767px) {
-    .enhanced-thead {
-        display: none !important;
-    }
-    #coingecko_exchange_rates tbody, #coingecko_exchange_rates tr, #coingecko_exchange_rates td {
-        display: block;
-        width: 100%;
-    }
-    #coingecko_exchange_rates tr {
-        margin-bottom: 1rem;
-        border: 1.5px solid #ff99ac;
-        border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
-        background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%);
-        padding: 0.7rem 1rem;
-    }
-    #coingecko_exchange_rates td {
-        text-align: left;
-        padding-left: 48%;
-        position: relative;
-        border: none;
-        border-bottom: 1px solid #ffdde1;
-        min-height: 44px;
-        box-sizing: border-box;
-        font-size: 1em;
-        color: #d72660;
-        background: none;
-    }
-    #coingecko_exchange_rates td:last-child {
-        border-bottom: none;
-    }
-    #coingecko_exchange_rates td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        width: 45%;
-        white-space: nowrap;
-        font-weight: bold;
-        color: #ff6a88;
+/* --- Info Block --- */
+.info-title {
+    margin-bottom: 0.5em;
+    font-size: 1.18em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+}
+.datatable-columns-list {
+    margin-bottom: 0;
+    font-size: 1.08em;
+    line-height: 1.7;
+    padding-left: 1.2em;
+    list-style: none;
+    max-width: 600px;
+    margin-top: 0.5em;
+}
+.datatable-columns-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7em;
+    margin-bottom: 0.6em;
+    background: rgba(255, 106, 136, 0.04);
+    border-radius: 0.6em;
+    padding: 0.5em 0.8em;
+    transition: background 0.2s;
+}
+.datatable-columns-list li:last-child {
+    margin-bottom: 0;
+}
+.datatable-columns-icon {
+    font-size: 1.3em;
+    margin-right: 0.3em;
+    flex-shrink: 0;
+    opacity: 0.85;
+    filter: drop-shadow(0 1px 2px #ff99ac33);
+}
+.datatable-columns-list li b {
+    color: #ff6a88;
+    margin-right: 0.2em;
+}
+@media (max-width: 600px) {
+    .datatable-columns-list {
         font-size: 0.98em;
-        letter-spacing: 0.01em;
+        padding-left: 0.5em;
     }
-    td.mobile-multiline-label:before {
-        white-space: normal;
-        word-break: break-word;
+    .datatable-columns-list li {
+        padding: 0.4em 0.4em;
+        gap: 0.5em;
     }
-    .mobile-multiline-label {
-        display: block;
-        font-weight: bold;
-        color: #ff6a88;
-        font-size: 0.98em;
-        margin-bottom: 0.2em;
-        white-space: normal;
-        word-break: break-word;
+    .datatable-columns-icon {
+        font-size: 1.1em;
     }
 }
-
-body.dark-mode #coingecko_exchange_rates tr {
-    background: #23272f !important;
-    color: #ff99ac !important;
-    border: 1.5px solid #ff6a88 !important;
-    box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+body.dark-mode .datatable-columns-list li {
+    background: rgba(255, 153, 172, 0.10);
 }
-body.dark-mode #coingecko_exchange_rates td {
-    color: #ff99ac !important;
-    background: none !important;
-}
-body.dark-mode #coingecko_exchange_rates td:before {
-    color: #ff6a88 !important;
-}
-body.dark-mode td.mobile-multiline-label {
-    color: #ff6a88 !important;
-}
-
-/* Dark mode styles */
-body.dark-mode .m-portlet {
-    background: #23272f;
-    color: #ffd200;
-}
-body.dark-mode .table {
-    background: #23272f;
-}
-body.dark-mode .table thead th {
-    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%);
-    color: #ffd200;
-}
-body.dark-mode .table tbody tr:hover {
-    background: #2d2f3a;
-}
-body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #23272f;
-}
-body.dark-mode .table-striped tbody tr:nth-of-type(even) {
-    background-color: #23272f;
-}
-body.dark-mode .enhanced-table-container {
-    background: #23272f;
-}
-body.dark-mode .enhanced-thead th {
-    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%);
+body.dark-mode .datatable-columns-list li b {
     color: #ffd200;
 }
 
-/* DataTable Search Bar Styles (adapted from markets.css) */
+/* --- Custom Datatable Search Bar Styles --- */
 .dataTables_filter {
     width: 100%;
     max-width: 400px;
@@ -239,6 +239,12 @@ body.dark-mode .enhanced-thead th {
     align-items: center;
     width: 100%;
     position: relative;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 0;
+    max-width: 100%;
 }
 .dataTables_filter .search-icon {
     position: absolute;
@@ -248,6 +254,7 @@ body.dark-mode .enhanced-thead th {
     pointer-events: none;
     top: 50%;
     transform: translateY(-50%);
+    margin: 0;
 }
 .dataTables_filter input[type="search"] {
     border-radius: 24px;
@@ -282,45 +289,21 @@ body.dark-mode .enhanced-thead th {
     background: linear-gradient(90deg, #fff 0%, #ff6a88 100%);
     color: #ff6a88;
 }
-
-/* Dark mode overrides */
-body.dark-mode .dataTables_filter input[type="search"] {
-    background: #23272f !important;
-    color: #ff99ac !important;
-    border: 1.5px solid #ff99ac !important;
+/* Highlight search results */
+.highlight {
+    background: #ffecf2;
+    color: #ff6a88;
+    font-weight: bold;
+    border-radius: 0.3em;
+    padding: 0 0.2em;
 }
-body.dark-mode .dataTables_filter input[type="search"]:focus {
-    border: 1.5px solid #ff6a88 !important;
-    background: #2c2f3a !important;
-}
-body.dark-mode .dataTables_filter #clear-search {
-    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
-    color: #ff99ac !important;
-}
-body.dark-mode .dataTables_filter #clear-search:hover {
-    background: #ff99ac !important;
-    color: #23272f !important;
+.highlight-row {
+    background: #fff6fa !important;
 }
 
-/* --- Additions/Updates for full Markets parity --- */
-/* Title Bar, Tabs, Action Buttons, Table Status Bar, Footer, etc. */
-.modern-title-bar { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%); border-radius: 1.5em; box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(255, 153, 172, 0.13); padding: 1.5em 2em 1.5em 2em; margin-bottom: 2em; color: #fff; transition: background 0.3s, box-shadow 0.3s; }
-.modern-title-bar-row { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 2em; }
-.modern-title-icon { display: flex; align-items: center; margin-right: 1em; }
-.modern-title-text { font-size: 2.1rem; font-weight: 800; letter-spacing: -1px; color: #fff; }
-.modern-tabs-container, .gradient-tabs-bg { background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%); border-radius: 1.2em; box-shadow: 0 4px 24px rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10); padding: 0.7em 1.2em; margin-bottom: 2em; }
-.modern-tabs { display: flex; gap: 1.2em; }
-.beautiful-tab { display: flex; align-items: center; gap: 0.5em; padding: 0.7em 1.3em; border-radius: 1.2em; background: none; color: #fff; font-weight: 600; font-size: 1.08em; transition: background 0.2s, color 0.2s; text-decoration: none; }
-.beautiful-tab.active, .beautiful-tab:focus, .beautiful-tab:hover { background: #fff; color: #ff6a88; }
-.beautiful-tab .tab-icon { display: flex; align-items: center; }
-.beautiful-tab .tab-label { margin-left: 0.4em; }
-@media (max-width: 900px) { .modern-title-bar, .m-portlet { padding: 1em 0.7em; } .modern-tabs-container, .gradient-tabs-bg { padding: 0.5em 0.5em; } }
-@media (max-width: 600px) { .modern-title-bar, .m-portlet { padding: 0.7em 0.3em; } .modern-tabs-container, .gradient-tabs-bg { padding: 0.3em 0.2em; } }
-body.dark-mode .modern-title-bar, body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg { background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%); color: #ffd200; }
-body.dark-mode .modern-title-text { color: #ffd200; }
-body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus, body.dark-mode .beautiful-tab:hover { background: #ffd200; color: #ff6a88; }
+/* --- Responsive and Dark Mode omitted for brevity, but should be included for full parity --- */
 
-/* DataTable Pagination Styles (copied from markets.css for parity) */
+/* --- Custom DataTables Pagination Buttons (Matching Markets) --- */
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
     color: #fff !important;
@@ -336,6 +319,12 @@ body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus, body.
     background: #fff !important;
     color: #ff6a88 !important;
 }
+@media (max-width: 768px) {
+    .dataTables_wrapper .dataTables_paginate {
+        text-align: center !important;
+        margin-top: 16px !important;
+    }
+}
 body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
     background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
     color: #ff99ac !important;
@@ -346,120 +335,82 @@ body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     color: #23272f !important;
 }
 
-/* --- Enhanced Table Container and Pagination Styles for Full Parity with Markets --- */
-/* Enhanced Table Container - Modern Gentle Gradient & Glassmorphism */
-.enhanced-table-container {
-    position: relative;
-    border-radius: 1.5em;
-    overflow-x: auto;
-    background: linear-gradient(135deg, rgba(255,246,250,0.85) 0%, rgba(252,177,227,0.75) 100%);
-    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10);
-    padding: 2em 2.5em;
-    margin-bottom: 2em;
-    border: 1.5px solid #ffdde1;
-    transition: box-shadow 0.2s, border-color 0.2s, background 0.3s;
-    outline: none;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+/* --- DataTable Info (Markets Parity) --- */
+.datatable-info-beautiful {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75em;
+    font-size: 1.08em;
+    font-weight: 500;
+    border-radius: 1.2em;
+    padding: 0.5em 1.3em;
+    box-shadow: 0 4px 16px 0 rgba(255, 106, 136, 0.10), 0 1.5px 6px 0 rgba(255, 0, 128, 0.08);
+    background: #fff;
+    color: #ff2d55;
+    margin: 0.5em 0;
+    border: none;
 }
-.enhanced-table-container:hover,
-.enhanced-table-container:focus-within {
-    box-shadow: 0 12px 40px 0 rgba(255, 106, 136, 0.18), 0 4px 20px 0 rgba(255, 153, 172, 0.13);
-    border-color: #ff99ac;
-    background: linear-gradient(135deg, rgba(255,255,255,0.92) 60%, rgba(255,214,227,0.85) 100%);
+.pinky-gradient {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff !important;
+    box-shadow: 0 4px 16px 0 rgba(255, 106, 136, 0.18), 0 1.5px 6px 0 rgba(255, 0, 128, 0.13);
 }
-.enhanced-table-container:focus-visible {
-    outline: 3px solid #ff6a88;
-    outline-offset: 2px;
+.datatable-info-icon {
+    font-size: 1.3em;
+    margin-right: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    box-shadow: 0 2px 8px 0 rgba(255, 106, 136, 0.10);
 }
-@media (max-width: 900px) {
-    .enhanced-table-container {
-        padding: 1.2em 0.7em;
-    }
+.datatable-info-text {
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+.datatable-info-beautiful strong {
+    color: #ff2d55;
+    font-weight: 700;
+    font-size: 1.1em;
 }
 @media (max-width: 600px) {
-    .enhanced-table-container {
-        padding: 0.7em 0.3em;
-        border-radius: 1.1em;
+    .datatable-info-beautiful {
+        font-size: 1em;
+        padding: 10px 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .datatable-info-icon {
+        font-size: 1.2em;
+        width: 1.8em;
+        height: 1.8em;
+        margin-right: 0;
+        margin-bottom: 4px;
     }
 }
-body.dark-mode .enhanced-table-container {
-    background: linear-gradient(135deg, rgba(35,39,47,0.85) 0%, rgba(45,47,58,0.80) 60%, rgba(255,106,136,0.18) 100%) !important;
-    border: 1.5px solid #ff6a88 !important;
-    box-shadow: 0 8px 32px rgba(255, 153, 172, 0.08);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-}
-body.dark-mode .enhanced-table-container:hover,
-body.dark-mode .enhanced-table-container:focus-within {
-    box-shadow: 0 12px 40px 0 rgba(255, 153, 172, 0.13), 0 4px 20px 0 rgba(255, 106, 136, 0.18);
-    border-color: #ffd200 !important;
-    background: linear-gradient(135deg, rgba(35,39,47,0.92) 60%, rgba(24,26,32,0.85) 100%, rgba(255,153,172,0.18) 100%) !important;
-}
-body.dark-mode .enhanced-table-container:focus-visible {
-    outline: 3px solid #ffd200;
-    outline-offset: 2px;
-}
-
-body.dark-mode .enhanced-table-container,
-body.dark-mode .enhanced-table-container h2,
-body.dark-mode .enhanced-table-container h3,
-body.dark-mode .enhanced-table-container p,
-body.dark-mode .enhanced-table-container ul,
-body.dark-mode .enhanced-table-container li {
-    color: #ffd200 !important;
-}
-body.dark-mode .enhanced-table-container h2,
-body.dark-mode .enhanced-table-container h3 {
+body.dark-mode .datatable-info-beautiful {
+    background: linear-gradient(90deg, #23272f 0%, #23272f 100%) !important;
     color: #ff99ac !important;
+    box-shadow: 0 2px 12px rgba(255,153,172,0.08);
 }
-body.dark-mode .enhanced-table-container a {
-    color: #ffd200 !important;
-    text-decoration: underline;
+body.dark-mode .datatable-info-icon {
+    color: #ff99ac;
+    background: linear-gradient(135deg, #23272f 0%, #ff99ac 100%);
+    box-shadow: 0 2px 8px rgba(255,153,172,0.10);
 }
-body.dark-mode .enhanced-table-container a:hover {
-    color: #ff6a88 !important;
-    background: rgba(255,218,55,0.08);
-    border-radius: 0.2em;
+body.dark-mode .datatable-info-text {
+    color: #ff99ac;
 }
-body.dark-mode .enhanced-table-container b {
-    color: #ffd200 !important;
-}
-
-@media (max-width: 768px) {
-    .enhanced-table-container,
-    .table-wrapper {
-        overflow-x: unset !important;
-    }
+body.dark-mode .datatable-info-beautiful strong {
+    color: #ffd200;
 }
 
-#datatableFullscreenContainer:fullscreen .dataTables_wrapper .dataTables_paginate .paginate_button {
-    font-size: 1.1em;
-    padding: 0.6em 1.5em;
-}
-body.dark-mode #datatableFullscreenContainer:fullscreen .dataTables_wrapper .dataTables_paginate .paginate_button {
-    background: linear-gradient(90deg, #2d1b3d 0%, #4a2b5a 100%);
-    color: #e0e0e0 !important;
-}
-
-body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
-    background: linear-gradient(90deg, #2d1b3d 0%, #4a2b5a 100%);
-    color: #e0e0e0 !important;
-}
-body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: #e0e0e0 !important;
-    color: #2d1b3d !important;
-}
-
-@media (max-width: 767px) {
-    .dataTables_wrapper .dataTables_paginate {
-        text-align: center !important;
-        margin-top: 16px !important;
-    }
-}
-
-/* DataTable Length (Show N entries) Styles - copied from markets.css for parity */
+/* --- Custom DataTable Length Dropdown Styles (Parity with Markets) --- */
 .dataTables_wrapper .dataTables_length {
     margin-bottom: 18px;
     float: left;
@@ -503,12 +454,714 @@ body.dark-mode .dataTables_wrapper .dataTables_length {
     background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
     color: #ff99ac !important;
 }
-body.dark-mode .dataTables_wrapper .dataTables_length select {
-    background: #2c2f3a !important;
+body.dark-mode .dataTables_wrapper .dataTables_length label {
     color: #ff99ac !important;
-    border: 1.5px solid #ff99ac !important;
+}
+body.dark-mode .dataTables_wrapper .dataTables_length select {
+    background: #23272f;
+    color: #ff99ac;
+    border: 1.5px solid #ff99ac;
 }
 body.dark-mode .dataTables_wrapper .dataTables_length select:focus {
-    border: 1.5px solid #ff6a88 !important;
-    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+    border: 1.5px solid #ffd200;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.13);
 }
+
+/* Responsive DataTable for mobile (like markets.css) */
+@media (max-width: 767px) {
+    .enhanced-thead {
+        display: none !important;
+    }
+    #coingecko_exchange_rates tbody, #coingecko_exchange_rates tr, #coingecko_exchange_rates td {
+        display: block;
+        width: 100%;
+    }
+    #coingecko_exchange_rates tr {
+        margin-bottom: 1rem;
+        border: 1.5px solid #ff99ac;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+        background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%);
+        padding: 0.7rem 1rem;
+    }
+    #coingecko_exchange_rates td {
+        text-align: left;
+        padding-left: 48%;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #ffdde1;
+        min-height: 44px;
+        box-sizing: border-box;
+        font-size: 1em;
+        color: #d72660;
+        background: none;
+    }
+    #coingecko_exchange_rates td:last-child {
+        border-bottom: none;
+    }
+    #coingecko_exchange_rates td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #ff6a88;
+        font-size: 0.98em;
+        letter-spacing: 0.01em;
+    }
+}
+
+@media (max-width: 767px) {
+    body.dark-mode #coingecko_exchange_rates tr {
+        background: #23272f !important;
+        border-color: #ff99ac;
+        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+    }
+    body.dark-mode #coingecko_exchange_rates td {
+        color: #ff99ac;
+        background: none;
+        border-bottom: 1px solid #23272f;
+    }
+    body.dark-mode #coingecko_exchange_rates td:before {
+        color: #ff6a88;
+    }
+}
+/* --- Fullscreen Styles --- */
+#datatableFullscreenContainer.fullscreen-active {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    background: #fff !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
+#datatableFullscreenContainer.fullscreen-active .table-wrapper {
+    flex: 1 1 auto;
+    height: 100%;
+    padding: 2vw 2vw 2vw 2vw;
+    background: #fff;
+    border-radius: 0;
+}
+body.dark-mode #datatableFullscreenContainer.fullscreen-active,
+body.dark-mode #datatableFullscreenContainer.fullscreen-active .table-wrapper {
+    background: #181a20 !important;
+}
+
+/* --- Dark Mode Enhancements --- */
+body.dark-mode {
+    background: #181a20 !important;
+    color: #eaeaea !important;
+}
+body.dark-mode .modern-title-bar,
+body.dark-mode .table-status-bar {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+    color: #fff !important;
+}
+body.dark-mode .enhanced-table-container {
+    background: #23272f !important;
+    box-shadow: 0 8px 32px rgba(255, 153, 172, 0.08);
+}
+body.dark-mode .table-wrapper {
+    background: #23272f !important;
+}
+body.dark-mode .enhanced-table {
+    background: #23272f !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .enhanced-thead {
+    background: linear-gradient(135deg, #23272f 0%, #23272f 100%) !important;
+}
+body.dark-mode .enhanced-th,
+body.dark-mode .datatable-header-text {
+    color: #ffd200 !important;
+    background: transparent !important;
+}
+body.dark-mode .enhanced-th:hover {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+    box-shadow: 0 4px 12px rgba(30,30,30,0.3) !important;
+}
+body.dark-mode .dataTables_filter input[type="search"] {
+    background: #23272f !important;
+    color: #ffd200 !important;
+    border: 1.5px solid #ff99ac !important;
+}
+body.dark-mode .dataTables_filter input[type="search"]::placeholder {
+    color: #ff99ac !important;
+    opacity: 1;
+}
+body.dark-mode .dataTables_filter .search-icon {
+    filter: brightness(1.5) grayscale(1);
+}
+body.dark-mode .datatable-info-beautiful {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+    color: #fff !important;
+}
+body.dark-mode .datatable-info-beautiful strong {
+    color: #fff !important;
+}
+body.dark-mode .status-action-btn {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .status-action-btn:hover {
+    background: rgba(255,255,255,0.18) !important;
+    color: #fff !important;
+}
+body.dark-mode .highlight {
+    background: #ffd200 !important;
+    color: #23272f !important;
+}
+body.dark-mode .highlight-row {
+    background: #2d313a !important;
+}
+
+/* --- Modern Action Buttons: Dark Mode, Refresh, Full Screen --- */
+.modern-title-actions .modern-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.7em 1.5em;
+    border: none;
+    border-radius: 1.2em;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.13);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    outline: none;
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    user-select: none;
+}
+.modern-title-actions .modern-tab:focus {
+    box-shadow: 0 0 0 3px #ff99ac55;
+    z-index: 2;
+}
+.modern-title-actions .modern-tab:hover {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+}
+.modern-title-actions .modern-tab:active {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    transform: scale(0.98);
+}
+
+/* --- Dark Mode Button --- */
+.modern-title-actions .darkmode-switch {
+    background: linear-gradient(90deg, #232526 0%, #ff6a88 100%);
+    color: #fff;
+    border: 2px solid #ff6a88;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.7em 1.5em;
+    font-size: 1.08em;
+    font-weight: 700;
+    border-radius: 1.2em;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.modern-title-actions .darkmode-switch:hover,
+.modern-title-actions .darkmode-switch:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #232526 100%);
+    border-color: #ff99ac;
+    box-shadow: 0 0 0 3px #ff99ac55;
+}
+
+/* --- Refresh Button --- */
+.modern-title-actions .refresh-btn {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    color: #fff;
+    border: 2px solid #ff6a88;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.7em 1.5em;
+    font-size: 1.08em;
+    font-weight: 700;
+    border-radius: 1.2em;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.modern-title-actions .refresh-btn:hover,
+.modern-title-actions .refresh-btn:focus {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    border-color: #ff99ac;
+    box-shadow: 0 0 0 3px #ff6a8855;
+}
+
+/* --- Full Screen Button --- */
+.modern-title-actions .modern-fullscreen-btn {
+    background: linear-gradient(90deg, #ff6a88 0%, #fcb1e3 100%);
+    color: #fff;
+    border: 2px solid #ff99ac;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.7em 1.5em;
+    font-size: 1.08em;
+    font-weight: 700;
+    border-radius: 1.2em;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.modern-title-actions .modern-fullscreen-btn:hover,
+.modern-title-actions .modern-fullscreen-btn:focus {
+    background: linear-gradient(90deg, #fcb1e3 0%, #ff6a88 100%);
+    border-color: #ff6a88;
+    box-shadow: 0 0 0 3px #fcb1e355;
+}
+
+/* --- Button Icon Styling --- */
+.modern-title-actions .modern-tab svg {
+    margin-right: 0.5em;
+    vertical-align: middle;
+    width: 1.4em;
+    height: 1.4em;
+    display: inline-block;
+}
+
+/* --- Button Label Styling --- */
+.modern-title-actions .modern-tab span {
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+/* --- Responsive: Stack buttons on small screens --- */
+@media (max-width: 600px) {
+    .modern-title-actions {
+        flex-direction: column;
+        gap: 0.7em;
+        align-items: stretch;
+    }
+    .modern-title-actions .modern-tab {
+        width: 100%;
+        justify-content: center;
+        min-width: unset;
+        min-height: 44px;
+        font-size: 1em;
+    }
+}
+
+/* --- Dark Mode Styles for Buttons --- */
+body.dark-mode .modern-title-actions .modern-tab {
+    background: linear-gradient(90deg, #232526 0%, #ff6a88 100%);
+    color: #fff;
+    border-color: #ff99ac;
+}
+body.dark-mode .modern-title-actions .modern-tab:hover,
+body.dark-mode .modern-title-actions .modern-tab:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #232526 100%);
+    color: #fff;
+    border-color: #ff6a88;
+}
+
+/* Tabs */
+.modern-tabs-container, .gradient-tabs-bg {
+    margin-bottom: 2em;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10);
+    padding: 0.7em 1.2em;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+@media (max-width: 900px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.5em 0.3em;
+    }
+}
+@media (max-width: 600px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.3em 0.1em;
+        border-radius: 0.8em;
+    }
+}
+body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.modern-tabs {
+    display: flex;
+    gap: 1.2em;
+    flex-wrap: wrap;
+}
+.beautiful-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2em;
+    border-radius: 1em;
+    padding: 0.5em 0.5em;
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd200 60%, #ff6a88 100%);
+    box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+    justify-content: flex-start;
+}
+.modern-tab, .beautiful-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: #fff;
+    border: none;
+    color: #ff6a88;
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 1em 1em 0 0;
+    padding: 0.6em 1.3em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.04);
+    outline: none;
+}
+.modern-tab.active, .modern-tab:focus, .modern-tab:hover,
+.beautiful-tab.active, .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,106,136,0.12);
+    z-index: 2;
+    transform: translateY(-2px) scale(1.04);
+}
+.beautiful-tab .tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #fffbe7;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+}
+.beautiful-tab .tab-label {
+    margin-left: 2px;
+}
+.beautiful-tab:hover:not(.active) {
+    background: #fffbe7;
+    color: #ff6a88;
+    transform: translateY(-1px) scale(1.02);
+}
+@media (max-width: 900px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.5em 0.3em;
+    }
+}
+@media (max-width: 767px) {
+    .modern-tabs, .beautiful-tabs {
+        flex-direction: column;
+        gap: 0.7em;
+        border-radius: 1em;
+        padding: 0.3em 0.1em;
+    }
+    .modern-tab, .beautiful-tab {
+        width: 100%;
+        border-radius: 1em;
+        justify-content: flex-start;
+        font-size: 1em;
+        padding: 0.8em 1em;
+    }
+    .beautiful-tab .tab-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+@media (max-width: 600px) {
+    .modern-tabs-container, .gradient-tabs-bg {
+        padding: 0.2em 0.05em;
+        border-radius: 0.8em;
+    }
+}
+body.dark-mode .modern-tabs-container, body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 30%, #ff99ac 60%, #fcb1e3 85%, #23272f 100%) !important;
+    color: #ff99ac !important;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .modern-tab, body.dark-mode .beautiful-tab {
+    background: #23272f !important;
+    color: #ffd200 !important;
+}
+body.dark-mode .modern-tab.active, body.dark-mode .modern-tab:focus, body.dark-mode .modern-tab:hover,
+body.dark-mode .beautiful-tab.active, body.dark-mode .beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #23272f 100%) !important;
+    color: #23272f !important;
+}
+body.dark-mode .beautiful-tab .tab-icon {
+    background: #23272f !important;
+}
+body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:focus .tab-icon {
+    background: #ffd200 !important;
+}
+
+#coingecko_exchanges td:first-child, #coingecko_exchanges th:first-child {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff99ac 100%);
+    font-weight: bold;
+    color: #d72660;
+    border-left: 3px solid #ff6a88;
+}
+body.dark-mode #coingecko_exchanges td:first-child, body.dark-mode #coingecko_exchanges th:first-child {
+    background: linear-gradient(90deg, #2d1e2f 0%, #ff6a88 100%);
+    color: #fff;
+    border-left: 3px solid #ff99ac;
+}
+
+/* --- Review Block Styles --- */
+.modern-reviews-section {
+    margin: 2.5em auto 2.5em auto;
+    padding: 2em 2em 2.5em 2em;
+    border-radius: 1.5em;
+    background: linear-gradient(120deg, #ff6a88 0%, #ff99ac 100%);
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.13), 0 3px 12px 0 rgba(255, 153, 172, 0.10);
+    color: #fff;
+    max-width: 800px;
+}
+.modern-reviews-title {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+}
+.reviews-list {
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+}
+.modern-review-card {
+    background: linear-gradient(100deg, #fff6fa 0%, #ffe3ed 100%);
+    color: #333;
+    border-radius: 1.2em;
+    box-shadow: 0 2px 12px 0 rgba(255, 106, 136, 0.08);
+    padding: 1.2em 1.5em;
+    display: flex;
+    gap: 1.2em;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+}
+.modern-review-card:hover {
+    box-shadow: 0 6px 24px 0 rgba(255, 106, 136, 0.18);
+}
+.modern-review-avatar {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px 0 rgba(255,106,136,0.10);
+    flex-shrink: 0;
+}
+.modern-review-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.modern-review-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.modern-review-name {
+    font-weight: 700;
+    color: #ff6a88;
+    font-size: 1.1em;
+}
+.modern-review-date {
+    font-size: 0.95em;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+.modern-review-rating {
+    color: #ffd200;
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
+}
+.modern-review-title {
+    font-size: 1.15em;
+    font-weight: 600;
+    margin-top: 0.2em;
+    color: #ff6a88;
+}
+.modern-review-comment {
+    margin: 0.3em 0 0.2em 0;
+    font-size: 1.05em;
+    color: #444;
+}
+.modern-review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em;
+    font-size: 0.98em;
+    margin-top: 0.2em;
+}
+.modern-review-country, .modern-review-experience, .modern-review-pros, .modern-review-cons, .modern-review-recommend {
+    background: #fff6fa;
+    color: #ff6a88;
+    border-radius: 0.7em;
+    padding: 0.2em 0.7em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+.modern-review-recommend {
+    background: #ff99ac;
+    color: #fff;
+}
+
+/* --- Review Form --- */
+.modern-review-form-container {
+    background: linear-gradient(100deg, #fff6fa 0%, #ffe3ed 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 2px 12px 0 rgba(255, 106, 136, 0.08);
+    padding: 2em 1.5em 1.5em 1.5em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.modern-review-form-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #ff6a88;
+    margin-bottom: 1em;
+    text-align: center;
+}
+.modern-form-group {
+    margin-bottom: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.modern-form-group label {
+    font-weight: 600;
+    color: #ff6a88;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 1em;
+}
+.modern-form-group input,
+.modern-form-group select,
+.modern-form-group textarea {
+    border-radius: 0.7em;
+    border: 1.5px solid #ff99ac;
+    padding: 0.7em 1em;
+    font-size: 1em;
+    background: #fff;
+    color: #333;
+    transition: border 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.modern-form-group input:focus,
+.modern-form-group select:focus,
+.modern-form-group textarea:focus {
+    border-color: #ff6a88;
+    box-shadow: 0 0 0 2px #ff99ac33;
+}
+.btn.modern-review-form-btn {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.7em;
+    padding: 0.8em 2em;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(255,106,136,0.10);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    margin-top: 0.5em;
+    display: block;
+    width: 100%;
+}
+.btn.modern-review-form-btn:hover, .btn.modern-review-form-btn:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    box-shadow: 0 4px 16px 0 rgba(255,106,136,0.18);
+    transform: translateY(-2px);
+}
+#reviewFormMsg {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 1em;
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 900px) {
+    .modern-reviews-section {
+        padding: 1.2em 0.5em 2em 0.5em;
+    }
+    .modern-review-form-container {
+        padding: 1.2em 0.5em 1em 0.5em;
+    }
+}
+@media (max-width: 600px) {
+    .modern-reviews-section {
+        padding: 0.7em 0.1em 1.2em 0.1em;
+        border-radius: 1em;
+    }
+    .modern-review-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1em 0.7em;
+        gap: 0.7em;
+    }
+    .modern-review-avatar {
+        margin: 0 auto 0.5em auto;
+    }
+    .modern-review-form-container {
+        padding: 0.7em 0.2em 0.7em 0.2em;
+        border-radius: 1em;
+    }
+}
+
+.modern-form-group label svg {
+    width: 1.1em;
+    height: 1.1em;
+    min-width: 18px;
+    min-height: 18px;
+    vertical-align: middle;
+    margin-right: 0.3em;
+    display: inline-block;
+}
+
+.info-block {
+    margin-top: 2em;
+    padding: 2em;
+    background: linear-gradient(135deg, #fff6fa 0%, #ffdde1 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.13), 0 1.5px 6px rgba(252, 177, 227, 0.10);
+    transition: background 0.4s, box-shadow 0.4s;
+}
+body.dark-mode .info-block {
+    background: linear-gradient(135deg, #23272f 0%, #3a3f51 100%);
+    color: #ff99ac;
+    box-shadow: 0 4px 24px rgba(35, 39, 47, 0.18), 0 1.5px 6px rgba(35, 39, 47, 0.13);
+}
+body.dark-mode .enhanced-table-container,
+body.dark-mode .enhanced-table-container * {
+    color: #ffd200 !important;
+}
+body.dark-mode .enhanced-table-container.info-block,
+body.dark-mode .enhanced-table-container.info-block * {
+    color: #ff99ac !important;
+}
+
