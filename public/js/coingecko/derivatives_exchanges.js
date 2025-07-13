@@ -247,6 +247,11 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     }
 
     // ======================== Fullscreen Functionality ========================
+    var fullscreenBtn = document.getElementById('fullscreenToggle');
+    var tableWrapper = document.querySelector('.table-wrapper');
+    var fullscreenText = document.getElementById('fullscreenText');
+    var fullscreenIcons = fullscreenBtn ? fullscreenBtn.querySelectorAll('.icon-fullscreen, .icon-exit-fullscreen') : null;
+
     function isFullscreen() {
         return !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
     }
@@ -272,6 +277,79 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             document.mozCancelFullScreen();
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
+        }
+    }
+
+    if (fullscreenBtn && tableWrapper) {
+        fullscreenBtn.addEventListener('click', function () {
+            if (!isFullscreen()) {
+                // Prepare table wrapper for fullscreen
+                tableWrapper.style.background = '#fff';
+                tableWrapper.style.padding = '20px';
+                tableWrapper.style.borderRadius = '0';
+                tableWrapper.style.boxShadow = 'none';
+                tableWrapper.style.width = '100%';
+                tableWrapper.style.height = '100%';
+
+                enterFullscreen(tableWrapper);
+            } else {
+                exitFullscreen();
+            }
+        });
+
+        // Handle fullscreen change events
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+        function handleFullscreenChange() {
+            if (isFullscreen()) {
+                fullscreenBtn.classList.add('active');
+                fullscreenText.textContent = 'Exit Fullscreen';
+                if (fullscreenIcons) {
+                    fullscreenIcons[0].style.display = 'none'; // icon-fullscreen
+                    fullscreenIcons[1].style.display = 'block'; // icon-exit-fullscreen
+                }
+
+                // Ensure all DataTables elements are visible in fullscreen
+                const dataTablesWrapper = tableWrapper.querySelector('.dataTables_wrapper');
+                if (dataTablesWrapper) {
+                    dataTablesWrapper.style.width = '100%';
+                    dataTablesWrapper.style.height = '100%';
+                    dataTablesWrapper.style.display = 'flex';
+                    dataTablesWrapper.style.flexDirection = 'column';
+                }
+
+                // Make sure pagination and other controls are visible
+                const pagination = tableWrapper.querySelector('.dataTables_paginate');
+                const info = tableWrapper.querySelector('.dataTables_info');
+                const length = tableWrapper.querySelector('.dataTables_length');
+                const filter = tableWrapper.querySelector('.dataTables_filter');
+                const toolbar = tableWrapper.querySelector('.datatable-toolbar');
+
+                if (pagination) pagination.style.display = 'block';
+                if (info) info.style.display = 'block';
+                if (length) length.style.display = 'block';
+                if (filter) filter.style.display = 'block';
+                if (toolbar) toolbar.style.display = 'block';
+
+            } else {
+                fullscreenBtn.classList.remove('active');
+                fullscreenText.textContent = 'Fullscreen';
+                if (fullscreenIcons) {
+                    fullscreenIcons[0].style.display = 'block'; // icon-fullscreen
+                    fullscreenIcons[1].style.display = 'none'; // icon-exit-fullscreen
+                }
+
+                // Restore normal table wrapper styling
+                tableWrapper.style.background = 'rgba(255,255,255,0.7)';
+                tableWrapper.style.padding = '';
+                tableWrapper.style.borderRadius = '1em';
+                tableWrapper.style.boxShadow = '0 2px 12px rgba(80,80,200,0.06)';
+                tableWrapper.style.width = '';
+                tableWrapper.style.height = '';
+            }
         }
     }
 
@@ -340,11 +418,11 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             setRefreshing(false);
             showRefreshFeedback('Data refreshed successfully!', 'success');
             updateTableStatus('Data updated successfully', '✅');
-            
+
             // Reset status after a delay
             setTimeout(() => {
                 updateTableStatus('Ready to display derivatives exchanges data', '📊');
-            }, 2000);
+        }, 2000);
         }, false); // false means don't reset paging
     });
 
@@ -380,28 +458,6 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     addRippleEffectToButton('.refresh-btn', '#ff6a88');
     addRippleEffectToButton('.modern-fullscreen-btn', '#ff99ac');
     addRippleEffectToButton('.status-action-btn', '#ff6a88');
-
-    // ======================== Fullscreen Toggle ========================
-    document.getElementById('fullscreenToggle').addEventListener('click', function() {
-        const container = document.getElementById('datatableFullscreenContainer');
-        const fullscreenText = document.getElementById('fullscreenText');
-        const fullscreenIcon = this.querySelector('.icon-fullscreen');
-        const exitFullscreenIcon = this.querySelector('.icon-exit-fullscreen');
-
-        if (isFullscreen()) {
-            exitFullscreen();
-            fullscreenText.textContent = 'Fullscreen';
-            fullscreenIcon.style.display = 'block';
-            exitFullscreenIcon.style.display = 'none';
-            this.setAttribute('aria-pressed', 'false');
-        } else {
-            enterFullscreen(container);
-            fullscreenText.textContent = 'Exit Fullscreen';
-            fullscreenIcon.style.display = 'none';
-            exitFullscreenIcon.style.display = 'block';
-            this.setAttribute('aria-pressed', 'true');
-        }
-    });
 
     // ======================== Loading Functions ========================
     function showLoading() {

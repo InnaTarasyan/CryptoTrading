@@ -124,409 +124,661 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="action-buttons-row" style="display: flex; justify-content: space-between; align-items: center; margin: 1.5em 0; padding: 0 1em;">
+        <div class="action-buttons-row">
             <div class="action-buttons-left">
-                <button id="refreshTable" class="modern-action-btn refresh-btn-enhanced" title="Refresh Table Data" aria-label="Refresh Table Data" aria-busy="false" aria-disabled="false" tabindex="0">
-                    <div class="btn-gradient-bg">
-                        <span class="refresh-btn-icon" style="position:relative; display:inline-flex; align-items:center; justify-content:center;">
-                            <!-- Modern Bold Refresh SVG with Enhanced Gradient -->
-                            <span class="refresh-icon-bg">
-                                <svg class="icon-refresh-upgraded" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <linearGradient id="refreshGradientEnhanced" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="#667eea"/>
-                                            <stop offset="0.5" stop-color="#764ba2"/>
-                                            <stop offset="1" stop-color="#f093fb"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <circle cx="16" cy="16" r="15" fill="#fff" stroke="url(#refreshGradientEnhanced)" stroke-width="2"/>
-                                    <path d="M25 10A12 12 0 1 0 27 16h-2.5" stroke="url(#refreshGradientEnhanced)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <polyline points="24 4 24 11 31 11" stroke="url(#refreshGradientEnhanced)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                </svg>
-                            </span>
-                            <span class="refresh-spinner" style="display:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2;">
-                                <svg width="24" height="24" viewBox="0 0 50 50">
-                                    <circle cx="25" cy="25" r="20" fill="none" stroke="url(#refreshGradientEnhanced)" stroke-width="4" stroke-linecap="round" stroke-dasharray="31.4 31.4" stroke-dashoffset="0">
-                                        <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
-                                    </circle>
-                                </svg>
-                            </span>
+                <button id="refreshTable" class="modern-tab refresh-btn" title="Refresh Table" aria-label="Refresh Table" aria-busy="false" aria-disabled="false" tabindex="0" style="overflow:hidden; position:relative;">
+                    <span class="refresh-btn-icon" style="position:relative; display:inline-flex; align-items:center; justify-content:center;">
+                        <!-- Modern Bold Refresh SVG (Pink) -->
+                        <span class="refresh-icon-bg">
+                            <svg class="icon-refresh-upgraded" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="refreshGradientModernUpgradedPink" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#ff6a88"/>
+                                        <stop offset="1" stop-color="#ff99ac"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="16" cy="16" r="15" fill="#fff"/>
+                                <path d="M25 10A12 12 0 1 0 27 16h-2.5" stroke="url(#refreshGradientModernUpgradedPink)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="24 4 24 11 31 11" stroke="url(#refreshGradientModernUpgradedPink)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
                         </span>
-                        <span class="refresh-btn-label">Refresh Data</span>
-                    </div>
+                        <span class="refresh-spinner" style="display:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2;">
+                            <svg width="28" height="28" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="20" fill="none" stroke="#ff6a88" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.4 31.4" stroke-dashoffset="0">
+                                    <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+                                </circle>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="refresh-btn-label">Refresh</span>
                     <span class="ripple-effect"></span>
                 </button>
             </div>
             <div class="action-buttons-right">
-                <button id="fullscreenToggle" class="modern-action-btn fullscreen-btn-enhanced" title="Toggle Fullscreen Mode" aria-label="Toggle Fullscreen Mode" aria-pressed="false" role="button" tabindex="0">
-                    <div class="btn-gradient-bg">
-                        <span class="fullscreen-icon-bg">
-                            <!-- Enhanced Fullscreen SVG with Gradient -->
-                            <svg class="icon-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <defs>
-                                    <linearGradient id="fullscreenGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#ff6a88"/>
-                                        <stop offset="0.5" stop-color="#ff99ac"/>
-                                        <stop offset="1" stop-color="#ff6a88"/>
-                                    </linearGradient>
-                                </defs>
-                                <rect x="3" y="3" width="7" height="2" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="3" y="3" width="2" height="7" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="14" y="3" width="7" height="2" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="19" y="3" width="2" height="7" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="3" y="19" width="7" height="2" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="3" y="14" width="2" height="7" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="14" y="19" width="7" height="2" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="19" y="14" width="2" height="7" rx="1" fill="url(#fullscreenGradient)"/>
-                            </svg>
-                            <!-- Exit Fullscreen SVG (hidden by default) -->
-                            <svg class="icon-exit-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
-                                <rect x="5" y="11" width="14" height="2" rx="1" fill="url(#fullscreenGradient)"/>
-                                <rect x="11" y="5" width="2" height="14" rx="1" fill="url(#fullscreenGradient)"/>
-                            </svg>
-                        </span>
-                        <span id="fullscreenText" class="fullscreen-switch-label">Fullscreen</span>
-                    </div>
+                <button id="fullscreenToggle" class="modern-tab modern-fullscreen-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen" aria-pressed="false" role="button" tabindex="0">
+                    <span class="fullscreen-icon-bg">
+                        <!-- Enter Fullscreen SVG -->
+                        <svg class="icon-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="3" width="7" height="2" rx="1" fill="#ff6a88"/>
+                            <rect x="3" y="3" width="2" height="7" rx="1" fill="#ff6a88"/>
+                            <rect x="14" y="3" width="7" height="2" rx="1" fill="#ff6a88"/>
+                            <rect x="19" y="3" width="2" height="7" rx="1" fill="#ff6a88"/>
+                            <rect x="3" y="19" width="7" height="2" rx="1" fill="#ff6a88"/>
+                            <rect x="3" y="14" width="2" height="7" rx="1" fill="#ff6a88"/>
+                            <rect x="14" y="19" width="7" height="2" rx="1" fill="#ff6a88"/>
+                            <rect x="19" y="14" width="2" height="7" rx="1" fill="#ff6a88"/>
+                        </svg>
+                        <!-- Exit Fullscreen SVG (hidden by default) -->
+                        <svg class="icon-exit-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+                            <rect x="5" y="11" width="14" height="2" rx="1" fill="#ff99ac"/>
+                            <rect x="11" y="5" width="2" height="14" rx="1" fill="#ff99ac"/>
+                        </svg>
+                    </span>
+                    <span id="fullscreenText" class="fullscreen-switch-label">Fullscreen</span>
                     <span class="ripple-effect"></span>
                 </button>
             </div>
         </div>
 
         <style>
-        /* Enhanced Action Buttons Styling */
-        .modern-action-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 20px;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            min-width: 140px;
-            justify-content: center;
-        }
-
-        .modern-action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 50%, #e085e8 100%);
-        }
-
-        .modern-action-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .modern-action-btn:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3), 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-gradient-bg {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .refresh-btn-enhanced {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-        }
-
-        .refresh-btn-enhanced:hover {
-            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 50%, #e085e8 100%);
-        }
-
-        .fullscreen-btn-enhanced {
-            background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 50%, #ff6a88 100%);
-        }
-
-        .fullscreen-btn-enhanced:hover {
-            background: linear-gradient(135deg, #ff5a78 0%, #ff89ac 50%, #ff5a78 100%);
-        }
-
-        .ripple-effect {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* Enhanced Dark Mode Button */
-        .enhanced-darkmode {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            border: none;
-            border-radius: 25px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.25);
-            min-width: 180px;
-            justify-content: center;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-
-        .enhanced-darkmode:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.35);
-            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 50%, #e085e8 100%);
-        }
-
-        .enhanced-darkmode:active {
-            transform: translateY(-1px) scale(0.98);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            transition: all 0.1s ease;
-        }
-
-        .enhanced-darkmode:focus {
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3), 0 12px 30px rgba(102, 126, 234, 0.35);
-        }
-
-        .enhanced-darkmode:focus-visible {
-            outline: 2px solid rgba(255, 255, 255, 0.8);
-            outline-offset: 2px;
-        }
-
-        /* Dark Mode Switch Track */
-        .darkmode-switch-track {
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 25px;
-            width: 48px;
-            height: 24px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .enhanced-darkmode:hover .darkmode-switch-track {
-            background: rgba(255, 255, 255, 0.35);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Dark Mode Switch Thumb */
-        .darkmode-switch-thumb {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            position: absolute;
-            top: 1px;
-            left: 1px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .enhanced-darkmode:hover .darkmode-switch-thumb {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
-            transform: scale(1.05);
-        }
-
-        /* Dark Mode Switch Icon */
-        .darkmode-switch-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-        }
-
-        .darkmode-switch-icon svg {
-            transition: all 0.3s ease;
-        }
-
-        .enhanced-darkmode:hover .darkmode-switch-icon svg {
-            transform: scale(1.1);
-        }
-
-        /* Dark Mode Text Label */
-        .darkmode-switch-label {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .enhanced-darkmode:hover .darkmode-switch-label {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Status Indicator */
-        .darkmode-status-indicator {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-            border: 2px solid white;
-            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .darkmode-status-indicator.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Ripple Effect for Dark Mode Button */
-        .enhanced-darkmode::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .enhanced-darkmode:active::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Tooltip Enhancement */
-        .theme-preview-tooltip {
-            position: absolute;
-            top: -45px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 500;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .theme-preview-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: #1f2937;
-        }
-
-        .enhanced-darkmode:hover + .theme-preview-tooltip {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(-5px);
-        }
-
-        /* Responsive Design for Dark Mode Button */
-        @media (max-width: 768px) {
-            .enhanced-darkmode {
-                min-width: auto;
-                width: 100%;
+            /* Enhanced Action Buttons Styling */
+            .modern-action-btn {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+                border: none;
+                border-radius: 12px;
+                padding: 12px 20px;
+                color: white;
+                font-weight: 600;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                min-width: 140px;
                 justify-content: center;
-                padding: 15px 24px;
-                font-size: 16px;
-                border-radius: 20px;
             }
 
-            .darkmode-switch-track {
-                width: 44px;
-                height: 22px;
+            .modern-action-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+                background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 50%, #e085e8 100%);
             }
 
-            .darkmode-switch-thumb {
-                width: 16px;
-                height: 16px;
+            .modern-action-btn:active {
+                transform: translateY(0);
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
             }
-        }
 
-        @media (max-width: 480px) {
+            .modern-action-btn:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3), 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+
+            .btn-gradient-bg {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .refresh-btn-enhanced {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            }
+
+            .refresh-btn-enhanced:hover {
+                background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 50%, #e085e8 100%);
+            }
+
+            .fullscreen-btn-enhanced {
+                background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 50%, #ff6a88 100%);
+            }
+
+            .fullscreen-btn-enhanced:hover {
+                background: linear-gradient(135deg, #ff5a78 0%, #ff89ac 50%, #ff5a78 100%);
+            }
+
+            .ripple-effect {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                pointer-events: none;
+            }
+
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+
+            /* Enhanced Dark Mode Button */
             .enhanced-darkmode {
-                padding: 18px 24px;
-                font-size: 16px;
-                gap: 10px;
-            }
-
-            .darkmode-switch-track {
-                width: 40px;
-                height: 20px;
-            }
-
-            .darkmode-switch-thumb {
-                width: 14px;
-                height: 14px;
-            }
-        }
-
-        /* High Contrast Mode Support */
-        @media (prefers-contrast: high) {
-            .enhanced-darkmode {
-                border: 2px solid currentColor;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            }
-
-            .darkmode-switch-track {
-                border: 2px solid currentColor;
-                background: rgba(255, 255, 255, 0.9);
-            }
-        }
-
-        /* Reduced Motion Support */
-        @media (prefers-reduced-motion: reduce) {
-            .enhanced-darkmode,
-            .darkmode-switch-track,
-            .darkmode-switch-thumb,
-            .darkmode-switch-icon,
-            .darkmode-switch-label {
-                transition: none;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+                border: none;
+                border-radius: 25px;
+                padding: 12px 24px;
+                color: white;
+                font-weight: 600;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.25);
+                min-width: 180px;
+                justify-content: center;
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
             }
 
             .enhanced-darkmode:hover {
-                transform: none;
+                transform: translateY(-3px) scale(1.02);
+                box-shadow: 0 12px 30px rgba(102, 126, 234, 0.35);
+                background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 50%, #e085e8 100%);
             }
-        }
+
+            .enhanced-darkmode:active {
+                transform: translateY(-1px) scale(0.98);
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                transition: all 0.1s ease;
+            }
+
+            .enhanced-darkmode:focus {
+                outline: none;
+                box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3), 0 12px 30px rgba(102, 126, 234, 0.35);
+            }
+
+            .enhanced-darkmode:focus-visible {
+                outline: 2px solid rgba(255, 255, 255, 0.8);
+                outline-offset: 2px;
+            }
+
+            /* Dark Mode Switch Track */
+            .darkmode-switch-track {
+                background: rgba(255, 255, 255, 0.25);
+                border-radius: 25px;
+                width: 48px;
+                height: 24px;
+                position: relative;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(10px);
+            }
+
+            .enhanced-darkmode:hover .darkmode-switch-track {
+                background: rgba(255, 255, 255, 0.35);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            /* Dark Mode Switch Thumb */
+            .darkmode-switch-thumb {
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                border-radius: 50%;
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                top: 1px;
+                left: 1px;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.8);
+            }
+
+            .enhanced-darkmode:hover .darkmode-switch-thumb {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
+                transform: scale(1.05);
+            }
+
+            /* Dark Mode Switch Icon */
+            .darkmode-switch-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+            }
+
+            .darkmode-switch-icon svg {
+                transition: all 0.3s ease;
+            }
+
+            .enhanced-darkmode:hover .darkmode-switch-icon svg {
+                transform: scale(1.1);
+            }
+
+            /* Dark Mode Text Label */
+            .darkmode-switch-label {
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                transition: all 0.3s ease;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            }
+
+            .enhanced-darkmode:hover .darkmode-switch-label {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            }
+
+            /* Status Indicator */
+            .darkmode-status-indicator {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+                border: 2px solid white;
+                box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+                opacity: 0;
+                transform: scale(0);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .darkmode-status-indicator.active {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            /* Ripple Effect for Dark Mode Button */
+            .enhanced-darkmode::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s ease, height 0.6s ease;
+            }
+
+            .enhanced-darkmode:active::before {
+                width: 300px;
+                height: 300px;
+            }
+
+            /* Tooltip Enhancement */
+            .theme-preview-tooltip {
+                position: absolute;
+                top: -45px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 8px;
+                font-size: 12px;
+                font-weight: 500;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+
+            .theme-preview-tooltip::after {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 6px solid transparent;
+                border-top-color: #1f2937;
+            }
+
+            .enhanced-darkmode:hover + .theme-preview-tooltip {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(-5px);
+            }
+
+            /* Responsive Design for Dark Mode Button */
+            @media (max-width: 768px) {
+                .enhanced-darkmode {
+                    min-width: auto;
+                    width: 100%;
+                    justify-content: center;
+                    padding: 15px 24px;
+                    font-size: 16px;
+                    border-radius: 20px;
+                }
+
+                .darkmode-switch-track {
+                    width: 44px;
+                    height: 22px;
+                }
+
+                .darkmode-switch-thumb {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .enhanced-darkmode {
+                    padding: 18px 24px;
+                    font-size: 16px;
+                    gap: 10px;
+                }
+
+                .darkmode-switch-track {
+                    width: 40px;
+                    height: 20px;
+                }
+
+                .darkmode-switch-thumb {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+
+            /* High Contrast Mode Support */
+            @media (prefers-contrast: high) {
+                .enhanced-darkmode {
+                    border: 2px solid currentColor;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+                }
+
+                .darkmode-switch-track {
+                    border: 2px solid currentColor;
+                    background: rgba(255, 255, 255, 0.9);
+                }
+            }
+
+            /* Reduced Motion Support */
+            @media (prefers-reduced-motion: reduce) {
+                .enhanced-darkmode,
+                .darkmode-switch-track,
+                .darkmode-switch-thumb,
+                .darkmode-switch-icon,
+                .darkmode-switch-label {
+                    transition: none;
+                }
+
+                .enhanced-darkmode:hover {
+                    transform: none;
+                }
+            }
+
+            /* Fullscreen Table Styles */
+            .table-wrapper:fullscreen {
+                background: #fff !important;
+                padding: 20px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                align-items: stretch !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                overflow: auto !important;
+            }
+
+            .table-wrapper:-webkit-full-screen {
+                background: #fff !important;
+                padding: 20px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                align-items: stretch !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                overflow: auto !important;
+            }
+
+            .table-wrapper:-moz-full-screen {
+                background: #fff !important;
+                padding: 20px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                align-items: stretch !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                overflow: auto !important;
+            }
+
+            .table-wrapper:-ms-fullscreen {
+                background: #fff !important;
+                padding: 20px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                align-items: stretch !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                overflow: auto !important;
+            }
+
+            /* Fullscreen DataTables wrapper */
+            .table-wrapper:fullscreen .dataTables_wrapper {
+                width: 100% !important;
+                max-width: none !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                flex: 1 !important;
+            }
+
+            .table-wrapper:-webkit-full-screen .dataTables_wrapper {
+                width: 100% !important;
+                max-width: none !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                flex: 1 !important;
+            }
+
+            .table-wrapper:-moz-full-screen .dataTables_wrapper {
+                width: 100% !important;
+                max-width: none !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                flex: 1 !important;
+            }
+
+            .table-wrapper:-ms-fullscreen .dataTables_wrapper {
+                width: 100% !important;
+                max-width: none !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                flex: 1 !important;
+            }
+
+            /* Fullscreen table styling */
+            .table-wrapper:fullscreen .enhanced-table {
+                width: 100% !important;
+                max-width: none !important;
+                font-size: 16px !important;
+                flex: 1 !important;
+            }
+
+            .table-wrapper:-webkit-full-screen .enhanced-table {
+                width: 100% !important;
+                max-width: none !important;
+                font-size: 16px !important;
+                flex: 1 !important;
+            }
+
+            .table-wrapper:-moz-full-screen .enhanced-table {
+                width: 100% !important;
+                max-width: none !important;
+                font-size: 16px !important;
+                flex: 1 !important;
+            }
+
+            .table-wrapper:-ms-fullscreen .enhanced-table {
+                width: 100% !important;
+                max-width: none !important;
+                font-size: 16px !important;
+                flex: 1 !important;
+            }
+
+            /* Fullscreen header styling */
+            .table-wrapper:fullscreen .enhanced-thead {
+                background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(96,165,250,0.15) 100%) !important;
+                font-weight: bold !important;
+                font-size: 18px !important;
+            }
+
+            .table-wrapper:-webkit-full-screen .enhanced-thead {
+                background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(96,165,250,0.15) 100%) !important;
+                font-weight: bold !important;
+                font-size: 18px !important;
+            }
+
+            .table-wrapper:-moz-full-screen .enhanced-thead {
+                background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(96,165,250,0.15) 100%) !important;
+                font-weight: bold !important;
+                font-size: 18px !important;
+            }
+
+            .table-wrapper:-ms-fullscreen .enhanced-thead {
+                background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(96,165,250,0.15) 100%) !important;
+                font-weight: bold !important;
+                font-size: 18px !important;
+            }
+
+            /* Fullscreen DataTables controls - ensure they're visible */
+            .table-wrapper:fullscreen .dataTables_length,
+            .table-wrapper:fullscreen .dataTables_filter,
+            .table-wrapper:fullscreen .dataTables_info,
+            .table-wrapper:fullscreen .dataTables_paginate,
+            .table-wrapper:fullscreen .datatable-toolbar {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                margin: 10px 0 !important;
+                position: static !important;
+            }
+
+            .table-wrapper:-webkit-full-screen .dataTables_length,
+            .table-wrapper:-webkit-full-screen .dataTables_filter,
+            .table-wrapper:-webkit-full-screen .dataTables_info,
+            .table-wrapper:-webkit-full-screen .dataTables_paginate,
+            .table-wrapper:-webkit-full-screen .datatable-toolbar {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                margin: 10px 0 !important;
+                position: static !important;
+            }
+
+            .table-wrapper:-moz-full-screen .dataTables_length,
+            .table-wrapper:-moz-full-screen .dataTables_filter,
+            .table-wrapper:-moz-full-screen .dataTables_info,
+            .table-wrapper:-moz-full-screen .dataTables_paginate,
+            .table-wrapper:-moz-full-screen .datatable-toolbar {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                margin: 10px 0 !important;
+                position: static !important;
+            }
+
+            .table-wrapper:-ms-fullscreen .dataTables_length,
+            .table-wrapper:-ms-fullscreen .dataTables_filter,
+            .table-wrapper:-ms-fullscreen .dataTables_info,
+            .table-wrapper:-ms-fullscreen .dataTables_paginate,
+            .table-wrapper:-ms-fullscreen .datatable-toolbar {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                margin: 10px 0 !important;
+                position: static !important;
+            }
+
+            /* Fullscreen pagination styling */
+            .table-wrapper:fullscreen .dataTables_paginate {
+                font-size: 16px !important;
+                margin-top: 20px !important;
+                text-align: center !important;
+            }
+
+            .table-wrapper:-webkit-full-screen .dataTables_paginate {
+                font-size: 16px !important;
+                margin-top: 20px !important;
+                text-align: center !important;
+            }
+
+            .table-wrapper:-moz-full-screen .dataTables_paginate {
+                font-size: 16px !important;
+                margin-top: 20px !important;
+                text-align: center !important;
+            }
+
+            .table-wrapper:-ms-fullscreen .dataTables_paginate {
+                font-size: 16px !important;
+                margin-top: 20px !important;
+                text-align: center !important;
+            }
+
+            /* Fullscreen buttons styling */
+            .table-wrapper:fullscreen .datatable-btn {
+                font-size: 14px !important;
+                padding: 8px 16px !important;
+                margin: 2px !important;
+            }
+
+            .table-wrapper:-webkit-full-screen .datatable-btn {
+                font-size: 14px !important;
+                padding: 8px 16px !important;
+                margin: 2px !important;
+            }
+
+            .table-wrapper:-moz-full-screen .datatable-btn {
+                font-size: 14px !important;
+                padding: 8px 16px !important;
+                margin: 2px !important;
+            }
+
+            .table-wrapper:-ms-fullscreen .datatable-btn {
+                font-size: 14px !important;
+                padding: 8px 16px !important;
+                margin: 2px !important;
+            }
+
+            /* Fullscreen search and length controls */
+            .table-wrapper:fullscreen .dataTables_filter input,
+            .table-wrapper:fullscreen .dataTables_length select {
+                font-size: 16px !important;
+                padding: 8px !important;
+            }
+
+            .table-wrapper:-webkit-full-screen .dataTables_filter input,
+            .table-wrapper:-webkit-full-screen .dataTables_length select {
+                font-size: 16px !important;
+                padding: 8px !important;
+            }
+
+            .table-wrapper:-moz-full-screen .dataTables_filter input,
+            .table-wrapper:-moz-full-screen .dataTables_length select {
+                font-size: 16px !important;
+                padding: 8px !important;
+            }
+
+            .table-wrapper:-ms-fullscreen .dataTables_filter input,
+            .table-wrapper:-ms-fullscreen .dataTables_length select {
+                font-size: 16px !important;
+                padding: 8px !important;
+            }
         </style>
 
         <!-- DataTable Section -->
@@ -550,7 +802,7 @@
                 background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 50%, #43cea2 100%);
                 z-index: 1;
             "></div>
-            
+
             <div class="m-portlet__body mt-5 enhanced-portlet-body modern-portlet-body" style="
                 padding: 2.5em 2em;
                 position: relative;
@@ -838,12 +1090,12 @@
                                     </span>
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Website</span>
                                 </th>
-                        </tr>
-                        </thead>
-                    </table>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 @endsection
