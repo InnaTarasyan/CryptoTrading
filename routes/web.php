@@ -151,3 +151,6 @@ Route::post('/coingecko/trendings/reviews', [\App\Http\Controllers\Coingecko\Coi
 Route::get('/coingecko/exchanges_rates/reviews', [\App\Http\Controllers\Coingecko\ExchangesRatesReviewsController::class, 'index']);
 Route::post('/coingecko/exchanges_rates/reviews', [\App\Http\Controllers\Coingecko\ExchangesRatesReviewsController::class, 'store']);
 Route::get('/coingecko/exchanges_rates/reviews/list', [\App\Http\Controllers\Coingecko\ExchangesRatesReviewsController::class, 'listJson']);
+
+// Privacy Policy Page
+Route::view('/privacy-policy', 'privacy-policy');
