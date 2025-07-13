@@ -1,0 +1,155 @@
+body {
+    background: #f4f7fa;
+}
+.about-hero {
+    background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%, #c7d2fe 100%);
+    padding: 3.5em 0 2.5em 0;
+    border-radius: 2em;
+    margin-bottom: 2.5em;
+    box-shadow: 0 8px 40px rgba(80,80,200,0.10);
+    position: relative;
+    overflow: hidden;
+    animation: gradientBG 8s ease-in-out infinite alternate;
+}
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+.about-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    box-shadow: 0 8px 32px rgba(80,80,200,0.18), 0 2px 8px rgba(80,80,200,0.10);
+    object-fit: cover;
+    border: 5px solid #fff;
+    margin-bottom: 1em;
+    background: #fff;
+    transition: transform 0.2s;
+}
+.about-avatar:hover {
+    transform: scale(1.04) rotate(-2deg);
+}
+.about-social {
+    margin-bottom: 1.2em;
+}
+.about-social a {
+    display: inline-block;
+    margin: 0 0.4em;
+    color: #6366f1;
+    background: #fff;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 1.3em;
+    box-shadow: 0 2px 8px rgba(80,80,200,0.10);
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.about-social a:hover {
+    background: #6366f1;
+    color: #fff;
+    transform: scale(1.12);
+}
+.about-card, .about-feedback-card {
+    background: rgba(255,255,255,0.75);
+    border-radius: 1.5em;
+    box-shadow: 0 4px 32px rgba(80,80,200,0.10);
+    padding: 2.2em 1.7em;
+    margin-bottom: 2.2em;
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(99,102,241,0.08);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.about-card:hover, .about-feedback-card:hover {
+    box-shadow: 0 12px 48px rgba(80,80,200,0.16);
+    transform: translateY(-2px) scale(1.01);
+}
+.about-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    color: #fff;
+    border-radius: 2em;
+    padding: 0.35em 1.1em;
+    font-size: 1em;
+    margin: 0.2em 0.3em 0.2em 0;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 4px rgba(99,102,241,0.10);
+}
+.about-section-title {
+    font-weight: 800;
+    font-size: 1.25em;
+    margin-bottom: 1.1em;
+    color: #3730a3;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.about-section-title i {
+    font-size: 1.1em;
+}
+.about-feature-list li {
+    margin-bottom: 0.7em;
+    font-size: 1.09em;
+    line-height: 1.7;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+}
+.about-feature-list i {
+    color: #6366f1;
+    margin-top: 0.2em;
+    min-width: 1.2em;
+    text-align: center;
+}
+.about-feedback-card .btn-primary {
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    border: none;
+    border-radius: 2em;
+    font-weight: 700;
+    font-size: 1.1em;
+    padding: 0.8em 2.2em;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 12px rgba(99,102,241,0.10);
+}
+.about-feedback-card .btn-primary:hover {
+    background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+    box-shadow: 0 4px 24px rgba(99,102,241,0.18);
+    transform: scale(1.04);
+}
+.form-control, .m-input {
+    border-radius: 1.5em !important;
+    border: 1.5px solid #e0e7ff !important;
+    background: rgba(255,255,255,0.95) !important;
+    font-size: 1.07em;
+    padding: 0.9em 1.2em;
+    margin-bottom: 1em;
+    box-shadow: 0 1px 4px rgba(99,102,241,0.06);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+.form-control:focus, .m-input:focus {
+    border: 1.5px solid #6366f1 !important;
+    box-shadow: 0 2px 12px rgba(99,102,241,0.10);
+    outline: none;
+}
+.input-group-text {
+    border-radius: 1.5em 0 0 1.5em !important;
+    background: #e0e7ff !important;
+    color: #6366f1 !important;
+    border: none !important;
+    font-size: 1.1em;
+}
+@media (max-width: 767px) {
+    .about-hero, .about-card, .about-feedback-card {
+        padding: 1.2em 0.7em;
+    }
+    .about-avatar {
+        width: 90px;
+        height: 90px;
+    }
+    .about-section-title {
+        font-size: 1.1em;
+    }
+}

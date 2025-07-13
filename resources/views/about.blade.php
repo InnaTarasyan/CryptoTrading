@@ -1,242 +1,6 @@
 @extends('layouts.base')
 @section('styles')
-<style>
-    body {
-        background: #f4f7fa;
-    }
-    .about-hero {
-        background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%, #c7d2fe 100%);
-        padding: 3.5em 0 2.5em 0;
-        border-radius: 2em;
-        margin-bottom: 2.5em;
-        box-shadow: 0 8px 40px rgba(80,80,200,0.10);
-        position: relative;
-        overflow: hidden;
-        animation: gradientBG 8s ease-in-out infinite alternate;
-    }
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 100% 50%; }
-    }
-    .about-avatar {
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        box-shadow: 0 8px 32px rgba(80,80,200,0.18), 0 2px 8px rgba(80,80,200,0.10);
-        object-fit: cover;
-        border: 5px solid #fff;
-        margin-bottom: 1em;
-        background: #fff;
-        transition: transform 0.2s;
-    }
-    .about-avatar:hover {
-        transform: scale(1.04) rotate(-2deg);
-    }
-    .about-social {
-        margin-bottom: 1.2em;
-    }
-    .about-social a {
-        display: inline-block;
-        margin: 0 0.4em;
-        color: #6366f1;
-        background: #fff;
-        border-radius: 50%;
-        width: 38px;
-        height: 38px;
-        line-height: 38px;
-        text-align: center;
-        font-size: 1.3em;
-        box-shadow: 0 2px 8px rgba(80,80,200,0.10);
-        transition: background 0.2s, color 0.2s, transform 0.2s;
-    }
-    .about-social a:hover {
-        background: #6366f1;
-        color: #fff;
-        transform: scale(1.12);
-    }
-    .about-tagline {
-        font-size: 1.25em;
-        color: #6366f1;
-        font-weight: 600;
-        margin-bottom: 1.2em;
-        letter-spacing: 0.01em;
-        animation: fadeIn 1.2s;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: none; }
-    }
-    .about-section {
-        margin-bottom: 2.5em;
-    }
-    .about-card, .about-feedback-card, .about-timeline, .about-testimonials, .about-funfacts {
-        background: rgba(255,255,255,0.85);
-        border-radius: 1.5em;
-        box-shadow: 0 4px 32px rgba(80,80,200,0.10);
-        padding: 2.2em 1.7em;
-        margin-bottom: 2.2em;
-        backdrop-filter: blur(8px);
-        border: 1.5px solid rgba(99,102,241,0.08);
-        transition: box-shadow 0.2s, transform 0.2s;
-        animation: fadeIn 1.2s;
-    }
-    .about-card:hover, .about-feedback-card:hover, .about-timeline:hover, .about-testimonials:hover, .about-funfacts:hover {
-        box-shadow: 0 12px 48px rgba(80,80,200,0.16);
-        transform: translateY(-2px) scale(1.01);
-    }
-    .about-section-title {
-        font-weight: 800;
-        font-size: 1.25em;
-        margin-bottom: 1.1em;
-        color: #3730a3;
-        letter-spacing: 0.01em;
-        display: flex;
-        align-items: center;
-        gap: 0.5em;
-    }
-    .about-section-title i {
-        font-size: 1.1em;
-    }
-    .about-feature-list li {
-        margin-bottom: 0.7em;
-        font-size: 1.09em;
-        line-height: 1.7;
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5em;
-    }
-    .about-feature-list i {
-        color: #6366f1;
-        margin-top: 0.2em;
-        min-width: 1.2em;
-        text-align: center;
-    }
-    .about-badge {
-        display: inline-block;
-        background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
-        color: #fff;
-        border-radius: 2em;
-        padding: 0.35em 1.1em;
-        font-size: 1em;
-        margin: 0.2em 0.3em 0.2em 0;
-        font-weight: 500;
-        letter-spacing: 0.03em;
-        box-shadow: 0 1px 4px rgba(99,102,241,0.10);
-    }
-    .about-timeline ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .about-timeline li {
-        position: relative;
-        padding-left: 2em;
-        margin-bottom: 1.2em;
-        font-size: 1.08em;
-    }
-    .about-timeline li:before {
-        content: '\2022';
-        color: #6366f1;
-        font-size: 1.5em;
-        position: absolute;
-        left: 0;
-        top: 0.1em;
-    }
-    .about-testimonials blockquote {
-        font-size: 1.08em;
-        color: #444;
-        border-left: 4px solid #6366f1;
-        margin: 0 0 1.2em 0;
-        padding: 0.5em 1em;
-        background: rgba(99,102,241,0.06);
-        border-radius: 0.7em;
-        font-style: italic;
-        animation: fadeIn 1.2s;
-    }
-    .about-testimonials cite {
-        display: block;
-        font-size: 0.98em;
-        color: #6366f1;
-        margin-top: 0.2em;
-        font-style: normal;
-    }
-    .about-funfacts ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.2em;
-        justify-content: center;
-    }
-    .about-funfacts li {
-        background: linear-gradient(90deg, #e0e7ff 0%, #f8fafc 100%);
-        border-radius: 1.2em;
-        padding: 1em 1.5em;
-        font-size: 1.07em;
-        color: #3730a3;
-        box-shadow: 0 1px 6px rgba(99,102,241,0.07);
-        min-width: 180px;
-        text-align: center;
-        animation: fadeIn 1.2s;
-    }
-    .about-feedback-card .btn-primary {
-        background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
-        border: none;
-        border-radius: 2em;
-        font-weight: 700;
-        font-size: 1.1em;
-        padding: 0.8em 2.2em;
-        transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-        box-shadow: 0 2px 12px rgba(99,102,241,0.10);
-    }
-    .about-feedback-card .btn-primary:hover {
-        background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
-        box-shadow: 0 4px 24px rgba(99,102,241,0.18);
-        transform: scale(1.04);
-    }
-    .form-control, .m-input {
-        border-radius: 1.5em !important;
-        border: 1.5px solid #e0e7ff !important;
-        background: rgba(255,255,255,0.95) !important;
-        font-size: 1.07em;
-        padding: 0.9em 1.2em;
-        margin-bottom: 1em;
-        box-shadow: 0 1px 4px rgba(99,102,241,0.06);
-        transition: border 0.2s, box-shadow 0.2s;
-    }
-    .form-control:focus, .m-input:focus {
-        border: 1.5px solid #6366f1 !important;
-        box-shadow: 0 2px 12px rgba(99,102,241,0.10);
-        outline: none;
-    }
-    .input-group-text {
-        border-radius: 1.5em 0 0 1.5em !important;
-        background: #e0e7ff !important;
-        color: #6366f1 !important;
-        border: none !important;
-        font-size: 1.1em;
-    }
-    @media (max-width: 767px) {
-        .about-hero, .about-card, .about-feedback-card, .about-timeline, .about-testimonials, .about-funfacts {
-            padding: 1.2em 0.7em;
-        }
-        .about-avatar {
-            width: 90px;
-            height: 90px;
-        }
-        .about-section-title {
-            font-size: 1.1em;
-        }
-        .about-funfacts ul {
-            flex-direction: column;
-            gap: 0.7em;
-        }
-        .about-funfacts li {
-            min-width: 0;
-        }
-    }
-</style>
+    <link href="{{ url('css/about.css') }}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="about-hero text-center">
@@ -245,41 +9,37 @@
         <a href="mailto:innatarasyanmail@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
         <a href="https://t.me/innatarasyan" target="_blank" title="Telegram"><i class="fa fa-telegram"></i></a>
         <a href="https://github.com/innatarasyan" target="_blank" title="GitHub"><i class="fa fa-github"></i></a>
-        <a href="https://linkedin.com/in/innatarasyan" target="_blank" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
     </div>
     <h1 style="margin-top: 0.7em; font-weight: 700; color: #3730a3;">Inna Tarasyan</h1>
-    <div class="about-tagline">Empowering crypto traders with data-driven insights</div>
-    <p style="color: #555; max-width: 500px; margin: 0 auto 1.2em auto;">Web Developer & Crypto Enthusiast. Based in Armenia.<br><a href="mailto:innatarasyanmail@gmail.com" style="color:#6366f1;text-decoration:underline;">innatarasyanmail@gmail.com</a></p>
+    <p class="lead" style="color: #6366f1; font-size: 1.2em;">Web Developer & Crypto Enthusiast</p>
+    <p style="color: #555; max-width: 500px; margin: 0 auto 1.2em auto;">Hello! I'm a passionate web developer from Armenia, dedicated to creating tools that make crypto trading more accessible and informed. I believe in the power of real-time data and user-friendly interfaces to help traders make better decisions.</p>
 </div>
 <div class="container-fluid" style="max-width: 1100px;">
-        <div class="row">
-        <div class="col-md-6 about-section">
+    <div class="row">
+        <div class="col-md-6">
             <div class="about-card">
                 <div class="about-section-title"><i class="fa fa-star"></i> Key Features</div>
                 <ul class="about-feature-list">
-                    <li><i class="fa fa-chart-line"></i> <b>Comprehensive Market Coverage:</b> Real-time & historical data from top exchanges.</li>
-                    <li><i class="fa fa-table"></i> <b>Advanced DataTables:</b> Instant filtering, export, and responsive tables.</li>
-                    <li><i class="fa fa-bolt"></i> <b>Real-Time Analytics:</b> Live price updates, OHLCV charts, and liquidity metrics.</li>
-                    <li><i class="fa fa-calendar-alt"></i> <b>Event & Sentiment Tracking:</b> Crypto event calendar and social analytics.</li>
-                    <li><i class="fa fa-bell"></i> <b>Portfolio & Alerts (Coming Soon):</b> Track coins, set alerts, and monitor performance.</li>
-                    <li><i class="fa fa-lock"></i> <b>Security & Privacy:</b> Data is secure and privacy is respected.</li>
-                    <li><i class="fa fa-sliders-h"></i> <b>Advanced Order Types:</b> Place limit, trailing stop, take profit, and stop loss orders for flexible trading strategies.</li>
-                    <li><i class="fa fa-robot"></i> <b>DCA Bots:</b> Automate your trading with Dollar-Cost Averaging bots for consistent investment.</li>
-                    <li><i class="fa fa-bell"></i> <b>Real-Time Notifications:</b> Get instant alerts for price movements, order execution, and important events.</li>
-                    <li><i class="fa fa-search"></i> <b>DEX Screener:</b> Analyze decentralized exchange markets and spot new opportunities.</li>
-                    <li><i class="fa fa-shield-alt"></i> <b>MEV Protection:</b> Protect your trades from front-running and maximize returns.</li>
-                    <li><i class="fa fa-users"></i> <b>Copy Trading (Upcoming):</b> Follow top traders and automatically copy their strategies.</li>
-                    <li><i class="fa fa-layer-group"></i> <b>Batch Orders & Transfers:</b> Execute multiple trades or transfers in a single action for efficiency.</li>
-                    <li><i class="fa fa-trophy"></i> <b>Trading Rewards & Loyalty:</b> Earn rewards and participate in loyalty programs for active trading.</li>
-                    <li><i class="fa fa-mobile-alt"></i> <b>Mobile-Friendly Design:</b> Enjoy a seamless experience on any device, from desktop to mobile.</li>
-                    <li><i class="fa fa-th-large"></i> <b>Customizable Dashboards:</b> Personalize your workspace with widgets and layouts that fit your workflow.</li>
-                    <li><i class="fa fa-file-export"></i> <b>Export Options:</b> Download your data and reports in multiple formats for further analysis.</li>
-                    <li><i class="fa fa-code"></i> <b>API Access:</b> Integrate platform data into your own tools and automate your workflow.</li>
-                    <li><i class="fa fa-graduation-cap"></i> <b>Educational Resources:</b> Access guides, tutorials, and tips to improve your trading skills.</li>
+                    <li><i class="fa fa-chart-line"></i> <b>Comprehensive Market Coverage:</b> Real-time & historical data from top exchanges with 24/7 monitoring.</li>
+                    <li><i class="fa fa-table"></i> <b>Advanced DataTables:</b> Instant filtering, sorting, export to CSV/Excel, and responsive tables with pagination.</li>
+                    <li><i class="fa fa-bolt"></i> <b>Real-Time Analytics:</b> Live price updates, OHLCV charts, liquidity metrics, and market depth analysis.</li>
+                    <li><i class="fa fa-calendar-alt"></i> <b>Event & Sentiment Tracking:</b> Crypto event calendar, social media sentiment analysis, and news impact monitoring.</li>
+                    <li><i class="fa fa-chart-bar"></i> <b>Advanced Charting:</b> Interactive TradingView charts with multiple timeframes, technical indicators, and drawing tools.</li>
+                    <li><i class="fa fa-search"></i> <b>Smart Search & Filters:</b> Find coins by name, symbol, market cap, or custom criteria with instant results.</li>
+                    <li><i class="fa fa-bell"></i> <b>Portfolio & Alerts (Coming Soon):</b> Track your favorite coins, set price alerts, and monitor portfolio performance.</li>
+                    <li><i class="fa fa-mobile-alt"></i> <b>Mobile-First Design:</b> Fully responsive interface that works perfectly on desktop, tablet, and mobile devices.</li>
+                    <li><i class="fa fa-download"></i> <b>Data Export:</b> Download market data, charts, and reports in multiple formats for offline analysis.</li>
+                    <li><i class="fa fa-code"></i> <b>API Integration:</b> RESTful APIs for developers to integrate crypto data into their own applications.</li>
+                    <li><i class="fa fa-users"></i> <b>Social Features:</b> Share insights, track community sentiment, and discover trending coins.</li>
+                    <li><i class="fa fa-shield-alt"></i> <b>Security & Privacy:</b> Data is secure, privacy is respected, and no sensitive information is stored.</li>
+                    <li><i class="fa fa-sync"></i> <b>Auto-Refresh:</b> Data updates automatically every 3 hours, with manual refresh options for real-time accuracy.</li>
+                    <li><i class="fa fa-lightbulb"></i> <b>Educational Resources:</b> Built-in tutorials, tooltips, and explanations for crypto trading concepts.</li>
+                    <li><i class="fa fa-globe"></i> <b>Multi-Language Support:</b> Interface available in multiple languages for global accessibility.</li>
+                    <li><i class="fa fa-cog"></i> <b>Customizable Dashboard:</b> Personalize your view with customizable widgets and layouts.</li>
                 </ul>
-                                </div>
-                            </div>
-        <div class="col-md-6 about-section">
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="about-card">
                 <div class="about-section-title"><i class="fa fa-cogs"></i> Technologies</div>
                 <div style="margin-bottom:1em;">
@@ -292,7 +52,7 @@
                     <span class="about-badge">AJAX</span>
                     <span class="about-badge">REST APIs</span>
                     <span class="about-badge">Google Maps API</span>
-                            </div>
+                </div>
                 <div style="font-size:1.04em; color:#444; margin-bottom:1.2em;">
                     <b>What data is shown in our tables?</b><br>
                     The interactive datatables present a rich set of crypto market data, including:
@@ -324,20 +84,20 @@
                     <li><b>select2.js:</b> Fast, intuitive search</li>
                 </ul>
             </div>
-                            </div>
-                        </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-6 about-section">
+        <div class="col-md-6">
             <div class="about-card">
                 <div class="about-section-title"><i class="fa fa-users"></i> Why This Matters for You</div>
                 <ul class="about-feature-list">
                     <li><b>For Traders:</b> Make informed decisions with up-to-the-second data, advanced analytics, and event tracking.</li>
                     <li><b>For Analysts:</b> Export and analyze large datasets, backtest strategies, and monitor market trends.</li>
                     <li><b>For Learners:</b> Explore a real-world example of a modern, full-stack web application using the latest technologies in crypto and web development.</li>
-                                </ul>
-                            </div>
-                            </div>
-        <div class="col-md-6 about-section">
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="about-card">
                 <div class="about-section-title"><i class="fa fa-shield-alt"></i> Reliability & Security</div>
                 <ul class="about-feature-list">
@@ -346,96 +106,86 @@
                     <li><b>Data Integrity:</b> Aggregated and standardized data ensures accuracy and consistency.</li>
                     <li><b>GDPR & Data Privacy:</b> User privacy is a top priority; no sensitive data is shared.</li>
                 </ul>
-                            </div>
-                            </div>
-                            </div>
-    <!-- Timeline / Milestones Section -->
-    <div class="row">
-        <div class="col-12 about-section">
-            <div class="about-timeline">
-                <div class="about-section-title"><i class="fa fa-trophy"></i> Milestones</div>
-                <ul>
-                    <li><b>2022:</b> Launched CryptoTrading platform</li>
-                    <li><b>2023:</b> Integrated CoinGecko & LiveCoinWatch APIs</li>
-                    <li><b>2024:</b> Reached 10,000+ users and added CoinMarketCal integration</li>
-                                </ul>
-                                </div>
-                            </div>
-                        </div>
-    <!-- Testimonials Section -->
-    <div class="row">
-        <div class="col-12 about-section">
-            <div class="about-testimonials">
-                <div class="about-section-title"><i class="fa fa-comment"></i> What Users Say</div>
-                <blockquote>“The best crypto dashboard I’ve used!”<cite>— Crypto Analyst</cite></blockquote>
-                <blockquote>“Superb real-time data and easy to use.”<cite>— Trader</cite></blockquote>
-                <blockquote>“Love the event calendar and portfolio tracking features.”<cite>— Community Member</cite></blockquote>
-            </div>
-                    </div>
-                </div>
-    <!-- Fun Facts / Behind the Scenes Section -->
-    <div class="row">
-        <div class="col-12 about-section">
-            <div class="about-funfacts">
-                <div class="about-section-title"><i class="fa fa-lightbulb"></i> Fun Facts & Behind the Scenes</div>
-                <ul>
-                    <li><span role="img" aria-label="coffee">☕</span> Code powered by Armenian coffee</li>
-                    <li><span role="img" aria-label="rocket">🚀</span> Over 1 million API calls served</li>
-                    <li><span role="img" aria-label="books">📚</span> Always learning new web tech</li>
-                    <li><span role="img" aria-label="chart">📈</span> Favorite chart: candlesticks!</li>
-                    <li><span role="img" aria-label="cat">🐱</span> Cat occasionally walks on the keyboard</li>
-                </ul>
             </div>
         </div>
     </div>
-    <!-- Note from Inna -->
-        <div class="row">
-        <div class="col-12 about-section">
+    <div class="row">
+        <div class="col-12">
             <div class="about-card" style="background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);">
                 <div class="about-section-title"><i class="fa fa-quote-left"></i> A Note from Inna</div>
                 <p style="font-size:1.08em; color:#444;">I created this project to help both new and experienced crypto traders navigate the fast-paced world of digital assets. I hope you find it useful, insightful, and easy to use. Your feedback is always welcome—please use the form below to share your thoughts or suggestions!</p>
                 <div style="font-size:0.98em; color:#888; margin-top:1em;"><em>Disclaimer: This site is for informational purposes only and does not provide financial advice. Please do your own research before making investment decisions.</em></div>
             </div>
-                            </div>
-                        </div>
-    <!-- Feedback Section -->
+        </div>
+    </div>
     <div class="row">
-        <div class="col-12 about-section">
+        <div class="col-12">
+            <div class="about-card">
+                <div class="about-section-title"><i class="fa fa-info-circle"></i> About This Project</div>
+                <div class="about-welcome-text">
+                    <p><em>Dear All,</em></p>
+                    <p>I'm <strong>Inna Tarasyan</strong>, a web developer from Armenia, and I'm excited to introduce you to the <strong>Coin Trading Project</strong>. This platform is designed to combine cryptocurrency information from different major sources, allowing you to track all changes in key indicators of the crypto market in real-time.</p>
+                    
+                    <p>Our platform integrates data from the following trusted sources:</p>
+                    <ul class="about-welcome-list">
+                        <li>livecoinwatch.com - Real-time price tracking and market data</li>
+                        <li>coingecko.com - Comprehensive crypto information and rankings</li>
+                        <li>coinmarketcal.com - Crypto events and announcements calendar</li>
+                    </ul>
+                    
+                    <p><strong>How it works:</strong> Information is automatically updated every 3 hours, but you can get the latest updates instantly by clicking the "Update All Data" button on any page. The system update takes about one minute and provides you with up-to-date cryptocurrency capitalization results. Click on any row in the data tables to see detailed information about a particular crypto coin.</p>
+                    
+                    <p><strong>Advanced Features:</strong> On the crypto coin details page, you can explore TradingView charts, social media mentions, and upcoming events. The charts display candlestick patterns and price performance over variable time spans, helping you predict trends and make better investment decisions. This information is perfect for both beginners and technical analysis experts.</p>
+                    
+                    <div class="about-disclaimer" style="background: linear-gradient(120deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 1em; padding: 1.2em; margin: 1.2em 0; box-shadow: 0 2px 8px rgba(245,158,11,0.15);">
+                        <div style="font-weight: 700; color: #92400e; margin-bottom: 0.5em; font-size: 1.1em;"><i class="fa fa-exclamation-triangle" style="margin-right: 0.5em;"></i>Important Note:</div>
+                        <p style="font-size: 1.05em; color: #78350f; margin: 0; line-height: 1.6;">This site is not responsible for your financial losses, if any. However, I will be very happy if this site helps you make money! Always do your own research and consider this as a learning tool rather than financial advice.</p>
+                    </div>
+                    
+                    <p><strong>Educational Value:</strong> This site can also be considered as a tutorial of Laravel framework web application and other major web technologies. It demonstrates modern web development practices and real-world implementation of crypto data integration.</p>
+                    
+                    <p><strong>Your Feedback Matters:</strong> I would highly appreciate it if this site becomes a reference book for financial analysts. With gratitude, I will accept all your remarks, both in terms of functional purposes of this site and the software. Please contact me via the feedback feature found on this website if you have any questions or suggestions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <div class="about-feedback-card">
                 <div class="about-section-title"><i class="fa fa-comment-dots"></i> Feedback</div>
                 <p class="mb-4">Have suggestions or want to say hi? I'd love to hear from you!</p>
-                        <div class="m-section__content" id="contactUs">
-                            <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
-                                @if(session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-                                @if (count($errors) > 0)
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-                                <form action={{route('about','#contactUs')}} method="post">
-                                    {{csrf_field()}}
-                                    <div class="m-demo__preview">
-                                        <div class="form-group m-form__group">
+                <div class="m-section__content" id="contactUs">
+                    <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+                        @if(session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form action={{route('about','#contactUs')}} method="post">
+                            {{csrf_field()}}
+                            <div class="m-demo__preview">
+                                <div class="form-group m-form__group">
                                     <input  class="form-control m-input m-input--square"  name="name" placeholder="Your Name">
-                                        </div>
-                                        <div class="form-group m-form__group">
-                                            <div class="input-group m-input-group">
-                                                <div class="input-group-prepend">
+                                </div>
+                                <div class="form-group m-form__group">
+                                    <div class="input-group m-input-group">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text">@</span>
                                         </div>
                                         <input type="text" class="form-control m-input" placeholder="Your Email" name="email">
                                     </div>
                                 </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-lg-12">
+                                <div class="form-group m-form__group row">
+                                    <div class="col-lg-12">
                                         <textarea name="text" class="form-control" data-provide="markdown" rows="7" placeholder="Your Message"></textarea>
                                     </div>
                                 </div>
