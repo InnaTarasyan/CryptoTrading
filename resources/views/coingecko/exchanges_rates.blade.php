@@ -185,6 +185,12 @@
             font-size: 0.85em;
         }
     }
+    .datatable-highlight-first {
+        background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%) !important;
+        font-weight: bold;
+        color: #ff6a88 !important;
+        border-left: 4px solid #ff6a88;
+    }
 </style>
 @endsection
 @section('content')

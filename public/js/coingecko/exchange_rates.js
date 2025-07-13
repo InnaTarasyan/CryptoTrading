@@ -71,6 +71,9 @@ CoingeckoExchangeRates.prototype.init = function () {
             // Set data-label for each cell
             $(row).find('td').each(function(idx) {
                 $(this).attr('data-label', columnLabels[idx]);
+                if(idx === 0) {
+                    $(this).addClass('datatable-highlight-first');
+                }
             });
         }
     });
