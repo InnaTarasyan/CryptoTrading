@@ -104,7 +104,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     const customSearch = `
         <div class="search-wrapper">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="#ff6a88" stroke-width="2"/><line x1="16.018" y1="16.4853" x2="21" y2="21.4673" stroke="#ff6a88" stroke-width="2" stroke-linecap="round"/></svg>
-            <input type="search" class="form-control" placeholder="Search coins..." aria-controls="coingecko_derivatives_exchanges" style="padding-left:44px;" />
+            <input type="search" class="form-control" placeholder="Search exchanges..." aria-controls="coingecko_derivatives_exchanges" style="padding-left:44px; background:#fff6fa; border:1.5px solid #ff6a88; border-radius:24px; color:#ff6a88; font-size:15px; box-shadow:0 2px 8px rgba(255,106,136,0.08); transition:border 0.2s, box-shadow 0.2s; width:100%;" />
             <button id="clear-search" class="ml-2" type="button">Clear</button>
         </div>
     `;
@@ -144,7 +144,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             });
             return;
         }
-        var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\\]\]/g, '\\$&')+')', 'gi');
+        var regex = new RegExp('('+searchTerm.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')+')', 'gi');
         $('#coingecko_derivatives_exchanges tbody tr').each(function() {
             var row = $(this);
             var found = false;
@@ -174,126 +174,8 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
 
     // Add highlight on table draw
     oTable.on('draw', highlightSearchResults);
-
-    // ======================== Dark Mode Functionality ========================
-    // Enhanced Dark Mode functionality with better UX
-    const darkModeBtn = $('#darkModeToggle');
-    const darkModeIcon = $('#darkModeIcon');
-    const darkModeText = $('#darkModeText');
-    const darkModeStatus = $('#darkModeStatus');
-    const themePreviewTooltip = $('#themePreviewTooltip');
-    const body = $('body');
-    
-    // Check system preference
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    function setDarkMode(enabled) {
-        // Add transition class for smooth animation
-        body.addClass('theme-transitioning');
-        
-        if (enabled) {
-            body.addClass('dark-mode');
-            darkModeBtn.attr('aria-checked', 'true');
-            darkModeText.text('Light Mode');
-            darkModeStatus.text('🌙');
-            darkModeBtn.addClass('dark-mode-active');
-            
-            // Update tooltip
-            themePreviewTooltip.find('.tooltip-icon').text('☀️');
-            themePreviewTooltip.find('.tooltip-text').text('Switch to Light Mode');
-            
-            // Add success feedback
-            showThemeFeedback('Dark mode activated! 🌙', 'success');
-        } else {
-            body.removeClass('dark-mode');
-            darkModeBtn.attr('aria-checked', 'false');
-            darkModeText.text('Dark Mode');
-            darkModeStatus.text('☀️');
-            darkModeBtn.removeClass('dark-mode-active');
-            
-            // Update tooltip
-            themePreviewTooltip.find('.tooltip-icon').text('🌙');
-            themePreviewTooltip.find('.tooltip-text').text('Switch to Dark Mode');
-            
-            // Add success feedback
-            showThemeFeedback('Light mode activated! ☀️', 'success');
-        }
-        
-        // Remove transition class after animation
-        setTimeout(() => {
-            body.removeClass('theme-transitioning');
-        }, 300);
-    }
-
-    // Show theme feedback notification
-    function showThemeFeedback(message, type) {
-        const feedback = $(`
-            <div class="theme-feedback ${type}">
-                <span class="feedback-icon">${type === 'success' ? '✅' : 'ℹ️'}</span>
-                <span class="feedback-text">${message}</span>
-            </div>
-        `);
-        
-        $('body').append(feedback);
-        
-        // Animate in
-        setTimeout(() => feedback.addClass('show'), 100);
-        
-        // Remove after 3 seconds
-        setTimeout(() => {
-            feedback.removeClass('show');
-            setTimeout(() => feedback.remove(), 300);
-        }, 3000);
-    }
-
-    // Initialize dark mode based on stored preference or system preference
-    const storedDarkMode = localStorage.getItem('darkMode');
-    const shouldUseDarkMode = storedDarkMode !== null ? storedDarkMode === 'true' : prefersDarkScheme.matches;
-    setDarkMode(shouldUseDarkMode);
-
-    // Enhanced click handler with better feedback
-    darkModeBtn.on('click', function(e) {
-        e.preventDefault();
-        
-        // Add click animation
-        darkModeBtn.addClass('clicked');
-        setTimeout(() => darkModeBtn.removeClass('clicked'), 200);
-        
-        const enabled = !body.hasClass('dark-mode');
-        setDarkMode(enabled);
-        localStorage.setItem('darkMode', enabled);
-        
-        // Update DataTable theme if needed
-        const table = $('#coingecko_derivatives_exchanges').DataTable();
-        if (table) {
-            table.draw();
-        }
-    });
-
-    // Enhanced hover effects
-    darkModeBtn.on('mouseenter', function() {
-        themePreviewTooltip.addClass('show');
-    }).on('mouseleave', function() {
-        themePreviewTooltip.removeClass('show');
-    });
-
-    // Keyboard accessibility
-    darkModeBtn.on('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            $(this).click();
-        }
-    });
-
-    // Listen for system theme changes
-    prefersDarkScheme.addEventListener('change', function(e) {
-        const storedPreference = localStorage.getItem('darkMode');
-        if (storedPreference === null) {
-            // Only auto-switch if user hasn't set a preference
-            setDarkMode(e.matches);
-            localStorage.setItem('darkMode', e.matches);
-        }
-    });
+    searchBox.on('input', highlightSearchResults);
+    filter.on('click', '#clear-search', highlightSearchResults);
 
     // ======================== Full Screen Functionality ========================
     const fullscreenBtn = document.getElementById('fullscreenToggle');

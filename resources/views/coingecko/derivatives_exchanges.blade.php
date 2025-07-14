@@ -5,8 +5,193 @@
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
     <link href="{{ asset('css/derivatives_exchanges.css') }}" rel="stylesheet">
+    <style>
+        /* Floating Dark Mode Toggle */
+        .darkmode-toggle {
+            position: fixed;
+            top: 32px;
+            right: 32px;
+            z-index: 1001;
+            background: linear-gradient(135deg, #232946 0%, #6366f1 100%);
+            color: #fff;
+            border: none;
+            border-radius: 2em;
+            box-shadow: 0 4px 24px rgba(80,80,200,0.18);
+            padding: 0.6em 1.3em 0.6em 1em;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 0.7em;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+        .darkmode-toggle:focus {
+            outline: 2px solid #6366f1;
+        }
+        .darkmode-toggle:hover {
+            background: linear-gradient(135deg, #6366f1 0%, #232946 100%);
+            color: #ffd200;
+            transform: scale(1.04);
+        }
+        .darkmode-toggle .toggle-icon {
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+        @media (max-width: 600px) {
+            .darkmode-toggle {
+                top: 12px;
+                right: 12px;
+                font-size: 1em;
+                padding: 0.5em 1em 0.5em 0.8em;
+            }
+        }
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #181a20 !important;
+            color: #e5e7eb !important;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .m-content,
+        body.dark-mode .modern-portlet,
+        body.dark-mode .modern-portlet-body,
+        body.dark-mode .table-wrapper,
+        body.dark-mode .enhanced-portlet {
+            background: linear-gradient(135deg, #232946 0%, #181a20 100%) !important;
+            color: #e5e7eb !important;
+            box-shadow: 0 4px 32px rgba(20,20,40,0.18) !important;
+            border-color: #232946 !important;
+        }
+        body.dark-mode .modern-title-bar,
+        body.dark-mode .modern-tabs-container,
+        body.dark-mode .modern-tabs,
+        body.dark-mode .modern-table-wrapper {
+            background: #232946 !important;
+            color: #e5e7eb !important;
+        }
+        body.dark-mode .modern-title-text,
+        body.dark-mode .tab-label {
+            color: #ffd200 !important;
+        }
+        body.dark-mode .modern-tab.beautiful-tab.active {
+            background: linear-gradient(90deg, #6366f1 0%, #232946 100%) !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .modern-tab.beautiful-tab {
+            background: #232946 !important;
+            color: #e5e7eb !important;
+        }
+        body.dark-mode .enhanced-table,
+        body.dark-mode .modern-table {
+            background: #232946 !important;
+            color: #e5e7eb !important;
+        }
+        body.dark-mode .enhanced-thead,
+        body.dark-mode .modern-thead {
+            background: linear-gradient(135deg, #232946 0%, #181a20 100%) !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .enhanced-th,
+        body.dark-mode .datatable-header-text {
+            color: #ffd200 !important;
+        }
+        body.dark-mode .datatable-header-icon svg {
+            filter: brightness(0.9) drop-shadow(0 0 2px #ffd200);
+        }
+        body.dark-mode .dataTables_wrapper,
+        body.dark-mode .dataTables_paginate,
+        body.dark-mode .dataTables_info,
+        body.dark-mode .dataTables_length,
+        body.dark-mode .dataTables_filter {
+            color: #e5e7eb !important;
+        }
+        body.dark-mode .dataTables_filter input,
+        body.dark-mode .dataTables_length select {
+            background: #232946 !important;
+            color: #ffd200 !important;
+            border: 1px solid #6366f1 !important;
+        }
+        body.dark-mode .table-hover tbody tr:hover {
+            background: #232946 !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .modern-refresh-btn-upgraded,
+        body.dark-mode .modern-fullscreen-btn {
+            background: linear-gradient(135deg, #232946 0%, #6366f1 100%) !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .modern-refresh-btn-upgraded:hover,
+        body.dark-mode .modern-fullscreen-btn:hover {
+            background: linear-gradient(135deg, #6366f1 0%, #232946 100%) !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .enhanced-loading {
+            background: #232946 !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .loading-container {
+            background: #232946 !important;
+            color: #ffd200 !important;
+        }
+        body.dark-mode .datatable-header-icon svg,
+        body.dark-mode .datatable-header-icon svg * {
+            filter: brightness(1.2) drop-shadow(0 0 2px #ffd200);
+        }
+        body.dark-mode .datatable-btn {
+            background: #232946 !important;
+            color: #ffd200 !important;
+            border: 1px solid #6366f1 !important;
+        }
+        body.dark-mode .datatable-btn:hover {
+            background: #6366f1 !important;
+            color: #fff !important;
+        }
+        body.dark-mode .alert,
+        body.dark-mode .alert-success,
+        body.dark-mode .alert-danger {
+            background: #232946 !important;
+            color: #ffd200 !important;
+            border-color: #6366f1 !important;
+        }
+        body.dark-mode .modern-title-bar-row svg {
+            filter: brightness(1.2) drop-shadow(0 0 2px #ffd200);
+        }
+        body.dark-mode .gradient-tabs-bg {
+            background: linear-gradient(90deg, #232946 0%, #6366f1 100%) !important;
+        }
+        body.dark-mode .modern-title-bar {
+            border-bottom: 2px solid #6366f1 !important;
+        }
+        body.dark-mode .m-portlet {
+            border: 1px solid #232946 !important;
+        }
+        body.dark-mode .table-wrapper {
+            background: #232946 !important;
+        }
+        body.dark-mode .enhanced-table td, body.dark-mode .enhanced-table th {
+            border-color: #6366f1 !important;
+        }
+        body.dark-mode .enhanced-table tr {
+            border-bottom: 1px solid #232946 !important;
+        }
+        body.dark-mode .enhanced-table tr:last-child {
+            border-bottom: none !important;
+        }
+        body.dark-mode .enhanced-table .datatable-header-text {
+            color: #ffd200 !important;
+        }
+        body.dark-mode .enhanced-table .datatable-header-icon svg {
+            filter: brightness(1.2) drop-shadow(0 0 2px #ffd200);
+        }
+    </style>
 @endsection
 @section('content')
+    <button class="darkmode-toggle" id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="toggle-icon" id="darkModeIcon">
+            <!-- Sun/Moon SVG will be injected by JS -->
+        </span>
+        <span class="toggle-label" id="darkModeLabel">Dark Mode</span>
+    </button>
     <div class="m-content">
         <!-- Modern Title Bar with Icon and Enhanced Dark Mode Button -->
         <div class="modern-title-bar" aria-labelledby="derivativesExchangesTitle" role="banner">
@@ -26,44 +211,6 @@
                         </svg>
                     </span>
                     <span class="modern-title-text" id="derivativesExchangesTitle">Derivatives Exchanges</span>
-                </div>
-                <div class="dark-mode-container">
-                    <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
-                        <div class="darkmode-switch-track">
-                            <div class="darkmode-switch-thumb">
-                                <span class="darkmode-switch-icon" id="darkModeIcon">
-                                    <!-- Enhanced Sun & Moon SVG with smooth transitions -->
-                                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
-                                        <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.8"/>
-                                    </svg>
-                                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="12" cy="12" r="5" fill="#ffb300"/>
-                                        <g stroke="#ffb300" stroke-width="2" opacity="0.9">
-                                            <line x1="12" y1="1" x2="12" y2="3"/>
-                                            <line x1="12" y1="21" x2="12" y2="23"/>
-                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                                            <line x1="1" y1="12" x2="3" y2="12"/>
-                                            <line x1="21" y1="12" x2="23" y2="12"/>
-                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
-                        <!-- Status indicator -->
-                        <span class="darkmode-status-indicator" id="darkModeStatus" aria-live="polite"></span>
-                    </button>
-                    <!-- Quick theme preview tooltip -->
-                    <div class="theme-preview-tooltip" id="themePreviewTooltip">
-                        <div class="tooltip-content">
-                            <span class="tooltip-icon">🌙</span>
-                            <span class="tooltip-text">Switch to Dark Mode</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1109,4 +1256,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="{{ url('js/coingecko/derivatives_exchanges.js') }}"></script>
+    <script>
+        // Modern Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        const darkModeLabel = document.getElementById('darkModeLabel');
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('dark-mode');
+                darkModeIcon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#232946" stroke-width="2" stroke-linecap="round"/></svg>`;
+                darkModeLabel.textContent = 'Light Mode';
+            } else {
+                document.body.classList.remove('dark-mode');
+                darkModeIcon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#232946"/><path d="M15.5 12A3.5 3.5 0 0 1 12 15.5 3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5c.2 0 .4.01.59.04A5.5 5.5 0 1 0 18 17.41c.03-.19.04-.39.04-.59A5.5 5.5 0 0 0 15.5 12Z" fill="#ffd200"/></svg>`;
+                darkModeLabel.textContent = 'Dark Mode';
+            }
+        }
+        // On load, set mode from localStorage or system preference
+        (function() {
+            let dark = localStorage.getItem('darkMode');
+            if (dark === null) {
+                dark = window.matchMedia('(prefers-color-scheme: dark)').matches ? '1' : '0';
+            }
+            setDarkMode(dark === '1');
+        })();
+        darkModeToggle.addEventListener('click', function() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            setDarkMode(isDark);
+            localStorage.setItem('darkMode', isDark ? '1' : '0');
+        });
+    </script>
 @endsection
