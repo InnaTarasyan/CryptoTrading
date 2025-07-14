@@ -104,7 +104,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     const customSearch = `
         <div class="search-wrapper">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="#ff6a88" stroke-width="2"/><line x1="16.018" y1="16.4853" x2="21" y2="21.4673" stroke="#ff6a88" stroke-width="2" stroke-linecap="round"/></svg>
-            <input type="search" class="form-control" placeholder="Search exchanges..." aria-controls="coingecko_derivatives_exchanges" style="padding-left:44px;" />
+            <input type="search" class="form-control" placeholder="Search coins..." aria-controls="coingecko_derivatives_exchanges" style="padding-left:44px;" />
             <button id="clear-search" class="ml-2" type="button">Clear</button>
         </div>
     `;
