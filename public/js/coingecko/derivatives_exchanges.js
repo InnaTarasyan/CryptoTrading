@@ -25,14 +25,38 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         "scrollX": true,
         "columns": [
             {data: 'name', name: 'name'},
+            // {data: 'image', name: 'image', render: function(data, type, row, meta) {
+            //     if (!data) return '<span style="color:#bbb;">—</span>';
+            //     return `<img src="${data}" alt="Logo" class="previewable-img" style="width:32px;height:32px;object-fit:contain;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.08);cursor:pointer;">`;
+            // }},
             {data: 'image', name: 'image'},
-            {data: 'description', name: 'description'},
+            {data: 'description', name: 'description', render: function(data, type, row, meta) {
+                if (!data) return '<span style="color:#bbb;">—</span>';
+                // Truncate to 100 chars for display, but tooltip always shows full text
+                var clean = data.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags if any
+                var short = clean.length > 100 ? clean.substring(0, 100).trim() + '…' : clean;
+                var html = short.replace(/\n/g, '<br>');
+                // Escape for HTML attribute
+                var escaped = clean.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                // Always show tooltip with full description on hover
+                return `<span class="desc-tooltip" data-tooltip="${escaped}" style="cursor: help; word-break: break-word;">${html}</span>`;
+            }},
             {data: 'open_interest_btc', name: 'open_interest_btc'},
             {data: 'trade_volume_24h_btc', name: 'trade_volume_24h_btc'},
             {data: 'number_of_perpetual_pairs', name: 'number_of_perpetual_pairs'},
             {data: 'number_of_futures_pairs', name: 'number_of_futures_pairs'},
-            {data: 'year_established', name: 'year_established'},
-            {data: 'country', name: 'country'},
+            // Render year_established with icon
+            {data: 'year_established', name: 'year_established', render: function(data, type, row, meta) {
+                if (!data) return '<span style="color:#bbb;">—</span>';
+                return '<span style="display:inline-flex;align-items:center;gap:0.4em;font-weight:500;">' +
+                    '<span style="font-size:1.2em;vertical-align:middle;">📅</span>' +
+                    '<span>' + data + '</span>' +
+                    '</span>';
+            }},
+            {data: 'country', name: 'country', render: function(data, type, row, meta) {
+                if (!data) return '<span style="color:#bbb;">—</span>';
+                return `<span style="font-size:1.1em;">🌍</span> <b>${data}</b>`;
+            }},
             {data: 'url', name: 'url'}
         ],
         "columnDefs": [
@@ -98,6 +122,47 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             });
         }
     });
+
+    // Custom tooltip logic for description column
+    function enableCustomTooltips() {
+        // Remove any existing tooltips
+        $('.custom-tooltip-box').remove();
+        // Mouse events for all .desc-tooltip elements
+        $('.desc-tooltip').off('mouseenter mouseleave mousemove').on({
+            mouseenter: function(e) {
+                const text = $(this).attr('data-tooltip');
+                if (!text) return;
+                const tooltip = $('<div class="custom-tooltip-box"></div>').text(text).css({
+                    position: 'fixed',
+                    top: e.clientY + 12,
+                    left: e.clientX + 12,
+                    background: '#232946',
+                    color: '#ffd200',
+                    padding: '8px 14px',
+                    borderRadius: '8px',
+                    fontSize: '1em',
+                    zIndex: 9999,
+                    maxWidth: '350px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
+                    pointerEvents: 'none',
+                    whiteSpace: 'pre-line'
+                }).appendTo('body');
+            },
+            mousemove: function(e) {
+                $('.custom-tooltip-box').css({
+                    top: e.clientY + 12,
+                    left: e.clientX + 12
+                });
+            },
+            mouseleave: function() {
+                $('.custom-tooltip-box').remove();
+            }
+        });
+    }
+    // Call after every table draw
+    oTable.on('draw', enableCustomTooltips);
+    // And after initial load
+    enableCustomTooltips();
 
     // Replace default DataTables filter with custom search bar (pink gradient)
     const filter = $('.dataTables_filter');
@@ -201,7 +266,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             updateTableStatus('Entered fullscreen mode', '🖥️');
             setTimeout(() => {
                 fullscreenBtn.classList.remove('success');
-            }, 600);
+        }, 600);
         } else {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
@@ -268,7 +333,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         fullscreenBtn.addEventListener('touchend', function() {
             setTimeout(() => {
                 this.style.transform = '';
-            }, 150);
+        }, 150);
         });
     }
 
@@ -346,7 +411,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     var label = refreshBtn.find('.refresh-btn-label');
     var icon = refreshBtn.find('.icon-refresh-upgraded');
     var table = $('#coingecko_derivatives_exchanges').DataTable();
-    
+
     function setRefreshing(isRefreshing) {
         if (isRefreshing) {
             refreshBtn.addClass('loading');
@@ -354,7 +419,7 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             icon.hide();
             refreshBtn.attr('aria-busy', 'true').attr('aria-disabled', 'true').prop('disabled', true);
             label.text('Refreshing...');
-            
+
             // Add spinning animation to icon
             icon.addClass('spinning');
         } else {
@@ -363,12 +428,12 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             icon.show();
             refreshBtn.attr('aria-busy', 'false').attr('aria-disabled', 'false').prop('disabled', false);
             label.text('Refresh');
-            
+
             // Remove spinning animation
             icon.removeClass('spinning');
         }
     }
-    
+
     function showRefreshFeedback(message, type = 'success') {
         const feedback = document.createElement('div');
         feedback.className = `refresh-feedback ${type}`;
@@ -409,19 +474,19 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         // Simulate a small delay for better UX
         setTimeout(() => {
             oTable.ajax.reload(function(json) {
-                setRefreshing(false);
-                // Fix header bug: force DataTable to recalculate columns
-                oTable.columns.adjust();
-                // Check if reload was successful
-                if (json && !json.error) {
-                    showRefreshFeedback('Data refreshed! ✅', 'success');
-                    refreshBtn.addClass('success-bounce');
-                    setTimeout(() => refreshBtn.removeClass('success-bounce'), 600);
-                } else {
-                    showRefreshFeedback('Refresh failed! ❌', 'error');
-                }
-            }, false);
-        }, 300);
+            setRefreshing(false);
+            // Fix header bug: force DataTable to recalculate columns
+            oTable.columns.adjust();
+            // Check if reload was successful
+            if (json && !json.error) {
+                showRefreshFeedback('Data refreshed! ✅', 'success');
+                refreshBtn.addClass('success-bounce');
+                setTimeout(() => refreshBtn.removeClass('success-bounce'), 600);
+            } else {
+                showRefreshFeedback('Refresh failed! ❌', 'error');
+            }
+        }, false);
+    }, 300);
     });
     // Handle processing state from DataTable
     oTable.on('processing.dt', function(e, settings, processing) {
@@ -489,3 +554,100 @@ $(document).ready(function() {
     coins.init();
     coins.bindEvents();
 });
+
+// Ensure tooltip is always visible and not hidden by CSS
+$(document).off('mouseleave.descTooltip').on('mouseleave.descTooltip', '.desc-tooltip', function() {
+    $('.custom-tooltip-box').remove();
+});
+$(document).off('mouseenter.descTooltip').on('mouseenter.descTooltip', '.desc-tooltip', function(e) {
+    const text = $(this).attr('data-tooltip');
+    if (!text) return;
+    $('.custom-tooltip-box').remove();
+    const tooltip = $('<div class="custom-tooltip-box"></div>').text(text).appendTo('body');
+    tooltip.css({
+        display: 'block',
+        position: 'absolute',
+        top: e.clientY + 12 + window.scrollY,
+        left: e.clientX + 12 + window.scrollX,
+        zIndex: 99999
+    });
+});
+$(document).off('mousemove.descTooltip').on('mousemove.descTooltip', '.desc-tooltip', function(e) {
+    $('.custom-tooltip-box').css({
+        top: e.clientY + 12 + window.scrollY,
+        left: e.clientX + 12 + window.scrollX
+    });
+});
+
+
+$(document).off('.descTooltip');
+$(document).on('mouseenter.descTooltip', '.desc-tooltip', function(e) {
+    const text = $(this).attr('data-tooltip');
+    if (!text) return;
+    $('.custom-tooltip-box').remove();
+    const tooltip = $('<div class="custom-tooltip-box"></div>').text(text).appendTo('body');
+    tooltip.css({
+        display: 'block',
+        top: e.clientY + 12,
+        left: e.clientX + 12
+    });
+});
+$(document).on('mousemove.descTooltip', '.desc-tooltip', function(e) {
+    $('.custom-tooltip-box').css({
+        top: e.clientY + 12,
+        left: e.clientX + 12
+    });
+});
+$(document).on('mouseleave.descTooltip', '.desc-tooltip', function() {
+    $('.custom-tooltip-box').remove();
+});
+
+// === Robust image preview logic for logo column ===
+(function() {
+    var $imgPreview = $('<div id="img-hover-preview"></div>').css({
+        'position': 'fixed',
+        'z-index': 99999,
+        'display': 'none',
+        'pointer-events': 'none',
+        'box-shadow': '0 8px 32px rgba(0,0,0,0.18)',
+        'border-radius': '16px',
+        'background': '#fff',
+        'padding': '12px',
+        'border': '2px solid #e2e8f0',
+        'transition': 'transform 0.15s cubic-bezier(.4,2,.6,1), opacity 0.15s',
+        'opacity': 0
+    });
+    if (!$('#img-hover-preview').length) $('body').append($imgPreview);
+
+    $(document).off('.imgPreviewer');
+    $(document).on('mouseenter.imgPreviewer', '.previewable-img', function(e) {
+        var src = $(this).attr('src');
+        var alt = $(this).attr('alt') || '';
+        $imgPreview.html('<img src="'+src+'" alt="'+alt+'" style="width:96px;height:96px;object-fit:contain;display:block;margin:auto;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.10);">');
+        $imgPreview.css({
+            'display': 'block',
+            'opacity': 1,
+            'transform': 'scale(1.08)'
+        });
+    });
+    $(document).on('mousemove.imgPreviewer', '.previewable-img', function(e) {
+        var previewWidth = $imgPreview.outerWidth();
+        var previewHeight = $imgPreview.outerHeight();
+        var left = e.clientX + 24;
+        var top = e.clientY - previewHeight/2;
+        // Prevent overflow
+        var maxLeft = $(window).width() - previewWidth - 16;
+        var maxTop = $(window).height() - previewHeight - 16;
+        if(left > maxLeft) left = maxLeft;
+        if(top < 8) top = 8;
+        if(top > maxTop) top = maxTop;
+        $imgPreview.css({ left: left, top: top });
+    });
+    $(document).on('mouseleave.imgPreviewer', '.previewable-img', function() {
+        $imgPreview.css({
+            'display': 'none',
+            'opacity': 0,
+            'transform': 'scale(0.98)'
+        });
+    });
+})();

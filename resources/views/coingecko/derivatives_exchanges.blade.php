@@ -183,6 +183,19 @@
         body.dark-mode .enhanced-table .datatable-header-icon svg {
             filter: brightness(1.2) drop-shadow(0 0 2px #ffd200);
         }
+        .custom-tooltip-box {
+            position: fixed;
+            background: #232946;
+            color: #ffd200;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 1em;
+            z-index: 99999;
+            max-width: 350px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+            pointer-events: none;
+            white-space: pre-line;
+        }
     </style>
 @endsection
 @section('content')
@@ -1065,13 +1078,13 @@
                         box-shadow: 0 2px 12px rgba(80,80,200,0.06);
                         border: 1px solid rgba(99,102,241,0.05);
                     ">
-                        <table id="coingecko_derivatives_exchanges" class="table table-hover table-condensed table-striped enhanced-table modern-table" style="width:100%; padding-top:1%">
+                        <table id="coingecko_derivatives_exchanges" class="table table-hover table-condensed table-striped enhanced-table modern-table text-center" style="width:100%; padding-top:1%">
                             <thead class="enhanced-thead modern-thead" style="
                                 background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(96,165,250,0.1) 100%);
                                 border-bottom: 2px solid rgba(99,102,241,0.2);
                             ">
                             <tr>
-                                <th class="datatable-highlight-first enhanced-th">
+                                <th class="datatable-highlight-first enhanced-th" style="width:120px;min-width:120px;max-width:120px;text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Exchange</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Exchange Icon with Gradient -->
@@ -1087,7 +1100,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Official logo or icon of the exchange" class="enhanced-th">
+                                <th title="Official logo or icon of the exchange" class="enhanced-th" style="width:72px;min-width:72px;max-width:72px;text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Logo</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Logo Icon with Gradient -->
@@ -1104,7 +1117,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Description of the exchange" class="enhanced-th">
+                                <th title="Description of the exchange" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Description</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Description Icon with Gradient -->
@@ -1120,7 +1133,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Open interest in Bitcoin" class="enhanced-th">
+                                <th title="Open interest in Bitcoin" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Open Interest BTC</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern BTC Icon with Gradient -->
@@ -1136,7 +1149,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="24-hour trading volume in Bitcoin" class="enhanced-th">
+                                <th title="24-hour trading volume in Bitcoin" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">24h Volume BTC</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Volume Icon with Gradient -->
@@ -1153,7 +1166,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Number of perpetual trading pairs" class="enhanced-th">
+                                <th title="Number of perpetual trading pairs" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Perpetual Pairs</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Pairs Icon with Gradient -->
@@ -1170,7 +1183,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Number of futures trading pairs" class="enhanced-th">
+                                <th title="Number of futures trading pairs" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Futures Pairs</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Futures Icon with Gradient -->
@@ -1187,7 +1200,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Year the exchange was established" class="enhanced-th">
+                                <th title="Year the exchange was established" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Established</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Year Icon with Gradient -->
@@ -1203,7 +1216,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Country where the exchange is based" class="enhanced-th">
+                                <th title="Country where the exchange is based" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Country</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern Country Icon with Gradient -->
@@ -1220,7 +1233,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th title="Website URL of the exchange" class="enhanced-th">
+                                <th title="Website URL of the exchange" class="enhanced-th" style="text-align:left;">
                                     <span class="datatable-header-text" style="display:block; text-align:center;">Website</span>
                                     <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
                                         <!-- Modern URL Icon with Gradient -->
@@ -1236,12 +1249,12 @@
                                         </svg>
                                     </span>
                                 </th>
-                        </tr>
-                        </thead>
-                    </table>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 @endsection
@@ -1284,6 +1297,30 @@
             const isDark = document.body.classList.toggle('dark-mode');
             setDarkMode(isDark);
             localStorage.setItem('darkMode', isDark ? '1' : '0');
+        });
+    </script>
+    <script>
+        // Robust custom tooltip logic for description column
+        $(document).off('.descTooltip');
+        $(document).on('mouseenter.descTooltip', '.desc-tooltip', function(e) {
+            const text = $(this).attr('data-tooltip');
+            if (!text) return;
+            $('.custom-tooltip-box').remove();
+            const tooltip = $('<div class="custom-tooltip-box"></div>').text(text).appendTo('body');
+            tooltip.css({
+                display: 'block',
+                top: e.clientY + 12,
+                left: e.clientX + 12
+            });
+        });
+        $(document).on('mousemove.descTooltip', '.desc-tooltip', function(e) {
+            $('.custom-tooltip-box').css({
+                top: e.clientY + 12,
+                left: e.clientX + 12
+            });
+        });
+        $(document).on('mouseleave.descTooltip', '.desc-tooltip', function() {
+            $('.custom-tooltip-box').remove();
         });
     </script>
 @endsection

@@ -31,7 +31,7 @@ class DerivativesExchangesController extends Controller
                 return substr($item->description, 0, 100).' .... ';
             })
             ->editColumn('image', function ($item) {
-                return '<img src="'.$item->image.'" height=50 width=50>';
+                return '<img src="'.$item->image.'" height=32 width=32 class="previewable-img" style="object-fit:contain;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.08);cursor:pointer;">';
             })
             ->editColumn('url', function($item) {
                 return '<a href="'.$item->url.'">'.$item->url.'</a>';
@@ -44,7 +44,7 @@ class DerivativesExchangesController extends Controller
             })
             ->rawColumns([
                 'name',
-               // 'image',
+              //  'image',
                 'url',
                 'open_interest_btc',
                 'trade_volume_24h_btc',
