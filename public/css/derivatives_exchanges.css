@@ -1328,3 +1328,25 @@ body.dark-mode .fullscreen-icon-bg {
     display: block !important;
     text-align: center !important;
 }
+#datatableFullscreenContainer:fullscreen .dataTables_filter input[type="search"] {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+    padding-left: 2.5em !important;
+    padding-right: 1.5em !important;
+    border-radius: 1.5em !important;
+    background: #f4f7fa !important;
+    font-size: 1.08em !important;
+    box-shadow: 0 2px 8px rgba(80,80,200,0.07);
+    border: 1.5px solid #e0e7ff !important;
+    margin-bottom: 1.2em !important;
+    margin-top: 0.5em !important;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+#datatableFullscreenContainer:fullscreen .dataTables_filter {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 1.2em auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
