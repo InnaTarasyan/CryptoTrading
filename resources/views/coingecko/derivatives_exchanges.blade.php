@@ -126,9 +126,8 @@
         <!-- Action Buttons -->
         <div class="action-buttons-row">
             <div class="action-buttons-left">
-                <button id="refreshTable" class="modern-tab refresh-btn" title="Refresh Table" aria-label="Refresh Table" aria-busy="false" aria-disabled="false" tabindex="0" style="overflow:hidden; position:relative;">
-                    <span class="refresh-btn-icon" style="position:relative; display:inline-flex; align-items:center; justify-content:center;">
-                        <!-- Modern Bold Refresh SVG (Pink) -->
+                <button id="refreshTable" class="modern-refresh-btn-upgraded" title="Refresh Table" aria-label="Refresh Table" aria-busy="false" aria-disabled="false" tabindex="0">
+                    <span class="refresh-btn-icon">
                         <span class="refresh-icon-bg">
                             <svg class="icon-refresh-upgraded" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <defs>

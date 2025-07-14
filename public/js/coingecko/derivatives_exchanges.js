@@ -390,7 +390,75 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         });
     }
 
-    // Refresh button logic with enhanced UX
+    // ======================== Loading Functions ========================
+    function showLoading() {
+        document.getElementById('datatableLoading').style.display = 'flex';
+    }
+
+    function hideLoading() {
+        document.getElementById('datatableLoading').style.display = 'none';
+    }
+
+    // ======================== Table Status Functions ========================
+    function updateTableStatus(text, icon) {
+        const statusText = document.querySelector('#tableStatusBar .status-text');
+        const statusIcon = document.querySelector('#tableStatusBar .status-icon');
+
+        if (statusText) statusText.textContent = text;
+        if (statusIcon) statusIcon.textContent = icon;
+    }
+
+    // ======================== Export and Print Functions ========================
+    document.getElementById('exportData').addEventListener('click', function() {
+        // Trigger CSV export
+        const csvButton = document.querySelector('.datatable-btn[data-action="csv"]');
+        if (csvButton) {
+            csvButton.click();
+        }
+    });
+
+    document.getElementById('printTable').addEventListener('click', function() {
+        // Trigger print
+        const printButton = document.querySelector('.datatable-btn[data-action="print"]');
+        if (printButton) {
+            printButton.click();
+        }
+    });
+
+    // ======================== Ripple Effect ========================
+    function addRippleEffectToButton(btnSelector, rippleColor) {
+        const buttons = document.querySelectorAll(btnSelector);
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple-effect';
+            ripple.style.background = rippleColor || '#ff6a88';
+
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+        }, 600);
+        });
+    });
+    }
+
+    // Add ripple effects to buttons
+    addRippleEffectToButton('.refresh-btn', '#ff6a88');
+    addRippleEffectToButton('.modern-fullscreen-btn', '#ff99ac');
+    addRippleEffectToButton('.status-action-btn', '#ff6a88');
+
+    // ======================== Refresh Functionality ========================
     var refreshBtn = $('#refreshTable');
     var spinner = refreshBtn.find('.refresh-spinner');
     var label = refreshBtn.find('.refresh-btn-label');
@@ -450,91 +518,60 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     }
 
     // ======================== Refresh Functionality ========================
-    document.getElementById('refreshTable').addEventListener('click', function() {
-        // Set refreshing state
+    refreshBtn.on('click', function(e) {
+        e.preventDefault();
+        // Add click animation
+        refreshBtn.addClass('clicked');
+        setTimeout(() => refreshBtn.removeClass('clicked'), 200);
         setRefreshing(true);
-        updateTableStatus('Refreshing data...', '🔄');
-
-        // Reload the DataTable
-        oTable.ajax.reload(function() {
-            // Callback after reload is complete
+        // Simulate a small delay for better UX
+        setTimeout(() => {
+            oTable.ajax.reload(function(json) {
+                setRefreshing(false);
+                // Fix header bug: force DataTable to recalculate columns
+                oTable.columns.adjust();
+                // Check if reload was successful
+                if (json && !json.error) {
+                    showRefreshFeedback('Data refreshed! ✅', 'success');
+                    refreshBtn.addClass('success-bounce');
+                    setTimeout(() => refreshBtn.removeClass('success-bounce'), 600);
+                } else {
+                    showRefreshFeedback('Refresh failed! ❌', 'error');
+                }
+            }, false);
+        }, 300);
+    });
+    // Handle processing state from DataTable
+    oTable.on('processing.dt', function(e, settings, processing) {
+        if (processing && !refreshBtn.hasClass('loading')) {
+            setRefreshing(true);
+        } else if (!processing && refreshBtn.hasClass('loading')) {
             setRefreshing(false);
-            showRefreshFeedback('Data refreshed successfully!', 'success');
-            updateTableStatus('Data updated successfully', '✅');
-
-            // Reset status after a delay
-            setTimeout(() => {
-                updateTableStatus('Ready to display derivatives exchanges data', '📊');
-        }, 2000);
-        }, false); // false means don't reset paging
-    });
-
-    // ======================== Ripple Effect ========================
-    function addRippleEffectToButton(btnSelector, rippleColor) {
-        const buttons = document.querySelectorAll(btnSelector);
-
-        buttons.forEach(button => {
-            button.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple-effect';
-            ripple.style.background = rippleColor || '#ff6a88';
-
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-
-            this.appendChild(ripple);
-
-            setTimeout(() => {
-                ripple.remove();
-        }, 600);
-        });
-    });
-    }
-
-    // Add ripple effects to buttons
-    addRippleEffectToButton('.refresh-btn', '#ff6a88');
-    addRippleEffectToButton('.modern-fullscreen-btn', '#ff99ac');
-    addRippleEffectToButton('.status-action-btn', '#ff6a88');
-
-    // ======================== Loading Functions ========================
-    function showLoading() {
-        document.getElementById('datatableLoading').style.display = 'flex';
-    }
-
-    function hideLoading() {
-        document.getElementById('datatableLoading').style.display = 'none';
-    }
-
-    // ======================== Table Status Functions ========================
-    function updateTableStatus(text, icon) {
-        const statusText = document.querySelector('#tableStatusBar .status-text');
-        const statusIcon = document.querySelector('#tableStatusBar .status-icon');
-
-        if (statusText) statusText.textContent = text;
-        if (statusIcon) statusIcon.textContent = icon;
-    }
-
-    // ======================== Export and Print Functions ========================
-    document.getElementById('exportData').addEventListener('click', function() {
-        // Trigger CSV export
-        const csvButton = document.querySelector('.datatable-btn[data-action="csv"]');
-        if (csvButton) {
-            csvButton.click();
         }
     });
-
-    document.getElementById('printTable').addEventListener('click', function() {
-        // Trigger print
-        const printButton = document.querySelector('.datatable-btn[data-action="print"]');
-        if (printButton) {
-            printButton.click();
+    // Add keyboard support for refresh button
+    refreshBtn.on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            $(this).click();
         }
+    });
+    // Add hover tooltip for refresh button
+    refreshBtn.attr('title', 'Refresh derivatives exchanges data (Ctrl+R)');
+    // Add keyboard shortcut
+    $(document).on('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+            e.preventDefault();
+            if (!refreshBtn.hasClass('loading')) {
+                refreshBtn.click();
+            }
+        }
+    });
+    // Add touch feedback for mobile
+    refreshBtn.on('touchstart', function() {
+        $(this).addClass('touch-active');
+    }).on('touchend touchcancel', function() {
+        $(this).removeClass('touch-active');
     });
 
     // ======================== Responsive Handling ========================
