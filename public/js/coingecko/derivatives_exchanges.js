@@ -295,41 +295,101 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         }
     });
 
-    // Fullscreen functionality
+    // ======================== Full Screen Functionality ========================
     const fullscreenBtn = document.getElementById('fullscreenToggle');
-    const fullscreenText = document.getElementById('fullscreenText');
     const fullscreenContainer = document.getElementById('datatableFullscreenContainer');
-    const fullscreenIcons = fullscreenBtn ? fullscreenBtn.querySelectorAll('svg') : null;
-    function isFullscreen() {
-        return document.fullscreenElement === fullscreenContainer;
+    const fullscreenText = document.getElementById('fullscreenText');
+    const iconFullscreen = fullscreenBtn ? fullscreenBtn.querySelector('.icon-fullscreen') : null;
+    const iconExitFullscreen = fullscreenBtn ? fullscreenBtn.querySelector('.icon-exit-fullscreen') : null;
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+            if (fullscreenContainer.requestFullscreen) {
+                fullscreenContainer.requestFullscreen();
+            } else if (fullscreenContainer.webkitRequestFullscreen) {
+                fullscreenContainer.webkitRequestFullscreen();
+            } else if (fullscreenContainer.msRequestFullscreen) {
+                fullscreenContainer.msRequestFullscreen();
+            }
+            fullscreenBtn.setAttribute('aria-pressed', 'true');
+            if (fullscreenText) fullscreenText.textContent = 'Exit Fullscreen';
+            if (iconFullscreen) iconFullscreen.style.display = 'none';
+            if (iconExitFullscreen) iconExitFullscreen.style.display = 'block';
+            fullscreenBtn.classList.add('success');
+            updateTableStatus('Entered fullscreen mode', '🖥️');
+            setTimeout(() => {
+                fullscreenBtn.classList.remove('success');
+            }, 600);
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+            fullscreenBtn.setAttribute('aria-pressed', 'false');
+            if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+            if (iconFullscreen) iconFullscreen.style.display = 'block';
+            if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
+            updateTableStatus('Exited fullscreen mode', '📊');
+        }
     }
     if (fullscreenBtn && fullscreenContainer) {
-        fullscreenBtn.addEventListener('click', function () {
-            if (!isFullscreen()) {
-                fullscreenContainer.requestFullscreen();
-            } else {
-                document.exitFullscreen();
+        fullscreenBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleFullscreen();
+        });
+        fullscreenBtn.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
             }
         });
-        fullscreenContainer.addEventListener('fullscreenchange', function () {
-            if (isFullscreen()) {
-                fullscreenBtn.classList.add('active');
-                fullscreenText.textContent = 'Exit Fullscreen';
-                if (fullscreenIcons) {
-                    fullscreenIcons[0].style.display = 'none'; // icon-fullscreen
-                    fullscreenIcons[1].style.display = '';
-                }
-            } else {
-                fullscreenBtn.classList.remove('active');
-                fullscreenText.textContent = 'Fullscreen';
-                if (fullscreenIcons) {
-                    fullscreenIcons[0].style.display = '';
-                    fullscreenIcons[1].style.display = 'none'; // icon-exit-fullscreen
-                }
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'block';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
             }
+        });
+        document.addEventListener('webkitfullscreenchange', function() {
+            if (!document.webkitFullscreenElement) {
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'block';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
+            }
+        });
+        document.addEventListener('MSFullscreenChange', function() {
+            if (!document.msFullscreenElement) {
+                fullscreenBtn.setAttribute('aria-pressed', 'false');
+                if (fullscreenText) fullscreenText.textContent = 'Fullscreen';
+                if (iconFullscreen) iconFullscreen.style.display = 'block';
+                if (iconExitFullscreen) iconExitFullscreen.style.display = 'none';
+            }
+        });
+        fullscreenBtn.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('loading')) {
+                this.style.transform = 'translateY(-2px) scale(1.04)';
+            }
+        });
+        fullscreenBtn.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('loading')) {
+                this.style.transform = 'translateY(0) scale(1)';
+            }
+        });
+        fullscreenBtn.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        fullscreenBtn.addEventListener('touchend', function() {
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
         });
     }
-    
+
     // Refresh button logic with enhanced UX
     var refreshBtn = $('#refreshTable');
     var spinner = refreshBtn.find('.refresh-spinner');
