@@ -1071,187 +1071,180 @@
                     </div>
 
                     <!-- Enhanced Table -->
-                    <div class="table-wrapper modern-table-wrapper" style="
-                        background: rgba(255,255,255,0.7);
-                        border-radius: 1em;
-                        overflow: hidden;
-                        box-shadow: 0 2px 12px rgba(80,80,200,0.06);
-                        border: 1px solid rgba(99,102,241,0.05);
-                    ">
-                        <table id="coingecko_derivatives_exchanges" class="table table-hover table-condensed table-striped enhanced-table modern-table text-center" style="width:100%; padding-top:1%">
-                            <thead class="enhanced-thead modern-thead" style="
-                                background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(96,165,250,0.1) 100%);
-                                border-bottom: 2px solid rgba(99,102,241,0.2);
-                            ">
-                            <tr>
-                                <th class="datatable-highlight-first enhanced-th" style="width:120px;min-width:120px;max-width:120px;text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Exchange</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Exchange Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="exchangeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ff6a88"/>
-                                                    <stop offset="1" stop-color="#ff99ac"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <rect x="3" y="3" width="18" height="18" rx="5" fill="url(#exchangeGradient)"/>
-                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Official logo or icon of the exchange" class="enhanced-th" style="width:72px;min-width:72px;max-width:72px;text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Logo</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Logo Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="logoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ff99ac"/>
-                                                    <stop offset="1" stop-color="#ff6a88"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <rect x="3" y="3" width="18" height="18" rx="6" fill="url(#logoGradient)"/>
-                                            <circle cx="12" cy="12" r="6" fill="#fff"/>
-                                            <circle cx="12" cy="12" r="3" fill="url(#logoGradient)"/>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Description of the exchange" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Description</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Description Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="descGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#43cea2"/>
-                                                    <stop offset="1" stop-color="#185a9d"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <rect x="2" y="4" width="20" height="16" rx="4" fill="url(#descGradient)"/>
-                                            <path d="M6 8h12M6 12h8" stroke="#fff" stroke-width="2"/>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Open interest in Bitcoin" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Open Interest BTC</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern BTC Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="btcGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#f7931a"/>
-                                                    <stop offset="1" stop-color="#ffd200"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#btcGradient)"/>
-                                            <text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">₿</text>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="24-hour trading volume in Bitcoin" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">24h Volume BTC</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Volume Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="volumeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ffd200"/>
-                                                    <stop offset="1" stop-color="#ffb300"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#volumeGradient)"/>
-                                            <path d="M7 9h10M7 15h10M8 9c0 3 8 3 8 0M8 15c0-3 8-3 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                            <path d="M12 6v12" stroke="#fff" stroke-width="1.5" stroke-dasharray="1 1"/>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Number of perpetual trading pairs" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Perpetual Pairs</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Pairs Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="pairsGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ff6a88"/>
-                                                    <stop offset="1" stop-color="#ff99ac"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#pairsGradient)"/>
-                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                            <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.3"/>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Number of futures trading pairs" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Futures Pairs</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Futures Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="futuresGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#43cea2"/>
-                                                    <stop offset="1" stop-color="#185a9d"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#futuresGradient)"/>
-                                            <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">F</text>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Year the exchange was established" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Established</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Year Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="yearGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ffd200"/>
-                                                    <stop offset="1" stop-color="#ffb300"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#yearGradient)"/>
-                                            <text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Y</text>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Country where the exchange is based" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Country</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern Country Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="countryGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#ff6a88"/>
-                                                    <stop offset="1" stop-color="#ff99ac"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="12" cy="12" r="11" fill="url(#countryGradient)"/>
-                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#fff" stroke-width="1.5" fill="none"/>
-                                            <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th title="Website URL of the exchange" class="enhanced-th" style="text-align:left;">
-                                    <span class="datatable-header-text" style="display:block; text-align:center;">Website</span>
-                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
-                                        <!-- Modern URL Icon with Gradient -->
-                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient id="urlGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#43cea2"/>
-                                                    <stop offset="1" stop-color="#185a9d"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <rect x="3" y="3" width="18" height="18" rx="4" fill="url(#urlGradient)"/>
-                                            <path d="M10 6h4M6 10v4h12v-4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
-                                </th>
-                            </tr>
-                            </thead>
-                        </table>
+                    <div class="table-wrapper modern-table-wrapper" style="background: rgba(255,255,255,0.7); border-radius: 1em; overflow: hidden; box-shadow: 0 2px 12px rgba(80,80,200,0.06); border: 1px solid rgba(99,102,241,0.05);">
+                        <div style="overflow-x: auto; width: 100%;">
+                            <table id="coingecko_derivatives_exchanges" class="table table-hover table-condensed table-striped enhanced-table modern-table text-center" style="width:100%; padding-top:1%; table-layout: fixed;">
+                                <thead class="enhanced-thead modern-thead" style="background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(96,165,250,0.1) 100%); border-bottom: 2px solid rgba(99,102,241,0.2);">
+                                <tr>
+                                    <th class="datatable-highlight-first enhanced-th" style="text-align:left; width: 160px; min-width: 120px; max-width: 220px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:left;">Exchange</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:left; margin-top:4px;">
+                                            <!-- Modern Exchange Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="exchangeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#ff6a88"/>
+                                                        <stop offset="1" stop-color="#ff99ac"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <rect x="3" y="3" width="18" height="18" rx="5" fill="url(#exchangeGradient)"/>
+                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Official logo or icon of the exchange" class="enhanced-th" style="width:72px;min-width:72px;max-width:72px;text-align:left;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Logo</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern Logo Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="logoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#ff99ac"/>
+                                                        <stop offset="1" stop-color="#ff6a88"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <rect x="3" y="3" width="18" height="18" rx="6" fill="url(#logoGradient)"/>
+                                                <circle cx="12" cy="12" r="6" fill="#fff"/>
+                                                <circle cx="12" cy="12" r="3" fill="url(#logoGradient)"/>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Description of the exchange" class="enhanced-th" style="text-align:left; width: 260px; min-width: 180px; max-width: 340px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Description</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern Description Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="descGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#43cea2"/>
+                                                        <stop offset="1" stop-color="#185a9d"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <rect x="2" y="4" width="20" height="16" rx="4" fill="url(#descGradient)"/>
+                                                <path d="M6 8h12M6 12h8" stroke="#fff" stroke-width="2"/>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Open interest in Bitcoin" class="enhanced-th" style="text-align:left; width: 120px; min-width: 100px; max-width: 160px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Open Interest BTC</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern BTC Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="btcGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#f7931a"/>
+                                                        <stop offset="1" stop-color="#ffd200"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="12" cy="12" r="11" fill="url(#btcGradient)"/>
+                                                <text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">₿</text>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="24-hour trading volume in Bitcoin" class="enhanced-th" style="text-align:left; width: 120px; min-width: 100px; max-width: 160px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">24h Volume BTC</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern Volume Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="volumeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#ffd200"/>
+                                                        <stop offset="1" stop-color="#ffb300"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="12" cy="12" r="11" fill="url(#volumeGradient)"/>
+                                                <path d="M7 9h10M7 15h10M8 9c0 3 8 3 8 0M8 15c0-3 8-3 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                                <path d="M12 6v12" stroke="#fff" stroke-width="1.5" stroke-dasharray="1 1"/>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Number of perpetual trading pairs" class="enhanced-th" style="text-align:left; width: 100px; min-width: 80px; max-width: 120px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Perpetual Pairs</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern Pairs Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="pairsGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#ff6a88"/>
+                                                        <stop offset="1" stop-color="#ff99ac"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="12" cy="12" r="11" fill="url(#pairsGradient)"/>
+                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                                <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.3"/>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Number of futures trading pairs" class="enhanced-th" style="text-align:left; width: 100px; min-width: 80px; max-width: 120px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Futures Pairs</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern Futures Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="futuresGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#43cea2"/>
+                                                        <stop offset="1" stop-color="#185a9d"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="12" cy="12" r="11" fill="url(#futuresGradient)"/>
+                                                <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">F</text>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Year the exchange was established" class="enhanced-th" style="text-align:left; width: 90px; min-width: 70px; max-width: 110px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Established</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern Year Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="yearGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#ffd200"/>
+                                                        <stop offset="1" stop-color="#ffb300"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="12" cy="12" r="11" fill="url(#yearGradient)"/>
+                                                <text x="12" y="17" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Y</text>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Country where the exchange is based" class="enhanced-th" style="text-align:left; width: 110px; min-width: 80px; max-width: 140px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Country</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern Country Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="countryGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#ff6a88"/>
+                                                        <stop offset="1" stop-color="#ff99ac"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="12" cy="12" r="11" fill="url(#countryGradient)"/>
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#fff" stroke-width="1.5" fill="none"/>
+                                                <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                    <th title="Website URL of the exchange" class="enhanced-th" style="text-align:left; width: 180px; min-width: 120px; max-width: 240px;">
+                                        <span class="datatable-header-text" style="display:block; text-align:center;">Website</span>
+                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:4px;">
+                                            <!-- Modern URL Icon with Gradient -->
+                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="urlGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#43cea2"/>
+                                                        <stop offset="1" stop-color="#185a9d"/>
+                                                    </linearGradient>
+                                                </defs>
+                                                <rect x="3" y="3" width="18" height="18" rx="4" fill="url(#urlGradient)"/>
+                                                <path d="M10 6h4M6 10v4h12v-4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -45,7 +45,7 @@ class DerivativesExchangesController extends Controller
             ->rawColumns([
                 'name',
               //  'image',
-                'url',
+              //  'url',
                 'open_interest_btc',
                 'trade_volume_24h_btc',
             ])

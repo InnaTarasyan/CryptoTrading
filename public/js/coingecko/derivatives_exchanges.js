@@ -23,41 +23,92 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_derivatives_exchanges_route').val(),
         "scrollX": true,
+        "fixedHeader": true,
         "columns": [
-            {data: 'name', name: 'name'},
-            // {data: 'image', name: 'image', render: function(data, type, row, meta) {
-            //     if (!data) return '<span style="color:#bbb;">—</span>';
-            //     return `<img src="${data}" alt="Logo" class="previewable-img" style="width:32px;height:32px;object-fit:contain;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.08);cursor:pointer;">`;
-            // }},
+            {data: 'name', name: 'name', render: function(data, type, row, meta) {
+                if (!data) return '';
+                // Split at the last space for two lines
+                var idx = data.lastIndexOf(' ');
+                if (idx > 0) {
+                    return data.substring(0, idx) + '<br>' + data.substring(idx + 1);
+                } else {
+                    return data;
+                }
+            }},
             {data: 'image', name: 'image'},
             {data: 'description', name: 'description', render: function(data, type, row, meta) {
                 if (!data) return '<span style="color:#bbb;">—</span>';
-                // Truncate to 100 chars for display, but tooltip always shows full text
-                var clean = data.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags if any
+                var clean = data.replace(/(<([^>]+)>)/gi, "");
                 var short = clean.length > 100 ? clean.substring(0, 100).trim() + '…' : clean;
                 var html = short.replace(/\n/g, '<br>');
-                // Escape for HTML attribute
                 var escaped = clean.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                // Always show tooltip with full description on hover
                 return `<span class="desc-tooltip" data-tooltip="${escaped}" style="cursor: help; word-break: break-word;">${html}</span>`;
             }},
-            {data: 'open_interest_btc', name: 'open_interest_btc'},
-            {data: 'trade_volume_24h_btc', name: 'trade_volume_24h_btc'},
-            {data: 'number_of_perpetual_pairs', name: 'number_of_perpetual_pairs'},
-            {data: 'number_of_futures_pairs', name: 'number_of_futures_pairs'},
-            // Render year_established with icon
+            {data: 'open_interest_btc', name: 'open_interest_btc', render: function(data, type, row, meta) {
+                if (!data) return '';
+                var str = data.toString();
+                var idx = str.lastIndexOf(' ');
+                if (idx > 0) {
+                    return str.substring(0, idx) + '<br>' + str.substring(idx + 1);
+                } else {
+                    return str;
+                }
+            }},
+            {data: 'trade_volume_24h_btc', name: 'trade_volume_24h_btc', render: function(data, type, row, meta) {
+                if (!data) return '';
+                var str = data.toString();
+                var idx = str.lastIndexOf(' ');
+                if (idx > 0) {
+                    return str.substring(0, idx) + '<br>' + str.substring(idx + 1);
+                } else {
+                    return str;
+                }
+            }},
+            {data: 'number_of_perpetual_pairs', name: 'number_of_perpetual_pairs', render: function(data, type, row, meta) {
+                if (!data) return '';
+                var str = data.toString();
+                var idx = str.lastIndexOf(' ');
+                if (idx > 0) {
+                    return str.substring(0, idx) + '<br>' + str.substring(idx + 1);
+                } else {
+                    return str;
+                }
+            }},
+            {data: 'number_of_futures_pairs', name: 'number_of_futures_pairs', render: function(data, type, row, meta) {
+                if (!data) return '';
+                var str = data.toString();
+                var idx = str.lastIndexOf(' ');
+                if (idx > 0) {
+                    return str.substring(0, idx) + '<br>' + str.substring(idx + 1);
+                } else {
+                    return str;
+                }
+            }},
             {data: 'year_established', name: 'year_established', render: function(data, type, row, meta) {
                 if (!data) return '<span style="color:#bbb;">—</span>';
+                var str = data.toString();
+                var idx = str.lastIndexOf(' ');
+                var display = (idx > 0) ? str.substring(0, idx) + '<br>' + str.substring(idx + 1) : str;
                 return '<span style="display:inline-flex;align-items:center;gap:0.4em;font-weight:500;">' +
                     '<span style="font-size:1.2em;vertical-align:middle;">📅</span>' +
-                    '<span>' + data + '</span>' +
+                    '<span>' + display + '</span>' +
                     '</span>';
             }},
             {data: 'country', name: 'country', render: function(data, type, row, meta) {
                 if (!data) return '<span style="color:#bbb;">—</span>';
-                return `<span style="font-size:1.1em;">🌍</span> <b>${data}</b>`;
+                var idx = data.lastIndexOf(' ');
+                var display = (idx > 0) ? data.substring(0, idx) + '<br>' + data.substring(idx + 1) : data;
+                return `<span style="font-size:1.1em;">🌍</span> <b>${display}</b>`;
             }},
-            {data: 'url', name: 'url'}
+            {data: 'url', name: 'url', render: function(data, type, row, meta) {
+                if (!data) return '';
+                var idx = data.lastIndexOf(' ');
+                if (idx > 0) {
+                    return data.substring(0, idx) + '<br>' + data.substring(idx + 1);
+                } else {
+                    return data;
+                }
+            }}
         ],
         "columnDefs": [
             { "width": "60px", "targets": 1 }
@@ -122,6 +173,11 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             });
         }
     });
+
+    // Ensure table uses fixed layout
+    $('#coingecko_derivatives_exchanges').css('table-layout', 'fixed');
+    // Ensure parent container allows horizontal scroll
+    $('#datatableFullscreenContainer').css('overflow-x', 'auto');
 
     // Custom tooltip logic for description column
     function enableCustomTooltips() {
