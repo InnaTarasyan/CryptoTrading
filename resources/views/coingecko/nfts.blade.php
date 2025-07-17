@@ -109,50 +109,65 @@
             display: flex;
             align-items: center;
             background: linear-gradient(90deg, #232526 0%, #414345 100%);
-            border-radius: 1.2em;
-            width: 48px;
-            height: 28px;
+            border-radius: 1.5em;
+            width: 60px;
+            height: 36px;
             position: relative;
             transition: background 0.3s;
-            box-shadow: 0 2px 8px rgba(34,185,255,0.08);
+            box-shadow: 0 2px 12px rgba(34,185,255,0.10);
+            cursor: pointer;
+            outline: none;
+            justify-content: space-between;
+            padding: 0 6px;
         }
         .toggle-icon {
-            position: absolute;
-            top: 4px;
-            width: 20px;
-            height: 20px;
-            transition: opacity 0.3s, left 0.3s;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s, transform 0.3s, filter 0.3s;
+            pointer-events: none;
+            position: relative;
+            z-index: 2;
         }
         .toggle-sun {
-            left: 6px;
             opacity: 1;
+            filter: drop-shadow(0 0 4px #FFD60055);
+            transform: scale(1.08);
         }
         .toggle-moon {
-            right: 6px;
-            opacity: 0;
+            opacity: 0.45;
+            filter: none;
+            transform: scale(0.95);
         }
         .toggle-thumb {
             position: absolute;
-            left: 4px;
-            top: 4px;
-            width: 20px;
-            height: 20px;
+            left: 6px;
+            top: 7px;
+            width: 22px;
+            height: 22px;
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(34,185,255,0.10);
             transition: left 0.3s, background 0.3s;
+            z-index: 1;
         }
         .nfts-dark-mode .toggle-track {
             background: linear-gradient(90deg, #181a1b 0%, #23272b 100%);
         }
         .nfts-dark-mode .toggle-sun {
-            opacity: 0;
+            opacity: 0.45;
+            filter: none;
+            transform: scale(0.95);
         }
         .nfts-dark-mode .toggle-moon {
             opacity: 1;
+            filter: drop-shadow(0 0 4px #FFD60055);
+            transform: scale(1.08);
         }
         .nfts-dark-mode .toggle-thumb {
-            left: 24px;
+            left: 32px;
             background: #23272b;
         }
         .nfts-dark-mode .toggle-label {
@@ -289,6 +304,7 @@
             align-items: center;
             gap: 0.7em;
             flex-wrap: wrap;
+            margin-left: auto;
         }
         .nfts-toolbar-btn {
             transition: background 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
@@ -356,7 +372,7 @@
                     </span>
                     <span class="modern-title-text" id="nftsTitle">NFTs</span>
                 </div>
-                <div class="nfts-toolbar" id="nftsToolbar" role="toolbar" aria-label="NFTs actions toolbar">
+                <div style="display: flex; align-items: center; gap: 1.2em; flex-wrap: wrap;">
                     <button class="nfts-toolbar-btn nfts-toggle-btn" id="nftsDarkModeBtn" title="Toggle Dark/Light Mode" type="button" aria-label="Toggle Dark/Light Mode">
                         <span class="toggle-switch" id="nftsDarkModeSwitch">
                             <span class="toggle-track" tabindex="0">
@@ -374,14 +390,16 @@
                             <span class="toggle-label toggle-label-dark">Dark</span>
                         </span>
                     </button>
-                    <button class="nfts-toolbar-btn" id="nftsFullscreenBtn" title="Full Screen Table" type="button" aria-label="Full Screen Table">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3m0 8v3a2 2 0 002 2h3m8-16h3a2 2 0 012 2v3m0 8v3a2 2 0 01-2 2h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <span class="d-none d-sm-inline">Full Screen</span>
-                    </button>
-                    <button class="nfts-toolbar-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4v5h.582M20 20v-5h-.581M5.5 19A9 9 0 1021 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <span class="d-none d-sm-inline">Refresh</span>
-                    </button>
+                    <div class="nfts-toolbar" id="nftsToolbar" role="toolbar" aria-label="NFTs actions toolbar">
+                        <button class="nfts-toolbar-btn" id="nftsFullscreenBtn" title="Full Screen Table" type="button" aria-label="Full Screen Table">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3m0 8v3a2 2 0 002 2h3m8-16h3a2 2 0 012 2v3m0 8v3a2 2 0 01-2 2h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="d-none d-sm-inline">Full Screen</span>
+                        </button>
+                        <button class="nfts-toolbar-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4v5h.582M20 20v-5h-.581M5.5 19A9 9 0 1021 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="d-none d-sm-inline">Refresh</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
