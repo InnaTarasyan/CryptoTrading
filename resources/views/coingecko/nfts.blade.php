@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
     <link href="{{ asset('css/nfts.css') }}" rel="stylesheet">
     <style>
@@ -350,6 +351,42 @@
                 font-size: 1.1rem;
             }
         }
+        .dt-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7em;
+            margin-bottom: 1em;
+        }
+        .dt-button {
+            background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%) !important;
+            color: #fff !important;
+            border: none !important;
+            border-radius: 0.7em !important;
+            padding: 0.55em 1.2em !important;
+            font-size: 1.05em !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            box-shadow: 0 2px 8px rgba(255,106,136,0.08) !important;
+            transition: background 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
+        }
+        .dt-button:hover, .dt-button:focus {
+            background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 16px rgba(255,106,136,0.15) !important;
+            outline: none !important;
+            transform: scale(1.045);
+        }
+        @media (max-width: 600px) {
+            .dt-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5em;
+            }
+            .dt-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -372,7 +409,7 @@
                     </span>
                     <span class="modern-title-text" id="nftsTitle">NFTs</span>
                 </div>
-                <div style="display: flex; align-items: center; gap: 1.2em; flex-wrap: wrap;">
+                <div class="nfts-toolbar" id="nftsToolbar" role="toolbar" aria-label="NFTs actions toolbar">
                     <button class="nfts-toolbar-btn nfts-toggle-btn" id="nftsDarkModeBtn" title="Toggle Dark/Light Mode" type="button" aria-label="Toggle Dark/Light Mode">
                         <span class="toggle-switch" id="nftsDarkModeSwitch">
                             <span class="toggle-track" tabindex="0">
@@ -493,6 +530,12 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="{{ url('js/coingecko/nfts.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

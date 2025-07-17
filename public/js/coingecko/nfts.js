@@ -30,7 +30,37 @@ Nfts.prototype.init = function () {
             $(row).find('td').each(function(idx) {
                 $(this).attr('data-label', columnLabels[idx]);
             });
-        }
+        },
+        // Add export buttons
+        dom: '<"dt-buttons"B>frtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                text: 'Copy',
+                className: 'btn-copy'
+            },
+            {
+                extend: 'excelHtml5',
+                text: 'Excel',
+                className: 'btn-excel'
+            },
+            {
+                extend: 'csvHtml5',
+                text: 'CSV',
+                className: 'btn-csv'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: 'PDF',
+                className: 'btn-pdf'
+            },
+            {
+                extend: 'print',
+                text: 'Print',
+                className: 'btn-print'
+            }
+        ],
+        responsive: true
     });
 
     // Replace default DataTables filter with custom search bar (icon inside input, improved CSS)
