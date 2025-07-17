@@ -1243,6 +1243,9 @@
                                     </th>
                                 </tr>
                                 </thead>
+                                <tbody>
+                                    <!-- DataTables will populate rows here -->
+                                </tbody>
                             </table>
                         </div>
                     </div>

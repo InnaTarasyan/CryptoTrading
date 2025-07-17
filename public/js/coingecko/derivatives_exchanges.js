@@ -96,9 +96,13 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             }},
             {data: 'country', name: 'country', render: function(data, type, row, meta) {
                 if (!data) return '<span style="color:#bbb;">—</span>';
-                var idx = data.lastIndexOf(' ');
-                var display = (idx > 0) ? data.substring(0, idx) + '<br>' + data.substring(idx + 1) : data;
-                return `<span style="font-size:1.1em;">🌍</span> <b>${display}</b>`;
+                // Try to get country code from row.country_code or row.country_code_2 (fallback)
+                var code = (row.country_code || row.country_code_2 || '').toLowerCase();
+                var flag = '';
+                if (code && /^[a-z]{2}$/.test(code)) {
+                    flag = `<img src="https://flagcdn.com/24x18/${code}.png" style="margin-right:6px;vertical-align:middle;" alt="${data} flag">`;
+                }
+                return `${flag}${data}`;
             }},
             {data: 'url', name: 'url', render: function(data, type, row, meta) {
                 if (!data) return '';
