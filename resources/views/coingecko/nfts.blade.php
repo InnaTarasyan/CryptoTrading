@@ -496,6 +496,58 @@
         }
     }
     </style>
+    <style>
+        .refresh-btn {
+            background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 60%, #fbc2eb 100%);
+            color: #fff;
+            border: none;
+            border-radius: 2.5em;
+            padding: 0.6em 1.7em;
+            font-size: 1.08em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            cursor: pointer;
+            box-shadow: 0 4px 24px 0 rgba(255,106,136,0.13), 0 1.5px 6px rgba(255, 153, 172, 0.10);
+            position: relative;
+            outline: none;
+            overflow: hidden;
+            backdrop-filter: blur(2.5px);
+            background-clip: padding-box;
+            transition: background 0.3s, color 0.3s, box-shadow 0.2s, transform 0.15s;
+        }
+        .refresh-btn:active, .refresh-btn:focus {
+            outline: 2px solid #ff99ac;
+            box-shadow: 0 0 0 3px #ff99ac, 0 4px 24px 0 rgba(255,106,136,0.13);
+        }
+        .refresh-btn:hover {
+            background: linear-gradient(135deg, #fbc2eb 0%, #ff99ac 60%, #ff6a88 100%);
+            color: #fff;
+            transform: scale(1.06);
+            box-shadow: 0 8px 32px 0 rgba(255,106,136,0.18), 0 2px 8px rgba(255, 153, 172, 0.13);
+        }
+        .refresh-btn-label {
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+        .refresh-btn svg {
+            width: 1.5em;
+            height: 1.5em;
+            margin-right: 0.3em;
+        }
+        @media (max-width: 700px) {
+            .refresh-btn {
+                padding: 0.5em 1em;
+                font-size: 0.98em;
+            }
+            .refresh-btn svg {
+                width: 1.1em;
+                height: 1.1em;
+            }
+        }
+    </style>
 @endsection
 @section('content')
     <div class="m-content">
@@ -540,33 +592,19 @@
                         <span class="d-none d-sm-inline">Full Screen</span>
                     </button>
                     <div style="display: flex; justify-content: flex-end; margin: 1.5em 0 0.5em 0;">
-                        <button class="nfts-toolbar-btn refresh-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table" tabindex="0" style="overflow:hidden; position:relative; min-width: 56px;" data-tooltip="Reload NFT Data">
-                            <span class="refresh-icon-outer">
-                                <!-- Glow effect -->
-                                <svg class="refresh-icon-glow" width="36" height="36">
-                                    <circle cx="18" cy="18" r="14" fill="url(#refreshGlowGradient)" />
-                                    <defs>
-                                        <radialGradient id="refreshGlowGradient" cx="50%" cy="50%" r="50%">
-                                            <stop offset="0%" stop-color="#ff99ac" stop-opacity="0.7"/>
-                                            <stop offset="100%" stop-color="#ff6a88" stop-opacity="0"/>
-                                        </radialGradient>
-                                    </defs>
-                                </svg>
-                                <!-- Main icon -->
-                                <svg class="refresh-icon-main" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                                    <defs>
-                                        <linearGradient id="refreshGradientModernUpgradedPink2" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="#ff6a88"/>
-                                            <stop offset="1" stop-color="#ff99ac"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <circle cx="14" cy="14" r="13" fill="#fff" opacity="0.95"/>
-                                    <path d="M22 10A9 9 0 1 0 24 14h-2" stroke="url(#refreshGradientModernUpgradedPink2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <polyline points="21 3 21 11 29 11" stroke="url(#refreshGradientModernUpgradedPink2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                </svg>
-                            </span>
+                        <button class="nfts-toolbar-btn refresh-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="refreshGradientModernUpgradedPink2" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#ff6a88"/>
+                                        <stop offset="1" stop-color="#ff99ac"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="12" cy="12" r="11" fill="#fff"/>
+                                <path d="M19 8A8 8 0 1 0 20 12h-1.5" stroke="url(#refreshGradientModernUpgradedPink2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="18 2 18 9 25 9" stroke="url(#refreshGradientModernUpgradedPink2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
                             <span class="refresh-btn-label d-none d-sm-inline">Refresh</span>
-                            <span class="ripple-effect"></span>
                         </button>
                     </div>
                 </div>
@@ -586,53 +624,53 @@
                     <span class="tab-icon">
                         <!-- Exchange Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff99ac"></rect><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Exchanges</span>
                 </a>
                 <a href="/coingeckotrendingsindex" class="modern-tab beautiful-tab" tabindex="0">
                     <span class="tab-icon">
                         <!-- Trendings Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff6a88"></rect><path d="M8 16l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Trendings</span>
                 </a>
                 <a href="/coingeckoexchangeratesindex" class="modern-tab beautiful-tab" tabindex="0">
                     <span class="tab-icon">
                         <!-- Exchange Rates Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff99ac"></rect><text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Exchange Rates</span>
                 </a>
                 <a href="/coingeckonftsindex" class="modern-tab beautiful-tab active" tabindex="0">
                     <span class="tab-icon">
                         <!-- NFTs Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff6a88"></rect><text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">NFT</text></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">NFTs</span>
                 </a>
                 <a href="/coingeckoderivativesindex" class="modern-tab beautiful-tab" tabindex="0">
                     <span class="tab-icon">
                         <!-- Derivatives Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff99ac"></rect><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Derivatives</span>
                 </a>
                 <a href="/coingeckoderivativesexchangesindex" class="modern-tab beautiful-tab" tabindex="0">
                     <span class="tab-icon">
                         <!-- Derivatives Exchanges Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff6a88"></rect><path d="M8 16l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Derivatives Exchanges</span>
                 </a>
             </nav>
         </div>
         <!-- DataTable Section -->
         <div class="nfts-table-responsive">
-            <input type="hidden" id="coingecko_nfts_route" value="{{ route('datatable.coingecko.nfts') }}">
+                <input type="hidden" id="coingecko_nfts_route" value="{{ route('datatable.coingecko.nfts') }}">
             <!-- Enhanced Table -->
             <div class="table-wrapper" id="nftsTableWrapper">
                 <table id="coingecko_nfts" class="nfts-table table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
-                    <thead>
+                        <thead>
                         <tr>
                             <th class="datatable-highlight-first enhanced-th">
                                 <span class="datatable-header-text" style="display:block; text-align:center;">Name</span>
@@ -654,9 +692,9 @@
                                 <span class="datatable-header-text">Asset Platform ID</span>
                             </th>
                         </tr>
-                    </thead>
-                </table>
-            </div>
+                        </thead>
+                    </table>
+                </div>
         </div>
         <section class="nfts-info-block">
             <div class="nfts-info-inner">
@@ -674,8 +712,8 @@
                         <li><strong>Name:</strong> The official name of the NFT collection or asset. This helps users identify and search for specific NFTs.</li>
                         <li><strong>Asset Platform ID:</strong> The blockchain or platform on which the NFT is issued (e.g., Ethereum, Solana, Binance Smart Chain). This is crucial for understanding the underlying technology and ecosystem of the NFT.</li>
                     </ul>
-                </div>
             </div>
+        </div>
         </section>
     </div>
 @endsection
