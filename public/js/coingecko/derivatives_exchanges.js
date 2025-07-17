@@ -154,8 +154,16 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
             }
         ],
         "fnDrawCallback": function() {
-            $('#coingecko_derivatives_exchanges tbody tr').click(function () {
-                var coin = $(this).find('.id').val();
+            $('#coingecko_derivatives_exchanges tbody tr').off('click').on('click', function (e) {
+                // Exclude clicks on the Website column (last cell) or any links inside it
+                var $td = $(e.target).closest('td');
+                var $tr = $(this);
+                var colIdx = $tr.find('td').index($td);
+                // Website column is index 9 (0-based)
+                if (colIdx === 9 || $(e.target).is('a')) {
+                    return;
+                }
+                var coin = $tr.find('.id').val();
                 window.location.href = "/details/" + coin;
             });
         },
