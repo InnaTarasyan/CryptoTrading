@@ -3,14 +3,345 @@
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
     <link href="{{ asset('css/nfts.css') }}" rel="stylesheet">
+    <style>
+        .nfts-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 1.2em;
+        }
+        .nfts-toolbar-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+            color: #fff;
+            border: none;
+            border-radius: 0.7em;
+            padding: 0.55em 1.2em;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+            transition: background 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
+        }
+        /* Modern and user-friendly Dark Mode button */
+        #nftsDarkModeBtn {
+            background: linear-gradient(90deg, #232526 0%, #414345 100%);
+            color: #ffe6f0;
+            box-shadow: 0 2px 12px rgba(34, 185, 255, 0.10), 0 1.5px 6px rgba(255, 106, 136, 0.08);
+            border: 1.5px solid #232526;
+            position: relative;
+            overflow: hidden;
+        }
+        #nftsDarkModeBtn:hover, #nftsDarkModeBtn:focus {
+            background: linear-gradient(90deg, #414345 0%, #232526 100%);
+            color: #fff;
+            box-shadow: 0 4px 24px 0 rgba(34, 185, 255, 0.18), 0 2px 8px rgba(255, 106, 136, 0.10);
+            outline: none;
+            transform: scale(1.045);
+        }
+        #nftsDarkModeBtn:active {
+            transform: scale(0.98);
+        }
+        #nftsDarkModeBtn svg {
+            filter: drop-shadow(0 0 4px #22b9ff33);
+        }
+        .nfts-toolbar-btn svg {
+            width: 1.2em;
+            height: 1.2em;
+        }
+        @media (max-width: 600px) {
+            .nfts-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.7em;
+            }
+            .nfts-toolbar-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        body.nfts-dark-mode, .nfts-dark-mode .m-content {
+            background: #181a1b !important;
+            color: #f3f3f3 !important;
+        }
+        .nfts-dark-mode .nfts-table, .nfts-dark-mode .dataTables_wrapper {
+            background: #23272b !important;
+            color: #f3f3f3 !important;
+        }
+        .nfts-dark-mode .nfts-table th, .nfts-dark-mode .nfts-table td {
+            background: #23272b !important;
+            color: #f3f3f3 !important;
+        }
+        .nfts-dark-mode .nfts-toolbar-btn {
+            background: linear-gradient(90deg, #23272b 0%, #181a1b 100%);
+            color: #ff6a88;
+        }
+        .nfts-dark-mode .nfts-toolbar-btn:hover, .nfts-dark-mode .nfts-toolbar-btn:focus {
+            background: linear-gradient(90deg, #181a1b 0%, #23272b 100%);
+            color: #ff99ac;
+        }
+        .nfts-dark-mode #nftsDarkModeBtn {
+            background: linear-gradient(90deg, #181a1b 0%, #23272b 100%);
+            color: #ffb6e6;
+            border-color: #23272b;
+        }
+        .nfts-dark-mode #nftsDarkModeBtn:hover, .nfts-dark-mode #nftsDarkModeBtn:focus {
+            background: linear-gradient(90deg, #23272b 0%, #181a1b 100%);
+            color: #fff;
+            box-shadow: 0 4px 24px 0 rgba(34, 185, 255, 0.18), 0 2px 8px rgba(255, 106, 136, 0.10);
+        }
+        .nfts-toggle-btn {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 0.2em 0.5em !important;
+            min-width: 60px;
+        }
+        .toggle-switch {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .toggle-track {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, #232526 0%, #414345 100%);
+            border-radius: 1.2em;
+            width: 48px;
+            height: 28px;
+            position: relative;
+            transition: background 0.3s;
+            box-shadow: 0 2px 8px rgba(34,185,255,0.08);
+        }
+        .toggle-icon {
+            position: absolute;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            transition: opacity 0.3s, left 0.3s;
+        }
+        .toggle-sun {
+            left: 6px;
+            opacity: 1;
+        }
+        .toggle-moon {
+            right: 6px;
+            opacity: 0;
+        }
+        .toggle-thumb {
+            position: absolute;
+            left: 4px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(34,185,255,0.10);
+            transition: left 0.3s, background 0.3s;
+        }
+        .nfts-dark-mode .toggle-track {
+            background: linear-gradient(90deg, #181a1b 0%, #23272b 100%);
+        }
+        .nfts-dark-mode .toggle-sun {
+            opacity: 0;
+        }
+        .nfts-dark-mode .toggle-moon {
+            opacity: 1;
+        }
+        .nfts-dark-mode .toggle-thumb {
+            left: 24px;
+            background: #23272b;
+        }
+        .nfts-dark-mode .toggle-label {
+            color: #ffb6e6;
+        }
+        .toggle-label {
+            margin-left: 0.7em;
+            font-weight: 600;
+            color: #ffe6f0;
+            transition: color 0.3s;
+        }
+        .beautiful-modern-title-bar {
+            background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+            border-radius: 1.5em;
+            box-shadow: 0 4px 32px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+            padding: 1.5em 2em 1.2em 2em;
+            margin-bottom: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 70px;
+            position: relative;
+            z-index: 1;
+        }
+        .beautiful-modern-title-bar .modern-title-main {
+            display: flex;
+            align-items: center;
+            gap: 1.2em;
+        }
+        .beautiful-modern-title-bar .modern-title-icon {
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(255, 106, 136, 0.10);
+            padding: 0.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .beautiful-modern-title-bar .modern-title-text {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 8px rgba(255, 106, 136, 0.10);
+        }
+        @media (max-width: 900px) {
+            .beautiful-modern-title-bar {
+                padding: 1.2em 1em 1em 1em;
+            }
+            .beautiful-modern-title-bar .modern-title-text {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .beautiful-modern-title-bar {
+                padding: 1em 0.5em 0.8em 0.5em;
+                min-height: 50px;
+            }
+            .beautiful-modern-title-bar .modern-title-main {
+                gap: 0.7em;
+            }
+            .beautiful-modern-title-bar .modern-title-text {
+                font-size: 1.1rem;
+            }
+        }
+        .modern-title-bar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.2em;
+        }
+        @media (max-width: 700px) {
+            .modern-title-bar-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.7em;
+            }
+            .nfts-toolbar {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+        .modern-title-bar.beautiful-modern-title-bar {
+            background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+            border-radius: 1.5em;
+            box-shadow: 0 4px 32px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+            padding: 1.5em 2em 1.2em 2em;
+            margin-bottom: 1.2em;
+            display: flex;
+            align-items: center;
+            min-height: 70px;
+            position: relative;
+            z-index: 1;
+            transition: background 0.3s;
+        }
+        .modern-title-bar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.2em;
+            width: 100%;
+        }
+        .modern-title-main {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            min-width: 0;
+        }
+        .modern-title-icon {
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(255, 106, 136, 0.10);
+            padding: 0.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            min-height: 40px;
+        }
+        .modern-title-text {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 8px rgba(255, 106, 136, 0.10);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nfts-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 0.7em;
+            flex-wrap: wrap;
+        }
+        .nfts-toolbar-btn {
+            transition: background 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
+        }
+        .nfts-toolbar-btn:hover, .nfts-toolbar-btn:focus {
+            background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%) !important;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255,106,136,0.15);
+            outline: none;
+            transform: scale(1.045);
+        }
+        @media (max-width: 900px) {
+            .modern-title-bar.beautiful-modern-title-bar {
+                padding: 1.2em 1em 1em 1em;
+            }
+            .modern-title-text {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .modern-title-bar-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.7em;
+            }
+            .nfts-toolbar {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .modern-title-main {
+                margin-bottom: 0.5em;
+            }
+        }
+        @media (max-width: 600px) {
+            .modern-title-bar.beautiful-modern-title-bar {
+                padding: 1em 0.5em 0.8em 0.5em;
+                min-height: 50px;
+            }
+            .modern-title-main {
+                gap: 0.7em;
+            }
+            .modern-title-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 @endsection
 @section('content')
     <div class="m-content">
-        <!-- Modern Title Bar with Icon and Enhanced Dark Mode Button -->
-        <div class="modern-title-bar" aria-labelledby="nftsTitle" role="banner">
-            <div class="modern-title-bar-row">
+        <div class="modern-title-bar beautiful-modern-title-bar" aria-labelledby="nftsTitle" role="banner">
+            <div class="modern-title-bar-row" role="group" aria-label="NFTs header section">
                 <div class="modern-title-main" style="display: flex; align-items: center; gap: 1em;">
-                    <span class="modern-title-icon" tabindex="0" title="NFTs Overview">
+                    <span class="modern-title-icon" tabindex="0" title="NFTs Overview" aria-label="NFTs Overview">
                         <!-- NFTs Icon SVG (Pink Gradient) -->
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -24,6 +355,33 @@
                         </svg>
                     </span>
                     <span class="modern-title-text" id="nftsTitle">NFTs</span>
+                </div>
+                <div class="nfts-toolbar" id="nftsToolbar" role="toolbar" aria-label="NFTs actions toolbar">
+                    <button class="nfts-toolbar-btn nfts-toggle-btn" id="nftsDarkModeBtn" title="Toggle Dark/Light Mode" type="button" aria-label="Toggle Dark/Light Mode">
+                        <span class="toggle-switch" id="nftsDarkModeSwitch">
+                            <span class="toggle-track" tabindex="0">
+                                <span class="toggle-icon toggle-sun" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="7" fill="#FFD600"/><g stroke="#FFD600" stroke-width="2"><line x1="14" y1="2" x2="14" y2="6"/><line x1="14" y1="22" x2="14" y2="26"/><line x1="2" y1="14" x2="6" y2="14"/><line x1="22" y1="14" x2="26" y2="14"/><line x1="5.22" y1="5.22" x2="8.34" y2="8.34"/><line x1="19.66" y1="19.66" x2="22.78" y2="22.78"/><line x1="5.22" y1="22.78" x2="8.34" y2="19.66"/><line x1="19.66" y1="8.34" x2="22.78" y2="5.22"/></g></svg>
+                                </span>
+                                <span class="toggle-icon toggle-moon" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M26 15.59A11 11 0 1113.41 2A9 9 0 0026 15.59Z" fill="#FFD600" stroke="#FFD600" stroke-width="2"/></svg>
+                                </span>
+                                <span class="toggle-thumb"></span>
+                            </span>
+                        </span>
+                        <span class="toggle-labels">
+                            <span class="toggle-label toggle-label-light">Light</span>
+                            <span class="toggle-label toggle-label-dark">Dark</span>
+                        </span>
+                    </button>
+                    <button class="nfts-toolbar-btn" id="nftsFullscreenBtn" title="Full Screen Table" type="button" aria-label="Full Screen Table">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3m0 8v3a2 2 0 002 2h3m8-16h3a2 2 0 012 2v3m0 8v3a2 2 0 01-2 2h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="d-none d-sm-inline">Full Screen</span>
+                    </button>
+                    <button class="nfts-toolbar-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4v5h.582M20 20v-5h-.581M5.5 19A9 9 0 1021 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="d-none d-sm-inline">Refresh</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -85,7 +443,7 @@
         <div class="nfts-table-responsive">
             <input type="hidden" id="coingecko_nfts_route" value="{{ route('datatable.coingecko.nfts') }}">
             <!-- Enhanced Table -->
-            <div class="table-wrapper">
+            <div class="table-wrapper" id="nftsTableWrapper">
                 <table id="coingecko_nfts" class="nfts-table table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                     <thead>
                         <tr>
@@ -118,4 +476,65 @@
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="{{ url('js/coingecko/nfts.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn = document.getElementById('nftsDarkModeBtn');
+            var track = document.querySelector('.toggle-track');
+            function setMode(isDark) {
+                if(isDark) {
+                    document.body.classList.add('nfts-dark-mode');
+                } else {
+                    document.body.classList.remove('nfts-dark-mode');
+                }
+            }
+            function getMode() {
+                return document.body.classList.contains('nfts-dark-mode');
+            }
+            btn.addEventListener('click', function() {
+                var isDark = !getMode();
+                setMode(isDark);
+            });
+            track.addEventListener('keydown', function(e) {
+                if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    btn.click();
+                }
+            });
+            // Set initial state
+            setMode(getMode());
+        });
+        // Refresh Table
+        document.getElementById('nftsRefreshBtn').addEventListener('click', function() {
+            if(window.nftsTable && typeof window.nftsTable.ajax === 'object') {
+                window.nftsTable.ajax.reload();
+            } else if ($ && $.fn.DataTable && $('#coingecko_nfts').length) {
+                $('#coingecko_nfts').DataTable().ajax.reload();
+            }
+        });
+        // Full Screen
+        document.getElementById('nftsFullscreenBtn').addEventListener('click', function() {
+            var elem = document.getElementById('nftsTableWrapper');
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) { /* Firefox */
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        });
+    </script>
 @endsection
