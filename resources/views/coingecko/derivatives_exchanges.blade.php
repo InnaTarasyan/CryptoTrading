@@ -1337,6 +1337,368 @@
                     }
                 }
                 </style>
+                <!-- Derivatives Exchanges Reviews Block -->
+                <div class="modern-reviews-section" style="margin-top:2.5em;">
+                    <h2 class="modern-reviews-title">
+                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.3em;"><circle cx="16" cy="16" r="16" fill="url(#reviewGradient)"/><path d="M10 22l2-2 4 4 8-8-2-2-6 6-2-2-2 2z" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="reviewGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6a88"/><stop offset="1" stop-color="#ff99ac"/></linearGradient></defs></svg>
+                        User Reviews
+                    </h2>
+                    <div id="reviews-list" class="reviews-list"></div>
+                    <hr style="border: none; border-top: 1.5px solid #ff99ac33; margin: 2em 0 2em 0;">
+                    <div class="modern-review-form-container">
+                        <h3 class="modern-review-form-title">Add Your Review</h3>
+                        <p style="text-align:center; color:#ff6a88; font-size:1.05em; margin-bottom:1.5em;">Share your experience with derivatives exchanges. Your feedback helps others make informed decisions!</p>
+                        <form id="reviewForm" method="POST" action="{{ url('/coingecko/derivatives_exchanges/reviews') }}" autocomplete="off" aria-label="Add your review">
+                            @csrf
+                            <input type="hidden" name="exchange_code" value="all">
+                            <div class="modern-form-group">
+                                <label for="name">
+                                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><circle cx="12" cy="8" r="4" fill="#ff6a88"/><path d="M4 20c0-4 8-4 8-4s8 0 8 4" stroke="#ff99ac" stroke-width="2"/></svg>
+                                    Name <span style="color:#ff6a88;">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="name" name="name" required maxlength="255" placeholder="Your name" aria-required="true">
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="email">
+                                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><rect x="2" y="6" width="20" height="12" rx="4" fill="#ff99ac"/><path d="M2 6l10 7 10-7" stroke="#ff6a88" stroke-width="2"/></svg>
+                                    Email <span style="color:#ff6a88;">*</span>
+                                </label>
+                                <input type="email" class="form-control" id="email" name="email" required maxlength="255" placeholder="you@email.com" aria-required="true">
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="rating">
+                                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 6v6l4 2" stroke="#ff99ac" stroke-width="2"/></svg>
+                                    Rating <span style="color:#ff6a88;">*</span>
+                                </label>
+                                <select class="form-control" id="rating" name="rating" required aria-required="true">
+                                    <option value="">Select rating</option>
+                                    <option value="5">★★★★★</option>
+                                    <option value="4">★★★★☆</option>
+                                    <option value="3">★★★☆☆</option>
+                                    <option value="2">★★☆☆☆</option>
+                                    <option value="1">★☆☆☆☆</option>
+                                </select>
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="title">
+                                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><rect x="4" y="4" width="16" height="16" rx="4" fill="#ff99ac"/><path d="M8 12h8M8 16h4" stroke="#ff6a88" stroke-width="2"/></svg>
+                                    Review Title <span style="color:#ff6a88;">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="title" name="title" required maxlength="255" placeholder="Short summary" aria-required="true">
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="comment">
+                                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><rect x="2" y="4" width="20" height="16" rx="4" fill="#43cea2"/><path d="M6 8h12M6 12h8" stroke="#fff" stroke-width="2"/></svg>
+                                    Your Review <span style="color:#ff6a88;">*</span>
+                                </label>
+                                <textarea class="form-control" id="comment" name="comment" required maxlength="2000" rows="4" placeholder="Share your experience..." aria-required="true"></textarea>
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="country">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ff99ac"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M12 6v6l4 2" stroke="#fff" stroke-width="2"/></svg>
+                                    Country
+                                </label>
+                                <input type="text" class="form-control" id="country" name="country" maxlength="100" placeholder="Your country (optional)">
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="experience_level">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" fill="#ff99ac"/><path d="M8 12h8M8 16h4" stroke="#ff6a88" stroke-width="2"/></svg>
+                                    Experience Level
+                                </label>
+                                <select class="form-control" id="experience_level" name="experience_level">
+                                    <option value="">Select level</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="Professional">Professional</option>
+                                </select>
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="pros">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#43cea2"/><path d="M8 12l2 2 4-4" stroke="#fff" stroke-width="2"/></svg>
+                                    Pros
+                                </label>
+                                <input type="text" class="form-control" id="pros" name="pros" maxlength="1000" placeholder="What did you like? (optional)">
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="cons">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ff6a88"/><path d="M16 10l-4 4-2-2" stroke="#fff" stroke-width="2"/></svg>
+                                    Cons
+                                </label>
+                                <input type="text" class="form-control" id="cons" name="cons" maxlength="1000" placeholder="What could be improved? (optional)">
+                            </div>
+                            <div class="modern-form-group">
+                                <label for="recommend">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M8 12l2 2 4-4" stroke="#43cea2" stroke-width="2"/></svg>
+                                    Would you recommend?
+                                </label>
+                                <select class="form-control" id="recommend" name="recommend">
+                                    <option value="">Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="modern-action-btn" style="margin-top:1.2em; background: linear-gradient(90deg, #ff6a88 0%, #43cea2 100%); color: #fff; font-weight: 600; font-size: 1.1em; border: none; border-radius: 1em; box-shadow: 0 2px 8px rgba(255,106,136,0.12);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:0.3em;"><circle cx="12" cy="12" r="10" fill="#43cea2"/><path d="M8 12l2 2 4-4" stroke="#fff" stroke-width="2"/></svg>
+                                Submit Review
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <style>
+                .modern-reviews-section {
+                    margin-top: 2.5em;
+                    margin-bottom: 2.5em;
+                    background: linear-gradient(120deg, #ff6a88 0%, #ff99ac 100%);
+                    border-radius: 2em;
+                    box-shadow: 0 4px 32px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+                    padding: 2.5em 1.5em;
+                    max-width: 900px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .modern-reviews-title {
+                    font-weight: 800;
+                    font-size: 2.2rem;
+                    margin-bottom: 1.5em;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.7em;
+                }
+                .modern-review-form-container {
+                    background: #fff;
+                    border-radius: 1.2em;
+                    box-shadow: 0 2px 12px rgba(80,80,200,0.06);
+                    padding: 2em 1.5em;
+                    margin-top: 2em;
+                }
+                .modern-review-form-title {
+                    font-size: 1.3em;
+                    font-weight: 700;
+                    color: #ff6a88;
+                    margin-bottom: 0.5em;
+                    text-align: center;
+                }
+                .modern-form-group {
+                    margin-bottom: 1.2em;
+                }
+                .modern-form-group label {
+                    font-weight: 600;
+                    color: #232946;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5em;
+                    margin-bottom: 0.3em;
+                }
+                .modern-form-group input,
+                .modern-form-group select,
+                .modern-form-group textarea {
+                    width: 100%;
+                    padding: 0.7em 1em;
+                    border-radius: 0.7em;
+                    border: 1.5px solid #ff99ac;
+                    font-size: 1em;
+                    font-family: inherit;
+                    background: #f8fafc;
+                    color: #232946;
+                    transition: border 0.2s;
+                }
+                .modern-form-group input:focus,
+                .modern-form-group select:focus,
+                .modern-form-group textarea:focus {
+                    border-color: #43cea2;
+                    outline: none;
+                }
+                .modern-action-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5em;
+                    background: linear-gradient(90deg, #ff6a88 0%, #43cea2 100%);
+                    color: #fff;
+                    font-weight: 600;
+                    font-size: 1.1em;
+                    border: none;
+                    border-radius: 1em;
+                    box-shadow: 0 2px 8px rgba(255,106,136,0.12);
+                    padding: 0.8em 2em;
+                    cursor: pointer;
+                    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+                }
+                .modern-action-btn:hover {
+                    background: linear-gradient(90deg, #43cea2 0%, #ff6a88 100%);
+                    color: #fff;
+                    transform: scale(1.04);
+                }
+                .reviews-list {
+                    margin-bottom: 2em;
+                }
+                .modern-review-card {
+                    background: #fff;
+                    border-radius: 1.2em;
+                    box-shadow: 0 2px 12px rgba(80,80,200,0.06);
+                    padding: 1.5em 1.2em;
+                    margin-bottom: 1.5em;
+                    display: flex;
+                    gap: 1.2em;
+                    align-items: flex-start;
+                }
+                .modern-review-avatar {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    background: linear-gradient(135deg, #ff6a88 0%, #43cea2 100%);
+                    color: #fff;
+                    font-size: 1.7em;
+                    font-weight: 700;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 2px 8px rgba(255,106,136,0.10);
+                }
+                .modern-review-content {
+                    flex: 1;
+                }
+                .modern-review-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 1em;
+                    margin-bottom: 0.3em;
+                }
+                .modern-review-name {
+                    font-weight: 700;
+                    color: #ff6a88;
+                    font-size: 1.1em;
+                }
+                .modern-review-date {
+                    color: #bbb;
+                    font-size: 0.98em;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.2em;
+                }
+                .modern-review-rating {
+                    color: #ffd200;
+                    font-size: 1.1em;
+                    font-weight: 700;
+                }
+                .modern-review-title {
+                    font-weight: 600;
+                    color: #232946;
+                    margin-bottom: 0.2em;
+                }
+                .modern-review-comment {
+                    color: #232946;
+                    margin-bottom: 0.5em;
+                    font-size: 1.05em;
+                }
+                .modern-review-meta {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1em;
+                    font-size: 0.98em;
+                    color: #6366f1;
+                }
+                .modern-review-pros {
+                    color: #43cea2;
+                }
+                .modern-review-cons {
+                    color: #ff6a88;
+                }
+                .modern-review-recommend {
+                    color: #ffd200;
+                    font-weight: 600;
+                }
+                @media (max-width: 700px) {
+                    .modern-reviews-section {
+                        padding: 1.2em 0.7em;
+                    }
+                    .modern-reviews-title {
+                        font-size: 1.3em;
+                    }
+                    .modern-review-form-container {
+                        padding: 1.2em 0.7em;
+                    }
+                    .modern-review-card {
+                        flex-direction: column;
+                        gap: 0.7em;
+                        padding: 1em 0.7em;
+                    }
+                    .modern-review-avatar {
+                        width: 38px;
+                        height: 38px;
+                        font-size: 1.2em;
+                    }
+                }
+                @media (max-width: 480px) {
+                    .modern-reviews-section {
+                        padding: 0.7em 0.2em;
+                    }
+                    .modern-reviews-title {
+                        font-size: 1em;
+                    }
+                }
+                </style>
+                <script>
+                function renderReviews(reviews) {
+                    let html = '';
+                    if (reviews.length === 0) {
+                        html = '<div class="alert alert-info">No reviews yet. Be the first to review!</div>';
+                    } else {
+                        html = reviews.map(r => `
+                            <div class="modern-review-card">
+                                <div class="modern-review-avatar">${r.name ? r.name.charAt(0).toUpperCase() : '?'}</div>
+                                <div class="modern-review-content">
+                                    <div class="modern-review-header">
+                                        <span class="modern-review-name">${r.name}</span>
+                                        <span class="modern-review-date"><svg style="width:1em;height:1em;vertical-align:middle;margin-right:0.2em;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ff6a88"/><path d="M12 6v6l4 2" stroke="#ff99ac" stroke-width="2"/></svg> ${new Date(r.created_at).toLocaleDateString()}</span>
+                                        <span class="modern-review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                                    </div>
+                                    <div class="modern-review-title">${r.title}</div>
+                                    <div class="modern-review-comment">${r.comment.replace(/\n/g, '<br>')}</div>
+                                    <div class="modern-review-meta">
+                                        ${r.country ? `<span class="modern-review-country"><svg style="width:1em;height:1em;vertical-align:middle;margin-right:0.2em;" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="4" fill="#ff99ac"/><path d="M2 6l10 7 10-7" stroke="#ff6a88" stroke-width="2"/></svg> ${r.country}</span>` : ''}
+                                        ${r.experience_level ? `<span class="modern-review-experience"><svg style="width:1em;height:1em;vertical-align:middle;margin-right:0.2em;" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" fill="#ff99ac"/><path d="M8 12h8M8 16h4" stroke="#ff6a88" stroke-width="2"/></svg> ${r.experience_level}</span>` : ''}
+                                        ${r.pros ? `<span class="modern-review-pros"><b>Pros:</b> ${r.pros}</span>` : ''}
+                                        ${r.cons ? `<span class="modern-review-cons"><b>Cons:</b> ${r.cons}</span>` : ''}
+                                        ${typeof r.recommend !== 'undefined' && r.recommend !== null ? `<span class="modern-review-recommend">${r.recommend ? '👍 Recommended' : '👎 Not recommended'}</span>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                    document.getElementById('reviews-list').innerHTML = html;
+                }
+                function fetchReviews() {
+                    fetch('/coingecko/derivatives_exchanges/reviews?exchange_code=all')
+                        .then(res => res.json())
+                        .then(data => renderReviews(data));
+                }
+                fetchReviews();
+                document.getElementById('reviewForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const form = e.target;
+                    const formData = new FormData(form);
+                    fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': form.querySelector('[name=_token]').value
+                        },
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            form.reset();
+                            fetchReviews();
+                            alert('Thank you for your review!');
+                        } else {
+                            alert('There was an error submitting your review. Please try again.');
+                        }
+                    })
+                    .catch(() => alert('There was an error submitting your review. Please try again.'));
+                });
+                </script>
             </div>
         </div>
     </div>

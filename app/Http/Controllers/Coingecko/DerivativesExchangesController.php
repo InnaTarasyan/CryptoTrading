@@ -5,6 +5,8 @@ namespace App\Http\Controllers\CoinGecko;
 use App\Http\Controllers\Controller;
 use App\Models\CoinGecko\DerivativesExchanges;
 use Yajra\DataTables\Facades\DataTables as Datatables;
+use App\Models\CoinGecko\DerivativesExchangesReview;
+use Illuminate\Http\Request;
 
 class DerivativesExchangesController extends Controller
 {
@@ -129,4 +131,38 @@ class DerivativesExchangesController extends Controller
             ->make(true);
     }
 
+    public function storeReview(Request $request)
+    {
+        $validated = $request->validate([
+            'exchange_code' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'rating' => 'required|integer|min:1|max:5',
+            'title' => 'required|string|max:255',
+            'comment' => 'required|string|max:2000',
+            'country' => 'nullable|string|max:100',
+            'experience_level' => 'nullable|string|max:100',
+            'pros' => 'nullable|string|max:1000',
+            'cons' => 'nullable|string|max:1000',
+            'recommend' => 'nullable|boolean',
+        ]);
+
+        try {
+            DerivativesExchangesReview::create($validated);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function reviewsList(Request $request)
+    {
+        $exchangeCode = $request->query('exchange_code', 'all');
+        $query = DerivativesExchangesReview::query();
+        if ($exchangeCode) {
+            $query->where('exchange_code', $exchangeCode);
+        }
+        $reviews = $query->orderBy('created_at', 'desc')->get();
+        return response()->json($reviews);
+    }
 }
