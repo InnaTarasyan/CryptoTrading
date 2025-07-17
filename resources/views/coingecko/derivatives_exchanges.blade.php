@@ -1253,6 +1253,90 @@
                         </div>
                     </div>
                 </div>
+                <!-- Info Block: About Coingecko Derivatives Exchanges and Table Columns -->
+                <section class="derivatives-info-block">
+                    <h2 class="derivatives-info-title">About Coingecko Derivatives Exchanges</h2>
+                    <p class="derivatives-info-paragraph">
+                        Coingecko Derivatives Exchanges are platforms where users can trade cryptocurrency derivatives, such as perpetual contracts and futures. These exchanges allow traders to speculate on the price movements of cryptocurrencies without owning the underlying assets. Coingecko provides a comprehensive overview of these exchanges, including their trading volumes, open interest, and the variety of derivative products offered. The platform helps users compare exchanges based on transparency, liquidity, and the number of available trading pairs, making it easier to choose a suitable venue for derivatives trading.
+                    </p>
+                    <h3 class="derivatives-info-subtitle">About the Table Above</h3>
+                    <p class="derivatives-info-paragraph">
+                        The datatable above presents a detailed comparison of major cryptocurrency derivatives exchanges, highlighting key metrics and features to help users make informed trading decisions.
+                    </p>
+                    <ul class="derivatives-info-list">
+                        <li><b>Exchange:</b> The name of the derivatives exchange.</li>
+                        <li><b>Logo:</b> The official logo or icon representing the exchange.</li>
+                        <li><b>Description:</b> A brief summary of the exchange, including its unique features or focus.</li>
+                        <li><b>Open Interest BTC:</b> The total value of outstanding derivative contracts (open interest) on the exchange, denominated in Bitcoin. This metric indicates the level of activity and liquidity.</li>
+                        <li><b>24h Volume BTC:</b> The total trading volume of derivatives on the exchange in the past 24 hours, measured in Bitcoin. Higher volume suggests greater liquidity and user participation.</li>
+                        <li><b>Perpetual Pairs:</b> The number of perpetual swap trading pairs available on the exchange. Perpetual swaps are a type of derivative contract with no expiry date.</li>
+                        <li><b>Futures Pairs:</b> The number of futures trading pairs offered. Futures contracts are agreements to buy or sell an asset at a predetermined price at a specified time in the future.</li>
+                    </ul>
+                </section>
+                <style>
+                .derivatives-info-block {
+                    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+                    border-radius: 1.2em;
+                    box-shadow: 0 2px 16px rgba(80,80,200,0.08);
+                    padding: 2em 1.5em;
+                    margin: 2.5em 0 1.5em 0;
+                    max-width: 900px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    font-family: 'Poppins', 'Roboto', Arial, Helvetica, sans-serif;
+                }
+                .derivatives-info-title {
+                    font-size: 1.5em;
+                    font-weight: 700;
+                    color: #3730a3;
+                    margin-bottom: 0.7em;
+                    text-align: center;
+                }
+                .derivatives-info-subtitle {
+                    font-size: 1.15em;
+                    font-weight: 600;
+                    color: #6366f1;
+                    margin-top: 1.5em;
+                    margin-bottom: 0.5em;
+                }
+                .derivatives-info-paragraph {
+                    font-size: 1.08em;
+                    color: #232946;
+                    margin-bottom: 1em;
+                    line-height: 1.7;
+                    text-align: justify;
+                }
+                .derivatives-info-list {
+                    font-size: 1em;
+                    color: #232946;
+                    margin: 0 0 0 1.2em;
+                    padding: 0;
+                    list-style: disc inside;
+                }
+                .derivatives-info-list li {
+                    margin-bottom: 0.7em;
+                    line-height: 1.6;
+                }
+                @media (max-width: 700px) {
+                    .derivatives-info-block {
+                        padding: 1.2em 0.7em;
+                    }
+                    .derivatives-info-title {
+                        font-size: 1.18em;
+                    }
+                    .derivatives-info-paragraph, .derivatives-info-list {
+                        font-size: 0.98em;
+                    }
+                }
+                @media (max-width: 480px) {
+                    .derivatives-info-block {
+                        padding: 0.7em 0.2em;
+                    }
+                    .derivatives-info-title {
+                        font-size: 1em;
+                    }
+                }
+                </style>
             </div>
         </div>
     </div>
