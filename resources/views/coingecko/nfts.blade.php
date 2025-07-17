@@ -391,12 +391,15 @@
             }
         }
         @media (max-width: 700px) {
-            #coingecko_nfts td[data-label]:before {
-                content: attr(data-label) ": ";
-                font-weight: 700;
-                color: #ff6a88;
+            #coingecko_nfts thead {
+                display: none;
+            }
+            #coingecko_nfts tr {
                 display: block;
-                margin-bottom: 0.2em;
+                margin-bottom: 1em;
+                border-radius: 1em;
+                box-shadow: 0 2px 8px rgba(255,106,136,0.06);
+                background: #fff;
             }
             #coingecko_nfts td[data-label] {
                 display: block;
@@ -406,18 +409,92 @@
                 padding-right: 0.5em;
                 border-bottom: 1px solid #f3f3f3;
                 background: #fff9fa;
+                position: relative;
             }
-            #coingecko_nfts tr {
+            #coingecko_nfts td[data-label]:before {
+                content: attr(data-label) ": ";
+                font-weight: 700;
+                color: #ff6a88;
                 display: block;
-                margin-bottom: 1em;
-                border-radius: 1em;
-                box-shadow: 0 2px 8px rgba(255,106,136,0.06);
-                background: #fff;
-            }
-            #coingecko_nfts thead {
-                display: none;
+                margin-bottom: 0.2em;
             }
         }
+    </style>
+
+    <style>
+    .nfts-info-block {
+        margin: 2.5em 0 1.5em 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .nfts-info-inner {
+        background: linear-gradient(90deg, #fff9fa 0%, #f3f3f3 100%);
+        border-radius: 1.5em;
+        box-shadow: 0 4px 24px rgba(255,106,136,0.08), 0 1.5px 6px rgba(255,153,172,0.06);
+        padding: 2.2em 2.5em 2em 2.5em;
+        max-width: 700px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2em;
+    }
+    .nfts-info-title {
+        font-size: 1.35em;
+        font-weight: 800;
+        color: #ff6a88;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+        letter-spacing: 0.01em;
+    }
+    .nfts-info-paragraph {
+        font-size: 1.08em;
+        color: #232526;
+        line-height: 1.7;
+        margin-bottom: 0.7em;
+        margin-top: 0;
+    }
+    .nfts-info-columns {
+        margin-top: 0.7em;
+        background: #fff;
+        border-radius: 1em;
+        box-shadow: 0 2px 8px rgba(255,106,136,0.04);
+        padding: 1.2em 1.5em;
+    }
+    .nfts-info-columns-title {
+        font-size: 1.12em;
+        font-weight: 700;
+        color: #ff6a88;
+        margin-bottom: 0.5em;
+    }
+    .nfts-info-columns-list {
+        list-style: disc inside;
+        padding-left: 1em;
+        color: #232526;
+        font-size: 1em;
+        margin: 0;
+    }
+    .nfts-info-columns-list li {
+        margin-bottom: 0.5em;
+        line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+        .nfts-info-inner {
+            padding: 1.2em 1em 1em 1em;
+        }
+    }
+    @media (max-width: 600px) {
+        .nfts-info-inner {
+            padding: 0.8em 0.5em 0.7em 0.5em;
+        }
+        .nfts-info-title {
+            font-size: 1.08em;
+        }
+        .nfts-info-columns-title {
+            font-size: 1em;
+        }
+    }
     </style>
 @endsection
 @section('content')
@@ -557,6 +634,25 @@
                 </table>
             </div>
         </div>
+        <section class="nfts-info-block">
+            <div class="nfts-info-inner">
+                <h2 class="nfts-info-title">About CoinGecko NFTs</h2>
+                <p class="nfts-info-paragraph">
+                    CoinGecko, a leading cryptocurrency data aggregator, has expanded its platform to include a comprehensive NFT tracker. This tool allows users to monitor NFT collections, track floor prices, market caps, number of owners, and 24-hour trading volumes. CoinGecko's NFT section provides real-time insights into the NFT market, making it easier for enthusiasts and investors to analyze trends, discover new collections, and manage their NFT portfolios. The platform supports both web and mobile access, and regularly features exclusive NFT drops and events, such as GeckoCon, which brings together thought leaders and innovators from the blockchain and NFT space.
+                </p>
+                <h2 class="nfts-info-title">About the NFT DataTable Above</h2>
+                <p class="nfts-info-paragraph">
+                    The DataTable above presents a live, interactive overview of NFT collections as tracked by CoinGecko. It is designed for clarity and ease of use, supporting features like search, sorting, and export. Each row represents a unique NFT collection, and the table is fully responsive—on mobile, each column is clearly labeled for accessibility. This format helps users quickly compare and analyze NFT projects, whether on desktop or mobile devices.
+                </p>
+                <div class="nfts-info-columns">
+                    <h3 class="nfts-info-columns-title">Column Explanations</h3>
+                    <ul class="nfts-info-columns-list">
+                        <li><strong>Name:</strong> The official name of the NFT collection or asset. This helps users identify and search for specific NFTs.</li>
+                        <li><strong>Asset Platform ID:</strong> The blockchain or platform on which the NFT is issued (e.g., Ethereum, Solana, Binance Smart Chain). This is crucial for understanding the underlying technology and ecosystem of the NFT.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </div>
 @endsection
 @section('scripts')
