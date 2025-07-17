@@ -34,7 +34,12 @@ class DerivativesExchangesController extends Controller
                 return '<img src="'.$item->image.'" height=25 width=25 class="previewable-img" style="object-fit:contain;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.08);cursor:pointer;">';
             })
             ->editColumn('url', function($item) {
-                return '<a href="'.$item->url.'">'.$item->url.'</a>';
+                if (!$item->url) return '';
+                $parsedUrl = parse_url($item->url);
+                $host = isset($parsedUrl['host']) ? preg_replace('/^www\./', '', $parsedUrl['host']) : $item->url;
+                $icon = '<svg style="vertical-align:middle;margin-left:4px;" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3h7v7" stroke="#43cea2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L21 3" stroke="#43cea2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5v14h14v-7" stroke="#43cea2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                return '<a href="'.e($item->url).'" target="_blank" rel="noopener noreferrer" title="'.e($item->url).'" style="color:#43cea2;font-weight:500;text-decoration:none;">'
+                    .e($host).$icon.'</a>';
             })
             ->editColumn('open_interest_btc', function ($item) {
                 return "<p class='success'>".number_format((float)$item->open_interest_btc, 2, ',', ' ')."</p>";
