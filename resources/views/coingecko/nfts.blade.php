@@ -535,16 +535,14 @@
                             <span class="toggle-label toggle-label-dark">Dark</span>
                         </span>
                     </button>
-                    <div class="nfts-toolbar" id="nftsToolbar" role="toolbar" aria-label="NFTs actions toolbar">
-                        <button class="nfts-toolbar-btn" id="nftsFullscreenBtn" title="Full Screen Table" type="button" aria-label="Full Screen Table">
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3m0 8v3a2 2 0 002 2h3m8-16h3a2 2 0 012 2v3m0 8v3a2 2 0 01-2 2h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <span class="d-none d-sm-inline">Full Screen</span>
-                        </button>
-                        <button class="nfts-toolbar-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table">
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4v5h.582M20 20v-5h-.581M5.5 19A9 9 0 1021 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <span class="d-none d-sm-inline">Refresh</span>
-                        </button>
-                    </div>
+                    <button class="nfts-toolbar-btn" id="nftsFullscreenBtn" title="Full Screen Table" type="button" aria-label="Full Screen Table">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3m0 8v3a2 2 0 002 2h3m8-16h3a2 2 0 012 2v3m0 8v3a2 2 0 01-2 2h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="d-none d-sm-inline">Full Screen</span>
+                    </button>
+                    <button class="nfts-toolbar-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4v5h.582M20 20v-5h-.581M5.5 19A9 9 0 1021 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="d-none d-sm-inline">Refresh</span>
+                    </button>
                 </div>
             </div>
         </div>
