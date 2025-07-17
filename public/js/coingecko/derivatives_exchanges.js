@@ -36,14 +36,24 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
                 }
             }},
             {data: 'image', name: 'image'},
-            {data: 'description', name: 'description', render: function(data, type, row, meta) {
-                if (!data) return '<span style="color:#bbb;">—</span>';
-                var clean = data.replace(/(<([^>]+)>)/gi, "");
-                var short = clean.length > 100 ? clean.substring(0, 100).trim() + '…' : clean;
-                var html = short.replace(/\n/g, '<br>');
-                var escaped = clean.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                return `<span class="desc-tooltip" data-tooltip="${escaped}" style="cursor: help; word-break: break-word;">${html}</span>`;
-            }},
+            // {data: 'description', name: 'description', render: function(data, type, row, meta) {
+            //     if (!data) return '<span class="desc-tooltip" style="color:#bbb;">—</span>';
+            //     var clean = data.replace(/(<([^>]+)>)/gi, "");
+            //     var short = clean.length > 100 ? clean.substring(0, 100).trim() + '…' : clean;
+            //     var html = short.replace(/\n/g, '<br>');
+            //     // Escape for tooltip, but allow line breaks and links
+            //
+            //     var escaped = data
+            //         .replace(/&/g, '&amp;')
+            //         .replace(/</g, '&lt;')
+            //         .replace(/>/g, '&gt;')
+            //         .replace(/\n/g, '<br>')
+            //         .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:#43cea2;text-decoration:underline;">$1</a>');
+            //     var readMore = clean.length > 100 ? '<span class="desc-readmore" style="color:#43cea2;cursor:pointer;font-weight:500;margin-left:6px;">Read more</span>' : '';
+            //     // Always wrap in .desc-tooltip for preview panel logic
+            //     return `<span class="desc-tooltip" data-tooltip="${escaped}" style="cursor: help; word-break: break-word;">${html}${readMore}</span>`;
+            // }},
+            {data: 'description', name: 'description'},
             {data: 'open_interest_btc', name: 'open_interest_btc', render: function(data, type, row, meta) {
                 if (!data) return '';
                 var str = data.toString();
@@ -191,46 +201,61 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
     // Ensure parent container allows horizontal scroll
     $('#datatableFullscreenContainer').css('overflow-x', 'auto');
 
-    // Custom tooltip logic for description column
-    function enableCustomTooltips() {
-        // Remove any existing tooltips
-        $('.custom-tooltip-box').remove();
-        // Mouse events for all .desc-tooltip elements
-        $('.desc-tooltip').off('mouseenter mouseleave mousemove').on({
+    // Add preview panel to body if not present or if removed
+    function ensureDescriptionPreviewPanel() {
+        let panel = document.getElementById('description-preview-panel');
+        if (!panel) {
+            panel = document.createElement('div');
+            panel.id = 'description-preview-panel';
+            document.body.appendChild(panel);
+        }
+        panel.style.position = 'fixed';
+        panel.style.bottom = '32px';
+        panel.style.right = '32px';
+        panel.style.zIndex = '2147483647';
+        panel.style.maxWidth = '420px';
+        panel.style.minWidth = '220px';
+        panel.style.background = '#232946';
+        panel.style.color = '#ffd200';
+        panel.style.padding = '18px 22px 18px 22px';
+        panel.style.borderRadius = '16px';
+        panel.style.boxShadow = '0 8px 32px rgba(0,0,0,0.18)';
+        panel.style.fontSize = '1.08em';
+        panel.style.lineHeight = '1.7';
+        panel.style.pointerEvents = 'auto';
+        panel.style.whiteSpace = 'normal';
+        panel.style.overflow = 'auto';
+        panel.style.maxHeight = '320px';
+        panel.style.display = 'none';
+        panel.style.border = '2px solid #ff6a88'; // Debug border
+        panel.innerHTML = '';
+        return panel;
+    }
+
+    function enableDescriptionPreviewPanel() {
+        $('.desc-tooltip').off('mouseenter mouseleave').on({
             mouseenter: function(e) {
-                const text = $(this).attr('data-tooltip');
-                if (!text) return;
-                const tooltip = $('<div class="custom-tooltip-box"></div>').text(text).css({
-                    position: 'fixed',
-                    top: e.clientY + 12,
-                    left: e.clientX + 12,
-                    background: '#232946',
-                    color: '#ffd200',
-                    padding: '8px 14px',
-                    borderRadius: '8px',
-                    fontSize: '1em',
-                    zIndex: 9999,
-                    maxWidth: '350px',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-                    pointerEvents: 'none',
-                    whiteSpace: 'pre-line'
-                }).appendTo('body');
-            },
-            mousemove: function(e) {
-                $('.custom-tooltip-box').css({
-                    top: e.clientY + 12,
-                    left: e.clientX + 12
-                });
+                const html = $(this).attr('data-tooltip');
+                if (!html) return;
+                const panel = ensureDescriptionPreviewPanel();
+                panel.innerHTML = `
+                    <div style="font-weight:700;font-size:1.13em;margin-bottom:0.5em;letter-spacing:0.01em;color:#43cea2;display:flex;align-items:center;gap:0.5em;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;"><defs><linearGradient id="descTooltipGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#43cea2"/><stop offset="1" stop-color="#185a9d"/></linearGradient></defs><rect x="2" y="4" width="20" height="16" rx="4" fill="url(#descTooltipGradient)"/><path d="M6 8h12M6 12h8" stroke="#fff" stroke-width="2"/></svg>
+                        Exchange Description
+                    </div>
+                    <div class="desc-tooltip-content" style="color:#ffd200;word-break:break-word;">${html}</div>
+                `;
+                panel.style.display = 'block';
             },
             mouseleave: function() {
-                $('.custom-tooltip-box').remove();
+                const panel = ensureDescriptionPreviewPanel();
+                panel.style.display = 'none';
+                panel.innerHTML = '';
             }
         });
     }
-    // Call after every table draw
-    oTable.on('draw', enableCustomTooltips);
-    // And after initial load
-    enableCustomTooltips();
+    oTable.on('draw', enableDescriptionPreviewPanel);
+    enableDescriptionPreviewPanel();
 
     // Replace default DataTables filter with custom search bar (pink gradient)
     const filter = $('.dataTables_filter');

@@ -28,7 +28,18 @@ class DerivativesExchangesController extends Controller
 
             })
             ->editColumn('description', function ($item) {
-                return substr($item->description, 0, 100).' .... ';
+                $data = $item->description;
+                if (!$data) return '<span class="desc-tooltip" style="color:#bbb;">—</span>';
+                $clean = preg_replace('/(<([^>]+)>)/i', '', $data);
+                $short = mb_strlen($clean) > 100 ? mb_substr($clean, 0, 100) . '…' : $clean;
+                $html = nl2br($short);
+                // Escape for tooltip, but allow line breaks and links
+                $escaped = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+                $escaped = preg_replace('/\n/', '<br>', $escaped);
+                $escaped = preg_replace('/(https?:\/\/[^\s]+)/', '<a href="$1" target="_blank" rel="noopener" style="color:#43cea2;text-decoration:underline;">$1</a>', $escaped);
+                $readMore = mb_strlen($clean) > 100 ? '<span class="desc-readmore" style="color:#43cea2;cursor:pointer;font-weight:500;margin-left:6px;">Read more</span>' : '';
+
+                return '<span class="desc-tooltip" data-tooltip="' . $escaped . '" style="cursor: help; word-break: break-word;">' . $html . $readMore . '</span>';
             })
             ->editColumn('image', function ($item) {
                 return '<img src="'.$item->image.'" height=25 width=25 class="previewable-img" style="object-fit:contain;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.08);cursor:pointer;">';
@@ -109,6 +120,7 @@ class DerivativesExchangesController extends Controller
             })
             ->rawColumns([
                 'name',
+                //'description',
               //  'image',
               //  'url',
                 'open_interest_btc',
