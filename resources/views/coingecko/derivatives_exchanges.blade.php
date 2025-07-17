@@ -196,6 +196,12 @@
             pointer-events: none;
             white-space: pre-line;
         }
+        /* Custom DataTable font styles */
+        table.dataTable, table.dataTable th, table.dataTable td {
+            font-size: 0.92em !important;
+            font-family: 'Poppins', 'Roboto', Arial, Helvetica, sans-serif !important;
+            font-style: italic !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -1243,9 +1249,6 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                    <!-- DataTables will populate rows here -->
-                                </tbody>
                             </table>
                         </div>
                     </div>
