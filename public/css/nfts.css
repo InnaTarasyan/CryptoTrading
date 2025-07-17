@@ -228,3 +228,191 @@ body.dark-mode .beautiful-tab .tab-icon {
 body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:focus .tab-icon {
     background: #ffd200 !important;
 }
+
+/* --- DataTable Pagination & Controls: Match Markets Page --- */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff !important;
+    border-radius: 1em;
+    border: none;
+    margin: 0 0.2em;
+    padding: 0.4em 1em;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #fff !important;
+    color: #ff6a88 !important;
+}
+.dataTables_wrapper .dataTables_length {
+    margin-bottom: 18px;
+    float: left;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    padding: 8px 18px;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dataTables_wrapper .dataTables_length label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    color: #fff;
+}
+.dataTables_wrapper .dataTables_length select {
+    border-radius: 16px;
+    border: 1.5px solid #ff6a88;
+    padding: 6px 32px 6px 16px;
+    background: #fff6fa;
+    color: #ff6a88;
+    font-size: 15px;
+    margin-left: 8px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-weight: 600;
+}
+.dataTables_wrapper .dataTables_length select:focus {
+    border: 1.5px solid #ff99ac;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.08);
+}
+.dataTables_wrapper .dataTables_info {
+    color: #ff6a88;
+    font-weight: 600;
+    margin-top: 1em;
+}
+.dataTables_filter {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 18px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: none;
+    padding: 0;
+}
+.dataTables_filter .search-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+.dataTables_filter .search-icon {
+    position: absolute;
+    left: 16px;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.dataTables_filter input[type="search"] {
+    border-radius: 24px;
+    border: 1.5px solid #ff6a88;
+    padding: 8px 44px 8px 44px;
+    background: #fff6fa;
+    transition: border 0.2s, box-shadow 0.2s;
+    font-size: 15px;
+    outline: none;
+    color: #ff6a88;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+}
+.dataTables_filter input[type="search"]:focus {
+    border: 1.5px solid #ff99ac;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.08);
+}
+.dataTables_filter #clear-search {
+    margin-left: 8px;
+    border: none;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 8px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.12);
+}
+.dataTables_filter #clear-search:hover {
+    background: linear-gradient(90deg, #fff 0%, #ff6a88 100%);
+    color: #ff6a88;
+}
+
+/* --- NFT Custom Search Bar Styles (moved from JS) --- */
+.nfts-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 340px;
+    margin: 0 auto 1em auto;
+    background: #fff;
+    border-radius: 2em;
+    box-shadow: 0 2px 12px rgba(255,106,136,0.07), 0 1.5px 6px rgba(255,153,172,0.08);
+    padding: 0.2em 0.5em 0.2em 0.2em;
+    transition: box-shadow 0.2s;
+}
+.nfts-search-wrapper:focus-within {
+    box-shadow: 0 0 0 2px #ff6a88, 0 2px 12px rgba(255,106,136,0.10);
+}
+.nfts-search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding-left: 2.2em;
+    padding-right: 0.5em;
+    font-size: 1.08em;
+    height: 2.2em;
+    border-radius: 2em;
+    width: 100%;
+    min-width: 120px;
+    color: #333;
+    transition: background 0.2s;
+}
+.nfts-search-input::placeholder {
+    color: #b0b0b0;
+    opacity: 1;
+}
+.nfts-search-icon {
+    position: absolute;
+    left: 0.9em;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.1em;
+    height: 1.1em;
+    pointer-events: none;
+    color: #ff6a88;
+    opacity: 0.85;
+}
+.nfts-clear-search {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border: none;
+    border-radius: 1.5em;
+    padding: 0.3em 1.1em;
+    margin-left: 0.5em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(255,106,136,0.08);
+}
+.nfts-clear-search:hover, .nfts-clear-search:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    color: #fff;
+    outline: none;
+}
+@media (max-width: 600px) {
+    .nfts-search-wrapper { max-width: 100%; }
+    .nfts-search-input { font-size: 1em; }
+}

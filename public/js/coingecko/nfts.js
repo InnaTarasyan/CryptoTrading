@@ -15,6 +15,7 @@ Nfts.prototype.init = function () {
             {data: 'asset_platform_id', name: 'asset_platform_id'},
         ],
         "iDisplayLength": 20,
+        pageLength: 10,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_nfts tbody tr').click(function () {
@@ -35,74 +36,6 @@ Nfts.prototype.init = function () {
     // Replace default DataTables filter with custom search bar (icon inside input, improved CSS)
     const filter = $('.dataTables_filter');
     const customSearch = `
-        <style>
-            .nfts-search-wrapper {
-                position: relative;
-                display: flex;
-                align-items: center;
-                max-width: 340px;
-                margin: 0 auto 1em auto;
-                background: #fff;
-                border-radius: 2em;
-                box-shadow: 0 2px 12px rgba(255,106,136,0.07), 0 1.5px 6px rgba(255,153,172,0.08);
-                padding: 0.2em 0.5em 0.2em 0.2em;
-                transition: box-shadow 0.2s;
-            }
-            .nfts-search-wrapper:focus-within {
-                box-shadow: 0 0 0 2px #ff6a88, 0 2px 12px rgba(255,106,136,0.10);
-            }
-            .nfts-search-input {
-                border: none;
-                outline: none;
-                background: transparent;
-                padding-left: 2.2em;
-                padding-right: 0.5em;
-                font-size: 1.08em;
-                height: 2.2em;
-                border-radius: 2em;
-                width: 100%;
-                min-width: 120px;
-                color: #333;
-                transition: background 0.2s;
-            }
-            .nfts-search-input::placeholder {
-                color: #b0b0b0;
-                opacity: 1;
-            }
-            .nfts-search-icon {
-                position: absolute;
-                left: 0.9em;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 1.1em;
-                height: 1.1em;
-                pointer-events: none;
-                color: #ff6a88;
-                opacity: 0.85;
-            }
-            .nfts-clear-search {
-                background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
-                color: #fff;
-                border: none;
-                border-radius: 1.5em;
-                padding: 0.3em 1.1em;
-                margin-left: 0.5em;
-                font-size: 1em;
-                font-weight: 500;
-                cursor: pointer;
-                transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-                box-shadow: 0 1px 4px rgba(255,106,136,0.08);
-            }
-            .nfts-clear-search:hover, .nfts-clear-search:focus {
-                background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
-                color: #fff;
-                outline: none;
-            }
-            @media (max-width: 600px) {
-                .nfts-search-wrapper { max-width: 100%; }
-                .nfts-search-input { font-size: 1em; }
-            }
-        </style>
         <div class="nfts-search-wrapper">
             <input type="search" class="nfts-search-input" placeholder="Search NFTs..." aria-controls="coingecko_nfts" />
             <svg class="nfts-search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="#ff6a88" stroke-width="2"/><line x1="16.018" y1="16.4853" x2="21" y2="21.4673" stroke="#ff6a88" stroke-width="2" stroke-linecap="round"/></svg>
