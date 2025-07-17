@@ -1,8 +1,11 @@
 @extends('layouts.base')
 @section('styles')
-    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet">
-    <link href="{{url('css/datatables.css')}}" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <!-- DataTables Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <!-- DataTables Responsive CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     <link href="{{ asset('css/nfts.css') }}" rel="stylesheet">
     <style>
         .nfts-toolbar {
@@ -387,6 +390,34 @@
                 justify-content: center;
             }
         }
+        @media (max-width: 700px) {
+            #coingecko_nfts td[data-label]:before {
+                content: attr(data-label) ": ";
+                font-weight: 700;
+                color: #ff6a88;
+                display: block;
+                margin-bottom: 0.2em;
+            }
+            #coingecko_nfts td[data-label] {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+                border-bottom: 1px solid #f3f3f3;
+                background: #fff9fa;
+            }
+            #coingecko_nfts tr {
+                display: block;
+                margin-bottom: 1em;
+                border-radius: 1em;
+                box-shadow: 0 2px 8px rgba(255,106,136,0.06);
+                background: #fff;
+            }
+            #coingecko_nfts thead {
+                display: none;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -529,13 +560,20 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables Buttons JS and dependencies -->
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <!-- DataTables Responsive JS -->
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <!-- Your custom DataTable initialization -->
     <script src="{{ url('js/coingecko/nfts.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

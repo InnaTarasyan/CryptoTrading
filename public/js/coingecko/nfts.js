@@ -60,7 +60,7 @@ Nfts.prototype.init = function () {
                 className: 'btn-print'
             }
         ],
-        responsive: true
+        responsive: { details: false }
     });
 
     // Replace default DataTables filter with custom search bar (icon inside input, improved CSS)
