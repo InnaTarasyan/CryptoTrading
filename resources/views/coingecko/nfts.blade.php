@@ -539,10 +539,36 @@
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3m0 8v3a2 2 0 002 2h3m8-16h3a2 2 0 012 2v3m0 8v3a2 2 0 01-2 2h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         <span class="d-none d-sm-inline">Full Screen</span>
                     </button>
-                    <button class="nfts-toolbar-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4v5h.582M20 20v-5h-.581M5.5 19A9 9 0 1021 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <span class="d-none d-sm-inline">Refresh</span>
-                    </button>
+                    <div style="display: flex; justify-content: flex-end; margin: 1.5em 0 0.5em 0;">
+                        <button class="nfts-toolbar-btn refresh-btn" id="nftsRefreshBtn" title="Refresh Table" type="button" aria-label="Refresh Table" tabindex="0" style="overflow:hidden; position:relative; min-width: 56px;" data-tooltip="Reload NFT Data">
+                            <span class="refresh-icon-outer">
+                                <!-- Glow effect -->
+                                <svg class="refresh-icon-glow" width="36" height="36">
+                                    <circle cx="18" cy="18" r="14" fill="url(#refreshGlowGradient)" />
+                                    <defs>
+                                        <radialGradient id="refreshGlowGradient" cx="50%" cy="50%" r="50%">
+                                            <stop offset="0%" stop-color="#ff99ac" stop-opacity="0.7"/>
+                                            <stop offset="100%" stop-color="#ff6a88" stop-opacity="0"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <!-- Main icon -->
+                                <svg class="refresh-icon-main" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                                    <defs>
+                                        <linearGradient id="refreshGradientModernUpgradedPink2" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#ff6a88"/>
+                                            <stop offset="1" stop-color="#ff99ac"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="14" cy="14" r="13" fill="#fff" opacity="0.95"/>
+                                    <path d="M22 10A9 9 0 1 0 24 14h-2" stroke="url(#refreshGradientModernUpgradedPink2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="21 3 21 11 29 11" stroke="url(#refreshGradientModernUpgradedPink2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                            </span>
+                            <span class="refresh-btn-label d-none d-sm-inline">Refresh</span>
+                            <span class="ripple-effect"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -694,6 +720,29 @@
             });
             // Set initial state
             setMode(getMode());
+
+            var refreshBtn = document.getElementById('nftsRefreshBtn');
+            var refreshIcon = refreshBtn.querySelector('.refresh-icon-main');
+            var ripple = refreshBtn.querySelector('.ripple-effect');
+            refreshBtn.addEventListener('click', function(e) {
+                // Ripple effect
+                var rect = refreshBtn.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                if (ripple) {
+                    ripple.style.left = (x - ripple.offsetWidth/2) + 'px';
+                    ripple.style.top = (y - ripple.offsetHeight/2) + 'px';
+                    ripple.classList.remove('show');
+                    void ripple.offsetWidth; // trigger reflow
+                    ripple.classList.add('show');
+                }
+                // Tactile feedback: scale
+                refreshBtn.style.transform = 'scale(0.97)';
+                setTimeout(function() {
+                    refreshBtn.style.transform = '';
+                    if (ripple) ripple.classList.remove('show');
+                }, 180);
+            });
         });
         // Refresh Table
         document.getElementById('nftsRefreshBtn').addEventListener('click', function() {
