@@ -89,8 +89,21 @@
                 <table id="coingecko_nfts" class="nfts-table table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
                     <thead>
                         <tr>
-                            <th>
-                                <span class="datatable-header-text">Name</span>
+                            <th class="datatable-highlight-first enhanced-th">
+                                <span class="datatable-header-text" style="display:block; text-align:center;">Name</span>
+                                <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                    <!-- NFT Icon SVG (Pink Gradient) -->
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="nftNameGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#ff6a88"/>
+                                                <stop offset="1" stop-color="#ff99ac"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#nftNameGradient)"/>
+                                        <text x="12" y="16" text-anchor="middle" font-size="10" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">NFT</text>
+                                    </svg>
+                                </span>
                             </th>
                             <th>
                                 <span class="datatable-header-text">Asset Platform ID</span>

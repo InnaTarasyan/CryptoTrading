@@ -22,15 +22,18 @@
 }
 
 .nfts-table thead th {
-    background: linear-gradient(135deg, #ffd200 0%, #6a11cb 100%);
-    color: #fff;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #ab1717;
     font-weight: 700;
-    font-size: 1.08em;
-    border-bottom: 2.5px solid #ffd200;
-    text-align: left;
+    border: none;
     vertical-align: middle;
-    padding: 1em 0.7em;
-    position: relative;
+    font-size: 1.08em;
+    padding: 1.1em 0.7em;
+}
+body.dark-mode .nfts-table thead th {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+    color: #ff99ac !important;
+    border: none !important;
 }
 
 .nfts-table thead th .datatable-header-icon {
@@ -430,4 +433,19 @@ body.dark-mode .beautiful-tab.active .tab-icon, body.dark-mode .beautiful-tab:fo
 .highlight-row {
     background: #fff6fa !important;
     box-shadow: 0 2px 8px rgba(255,106,136,0.07);
+}
+
+/* Highlight first column like markets datatable */
+.nfts-table th:first-child,
+.nfts-table td:first-child {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff6a88 100%);
+    color: #d72660;
+    font-weight: bold;
+    border-right: 2px solid #ff6a88;
+}
+body.dark-mode .nfts-table th:first-child,
+body.dark-mode .nfts-table td:first-child {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+    color: #ff99ac !important;
+    border-right: 2px solid #ff6a88 !important;
 }
