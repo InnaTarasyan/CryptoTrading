@@ -1291,6 +1291,96 @@ body.dark-mode .m-portlet.enhanced-portlet:after {
 }
 /* --- End Enhanced m-portlet enhanced-portlet Background --- */
 
+/* --- Derivatives Info Block Styles --- */
+.derivatives-info-block {
+    margin: 2.5em 0 1.5em 0;
+    padding: 2em 1.5em;
+    border-radius: 1.5em;
+    background: linear-gradient(120deg, #fff6fa 0%, #ffdde1 100%);
+    box-shadow: 0 4px 32px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    font-size: 1.08em;
+}
+.derivatives-info-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2em;
+    margin-bottom: 0.5em;
+}
+.info-icon-bg {
+    background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
+    border-radius: 1.2em;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.10);
+    flex-shrink: 0;
+}
+.info-title {
+    font-size: 1.25em;
+    font-weight: 800;
+    margin-bottom: 0.5em;
+    color: #ff6a88;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.datatable-columns-list {
+    margin: 0.7em 0 0 0;
+    padding-left: 1.2em;
+    list-style: none;
+    font-size: 1em;
+    line-height: 1.7;
+}
+.datatable-columns-list li {
+    margin-bottom: 0.3em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.col-icon {
+    font-size: 1.2em;
+    margin-right: 0.4em;
+    display: inline-block;
+}
+@media (max-width: 700px) {
+    .derivatives-info-block {
+        padding: 1.1em 0.5em;
+        font-size: 0.98em;
+        border-radius: 1em;
+    }
+    .derivatives-info-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.7em;
+    }
+    .info-icon-bg {
+        width: 40px;
+        height: 40px;
+        border-radius: 0.7em;
+    }
+    .info-title {
+        font-size: 1.08em;
+    }
+}
+body.dark-mode .derivatives-info-block {
+    background: linear-gradient(120deg, #23272f 0%, #ffdde1 100%);
+    box-shadow: 0 4px 32px rgba(255,153,172,0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+}
+body.dark-mode .info-title {
+    color: #ffd200;
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+/* --- End Derivatives Info Block Styles --- */
+
 /* --- Modern Navigation Tabs Styles --- */
 .modern-tabs-container {
     width: 100%;

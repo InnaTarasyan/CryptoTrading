@@ -112,49 +112,49 @@
                     <span class="tab-icon">
                         <!-- Markets Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ff6a88"/><path d="M12 7v5l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Markets</span>
                 </a>
                 <a href="/coingeckoexchangesindex" class="modern-tab beautiful-tab {{ request()->is('coingeckoexchangesindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- Exchange Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff99ac"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Exchanges</span>
                 </a>
                 <a href="/coingeckotrendingsindex" class="modern-tab beautiful-tab {{ request()->is('coingeckotrendingsindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- Trendings Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff6a88"/><path d="M8 16l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Trendings</span>
                 </a>
                 <a href="/coingeckoexchangeratesindex" class="modern-tab beautiful-tab {{ request()->is('coingeckoexchangeratesindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- Exchange Rates Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff99ac"/><text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Exchange Rates</span>
                 </a>
                 <a href="/coingeckonftsindex" class="modern-tab beautiful-tab {{ request()->is('coingeckonftsindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- NFTs Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff6a88"/><text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">NFT</text></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">NFTs</span>
                 </a>
                 <a href="/coingeckoderivativesindex" class="modern-tab beautiful-tab {{ request()->is('coingeckoderivativesindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- Derivatives Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff99ac"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Derivatives</span>
                 </a>
                 <a href="/coingeckoderivativesexchangesindex" class="modern-tab beautiful-tab {{ request()->is('coingeckoderivativesexchangesindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- Derivatives Exchanges Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff6a88"/><path d="M8 16l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </span>
+                        </span>
                     <span class="tab-label">Derivatives Exchanges</span>
                 </a>
             </nav>
@@ -183,6 +183,68 @@
                         </tr>
                         </thead>
                     </table>
+                </div>
+            </div>
+        </div>
+        <!-- Info Block: About Coingecko Derivatives and This DataTable -->
+        <div class="derivatives-info-block">
+            <div class="derivatives-info-section">
+                <div class="info-icon-bg">
+                    <!-- Derivatives Icon -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <defs>
+                            <linearGradient id="derivInfoGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#ff6a88"/>
+                                <stop offset="1" stop-color="#ff99ac"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="4" y="4" width="24" height="24" rx="8" fill="url(#derivInfoGradient)"/>
+                        <path d="M10 16h12M16 10v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="info-title">What are Coingecko Derivatives?</h3>
+                    <p>
+                        <strong>Coingecko Derivatives</strong> provide real-time data and analytics for crypto derivatives markets, including futures and options. These instruments allow traders to hedge, speculate, and manage risk on cryptocurrencies. Coingecko aggregates data from top exchanges, offering insights into open interest, funding rates, contract types, and more, empowering both institutional and retail traders to make informed decisions in the fast-evolving crypto derivatives landscape.
+                    </p>
+                </div>
+            </div>
+            <div class="derivatives-info-section">
+                <div class="info-icon-bg">
+                    <!-- DataTable Icon -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <defs>
+                            <linearGradient id="tableInfoGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#ffd200"/>
+                                <stop offset="1" stop-color="#ff99ac"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="4" y="4" width="24" height="24" rx="8" fill="url(#tableInfoGradient)"/>
+                        <rect x="8" y="10" width="16" height="2" rx="1" fill="#fff"/>
+                        <rect x="8" y="16" width="16" height="2" rx="1" fill="#fff"/>
+                        <rect x="8" y="22" width="10" height="2" rx="1" fill="#fff"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="info-title">About the Derivatives DataTable</h3>
+                    <p>
+                        <strong>This DataTable</strong> provides a comprehensive, real-time overview of key metrics for crypto derivatives contracts. Each row represents a specific contract, and each column offers a unique insight:
+                    </p>
+                    <ul class="datatable-columns-list">
+                        <li><span class="col-icon">💹</span> <b>Market:</b> The exchange or platform where the derivative is traded.</li>
+                        <li><span class="col-icon">🆔</span> <b>Index Id:</b> The identifier for the underlying index or asset.</li>
+                        <li><span class="col-icon">💲</span> <b>Price:</b> The current price of the derivative contract.</li>
+                        <li><span class="col-icon">📈</span> <b>Price % Change 24h:</b> The percentage change in price over the last 24 hours.</li>
+                        <li><span class="col-icon">📄</span> <b>Contract Type:</b> The type of derivative (e.g., perpetual, futures, options).</li>
+                        <li><span class="col-icon">🔗</span> <b>Index:</b> The reference index used for pricing the contract.</li>
+                        <li><span class="col-icon">🔀</span> <b>Basis:</b> The difference between the derivative price and the spot price of the underlying asset.</li>
+                        <li><span class="col-icon">📊</span> <b>Spread:</b> The bid-ask spread for the contract.</li>
+                        <li><span class="col-icon">💸</span> <b>Funding Rate:</b> The periodic payment exchanged between long and short positions (for perpetuals).</li>
+                        <li><span class="col-icon">📦</span> <b>Open Interest:</b> The total number of outstanding contracts.</li>
+                        <li><span class="col-icon">🔄</span> <b>Volume 24h:</b> The total trading volume in the last 24 hours.</li>
+                        <li><span class="col-icon">⏰</span> <b>Last Traded At:</b> The timestamp of the most recent trade for the contract.</li>
+                        <li><span class="col-icon">📅</span> <b>Expired At:</b> The expiration date/time of the contract (if applicable).</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -303,6 +365,37 @@
                     reloadSpinner.style.display = 'none';
                 }, 800);
             }
+        });
+
+        // Enhance Last Traded At and Expired At columns with icons after DataTable draw
+        function enhanceDateColumns() {
+            $('#coingecko_derivatives tbody tr').each(function() {
+                var $tds = $(this).find('td');
+                // Last Traded At is the 12th column (index 11)
+                var $lastTraded = $tds.eq(11);
+                var lastTradedVal = $lastTraded.text().trim();
+                if (lastTradedVal && !$lastTraded.hasClass('iconified')) {
+                    $lastTraded.html('<span class="date-icon" title="Last Traded At" aria-label="Last Traded At">\
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10" fill="#ffdde1"/><circle cx="12" cy="12" r="8" fill="#fff"/><path d="M12 7v5l3 3" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>\
+                    </span>' + lastTradedVal);
+                    $lastTraded.addClass('iconified');
+                }
+                // Expired At is the 13th column (index 12)
+                var $expiredAt = $tds.eq(12);
+                var expiredAtVal = $expiredAt.text().trim();
+                if (expiredAtVal && !$expiredAt.hasClass('iconified')) {
+                    $expiredAt.html('<span class="date-icon" title="Expired At" aria-label="Expired At">\
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle; margin-right:4px;"><rect x="3" y="5" width="18" height="16" rx="4" fill="#ffdde1"/><rect x="6" y="8" width="12" height="10" rx="2" fill="#fff"/><rect x="9" y="11" width="6" height="2" rx="1" fill="#ff6a88"/></svg>\
+                    </span>' + expiredAtVal);
+                    $expiredAt.addClass('iconified');
+                }
+            });
+        }
+        // Run after DataTable draw
+        $(document).ready(function() {
+            var table = $('#coingecko_derivatives').DataTable();
+            table.on('draw', enhanceDateColumns);
+            enhanceDateColumns();
         });
     </script>
 @endsection
