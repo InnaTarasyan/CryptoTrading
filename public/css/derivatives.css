@@ -1,35 +1,82 @@
 /* Modern DataTable and UI styles for Derivatives page (adapted from markets.css) */
 
-/* Title Bar */
+/* --- Enhanced Modern Title Bar Styles --- */
 .modern-title-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%);
-    border-radius: 1.5em;
-    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(255, 153, 172, 0.13);
-    padding: 1.5em 2em 1.5em 2em;
-    margin-bottom: 2em;
+    background: linear-gradient(90deg, rgba(255,106,136,0.92) 0%, rgba(255,153,172,0.85) 30%, rgba(252,177,227,0.80) 60%, rgba(255,133,161,0.90) 85%, rgba(255,106,136,0.92) 100%);
+    border-radius: 1.7em;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.22), 0 3px 12px 0 rgba(255, 153, 172, 0.18);
+    padding: 2em 2.5em 2em 2.5em;
+    margin-bottom: 2.2em;
     color: #fff;
-    transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, box-shadow 0.3s, border 0.3s;
+    border: 1.5px solid #ff99ac44;
+    backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 2;
 }
-.modern-title-icon {
-    display: flex;
-    align-items: center;
-    margin-right: 1em;
-}
-.modern-title-text {
-    font-size: 2.1rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: #fff;
+.modern-title-bar:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1.7em;
+    pointer-events: none;
+    box-shadow: 0 0 32px 8px #ff99ac33 inset;
+    opacity: 0.18;
 }
 .modern-title-bar-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    gap: 2em;
+    gap: 2.2em;
+}
+.modern-title-main {
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+}
+.modern-title-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+    background: rgba(255,255,255,0.13);
+    border-radius: 1.2em;
+    padding: 0.5em 0.7em;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.10);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.modern-title-icon:focus,
+.modern-title-icon:hover {
+    background: rgba(255,255,255,0.22);
+    box-shadow: 0 4px 16px rgba(255,153,172,0.13);
+}
+.modern-title-text {
+    font-size: 2.3rem;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: #fff;
+    text-shadow: 0 2px 12px #ff99ac55, 0 1px 2px #ff6a8855;
+    background: linear-gradient(90deg, #fff 0%, #ffdde1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 8px #ff99ac33);
+    transition: text-shadow 0.3s, filter 0.3s;
+}
+@media (max-width: 900px) {
+    .modern-title-bar {
+        padding: 1.2em 1em;
+        border-radius: 1.2em;
+    }
+    .modern-title-bar-row {
+        gap: 1em;
+    }
+    .modern-title-text {
+        font-size: 1.5rem;
+    }
 }
 @media (max-width: 700px) {
     .modern-title-bar {
@@ -38,6 +85,7 @@
         padding: 1em 0.7em;
         gap: 0.7em;
         text-align: left;
+        border-radius: 0.8em;
     }
     .modern-title-bar-row {
         flex-direction: column;
@@ -45,7 +93,95 @@
         gap: 0.7em;
         width: 100%;
     }
+    .modern-title-main {
+        gap: 0.7em;
+    }
+    .modern-title-text {
+        font-size: 1.2rem;
+    }
 }
+body.dark-mode .modern-title-bar {
+    background: linear-gradient(90deg, rgba(35,39,47,0.98) 0%, rgba(255,106,136,0.18) 100%);
+    color: #ffd200;
+    border: 1.5px solid #ffd20033;
+    box-shadow: 0 8px 32px 0 rgba(255,153,172,0.13), 0 3px 12px 0 rgba(255, 153, 172, 0.10);
+}
+body.dark-mode .modern-title-bar:after {
+    box-shadow: 0 0 32px 8px #ffd20033 inset;
+}
+body.dark-mode .modern-title-text {
+    color: #ffd200;
+    background: linear-gradient(90deg, #ffd200 0%, #fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 12px #ffd20055, 0 1px 2px #fff2;
+    filter: drop-shadow(0 2px 8px #ffd20033);
+}
+body.dark-mode .modern-title-icon {
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 2px 8px rgba(255,153,172,0.10);
+}
+body.dark-mode .modern-title-icon:focus,
+body.dark-mode .modern-title-icon:hover {
+    background: rgba(255,255,255,0.16);
+    box-shadow: 0 4px 16px rgba(255,153,172,0.13);
+}
+/* --- End Enhanced Modern Title Bar Styles --- */
+
+/* --- Enhanced Title Highlight and Actions Alignment --- */
+.enhanced-title-highlight {
+    background: rgba(255,255,255,0.22);
+    border-radius: 1.2em;
+    padding: 0.25em 1.2em 0.25em 1.2em;
+    box-shadow: 0 2px 16px #ff99ac44, 0 1px 2px #ff6a8855;
+    color: #d72660;
+    font-weight: 900;
+    text-shadow: 0 2px 16px #fff, 0 1px 2px #ff6a8855;
+    display: inline-block;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    letter-spacing: -1.5px;
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+body.dark-mode .enhanced-title-highlight {
+    background: rgba(35,39,47,0.85);
+    color: #ffd200;
+    text-shadow: 0 2px 16px #ffd20055, 0 1px 2px #fff2;
+    box-shadow: 0 2px 16px #ffd20044, 0 1px 2px #fff2;
+}
+.modern-title-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-left: auto;
+}
+.modern-title-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+@media (max-width: 900px) {
+    .enhanced-title-highlight {
+        font-size: 1.1rem;
+        padding: 0.18em 0.7em;
+    }
+    .modern-title-actions-group {
+        gap: 0.3em;
+    }
+}
+@media (max-width: 700px) {
+    .modern-title-actions {
+        margin-top: 0.7em;
+        justify-content: flex-end;
+    }
+    .modern-title-actions-group {
+        gap: 0.2em;
+    }
+}
+/* --- End Enhanced Title Highlight and Actions Alignment --- */
 
 /* DataTable Section */
 .m-portlet {
@@ -720,3 +856,274 @@ body.dark-mode #coingecko_derivatives tbody tr:hover td {
     color: #fff !important;
 }
 /* --- End coingecko_derivatives td hover color in Dark Mode --- */
+
+/* --- Fullscreen Button and Table Styles --- */
+.modern-fullscreen-btn {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2em;
+    padding: 0.5em 1.5em;
+    font-size: 1em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(255,106,136,0.10);
+    position: relative;
+    outline: none;
+}
+.modern-fullscreen-btn:active, .modern-fullscreen-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #ff99ac;
+}
+.fullscreen-icon-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fullscreen-switch-label {
+    font-size: 1em;
+    font-weight: 500;
+}
+.ripple-effect {
+    display: none;
+}
+.fullscreen-active {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #fff !important;
+    z-index: 9999 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: auto !important;
+    padding: 2vw 2vw 2vw 2vw !important;
+    transition: all 0.3s;
+}
+body.dark-mode .fullscreen-active {
+    background: #23272f !important;
+}
+/* Fullscreen DataTables wrapper */
+.fullscreen-active .dataTables_wrapper {
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+}
+/* Fullscreen table styling */
+.fullscreen-active .enhanced-table {
+    width: 100% !important;
+    max-width: none !important;
+    font-size: 16px !important;
+    flex: 1 !important;
+}
+/* Fullscreen header styling */
+.fullscreen-active .enhanced-thead {
+    background: linear-gradient(135deg, rgba(255,106,136,0.15) 0%, rgba(255,153,172,0.15) 100%) !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+/* Fullscreen DataTables controls - ensure they're visible */
+.fullscreen-active .dataTables_length,
+.fullscreen-active .dataTables_filter,
+.fullscreen-active .dataTables_info,
+.fullscreen-active .dataTables_paginate,
+.fullscreen-active .datatable-toolbar {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 10px 0 !important;
+    position: static !important;
+}
+/* Fullscreen pagination styling */
+.fullscreen-active .dataTables_paginate {
+    font-size: 16px !important;
+    margin-top: 20px !important;
+    text-align: center !important;
+}
+/* Fullscreen buttons styling */
+.fullscreen-active .datatable-btn {
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    margin: 2px !important;
+}
+/* Fullscreen search and length controls */
+.fullscreen-active .dataTables_filter input,
+.fullscreen-active .dataTables_length select {
+    font-size: 16px !important;
+    padding: 8px !important;
+}
+@media (max-width: 700px) {
+    .modern-fullscreen-btn {
+        font-size: 0.95em;
+        padding: 0.3em 0.8em;
+    }
+    .fullscreen-active {
+        padding: 0.5em !important;
+    }
+}
+/* --- End Fullscreen Button and Table Styles --- */
+
+/* --- Enhanced Fullscreen Button Icon and UX --- */
+.modern-fullscreen-btn {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2em;
+    padding: 0.5em 1.5em;
+    font-size: 1em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, box-shadow 0.2s, transform 0.15s;
+    box-shadow: 0 4px 16px 0 rgba(255,106,136,0.13), 0 1.5px 6px rgba(255, 153, 172, 0.10);
+    position: relative;
+    outline: none;
+    will-change: transform, box-shadow;
+    overflow: hidden;
+}
+.modern-fullscreen-btn .fullscreen-icon-bg {
+    background: linear-gradient(135deg, #fff6fa 0%, #ffdde1 100%);
+    border-radius: 50%;
+    width: 2.4em;
+    height: 2.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5em;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.10);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.modern-fullscreen-btn .icon-fullscreen,
+.modern-fullscreen-btn .icon-exit-fullscreen {
+    width: 1.5em;
+    height: 1.5em;
+    display: block;
+    transition: filter 0.3s, transform 0.2s;
+    filter: drop-shadow(0 1px 2px #ff99ac33);
+}
+.modern-fullscreen-btn:hover .fullscreen-icon-bg,
+.modern-fullscreen-btn:focus .fullscreen-icon-bg {
+    background: linear-gradient(135deg, #ffdde1 0%, #ff6a88 100%);
+    box-shadow: 0 4px 16px 0 rgba(255,106,136,0.18), 0 2px 8px rgba(255, 153, 172, 0.13);
+}
+.modern-fullscreen-btn:hover .icon-fullscreen,
+.modern-fullscreen-btn:focus .icon-fullscreen,
+.modern-fullscreen-btn:hover .icon-exit-fullscreen,
+.modern-fullscreen-btn:focus .icon-exit-fullscreen {
+    filter: drop-shadow(0 0 8px #ff99ac88) brightness(1.15);
+    transform: scale(1.12);
+}
+.modern-fullscreen-btn:active .fullscreen-icon-bg {
+    background: linear-gradient(135deg, #ff99ac 0%, #ff6a88 100%);
+    box-shadow: 0 2px 8px rgba(255,106,136,0.10);
+}
+.modern-fullscreen-btn:active .icon-fullscreen,
+.modern-fullscreen-btn:active .icon-exit-fullscreen {
+    filter: drop-shadow(0 0 4px #ff6a88cc) brightness(0.95);
+    transform: scale(0.97);
+}
+.modern-fullscreen-btn:focus-visible {
+    outline: 2px solid #ffd200;
+    box-shadow: 0 0 0 4px #ffd20055, 0 8px 24px 0 rgba(255,106,136,0.18);
+}
+.modern-fullscreen-btn .fullscreen-switch-label {
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 2px rgba(255,106,136,0.08);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+.modern-fullscreen-btn:hover .fullscreen-switch-label,
+.modern-fullscreen-btn:focus .fullscreen-switch-label {
+    color: #ffd200;
+    text-shadow: 0 2px 4px rgba(255,153,172,0.15);
+}
+/* Pulse effect for accessibility */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 #ff99ac55; }
+    70% { box-shadow: 0 0 0 10px #ff99ac00; }
+    100% { box-shadow: 0 0 0 0 #ff99ac00; }
+}
+.modern-fullscreen-btn:focus .fullscreen-icon-bg {
+    animation: pulse-glow 1.2s infinite;
+}
+body.dark-mode .modern-fullscreen-btn {
+    background: linear-gradient(90deg, #23272f 0%, #ff99ac 100%);
+    color: #ffd200;
+}
+body.dark-mode .modern-fullscreen-btn .fullscreen-icon-bg {
+    background: linear-gradient(135deg, #23272f 0%, #ffdde1 100%);
+    box-shadow: 0 2px 8px rgba(255,153,172,0.10);
+}
+body.dark-mode .modern-fullscreen-btn:hover .fullscreen-icon-bg,
+body.dark-mode .modern-fullscreen-btn:focus .fullscreen-icon-bg {
+    background: linear-gradient(135deg, #ffdde1 0%, #23272f 100%);
+    box-shadow: 0 4px 16px 0 rgba(255,153,172,0.18), 0 2px 8px rgba(255, 153, 172, 0.13);
+}
+body.dark-mode .modern-fullscreen-btn .icon-fullscreen,
+body.dark-mode .modern-fullscreen-btn .icon-exit-fullscreen {
+    filter: drop-shadow(0 1px 2px #ffd20055);
+}
+body.dark-mode .modern-fullscreen-btn:hover .icon-fullscreen,
+body.dark-mode .modern-fullscreen-btn:focus .icon-fullscreen,
+body.dark-mode .modern-fullscreen-btn:hover .icon-exit-fullscreen,
+body.dark-mode .modern-fullscreen-btn:focus .icon-exit-fullscreen {
+    filter: drop-shadow(0 0 8px #ffd20088) brightness(1.15);
+}
+body.dark-mode .modern-fullscreen-btn .fullscreen-switch-label {
+    color: #ffd200;
+    text-shadow: 0 1px 2px #23272f;
+}
+body.dark-mode .modern-fullscreen-btn:hover .fullscreen-switch-label,
+body.dark-mode .modern-fullscreen-btn:focus .fullscreen-switch-label {
+    color: #fff;
+    text-shadow: 0 2px 4px #ffd20055;
+}
+/* --- End Enhanced Fullscreen Button Icon and UX --- */
+
+/* --- Further Enhanced Title Highlight for Maximum Visibility (Dark Text, Smaller Font) --- */
+.enhanced-title-highlight {
+    border-radius: 1.5em;
+    padding: 0.18em 1em 0.18em 1em;
+    box-shadow: 0 2px 8px #ff99ac33, 0 1px 2px #ff6a8833;
+    color: #23272f;
+    font-weight: 800;
+    text-shadow: 0 1px 2px #fff, 0 1px 2px #ff6a8833;
+    display: inline-block;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    letter-spacing: -1px;
+    font-size: 1.25rem;
+    border: 1.5px solid #ff99ac33;
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s, font-size 0.3s;
+}
+body.dark-mode .enhanced-title-highlight {
+    background: rgba(35,39,47,0.98);
+    color: #fff;
+    text-shadow: 0 1px 2px #ffd20033, 0 1px 2px #fff2;
+    box-shadow: 0 2px 8px #ffd20033, 0 1px 2px #ffd20033;
+    border: 1.5px solid #ffd20033;
+}
+@media (max-width: 900px) {
+    .enhanced-title-highlight {
+        font-size: 1.05rem;
+        padding: 0.13em 0.7em;
+    }
+}
+@media (max-width: 700px) {
+    .enhanced-title-highlight {
+        font-size: 0.98rem;
+        padding: 0.09em 0.4em;
+    }
+}
+/* --- End Further Enhanced Title Highlight --- */

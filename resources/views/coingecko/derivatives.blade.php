@@ -11,7 +11,7 @@
         <!-- Modern Title Bar with Icon -->
         <div class="modern-title-bar" aria-labelledby="derivativesTitle" role="banner">
             <div class="modern-title-bar-row">
-                <div class="modern-title-main" style="display: flex; align-items: center; gap: 1em;">
+                <div class="modern-title-main">
                     <span class="modern-title-icon" tabindex="0" title="Derivatives Overview">
                         <!-- Derivatives Icon SVG (Pink Gradient) -->
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,38 +25,61 @@
                             <path d="M10 16h12M16 10v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
                         </svg>
                     </span>
-                    <span class="modern-title-text" id="derivativesTitle">Coingecko Derivatives</span>
+                    <span class="modern-title-text enhanced-title-highlight" id="derivativesTitle">Coingecko Derivatives</span>
                 </div>
-                <!-- Enhanced Dark Mode Toggle -->
-                <div class="dark-mode-container">
-                    <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
-                        <div class="darkmode-switch-track">
-                            <div class="darkmode-switch-thumb">
-                                <span class="darkmode-switch-icon" id="darkModeIcon">
-                                    <!-- Sun & Moon SVG with smooth transitions -->
-                                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
-                                        <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.8"/>
-                                    </svg>
-                                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
-                                        <circle cx="12" cy="12" r="5" fill="#ffb300"/>
-                                        <g stroke="#ffb300" stroke-width="2" opacity="0.9">
-                                            <line x1="12" y1="1" x2="12" y2="3"/>
-                                            <line x1="12" y1="21" x2="12" y2="23"/>
-                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                                            <line x1="1" y1="12" x2="3" y2="12"/>
-                                            <line x1="21" y1="12" x2="23" y2="12"/>
-                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                                        </g>
-                                    </svg>
-                                </span>
+                <div class="modern-title-actions">
+                    <div class="modern-title-actions-group">
+                        <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
+                            <div class="darkmode-switch-track">
+                                <div class="darkmode-switch-thumb">
+                                    <span class="darkmode-switch-icon" id="darkModeIcon">
+                                        <!-- Sun & Moon SVG with smooth transitions -->
+                                        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
+                                            <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.8"/>
+                                        </svg>
+                                        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                                            <circle cx="12" cy="12" r="5" fill="#ffb300"/>
+                                            <g stroke="#ffb300" stroke-width="2" opacity="0.9">
+                                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
-                        <span class="darkmode-status-indicator" id="darkModeStatus" aria-live="polite"></span>
-                    </button>
+                            <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
+                            <span class="darkmode-status-indicator" id="darkModeStatus" aria-live="polite"></span>
+                        </button>
+                        <button id="fullscreenToggle" class="modern-tab modern-fullscreen-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen" aria-pressed="false" role="button" tabindex="0">
+                            <span class="fullscreen-icon-bg">
+                                <!-- Enter Fullscreen SVG -->
+                                <svg class="icon-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="3" y="3" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                    <rect x="3" y="3" width="2" height="7" rx="1" fill="#ff6a88"/>
+                                    <rect x="14" y="3" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                    <rect x="19" y="3" width="2" height="7" rx="1" fill="#ff6a88"/>
+                                    <rect x="3" y="19" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                    <rect x="3" y="14" width="2" height="7" rx="1" fill="#ff6a88"/>
+                                    <rect x="14" y="19" width="7" height="2" rx="1" fill="#ff6a88"/>
+                                    <rect x="19" y="14" width="2" height="7" rx="1" fill="#ff6a88"/>
+                                </svg>
+                                <!-- Exit Fullscreen SVG (hidden by default) -->
+                                <svg class="icon-exit-fullscreen" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+                                    <rect x="5" y="11" width="14" height="2" rx="1" fill="#ff99ac"/>
+                                    <rect x="11" y="5" width="2" height="14" rx="1" fill="#ff99ac"/>
+                                </svg>
+                            </span>
+                            <span id="fullscreenText" class="fullscreen-switch-label">Fullscreen</span>
+                            <span class="ripple-effect"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,7 +87,7 @@
         <div class="m-portlet enhanced-portlet">
             <div class="m-portlet__body mt-5 enhanced-portlet-body">
                 <input type="hidden" id="coingecko_derivatives_route" value="{{ route('datatable.coingecko.derivatives') }}">
-                <div class="enhanced-table-container table-responsive">
+                <div id="datatableFullscreenContainer" class="table-responsive enhanced-table-container">
                     <table id="coingecko_derivatives" class="table table-hover table-condensed table-striped enhanced-table" style="width:100%; padding-top:1%">
                         <thead class="enhanced-thead">
                         <tr>
@@ -142,6 +165,43 @@
             if (e.key === ' ' || e.key === 'Enter') {
                 e.preventDefault();
                 darkModeToggle.click();
+            }
+        });
+
+        // Fullscreen Functionality for DataTable
+        var fullscreenToggle = document.getElementById('fullscreenToggle');
+        var fullscreenContainer = document.getElementById('datatableFullscreenContainer');
+        var iconEnter = fullscreenToggle.querySelector('.icon-fullscreen');
+        var iconExit = fullscreenToggle.querySelector('.icon-exit-fullscreen');
+        var fullscreenText = document.getElementById('fullscreenText');
+        var isFullscreen = false;
+        function enterFullscreen() {
+            fullscreenContainer.classList.add('fullscreen-active');
+            iconEnter.style.display = 'none';
+            iconExit.style.display = 'inline';
+            fullscreenToggle.setAttribute('aria-pressed', 'true');
+            fullscreenText.textContent = 'Exit Fullscreen';
+            isFullscreen = true;
+        }
+        function exitFullscreen() {
+            fullscreenContainer.classList.remove('fullscreen-active');
+            iconEnter.style.display = 'inline';
+            iconExit.style.display = 'none';
+            fullscreenToggle.setAttribute('aria-pressed', 'false');
+            fullscreenText.textContent = 'Fullscreen';
+            isFullscreen = false;
+        }
+        fullscreenToggle.addEventListener('click', function() {
+            if (!isFullscreen) {
+                enterFullscreen();
+            } else {
+                exitFullscreen();
+            }
+        });
+        // ESC key to exit fullscreen
+        document.addEventListener('keydown', function(e) {
+            if (isFullscreen && (e.key === 'Escape' || e.key === 'Esc')) {
+                exitFullscreen();
             }
         });
     </script>
