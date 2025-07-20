@@ -1,0 +1,305 @@
+/* Modern DataTable and UI styles for Derivatives page (adapted from markets.css) */
+
+/* Title Bar */
+.modern-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 30%, #fcb1e3 60%, #ff85a1 85%, #ff6a88 100%);
+    border-radius: 1.5em;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(255, 153, 172, 0.13);
+    padding: 1.5em 2em 1.5em 2em;
+    margin-bottom: 2em;
+    color: #fff;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.modern-title-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+}
+.modern-title-text {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #fff;
+}
+.modern-title-bar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2em;
+}
+@media (max-width: 700px) {
+    .modern-title-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1em 0.7em;
+        gap: 0.7em;
+        text-align: left;
+    }
+    .modern-title-bar-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.7em;
+        width: 100%;
+    }
+}
+
+/* DataTable Section */
+.m-portlet {
+    background: #fff;
+    border-radius: 1.5em;
+    box-shadow: 0 4px 24px rgba(255, 106, 136, 0.10), 0 1.5px 6px rgba(255, 153, 172, 0.08);
+    padding: 2em 1.5em;
+    margin-bottom: 2em;
+}
+.table {
+    background: #fff;
+    border-radius: 1em;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(255, 106, 136, 0.06);
+}
+.table thead th {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #ab1717;
+    font-weight: 700;
+    border: none;
+    vertical-align: middle;
+    font-size: 1.08em;
+    padding: 1.1em 0.7em;
+}
+.table tbody tr {
+    transition: background 0.2s;
+}
+.table tbody tr:hover {
+    background: #ffe0ec;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff6fa;
+}
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #fff;
+}
+
+/* DataTables Pagination, Length, Info, and Search Bar */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff !important;
+    border-radius: 1em;
+    border: none;
+    margin: 0 0.2em;
+    padding: 0.4em 1em;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #fff !important;
+    color: #ff6a88 !important;
+}
+.dataTables_wrapper .dataTables_length {
+    margin-bottom: 18px;
+    float: left;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    padding: 8px 18px;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dataTables_wrapper .dataTables_length label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    color: #fff;
+}
+.dataTables_wrapper .dataTables_length select {
+    border-radius: 16px;
+    border: 1.5px solid #ff6a88;
+    padding: 6px 32px 6px 16px;
+    background: #fff6fa;
+    color: #ff6a88;
+    font-size: 15px;
+    margin-left: 8px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-weight: 600;
+}
+.dataTables_wrapper .dataTables_length select:focus {
+    border: 1.5px solid #ff99ac;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.08);
+}
+.dataTables_wrapper .dataTables_info {
+    color: #ff6a88;
+    font-weight: 600;
+    margin-top: 1em;
+}
+
+/* --- Enhanced DataTable Search Bar (EXACTLY matches markets page) --- */
+.dataTables_filter {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 18px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: none;
+    padding: 0;
+}
+.dataTables_filter .search-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+.dataTables_filter .search-icon {
+    position: absolute;
+    left: 16px;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.dataTables_filter input[type="search"] {
+    border-radius: 24px;
+    border: 1.5px solid #ff6a88;
+    padding: 8px 44px 8px 44px;
+    background: #fff6fa;
+    transition: border 0.2s, box-shadow 0.2s;
+    font-size: 15px;
+    outline: none;
+    color: #ff6a88;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+}
+.dataTables_filter input[type="search"]:focus {
+    border: 1.5px solid #ff99ac;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(255,153,172,0.08);
+}
+.dataTables_filter #clear-search {
+    margin-left: 8px;
+    border: none;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 8px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.12);
+}
+.dataTables_filter #clear-search:hover {
+    background: linear-gradient(90deg, #fff 0%, #ff6a88 100%);
+    color: #ff6a88;
+}
+
+/* Dark mode overrides for search bar (matches markets) */
+body.dark-mode .dataTables_filter input[type="search"] {
+    background: #2c2f3a !important;
+    color: #ff99ac !important;
+    border: 1.5px solid #ff99ac !important;
+}
+body.dark-mode .dataTables_filter input[type="search"]:focus {
+    border: 1.5px solid #ff6a88 !important;
+    background: #23272f !important;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+}
+body.dark-mode .dataTables_filter #clear-search {
+    background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+    color: #ff99ac !important;
+}
+body.dark-mode .dataTables_filter #clear-search:hover {
+    background: #ff99ac !important;
+    color: #23272f !important;
+}
+
+/* Highlight first column in datatable (pinky modern gradient) */
+.table th:first-child,
+.table td:first-child {
+    background: linear-gradient(90deg, #ffdde1 0%, #ff6a88 100%);
+    color: #d72660;
+    font-weight: bold;
+    border-right: 2px solid #ff6a88;
+}
+
+/* Highlight search results (CoinMarketCal style, matches markets) */
+.dataTables_wrapper .highlight {
+    background: #fffbe7 !important;
+    color: #ff512f !important;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 2px 2px;
+    box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+body.dark-mode .dataTables_wrapper .highlight {
+    background: #333 !important;
+    color: #ffd200 !important;
+}
+.highlight-row {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffd20022 100%) !important;
+    transition: background 0.2s;
+}
+body.dark-mode .highlight-row {
+    background: #23272f !important;
+}
+
+/* Responsive DataTable for mobile (pinky modern gradient) */
+@media (max-width: 767px) {
+    .table thead {
+        display: none !important;
+    }
+    #coingecko_derivatives tbody, #coingecko_derivatives tr, #coingecko_derivatives td {
+        display: block;
+        width: 100%;
+    }
+    #coingecko_derivatives tr {
+        margin-bottom: 1rem;
+        border: 1.5px solid #ff99ac;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(255,106,136,0.10), 0 1.5px 6px rgba(255,153,172,0.08);
+        background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%);
+        padding: 0.7rem 1rem;
+    }
+    #coingecko_derivatives td {
+        text-align: left;
+        padding-left: 48%;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #ffdde1;
+        min-height: 44px;
+        box-sizing: border-box;
+        font-size: 1em;
+        color: #d72660;
+        background: none;
+    }
+    #coingecko_derivatives td:last-child {
+        border-bottom: none;
+    }
+    #coingecko_derivatives td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #ff6a88;
+        font-size: 0.98em;
+        letter-spacing: 0.01em;
+    }
+}
+
+/* Add more styles as needed for buttons, status bar, etc. */
