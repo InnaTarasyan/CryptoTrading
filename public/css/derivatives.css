@@ -1127,3 +1127,134 @@ body.dark-mode .enhanced-title-highlight {
     }
 }
 /* --- End Further Enhanced Title Highlight --- */
+
+/* --- Modern Reload Button & Icon --- */
+.modern-reload-btn {
+    background: rgba(255,255,255,0.18);
+    color: #ff6a88;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px 0 rgba(255,106,136,0.10), 0 1.5px 6px rgba(255, 153, 172, 0.10);
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.25s, background 0.25s, transform 0.18s;
+    overflow: hidden;
+    outline: none;
+}
+.modern-reload-btn:focus-visible {
+    outline: 2px solid #ffd200;
+    box-shadow: 0 0 0 4px #ffd20055, 0 8px 24px 0 rgba(255,106,136,0.18);
+}
+.modern-reload-btn:hover, .modern-reload-btn:focus {
+    background: rgba(255,255,255,0.32);
+    box-shadow: 0 4px 24px 0 rgba(255,106,136,0.18), 0 2px 8px rgba(255, 153, 172, 0.13), 0 0 0 6px #ff99ac33;
+    transform: scale(1.09);
+}
+.modern-reload-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px 0 rgba(255,106,136,0.10);
+}
+.reload-icon-bg {
+    background: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.icon-reload {
+    width: 28px;
+    height: 28px;
+    display: block;
+    stroke: url(#reloadGradient);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    filter: drop-shadow(0 1px 2px #ff99ac33);
+    transition: filter 0.3s, transform 0.2s;
+    will-change: filter, transform;
+}
+.modern-reload-btn:hover .icon-reload,
+.modern-reload-btn:focus .icon-reload {
+    filter: drop-shadow(0 0 8px #ff99ac88) brightness(1.15);
+    transform: scale(1.13) rotate(-18deg);
+}
+.modern-reload-btn:active .icon-reload {
+    filter: drop-shadow(0 0 4px #ff6a88cc) brightness(0.95);
+    transform: scale(0.97) rotate(0deg);
+}
+.modern-reload-btn[aria-busy="true"] .icon-reload,
+.modern-reload-btn[aria-busy="true"] .reload-spinner svg {
+    animation: reload-spin 0.8s linear infinite;
+}
+@keyframes reload-spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+.reload-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    display: none;
+    z-index: 2;
+}
+.modern-reload-btn[aria-busy="true"] .reload-spinner {
+    display: block;
+}
+.modern-reload-btn[aria-busy="true"] .icon-reload {
+    visibility: hidden;
+}
+.modern-reload-btn .reload-switch-label {
+    display: none;
+}
+.modern-reload-btn:after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 0; height: 0;
+    background: radial-gradient(circle, #ff99ac55 0%, transparent 80%);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+.modern-reload-btn:active:after {
+    width: 80px;
+    height: 80px;
+    opacity: 0.25;
+    transition: width 0.1s, height 0.1s, opacity 0.1s;
+}
+body.dark-mode .modern-reload-btn {
+    background: rgba(35,39,47,0.18);
+    color: #ffd200;
+}
+body.dark-mode .modern-reload-btn:hover, body.dark-mode .modern-reload-btn:focus {
+    background: rgba(35,39,47,0.32);
+    box-shadow: 0 4px 24px 0 rgba(255,153,172,0.18), 0 2px 8px rgba(255, 153, 172, 0.13), 0 0 0 6px #ffd20033;
+}
+body.dark-mode .icon-reload {
+    stroke: #ffd200;
+    filter: drop-shadow(0 1px 2px #ffd20055);
+}
+body.dark-mode .modern-reload-btn:hover .icon-reload,
+body.dark-mode .modern-reload-btn:focus .icon-reload {
+    filter: drop-shadow(0 0 8px #ffd20088) brightness(1.15);
+}
+body.dark-mode .modern-reload-btn:active .icon-reload {
+    filter: drop-shadow(0 0 4px #ffd200cc) brightness(0.95);
+}
+/* --- End Modern Reload Button & Icon --- */

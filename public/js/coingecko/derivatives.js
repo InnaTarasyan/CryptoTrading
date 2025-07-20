@@ -92,6 +92,21 @@ Derivatives.prototype.init = function () {
     oTable.on('draw', highlightSearchResults);
     searchBox.on('input', highlightSearchResults);
     filter.on('click', '#clear-search', highlightSearchResults);
+
+    // ======================== Responsive DataTable: Add data-labels for mobile ========================
+    function setDerivativesDataLabels() {
+        var headers = [];
+        $('#coingecko_derivatives thead th').each(function() {
+            headers.push($(this).text().trim());
+        });
+        $('#coingecko_derivatives tbody tr').each(function() {
+            $(this).find('td').each(function(i) {
+                if (headers[i]) $(this).attr('data-label', headers[i]);
+            });
+        });
+    }
+    setDerivativesDataLabels();
+    oTable.on('draw', setDerivativesDataLabels);
 };
 
 Derivatives.prototype.bindEvents = function () {

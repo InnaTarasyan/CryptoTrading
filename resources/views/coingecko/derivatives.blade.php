@@ -29,6 +29,7 @@
                 </div>
                 <div class="modern-title-actions">
                     <div class="modern-title-actions-group">
+                        <!-- Dark Mode Toggle (already present) -->
                         <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
                             <div class="darkmode-switch-track">
                                 <div class="darkmode-switch-thumb">
@@ -57,6 +58,27 @@
                             <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
                             <span class="darkmode-status-indicator" id="darkModeStatus" aria-live="polite"></span>
                         </button>
+                        <!-- Reload Button -->
+                        <button id="reloadTableBtn" class="modern-tab modern-reload-btn" title="Reload Table" aria-label="Reload Table" tabindex="0" type="button">
+                            <span class="reload-icon-bg">
+                                <svg class="icon-reload" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <defs>
+                                        <linearGradient id="reloadGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#ff6a88"/>
+                                            <stop offset="1" stop-color="#ff99ac"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="12" cy="12" r="10" fill="#fff"/>
+                                    <path d="M19 8A7 7 0 1 0 20 12h-1.5" stroke="url(#reloadGradient)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="18 2 18 9 25 9" stroke="url(#reloadGradient)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                                <span class="reload-spinner" style="display:none;">
+                                    <svg width="22" height="22" viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="#ff6a88" stroke-width="4" stroke-linecap="round" stroke-dasharray="31.4 31.4" stroke-dashoffset="0"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.8s" repeatCount="indefinite"/></circle></svg>
+                                </span>
+                            </span>
+                            <span class="reload-switch-label">Reload</span>
+                        </button>
+                        <!-- Full Screen Button (already present) -->
                         <button id="fullscreenToggle" class="modern-tab modern-fullscreen-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen" aria-pressed="false" role="button" tabindex="0">
                             <span class="fullscreen-icon-bg">
                                 <!-- Enter Fullscreen SVG -->
@@ -202,6 +224,30 @@
         document.addEventListener('keydown', function(e) {
             if (isFullscreen && (e.key === 'Escape' || e.key === 'Esc')) {
                 exitFullscreen();
+            }
+        });
+
+        // Reload Button Functionality
+        const reloadBtn = document.getElementById('reloadTableBtn');
+        const reloadIcon = reloadBtn.querySelector('.icon-reload');
+        const reloadSpinner = reloadBtn.querySelector('.reload-spinner');
+        reloadBtn.addEventListener('click', function() {
+            reloadBtn.setAttribute('aria-busy', 'true');
+            reloadIcon.style.display = 'none';
+            reloadSpinner.style.display = 'inline-block';
+            // Reload DataTable
+            if (window.$ && $('#coingecko_derivatives').length && $.fn.dataTable) {
+                $('#coingecko_derivatives').DataTable().ajax.reload(function() {
+                    reloadBtn.removeAttribute('aria-busy');
+                    reloadIcon.style.display = '';
+                    reloadSpinner.style.display = 'none';
+                }, false);
+            } else {
+                setTimeout(function() {
+                    reloadBtn.removeAttribute('aria-busy');
+                    reloadIcon.style.display = '';
+                    reloadSpinner.style.display = 'none';
+                }, 800);
             }
         });
     </script>
