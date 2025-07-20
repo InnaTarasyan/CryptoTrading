@@ -106,6 +106,7 @@
             </div>
         </div>
         <!-- Navigation Tabs BELOW Title Bar -->
+        <!-- Navigation Tabs -->
         <div class="modern-tabs-container gradient-tabs-bg">
             <nav class="modern-tabs beautiful-tabs" aria-label="Main navigation">
                 <a href="/coingeckomarketsindex" class="modern-tab beautiful-tab {{ request()->is('coingeckomarketsindex') ? 'active' : '' }}" tabindex="0">
