@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(90deg, rgba(255,106,136,0.92) 0%, rgba(255,153,172,0.85) 30%, rgba(252,177,227,0.80) 60%, rgba(255,133,161,0.90) 85%, rgba(255,106,136,0.92) 100%);
+    background: linear-gradient(90deg, rgba(255,106,136,0.60) 0%, rgba(255,153,172,0.38) 30%, rgba(252,177,227,0.22) 60%, rgba(255,133,161,0.32) 85%, rgba(255,106,136,0.18) 100%);
     border-radius: 1.7em;
     box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.22), 0 3px 12px 0 rgba(255, 153, 172, 0.18);
     padding: 2em 2.5em 2em 2.5em;
@@ -53,19 +53,30 @@
     background: rgba(255,255,255,0.22);
     box-shadow: 0 4px 16px rgba(255,153,172,0.13);
 }
+/* --- Enhanced Modern Title Text Gradient --- */
 .modern-title-text {
     font-size: 2.3rem;
     font-weight: 900;
     letter-spacing: -1.5px;
-    color: #fff;
-    text-shadow: 0 2px 12px #ff99ac55, 0 1px 2px #ff6a8855;
-    background: linear-gradient(90deg, #fff 0%, #ffdde1 100%);
+    background: linear-gradient(90deg, #2d1e2f 0%, #ff6a88 60%, #ff99ac 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: #2d1e2f;
+    text-shadow: 0 2px 12px #ff99ac33, 0 1px 2px #2d1e2f99;
     filter: drop-shadow(0 2px 8px #ff99ac33);
     transition: text-shadow 0.3s, filter 0.3s;
 }
+body.dark-mode .modern-title-text {
+    background: linear-gradient(90deg, #ffd200 0%, #2d1e2f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #ffd200;
+    text-shadow: 0 2px 12px #ffd20055, 0 1px 2px #2d1e2f99;
+    filter: drop-shadow(0 2px 8px #ffd20033);
+}
+/* --- End Enhanced Modern Title Text Gradient --- */
 @media (max-width: 900px) {
     .modern-title-bar {
         padding: 1.2em 1em;
@@ -101,7 +112,7 @@
     }
 }
 body.dark-mode .modern-title-bar {
-    background: linear-gradient(90deg, rgba(35,39,47,0.98) 0%, rgba(255,106,136,0.18) 100%);
+    background: linear-gradient(90deg, rgba(35,39,47,0.98) 0%, rgba(255,106,136,0.10) 100%);
     color: #ffd200;
     border: 1.5px solid #ffd20033;
     box-shadow: 0 8px 32px 0 rgba(255,153,172,0.13), 0 3px 12px 0 rgba(255, 153, 172, 0.10);
