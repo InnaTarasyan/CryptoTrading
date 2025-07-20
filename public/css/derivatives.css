@@ -1258,3 +1258,171 @@ body.dark-mode .modern-reload-btn:active .icon-reload {
     filter: drop-shadow(0 0 4px #ffd200cc) brightness(0.95);
 }
 /* --- End Modern Reload Button & Icon --- */
+
+/* --- Enhanced m-portlet enhanced-portlet Background --- */
+.m-portlet.enhanced-portlet {
+    background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(255,246,250,0.85) 60%, rgba(255,221,225,0.80) 100%);
+    border-radius: 1.7em;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.13), 0 3px 12px 0 rgba(255, 153, 172, 0.10);
+    border: 1.5px solid #ff99ac33;
+    backdrop-filter: blur(7px);
+    padding: 2em 1.5em;
+    margin-bottom: 2em;
+    transition: background 0.3s, box-shadow 0.3s, border 0.3s;
+    position: relative;
+    z-index: 1;
+}
+.m-portlet.enhanced-portlet:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1.7em;
+    pointer-events: none;
+    box-shadow: 0 0 32px 8px #ff99ac33 inset;
+    opacity: 0.10;
+}
+body.dark-mode .m-portlet.enhanced-portlet {
+    background: linear-gradient(135deg, rgba(35,39,47,0.98) 0%, rgba(255,106,136,0.10) 100%);
+    border: 1.5px solid #ffd20033;
+    box-shadow: 0 8px 32px 0 rgba(255,153,172,0.10), 0 3px 12px 0 rgba(255, 153, 172, 0.08);
+}
+body.dark-mode .m-portlet.enhanced-portlet:after {
+    box-shadow: 0 0 32px 8px #ffd20033 inset;
+}
+/* --- End Enhanced m-portlet enhanced-portlet Background --- */
+
+/* --- Modern Navigation Tabs Styles --- */
+.modern-tabs-container {
+    width: 100%;
+    margin-bottom: 1.5em;
+    border-radius: 1.5em;
+    overflow-x: auto;
+    background: none;
+    position: relative;
+    z-index: 3;
+}
+.gradient-tabs-bg {
+    background: linear-gradient(90deg, #fff6fa 0%, #ffdde1 100%);
+    border-radius: 1.5em;
+    box-shadow: 0 2px 12px rgba(255,106,136,0.08);
+    padding: 0.5em 1.2em;
+}
+.modern-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: auto;
+    padding: 0.2em 0;
+}
+.beautiful-tabs {
+    background: none;
+    border-radius: 1.5em;
+    box-shadow: none;
+}
+.modern-tab.beautiful-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: #fff;
+    border: none;
+    border-radius: 1.2em;
+    padding: 0.55em 1.3em;
+    font-size: 1.08em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.08);
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
+    text-decoration: none;
+    outline: none;
+    position: relative;
+    min-width: 110px;
+    justify-content: center;
+}
+.modern-tab.beautiful-tab:focus-visible {
+    outline: 2px solid #ffd200;
+    box-shadow: 0 0 0 4px #ffd20055, 0 8px 24px 0 rgba(255,106,136,0.18);
+}
+.modern-tab.beautiful-tab:hover, .modern-tab.beautiful-tab:focus {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    color: #ffd200;
+    box-shadow: 0 4px 16px 0 rgba(255,106,136,0.18), 0 2px 8px rgba(255, 153, 172, 0.13);
+    transform: scale(1.045);
+    text-decoration: none;
+}
+.modern-tab.beautiful-tab.active, .modern-tab.beautiful-tab[aria-current="page"] {
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    color: #fff;
+    box-shadow: 0 4px 24px 0 rgba(255,106,136,0.18), 0 2px 8px rgba(255, 153, 172, 0.13);
+    transform: scale(1.07);
+    z-index: 2;
+}
+.tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.2em;
+}
+.tab-label {
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 2px rgba(255,106,136,0.08);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+@media (max-width: 900px) {
+    .modern-tabs-container {
+        padding: 0.2em 0.2em;
+        border-radius: 1em;
+    }
+    .gradient-tabs-bg {
+        padding: 0.3em 0.5em;
+        border-radius: 1em;
+    }
+    .modern-tab.beautiful-tab {
+        font-size: 0.98em;
+        padding: 0.45em 0.8em;
+        min-width: 90px;
+    }
+}
+@media (max-width: 700px) {
+    .modern-tabs {
+        gap: 0.2em;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 0.1em 0;
+    }
+    .modern-tab.beautiful-tab {
+        font-size: 0.93em;
+        padding: 0.35em 0.6em;
+        min-width: 80px;
+    }
+}
+body.dark-mode .gradient-tabs-bg {
+    background: linear-gradient(90deg, #23272f 0%, #ffdde1 100%);
+    box-shadow: 0 2px 12px rgba(255,153,172,0.08);
+}
+body.dark-mode .modern-tab.beautiful-tab {
+    background: linear-gradient(90deg, #23272f 0%, #ff99ac 100%);
+    color: #ffd200;
+}
+body.dark-mode .modern-tab.beautiful-tab:hover, body.dark-mode .modern-tab.beautiful-tab:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #23272f 100%);
+    color: #fff;
+}
+body.dark-mode .modern-tab.beautiful-tab.active, body.dark-mode .modern-tab.beautiful-tab[aria-current="page"] {
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    color: #23272f;
+}
+body.dark-mode .tab-label {
+    color: #ffd200;
+    text-shadow: 0 1px 2px #23272f;
+}
+body.dark-mode .modern-tab.beautiful-tab.active .tab-label {
+    color: #23272f;
+}
+/* --- End Modern Navigation Tabs Styles --- */
