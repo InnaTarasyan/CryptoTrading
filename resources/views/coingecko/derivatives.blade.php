@@ -27,6 +27,37 @@
                     </span>
                     <span class="modern-title-text" id="derivativesTitle">Coingecko Derivatives</span>
                 </div>
+                <!-- Enhanced Dark Mode Toggle -->
+                <div class="dark-mode-container">
+                    <button id="darkModeToggle" class="modern-tab darkmode-switch enhanced-darkmode" title="Toggle dark/light mode" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
+                        <div class="darkmode-switch-track">
+                            <div class="darkmode-switch-thumb">
+                                <span class="darkmode-switch-icon" id="darkModeIcon">
+                                    <!-- Sun & Moon SVG with smooth transitions -->
+                                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#ffd200"/>
+                                        <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.8"/>
+                                    </svg>
+                                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                                        <circle cx="12" cy="12" r="5" fill="#ffb300"/>
+                                        <g stroke="#ffb300" stroke-width="2" opacity="0.9">
+                                            <line x1="12" y1="1" x2="12" y2="3"/>
+                                            <line x1="12" y1="21" x2="12" y2="23"/>
+                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                            <line x1="1" y1="12" x2="3" y2="12"/>
+                                            <line x1="21" y1="12" x2="23" y2="12"/>
+                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <span id="darkModeText" class="darkmode-switch-label">Dark Mode</span>
+                        <span class="darkmode-status-indicator" id="darkModeStatus" aria-live="polite"></span>
+                    </button>
+                </div>
             </div>
         </div>
         <!-- DataTable Section -->
@@ -69,4 +100,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="{{ url('js/coingecko/derivatives.js') }}"></script>
+    <script>
+        // Enhanced Dark Mode Toggle Logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        const darkModeText = document.getElementById('darkModeText');
+        const darkModeStatus = document.getElementById('darkModeStatus');
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('dark-mode');
+                darkModeIcon.querySelector('.icon-moon').style.display = 'none';
+                darkModeIcon.querySelector('.icon-sun').style.display = '';
+                darkModeText.textContent = 'Light Mode';
+                darkModeToggle.setAttribute('aria-checked', 'true');
+                darkModeStatus.classList.add('active');
+                darkModeStatus.title = 'Dark mode enabled';
+            } else {
+                document.body.classList.remove('dark-mode');
+                darkModeIcon.querySelector('.icon-moon').style.display = '';
+                darkModeIcon.querySelector('.icon-sun').style.display = 'none';
+                darkModeText.textContent = 'Dark Mode';
+                darkModeToggle.setAttribute('aria-checked', 'false');
+                darkModeStatus.classList.remove('active');
+                darkModeStatus.title = 'Dark mode disabled';
+            }
+        }
+        // On load, set mode from localStorage or system preference
+        (function() {
+            let dark = localStorage.getItem('derivativesDarkMode');
+            if (dark === null) {
+                dark = window.matchMedia('(prefers-color-scheme: dark)').matches ? '1' : '0';
+            }
+            setDarkMode(dark === '1');
+        })();
+        darkModeToggle.addEventListener('click', function() {
+            const isDark = !document.body.classList.contains('dark-mode');
+            setDarkMode(isDark);
+            localStorage.setItem('derivativesDarkMode', isDark ? '1' : '0');
+        });
+        darkModeToggle.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                darkModeToggle.click();
+            }
+        });
+    </script>
 @endsection

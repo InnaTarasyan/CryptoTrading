@@ -24,6 +24,7 @@ Derivatives.prototype.init = function () {
             {data: 'expired_at', name: 'expired_at'},
         ],
         "iDisplayLength": 20,
+        pageLength: 10,
         "aaSorting": [[1, "asc"]],
         "fnDrawCallback": function() {
             $('#coingecko_derivatives tbody tr').click(function () {
