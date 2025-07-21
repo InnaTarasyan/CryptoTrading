@@ -58,8 +58,7 @@ class DetailsController extends Controller
 
         $data = [
             'symbol' => $symbol,
-            'coin' => $liveCoinWatch ? $liveCoinWatch->name :
-                ($coinGecko ? $coinGecko->name : ''),
+            'coin' => $liveCoinWatch,
             'events' => $events,
             'livecoin' => LiveCoinWatch::join('live_coin_histories', 'live_coin_histories.code', '=', 'live_coin_watches.code')
                         ->where('live_coin_watches.code', $symbol)->first(),
@@ -74,6 +73,7 @@ class DetailsController extends Controller
             'coingeckoexchanges' => CoingeckoExchanges::where('api_id', $symbol)->first(),
             'derivativesExchanges' => $derivativesExchanges ? $derivativesExchanges->description : '',
         ];
+
 
         if(empty($data['livecoin']) && empty($data['coingecko']) && empty($data['coinmarketcal'])) {
             $fiats = Fiats::where('code', $symbol)->first();

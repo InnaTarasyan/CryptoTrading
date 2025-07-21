@@ -23,3 +23,233 @@
 .m-body .m-content {
     padding: 15px 15px;
 }
+
+/* --- TradingView Chart Section Modern Styles --- */
+#trading_view_chart_section {
+  background: linear-gradient(120deg, #fffbe7 0%, #ffd200 60%, #43cea2 100%);
+  border-radius: 2em;
+  box-shadow: 0 8px 32px 0 rgba(67, 206, 162, 0.13), 0 3px 12px 0 rgba(255, 210, 0, 0.10);
+  padding: 2.2em 2em 2em 2em;
+  margin: 2em auto 2em auto;
+  max-width: 1100px;
+  position: relative;
+  overflow: visible;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+#trading_view_chart_section .tv-title-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+  background: linear-gradient(90deg, #43cea2 0%, #ffd200 100%);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 24px 0 rgba(67, 206, 162, 0.10);
+  padding: 1.1em 1.5em;
+  margin-bottom: 1.2em;
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+#trading_view_chart_section .tv-title-bar .tv-title-icon {
+  width: 2.5em;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.13);
+  border-radius: 1em;
+  box-shadow: 0 2px 8px rgba(67,206,162,0.10);
+}
+#trading_view_chart_section .tv-title-bar .tv-title-text {
+  font-size: 1.2em;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #fff;
+}
+#trading_view_chart_section .tv-title-bar .tv-title-subtitle {
+  font-size: 1em;
+  font-weight: 400;
+  color: #fffbe7;
+  margin-left: 0.7em;
+  opacity: 0.85;
+}
+#trading_view_chart_section .tv-chart-embed {
+  width: 100%;
+  min-height: 420px;
+  border-radius: 1.2em;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 4px 24px 0 rgba(67, 206, 162, 0.10);
+  overflow: hidden;
+  margin-bottom: 1.5em;
+  border: 1.5px solid #ffd20033;
+  backdrop-filter: blur(7px);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+#trading_view_chart_section .tv-quick-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+  border-radius: 1.2em;
+  box-shadow: 0 2px 12px rgba(67,206,162,0.08);
+  padding: 1em 1.5em;
+  margin-bottom: 1.2em;
+  color: #23272f;
+  font-size: 1.08em;
+  font-weight: 600;
+}
+#trading_view_chart_section .tv-quick-stats .tv-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  min-width: 120px;
+}
+#trading_view_chart_section .tv-quick-stats .tv-stat-icon {
+  width: 1.7em;
+  height: 1.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffbe7;
+  border-radius: 0.7em;
+  box-shadow: 0 1px 4px rgba(255,215,0,0.08);
+}
+#trading_view_chart_section .tv-quick-stats .tv-stat-label {
+  font-size: 1em;
+  font-weight: 700;
+  color: #23272f;
+}
+#trading_view_chart_section .tv-quick-stats .tv-stat-value {
+  font-size: 1.08em;
+  font-weight: 700;
+  color: #43cea2;
+}
+#trading_view_chart_section .tv-actions-row {
+  display: flex;
+  gap: 1em;
+  margin-top: 0.7em;
+  margin-bottom: 0.2em;
+  flex-wrap: wrap;
+}
+#trading_view_chart_section .tv-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.3em;
+  background: linear-gradient(90deg, #43cea2 0%, #ffd200 100%);
+  border: none;
+  border-radius: 1em;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(67,206,162,0.08);
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
+  outline: none;
+  text-decoration: none;
+}
+#trading_view_chart_section .tv-action-btn:focus-visible {
+  outline: 2px solid #ffd200;
+  box-shadow: 0 0 0 4px #ffd20055, 0 8px 24px 0 rgba(67,206,162,0.18);
+}
+#trading_view_chart_section .tv-action-btn:hover, #trading_view_chart_section .tv-action-btn:focus {
+  background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+  color: #23272f;
+  box-shadow: 0 4px 16px 0 rgba(67,206,162,0.18), 0 2px 8px rgba(255, 210, 0, 0.13);
+  transform: scale(1.045);
+  text-decoration: none;
+}
+#trading_view_chart_section .tv-action-btn .tv-action-icon {
+  width: 1.3em;
+  height: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  #trading_view_chart_section {
+    padding: 1.2em 0.7em 1.2em 0.7em;
+  }
+  #trading_view_chart_section .tv-title-bar {
+    flex-direction: column;
+    gap: 0.7em;
+    padding: 0.8em 1em;
+    font-size: 1.1em;
+  }
+  #trading_view_chart_section .tv-quick-stats {
+    flex-direction: column;
+    gap: 0.7em;
+    padding: 0.7em 1em;
+    font-size: 1em;
+  }
+  #trading_view_chart_section .tv-chart-embed {
+    min-height: 320px;
+  }
+}
+@media (max-width: 600px) {
+  #trading_view_chart_section {
+    padding: 0.7em 0.2em 0.7em 0.2em;
+    border-radius: 1.2em;
+  }
+  #trading_view_chart_section .tv-title-bar {
+    font-size: 1em;
+    border-radius: 0.8em;
+    padding: 0.6em 0.7em;
+  }
+  #trading_view_chart_section .tv-quick-stats {
+    border-radius: 0.8em;
+    padding: 0.5em 0.7em;
+    font-size: 0.98em;
+  }
+  #trading_view_chart_section .tv-chart-embed {
+    min-height: 220px;
+    border-radius: 0.8em;
+  }
+  #trading_view_chart_section .tv-action-btn {
+    padding: 0.6em 1em;
+    font-size: 0.98em;
+    border-radius: 0.8em;
+  }
+}
+
+/* --- Dark Mode Styles --- */
+body.dark-mode #trading_view_chart_section {
+  background: linear-gradient(120deg, #23272f 0%, #3a3f51 100%);
+  box-shadow: 0 8px 32px 0 rgba(255, 210, 0, 0.10), 0 3px 12px 0 rgba(67, 206, 162, 0.13);
+}
+body.dark-mode #trading_view_chart_section .tv-title-bar {
+  background: linear-gradient(90deg, #23272f 0%, #ffd200 100%);
+  color: #ffd200;
+}
+body.dark-mode #trading_view_chart_section .tv-title-bar .tv-title-text {
+  color: #ffd200;
+}
+body.dark-mode #trading_view_chart_section .tv-title-bar .tv-title-subtitle {
+  color: #ffd200;
+  opacity: 0.85;
+}
+body.dark-mode #trading_view_chart_section .tv-chart-embed {
+  background: rgba(35,39,47,0.98);
+  border: 1.5px solid #ffd20033;
+}
+body.dark-mode #trading_view_chart_section .tv-quick-stats {
+  background: linear-gradient(90deg, #ffd200 0%, #23272f 100%);
+  color: #ffd200;
+}
+body.dark-mode #trading_view_chart_section .tv-quick-stats .tv-stat-label {
+  color: #ffd200;
+}
+body.dark-mode #trading_view_chart_section .tv-quick-stats .tv-stat-value {
+  color: #43cea2;
+}
+body.dark-mode #trading_view_chart_section .tv-action-btn {
+  background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+  color: #23272f;
+}
+body.dark-mode #trading_view_chart_section .tv-action-btn:hover, body.dark-mode #trading_view_chart_section .tv-action-btn:focus {
+  background: linear-gradient(90deg, #43cea2 0%, #ffd200 100%);
+  color: #ffd200;
+}
