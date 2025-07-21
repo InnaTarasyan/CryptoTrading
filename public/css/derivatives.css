@@ -1539,3 +1539,256 @@ body.dark-mode .info-title {
     border-radius: 3px;
 }
 /* --- End Responsive Modern Tabs for Mobile --- */
+
+/* --- Derivatives Review Block Styles --- */
+.derivatives-review-block {
+    background: linear-gradient(135deg, #fff6fa 0%, #e0e7ff 100%);
+    border-radius: 1.2em;
+    box-shadow: 0 2px 16px rgba(255,106,136,0.08);
+    padding: 2em 1.5em;
+    margin: 2.5em 0 1.5em 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', 'Roboto', Arial, Helvetica, sans-serif;
+}
+.review-block-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin-bottom: 1.2em;
+}
+.review-block-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff6a88 0%, #ffd200 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.13);
+    width: 2.5em;
+    height: 2.5em;
+}
+.review-block-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #ff6a88;
+    letter-spacing: 0.01em;
+}
+.modern-review-form {
+    background: rgba(255,255,255,0.85);
+    border-radius: 1em;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.07);
+    padding: 1.2em 1em 1em 1em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+}
+.review-form-row {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.review-form-group {
+    flex: 1 1 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    margin-bottom: 0.5em;
+}
+.review-form-group-full {
+    flex: 1 1 100%;
+}
+.review-form-group-submit {
+    align-self: flex-end;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.modern-review-form label {
+    font-weight: 600;
+    color: #ff6a88;
+    font-size: 1em;
+    margin-bottom: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+.modern-review-form input,
+.modern-review-form select,
+.modern-review-form textarea {
+    border: 1px solid #ffdde1;
+    border-radius: 0.6em;
+    padding: 0.5em 0.9em;
+    font-size: 1em;
+    background: #fff;
+    color: #232946;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(255,106,136,0.04);
+}
+.modern-review-form input:focus,
+.modern-review-form select:focus,
+.modern-review-form textarea:focus {
+    border: 1.5px solid #ff6a88;
+    outline: none;
+    box-shadow: 0 0 0 2px #ffd20055;
+}
+.modern-review-form textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+.modern-review-submit {
+    background: linear-gradient(90deg, #ff6a88 0%, #ffd200 100%);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    border-radius: 0.7em;
+    padding: 0.7em 1.5em;
+    font-size: 1.08em;
+    box-shadow: 0 2px 8px rgba(255,106,136,0.13);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.modern-review-submit:hover, .modern-review-submit:focus {
+    background: linear-gradient(90deg, #ffd200 0%, #ff6a88 100%);
+    color: #ff6a88;
+    transform: scale(1.04);
+}
+.submit-icon {
+    font-size: 1.2em;
+}
+.form-icon {
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+#reviewFormMsg {
+    margin-top: 0.5em;
+    min-height: 1.2em;
+}
+.reviews-list-block {
+    margin-top: 2em;
+    background: rgba(255,255,255,0.7);
+    border-radius: 1em;
+    box-shadow: 0 1px 6px rgba(255,106,136,0.06);
+    padding: 1.2em 1em 0.5em 1em;
+}
+.reviews-list-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #ff6a88;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+#reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+}
+.modern-review-card {
+    display: flex;
+    gap: 1em;
+    background: linear-gradient(90deg, #fff6fa 0%, #e0e7ff 100%);
+    border-radius: 0.8em;
+    box-shadow: 0 1px 8px rgba(255,106,136,0.07);
+    padding: 1em 1.2em;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+.modern-review-avatar {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd200 0%, #ff6a88 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(255,106,136,0.09);
+    flex-shrink: 0;
+}
+.modern-review-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+.modern-review-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    font-size: 1em;
+    font-weight: 600;
+    color: #ff6a88;
+}
+.modern-review-name {
+    color: #232946;
+    font-weight: 700;
+}
+.modern-review-date {
+    color: #888;
+    font-size: 0.98em;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+.modern-review-rating {
+    color: #ffd200;
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
+}
+.modern-review-title {
+    font-size: 1.08em;
+    font-weight: 600;
+    color: #ff6a88;
+    margin-top: 0.2em;
+}
+.modern-review-comment {
+    color: #232946;
+    font-size: 1em;
+    margin: 0.2em 0 0.1em 0;
+    line-height: 1.6;
+}
+.modern-review-extra {
+    font-size: 0.98em;
+    color: #888;
+    margin-top: 0.2em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em;
+}
+@media (max-width: 700px) {
+    .derivatives-review-block {
+        padding: 1.2em 0.7em;
+    }
+    .modern-review-form {
+        padding: 0.7em 0.3em 0.7em 0.3em;
+    }
+    .review-form-row {
+        flex-direction: column;
+        gap: 0.3em;
+    }
+    .modern-review-card {
+        flex-direction: column;
+        gap: 0.5em;
+        padding: 0.7em 0.5em;
+    }
+    .modern-review-avatar {
+        width: 2em;
+        height: 2em;
+        font-size: 1em;
+    }
+}
+@media (max-width: 480px) {
+    .derivatives-review-block {
+        padding: 0.7em 0.2em;
+    }
+}
+/* --- End Derivatives Review Block Styles --- */

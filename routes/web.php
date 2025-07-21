@@ -156,5 +156,9 @@ Route::get('/coingecko/exchanges_rates/reviews/list', [\App\Http\Controllers\Coi
 Route::get('/coingecko/derivatives_exchanges/reviews', [\App\Http\Controllers\Coingecko\DerivativesExchangesController::class, 'reviewsList']);
 Route::post('/coingecko/derivatives_exchanges/reviews', [\App\Http\Controllers\Coingecko\DerivativesExchangesController::class, 'storeReview']);
 
+// Coin Gecko Derivatives Reviews
+Route::get('/coingecko/derivatives/reviews', [\App\Http\Controllers\Coingecko\DerivativesReviewController::class, 'index'])->name('coingecko.derivatives.reviews.index');
+Route::post('/coingecko/derivatives/reviews', [\App\Http\Controllers\Coingecko\DerivativesReviewController::class, 'store'])->name('coingecko.derivatives.reviews.store');
+
 // Privacy Policy Page
 Route::view('/privacy-policy', 'privacy-policy');

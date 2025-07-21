@@ -249,6 +249,99 @@
                 </div>
             </div>
         </div>
+
+        <!-- Add Review Block -->
+        <section class="derivatives-review-block">
+            <div class="review-block-header">
+                <span class="review-block-icon">
+                    <!-- Review Icon SVG -->
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><defs><linearGradient id="reviewGradient" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6a88"/><stop offset="1" stop-color="#ffd200"/></linearGradient></defs><circle cx="14" cy="14" r="14" fill="url(#reviewGradient)"/><path d="M9 12h10M9 16h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>
+                <h3 class="review-block-title">Add Your Review</h3>
+            </div>
+            <form id="reviewForm" class="modern-review-form" method="POST" action="{{ route('coingecko.derivatives.reviews.store') }}">
+                @csrf
+                <div class="review-form-row">
+                    <div class="review-form-group">
+                        <label for="reviewName"><span class="form-icon">👤</span> Name</label>
+                        <input type="text" id="reviewName" name="name" required maxlength="255" placeholder="Your name">
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewEmail"><span class="form-icon">✉️</span> Email</label>
+                        <input type="email" id="reviewEmail" name="email" required maxlength="255" placeholder="Your email">
+                    </div>
+                </div>
+                <div class="review-form-row">
+                    <div class="review-form-group">
+                        <label for="reviewRating"><span class="form-icon">⭐</span> Rating</label>
+                        <select id="reviewRating" name="rating" required>
+                            <option value="">Select</option>
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★☆</option>
+                            <option value="3">★★★☆☆</option>
+                            <option value="2">★★☆☆☆</option>
+                            <option value="1">★☆☆☆☆</option>
+                        </select>
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewCountry"><span class="form-icon">🌍</span> Country</label>
+                        <input type="text" id="reviewCountry" name="country" maxlength="100" placeholder="Country (optional)">
+                    </div>
+                </div>
+                <div class="review-form-row">
+                    <div class="review-form-group">
+                        <label for="reviewExperience"><span class="form-icon">🎓</span> Experience Level</label>
+                        <select id="reviewExperience" name="experience_level">
+                            <option value="">Select</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                            <option value="Professional">Professional</option>
+                        </select>
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewTitle"><span class="form-icon">📝</span> Title</label>
+                        <input type="text" id="reviewTitle" name="title" required maxlength="255" placeholder="Review title">
+                    </div>
+                </div>
+                <div class="review-form-row">
+                    <div class="review-form-group review-form-group-full">
+                        <label for="reviewComment"><span class="form-icon">💬</span> Comment</label>
+                        <textarea id="reviewComment" name="comment" required maxlength="2000" rows="3" placeholder="Share your experience..."></textarea>
+                    </div>
+                </div>
+                <div class="review-form-row">
+                    <div class="review-form-group">
+                        <label for="reviewPros"><span class="form-icon">👍</span> Pros</label>
+                        <input type="text" id="reviewPros" name="pros" maxlength="1000" placeholder="Pros (optional)">
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewCons"><span class="form-icon">👎</span> Cons</label>
+                        <input type="text" id="reviewCons" name="cons" maxlength="1000" placeholder="Cons (optional)">
+                    </div>
+                </div>
+                <div class="review-form-row">
+                    <div class="review-form-group">
+                        <label for="reviewRecommend"><span class="form-icon">🤝</span> Would you recommend?</label>
+                        <select id="reviewRecommend" name="recommend">
+                            <option value="">Select</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="review-form-group review-form-group-submit">
+                        <button type="submit" class="modern-review-submit">
+                            <span class="submit-icon">➕</span> Submit Review
+                        </button>
+                    </div>
+                </div>
+                <div id="reviewFormMsg"></div>
+            </form>
+            <div class="reviews-list-block">
+                <h4 class="reviews-list-title"><span class="form-icon">🗂️</span> Previous User Reviews</h4>
+                <div id="reviews-list"></div>
+            </div>
+        </section>
     </div>
 @endsection
 @section('scripts')
