@@ -54,11 +54,11 @@ class DetailsController extends Controller
         $derivatives = Derivatives::where('symbol', $symbol)->first();
 
         $liveCoinWatch = LiveCoinWatch::where('code', $symbol)->first();
-        $coinGecko     = CoinGeckoCoin::where('symbol', $symbol)->first();
 
+        $coinMarketCal = CoinMarketCal::where('symbol', $symbol)->first();
         $data = [
             'symbol' => $symbol,
-            'name'   => strtolower($coinGecko->name),
+            'name'   => $coinMarketCal ? strtolower($coinMarketCal->name) : 'bitcoin',
             'coin' => $liveCoinWatch,
             'events' => $events,
             'livecoin' => LiveCoinWatch::join('live_coin_histories', 'live_coin_histories.code', '=', 'live_coin_watches.code')
