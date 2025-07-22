@@ -4,6 +4,29 @@
 @endsection
 @section('content')
 
+    <div class="m-content">
+        <!-- Modern Coin Info Summary Card -->
+        <div id="coinInfoSummary" class="coin-info-summary fade-in-up" style="display:none;">
+            <img class="coin-logo" id="coinLogo" src="" alt="Coin Logo" loading="lazy">
+            <div class="coin-meta">
+                <div class="coin-title" id="coinTitle"></div>
+                <span class="coin-symbol" id="coinSymbol"></span>
+                <div class="coin-desc" id="coinDesc"></div>
+                <div class="coin-links" id="coinLinks"></div>
+            </div>
+            <div class="coin-meta-stats">
+                <div><strong>Price:</strong> <span id="coinPrice"></span></div>
+                <div><strong>Market Cap:</strong> <span id="coinMarketCap"></span></div>
+                <div><strong>Rank:</strong> <span id="coinRank"></span></div>
+                <div><strong>Supply:</strong> <span id="coinSupply"></span></div>
+            </div>
+        </div>
+        <div id="coinInfoLoading" style="text-align:center; margin:2em 0;">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation:spin 1s linear infinite;"><circle cx="24" cy="24" r="20" stroke="#ff6a88" stroke-width="4" stroke-linecap="round" stroke-dasharray="31.4 31.4"/><style>@keyframes spin{100%{transform:rotate(360deg)}}</style></svg>
+        </div>
+        <div id="coinInfoError" style="display:none; color:#ff6a88; text-align:center; font-weight:600; margin:2em 0;"></div>
+    </div>
+
     <div class="row">
         <div class="col-xl-5 col-lg-5 trading_view_chart_section" >
             {{--@if(!isset($tradingPair))--}}
@@ -179,7 +202,7 @@
 
         <div class="col-xl-7 col-lg-7 trading_view_chart_section" >
             <div class="coin-extra-chart-title"><span>📉</span> Mini Price Chart</div>
-            <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container" style="min-height:350px; height:45vw; max-height:520px; width:100%; border-radius:1.2em; overflow:hidden; background:#f7faff; box-shadow:0 2px 12px rgba(67,206,162,0.08);">
                 <div id="tv-mini-chart"></div>
                 <script type="text/javascript">
                     new TradingView.widget({
@@ -203,7 +226,7 @@
     <div class="row">
         <div class="col-xl-6 col-lg-6 trading_view_chart_section" >
             <div class="coin-extra-chart-title"><span>🧑‍💻</span> Technical Analysis</div>
-            <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container" style="min-height:450px; height:45vw; max-height:620px; width:100%; border-radius:1.2em; overflow:hidden; background:#f7faff; box-shadow:0 2px 12px rgba(67,206,162,0.08);">
                 <div id="tv-ta-chart"></div>
                 <script type="text/javascript">
                     new TradingView.widget({
@@ -229,7 +252,7 @@
 
         <div class="col-xl-6 col-lg-6 trading_view_chart_section" >
             <div class="coin-extra-chart-title"><span>💹</span> Market Cap & Volume</div>
-            <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container" style="min-height:450px; height:45vw; max-height:620px; width:100%; border-radius:1.2em; overflow:hidden; background:#f7faff; box-shadow:0 2px 12px rgba(67,206,162,0.08);">
                 <div id="tv-volume-chart"></div>
                 <script type="text/javascript">
                     new TradingView.widget({
@@ -495,6 +518,60 @@
 
 @endsection
 @section('scripts')
+    <script>
+        // --- Modern Coin Info Fetcher (CoinGecko) ---
+        // Set your coin id here, or fetch dynamically from backend/route/JS variable
+        const coinId = '{{ $name ?? "monero" }}'; // fallback to monero for demo
+        console.log(coinId);
+
+        const apiUrl = `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+
+        function formatNumber(n) {
+            if (!n && n !== 0) return '-';
+            return n.toLocaleString('en-US', {maximumFractionDigits: 2});
+        }
+        function formatCurrency(n) {
+            if (!n && n !== 0) return '-';
+            return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 6});
+        }
+        function escapeHTML(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+        function stripTags(str) {
+            return str.replace(/<[^>]*>?/gm, '');
+        }
+
+        fetch(apiUrl)
+            .then(r => r.json())
+        .then(data => {
+            document.getElementById('coinLogo').src = data.image.large || data.image.small || '';
+        document.getElementById('coinLogo').alt = data.name + ' logo';
+        document.getElementById('coinTitle').textContent = data.name;
+        document.getElementById('coinSymbol').textContent = data.symbol ? data.symbol.toUpperCase() : '';
+        document.getElementById('coinDesc').innerHTML = data.description.en ? data.description.en.split('. ').slice(0,2).join('. ') + '.' : '';
+        document.getElementById('coinPrice').textContent = formatCurrency(data.market_data.current_price.usd);
+        document.getElementById('coinMarketCap').textContent = formatCurrency(data.market_data.market_cap.usd);
+        document.getElementById('coinRank').textContent = data.market_cap_rank ? '#' + data.market_cap_rank : '-';
+        document.getElementById('coinSupply').textContent = formatNumber(data.market_data.circulating_supply) + (data.market_data.max_supply ? ' / ' + formatNumber(data.market_data.max_supply) : '');
+        // Links
+        let links = [];
+        if (data.links.homepage && data.links.homepage[0]) links.push(`<a class="coin-link" href="${data.links.homepage[0]}" target="_blank" rel="noopener">Website</a>`);
+        if (data.links.blockchain_site && data.links.blockchain_site[0]) links.push(`<a class="coin-link" href="${data.links.blockchain_site[0]}" target="_blank" rel="noopener">Blockchain</a>`);
+        if (data.links.repos_url && data.links.repos_url.github && data.links.repos_url.github[0]) links.push(`<a class="coin-link" href="${data.links.repos_url.github[0]}" target="_blank" rel="noopener">GitHub</a>`);
+        if (data.links.subreddit_url) links.push(`<a class="coin-link" href="${data.links.subreddit_url}" target="_blank" rel="noopener">Reddit</a>`);
+        if (data.links.twitter_screen_name) links.push(`<a class="coin-link" href="https://twitter.com/${data.links.twitter_screen_name}" target="_blank" rel="noopener">Twitter</a>`);
+        document.getElementById('coinLinks').innerHTML = links.join(' ');
+        document.getElementById('coinInfoSummary').style.display = '';
+        document.getElementById('coinInfoLoading').style.display = 'none';
+        })
+        .catch(e => {
+            document.getElementById('coinInfoLoading').style.display = 'none';
+        document.getElementById('coinInfoError').style.display = '';
+        document.getElementById('coinInfoError').textContent = 'Failed to load coin data. Please try again later.';
+        });
+    </script>
     <script>
         var events = {!! $events !!};
     </script>

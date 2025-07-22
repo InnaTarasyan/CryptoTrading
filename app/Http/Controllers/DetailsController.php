@@ -58,6 +58,7 @@ class DetailsController extends Controller
 
         $data = [
             'symbol' => $symbol,
+            'name'   => strtolower($coinGecko->name),
             'coin' => $liveCoinWatch,
             'events' => $events,
             'livecoin' => LiveCoinWatch::join('live_coin_histories', 'live_coin_histories.code', '=', 'live_coin_watches.code')
