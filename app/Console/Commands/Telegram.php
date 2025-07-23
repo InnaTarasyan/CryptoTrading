@@ -31,13 +31,8 @@ class Telegram extends Command
      */
     public function handle()
     {
-        $appInfo = new AppInfo();
-        $appInfo->setApiId(config('telegram.api_id'));
-        $appInfo->setApiHash(config('telegram.api_hash'));
-        $setting = new Settings();
-        $setting->setAppInfo($appInfo);
-
-        $MadelineProto = new \danog\MadelineProto\API('session.madeline');
+        $MadelineProto = new \danog\MadelineProto\API('bot.madeline');
+        $MadelineProto->botLogin(config('telegram.api_id'), config('telegram.api_hash'));
 
         $MadelineProto->start();
         $me = $MadelineProto->getSelf();
@@ -60,11 +55,15 @@ class Telegram extends Command
                     'hash'        => 0
                 ]);
 
+                print_r($messages_Messages);
+
                 if(!array_key_exists('messages', $messages_Messages)) {
                     break;
                 }
 
                 foreach ($messages_Messages['messages'] as $message) {
+                    print_r($message);
+
                     if(array_key_exists('message', $message)) {
                         $link = '';
                         preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#',
