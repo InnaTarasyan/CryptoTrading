@@ -34,6 +34,12 @@ CoinDetails.prototype.init = function () {
         return;
     }
 
+    if (window.innerWidth >= 768 ) {
+        $('#m_calendar').fullCalendar('changeView', 'agendaDay');
+    } else {
+        $('#m_calendar').fullCalendar('changeView', 'month');
+    }
+
 
     $('#m_calendar').fullCalendar({
         plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],

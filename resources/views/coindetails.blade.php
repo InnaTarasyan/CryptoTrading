@@ -27,6 +27,40 @@
         <div id="coinInfoError" style="display:none; color:#ff6a88; text-align:center; font-weight:600; margin:2em 0;"></div>
     </div>
 
+
+
+    <!--begin::Portlet-->
+    <div class="m-portlet" id="m_portlet_calendar" style="padding: 3em 3em 1.5em 3em;">
+        <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_1">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                <span class="m-portlet__head-icon">
+                    <i class="flaticon-map-location"></i>
+                </span>
+                        <h3 class="m-portlet__head-text">
+                            Coin Events
+                        </h3>
+                    </div>
+                </div>
+                <div class="m-portlet__head-tools">
+                    <ul class="m-portlet__nav">
+                        <li class="m-portlet__nav-item">
+                            <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
+                                <i class="la la-angle-down"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+            </div>
+        </div>
+    </div>
+    <!--end::Portlet-->
+
+
+
     <div class="row" style="padding: 3em 3em 1.5em 3em;">
         <div class="col-xl-5 col-lg-5 trading_view_chart_section" >
             {{--@if(!isset($tradingPair))--}}
@@ -436,39 +470,8 @@
     {{--</div>--}}
 
 
-<div class="row" style="padding: 3em 3em 1.5em 3em;">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
-        <!--begin::Portlet-->
-        <div class="m-portlet" id="m_portlet_calendar">
-            <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_1">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                        <span class="m-portlet__head-icon">
-                            <i class="flaticon-map-location"></i>
-                        </span>
-                            <h3 class="m-portlet__head-text">
-                                Coin Events
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
-                                    <i class="la la-angle-down"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                </div>
-            </div>
-        </div>
-        <!--end::Portlet-->
-    </div>
-</div>
+
+
 
 
 
@@ -526,69 +529,61 @@
 
 
 
-
-            <!--Begin::Section-->
-            <div class="row">
-                <div class="col-xl-4 col-lg-12">
-                    <!--Begin::Portlet-->
-                    <div class="m-portlet ">
-                        <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_2">
-                            <div class="m-portlet__head">
-                                <div class="m-portlet__head-caption">
-                                    <div class="m-portlet__head-title">
+        <!--Begin::Portlet-->
+        <div class="m-portlet " style="padding: 3em 3em 1.5em 3em;">
+            <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_2">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
                                     <span class="m-portlet__head-icon">
                                         <i class="socicon-telegram"></i>
                                     </span>
-                                        <h3 class="m-portlet__head-text">
-                                            Telegram Channel
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="m-portlet__head-tools">
-                                    <ul class="m-portlet__nav">
-                                        <li class="m-portlet__nav-item">
-                                            <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
-                                                <i class="la la-angle-down"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="m-portlet__body">
-                                @if(isset($tweets))
-                                    <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="600" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
-                                        <!--Begin::Timeline 2 -->
-                                        <div class="m-timeline-2">
-                                            @foreach($tweets as $tweet)
-                                                <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
-                                                    <div class="m-timeline-2__item">
+                            <h3 class="m-portlet__head-text">
+                                Telegram Channel
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
+                                    <i class="la la-angle-down"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    @if(isset($tweets))
+                        <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="600" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
+                            <!--Begin::Timeline 2 -->
+                            <div class="m-timeline-2">
+                                @foreach($tweets as $tweet)
+                                    <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
+                                        <div class="m-timeline-2__item">
                                                     <span class="m-timeline-2__item-time">
                                                         {{\Carbon\Carbon::parse($tweet['created_at'])->format('y, M, d, H:i:s')}}
                                                     </span>
-                                                        <div class="m-timeline-2__item-cricle">
-                                                            <i class="fa fa-genderless m--font-danger"></i>
-                                                        </div>
-                                                        <div class="m-timeline-2__item-text  m--padding-top-5">
-                                                            {!! $tweet['content'] !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                                            <div class="m-timeline-2__item-cricle">
+                                                <i class="fa fa-genderless m--font-danger"></i>
+                                            </div>
+                                            <div class="m-timeline-2__item-text  m--padding-top-5">
+                                                {!! $tweet['content'] !!}
+                                            </div>
                                         </div>
-                                        <!--End::Timeline 2 -->
                                     </div>
-                                @else
-                                    <i>Twitter Account</i> has not been added.
-                                    Please configure it <a href="{{ url('twitter') }}">here...</a>
-                                @endif
+                                @endforeach
                             </div>
+                            <!--End::Timeline 2 -->
                         </div>
-                    </div>
-                    <!--end::Portlet-->
+                    @else
+                        <i>Twitter Account</i> has not been added.
+                        Please configure it <a href="{{ url('twitter') }}">here...</a>
+                    @endif
                 </div>
-
             </div>
-            <!--End::Section-->
+        </div>
+        <!--end::Portlet-->
 
 
 
