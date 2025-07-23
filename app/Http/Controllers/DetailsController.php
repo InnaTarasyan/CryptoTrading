@@ -30,6 +30,8 @@ class DetailsController extends Controller
             ->orWhereJsonContains('coins', [["id" => $symbol]])
             ->get();
 
+        $events = CoinMarketCalEvents::all();
+
         $tradingPair = TradingPair::where('coin', $symbol)->first();
 
         $trendings = CoinGeckoTrending::where('api_id', $symbol)->first() ?
@@ -56,6 +58,10 @@ class DetailsController extends Controller
         $liveCoinWatch = LiveCoinWatch::where('code', $symbol)->first();
 
         $coinMarketCal = CoinMarketCal::where('symbol', $symbol)->first();
+        if(!$liveCoinWatch) {
+            $liveCoinWatch  = CoinMarketCal::where('symbol', 'btc')->first();
+        }
+
         $data = [
             'symbol' => $symbol,
             'name'   => $coinMarketCal ? strtolower($coinMarketCal->name) : 'bitcoin',

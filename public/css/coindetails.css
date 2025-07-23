@@ -553,7 +553,7 @@ body {
   box-shadow: 0 2px 16px 0 rgba(255,106,136,0.10);
   margin-bottom: 2em;
   padding: 1em 0.5em;
-  min-height: 350px;
+  min-height: 650px;
   overflow: hidden;
 }
 @media (max-width: 700px) {

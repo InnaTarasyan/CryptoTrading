@@ -3,6 +3,8 @@ function CoinDetails() {
 
 }
 
+
+
 CoinDetails.prototype.init = function () {
 
   var ev_list = [];
@@ -11,7 +13,13 @@ CoinDetails.prototype.init = function () {
             'title': this['title'],
             'start': new Date(this['displayed_date']),
             'description': this['source'],
-            'className': "m-fc-event--accent"
+            'className': "m-fc-event--accent",
+            "editable": true,
+            "extendedProps": {
+               "source": this['source'],
+               "proof" : this['proof'],
+               "can_occur_before" :  this['can_occur_before'],
+            },
 
         };
         ev_list.push(elem);
@@ -28,11 +36,15 @@ CoinDetails.prototype.init = function () {
 
 
     $('#m_calendar').fullCalendar({
+        plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+        timeZone: 'UTC',
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay,listWeek'
+            // right: 'month,agendaWeek,agendaDay,listWeek'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
+        selectable: true,
         editable: true,
         eventLimit: true, // allow "more" link when too many events
         navLinks: true,
@@ -45,9 +57,9 @@ CoinDetails.prototype.init = function () {
                 element.data('placement', 'top');
                 mApp.initPopover(element);
             } else if (element.hasClass('fc-time-grid-event')) {
-                element.find('.fc-title').append('<div class="fc-description">' + event.description + '</div>');
-            } else if (element.find('.fc-list-item-title').lenght !== 0) {
-                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.description + '</div>');
+                element.find('.fc-title').append('<div class="fc-description"><a href="'+ event.description + '">' + event.description + '</a></div>');
+            } else if (element.find('.fc-list-item-title').length !== 0) {
+                element.find('.fc-list-item-title').append('<div class="fc-description"><a href="' + event.description + '">' + event.description + '</a></div>');
             }
         }
     });
@@ -59,13 +71,13 @@ CoinDetails.prototype.init = function () {
    $('.fc-listWeek-button').hide();
 
 
-    var portlet = $('#m_portlet_tools_2').mPortlet();
+    var portlet = $('#m_portlet_tools').mPortlet();
     portlet.on('afterFullscreenOn', function(portlet) {
-       $('#tradingview_ffbfc').css('height', '100%');
+       $('#tradingview_chart').css('height', '100%');
     });
 
     portlet.on('afterFullscreenOff', function(portlet) {
-       $('#tradingview_ffbfc').css('height', '400px');
+       $('tradingview_chart').css('height', '400px');
     });
 
 };
@@ -74,3 +86,4 @@ $(document).ready(function() {
     var coin = new CoinDetails();
     coin.init();
 });
+
