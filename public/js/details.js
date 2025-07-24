@@ -7,23 +7,26 @@ function CoinDetails() {
 
 CoinDetails.prototype.init = function () {
 
+
   var ev_list = [];
   $.each(events, function(key, value) {
         var elem = {
             'title': this['title'],
-            'start': new Date(this['displayed_date']),
+            'start': new Date(this['date_event']),
             'description': this['source'],
             'className': "m-fc-event--accent",
             "editable": true,
-            "extendedProps": {
-               "source": this['source'],
-               "proof" : this['proof'],
-               "can_occur_before" :  this['can_occur_before'],
-            },
+            // "extendedProps": {
+            //    "source": this['source'],
+            //    "proof" : this['proof'],
+            //    "can_occur_before" :  this['can_occur_before'],
+            // },
 
         };
         ev_list.push(elem);
   });
+
+  console.log(ev_list);
 
     $('#tradingview_ffbfc').css('height', '400px');
 
@@ -42,13 +45,13 @@ CoinDetails.prototype.init = function () {
 
 
     $('#m_calendar').fullCalendar({
-        plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+        //plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
         timeZone: 'UTC',
         header: {
             left: 'prev,next today',
             center: 'title',
-            // right: 'month,agendaWeek,agendaDay,listWeek'
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+             right: 'month,agendaWeek,agendaDay,listWeek'
+           // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
         selectable: true,
         editable: true,
@@ -70,11 +73,11 @@ CoinDetails.prototype.init = function () {
         }
     });
 
-   $('.fc-listWeek-button').click();
-   $('.fc-month-button').hide();
-   $('.fc-agendaWeek-button').hide();
-   $('.fc-agendaDay-button').hide();
-   $('.fc-listWeek-button').hide();
+   // $('.fc-listWeek-button').click();
+   // $('.fc-month-button').hide();
+   // $('.fc-agendaWeek-button').hide();
+   // $('.fc-agendaDay-button').hide();
+   // $('.fc-listWeek-button').hide();
 
 
     var portlet = $('#m_portlet_tools').mPortlet();

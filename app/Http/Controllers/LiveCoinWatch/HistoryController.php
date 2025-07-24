@@ -26,9 +26,8 @@ class HistoryController extends Controller
             })
             ->editColumn('code', function ($item){
                 return "<span >
-                           <input type='hidden' class='id' value='".$item->code."'/>
-                           <p style='text-decoration: underline solid ". $item->color." 4px'>$item->code</p>
-                           <p>".(isset($item->symbol) ? '('.$item->symbol.')' : '')."</p>
+                           <input type='hidden' class='id' value='".strtolower($item->code)."'/>
+                           <p>".$item->code.' '.(isset($item->symbol) ? '('.$item->symbol.')' : '')."</p>
                         </span>";
 
             })
@@ -81,7 +80,7 @@ class HistoryController extends Controller
                 $str.=  '</ul>';
                 return $str;
             })
-            ->rawColumns(['code', 'rate',  'maxSupply', 'totalSupply', 'circulatingSupply', 'categories'])
+            ->rawColumns([ 'rate',  'maxSupply', 'totalSupply', 'circulatingSupply', 'categories'])
             ->make(true);
     }
 }
