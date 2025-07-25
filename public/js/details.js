@@ -10,12 +10,14 @@ CoinDetails.prototype.init = function () {
 
   var ev_list = [];
   $.each(events, function(key, value) {
+
         var elem = {
-            'title': this['title'],
+            'title': JSON.parse(this['title']).en,
             'start': new Date(this['date_event']),
             'description': this['source'],
             'className': "m-fc-event--accent",
             "editable": true,
+            "url": this['source'],
             // "extendedProps": {
             //    "source": this['source'],
             //    "proof" : this['proof'],
@@ -26,7 +28,6 @@ CoinDetails.prototype.init = function () {
         ev_list.push(elem);
   });
 
-  console.log(ev_list);
 
     $('#tradingview_ffbfc').css('height', '400px');
 
@@ -60,17 +61,18 @@ CoinDetails.prototype.init = function () {
         defaultDate: todayDate,
         events: ev_list,
 
-        eventRender: function(event, element) {
-            if (element.hasClass('fc-day-grid-event')) {
-                element.data('content', event.description);
-                element.data('placement', 'top');
-                mApp.initPopover(element);
-            } else if (element.hasClass('fc-time-grid-event')) {
-                element.find('.fc-title').append('<div class="fc-description"><a href="'+ event.description + '">' + event.description + '</a></div>');
-            } else if (element.find('.fc-list-item-title').length !== 0) {
-                element.find('.fc-list-item-title').append('<div class="fc-description"><a href="' + event.description + '">' + event.description + '</a></div>');
-            }
-        }
+        // eventRender: function(event, element) {
+        //     if (element.hasClass('fc-day-grid-event')) {
+        //         element.data('content', event.description);
+        //         element.data('placement', 'top');
+        //         mApp.initPopover(element);
+        //     } else if (element.hasClass('fc-time-grid-event')) {
+        //         element.find('.fc-title').append('<div class="fc-description"><a href="'+ event.description + '">' + event.description + '</a></div>');
+        //     } else if (element.find('.fc-list-item-title').length !== 0) {
+        //         element.find('.fc-list-item-title').append('<div class="fc-description"><a href="' + event.description + '">' + event.description + '</a></div>');
+        //     }
+        // },
+
     });
 
    // $('.fc-listWeek-button').click();
