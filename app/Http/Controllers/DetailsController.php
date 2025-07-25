@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoinGecko\CoinGeckoMarkets;
 use App\Models\CoinMarketCal\CoinMarketCalEvents;
 use App\Models\LiveCoinWatch\LiveCoinHistory;
 use App\Models\TelegramMessages;
@@ -41,6 +42,11 @@ class DetailsController extends Controller
             'events' => $events,
             'tweets' => TelegramMessages::get(),
         ];
+
+        if($coin) {
+            $coingeckoMarkets = CoinGeckoMarkets::where('api_id', strtolower($coin->name))->first();
+            $data['coinGeckoMarkets'] = $coingeckoMarkets;
+        }
 
         return view('coindetails')
             ->with($data);
