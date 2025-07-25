@@ -59,12 +59,12 @@ Derivatives.prototype.init = function () {
             }
         ],
         "aaSorting": [[1, "asc"]],
-        "fnDrawCallback": function() {
-            $('#coingecko_derivatives tbody tr').click(function () {
-                var coin = $(this).find('.id').val();
-                window.location.href = "/details/" + coin;
-            });
-        }
+        // "fnDrawCallback": function() {
+        //     $('#coingecko_derivatives tbody tr').click(function () {
+        //         var coin = $(this).find('.id').val();
+        //         window.location.href = "/details/" + coin;
+        //     });
+        // }
     });
 
     // Replace default DataTables filter with custom search bar (pink gradient)

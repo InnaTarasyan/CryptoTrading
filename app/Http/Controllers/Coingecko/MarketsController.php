@@ -22,7 +22,7 @@ class MarketsController extends Controller
             'coin_gecko_coins.api_id', '=', 'coin_gecko_markets.api_id')->get())
             ->editColumn('name', function ($item){
                 return "<span style='font-size: 16px;'>
-                           <input type='hidden' class='id' value='".$item->api_id."'/>
+                           <input type='hidden' class='id' value='".$item->symbol."'/>
                            <p class='success'>".$item->symbol ."</p>
                         </span>";
 
@@ -179,7 +179,7 @@ class MarketsController extends Controller
                 return '<span style="white-space:nowrap;"><span style="font-size:1em;margin-right:3px;vertical-align:middle;">⏰</span> ' . $label . ', ' . $time . '</span>';
             })
             ->rawColumns([
-                'name',
+              //  'name',
                 'market_cap',
                 'current_price',
                 'circulatingSupply',

@@ -84,7 +84,7 @@ class ExchangesController extends Controller
                 return $item->has_trading_incentive ? 'Yes' : 'No';
             })
             ->rawColumns([
-                'name',
+                //'name',
                 'trade_volume_24h_btc_normalized',
                 'api_id',
             ])

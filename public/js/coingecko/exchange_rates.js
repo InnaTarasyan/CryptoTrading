@@ -58,12 +58,12 @@ CoingeckoExchangeRates.prototype.init = function () {
             }
         ],
         "responsive": true,
-        "fnDrawCallback": function() {
-            $('#coingecko_exchange_rates tbody tr').click(function () {
-                var coin = $(this).find('.id').val();
-                window.location.href = "/details/" + coin;
-            });
-        },
+        // "fnDrawCallback": function() {
+        //     $('#coingecko_exchange_rates tbody tr').click(function () {
+        //         var coin = $(this).find('.id').val();
+        //         window.location.href = "/details/" + coin;
+        //     });
+        // },
         "infoCallback": function(settings, start, end, max, total, pre) {
             return `\n                <div class=\"datatable-info-beautiful pinky-gradient\">\n                    <span class=\"datatable-info-icon\">💖</span>\n                    <span class=\"datatable-info-text\">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
         },

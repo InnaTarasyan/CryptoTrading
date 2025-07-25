@@ -96,9 +96,9 @@ class CoinMarketCalTable {
      */
     bindRowClick() {
         $(this.tableSelector + ' tbody tr').off('click').on('click', function () {
-            const coinSymbol = $(this).find('td:first').text();
-            if (coinSymbol) {
-                window.location.href = `/details/${coinSymbol}`;
+            var coin = $(this).find('.id').val();
+            if (coin) {
+                window.location.href = `/details/${coin}`;
             }
         });
     }

@@ -22,13 +22,13 @@ class ExchangesController extends Controller
         return Datatables::of(Exchanges::orderBy('code')
             ->orderBy('markets', 'DESC')
             ->get())
-//            ->editColumn('name', function ($item){
-//                return "<span style='font-size: 16px;'>
-//                           <input type='hidden' class='id' value='".$item->code."'/>
-//                           <p class='success'>$item->name</p>
-//                        </span>";
-//
-//            })
+            ->editColumn('name', function ($item){
+                return "<span style='font-size: 16px;'>
+                           <input type='hidden' class='id' value='".$item->code."'/>
+                           <p class='success'>$item->name</p>
+                        </span>";
+
+            })
 //            ->editColumn('png128', function ($image) {
 //                return '<img src="'.$image->png128.'" height=50 width=50>';
 //            })

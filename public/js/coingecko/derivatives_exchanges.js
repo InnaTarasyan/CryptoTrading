@@ -163,20 +163,20 @@ CoingeckoDerivativesExchanges.prototype.init = function () {
                 text: '<span class="datatable-btn-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#6a11cb"/><rect x="7" y="7" width="10" height="2" fill="#fff"/><rect x="7" y="11" width="10" height="2" fill="#fff"/><rect x="7" y="15" width="10" height="2" fill="#fff"/></svg></span> <span>Columns</span>'
             }
         ],
-        "fnDrawCallback": function() {
-            $('#coingecko_derivatives_exchanges tbody tr').off('click').on('click', function (e) {
-                // Exclude clicks on the Website column (last cell) or any links inside it
-                var $td = $(e.target).closest('td');
-                var $tr = $(this);
-                var colIdx = $tr.find('td').index($td);
-                // Website column is index 9 (0-based)
-                if (colIdx === 9 || $(e.target).is('a')) {
-                    return;
-                }
-                var coin = $tr.find('.id').val();
-                window.location.href = "/details/" + coin;
-            });
-        },
+        // "fnDrawCallback": function() {
+        //     $('#coingecko_derivatives_exchanges tbody tr').off('click').on('click', function (e) {
+        //         // Exclude clicks on the Website column (last cell) or any links inside it
+        //         var $td = $(e.target).closest('td');
+        //         var $tr = $(this);
+        //         var colIdx = $tr.find('td').index($td);
+        //         // Website column is index 9 (0-based)
+        //         if (colIdx === 9 || $(e.target).is('a')) {
+        //             return;
+        //         }
+        //         var coin = $tr.find('.id').val();
+        //         window.location.href = "/details/" + coin;
+        //     });
+        // },
         "infoCallback": function(settings, start, end, max, total, pre) {
             return `\n                <div class=\"datatable-info-beautiful pinky-gradient\">\n                    <span class=\"datatable-info-icon\">💖</span>\n                    <span class=\"datatable-info-text\">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
         },

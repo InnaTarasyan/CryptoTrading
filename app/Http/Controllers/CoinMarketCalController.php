@@ -21,7 +21,15 @@ class CoinMarketCalController extends Controller
     {
         return Datatables::eloquent(Coinmarketcal::query())
             ->orderColumn('rank', false)
-            ->toJson();
+            ->editColumn('symbol', function ($item){
+                return "<span style='font-size: 16px;'>
+                           <input type='hidden' class='id' value='".strtolower($item->symbol)."'/>
+                           <p class='success'>$item->symbol</p>
+                        </span>";
+
+            })
+            ->rawColumns([ 'symbol'])
+            ->make(true);
 
     }
 
