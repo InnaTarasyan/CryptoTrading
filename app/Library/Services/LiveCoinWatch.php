@@ -10,13 +10,13 @@ class LiveCoinWatch
 {
     public function handle()
     {
-//        $this->getCoins();
-//        $this->getHistory();
+        $this->getCoins();
+        $this->getHistory();
         $this->getFiats();
-    //    $this->exchanges();
+        $this->exchanges();
        /** $this->credits();
         $this->overview();
-        $this->overviewHistory();**/
+        $this->overviewHistory();*/
     }
 
     public static function getCoins()
