@@ -12,40 +12,54 @@ use App\Models\CoinGecko\Derivatives;
 use App\Models\CoinGecko\DerivativesExchanges;
 use App\Models\CoinGecko\Nfts;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class CoinGeckoService extends  BaseService
 {
     public function handle()
     {
+        Log::channel('crabler')->info('CoinGeckoService::coins()');
         //$this->ping();
         $this->coins();
         sleep(60);
 
+        Log::channel('crabler')->info('CoinGeckoService::markets()');
         $this->markets();
         sleep(60);
 
+        Log::channel('crabler')->info('CoinGeckoService::exchanges()');
         $this->exchanges();
         sleep(60);
 
+        Log::channel('crabler')->info('CoinGeckoService::trendings()');
         $this->trending();
         sleep(60);
 
+        Log::channel('crabler')->info('CoinGeckoService::exchangeRates()');
         $this->exchangeRates();
         sleep(60);
 
+        Log::channel('crabler')->info('CoinGeckoService::nfts()');
         $this->nfts();
         sleep(60);
 
+        Log::channel('crabler')->info('CoinGeckoService::derivatives()');
         $this->getDerivatives();
         sleep(60);
 
+        Log::channel('crabler')->info('CoinGeckoService::derivativesExchanges()');
         $this->getDerivativesExchanges();
         sleep(60);
 
        // $this->getCategories();
     }
 
-    protected function ping()
+    public function handleSingle()
+    {
+        $this->markets();
+    }
+
+    public function ping()
     {
         $params = [
             'api_key' => env('COIN_GECKO_KEY')

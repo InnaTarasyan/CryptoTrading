@@ -14,7 +14,7 @@ class CoinMarketCalService
         $this->getEvents();
     }
 
-    protected function coins()
+    public static function coins()
     {
         $params = [];
         $url = 'https://developers.coinmarketcal.com/v1/coins';
@@ -88,10 +88,10 @@ class CoinMarketCalService
         // print_r(json_decode($response)); // print json decoded response
         curl_close($curl); // Close request
 
-        print_r($response);
+        //print_r($response);
 
         $data = json_decode($response);
-        print_r($data);
+        //print_r($data);
 
 
         foreach ($data->body as $item) {

@@ -76,6 +76,12 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'crabler' => [
+            'driver' => 'single', // or 'daily' for daily log files
+            'path' => storage_path('logs/crabler.log'), // Path to your custom log file
+            'level' => 'debug', // Minimum logging level for this channel
+        ],
     ],
 
 ];

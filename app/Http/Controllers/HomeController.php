@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\Services\CoinGeckoService;
 use App\Library\Services\CoinMarketCalService;
 use App\Library\Services\LiveCoinWatch;
 use Illuminate\Http\Request;
@@ -63,7 +64,9 @@ class HomeController extends Controller
 
         try {
             CoinMarketCalService::getEvents();
-            LiveCoinWatch::getCoins();
+
+            $coinGeckoService = new CoinGeckoService();
+            $coinGeckoService->handleSingle();
         } catch (\Exception $exception) {
             $status = 'fail';
         }

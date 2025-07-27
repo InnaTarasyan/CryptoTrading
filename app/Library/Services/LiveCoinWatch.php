@@ -44,7 +44,7 @@ class LiveCoinWatch
         }
     }
 
-    public function getHistory()
+    public static function getHistory()
     {
        $coins = LiveCoinWatchModel::all();
        foreach ($coins as $coin) {
@@ -85,7 +85,7 @@ class LiveCoinWatch
        }
     }
 
-    public function getFiats()
+    public static function getFiats()
     {
         $context_options = array (
             'http' => array (
@@ -109,7 +109,7 @@ class LiveCoinWatch
         }
     }
 
-    public function exchanges()
+    public static function exchanges()
     {
         $data = json_encode(array('currency' => 'USD', 'sort' => 'visitors', 'order' => 'descending', 'offset' => 0, 'limit' => 200, 'meta' => true));
         $context_options = array (
@@ -147,7 +147,7 @@ class LiveCoinWatch
         }
     }
 
-    public function credits()
+    public static function credits()
     {
         $data = json_encode(array('currency' => 'USD'));
         $context_options = array (
@@ -163,7 +163,7 @@ class LiveCoinWatch
         print_r(stream_get_contents($fp));
     }
 
-    public function overview()
+    public static function overview()
     {
         $data = json_encode(array('currency' => 'USD'));
         $context_options = array (
@@ -179,7 +179,7 @@ class LiveCoinWatch
         print_r(stream_get_contents($fp));
     }
 
-    public function overviewHistory()
+    public static function overviewHistory()
     {
         $data = json_encode(array('currency' => 'USD', 'start' => 1606232700000, 'end' => 1606233000000));
         $context_options = array (

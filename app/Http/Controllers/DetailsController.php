@@ -44,7 +44,7 @@ class DetailsController extends Controller
             'name'   => $coin ? strtolower($coin->name) : 'bitcoin',
             'coin'   => $coin,
             'events' => $events,
-            'tweets' => TelegramMessages::get(),
+            'tweets' => TelegramMessages::orderBy('created_at', 'desc')->get(),
         ];
 
         if($coin) {
