@@ -54,6 +54,10 @@ class DetailsController extends Controller
             $data['coinGeckoMarkets'] = $coingeckoMarkets;
         }
 
+        if(!$coin) {
+            abort(404);
+        }
+
         return view('coindetails')
             ->with($data);
     }
