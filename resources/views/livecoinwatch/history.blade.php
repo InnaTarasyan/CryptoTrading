@@ -163,7 +163,7 @@
                                         <text x="16" y="21" text-anchor="middle" font-size="16" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text">Price</span>
+                                <span class="datatable-header-text">Rate</span>
                             </th>
                             <th title="How old the coin is">
                                 <span class="datatable-header-icon">

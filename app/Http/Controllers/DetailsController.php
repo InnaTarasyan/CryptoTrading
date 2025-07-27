@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\CoinGecko\CoinGeckoMarkets;
+use App\Models\CoinGecko\Derivatives;
 use App\Models\CoinMarketCal\CoinMarketCalEvents;
 use App\Models\LiveCoinWatch\LiveCoinHistory;
+use App\Models\LiveCoinWatch\LiveCoinWatch;
 use App\Models\TelegramMessages;
 
 class DetailsController extends Controller
@@ -28,7 +30,9 @@ class DetailsController extends Controller
         $coin = null;
 
         if(!$coin) {
-            $coin = LiveCoinHistory::where('code', $symbol)->first();
+            $coin = LiveCoinWatch::join('live_coin_histories', 'live_coin_histories.code',
+                '=', 'live_coin_watches.code')
+                ->where('live_coin_histories.code', $symbol)->first();
         }
 
         if(!$coin) {
@@ -45,6 +49,8 @@ class DetailsController extends Controller
 
         if($coin) {
             $coingeckoMarkets = CoinGeckoMarkets::where('api_id', strtolower($coin->name))->first();
+            $derivatives = Derivatives::where('index_id', strtoupper($coin->code))->first();
+            $data['derivatives'] = $derivatives;
             $data['coinGeckoMarkets'] = $coingeckoMarkets;
         }
 

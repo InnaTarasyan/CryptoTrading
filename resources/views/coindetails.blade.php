@@ -241,11 +241,17 @@
                     <div class="coin-chart-stats" style="display:flex; flex-wrap:wrap; gap:2em; margin-top:1.2em; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.95); border-radius:1em; box-shadow:0 2px 8px rgba(67,206,162,0.06); padding:1.2em 1.5em;">
                         <div><b>Coin Gecko Current Price:</b> ${{ number_format($coinGeckoMarkets->current_price, 2) }}</div>
                         <div><b>Coin Gecko 24h Price Percentage Change:</b>
-                            <span class="coin-price-change {{ $coinGeckoMarkets->price_change_percentage_24h > 0 ? 'up' : 'down' }}">{{ $coin->change_24h > 0 ? '+' : '' }}{{ number_format($coin->change_24h, 2) }}%</span></div>
+                            <span class="coin-price-change
+                         {{ $coinGeckoMarkets->price_change_percentage_24h > 0 ? 'up' : 'down' }}">
+                                {{ $coinGeckoMarkets->price_change_percentage_24h > 0 ? '+' : '' }}
+                                {{ number_format($coinGeckoMarkets->price_change_percentage_24h, 2) }}%</span></div>
                         <div><b>Coin Gecko 24h High:</b> ${{ number_format($coinGeckoMarkets->high_24h ?? 0, 2) }}</div>
                         <div><b>Coin Gecko 24h Low:</b> ${{ number_format($coinGeckoMarkets->low_24h ?? 0, 2) }}</div>
                         <div><b>Coin Gecko Total Volume:</b> ${{ number_format($coinGeckoMarkets->total_volume) }}</div>
                         <div><b>Coin Gecko Market Cap Change 24h:</b> ${{ number_format($coinGeckoMarkets->market_cap_change_24h) }}</div>
+                        <div><b>Coin Gecko Total Supply:</b> ${{ number_format($coinGeckoMarkets->total_supply) }}</div>
+                        <div><b>Coin Gecko Circulating Supply:</b> ${{ number_format($coinGeckoMarkets->circulating_supply) }}</div>
+                        <div><b>Coin Gecko Max Supply:</b> ${{ number_format($coinGeckoMarkets->max_supply) }}</div>
                     </div>
                 @endif
             </div>
@@ -292,15 +298,20 @@
                         else if (el.msRequestFullscreen) el.msRequestFullscreen();
                     };
                 </script>
-            @if(isset($coinGeckoMarkets))
+            @if(isset($coin))
                 <div class="coin-chart-stats" style="display:flex; flex-wrap:wrap; gap:2em; margin-top:1.2em; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.95); border-radius:1em; box-shadow:0 2px 8px rgba(67,206,162,0.06); padding:1.2em 1.5em;">
-                    <div><b>Coin Gecko Current Price:</b> ${{ number_format($coinGeckoMarkets->current_price, 2) }}</div>
-                    <div><b>Coin Gecko 24h Price Percentage Change:</b>
-                        <span class="coin-price-change {{ $coinGeckoMarkets->price_change_percentage_24h > 0 ? 'up' : 'down' }}">{{ $coin->change_24h > 0 ? '+' : '' }}{{ number_format($coin->change_24h, 2) }}%</span></div>
-                    <div><b>Coin Gecko 24h High:</b> ${{ number_format($coinGeckoMarkets->high_24h ?? 0, 2) }}</div>
-                    <div><b>Coin Gecko 24h Low:</b> ${{ number_format($coinGeckoMarkets->low_24h ?? 0, 2) }}</div>
-                    <div><b>Coin Gecko Total Volume:</b> ${{ number_format($coinGeckoMarkets->total_volume) }}</div>
-                    <div><b>Coin Gecko Market Cap Change 24h:</b> ${{ number_format($coinGeckoMarkets->market_cap_change_24h) }}</div>
+                    <div><b>Live Coin Current Rate:</b> ${{ number_format($coin->rate, 2) }}</div>
+                    <div><b>Live Coin Total Volume:</b> ${{ number_format($coin->volume ?? 0, 2) }}</div>
+                    <div><b>Live Coin Market Cap:</b> ${{ number_format($coin->cap ?? 0, 2) }}</div>
+                    <div><b>Live Coin Total Volume:</b> ${{ number_format($coin->volume) }}</div>
+                    <div><b>Live Coin Total Supply:</b> ${{ number_format($coin->totalSupply) }}</div>
+                    <div><b>Live Coin Circulating Supply:</b> ${{ number_format($coin->circulatingSupply) }}</div>
+                    <div><b>Live Coin Max Supply:</b> ${{ number_format($coin->maxSupply) }}</div>
+                    <div><b>Live Coin Exchanges:</b> {{ number_format($coin->exchanges) }}</div>
+                    <div><b>Live Coin Markets:</b> {{ number_format($coin->markets) }}</div>
+                    <div><b>Live Coin Pairs:</b> {{ number_format($coin->pairs) }}</div>
+                    <div><b>Live Coin Rank:</b> {{ number_format($coin->rank) }}</div>
+                    <div><b>Live Coin Age:</b> {{ number_format($coin->age) }}</div>
                 </div>
             @endif
             {{--</div>--}}
@@ -354,13 +365,18 @@
                 </script>
             @if(isset($coinGeckoMarkets))
                 <div class="coin-chart-stats" style="display:flex; flex-wrap:wrap; gap:2em; margin-top:1.2em; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.95); border-radius:1em; box-shadow:0 2px 8px rgba(67,206,162,0.06); padding:1.2em 1.5em;">
-                    <div><b>Coin Gecko Current Price:</b> ${{ number_format($coinGeckoMarkets->current_price, 2) }}</div>
-                    <div><b>Coin Gecko 24h Price Percentage Change:</b>
-                        <span class="coin-price-change {{ $coinGeckoMarkets->price_change_percentage_24h > 0 ? 'up' : 'down' }}">{{ $coin->change_24h > 0 ? '+' : '' }}{{ number_format($coin->change_24h, 2) }}%</span></div>
-                    <div><b>Coin Gecko 24h High:</b> ${{ number_format($coinGeckoMarkets->high_24h ?? 0, 2) }}</div>
-                    <div><b>Coin Gecko 24h Low:</b> ${{ number_format($coinGeckoMarkets->low_24h ?? 0, 2) }}</div>
-                    <div><b>Coin Gecko Total Volume:</b> ${{ number_format($coinGeckoMarkets->total_volume) }}</div>
-                    <div><b>Coin Gecko Market Cap Change 24h:</b> ${{ number_format($coinGeckoMarkets->market_cap_change_24h) }}</div>
+                    <div><b>Coin Gecko Roi:</b> {{ number_format($coinGeckoMarkets->roi) }}</div>
+                    <div><b>Coin Gecko Atl Change Percentage:</b>
+                        <span class="coin-price-change
+                            {{ $coinGeckoMarkets->atl_change_percentage > 0 ? 'up' : 'down' }}">
+                            {{ $coinGeckoMarkets->atl_change_percentage > 0 ? '+' : '' }}
+                            {{ number_format($coinGeckoMarkets->atl_change_percentage, 2) }}%</span></div>
+                    <div><b>Coin Gecko Atl:</b> {{ number_format($coinGeckoMarkets->atl) }}</div>
+                    <div><b>Coin Gecko Ath Date:</b>
+                        {{ (\Carbon\Carbon::parse($coinGeckoMarkets->ath_date))->format('Y-m-d h:i:s') }}</div>
+                    <div><b>Coin Gecko Ath Change Percentage:</b>
+                        {{ number_format($coinGeckoMarkets->ath_change_percentage) }}%</div>
+                    <div><b>Coin Gecko Ath:</b> ${{ number_format($coinGeckoMarkets->ath) }}</div>
                 </div>
             @endif
             {{--</div>--}}
@@ -410,15 +426,16 @@
                         else if (el.msRequestFullscreen) el.msRequestFullscreen();
                     };
                 </script>
-            @if(isset($coinGeckoMarkets))
+            @if(isset($derivatives))
                 <div class="coin-chart-stats" style="display:flex; flex-wrap:wrap; gap:2em; margin-top:1.2em; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.95); border-radius:1em; box-shadow:0 2px 8px rgba(67,206,162,0.06); padding:1.2em 1.5em;">
-                    <div><b>Coin Gecko Current Price:</b> ${{ number_format($coinGeckoMarkets->current_price, 2) }}</div>
-                    <div><b>Coin Gecko 24h Price Percentage Change:</b>
-                        <span class="coin-price-change {{ $coinGeckoMarkets->price_change_percentage_24h > 0 ? 'up' : 'down' }}">{{ $coin->change_24h > 0 ? '+' : '' }}{{ number_format($coin->change_24h, 2) }}%</span></div>
-                    <div><b>Coin Gecko 24h High:</b> ${{ number_format($coinGeckoMarkets->high_24h ?? 0, 2) }}</div>
-                    <div><b>Coin Gecko 24h Low:</b> ${{ number_format($coinGeckoMarkets->low_24h ?? 0, 2) }}</div>
-                    <div><b>Coin Gecko Total Volume:</b> ${{ number_format($coinGeckoMarkets->total_volume) }}</div>
-                    <div><b>Coin Gecko Market Cap Change 24h:</b> ${{ number_format($coinGeckoMarkets->market_cap_change_24h) }}</div>
+                    <div><b>Coin Gecko Spread:</b> {{ number_format($derivatives->spread, 2) }}</div>
+                    <div><b>Coin Gecko Funding Rate:</b> {{ number_format($derivatives->funding_rate, 2) }}</div>
+                    <div><b>Coin Gecko Open Interest:</b> {{ number_format($derivatives->open_interest) }}</div>
+                    <div><b>Coin Gecko Volume 24h:</b> {{ number_format($derivatives->volume_24h) }}</div>
+                    <div><b>Coin Gecko Last Traded At</b>
+                        {{ (\Carbon\Carbon::parse($derivatives->last_traded_at))->format('Y-m-d h:i:s')}}</div>
+                    <div><b>Coin Gecko Last Expired At</b>
+                        {{ (\Carbon\Carbon::parse($derivatives->expired_at))->format('Y-m-d h:i:s')}}</div>
                 </div>
             @endif
             {{--</div>--}}
