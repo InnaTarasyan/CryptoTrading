@@ -365,7 +365,7 @@
                 </script>
             @if(isset($coinGeckoMarkets))
                 <div class="coin-chart-stats" style="display:flex; flex-wrap:wrap; gap:2em; margin-top:1.2em; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.95); border-radius:1em; box-shadow:0 2px 8px rgba(67,206,162,0.06); padding:1.2em 1.5em;">
-                    <div><b>Coin Gecko Roi:</b> {{ number_format($coinGeckoMarkets->roi) }}</div>
+                    <div><b>Coin Gecko Roi:</b> {{ $coinGeckoMarkets->roi }}</div>
                     <div><b>Coin Gecko Atl Change Percentage:</b>
                         <span class="coin-price-change
                             {{ $coinGeckoMarkets->atl_change_percentage > 0 ? 'up' : 'down' }}">

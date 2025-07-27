@@ -139,7 +139,7 @@ class CoinGeckoService extends  BaseService
                 'trust_score' => $item['trust_score'],
                 'trust_score_rank' => $item['trust_score_rank'],
                 'trade_volume_24h_btc' => $item['trade_volume_24h_btc'],
-                'trade_volume_24h_btc_normalized' => $item['trade_volume_24h_btc_normalized'],
+                //'trade_volume_24h_btc_normalized' => $item['trade_volume_24h_btc_normalized'],
             ]);
         }
     }
