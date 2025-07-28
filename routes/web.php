@@ -1,5 +1,8 @@
 <?php
 
+use Atymic\Twitter\Facade\Twitter;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -162,3 +165,19 @@ Route::post('/coingecko/derivatives/reviews', [\App\Http\Controllers\Coingecko\D
 
 // Privacy Policy Page
 Route::view('/privacy-policy', 'privacy-policy');
+
+Route::get('/tweets', function (){
+    $userId = 'thujohn'; // Or 'example_screen_name'
+    $params = [
+        'count' => 2,
+        'exclude_replies' => true
+    ];
+
+    $tweets = Twitter::userTweets($userId, $params);
+
+// Process the retrieved tweets
+    foreach ($tweets as $tweet) {
+        echo $tweet->text . "\n";
+    }
+});
+
