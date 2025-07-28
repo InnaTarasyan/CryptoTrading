@@ -17,4 +17,5 @@ return [
     'authenticate_url' => 'https://api.twitter.com/oauth/authenticate',
     'access_token_url' => 'https://api.twitter.com/oauth/access_token',
     'request_token_url' => 'https://api.twitter.com/oauth/request_token',
+    'user_id'           => env('TWITTER_USER_ID')
 ];
