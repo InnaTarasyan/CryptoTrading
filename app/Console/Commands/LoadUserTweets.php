@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Atymic\Twitter\Facade\Twitter;
+use Atymic\Twitter\Twitter as TwitterContract;
+use Illuminate\Http\JsonResponse;
 
 
 class LoadUserTweets extends Command
@@ -33,6 +35,15 @@ class LoadUserTweets extends Command
             'count' => 2,
             'exclude_replies' => true
         ];
+
+//        $params = [
+//            'place.fields' => 'country,name',
+//            'tweet.fields' => 'author_id,geo',
+//            'expansions' => 'author_id,in_reply_to_user_id',
+//            TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_JSON,
+//        ];
+//
+//        return JsonResponse::fromJsonString(Twitter::userTweets($userId, $params));
 
         $tweets = Twitter::userTweets($userId, $params);
 
