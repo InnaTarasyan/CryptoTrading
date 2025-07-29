@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('app:crabler')->everyTwoDays();
+        $schedule->command('app:crabler')->weeklyOn(1, '09:00');
 
         $schedule->command('app:live-coin-coins')->weeklyOn(2, '09:00');
 
