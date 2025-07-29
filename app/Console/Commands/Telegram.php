@@ -7,6 +7,7 @@ use danog\MadelineProto\Settings\AppInfo;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use App\Models\TelegramMessages;
+use Illuminate\Support\Facades\Log;
 
 class Telegram extends Command
 {
@@ -38,6 +39,7 @@ class Telegram extends Command
         $me = $MadelineProto->getSelf();
 
         TelegramMessages::truncate();
+        Log::channel('crabler')->info('Telegram messages');
 
         $channels = config('telegram.channels');
         $counter = 0;
