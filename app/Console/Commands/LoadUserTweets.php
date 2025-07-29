@@ -31,26 +31,22 @@ class LoadUserTweets extends Command
     {
         $userId = config('twitter.user_id');
 
+
         $params = [
-            'count' => 2,
-            'exclude_replies' => true
+            'place.fields' => 'country,name',
+            'tweet.fields' => 'author_id,geo',
+            'expansions' => 'author_id,in_reply_to_user_id',
+            TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_JSON,
         ];
 
-//        $params = [
-//            'place.fields' => 'country,name',
-//            'tweet.fields' => 'author_id,geo',
-//            'expansions' => 'author_id,in_reply_to_user_id',
-//            TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_JSON,
-//        ];
+        dd(JsonResponse::fromJsonString(Twitter::userTweets($userId, $params)));
+
+//        $tweets = Twitter::userTweets($userId, $params);
 //
-//        return JsonResponse::fromJsonString(Twitter::userTweets($userId, $params));
-
-        $tweets = Twitter::userTweets($userId, $params);
-
-        // Process the retrieved tweets
-        foreach ($tweets as $tweet) {
-            dump($tweet);
-            echo $tweet->text . "\n";
-        }
+//        // Process the retrieved tweets
+//        foreach ($tweets as $tweet) {
+//            dump($tweet);
+//            echo $tweet->text . "\n";
+//        }
     }
 }
