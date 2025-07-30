@@ -3,6 +3,7 @@
 return [
     'api_id'   => env('API_ID', ''),
     'api_hash' => env('API_HASH', ''),
+    'token'    => env('API_TOKEN', ''),
     'channels'  => [
         [
             'slug'=> 'btc',

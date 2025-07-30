@@ -33,8 +33,9 @@ class Telegram extends Command
     public function handle()
     {
         $MadelineProto = new \danog\MadelineProto\API('bot.madeline');
-        $MadelineProto->botLogin(config('telegram.api_id'), config('telegram.api_hash'));
+       // $MadelineProto->botLogin(config('telegram.api_id'), config('telegram.api_hash'));
 
+        $MadelineProto->botLogin(config('telegram.token'));
         $MadelineProto->start();
         $me = $MadelineProto->getSelf();
 
