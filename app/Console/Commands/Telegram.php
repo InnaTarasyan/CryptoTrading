@@ -62,14 +62,16 @@ class Telegram extends Command
                         'hash'        => 0
                     ]);
 
-                    print_r($messages_Messages);
+                  //  print_r($messages_Messages);
 
                     if(!array_key_exists('messages', $messages_Messages)) {
                         break;
                     }
 
+                    Log::channel('crabler')->info('Telegram messages received');
+
                     foreach ($messages_Messages['messages'] as $message) {
-                        print_r($message);
+                       // print_r($message);
 
                         if(array_key_exists('message', $message)) {
                             $link = '';
