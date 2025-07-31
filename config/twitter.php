@@ -17,5 +17,14 @@ return [
     'authenticate_url' => 'https://api.twitter.com/oauth/authenticate',
     'access_token_url' => 'https://api.twitter.com/oauth/access_token',
     'request_token_url' => 'https://api.twitter.com/oauth/request_token',
-    'user_id'           => env('TWITTER_USER_ID')
+    'bitcoin_id'           => env('TWITTER_BITCOIN_ID'),
+    'eth_id'               => env('TWITTER_ETH_ID'),
+    'coin_market_cap'      => env('TWITTER_COIN_MARKET_CAP'),
+    'tesla'                => env('TWITTER_TESLA'),
+    'coinbase'             => env('TWITTER_COINBASE'),
+    'litecoin'             => env('TWITTER_LITECOIN'),
+    'btctn'                => env('TWITTER_BTCTN'),
+    'bitcoin_magazine'     => env('TWITTER_BITCOINMAGAZINE'),
+    'shib'                 => env('TWITTER_SHIB'),
+
 ];

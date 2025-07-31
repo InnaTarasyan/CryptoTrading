@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TweeterMessages extends Model
+class TwitterMeta extends Model
 {
     use HasFactory;
 
-    public function author()
+    public function tweets()
     {
-        return $this->belongsTo(TwitterUsers::class);
+        return $this->hasMany(TweeterMessages::class);
     }
 }

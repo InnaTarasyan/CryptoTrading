@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('twitter_messages', function (Blueprint $table) {
             $table->id();
-            $table->text('title')->nullable();
-            $table->text('slug')->nullable();
-            $table->text('company')->nullable();
-            $table->string('logo')->nullable();
-            $table->text('content')->nullable();
-            $table->text('apply_link')->nullable();
+            $table->string('tweet_id');
+            $table->json('edit_history_tweet_ids')->nullable();
+            $table->text('text')->nullable();
+            $table->string('author_id')->nullable();
+            $table->foreign('author_id')
+                ->references('user_id') // Referenced column
+                ->on('twitter_users') // Referenced table
+                ->onDelete('cascade');
+
+            $table->index('tweet_id');
             $table->timestamps();
         });
     }
@@ -28,6 +32,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('twitter_messages', function (Blueprint $table) {
+            $table->dropForeign(['author_id']);
+        });
+
         Schema::dropIfExists('twitter_messages');
     }
 };

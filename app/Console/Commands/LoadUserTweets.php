@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\TweeterMessages;
+use App\Models\TwitterMeta;
+use App\Models\TwitterUsers;
 use Illuminate\Console\Command;
 use Atymic\Twitter\Facade\Twitter;
 use Atymic\Twitter\Twitter as TwitterContract;
@@ -29,24 +32,63 @@ class LoadUserTweets extends Command
      */
     public function handle()
     {
-        $userId = config('twitter.user_id');
+        $userIds = [
+            config('twitter.bitcoin_id'),
+            config('twitter.eth_id'),
+            config('twitter.coin_market_cap'),
+            config('twitter.tesla'),
+            config('twitter.coinbase'),
+            config('twitter.litecoin'),
+            config('twitter.btctn'),
+            config('twitter.bitcoin_magazine'),
+            config('twitter.shib'),
+        ];
 
+        $userId = $userIds[array_rand($userIds, 1)];
 
         $params = [
             'place.fields' => 'country,name',
             'tweet.fields' => 'author_id,geo',
             'expansions' => 'author_id,in_reply_to_user_id',
-            TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_JSON,
+            TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_ARRAY,
         ];
 
-        dd(JsonResponse::fromJsonString(Twitter::userTweets($userId, $params)));
+        $response = Twitter::userTweets($userId, $params);
 
-//        $tweets = Twitter::userTweets($userId, $params);
-//
-//        // Process the retrieved tweets
-//        foreach ($tweets as $tweet) {
-//            dump($tweet);
-//            echo $tweet->text . "\n";
-//        }
+        dump($response);
+
+        foreach ($response['includes']['users'] as $datum) {
+            TwitterUsers::updateOrCreate([
+                'user_id' => $datum->id,
+            ], [
+                'user_id'  => $datum->id,
+                'name'     => $datum->name,
+                'username' => $datum->username,
+            ]);
+        }
+
+
+        foreach ($response['data'] as $datum) {
+            TweeterMessages::updateOrCreate([
+                'tweet_id' => $datum['id'],
+            ], [
+                'tweet_id' => $datum['id'],
+                'edit_history_tweet_ids' => json_encode($datum['edit_history_tweet_ids']),
+                'text' => $datum['text'],
+                'author_id' => $datum['author_id'],
+            ]);
+        }
+
+        foreach ($response['meta'] as $datum) {
+            TwitterMeta::updateOrCreate([
+                'result_count' => $datum['result_count'],
+                'newest_id'    => $datum['newest_id'],
+                'oldest_id'    => $datum['oldest_id'],
+            ], [
+                'result_count' => $datum['result_count'],
+                'newest_id'    => $datum['newest_id'],
+                'oldest_id'    => $datum['oldest_id'],
+            ]);
+        }
     }
 }
