@@ -53,8 +53,6 @@ class LoadUserTweets extends Command
             TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_ARRAY,
         ];
 
-        dump($params);
-
         $response = Twitter::userTweets($userId, $params);
 
         dump($response);
@@ -63,9 +61,9 @@ class LoadUserTweets extends Command
             TwitterUsers::where('timeline', $userId)->delete();
 
             TwitterUsers::create([
-                'user_id'  => $datum->id,
-                'name'     => $datum->name,
-                'username' => $datum->username,
+                'user_id'  => $datum['id'],
+                'name'     => $datum['name'],
+                'username' => $datum['username'],
                 'timeline' => $userId,
             ]);
         }
