@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 use Atymic\Twitter\Facade\Twitter;
 use Atymic\Twitter\Twitter as TwitterContract;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 
 class LoadUserTweets extends Command
@@ -45,6 +46,8 @@ class LoadUserTweets extends Command
         ];
 
         $userId = $userIds[array_rand($userIds, 1)];
+
+        Log::channel('crabler')->info('Twitter '.$userId);
 
         $params = [
             'place.fields' => 'country,name',
