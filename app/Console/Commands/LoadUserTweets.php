@@ -53,6 +53,8 @@ class LoadUserTweets extends Command
             TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_ARRAY,
         ];
 
+        dump($params);
+
         $response = Twitter::userTweets($userId, $params);
 
         dump($response);
