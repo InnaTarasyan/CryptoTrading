@@ -35,7 +35,20 @@ class Telegram extends Command
         $MadelineProto = new \danog\MadelineProto\API('bot.madeline');
        // $MadelineProto->botLogin(config('telegram.api_id'), config('telegram.api_hash'));
 
-        $MadelineProto->botLogin(config('telegram.token'));
+        try {
+            $MadelineProto->botLogin(config('telegram.token'));
+
+            Log::channel('crabler')->info("Bot successfully logged in!");
+
+            $self = $MadelineProto->getSelf();
+
+            Log::channel('crabler')->info("Bot Username: @" . $self['username']);
+
+        } catch (\Exception $e) {
+            Log::channel('crabler')->info("Error logging in bot: " . $e->getMessage());
+            return 0;
+        }
+
         $MadelineProto->start();
         $me = $MadelineProto->getSelf();
 
@@ -68,8 +81,6 @@ class Telegram extends Command
                     if(!array_key_exists('messages', $messages_Messages)) {
                         break;
                     }
-
-                    Log::channel('crabler')->info('Telegram messages received');
 
                     foreach ($messages_Messages['messages'] as $message) {
                        // print_r($message);
