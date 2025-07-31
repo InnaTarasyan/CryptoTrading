@@ -499,7 +499,7 @@
     @endif
 
 
-    @if(isset($tweets))
+    @if(isset($twitterMessages))
         <!--Begin::Portlet-->
         <div class="m-portlet " style="padding: 3em 3em 1.5em 3em;">
             <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_2">
@@ -532,13 +532,13 @@
                                 <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
                                     <div class="m-timeline-2__item">
                                             <span class="m-timeline-2__item-time">
-                                                {{\Carbon\Carbon::parse($tweet['created_at'])->format('y, M, d, H:i:s')}}
+                                                {{\Carbon\Carbon::parse($tweet->created_at)->format('y, M, d, H:i:s')}}
                                             </span>
                                         <div class="m-timeline-2__item-cricle">
                                             <i class="fa fa-genderless m--font-danger"></i>
                                         </div>
                                         <div class="m-timeline-2__item-text  m--padding-top-5">
-                                            {!! $tweet['content'] !!}
+                                            {!! $tweet->text !!}, {{ $tweet->author->name }}
                                         </div>
                                     </div>
                                 </div>

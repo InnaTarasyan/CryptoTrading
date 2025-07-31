@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\TweeterMessages;
+use App\Models\TwitterMessages;
 use App\Models\TwitterMeta;
 use App\Models\TwitterUsers;
 use Illuminate\Console\Command;
@@ -72,9 +72,9 @@ class LoadUserTweets extends Command
 
         foreach ($response['data'] as $datum) {
 
-            TweeterMessages::where('timeline', $userId)->delete();
+            TwitterMessages::where('timeline', $userId)->delete();
 
-            TweeterMessages::create([
+            TwitterMessages::create([
                 'tweet_id' => $datum['id'],
                 'edit_history_tweet_ids' => json_encode($datum['edit_history_tweet_ids']),
                 'text' => $datum['text'],

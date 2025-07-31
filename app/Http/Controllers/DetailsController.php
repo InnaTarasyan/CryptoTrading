@@ -8,6 +8,7 @@ use App\Models\CoinMarketCal\CoinMarketCalEvents;
 use App\Models\LiveCoinWatch\LiveCoinHistory;
 use App\Models\LiveCoinWatch\LiveCoinWatch;
 use App\Models\TelegramMessages;
+use App\Models\TwitterMessages;
 
 class DetailsController extends Controller
 {
@@ -45,7 +46,7 @@ class DetailsController extends Controller
             'coin'   => $coin,
             'events' => $events,
             'telegramMessages' => TelegramMessages::orderBy('created_at', 'desc')->get(),
-           // 'tweets' => TwitterMessages::orderBy('created_at', 'desc')->get(),
+            'twitterMessages' => TwitterMessages::with('author')->orderBy('created_at', 'desc')->get(),
         ];
 
         if($coin) {
