@@ -11,6 +11,8 @@ class TwitterMeta extends Model
 
     use HasFactory;
 
+    protected $table = 'twitter_meta';
+
     public function tweets()
     {
         return $this->hasMany(TweeterMessages::class);
