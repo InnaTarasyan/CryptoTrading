@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TwitterMeta extends Model
 {
+    protected $guarded = [];
+
     use HasFactory;
 
     public function tweets()

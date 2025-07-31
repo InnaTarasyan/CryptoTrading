@@ -60,36 +60,37 @@ class LoadUserTweets extends Command
         dump($response);
 
         foreach ($response['includes']['users'] as $datum) {
-            TwitterUsers::updateOrCreate([
-                'user_id' => $datum->id,
-            ], [
+            TwitterUsers::where('timeline', $userId)->delete();
+
+            TwitterUsers::create([
                 'user_id'  => $datum->id,
                 'name'     => $datum->name,
                 'username' => $datum->username,
+                'timeline' => $userId,
             ]);
         }
 
-
         foreach ($response['data'] as $datum) {
-            TweeterMessages::updateOrCreate([
-                'tweet_id' => $datum['id'],
-            ], [
+
+            TweeterMessages::where('timeline', $userId)->delete();
+
+            TweeterMessages::create([
                 'tweet_id' => $datum['id'],
                 'edit_history_tweet_ids' => json_encode($datum['edit_history_tweet_ids']),
                 'text' => $datum['text'],
                 'author_id' => $datum['author_id'],
+                'timeline'  => $userId,
             ]);
         }
 
         foreach ($response['meta'] as $datum) {
-            TwitterMeta::updateOrCreate([
+            TwitterMeta::where('timeline', $userId)->delete();
+
+            TwitterMeta::create([
                 'result_count' => $datum['result_count'],
                 'newest_id'    => $datum['newest_id'],
                 'oldest_id'    => $datum['oldest_id'],
-            ], [
-                'result_count' => $datum['result_count'],
-                'newest_id'    => $datum['newest_id'],
-                'oldest_id'    => $datum['oldest_id'],
+                'timeline'     => $userId
             ]);
         }
     }

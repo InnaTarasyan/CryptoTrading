@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TweeterMessages extends Model
 {
+    protected $guarded = [];
+
     use HasFactory;
 
     public function author()
