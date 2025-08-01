@@ -116,6 +116,13 @@ Route::resource('telegram', 'TelegramController');
 Route::get('/gettelegram', ['as' => 'datatable.gettelegram','uses' => 'TelegramController@getMessages']);
 
 
+
+/** ===== Twitter ====== */
+
+Route::get('/twitter', ['as' => 'twitter', 'uses' => 'TwitterController@index']);
+Route::resource('twitter', 'TwitterController');
+Route::get('/gettwitter', ['as' => 'datatable.gettwitter','uses' => 'TwitterController@getMessages']);
+
 /** ===== Trading Pairs ====== */
 
 Route::get('/tradingPairs', ['as' => 'tradingPairs', 'uses' => 'TradingPairsController@index']);
