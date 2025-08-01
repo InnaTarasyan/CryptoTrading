@@ -113,7 +113,8 @@ Telegram.prototype.editAccount = function (event) {
                 $('#coin_id').val(res.data.account_id);
                 $('#telegram_account').val(res.data.account);
 
-                $('#coin').select2('data', { id: res.data.id, name:  res.data.coin});
+
+                $('#coin').select2('data', { id: res.data.id, code:  res.data.coin});
                 $('#rel_coins').select2('data', res.data.rel_coins);
             }
         },
@@ -256,8 +257,8 @@ $(document).ready(function() {
             },
             cache: true
         },
-        formatResult: function (item) { return item.name; },
-        formatSelection: function (item) { return item.name; },
+        formatResult: function (item) { return item.code; },
+        formatSelection: function (item) { return item.code; },
     });
 
 
@@ -280,7 +281,7 @@ $(document).ready(function() {
             },
             cache: true
         },
-        formatResult: function (item) { return item.name; },
-        formatSelection: function (item) { return item.name; },
+        formatResult: function (item) { return item.code; },
+        formatSelection: function (item) { return item.code; },
     });
 });

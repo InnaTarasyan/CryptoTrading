@@ -106,7 +106,7 @@ TradingPairs.prototype.editTradingPair = function () {
                // $('#coin').val(res.data.coin);
                 $('#trading_pair').val(res.data.trading_pair);
 
-                $('#coin').select2('data', { id: res.data.id, name:  res.data.coin});
+                $('#coin').select2('data', { id: res.data.id, code:  res.data.coin});
 
             }
         },
@@ -246,8 +246,8 @@ $(document).ready(function() {
             },
             cache: true
         },
-        formatResult: function (item) { return item.name; },
-        formatSelection: function (item) { return item.name; },
+        formatResult: function (item) { return item.code; },
+        formatSelection: function (item) { return item.code; },
     });
 
 });

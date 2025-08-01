@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoinGecko\CoinGeckoCoin;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Models\TradingPair;
+use App\Models\LiveCoinWatch\LiveCoinHistory;
 
 class TradingPairsController extends Controller
 {
@@ -14,7 +14,7 @@ class TradingPairsController extends Controller
     {
         return view('trading_pairs')
                 ->with([
-                    'coins' => CoinGeckoCoin::all(),
+                    'coins' => LiveCoinHistory::all(),
                     'title' => 'Trading Pair',
                 ]);
     }
@@ -22,7 +22,7 @@ class TradingPairsController extends Controller
     public function getTradingPairsData(){
         return Datatables::of(TradingPair::all())
             ->editColumn('coin', function($coin){
-                $currentCoin = CoinGeckoCoin::find($coin->coin);
+                $currentCoin = LiveCoinHistory::find($coin->coin);
                 return $currentCoin ? $currentCoin->name : ' - ';
             })
             ->addColumn('action', function ($coin){
@@ -74,7 +74,7 @@ class TradingPairsController extends Controller
         $status = 'fail';
         $data = [];
         $tradingPair = TradingPair::where('id',$id)->first();
-        $coingeckoCoin = CoinGeckoCoin::find($tradingPair->coin);
+        $coingeckoCoin = LiveCoinHistory::find($tradingPair->coin);
         if($tradingPair && $coingeckoCoin){
             $status = 'ok';
             $data['trading_pair_id'] = $tradingPair->id;
@@ -132,12 +132,13 @@ class TradingPairsController extends Controller
     public function ajaxGetCoins(Request $request)
     {
         $search = $request->get('q');
-        $coins = CoinGeckoCoin::query();
+        $coins = LiveCoinHistory::query();
         if($search) {
-            $coins = $coins->where('name', 'like', '%'.$search.'%');
+            $coins = $coins->where('name', 'like', '%'.$search.'%')
+               ->orWhere('code', 'like', '%'.$search.'%');
         }
 
-        return response()->json($coins->orderBy('name')
+        return response()->json($coins->orderBy('rank')
             ->get());
     }
 }

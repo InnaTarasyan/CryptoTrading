@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Models\TwitterAccount;
-use App\Models\CoinGecko\CoinGeckoCoin;
+use App\Models\LiveCoinWatch\LiveCoinHistory;
 
 class TwitterController extends Controller
 {
@@ -20,15 +20,16 @@ class TwitterController extends Controller
         $status = 'fail';
         $data = [];
         $account = TwitterAccount::where('id' ,$id)->first();
-        $coingeckoCoin = CoinGeckoCoin::find($account->coin);
+        $coingeckoCoin = LiveCoinHistory::find($account->coin);
         $relatedCoinIds = explode(',', $account->rel_coins);
         $related = [];
         if(!empty($relatedCoinIds)) {
-            $data = CoinGeckoCoin::whereIn('id', $relatedCoinIds)->select('id', 'name')->get();
-            foreach ($data as $datum) {
+            $live = LiveCoinHistory::whereIn('id', $relatedCoinIds)->get();
+            foreach ($live as $datum) {
                 $related[] = [
                     'id' => $datum->id,
                     'name' => $datum->name,
+                    'code' => $datum->code,
                 ];
             }
         }
@@ -38,7 +39,7 @@ class TwitterController extends Controller
             $data['account'] = $account->account;
             $data['account_id'] = $account->id;
             $data['id'] = $coingeckoCoin->id;
-            $data['coin'] = $coingeckoCoin->name;
+            $data['coin'] = $coingeckoCoin->code;
             $data['rel_coins'] = $related;
         }
         return response()->json(['status' => $status, 'data' => $data]);
@@ -46,9 +47,9 @@ class TwitterController extends Controller
 
     public function index()
     {
-        return view('telegram')
-            ->with(['coins' => CoinGeckoCoin::all(),
-                'title' => 'Telegram']);
+        return view('twitter')
+            ->with(['coins' => LiveCoinHistory::all(),
+                'title' => 'Twitter']);
     }
 
     /**
@@ -101,12 +102,12 @@ class TwitterController extends Controller
     public function getMessages(){
         return Datatables::of(TwitterAccount::all())
             ->editColumn('coin', function($coin){
-                $currentCoin = CoinGeckoCoin::find($coin->coin);
+                $currentCoin = LiveCoinHistory::find($coin->coin);
                 return $currentCoin ? $currentCoin->name : ' - ';
             })
             ->editColumn('rel_coins', function($coin){
                 $relCoinNames = explode(',', $coin->rel_coins);
-                $currentCoin = CoinGeckoCoin::whereIn('id', $relCoinNames)->pluck('name')->toArray();
+                $currentCoin = LiveCoinHistory::whereIn('id', $relCoinNames)->pluck('code')->toArray();
                 return $currentCoin ? implode(', ', $currentCoin) : ' - ';
             })
             ->editColumn('action', function ($account){

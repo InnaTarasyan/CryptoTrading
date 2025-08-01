@@ -21,4 +21,8 @@ class TwitterAccount extends Model
         'rel_coins',
         'account'
     ];
+
+    protected $casts = [
+        'rel_coins' => 'array',
+    ];
 }
