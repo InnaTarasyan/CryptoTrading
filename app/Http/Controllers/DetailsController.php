@@ -8,6 +8,8 @@ use App\Models\CoinMarketCal\CoinMarketCalEvents;
 use App\Models\LiveCoinWatch\LiveCoinHistory;
 use App\Models\LiveCoinWatch\LiveCoinWatch;
 use App\Models\TelegramMessages;
+use App\Models\TradingPair;
+use App\Models\TwitterAccount;
 use App\Models\TwitterMessages;
 
 class DetailsController extends Controller
@@ -40,13 +42,32 @@ class DetailsController extends Controller
             $coin  = LiveCoinHistory::where('code', 'btc')->first();
         }
 
+        $tradingPair = null;
+        $tradingViewPair = TradingPair::where('coin', $coin->id)->first();
+        if($tradingViewPair && isset($tradingViewPair->trading_pair)) {
+            $tradingPair = $tradingViewPair->trading_pair;
+        }
+
+        $twitterAccount = null;
+        $twitterMessages = null;
+        $twitterAccountModel = TwitterAccount::where('coin', $coin->id)
+            ->orWhere('rel_coins', 'LIKE', '%' . $coin->id . '%')->first();
+        if($twitterAccountModel) {
+            $twitterMessages = TwitterMessages::with('author')
+                ->where('timeline', $twitterAccountModel->account)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
         $data = [
             'symbol' => $symbol,
             'name'   => $coin ? strtolower($coin->name) : 'bitcoin',
             'coin'   => $coin,
             'events' => $events,
             'telegramMessages' => TelegramMessages::orderBy('created_at', 'desc')->get(),
-            'twitterMessages' => TwitterMessages::with('author')->orderBy('created_at', 'desc')->get(),
+            'twitterMessages' => isset($twitterMessages) ? $twitterMessages :
+                TwitterMessages::with('author')->orderBy('created_at', 'desc')->get(),
+            'tradingPair' => $tradingPair,
         ];
 
         if($coin) {

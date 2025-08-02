@@ -60,9 +60,13 @@
     <!--end::Portlet-->
 
 
+    <div class="row" style="padding: 3em 3em 1.5em 3em;">
+        <h2><a href="/tradingPairs">You can also add TradingView Pair here</a></h2>
+    </div>
 
     <div class="row" style="padding: 3em 3em 1.5em 3em;">
         <div class="col-xl-5 col-lg-5 trading_view_chart_section" >
+
             {{--@if(!isset($tradingPair))--}}
             {{--<div style="padding-top: 10px; padding-bottom: 10px;">--}}
             {{--Please add a Trading Pair <a href="/tradingPairs">Here</a>:--}}
@@ -164,9 +168,11 @@
                   'usdt' => 'BINANCE:USDTUSDT',
                   // Add more as needed
                 ];
-                $tvSymbol = $tvSymbols[strtolower($coin->id ?? '')] ?? ($coin->code ?? 'BINANCE:BTCUSDT');
+                $tvSymbol = $tvSymbols[strtolower($coin->id ?? '')] ?? ($tradingPair ?? 'BINANCE:BTCUSDT');
                 $tvChartUrl = 'https://www.tradingview.com/symbols/' . (str_contains($tvSymbol, ':') ? explode(':', $tvSymbol)[1] : $tvSymbol) . '/';
             @endphp
+
+
             <div class="coin-chart-card" style="margin-bottom:2em;">
                 <div class="modern-title-bar" style="margin-bottom:1.2em; display:flex; align-items:center; justify-content:space-between;">
                     <div style="display:flex; align-items:center; gap:1em;">
@@ -445,6 +451,68 @@
     
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 
+    <div class="row" style="padding: 3em 3em 1.5em 3em;">
+        <h2><a href="/twitter">You can also relate a Twitter Account Here</a></h2>
+    </div>
+
+    @if(isset($twitterMessages))
+        <!--Begin::Portlet-->
+        <div class="m-portlet " style="padding: 3em 3em 1.5em 3em;">
+            <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_2">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="socicon-telegram"></i>
+                                </span>
+                            <h3 class="m-portlet__head-text">
+                                Twitter Messages
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
+                                    <i class="la la-angle-down"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="600" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
+                        <!--Begin::Timeline 2 -->
+                        <div class="m-timeline-2">
+                            @foreach($twitterMessages as $tweet)
+                                <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
+                                    <div class="m-timeline-2__item">
+                                            <span class="m-timeline-2__item-time">
+                                                {{\Carbon\Carbon::parse($tweet->created_at)->format('y, M, d, H:i:s')}}
+                                            </span>
+                                        <div class="m-timeline-2__item-cricle">
+                                            <i class="fa fa-genderless m--font-danger"></i>
+                                        </div>
+                                        <div class="m-timeline-2__item-text  m--padding-top-5">
+                                            {!! $tweet->text !!}, {{ $tweet->author->name }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!--End::Timeline 2 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Portlet-->
+    @endif
+
+
+    <div class="row" style="padding: 3em 3em 1.5em 3em;">
+        <h2><a href="/telegram">You can also relate a Telegram Account Here</a></h2>
+    </div>
+
     @if(isset($telegramMessages))
         <!--Begin::Portlet-->
         <div class="m-portlet " style="padding: 3em 3em 1.5em 3em;">
@@ -485,60 +553,6 @@
                                         </div>
                                         <div class="m-timeline-2__item-text  m--padding-top-5">
                                             {!! $telegramMessage['content'] !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <!--End::Timeline 2 -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end::Portlet-->
-    @endif
-
-
-    @if(isset($twitterMessages))
-        <!--Begin::Portlet-->
-        <div class="m-portlet " style="padding: 3em 3em 1.5em 3em;">
-            <div class="m-portlet m-portlet--accent m-portlet--head-solid-bg m-portlet--head-sm" data-portlet="true" id="m_portlet_tools_2">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon">
-                                    <i class="socicon-telegram"></i>
-                                </span>
-                            <h3 class="m-portlet__head-text">
-                               Twitter Messages
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon" title="" data-original-title="Collapse">
-                                    <i class="la la-angle-down"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="600" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
-                        <!--Begin::Timeline 2 -->
-                        <div class="m-timeline-2">
-                            @foreach($twitterMessages as $tweet)
-                                <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
-                                    <div class="m-timeline-2__item">
-                                            <span class="m-timeline-2__item-time">
-                                                {{\Carbon\Carbon::parse($tweet->created_at)->format('y, M, d, H:i:s')}}
-                                            </span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-danger"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text  m--padding-top-5">
-                                            {!! $tweet->text !!}, {{ $tweet->author->name }}
                                         </div>
                                     </div>
                                 </div>

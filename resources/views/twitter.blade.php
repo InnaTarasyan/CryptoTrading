@@ -23,7 +23,7 @@
                         <thead>
                         <tr>
                             <th>Coin</th>
-                            <th>Account</th>
+                            <th>Twitter User Id</th>
                             <th>Related Coins</th>
                             <th>Action</th>
                         </tr>
@@ -73,7 +73,7 @@
                             <div class="col-lg-12 mt-3">
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">
-                                        Twitter Account: *
+                                        Twitter User Id: *
                                     </label>
                                     <textarea class="form-control" id="twitter_account"></textarea>
                                 </div>

@@ -127,7 +127,8 @@ Route::get('/gettwitter', ['as' => 'datatable.gettwitter','uses' => 'TwitterCont
 
 Route::get('/tradingPairs', ['as' => 'tradingPairs', 'uses' => 'TradingPairsController@index']);
 Route::resource('tradingPairs', 'TradingPairsController');
-Route::get('/gettradingPairs', ['as' => 'datatable.gettradingPairs','uses' => 'TradingPairsController@getTradingPairsData']);
+Route::get('/gettradingPairs',
+    ['as' => 'datatable.gettradingPairs','uses' => 'TradingPairsController@getTradingPairsData']);
 
 
 /** ===== Profile ====== */

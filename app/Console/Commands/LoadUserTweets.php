@@ -8,7 +8,6 @@ use App\Models\TwitterUsers;
 use Illuminate\Console\Command;
 use Atymic\Twitter\Facade\Twitter;
 use Atymic\Twitter\Twitter as TwitterContract;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
 
@@ -57,8 +56,6 @@ class LoadUserTweets extends Command
         ];
 
         $response = Twitter::userTweets($userId, $params);
-
-        dump($response);
 
         TwitterUsers::query()->where('timeline', $userId)->delete();
 
