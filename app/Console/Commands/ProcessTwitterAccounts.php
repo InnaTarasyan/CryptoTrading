@@ -32,60 +32,59 @@ class ProcessTwitterAccounts extends Command
      */
     public function handle()
     {
-        foreach (TwitterAccount::where('processed', null)->get() as $account) {
-            $userId = $account->account;
+        $account = TwitterAccount::where('processed', null)->first();
 
-            try {
-                $params = [
-                    'place.fields' => 'country,name',
-                    'tweet.fields' => 'author_id,geo',
-                    'expansions' => 'author_id,in_reply_to_user_id',
-                    TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_ARRAY,
-                ];
+        $userId = $account->account;
 
-                $response = Twitter::userTweets($userId, $params);
+        try {
+            $params = [
+                'place.fields' => 'country,name',
+                'tweet.fields' => 'author_id,geo',
+                'expansions' => 'author_id,in_reply_to_user_id',
+                TwitterContract::KEY_RESPONSE_FORMAT => TwitterContract::RESPONSE_FORMAT_ARRAY,
+            ];
 
-                TwitterUsers::query()->where('timeline', $userId)->delete();
+            $response = Twitter::userTweets($userId, $params);
 
-                foreach ($response['includes']['users'] as $datum) {
-                    TwitterUsers::create([
-                        'user_id'  => $datum['id'],
-                        'name'     => $datum['name'],
-                        'username' => $datum['username'],
-                        'timeline' => $userId,
-                    ]);
-                }
+            TwitterUsers::query()->where('timeline', $userId)->delete();
 
-                TwitterMessages::query()->where('timeline', $userId)->delete();
-
-                foreach ($response['data'] as $datum) {
-                    TwitterMessages::create([
-                        'tweet_id' => $datum['id'],
-                        'edit_history_tweet_ids' => json_encode($datum['edit_history_tweet_ids']),
-                        'text' => $datum['text'],
-                        'author_id' => $datum['author_id'],
-                        'timeline'  => $userId,
-                    ]);
-                }
-
-                TwitterMeta::query()->where('timeline', $userId)->delete();
-
-                TwitterMeta::create([
-                    'result_count' => $response['meta']['result_count'],
-                    'newest_id'    => $response['meta']['newest_id'],
-                    'oldest_id'    => $response['meta']['oldest_id'],
-                    'timeline'     => $userId,
+            foreach ($response['includes']['users'] as $datum) {
+                TwitterUsers::create([
+                    'user_id'  => $datum['id'],
+                    'name'     => $datum['name'],
+                    'username' => $datum['username'],
+                    'timeline' => $userId,
                 ]);
-
-
-                $account->processed = 1;
-                $account->save();
-
-                Log::channel('crabler')->info('Twitter Accounts '.$userId);
-            } catch (\Exception $exception) {
-                continue;
             }
 
+            TwitterMessages::query()->where('timeline', $userId)->delete();
+
+            foreach ($response['data'] as $datum) {
+                TwitterMessages::create([
+                    'tweet_id' => $datum['id'],
+                    'edit_history_tweet_ids' => json_encode($datum['edit_history_tweet_ids']),
+                    'text' => $datum['text'],
+                    'author_id' => $datum['author_id'],
+                    'timeline'  => $userId,
+                ]);
+            }
+
+            TwitterMeta::query()->where('timeline', $userId)->delete();
+
+            TwitterMeta::create([
+                'result_count' => $response['meta']['result_count'],
+                'newest_id'    => $response['meta']['newest_id'],
+                'oldest_id'    => $response['meta']['oldest_id'],
+                'timeline'     => $userId,
+            ]);
+
+
+            $account->processed = 1;
+            $account->save();
+
+            Log::channel('crabler')->info('Twitter Accounts '.$userId);
+        } catch (\Exception $exception) {
+            Log::channel('crabler')->info('Twitter Accounts data fetch error');
         }
     }
 }
