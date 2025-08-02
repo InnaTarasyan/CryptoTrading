@@ -65,7 +65,7 @@ class DetailsController extends Controller
             'coin'   => $coin,
             'events' => $events,
             'telegramMessages' => TelegramMessages::orderBy('created_at', 'desc')->get(),
-            'twitterMessages' => isset($twitterMessages) ? $twitterMessages :
+            'twitterMessages' => (isset($twitterMessages) && ($twitterMessages->count() > 0)) ? $twitterMessages :
                 TwitterMessages::with('author')->orderBy('created_at', 'desc')->get(),
             'tradingPair' => $tradingPair,
         ];
