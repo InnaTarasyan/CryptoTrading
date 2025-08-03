@@ -641,3 +641,502 @@ body {
 
 /* --- End Enhanced Responsive & Modern Coin Details Page Styles --- */
 
+/* --- Modern Calendar Styles --- */
+
+/* Enhanced Calendar Portlet */
+#m_portlet_calendar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 1.5em;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15), 0 4px 16px rgba(118, 75, 162, 0.1);
+  padding: 2em 2em 1.5em 2em;
+  margin: 2em auto;
+  max-width: 1200px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+#m_portlet_calendar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  pointer-events: none;
+  border-radius: 1.5em;
+}
+
+#m_portlet_calendar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25), 0 6px 20px rgba(118, 75, 162, 0.15);
+}
+
+/* Calendar Header */
+#m_portlet_calendar .m-portlet__head {
+  background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+  border: none;
+  border-radius: 1.2em;
+  margin-bottom: 1.5em;
+  padding: 1.2em 1.5em;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 2;
+}
+
+#m_portlet_calendar .m-portlet__head-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1em;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+#m_portlet_calendar .m-portlet__head-icon i {
+  color: white;
+  font-size: 1.2em;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+#m_portlet_calendar .m-portlet__head-text {
+  color: #2d3748;
+  font-size: 1.4em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Calendar Body */
+#m_portlet_calendar .m-portlet__body {
+  background: rgba(255,255,255,0.95);
+  border-radius: 1.2em;
+  padding: 1.5em;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 2;
+}
+
+/* FullCalendar Container */
+#m_portlet_calendar .fc {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  border-radius: 1em;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+/* Calendar Toolbar */
+#m_portlet_calendar .fc-toolbar {
+  background: linear-gradient(90deg, #f7fafc 0%, #edf2f7 100%);
+  padding: 1em 1.5em;
+  border-bottom: 1px solid #e2e8f0;
+  border-radius: 1em 1em 0 0;
+}
+
+#m_portlet_calendar .fc-toolbar h2 {
+  color: #2d3748;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin: 0;
+}
+
+#m_portlet_calendar .fc-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 0.8em;
+  padding: 0.6em 1.2em;
+  font-weight: 600;
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+#m_portlet_calendar .fc-button:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#m_portlet_calendar .fc-button:active {
+  transform: translateY(0);
+}
+
+#m_portlet_calendar .fc-button.fc-state-active {
+  background: linear-gradient(135deg, #4c51bf 0%, #553c9a 100%);
+  box-shadow: 0 2px 8px rgba(76, 81, 191, 0.4);
+}
+
+/* Calendar Header */
+#m_portlet_calendar .fc-day-header {
+  background: linear-gradient(90deg, #f7fafc 0%, #edf2f7 100%);
+  color: #4a5568;
+  font-weight: 700;
+  padding: 1em 0.5em;
+  border: 1px solid #e2e8f0;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Calendar Days */
+#m_portlet_calendar .fc-day {
+  border: 1px solid #e2e8f0;
+  background: white;
+  transition: background-color 0.2s ease;
+}
+
+#m_portlet_calendar .fc-day:hover {
+  background: #f7fafc;
+}
+
+#m_portlet_calendar .fc-day.fc-today {
+  background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+  border: 2px solid #3182ce;
+}
+
+#m_portlet_calendar .fc-day-number {
+  color: #2d3748;
+  font-weight: 600;
+  padding: 0.5em;
+  font-size: 0.95em;
+}
+
+#m_portlet_calendar .fc-day.fc-today .fc-day-number {
+  color: #3182ce;
+  font-weight: 700;
+}
+
+/* Enhanced Event Styles */
+#m_portlet_calendar .fc-day-grid-event {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 0.6em;
+  padding: 0.4em 0.8em;
+  margin: 0.2em 0.3em;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+#m_portlet_calendar .fc-day-grid-event::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  pointer-events: none;
+  border-radius: 0.6em;
+}
+
+#m_portlet_calendar .fc-day-grid-event:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+}
+
+#m_portlet_calendar .fc-day-grid-event.fc-selected {
+  background: linear-gradient(135deg, #4c51bf 0%, #553c9a 100%);
+  box-shadow: 0 4px 16px rgba(76, 81, 191, 0.4);
+  transform: scale(1.05);
+}
+
+#m_portlet_calendar .fc-day-grid-event .fc-content {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#m_portlet_calendar .fc-day-grid-event .fc-time {
+  font-weight: 700;
+  margin-right: 0.5em;
+  opacity: 0.9;
+}
+
+#m_portlet_calendar .fc-day-grid-event .fc-title {
+  font-weight: 600;
+}
+
+/* Event Categories */
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--accent {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--accent:hover {
+  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+}
+
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--success {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--success:hover {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+}
+
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--warning {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--warning:hover {
+  background: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
+}
+
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--danger {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+#m_portlet_calendar .fc-day-grid-event.m-fc-event--danger:hover {
+  background: linear-gradient(135deg, #fee140 0%, #fa709a 100%);
+}
+
+/* More Events Link */
+#m_portlet_calendar .fc-more {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 0.5em;
+  padding: 0.3em 0.6em;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.25);
+  transition: all 0.3s ease;
+}
+
+#m_portlet_calendar .fc-more:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(102, 126, 234, 0.35);
+  text-decoration: none;
+  color: white;
+}
+
+/* Popover Styles */
+#m_portlet_calendar .fc-more-popover {
+  background: white;
+  border-radius: 1em;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  border: none;
+  overflow: hidden;
+}
+
+#m_portlet_calendar .fc-more-popover .fc-header {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.8em 1.2em;
+  font-weight: 600;
+}
+
+#m_portlet_calendar .fc-more-popover .fc-event-container {
+  padding: 1em;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #m_portlet_calendar {
+    padding: 1.5em 1em 1em 1em;
+    margin: 1.5em auto;
+    border-radius: 1.2em;
+  }
+  
+  #m_portlet_calendar .m-portlet__head {
+    padding: 1em;
+    margin-bottom: 1em;
+  }
+  
+  #m_portlet_calendar .m-portlet__head-icon {
+    width: 2.5em;
+    height: 2.5em;
+    margin-right: 0.8em;
+  }
+  
+  #m_portlet_calendar .m-portlet__head-text {
+    font-size: 1.2em;
+  }
+  
+  #m_portlet_calendar .m-portlet__body {
+    padding: 1em;
+  }
+  
+  #m_portlet_calendar .fc-toolbar {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+  }
+  
+  #m_portlet_calendar .fc-toolbar h2 {
+    font-size: 1.1em;
+  }
+  
+  #m_portlet_calendar .fc-button {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+  }
+  
+  #m_portlet_calendar .fc-day-header {
+    padding: 0.8em 0.3em;
+    font-size: 0.85em;
+  }
+  
+  #m_portlet_calendar .fc-day-grid-event {
+    padding: 0.3em 0.6em;
+    margin: 0.1em 0.2em;
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  #m_portlet_calendar {
+    padding: 1em 0.8em 0.8em 0.8em;
+    margin: 1em auto;
+  }
+  
+  #m_portlet_calendar .m-portlet__head {
+    padding: 0.8em;
+  }
+  
+  #m_portlet_calendar .m-portlet__head-icon {
+    width: 2em;
+    height: 2em;
+    margin-right: 0.6em;
+  }
+  
+  #m_portlet_calendar .m-portlet__head-text {
+    font-size: 1.1em;
+  }
+  
+  #m_portlet_calendar .fc-toolbar h2 {
+    font-size: 1em;
+  }
+  
+  #m_portlet_calendar .fc-day-header {
+    padding: 0.6em 0.2em;
+    font-size: 0.8em;
+  }
+  
+  #m_portlet_calendar .fc-day-number {
+    font-size: 0.85em;
+    padding: 0.4em;
+  }
+  
+  #m_portlet_calendar .fc-day-grid-event {
+    padding: 0.2em 0.5em;
+    margin: 0.1em;
+    font-size: 0.75em;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  #m_portlet_calendar {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  }
+  
+  #m_portlet_calendar .m-portlet__head {
+    background: linear-gradient(90deg, rgba(45, 55, 72, 0.95) 0%, rgba(74, 85, 104, 0.85) 100%);
+  }
+  
+  #m_portlet_calendar .m-portlet__head-text {
+    color: #e2e8f0;
+  }
+  
+  #m_portlet_calendar .m-portlet__body {
+    background: rgba(45, 55, 72, 0.95);
+  }
+  
+  #m_portlet_calendar .fc-toolbar {
+    background: linear-gradient(90deg, #2d3748 0%, #4a5568 100%);
+    border-bottom-color: #4a5568;
+  }
+  
+  #m_portlet_calendar .fc-toolbar h2 {
+    color: #e2e8f0;
+  }
+  
+  #m_portlet_calendar .fc-day-header {
+    background: linear-gradient(90deg, #2d3748 0%, #4a5568 100%);
+    color: #e2e8f0;
+    border-color: #4a5568;
+  }
+  
+  #m_portlet_calendar .fc-day {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  #m_portlet_calendar .fc-day:hover {
+    background: #4a5568;
+  }
+  
+  #m_portlet_calendar .fc-day.fc-today {
+    background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+    border-color: #3182ce;
+  }
+  
+  #m_portlet_calendar .fc-day-number {
+    color: #e2e8f0;
+  }
+  
+  #m_portlet_calendar .fc-day.fc-today .fc-day-number {
+    color: #90cdf4;
+  }
+}
+
+/* Animation for calendar events */
+@keyframes calendarEventPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+#m_portlet_calendar .fc-day-grid-event {
+  animation: calendarEventPulse 2s ease-in-out infinite;
+}
+
+#m_portlet_calendar .fc-day-grid-event:hover {
+  animation: none;
+}
+
+/* Loading state for calendar */
+#m_portlet_calendar.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+#m_portlet_calendar.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
