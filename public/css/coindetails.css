@@ -1140,3 +1140,495 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+/* --- Modern Action Link Styles --- */
+
+/* Action Link Cards Container */
+.action-link-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 1.5em;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15), 0 4px 16px rgba(118, 75, 162, 0.1);
+  padding: 2em 2.5em;
+  margin: 2em auto;
+  max-width: 800px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.action-link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  pointer-events: none;
+  border-radius: 1.5em;
+}
+
+.action-link-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25), 0 6px 20px rgba(118, 75, 162, 0.15);
+}
+
+/* Action Link Content */
+.action-link-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  flex-wrap: wrap;
+}
+
+.action-link-icon {
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 3.5em;
+  height: 3.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.action-link-card:hover .action-link-icon {
+  transform: scale(1.1) rotate(5deg);
+  background: rgba(255,255,255,0.3);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.action-link-icon i {
+  font-size: 1.5em;
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Action Link Text */
+.action-link-text {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5em 0;
+}
+
+.action-link-text::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.action-link-card:hover .action-link-text::after {
+  width: 100%;
+}
+
+.action-link-card:hover .action-link-text {
+  color: #ffd200;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Specific Link Styles */
+.action-link-card.tradingview-link {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+}
+
+.action-link-card.tradingview-link .action-link-icon {
+  background: rgba(255,255,255,0.2);
+}
+
+.action-link-card.tradingview-link .action-link-icon i {
+  color: white;
+}
+
+.action-link-card.twitter-link {
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+}
+
+.action-link-card.twitter-link .action-link-icon {
+  background: rgba(255,255,255,0.2);
+}
+
+.action-link-card.twitter-link .action-link-icon i {
+  color: white;
+}
+
+.action-link-card.telegram-link {
+  background: linear-gradient(135deg, #0088cc 0%, #0077b3 100%);
+}
+
+.action-link-card.telegram-link .action-link-icon {
+  background: rgba(255,255,255,0.2);
+}
+
+.action-link-card.telegram-link .action-link-icon i {
+  color: white;
+}
+
+/* Action Link Description */
+.action-link-description {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.95em;
+  margin-top: 0.8em;
+  font-weight: 400;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .action-link-card {
+    padding: 1.5em 1.5em;
+    margin: 1.5em auto;
+    border-radius: 1.2em;
+  }
+  
+  .action-link-content {
+    gap: 1em;
+  }
+  
+  .action-link-icon {
+    width: 3em;
+    height: 3em;
+  }
+  
+  .action-link-icon i {
+    font-size: 1.3em;
+  }
+  
+  .action-link-text {
+    font-size: 1.1em;
+  }
+  
+  .action-link-description {
+    font-size: 0.9em;
+    margin-top: 0.6em;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-link-card {
+    padding: 1.2em 1em;
+    margin: 1em auto;
+  }
+  
+  .action-link-content {
+    flex-direction: column;
+    gap: 0.8em;
+  }
+  
+  .action-link-icon {
+    width: 2.5em;
+    height: 2.5em;
+  }
+  
+  .action-link-icon i {
+    font-size: 1.1em;
+  }
+  
+  .action-link-text {
+    font-size: 1em;
+  }
+  
+  .action-link-description {
+    font-size: 0.85em;
+    margin-top: 0.5em;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .action-link-card {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  }
+  
+  .action-link-card.tradingview-link {
+    background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+  }
+  
+  .action-link-card.twitter-link {
+    background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+  }
+  
+  .action-link-card.telegram-link {
+    background: linear-gradient(135deg, #2c7a7b 0%, #234e52 100%);
+  }
+}
+
+/* Animation for action links */
+@keyframes actionLinkPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.action-link-card {
+  animation: actionLinkPulse 3s ease-in-out infinite;
+}
+
+.action-link-card:hover {
+  animation: none;
+}
+
+/* Focus states for accessibility */
+.action-link-text:focus {
+  outline: 2px solid #ffd200;
+  outline-offset: 4px;
+  border-radius: 0.5em;
+}
+
+/* Loading state */
+.action-link-card.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.action-link-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+/* --- Modern Action Link Styles (for existing h2 links) --- */
+
+/* Action Link Container */
+.row:has(h2 a[href="/tradingPairs"]),
+.row:has(h2 a[href="/twitter"]),
+.row:has(h2 a[href="/telegram"]) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 1.5em;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15), 0 4px 16px rgba(118, 75, 162, 0.1);
+  padding: 2em 2.5em !important;
+  margin: 2em auto;
+  max-width: 800px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.row:has(h2 a[href="/tradingPairs"])::before,
+.row:has(h2 a[href="/twitter"])::before,
+.row:has(h2 a[href="/telegram"])::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  pointer-events: none;
+  border-radius: 1.5em;
+}
+
+.row:has(h2 a[href="/tradingPairs"]):hover,
+.row:has(h2 a[href="/twitter"]):hover,
+.row:has(h2 a[href="/telegram"]):hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25), 0 6px 20px rgba(118, 75, 162, 0.15);
+}
+
+/* Specific link styles */
+.row:has(h2 a[href="/tradingPairs"]) {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+}
+
+.row:has(h2 a[href="/twitter"]) {
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+}
+
+.row:has(h2 a[href="/telegram"]) {
+  background: linear-gradient(135deg, #0088cc 0%, #0077b3 100%);
+}
+
+/* Action Link Text Styling */
+.row:has(h2 a[href="/tradingPairs"]) h2,
+.row:has(h2 a[href="/twitter"]) h2,
+.row:has(h2 a[href="/telegram"]) h2 {
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.row:has(h2 a[href="/tradingPairs"]) h2 a,
+.row:has(h2 a[href="/twitter"]) h2 a,
+.row:has(h2 a[href="/telegram"]) h2 a {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5em 0;
+  display: inline-block;
+}
+
+.row:has(h2 a[href="/tradingPairs"]) h2 a::before,
+.row:has(h2 a[href="/twitter"]) h2 a::before,
+.row:has(h2 a[href="/telegram"]) h2 a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.row:has(h2 a[href="/tradingPairs"]):hover h2 a::before,
+.row:has(h2 a[href="/twitter"]):hover h2 a::before,
+.row:has(h2 a[href="/telegram"]):hover h2 a::before {
+  width: 100%;
+}
+
+.row:has(h2 a[href="/tradingPairs"]):hover h2 a,
+.row:has(h2 a[href="/twitter"]):hover h2 a,
+.row:has(h2 a[href="/telegram"]):hover h2 a {
+  color: #ffd200;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Add icons using pseudo-elements */
+.row:has(h2 a[href="/tradingPairs"]) h2 a::after {
+  content: '📊';
+  margin-left: 0.8em;
+  font-size: 1.2em;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.row:has(h2 a[href="/twitter"]) h2 a::after {
+  content: '🐦';
+  margin-left: 0.8em;
+  font-size: 1.2em;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.row:has(h2 a[href="/telegram"]) h2 a::after {
+  content: '📱';
+  margin-left: 0.8em;
+  font-size: 1.2em;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.row:has(h2 a[href="/tradingPairs"]):hover h2 a::after,
+.row:has(h2 a[href="/twitter"]):hover h2 a::after,
+.row:has(h2 a[href="/telegram"]):hover h2 a::after {
+  transform: scale(1.2) rotate(5deg);
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .row:has(h2 a[href="/tradingPairs"]),
+  .row:has(h2 a[href="/twitter"]),
+  .row:has(h2 a[href="/telegram"]) {
+    padding: 1.5em 1.5em !important;
+    margin: 1.5em auto;
+    border-radius: 1.2em;
+  }
+  
+  .row:has(h2 a[href="/tradingPairs"]) h2 a,
+  .row:has(h2 a[href="/twitter"]) h2 a,
+  .row:has(h2 a[href="/telegram"]) h2 a {
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .row:has(h2 a[href="/tradingPairs"]),
+  .row:has(h2 a[href="/twitter"]),
+  .row:has(h2 a[href="/telegram"]) {
+    padding: 1.2em 1em !important;
+    margin: 1em auto;
+  }
+  
+  .row:has(h2 a[href="/tradingPairs"]) h2 a,
+  .row:has(h2 a[href="/twitter"]) h2 a,
+  .row:has(h2 a[href="/telegram"]) h2 a {
+    font-size: 1em;
+  }
+  
+  .row:has(h2 a[href="/tradingPairs"]) h2 a::after,
+  .row:has(h2 a[href="/twitter"]) h2 a::after,
+  .row:has(h2 a[href="/telegram"]) h2 a::after {
+    margin-left: 0.5em;
+    font-size: 1em;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .row:has(h2 a[href="/tradingPairs"]) {
+    background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+  }
+  
+  .row:has(h2 a[href="/twitter"]) {
+    background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+  }
+  
+  .row:has(h2 a[href="/telegram"]) {
+    background: linear-gradient(135deg, #2c7a7b 0%, #234e52 100%);
+  }
+}
+
+/* Animation for action links */
+@keyframes actionLinkPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.row:has(h2 a[href="/tradingPairs"]),
+.row:has(h2 a[href="/twitter"]),
+.row:has(h2 a[href="/telegram"]) {
+  animation: actionLinkPulse 3s ease-in-out infinite;
+}
+
+.row:has(h2 a[href="/tradingPairs"]):hover,
+.row:has(h2 a[href="/twitter"]):hover,
+.row:has(h2 a[href="/telegram"]):hover {
+  animation: none;
+}
+
+/* Focus states for accessibility */
+.row:has(h2 a[href="/tradingPairs"]) h2 a:focus,
+.row:has(h2 a[href="/twitter"]) h2 a:focus,
+.row:has(h2 a[href="/telegram"]) h2 a:focus {
+  outline: 2px solid #ffd200;
+  outline-offset: 4px;
+  border-radius: 0.5em;
+}
+
