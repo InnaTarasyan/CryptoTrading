@@ -1632,3 +1632,631 @@ body {
   border-radius: 0.5em;
 }
 
+/* --- Modern Twitter Messages Timeline Styles --- */
+
+/* Enhanced Scrollable Container */
+.m-scrollable.mCustomScrollbar {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+/* Custom Scrollbar Styling */
+.m-scrollable.mCustomScrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.m-scrollable.mCustomScrollbar::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.5);
+  border-radius: 4px;
+}
+
+.m-scrollable.mCustomScrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(29, 161, 242, 0.3);
+}
+
+.m-scrollable.mCustomScrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #0d8bd9 0%, #1da1f2 100%);
+}
+
+/* Modern Timeline Container */
+.m-timeline-2 {
+  padding: 2em 1.5em 1em 1.5em;
+  position: relative;
+  overflow: visible;
+}
+
+.m-timeline-2::before {
+  content: '';
+  position: absolute;
+  left: 3.2em;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #1da1f2 0%, #0d8bd9 50%, #1da1f2 100%);
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba(29, 161, 242, 0.3);
+}
+
+/* Timeline Items */
+.m-timeline-2__items {
+  position: relative;
+  margin-bottom: 2em;
+  transition: all 0.3s ease;
+  overflow: visible;
+}
+
+.m-timeline-2__items:hover {
+  transform: translateX(4px);
+}
+
+.m-timeline-2__items:last-child {
+  margin-bottom: 0;
+}
+
+/* Timeline Item Container */
+.m-timeline-2__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2em;
+  position: relative;
+  background: white;
+  border-radius: 1em;
+  padding: 1.5em 1.8em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  overflow: visible;
+  margin-bottom: 1em;
+  min-height: 80px;
+}
+
+.m-timeline-2__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(29, 161, 242, 0.05) 0%, rgba(13, 139, 217, 0.02) 100%);
+  pointer-events: none;
+  border-radius: 1em;
+}
+
+.m-timeline-2__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(29, 161, 242, 0.15);
+  border-color: #1da1f2;
+}
+
+/* Timeline Circle/Icon - Enhanced User-Friendly Design */
+.m-timeline-2__item-cricle {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 3em;
+  height: 3em;
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(29, 161, 242, 0.4), 0 2px 8px rgba(29, 161, 242, 0.2);
+  border: 4px solid white;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 0.2em;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Glowing effect on hover */
+.m-timeline-2__item-cricle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.m-timeline-2__item:hover .m-timeline-2__item-cricle {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(29, 161, 242, 0.5), 0 4px 12px rgba(29, 161, 242, 0.3);
+  background: linear-gradient(135deg, #0d8bd9 0%, #1da1f2 100%);
+}
+
+.m-timeline-2__item:hover .m-timeline-2__item-cricle::before {
+  opacity: 1;
+}
+
+/* Active state for timeline circle */
+.m-timeline-2__item-cricle:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+/* Enhanced icon styling */
+.m-timeline-2__item-cricle i {
+  color: white;
+  font-size: 1.1em;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  transition: all 0.3s ease;
+  z-index: 1;
+  position: relative;
+}
+
+.m-timeline-2__item:hover .m-timeline-2__item-cricle i {
+  transform: scale(1.1);
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+}
+
+/* Pulse animation for timeline circles */
+@keyframes timelineCirclePulse {
+  0% {
+    box-shadow: 0 6px 20px rgba(29, 161, 242, 0.4), 0 2px 8px rgba(29, 161, 242, 0.2);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(29, 161, 242, 0.6), 0 2px 8px rgba(29, 161, 242, 0.4);
+  }
+  100% {
+    box-shadow: 0 6px 20px rgba(29, 161, 242, 0.4), 0 2px 8px rgba(29, 161, 242, 0.2);
+  }
+}
+
+.m-timeline-2__item-cricle {
+  animation: timelineCirclePulse 3s ease-in-out infinite;
+}
+
+.m-timeline-2__item:hover .m-timeline-2__item-cricle {
+  animation: none;
+}
+
+/* Responsive Design for Timeline Circles */
+@media (max-width: 768px) {
+  .m-timeline-2__item-cricle {
+    width: 2.5em;
+    height: 2.5em;
+    margin-top: 0.1em;
+    border-width: 3px;
+  }
+  
+  .m-timeline-2__item-cricle i {
+    font-size: 1em;
+  }
+  
+  .m-timeline-2__item:hover .m-timeline-2__item-cricle {
+    transform: scale(1.1) rotate(3deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .m-timeline-2__item-cricle {
+    width: 2.2em;
+    height: 2.2em;
+    margin-top: 0;
+    border-width: 3px;
+  }
+  
+  .m-timeline-2__item-cricle i {
+    font-size: 0.9em;
+  }
+  
+  .m-timeline-2__item:hover .m-timeline-2__item-cricle {
+    transform: scale(1.08) rotate(2deg);
+  }
+}
+
+/* Dark Mode Support for Timeline Circles */
+@media (prefers-color-scheme: dark) {
+  .m-timeline-2__item-cricle {
+    background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+    border-color: #4a5568;
+    box-shadow: 0 6px 20px rgba(43, 108, 176, 0.4), 0 2px 8px rgba(43, 108, 176, 0.2);
+  }
+  
+  .m-timeline-2__item:hover .m-timeline-2__item-cricle {
+    background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+    box-shadow: 0 8px 25px rgba(43, 108, 176, 0.5), 0 4px 12px rgba(43, 108, 176, 0.3);
+  }
+}
+
+/* Focus states for accessibility */
+.m-timeline-2__item-cricle:focus {
+  outline: 2px solid #ffd200;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Loading state for timeline circles */
+.m-timeline-2__item-cricle.loading {
+  animation: spin 1s linear infinite;
+}
+
+/* Different circle styles for different message types */
+.m-timeline-2__item-cricle.twitter-message {
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+}
+
+.m-timeline-2__item-cricle.telegram-message {
+  background: linear-gradient(135deg, #0088cc 0%, #0077b3 100%);
+}
+
+.m-timeline-2__item-cricle.news-message {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+}
+
+.m-timeline-2__item-cricle.update-message {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Timeline Time - Enhanced Date Display */
+.m-timeline-2__item-time {
+  position: absolute;
+  top: -0.8em;
+  left: 4.8em;
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+  color: #ffffff !important;
+  padding: 0.6em 1em;
+  border-radius: 1em;
+  font-size: 0.9em;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
+  z-index: 3;
+  white-space: nowrap;
+  min-width: 200px;
+  max-width: 300px;
+  overflow: visible;
+  text-overflow: clip;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  border: 2px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.m-timeline-2__item:hover .m-timeline-2__item-time {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(29, 161, 242, 0.4);
+  background: linear-gradient(135deg, #0d8bd9 0%, #1da1f2 100%);
+}
+
+/* Add date icon */
+.m-timeline-2__item-time::before {
+  content: '📅';
+  margin-right: 0.5em;
+  font-size: 0.9em;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+/* Enhanced Timeline Item with Date Display */
+.m-timeline-2__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2em;
+  position: relative;
+  background: white;
+  border-radius: 1em;
+  padding: 2.5em 1.8em 1.5em 1.8em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  overflow: visible;
+  margin-bottom: 1.5em;
+  min-height: 120px;
+}
+
+/* Timeline Content with Better Spacing for Date */
+.m-timeline-2__item-text {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+  line-height: 1.6;
+  color: #2d3748;
+  font-size: 0.95em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-top: 1em;
+  padding-top: 1em;
+  min-height: 3em;
+  display: block;
+  width: 100%;
+}
+
+/* Responsive Design for Date Display */
+@media (max-width: 768px) {
+  .m-timeline-2__item-time {
+    left: 4em;
+    font-size: 0.85em;
+    padding: 0.5em 0.8em;
+    min-width: 180px;
+    max-width: 250px;
+  }
+  
+  .m-timeline-2__item {
+    padding: 2.2em 1.5em 1.2em 1.5em;
+    min-height: 110px;
+  }
+  
+  .m-timeline-2__item-text {
+    margin-top: 0.8em;
+    padding-top: 0.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .m-timeline-2__item-time {
+    left: 3.5em;
+    font-size: 0.8em;
+    padding: 0.4em 0.6em;
+    min-width: 160px;
+    max-width: 220px;
+  }
+  
+  .m-timeline-2__item {
+    padding: 2em 1.2em 1em 1.2em;
+    min-height: 100px;
+  }
+  
+  .m-timeline-2__item-text {
+    margin-top: 0.6em;
+    padding-top: 0.6em;
+  }
+}
+
+/* Dark Mode Support for Date Display */
+@media (prefers-color-scheme: dark) {
+  .m-timeline-2__item-time {
+    background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+    border-color: rgba(255,255,255,0.1);
+  }
+  
+  .m-timeline-2__item-date-badge {
+    background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+    border-color: rgba(255,255,255,0.1);
+  }
+}
+
+/* Timeline Content */
+.m-timeline-2__item-text {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+  line-height: 1.6;
+  color: #2d3748;
+  font-size: 0.95em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-top: 0.5em;
+  padding-top: 0.5em;
+  min-height: 2.5em;
+  display: block;
+  width: 100%;
+}
+
+/* Tweet Content Styling */
+.m-timeline-2__item-text a {
+  color: #1da1f2;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.m-timeline-2__item-text a:hover {
+  color: #0d8bd9;
+  text-decoration: underline;
+}
+
+/* Author Name Styling */
+.m-timeline-2__item-text:contains(',') {
+  position: relative;
+}
+
+.m-timeline-2__item-text::after {
+  content: '';
+  display: block;
+  margin-top: 0.8em;
+  padding-top: 0.8em;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Twitter-specific styling */
+.m-timeline-2__item-text:contains('@') {
+  font-weight: 500;
+}
+
+/* Hashtag styling */
+.m-timeline-2__item-text:contains('#') {
+  color: #1da1f2;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .m-timeline-2 {
+    padding: 1.5em 1em 0.5em 1em;
+  }
+  
+  .m-timeline-2::before {
+    left: 2.5em;
+  }
+  
+  .m-timeline-2__item {
+    padding: 1.2em 1.5em;
+    gap: 1em;
+    min-height: 70px;
+  }
+  
+  .m-timeline-2__item-cricle {
+    width: 2.2em;
+    height: 2.2em;
+    margin-top: 0.1em;
+  }
+  
+  .m-timeline-2__item-time {
+    left: 4em;
+    font-size: 0.8em;
+    padding: 0.3em 0.6em;
+    max-width: 150px;
+  }
+  
+  .m-timeline-2__item-text {
+    font-size: 0.9em;
+    margin-top: 0.3em;
+    padding-top: 0.3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .m-timeline-2 {
+    padding: 1.2em 0.8em 0.4em 0.8em;
+  }
+  
+  .m-timeline-2::before {
+    left: 2.2em;
+  }
+  
+  .m-timeline-2__item {
+    padding: 1em 1.2em;
+    gap: 0.8em;
+    min-height: 60px;
+  }
+  
+  .m-timeline-2__item-cricle {
+    width: 2em;
+    height: 2em;
+    margin-top: 0;
+  }
+  
+  .m-timeline-2__item-cricle i {
+    font-size: 0.8em;
+  }
+  
+  .m-timeline-2__item-time {
+    left: 3.5em;
+    font-size: 0.75em;
+    padding: 0.25em 0.5em;
+    max-width: 120px;
+  }
+  
+  .m-timeline-2__item-text {
+    font-size: 0.85em;
+    margin-top: 0.2em;
+    padding-top: 0.2em;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .m-scrollable.mCustomScrollbar {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    border-color: #4a5568;
+  }
+  
+  .m-timeline-2__item {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .m-timeline-2__item::before {
+    background: linear-gradient(135deg, rgba(29, 161, 242, 0.1) 0%, rgba(13, 139, 217, 0.05) 100%);
+  }
+  
+  .m-timeline-2__item:hover {
+    border-color: #1da1f2;
+    box-shadow: 0 8px 25px rgba(29, 161, 242, 0.2);
+  }
+  
+  .m-timeline-2__item-text {
+    color: #e2e8f0;
+  }
+  
+  .m-timeline-2__item-text::after {
+    border-top-color: #4a5568;
+  }
+}
+
+/* Animation for timeline items */
+@keyframes timelineItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.m-timeline-2__items {
+  animation: timelineItemFadeIn 0.6s ease-out forwards;
+}
+
+.m-timeline-2__items:nth-child(1) { animation-delay: 0.1s; }
+.m-timeline-2__items:nth-child(2) { animation-delay: 0.2s; }
+.m-timeline-2__items:nth-child(3) { animation-delay: 0.3s; }
+.m-timeline-2__items:nth-child(4) { animation-delay: 0.4s; }
+.m-timeline-2__items:nth-child(5) { animation-delay: 0.5s; }
+
+/* Loading state */
+.m-scrollable.mCustomScrollbar.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.m-scrollable.mCustomScrollbar.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid rgba(29, 161, 242, 0.3);
+  border-top: 3px solid #1da1f2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+/* Enhanced Twitter Portlet Header */
+.m-portlet:has(.m-portlet__head-text:contains("Twitter Messages")) .m-portlet__head {
+  background: linear-gradient(90deg, #1da1f2 0%, #0d8bd9 100%);
+  border-bottom: 1px solid #0d8bd9;
+}
+
+.m-portlet:has(.m-portlet__head-text:contains("Twitter Messages")) .m-portlet__head-icon {
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.8em;
+}
+
+.m-portlet:has(.m-portlet__head-text:contains("Twitter Messages")) .m-portlet__head-icon i {
+  color: white;
+  font-size: 1.2em;
+}
+
+.m-portlet:has(.m-portlet__head-text:contains("Twitter Messages")) .m-portlet__head-text {
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
