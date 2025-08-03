@@ -2266,3 +2266,263 @@ body {
   margin-bottom: 0.5em;
 }
 
+/* --- Calendar Fullscreen Styles --- */
+
+/* Fullscreen Button Styles */
+.calendar-fullscreen-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    margin-right: 8px;
+}
+
+.calendar-fullscreen-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.calendar-fullscreen-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.calendar-fullscreen-btn i {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.calendar-fullscreen-btn:hover i {
+    transform: scale(1.1);
+}
+
+/* Fullscreen Container Styles */
+#m_portlet_calendar.fullscreen-active {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 2em !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    overflow: auto !important;
+    transition: all 0.3s ease;
+}
+
+#m_portlet_calendar.fullscreen-active .m-portlet__head {
+    background: rgba(255,255,255,0.95) !important;
+    border-radius: 1.2em !important;
+    margin-bottom: 1.5em !important;
+    padding: 1.2em 1.5em !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+#m_portlet_calendar.fullscreen-active .m-portlet__body {
+    background: rgba(255,255,255,0.95) !important;
+    border-radius: 1.2em !important;
+    padding: 1.5em !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    position: relative !important;
+    z-index: 2 !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+}
+
+#m_portlet_calendar.fullscreen-active .fc {
+    height: calc(100vh - 200px) !important;
+    font-size: 1.1em !important;
+}
+
+#m_portlet_calendar.fullscreen-active .fc-toolbar {
+    padding: 1.5em 2em !important;
+    font-size: 1.2em !important;
+}
+
+#m_portlet_calendar.fullscreen-active .fc-toolbar h2 {
+    font-size: 1.5em !important;
+}
+
+#m_portlet_calendar.fullscreen-active .fc-button {
+    padding: 0.8em 1.5em !important;
+    font-size: 1.1em !important;
+}
+
+#m_portlet_calendar.fullscreen-active .fc-day-header {
+    padding: 1.2em 0.8em !important;
+    font-size: 1.1em !important;
+}
+
+#m_portlet_calendar.fullscreen-active .fc-day-grid-event {
+    padding: 0.6em 1em !important;
+    margin: 0.3em 0.4em !important;
+    font-size: 1em !important;
+}
+
+/* Fullscreen Close Button */
+.calendar-fullscreen-btn.fullscreen-active {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%) !important;
+}
+
+.calendar-fullscreen-btn.fullscreen-active i {
+    transform: rotate(45deg);
+}
+
+/* Responsive Fullscreen */
+@media (max-width: 768px) {
+    #m_portlet_calendar.fullscreen-active {
+        padding: 1em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .m-portlet__head {
+        padding: 1em !important;
+        margin-bottom: 1em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .m-portlet__body {
+        padding: 1em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .fc {
+        height: calc(100vh - 150px) !important;
+        font-size: 1em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .fc-toolbar {
+        padding: 1em 1.5em !important;
+        font-size: 1.1em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .fc-toolbar h2 {
+        font-size: 1.3em !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #m_portlet_calendar.fullscreen-active {
+        padding: 0.8em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .m-portlet__head {
+        padding: 0.8em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .m-portlet__body {
+        padding: 0.8em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .fc {
+        height: calc(100vh - 120px) !important;
+        font-size: 0.95em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .fc-toolbar {
+        padding: 0.8em 1em !important;
+        font-size: 1em !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .fc-toolbar h2 {
+        font-size: 1.2em !important;
+    }
+}
+
+/* Dark Mode Support for Fullscreen */
+@media (prefers-color-scheme: dark) {
+    #m_portlet_calendar.fullscreen-active {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%) !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .m-portlet__head {
+        background: rgba(45, 55, 72, 0.95) !important;
+    }
+    
+    #m_portlet_calendar.fullscreen-active .m-portlet__body {
+        background: rgba(45, 55, 72, 0.95) !important;
+    }
+}
+
+/* Animation for fullscreen transition */
+@keyframes fullscreenFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#m_portlet_calendar.fullscreen-active {
+    animation: fullscreenFadeIn 0.3s ease forwards;
+}
+
+/* Focus states for accessibility */
+.calendar-fullscreen-btn:focus {
+    outline: 2px solid #ffd200;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* Loading state for fullscreen button */
+.calendar-fullscreen-btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.calendar-fullscreen-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Ripple effect for button */
+.calendar-fullscreen-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-fullscreen-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.calendar-fullscreen-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
