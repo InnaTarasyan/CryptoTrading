@@ -124,7 +124,7 @@
                     </button>
                 </div>
             </div>
-            
+
         {{-- ======================== DataTable Section ======================== --}}
         <div class="m-portlet">
             <div class="m-portlet__body mt-5">
@@ -294,6 +294,553 @@
             </div>
         </div>
         {{-- ======================== End DataTable Section ======================== --}}
+
+        {{-- ======================== Comparison Charts Section ======================== --}}
+        <div class="comparison-section" style="margin-top: 3em;">
+            <div class="modern-title-bar">
+                <div class="m-portlet__head-title custom-modern">
+                    <span class="modern-title-icon">
+                        {{-- Comparison Icon SVG --}}
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="url(#comparisonGradient)"/>
+                            <path d="M8 12h4l2-4 2 4h4M8 20h4l2-4 2 4h4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="comparisonGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ff512f"/>
+                                    <stop offset="1" stop-color="#f7971e"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </span>
+                    <span class="modern-title-text" data-lang-key="market_comparison">Market Comparison Analysis</span>
+                </div>
+                <button id="refreshComparison" class="modern-tab darkmode-switch" title="Refresh Comparison Data" aria-label="Refresh Comparison Data">
+                    <span class="darkmode-switch-icon">
+                        {{-- Refresh SVG --}}
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M17.65 6.35A8 8 0 1 0 19 12h-1.5" stroke="#ff512f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="17 2 17 7 22 7" stroke="#ff512f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span data-lang-key="refresh">Refresh</span>
+                </button>
+            </div>
+
+            {{-- Loading Spinner --}}
+            <div id="comparisonLoading" class="datatable-loading" style="display:none; text-align:center; margin:2em;">
+                <div class="spinner-border text-warning" role="status" style="width:3rem;height:3rem;">
+                    <span class="sr-only">Loading comparison data...</span>
+                </div>
+            </div>
+
+            {{-- Charts Container --}}
+            <div id="comparisonCharts" class="charts-container" style="display:none;">
+
+                {{-- Coin Search Section --}}
+                <div class="coin-search-section">
+                    <div class="search-container">
+                        <input type="text" id="coinSearchInput" placeholder="Search for a coin (e.g., bitcoin, ethereum)" class="coin-search-input">
+                        <button id="searchCoinBtn" class="search-btn">Search</button>
+                    </div>
+                    <div id="coinAnalysisResult" class="coin-analysis-result" style="display:none;">
+                        <!-- Coin analysis will be displayed here -->
+                    </div>
+                </div>
+
+                {{-- Platform Overview Cards --}}
+                <div class="platform-overview">
+                    <div class="platform-card livecoinwatch">
+                        <div class="platform-header">
+                            <h3>LiveCoinWatch</h3>
+                            <div class="platform-icon">📊</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-label">Total Coins</span>
+                                <span class="stat-value" id="lcw-total-coins">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total Market Cap</span>
+                                <span class="stat-value" id="lcw-total-mcap">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total Volume</span>
+                                <span class="stat-value" id="lcw-total-volume">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="platform-card coingecko">
+                        <div class="platform-header">
+                            <h3>CoinGecko</h3>
+                            <div class="platform-icon">🦎</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-label">Total Coins</span>
+                                <span class="stat-value" id="cg-total-coins">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total Markets</span>
+                                <span class="stat-value" id="cg-total-markets">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total Exchanges</span>
+                                <span class="stat-value" id="cg-total-exchanges">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="platform-card coinmarketcal">
+                        <div class="platform-header">
+                            <h3>CoinMarketCal</h3>
+                            <div class="platform-icon">📅</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-label">Total Coins</span>
+                                <span class="stat-value" id="cmc-total-coins">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total Events</span>
+                                <span class="stat-value" id="cmc-total-events">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Top 10 Ranked</span>
+                                <span class="stat-value" id="cmc-top-10">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Chart Grid --}}
+                <div class="chart-grid">
+                    {{-- Market Cap Distribution Chart --}}
+                    <div class="chart-card">
+                        <h4>Market Cap Distribution</h4>
+                        <div class="chart-container" style="height: 300px; position: relative;">
+                            <canvas id="marketCapChart"></canvas>
+                        </div>
+                    </div>
+
+                    {{-- Price Movement Trends --}}
+                    <div class="chart-card">
+                        <h4>24h Price Movement Trends</h4>
+                        <div class="chart-container" style="height: 300px; position: relative;">
+                            <canvas id="priceTrendsChart"></canvas>
+                        </div>
+                    </div>
+
+                    {{-- Volume Analysis --}}
+                    <div class="chart-card">
+                        <h4>Volume Distribution</h4>
+                        <div class="chart-container" style="height: 300px; position: relative;">
+                            <canvas id="volumeChart"></canvas>
+                        </div>
+                    </div>
+
+                    {{-- Cross-Platform Comparison --}}
+                    <div class="chart-card">
+                        <h4>Platform Coverage</h4>
+                        <div class="chart-container" style="height: 300px; position: relative;">
+                            <canvas id="platformChart"></canvas>
+                        </div>
+                    </div>
+
+                    {{-- Top Performers --}}
+                    <div class="chart-card full-width">
+                        <h4>Top 10 Coins by Market Cap</h4>
+                        <div class="top-performers-table">
+                            <table id="topPerformersTable" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                        <th>Symbol</th>
+                                        <th>Market Cap</th>
+                                        <th>Price</th>
+                                        <th>24h Change</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="topPerformersBody">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {{-- Market Trends Summary --}}
+                    <div class="chart-card full-width">
+                        <h4>Market Trends Summary</h4>
+                        <div class="trends-summary">
+                            <div class="trend-item positive">
+                                <span class="trend-icon">📈</span>
+                                <span class="trend-label">Gaining</span>
+                                <span class="trend-value" id="trends-gaining">-</span>
+                            </div>
+                            <div class="trend-item negative">
+                                <span class="trend-icon">📉</span>
+                                <span class="trend-label">Losing</span>
+                                <span class="trend-value" id="trends-losing">-</span>
+                            </div>
+                            <div class="trend-item neutral">
+                                <span class="trend-icon">➡️</span>
+                                <span class="trend-label">Stable</span>
+                                <span class="trend-value" id="trends-stable">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+        .comparison-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2em;
+            padding: 2em;
+            margin: 2em 0;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        }
+
+        .coin-search-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5em;
+            padding: 1.5em;
+            margin-bottom: 2em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            margin-bottom: 1em;
+        }
+
+        .coin-search-input {
+            flex: 1;
+            padding: 0.8em 1.2em;
+            border: 2px solid #667eea;
+            border-radius: 1em;
+            font-size: 1.1em;
+            background: #fff;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        .coin-search-input:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        .search-btn {
+            padding: 0.8em 1.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 1em;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .coin-analysis-result {
+            background: #f8f9fa;
+            border-radius: 1em;
+            padding: 1.5em;
+            margin-top: 1em;
+        }
+
+        .coin-analysis-header {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            margin-bottom: 1em;
+            padding-bottom: 1em;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .coin-analysis-header h3 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .coin-analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5em;
+        }
+
+        .coin-analysis-card {
+            background: #fff;
+            border-radius: 1em;
+            padding: 1.5em;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .coin-analysis-card h4 {
+            margin: 0 0 1em 0;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .coin-analysis-data {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8em;
+        }
+
+        .coin-analysis-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5em 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .coin-analysis-item:last-child {
+            border-bottom: none;
+        }
+
+        .coin-analysis-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .coin-analysis-value {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .coin-analysis-value.positive {
+            color: #28a745;
+        }
+
+        .coin-analysis-value.negative {
+            color: #dc3545;
+        }
+
+        .platform-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5em;
+            margin-bottom: 2em;
+        }
+
+        .platform-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5em;
+            padding: 1.5em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .platform-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1em;
+        }
+
+        .platform-header h3 {
+            margin: 0;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .platform-icon {
+            font-size: 2em;
+        }
+
+        .platform-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8em;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5em 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stat:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2em;
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5em;
+            padding: 1.5em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+            min-height: auto;
+        }
+
+        .chart-card h4 {
+            margin: 0 0 1em 0;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px !important;
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            min-height: 300px;
+        }
+
+        .chart-container canvas {
+            max-height: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+        }
+
+        .top-performers-table {
+            overflow-x: auto;
+        }
+
+        .top-performers-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .top-performers-table th,
+        .top-performers-table td {
+            padding: 0.8em;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .top-performers-table th {
+            background: #f8f9fa;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .trends-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5em;
+            margin-top: 1em;
+        }
+
+        .trend-item {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1em;
+            border-radius: 1em;
+            background: #f8f9fa;
+        }
+
+        .trend-item.positive {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left: 4px solid #28a745;
+        }
+
+        .trend-item.negative {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left: 4px solid #dc3545;
+        }
+
+        .trend-item.neutral {
+            background: linear-gradient(135deg, #e2e3e5 0%, #d6d8db 100%);
+            border-left: 4px solid #6c757d;
+        }
+
+        .trend-icon {
+            font-size: 1.5em;
+        }
+
+        .trend-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .trend-value {
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .platform-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trends-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Prevent chart height changes during scroll */
+        .comparison-section {
+            transform: translateZ(0);
+            will-change: auto;
+        }
+
+        .chart-card {
+            transform: translateZ(0);
+            will-change: auto;
+        }
+
+        .chart-container {
+            transform: translateZ(0);
+            will-change: auto;
+        }
+        </style>
 
         {{-- ======================== Live Coin Watch Info Section ======================== --}}
         <style>
@@ -662,6 +1209,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url('js/livecoin/history.js') }}"></script>
     <script>
         function getInitials(name) {
@@ -699,8 +1247,495 @@
                 .then(data => renderReviews(data));
         }
 
+        // Comparison Charts and Data Loading
+        let comparisonCharts = {};
+
+        function formatNumber(num) {
+            if (num >= 1e12) return (num / 1e12).toFixed(2) + 'T';
+            if (num >= 1e9) return (num / 1e9).toFixed(2) + 'B';
+            if (num >= 1e6) return (num / 1e6).toFixed(2) + 'M';
+            if (num >= 1e3) return (num / 1e3).toFixed(2) + 'K';
+            return num.toFixed(2);
+        }
+
+        function formatCurrency(num) {
+            return '$' + formatNumber(num);
+        }
+
+        function loadComparisonData() {
+            const loadingEl = document.getElementById('comparisonLoading');
+            const chartsEl = document.getElementById('comparisonCharts');
+            
+            loadingEl.style.display = 'block';
+            chartsEl.style.display = 'none';
+
+            fetch('/livecoinwatch/compare')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        renderComparisonData(data.data);
+                        loadingEl.style.display = 'none';
+                        chartsEl.style.display = 'block';
+                    } else {
+                        console.error('Error loading comparison data:', data.message);
+                        loadingEl.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching comparison data:', error);
+                    loadingEl.style.display = 'none';
+                });
+        }
+
+        function renderComparisonData(data) {
+            // Update platform overview cards
+            updatePlatformCards(data);
+            
+            // Create charts
+            createMarketCapChart(data.market_cap_distribution);
+            createPriceTrendsChart(data.trends);
+            createVolumeChart(data.volume_analysis);
+            createPlatformChart(data.comparison);
+            
+            // Update top performers table
+            updateTopPerformersTable(data.top_performers);
+            
+            // Update trends summary
+            updateTrendsSummary(data.trends);
+        }
+
+        function updatePlatformCards(data) {
+            // LiveCoinWatch
+            document.getElementById('lcw-total-coins').textContent = data.livecoinwatch.total_coins.toLocaleString();
+            document.getElementById('lcw-total-mcap').textContent = formatCurrency(data.livecoinwatch.total_market_cap);
+            document.getElementById('lcw-total-volume').textContent = formatCurrency(data.livecoinwatch.total_volume);
+            
+            // CoinGecko
+            document.getElementById('cg-total-coins').textContent = data.coingecko.total_coins.toLocaleString();
+            document.getElementById('cg-total-markets').textContent = data.coingecko.total_markets.toLocaleString();
+            document.getElementById('cg-total-exchanges').textContent = data.coingecko.total_exchanges.toLocaleString();
+            
+            // CoinMarketCal
+            document.getElementById('cmc-total-coins').textContent = data.coinmarketcal.total_coins.toLocaleString();
+            document.getElementById('cmc-total-events').textContent = data.coinmarketcal.total_events.toLocaleString();
+            document.getElementById('cmc-top-10').textContent = data.coinmarketcal.rank_distribution.top_10.toLocaleString();
+        }
+
+        function createMarketCapChart(data) {
+            const ctx = document.getElementById('marketCapChart').getContext('2d');
+            
+            if (comparisonCharts.marketCap) {
+                comparisonCharts.marketCap.destroy();
+            }
+
+            comparisonCharts.marketCap = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Mega Cap (>$10B)', 'Large Cap ($1B-$10B)', 'Mid Cap ($100M-$1B)', 'Small Cap ($10M-$100M)', 'Micro Cap (<$10M)'],
+                    datasets: [{
+                        data: [
+                            data.distribution.mega_cap,
+                            data.distribution.large_cap,
+                            data.distribution.mid_cap,
+                            data.distribution.small_cap,
+                            data.distribution.micro_cap
+                        ],
+                        backgroundColor: [
+                            '#FF6384',
+                            '#36A2EB',
+                            '#FFCE56',
+                            '#4BC0C0',
+                            '#9966FF'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                boxWidth: 12
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPriceTrendsChart(data) {
+            const ctx = document.getElementById('priceTrendsChart').getContext('2d');
+            
+            if (comparisonCharts.priceTrends) {
+                comparisonCharts.priceTrends.destroy();
+            }
+
+            comparisonCharts.priceTrends = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Gaining', 'Losing', 'Stable'],
+                    datasets: [{
+                        label: 'Price Movement (24h)',
+                        data: [
+                            data.price_movement.gaining,
+                            data.price_movement.losing,
+                            data.price_movement.stable
+                        ],
+                        backgroundColor: [
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(220, 53, 69, 0.8)',
+                            'rgba(108, 117, 125, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(220, 53, 69, 1)',
+                            'rgba(108, 117, 125, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        function createVolumeChart(data) {
+            const ctx = document.getElementById('volumeChart').getContext('2d');
+            
+            if (comparisonCharts.volume) {
+                comparisonCharts.volume.destroy();
+            }
+
+            comparisonCharts.volume = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['High Volume (>$1B)', 'Medium Volume ($100M-$1B)', 'Low Volume (<$100M)'],
+                    datasets: [{
+                        data: [
+                            data.volume_distribution.high,
+                            data.volume_distribution.medium,
+                            data.volume_distribution.low
+                        ],
+                        backgroundColor: [
+                            '#28a745',
+                            '#ffc107',
+                            '#dc3545'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                boxWidth: 12
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPlatformChart(data) {
+            const ctx = document.getElementById('platformChart').getContext('2d');
+            
+            if (comparisonCharts.platform) {
+                comparisonCharts.platform.destroy();
+            }
+
+            comparisonCharts.platform = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['LiveCoinWatch Only', 'CoinGecko Only', 'Both Platforms'],
+                    datasets: [{
+                        label: 'Platform Coverage',
+                        data: [
+                            data.platform_coverage.livecoinwatch_only,
+                            data.platform_coverage.coingecko_only,
+                            data.platform_coverage.both_platforms
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(13, 110, 253, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(13, 110, 253, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTopPerformersTable(data) {
+            const tbody = document.getElementById('topPerformersBody');
+            let html = '';
+            
+            data.by_market_cap.forEach((coin, index) => {
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${coin.name}</td>
+                        <td><strong>${coin.symbol.toUpperCase()}</strong></td>
+                        <td>${formatCurrency(coin.market_cap)}</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        function updateTrendsSummary(data) {
+            document.getElementById('trends-gaining').textContent = data.price_movement.gaining.toLocaleString();
+            document.getElementById('trends-losing').textContent = data.price_movement.losing.toLocaleString();
+            document.getElementById('trends-stable').textContent = data.price_movement.stable.toLocaleString();
+        }
+
+        // Coin Search Functionality
+        function searchCoin() {
+            const symbol = document.getElementById('coinSearchInput').value.trim();
+            if (!symbol) {
+                alert('Please enter a coin symbol');
+                return;
+            }
+
+            const resultEl = document.getElementById('coinAnalysisResult');
+            resultEl.style.display = 'block';
+            resultEl.innerHTML = '<div style="text-align: center; padding: 2em;"><div class="spinner-border text-warning" role="status"></div><p>Searching for coin data...</p></div>';
+
+            fetch(`/livecoinwatch/coin-analysis?symbol=${encodeURIComponent(symbol)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        renderCoinAnalysis(data);
+                    } else {
+                        resultEl.innerHTML = `<div class="alert alert-warning">No data found for ${symbol.toUpperCase()}</div>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error searching coin:', error);
+                    resultEl.innerHTML = `<div class="alert alert-danger">Error searching for ${symbol.toUpperCase()}</div>`;
+                });
+        }
+
+        function renderCoinAnalysis(data) {
+            const resultEl = document.getElementById('coinAnalysisResult');
+            const analysis = data.analysis;
+            
+            let html = `
+                <div class="coin-analysis-header">
+                    <h3>📊 Analysis for ${data.symbol}</h3>
+                </div>
+                <div class="coin-analysis-grid">
+            `;
+
+            // LiveCoinWatch Data
+            if (analysis.livecoinwatch) {
+                html += `
+                    <div class="coin-analysis-card">
+                        <h4>📈 LiveCoinWatch</h4>
+                        <div class="coin-analysis-data">
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Price</span>
+                                <span class="coin-analysis-value">$${formatNumber(analysis.livecoinwatch.price)}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Market Cap</span>
+                                <span class="coin-analysis-value">${formatCurrency(analysis.livecoinwatch.market_cap)}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Volume</span>
+                                <span class="coin-analysis-value">${formatCurrency(analysis.livecoinwatch.volume)}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Last Updated</span>
+                                <span class="coin-analysis-value">${new Date(analysis.livecoinwatch.last_updated).toLocaleString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // CoinGecko Data
+            if (analysis.coingecko) {
+                const priceChangeClass = analysis.coingecko.price_change_percentage_24h >= 0 ? 'positive' : 'negative';
+                const priceChangeSign = analysis.coingecko.price_change_percentage_24h >= 0 ? '+' : '';
+                
+                html += `
+                    <div class="coin-analysis-card">
+                        <h4>🦎 CoinGecko</h4>
+                        <div class="coin-analysis-data">
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Name</span>
+                                <span class="coin-analysis-value">${analysis.coingecko.name}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Price</span>
+                                <span class="coin-analysis-value">$${formatNumber(analysis.coingecko.current_price)}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Market Cap</span>
+                                <span class="coin-analysis-value">${formatCurrency(analysis.coingecko.market_cap)}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Rank</span>
+                                <span class="coin-analysis-value">#${analysis.coingecko.market_cap_rank}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">24h Change</span>
+                                <span class="coin-analysis-value ${priceChangeClass}">${priceChangeSign}${analysis.coingecko.price_change_percentage_24h.toFixed(2)}%</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Volume</span>
+                                <span class="coin-analysis-value">${formatCurrency(analysis.coingecko.total_volume)}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Circulating Supply</span>
+                                <span class="coin-analysis-value">${formatNumber(analysis.coingecko.circulating_supply)}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Max Supply</span>
+                                <span class="coin-analysis-value">${analysis.coingecko.max_supply ? formatNumber(analysis.coingecko.max_supply) : 'N/A'}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">ATH</span>
+                                <span class="coin-analysis-value">$${formatNumber(analysis.coingecko.ath)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // CoinMarketCal Data
+            if (analysis.coinmarketcal) {
+                html += `
+                    <div class="coin-analysis-card">
+                        <h4>📅 CoinMarketCal</h4>
+                        <div class="coin-analysis-data">
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Name</span>
+                                <span class="coin-analysis-value">${analysis.coinmarketcal.name}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Rank</span>
+                                <span class="coin-analysis-value">#${analysis.coinmarketcal.rank}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Hot Index</span>
+                                <span class="coin-analysis-value">${analysis.coinmarketcal.hot_index || 'N/A'}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Trending Index</span>
+                                <span class="coin-analysis-value">${analysis.coinmarketcal.trending_index || 'N/A'}</span>
+                            </div>
+                            <div class="coin-analysis-item">
+                                <span class="coin-analysis-label">Significant Index</span>
+                                <span class="coin-analysis-value">${analysis.coinmarketcal.significant_index || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += '</div>';
+            resultEl.innerHTML = html;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             fetchReviews();
+            
+            // Load comparison data on page load
+            loadComparisonData();
+            
+            // Refresh comparison data button
+            document.getElementById('refreshComparison').addEventListener('click', function() {
+                loadComparisonData();
+            });
+            
+            // Coin search functionality
+            document.getElementById('searchCoinBtn').addEventListener('click', searchCoin);
+            document.getElementById('coinSearchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchCoin();
+                }
+            });
+            
             document.getElementById('reviewForm').addEventListener('submit', function(e) {
                             e.preventDefault();
                 const form = e.target;

@@ -20,6 +20,21 @@ Route::get('/getlivecoinhistory',
     ['as' => 'datatable.livecoin.history',
         'uses' => 'LiveCoinWatch\HistoryController@getData']);
 
+// live coin watch comparison data
+Route::get('/livecoinwatch/compare',
+    ['as' => 'livecoinwatch.compare',
+        'uses' => 'LiveCoinWatch\HistoryController@compareData']);
+
+// enhanced comparison with external API data
+Route::get('/livecoinwatch/enhanced-compare',
+    ['as' => 'livecoinwatch.enhanced.compare',
+        'uses' => 'LiveCoinWatch\HistoryController@getEnhancedComparison']);
+
+// coin analysis across platforms
+Route::get('/livecoinwatch/coin-analysis',
+    ['as' => 'livecoinwatch.coin.analysis',
+        'uses' => 'LiveCoinWatch\HistoryController@getCoinAnalysis']);
+
 // live coin watch exchanges
 Route::get('/livecoinexchangesindex','LiveCoinWatch\ExchangesController@index');
 Route::get('/getlivecoinexchanges',

@@ -1768,4 +1768,9 @@
     .m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"]:hover .m-menu__link-bullet--custom {
         transform: none !important;
     }
-} 
+}
+
+
+.m-stack.m-stack--desktop  {
+    background-color: white !important;
+}
