@@ -80,6 +80,17 @@ class TranslationHelper {
                 'telegram': 'Telegram',
                 'telegram_account': 'Telegram Account',
                 'trading_pair': 'Trading Pair',
+                
+                // Button Text
+                'update_all_data': 'Update All Data',
+                
+                // DataTable Buttons
+                'copy': 'Copy',
+                'csv': 'CSV',
+                'excel': 'Excel',
+                'pdf': 'PDF',
+                'print': 'Print',
+                'columns': 'Columns',
             },
             ru: {
                 // Main Navigation
@@ -158,6 +169,17 @@ class TranslationHelper {
                 'telegram': 'Telegram',
                 'telegram_account': 'Аккаунт Telegram',
                 'trading_pair': 'Торговая пара',
+                
+                // Button Text
+                'update_all_data': 'Обновить все данные',
+                
+                // DataTable Buttons
+                'copy': 'Копировать',
+                'csv': 'CSV',
+                'excel': 'Excel',
+                'pdf': 'PDF',
+                'print': 'Печать',
+                'columns': 'Колонки',
             },
             hy: {
                 // Main Navigation
@@ -236,6 +258,17 @@ class TranslationHelper {
                 'telegram': 'Telegram',
                 'telegram_account': 'Telegram հաշիվ',
                 'trading_pair': 'Առևտրային զույգ',
+                
+                // Button Text
+                'update_all_data': 'Թարմացնել բոլոր տվյալները',
+                
+                // DataTable Buttons
+                'copy': 'Պատճենել',
+                'csv': 'CSV',
+                'excel': 'Excel',
+                'pdf': 'PDF',
+                'print': 'Տպել',
+                'columns': 'Սյուներ',
             },
             fi: {
                 // Main Navigation
@@ -314,6 +347,17 @@ class TranslationHelper {
                 'telegram': 'Telegram',
                 'telegram_account': 'Telegram-tili',
                 'trading_pair': 'Kauppapari',
+                
+                // Button Text
+                'update_all_data': 'Päivitä kaikki tiedot',
+                
+                // DataTable Buttons
+                'copy': 'Kopioi',
+                'csv': 'CSV',
+                'excel': 'Excel',
+                'pdf': 'PDF',
+                'print': 'Tulosta',
+                'columns': 'Sarakkeet',
             }
         };
         
@@ -357,6 +401,9 @@ class TranslationHelper {
         
         // Update page title
         this.updatePageTitle();
+        
+        // Update DataTable buttons
+        this.updateDataTableButtons();
         
         // Update meta descriptions if they have translations
         const metaDescription = document.querySelector('meta[name="description"]');
@@ -434,6 +481,29 @@ class TranslationHelper {
             titleElement.textContent = newTitle;
         } else {
             console.log('No title changes needed');
+        }
+    }
+    
+    updateDataTableButtons() {
+        // Update DataTable button text for all DataTables on the page
+        if (typeof $.fn.DataTable !== 'undefined') {
+            $('.dataTable').each(function() {
+                const table = $(this).DataTable();
+                if (table && table.buttons) {
+                    // Update each button text
+                    const buttonKeys = ['copy', 'csv', 'excel', 'pdf', 'print', 'columns'];
+                    buttonKeys.forEach(key => {
+                        const button = table.button(`.buttons-${key}`);
+                        if (button && button.node()) {
+                            const $button = $(button.node());
+                            const $textSpan = $button.find(`[data-lang-key="${key}"]`);
+                            if ($textSpan.length > 0) {
+                                $textSpan.text(this.translate(key));
+                            }
+                        }
+                    });
+                }
+            }.bind(this));
         }
     }
     

@@ -77,4 +77,15 @@ return [
     'telegram' => 'Telegram',
     'telegram_account' => 'Telegram հաշիվ',
     'trading_pair' => 'Առևտրային զույգ',
+    
+    // Button Text
+    'update_all_data' => 'Թարմացնել բոլոր տվյալները',
+    
+    // DataTable Buttons
+    'copy' => 'Պատճենել',
+    'csv' => 'CSV',
+    'excel' => 'Excel',
+    'pdf' => 'PDF',
+    'print' => 'Տպել',
+    'columns' => 'Սյուներ',
 ]; 

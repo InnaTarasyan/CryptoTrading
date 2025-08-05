@@ -77,4 +77,15 @@ return [
     'telegram' => 'Telegram',
     'telegram_account' => 'Telegram-tili',
     'trading_pair' => 'Kauppapari',
+    
+    // Button Text
+    'update_all_data' => 'Päivitä kaikki tiedot',
+    
+    // DataTable Buttons
+    'copy' => 'Kopioi',
+    'csv' => 'CSV',
+    'excel' => 'Excel',
+    'pdf' => 'PDF',
+    'print' => 'Tulosta',
+    'columns' => 'Sarakkeet',
 ]; 

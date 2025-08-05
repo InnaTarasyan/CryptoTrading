@@ -2,7 +2,7 @@
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="m-subheader__title m-subheader__title--separator">
+            <h3 class="m-subheader__title m-subheader__title--separator" data-lang-key="dashboard">
                 Dashboard
             </h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
@@ -37,7 +37,7 @@
                 </span>
                 <span style="display:inline-flex;align-items:center;gap:8px;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="5" fill="#ffd200"/></svg>
-                    <span id="updateAllDataText" style="font-weight:700;letter-spacing:0.5px;">Update All Data</span>
+                    <span id="updateAllDataText" style="font-weight:700;letter-spacing:0.5px;" data-lang-key="update_all_data">Update All Data</span>
                 </span>
             </button>
             <style>

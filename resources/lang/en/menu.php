@@ -77,4 +77,15 @@ return [
     'telegram' => 'Telegram',
     'telegram_account' => 'Telegram Account',
     'trading_pair' => 'Trading Pair',
+    
+    // Button Text
+    'update_all_data' => 'Update All Data',
+    
+    // DataTable Buttons
+    'copy' => 'Copy',
+    'csv' => 'CSV',
+    'excel' => 'Excel',
+    'pdf' => 'PDF',
+    'print' => 'Print',
+    'columns' => 'Columns',
 ]; 
