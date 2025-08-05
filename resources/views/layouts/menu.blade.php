@@ -16,6 +16,86 @@
          data-menu-vertical="true"
          data-menu-scrollable="true" data-menu-dropdown-timeout="500">
         <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+            
+            <!-- BEGIN: Tutorial Links Section -->
+            <li class="m-menu__item  m-menu__item--submenu mobile-only-tutorials" aria-haspopup="true"  data-menu-submenu-toggle="click" data-menu-dropdown-toggle-class="m-aside-menu-overlay--on">
+                <a  href="#" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon la la-graduation-cap"></i>
+                    <span class="m-menu__link-text">
+						Trading Tutorials
+					</span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                </a>
+                <div class="m-menu__submenu ">
+                    <span class="m-menu__arrow"></span>
+                    <div class="m-menu__wrapper">
+                        <ul class="m-menu__subnav">
+                            <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
+                                <a  href="https://www.binance.com/en/blog/ecosystem/crypto-trading-guide-for-beginners-421499824684903654" target="_blank" class="m-menu__link ">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--custom">
+                                        <i class="la la-chart-line"></i>
+                                    </i>
+                                    <span class="m-menu__link-text p-2">
+                                        Binance Trading Guide
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
+                                <a  href="https://academy.binance.com/en/articles/how-to-trade-cryptocurrency" target="_blank" class="m-menu__link ">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--custom">
+                                        <i class="la la-university"></i>
+                                    </i>
+                                    <span class="m-menu__link-text p-2">
+                                        How to Trade Cryptocurrency
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
+                                <a  href="https://www.coinbase.com/learn/crypto-basics" target="_blank" class="m-menu__link ">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--custom">
+                                        <i class="la la-book"></i>
+                                    </i>
+                                    <span class="m-menu__link-text p-2">
+                                        Crypto Basics
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
+                                <a  href="https://www.investopedia.com/articles/forex/042015/why-cryptocurrency-trading-so-volatile.asp" target="_blank" class="m-menu__link ">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--custom">
+                                        <i class="la la-chart-bar"></i>
+                                    </i>
+                                    <span class="m-menu__link-text p-2">
+                                        Trading Strategy
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
+                                <a  href="https://www.kraken.com/learn" target="_blank" class="m-menu__link ">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--custom">
+                                        <i class="la la-lightbulb"></i>
+                                    </i>
+                                    <span class="m-menu__link-text p-2">
+                                        Kraken Learning Center
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item " aria-haspopup="true"  data-redirect="true">
+                                <a  href="https://www.tradingview.com/education/" target="_blank" class="m-menu__link ">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--custom">
+                                        <i class="la la-chart-area"></i>
+                                    </i>
+                                    <span class="m-menu__link-text p-2">
+                                        Chart Analysis
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <!-- END: Tutorial Links Section -->
+            
             <!--
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="click" data-menu-dropdown-toggle-class="m-aside-menu-overlay--on">
                 <a  href="#" class="m-menu__link m-menu__toggle">

@@ -47,7 +47,7 @@
         </div>
         
         <!-- Language Switcher Item -->
-        @if(Route::is('coin_details') || Route::is('home'))
+        @if( Route::is('home'))
         <div class="mobile-menu-item">
             <div class="mobile-menu-link mobile-menu-toggle" data-toggle="language-submenu">
                 <div class="mobile-menu-icon">
@@ -115,54 +115,54 @@
         @endif
     </div>
     
-    <!-- Desktop Menu (unchanged) -->
-    <ul class="m-menu__nav m-menu__nav--submenu-arrow desktop-menu">
-        <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
-            <a href="{{route('about')}}" class="m-nav__link">
-                <span class="m-nav__link-text">
-                    About
-                </span>
-            </a>
-        </li>
-        <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">
-            <a  href="#" class="m-menu__link m-menu__toggle">
-                <span class="m-menu__item-here"></span>
-                <span class="m-menu__link-text">
-					Dashboard
-				</span>
-                <i class="m-menu__hor-arrow la la-angle-down"></i>
-                <i class="m-menu__ver-arrow la la-angle-right"></i>
-            </a>
-            <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
-                <span class="m-menu__arrow m-menu__arrow--adjust"></span>
-                <ul class="m-menu__subnav">
-                    <li class="m-menu__item ">
-                        <a href="/" class="m-menu__link">
-                        <span class="m-nav__link-text">
-                            Live Coin Watch
-                        </span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item ">
-                        <a href="/coingeckomarketsindex" class="m-menu__link">
-                        <span class="m-nav__link-text">
-                           Coingecko
-                        </span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item ">
-                        <a href="/coinmarketcalindex" class="m-menu__link">
-                        <span class="m-nav__link-text">
-                           Coin market Cal
-                        </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ul>
+    {{--<!-- Desktop Menu (unchanged) -->--}}
+    {{--<ul class="m-menu__nav m-menu__nav--submenu-arrow desktop-menu">--}}
+        {{--<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">--}}
+            {{--<a href="{{route('about')}}" class="m-nav__link">--}}
+                {{--<span class="m-nav__link-text">--}}
+                    {{--About--}}
+                {{--</span>--}}
+            {{--</a>--}}
+        {{--</li>--}}
+        {{--<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">--}}
+            {{--<a  href="#" class="m-menu__link m-menu__toggle">--}}
+                {{--<span class="m-menu__item-here"></span>--}}
+                {{--<span class="m-menu__link-text">--}}
+					{{--Dashboard--}}
+				{{--</span>--}}
+                {{--<i class="m-menu__hor-arrow la la-angle-down"></i>--}}
+                {{--<i class="m-menu__ver-arrow la la-angle-right"></i>--}}
+            {{--</a>--}}
+            {{--<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">--}}
+                {{--<span class="m-menu__arrow m-menu__arrow--adjust"></span>--}}
+                {{--<ul class="m-menu__subnav">--}}
+                    {{--<li class="m-menu__item ">--}}
+                        {{--<a href="/" class="m-menu__link">--}}
+                        {{--<span class="m-nav__link-text">--}}
+                            {{--Live Coin Watch--}}
+                        {{--</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    {{--<li class="m-menu__item ">--}}
+                        {{--<a href="/coingeckomarketsindex" class="m-menu__link">--}}
+                        {{--<span class="m-nav__link-text">--}}
+                           {{--Coingecko--}}
+                        {{--</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    {{--<li class="m-menu__item ">--}}
+                        {{--<a href="/coinmarketcalindex" class="m-menu__link">--}}
+                        {{--<span class="m-nav__link-text">--}}
+                           {{--Coin market Cal--}}
+                        {{--</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+        {{--</li>--}}
+    {{--</ul>--}}
     
-    @if(Route::is('coin_details') || Route::is('home'))
+    @if(Route::is('home'))
         <!-- Desktop Language Switcher (unchanged) -->
         <div class="language-switcher-container desktop-language-switcher">
             <div class="language-switcher" id="languageSwitcher">

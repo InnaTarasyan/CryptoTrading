@@ -31,6 +31,75 @@
             </div>
             <!-- END: Brand -->
             <div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
+                <!-- BEGIN: Left Side Menu Items -->
+                <div class="left-menu-container">
+                    <div class="menu-item">
+                        <a href="{{route('about')}}" class="menu-link">
+                            <i class="la la-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="#" class="menu-link dropdown-toggle" data-toggle="dashboard-dropdown">
+                            <i class="la la-dashboard"></i>
+                            <span>Dashboard</span>
+                            <i class="la la-angle-down"></i>
+                        </a>
+                        <div class="dropdown-menu" id="dashboard-dropdown">
+                            <a href="/" class="dropdown-item">
+                                <i class="la la-chart-line"></i>
+                                <span>Live Coin Watch</span>
+                            </a>
+                            <a href="/coingeckomarketsindex" class="dropdown-item">
+                                <i class="la la-bitcoin"></i>
+                                <span>Coingecko</span>
+                            </a>
+                            <a href="/coinmarketcalindex" class="dropdown-item">
+                                <i class="la la-calendar"></i>
+                                <span>Coin Market Cal</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Left Side Menu Items -->
+                
+                <!-- BEGIN: Tutorial Links Section (Right Side) -->
+                <div class="tutorial-links-container desktop-tutorial-links">
+                    <div class="tutorial-links-wrapper">
+                        <div class="tutorial-links-title">
+                            <i class="la la-graduation-cap"></i>
+                            <span>Trading Tutorials</span>
+                        </div>
+                        <div class="tutorial-links-grid">
+                            <a href="https://www.binance.com/en/blog/ecosystem/crypto-trading-guide-for-beginners-421499824684903654" target="_blank" class="tutorial-link" title="Binance Trading Guide">
+                                <i class="la la-chart-line"></i>
+                                <span>Binance Guide</span>
+                            </a>
+                            <a href="https://academy.binance.com/en/articles/how-to-trade-cryptocurrency" target="_blank" class="tutorial-link" title="How to Trade Cryptocurrency">
+                                <i class="la la-university"></i>
+                                <span>Crypto Trading</span>
+                            </a>
+                            <a href="https://www.coinbase.com/learn/crypto-basics" target="_blank" class="tutorial-link" title="Coinbase Learning">
+                                <i class="la la-book"></i>
+                                <span>Crypto Basics</span>
+                            </a>
+                            <a href="https://www.investopedia.com/articles/forex/042015/why-cryptocurrency-trading-so-volatile.asp" target="_blank" class="tutorial-link" title="Investopedia Crypto Trading">
+                                <i class="la la-chart-bar"></i>
+                                <span>Trading Strategy</span>
+                            </a>
+                            <a href="https://www.kraken.com/learn" target="_blank" class="tutorial-link" title="Kraken Learning Center">
+                                <i class="la la-lightbulb"></i>
+                                <span>Learn Center</span>
+                            </a>
+                            <a href="https://www.tradingview.com/education/" target="_blank" class="tutorial-link" title="TradingView Education">
+                                <i class="la la-chart-area"></i>
+                                <span>Chart Analysis</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Tutorial Links Section -->
+                
                 @include('layouts.horizontal_menu')
                 @include('layouts.topbar')
             </div>

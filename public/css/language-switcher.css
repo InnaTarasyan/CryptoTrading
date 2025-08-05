@@ -214,7 +214,7 @@
     /*gap: 1rem !important;*/
     /*padding: 0.5rem 1rem !important;*/
     /*min-height: 60px !important;*/
-  //  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    /*background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;*/
     /*border-bottom: 1px solid #e2e8f0 !important;*/
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;*/
     /*transition: all 0.3s ease !important;*/
@@ -247,7 +247,6 @@
     position: relative !important;
     display: flex !important;
     align-items: center !important;
-    flex-shrink: 0 !important;
 }
 
 #m_header_menu .m-nav__link,
@@ -909,5 +908,864 @@
         to {
             opacity: 1;
         }
+    }
+} 
+
+/* ======================== Tutorial Links Styles ======================== */
+
+/* Desktop Tutorial Links */
+.tutorial-links-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.5rem 1rem !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 0.75rem !important;
+    margin: 0.5rem 1rem !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.tutorial-links-container:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+}
+
+.tutorial-links-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    flex-wrap: wrap !important;
+}
+
+.tutorial-links-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    white-space: nowrap !important;
+}
+
+.tutorial-links-title i {
+    font-size: 1.1rem !important;
+    color: #fbbf24 !important;
+}
+
+.tutorial-links-grid {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    flex-wrap: wrap !important;
+}
+
+.tutorial-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.tutorial-link:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    text-decoration: none !important;
+}
+
+.tutorial-link i {
+    font-size: 0.9rem !important;
+    color: #fbbf24 !important;
+}
+
+.tutorial-link span {
+    white-space: nowrap !important;
+}
+
+/* Mobile Tutorial Links - Hide on mobile */
+@media (max-width: 768px) {
+    .desktop-tutorial-links {
+        display: none !important;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .tutorial-links-grid {
+        gap: 0.5rem !important;
+    }
+    
+    .tutorial-link {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .tutorial-links-wrapper {
+        gap: 0.75rem !important;
+    }
+    
+    .tutorial-links-title {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Mobile menu tutorial links styling */
+.m-menu__nav .m-menu__item .m-menu__link[href*="binance"],
+.m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"],
+.m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"],
+.m-menu__nav .m-menu__item .m-menu__link[href*="kraken"],
+.m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"] {
+    transition: all 0.3s ease !important;
+}
+
+.m-menu__nav .m-menu__item .m-menu__link[href*="binance"]:hover,
+.m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"]:hover,
+.m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"]:hover,
+.m-menu__nav .m-menu__item .m-menu__link[href*="kraken"]:hover,
+.m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"]:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    transform: translateX(5px) !important;
+}
+
+/* Tutorial links in mobile menu */
+.m-menu__nav .m-menu__item .m-menu__link[href*="binance"] .m-menu__link-bullet,
+.m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"] .m-menu__link-bullet,
+.m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"] .m-menu__link-bullet,
+.m-menu__nav .m-menu__item .m-menu__link[href*="kraken"] .m-menu__link-bullet,
+.m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"] .m-menu__link-bullet {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .tutorial-links-container {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .tutorial-link {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    .tutorial-link:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .tutorial-links-container {
+        border: 2px solid currentColor !important;
+    }
+    
+    .tutorial-link {
+        border: 1px solid currentColor !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .tutorial-links-container,
+    .tutorial-link {
+        transition: none !important;
+    }
+    
+    .tutorial-link:hover {
+        transform: none !important;
+    }
+} 
+
+/* ======================== Left Menu Layout Styles ======================== */
+
+/* Left menu container */
+.left-menu-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    margin-right: auto !important;
+}
+
+.menu-item {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.menu-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem 1rem !important;
+    color: #374151 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    border-radius: 0.5rem !important;
+    transition: all 0.3s ease !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    white-space: nowrap !important;
+}
+
+.menu-link:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+
+.menu-link i {
+    font-size: 1rem !important;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    margin-top: 0.5rem !important;
+    background: white !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.3s ease !important;
+    z-index: 1000 !important;
+    min-width: 200px !important;
+    border: 1px solid #e5e7eb !important;
+    overflow: hidden !important;
+}
+
+.dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+.dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 0.75rem 1rem !important;
+    color: #374151 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    transition: background-color 0.2s ease !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none !important;
+}
+
+.dropdown-item:hover {
+    background: #eff6ff !important;
+    color: #1d4ed8 !important;
+}
+
+.dropdown-item i {
+    font-size: 1rem !important;
+    color: #6b7280 !important;
+    width: 1rem !important;
+    text-align: center !important;
+}
+
+/* Hide tutorial links on desktop in mobile menu */
+@media (min-width: 769px) {
+    .mobile-only-tutorials {
+        display: none !important;
+    }
+}
+
+/* Show tutorial links only on mobile */
+@media (max-width: 768px) {
+    .mobile-only-tutorials {
+        display: block !important;
+    }
+    
+    .left-menu-container {
+        display: none !important;
+    }
+}
+
+/* Responsive adjustments for left menu */
+@media (max-width: 1200px) {
+    .left-menu-container {
+        gap: 0.75rem !important;
+    }
+    
+    .menu-link {
+        padding: 0.625rem 0.875rem !important;
+        font-size: 0.875rem !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .left-menu-container {
+        gap: 0.5rem !important;
+    }
+    
+    .menu-link {
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Dark mode support for left menu */
+@media (prefers-color-scheme: dark) {
+    .menu-link {
+        color: #e5e7eb !important;
+    }
+    
+    .menu-link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+    }
+    
+    .dropdown-menu {
+        background: #1f2937 !important;
+        border-color: #374151 !important;
+    }
+    
+    .dropdown-item {
+        color: #d1d5db !important;
+        border-bottom-color: #374151 !important;
+    }
+    
+    .dropdown-item:hover {
+        background: #374151 !important;
+        color: #e5e7eb !important;
+    }
+}
+
+/* High contrast mode support for left menu */
+@media (prefers-contrast: high) {
+    .menu-link {
+        border: 1px solid currentColor !important;
+    }
+    
+    .dropdown-menu {
+        border: 2px solid currentColor !important;
+    }
+}
+
+/* Reduced motion support for left menu */
+@media (prefers-reduced-motion: reduce) {
+    .menu-link,
+    .dropdown-menu,
+    .dropdown-item {
+        transition: none !important;
+    }
+    
+    .menu-link:hover {
+        transform: none !important;
+    }
+} 
+
+/* ======================== Mobile Menu Styles ======================== */
+
+/* Desktop menu - hide on mobile */
+@media (max-width: 768px) {
+    .desktop-menu {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+    
+    .desktop-language-switcher {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    /* Ensure mobile menu is visible and positioned at top */
+    .mobile-menu-container {
+        display: flex !important;
+        order: -1 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Hide desktop menu completely */
+    #m_header_menu .desktop-menu {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+}
+
+/* Mobile menu container - hidden by default, shown on mobile */
+.mobile-menu-container {
+    display: none !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 1rem 0 !important;
+    gap: 0.5rem !important;
+}
+
+/* Show mobile menu on mobile screens */
+@media (max-width: 768px) {
+    .mobile-menu-container {
+        display: flex !important;
+        order: -1 !important;
+    }
+}
+
+/* Mobile menu items */
+.mobile-menu-item {
+    width: 100% !important;
+    border-radius: 0.75rem !important;
+    background: white !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    margin-bottom: 0.5rem !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+.mobile-menu-item:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Mobile menu links */
+.mobile-menu-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 1rem 1.25rem !important;
+    color: #374151 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+
+.mobile-menu-link:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.mobile-menu-link:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* Mobile menu icon and text container */
+.mobile-menu-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    border-radius: 0.5rem !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-size: 1.25rem !important;
+    margin-right: 1rem !important;
+    flex-shrink: 0 !important;
+}
+
+.mobile-menu-text {
+    flex: 1 !important;
+    text-align: left !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+/* Mobile menu arrow */
+.mobile-menu-arrow {
+    font-size: 1rem !important;
+    color: #6b7280 !important;
+    transition: transform 0.3s ease !important;
+    margin-left: 0.5rem !important;
+}
+
+.mobile-menu-toggle.active .mobile-menu-arrow {
+    transform: rotate(180deg) !important;
+}
+
+/* Mobile submenu */
+.mobile-submenu {
+    display: none !important;
+    background: #f8fafc !important;
+    border-top: 1px solid #e5e7eb !important;
+    padding: 0.5rem 0 !important;
+    animation: slideDown 0.3s ease !important;
+}
+
+.mobile-submenu.show {
+    display: block !important;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile submenu items */
+.mobile-submenu-item {
+    margin: 0 !important;
+}
+
+.mobile-submenu-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.75rem 1.25rem 0.75rem 3.75rem !important;
+    color: #374151 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    transition: background-color 0.2s ease !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+
+.mobile-submenu-link:hover {
+    background: #eff6ff !important;
+    color: #1d4ed8 !important;
+}
+
+.mobile-submenu-link i {
+    margin-right: 0.75rem !important;
+    font-size: 1rem !important;
+    color: #6b7280 !important;
+    width: 1rem !important;
+    text-align: center !important;
+}
+
+.mobile-submenu-link span {
+    flex: 1 !important;
+}
+
+/* Language option mobile styles */
+.language-option-mobile {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 0.75rem 1.25rem 0.75rem 3.75rem !important;
+    color: #374151 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    transition: background-color 0.2s ease !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+
+.language-option-mobile:hover {
+    background: #eff6ff !important;
+    color: #1d4ed8 !important;
+}
+
+.language-option-mobile .flag-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 0.75rem !important;
+}
+
+.language-option-mobile span:last-child {
+    flex: 1 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .mobile-menu-container {
+        padding: 0.75rem 0 !important;
+    }
+    
+    .mobile-menu-item {
+        margin-bottom: 0.375rem !important;
+    }
+    
+    .mobile-menu-link {
+        padding: 0.875rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .mobile-menu-icon {
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        font-size: 1.125rem !important;
+        margin-right: 0.875rem !important;
+    }
+    
+    .mobile-menu-text {
+        font-size: 0.9rem !important;
+    }
+    
+    .mobile-submenu-link {
+        padding: 0.625rem 1rem 0.625rem 3.5rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .language-option-mobile {
+        padding: 0.625rem 1rem 0.625rem 3.5rem !important;
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Dark mode support for mobile tutorial links */
+@media (prefers-color-scheme: dark) {
+    .m-menu__nav .m-menu__item .m-menu__link {
+        background: #1f2937 !important;
+        color: #e5e7eb !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link .m-menu__link-text {
+        color: #e5e7eb !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover .m-menu__link-text {
+        color: white !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .m-menu__nav .m-menu__item .m-menu__link {
+        border: 2px solid currentColor !important;
+    }
+    
+    .m-menu__link-bullet--custom {
+        border: 2px solid currentColor !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .m-menu__nav .m-menu__item .m-menu__link,
+    .m-menu__link-bullet--custom {
+        transition: none !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover {
+        transform: none !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link[href*="binance"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="kraken"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"]:hover .m-menu__link-bullet--custom {
+        transform: none !important;
+    }
+} 
+
+/* Custom bullet points for tutorial links */
+.m-menu__link-bullet--custom {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-size: 0.75rem !important;
+    margin-right: 0.75rem !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.m-menu__link-bullet--custom i {
+    font-size: 0.75rem !important;
+    color: white !important;
+}
+
+/* Enhanced mobile menu link styling to prevent text overlap */
+.m-menu__nav .m-menu__item .m-menu__link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.75rem 1rem !important;
+    position: relative !important;
+    min-height: 2.5rem !important;
+}
+
+.m-menu__nav .m-menu__item .m-menu__link .m-menu__link-text {
+    flex: 1 !important;
+    margin-left: 0.5rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    line-height: 1.4 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Mobile-specific improvements for tutorial links */
+@media (max-width: 768px) {
+    .m-menu__nav .m-menu__item .m-menu__link {
+        padding: 1rem 1.25rem !important;
+        min-height: 3rem !important;
+        background: white !important;
+        border-radius: 0.5rem !important;
+        margin-bottom: 0.25rem !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover .m-menu__link-text {
+        color: white !important;
+    }
+    
+    .m-menu__link-bullet--custom {
+        width: 2rem !important;
+        height: 2rem !important;
+        margin-right: 1rem !important;
+        font-size: 0.875rem !important;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
+    }
+    
+    .m-menu__link-bullet--custom i {
+        font-size: 0.875rem !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link .m-menu__link-text {
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        margin-left: 0.75rem !important;
+        line-height: 1.5 !important;
+    }
+    
+    /* Enhanced tutorial link styling in mobile menu */
+    .m-menu__nav .m-menu__item .m-menu__link[href*="binance"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="kraken"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"]:hover .m-menu__link-bullet--custom {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+        transform: scale(1.1) !important;
+        box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4) !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .m-menu__nav .m-menu__item .m-menu__link {
+        padding: 0.875rem 1rem !important;
+        min-height: 2.75rem !important;
+    }
+    
+    .m-menu__link-bullet--custom {
+        width: 1.75rem !important;
+        height: 1.75rem !important;
+        margin-right: 0.875rem !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .m-menu__link-bullet--custom i {
+        font-size: 0.8rem !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link .m-menu__link-text {
+        font-size: 0.9rem !important;
+        margin-left: 0.625rem !important;
+    }
+}
+
+/* Dark mode support for mobile tutorial links */
+@media (prefers-color-scheme: dark) {
+    .m-menu__nav .m-menu__item .m-menu__link {
+        background: #1f2937 !important;
+        color: #e5e7eb !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link .m-menu__link-text {
+        color: #e5e7eb !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover .m-menu__link-text {
+        color: white !important;
+    }
+}
+
+/* High contrast mode support for tutorial links */
+@media (prefers-contrast: high) {
+    .m-menu__nav .m-menu__item .m-menu__link {
+        border: 2px solid currentColor !important;
+    }
+    
+    .m-menu__link-bullet--custom {
+        border: 2px solid currentColor !important;
+    }
+}
+
+/* Reduced motion support for tutorial links */
+@media (prefers-reduced-motion: reduce) {
+    .m-menu__nav .m-menu__item .m-menu__link,
+    .m-menu__link-bullet--custom {
+        transition: none !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link:hover {
+        transform: none !important;
+    }
+    
+    .m-menu__nav .m-menu__item .m-menu__link[href*="binance"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="kraken"]:hover .m-menu__link-bullet--custom,
+    .m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"]:hover .m-menu__link-bullet--custom {
+        transform: none !important;
     }
 } 

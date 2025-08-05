@@ -3,6 +3,57 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Mobile menu script loaded');
     
+    // Left menu dropdown functionality
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('data-toggle');
+            const dropdown = document.getElementById(targetId);
+            const arrow = this.querySelector('.la-angle-down');
+            
+            // Close other open dropdowns
+            document.querySelectorAll('.dropdown-menu.show').forEach(openDropdown => {
+                if (openDropdown !== dropdown) {
+                    openDropdown.classList.remove('show');
+                    const otherToggle = openDropdown.previousElementSibling;
+                    if (otherToggle && otherToggle.classList.contains('dropdown-toggle')) {
+                        const otherArrow = otherToggle.querySelector('.la-angle-down');
+                        if (otherArrow) {
+                            otherArrow.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('show');
+            
+            // Animate arrow
+            if (arrow) {
+                arrow.style.transform = dropdown.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.menu-item')) {
+            document.querySelectorAll('.dropdown-menu.show').forEach(dropdown => {
+                dropdown.classList.remove('show');
+                const toggle = dropdown.previousElementSibling;
+                if (toggle && toggle.classList.contains('dropdown-toggle')) {
+                    const arrow = toggle.querySelector('.la-angle-down');
+                    if (arrow) {
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+        }
+    });
+    
     // Mobile menu toggle functionality
     const mobileMenuToggles = document.querySelectorAll('.mobile-menu-toggle');
     console.log('Found mobile menu toggles:', mobileMenuToggles.length);
@@ -210,6 +261,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (toggle && toggle.classList.contains('mobile-menu-toggle')) {
                     toggle.classList.remove('active');
                     const arrow = toggle.querySelector('.mobile-menu-arrow');
+                    if (arrow) {
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+            
+            // Also close desktop dropdowns
+            document.querySelectorAll('.dropdown-menu.show').forEach(dropdown => {
+                dropdown.classList.remove('show');
+                const toggle = dropdown.previousElementSibling;
+                if (toggle && toggle.classList.contains('dropdown-toggle')) {
+                    const arrow = toggle.querySelector('.la-angle-down');
                     if (arrow) {
                         arrow.style.transform = 'rotate(0deg)';
                     }
