@@ -399,6 +399,15 @@ $(document).ready(function() {
         setDarkMode(enabled);
         localStorage.setItem('darkMode', enabled);
     });
+
+    // Add event listener for language change to re-apply translations to DataTable headers and dynamic content
+    document.addEventListener('languageChanged', function(e) {
+        setTimeout(function() {
+            if (window.applyLanguageToPage) {
+                applyLanguageToPage(e.detail.language);
+            }
+        }, 100);
+    });
 });
 function highlightSearchResults() {
     var table = $('#livecoin_history').DataTable();

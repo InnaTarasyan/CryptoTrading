@@ -33,6 +33,7 @@
     <!--end::Base Styles -->
     <link rel="shortcut icon" href="{{ url('assets/demo/demo7/media/img/logo/favicon.ico') }}" />
     <link rel="icon" type="image/x-icon" href="{{ url('assets/demo/default/media/img/logo/favicon.ico') }}" />
+    <link href="{{url('css/language-switcher.css')}}" rel="stylesheet" type="text/css" />
     @yield('styles')
 </head>
 <!-- end::Head -->
@@ -90,6 +91,7 @@
         });
     </script>
     <script src="{{ url('js/base.js') }}"></script>
+    <script src="{{ url('js/mobile-menu.js') }}"></script>
 <!--end::Page Snippets -->
 </body>
 <!-- end::Body -->

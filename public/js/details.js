@@ -3,14 +3,9 @@ function CoinDetails() {
 
 }
 
-
-
 CoinDetails.prototype.init = function () {
-
-
-  var ev_list = [];
-  $.each(events, function(key, value) {
-
+    var ev_list = [];
+    $.each(events, function(key, value) {
         var elem = {
             'title': JSON.parse(this['title']).en,
             'start': new Date(this['date_event']),
@@ -18,16 +13,9 @@ CoinDetails.prototype.init = function () {
             'className': "m-fc-event--accent",
             "editable": true,
             "url": this['source'],
-            // "extendedProps": {
-            //    "source": this['source'],
-            //    "proof" : this['proof'],
-            //    "can_occur_before" :  this['can_occur_before'],
-            // },
-
         };
         ev_list.push(elem);
-  });
-
+    });
 
     $('#tradingview_ffbfc').css('height', '400px');
 
@@ -44,43 +32,96 @@ CoinDetails.prototype.init = function () {
         $('#m_calendar').fullCalendar('changeView', 'month');
     }
 
+    // Get current language from localStorage or default to English
+    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+    
+    // Language-specific calendar configurations
+    const calendarConfigs = {
+        en: {
+            buttonText: {
+                prev: "Prev",
+                next: "Next",
+                today: "Today",
+                month: "Month",
+                week: "Week",
+                day: "Day",
+                list: "List"
+            },
+            allDayText: "All Day",
+            noEventsMessage: "No events"
+        },
+        ru: {
+            buttonText: {
+                prev: "Пред",
+                next: "След",
+                today: "Сегодня",
+                month: "Месяц",
+                week: "Неделя",
+                day: "День",
+                list: "Список"
+            },
+            allDayText: "Весь день",
+            noEventsMessage: "Нет событий"
+        },
+        hy: {
+            buttonText: {
+                prev: "Նախ",
+                next: "Հաջորդ",
+                today: "Այսօր",
+                month: "Ամիս",
+                week: "Շաբաթ",
+                day: "Օր",
+                list: "Ցուցակ"
+            },
+            allDayText: "Ամբողջ օր",
+            noEventsMessage: "Իրադարձություններ չկան"
+        },
+        fi: {
+            buttonText: {
+                prev: "Edell",
+                next: "Seur",
+                today: "Tänään",
+                month: "Kuukausi",
+                week: "Viikko",
+                day: "Päivä",
+                list: "Lista"
+            },
+            allDayText: "Koko päivä",
+            noEventsMessage: "Ei tapahtumia"
+        }
+    };
+
+    const config = calendarConfigs[currentLang] || calendarConfigs.en;
 
     $('#m_calendar').fullCalendar({
-        //plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
         timeZone: 'UTC',
         header: {
             left: 'prev,next today',
             center: 'title',
-             right: 'month,agendaWeek,agendaDay,listWeek'
-           // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            right: 'month,agendaWeek,agendaDay,listWeek'
         },
+        buttonText: config.buttonText,
+        allDayText: config.allDayText,
+        noEventsMessage: config.noEventsMessage,
         selectable: true,
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: true,
         navLinks: true,
         defaultDate: todayDate,
         events: ev_list,
-
-        // eventRender: function(event, element) {
-        //     if (element.hasClass('fc-day-grid-event')) {
-        //         element.data('content', event.description);
-        //         element.data('placement', 'top');
-        //         mApp.initPopover(element);
-        //     } else if (element.hasClass('fc-time-grid-event')) {
-        //         element.find('.fc-title').append('<div class="fc-description"><a href="'+ event.description + '">' + event.description + '</a></div>');
-        //     } else if (element.find('.fc-list-item-title').length !== 0) {
-        //         element.find('.fc-list-item-title').append('<div class="fc-description"><a href="' + event.description + '">' + event.description + '</a></div>');
-        //     }
-        // },
-
+        viewRender: function(view, element) {
+            // Update calendar language when view changes
+            setTimeout(() => {
+                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                updateCalendarContent(currentLang);
+            }, 100);
+        }
     });
 
-   // $('.fc-listWeek-button').click();
-   // $('.fc-month-button').hide();
-   // $('.fc-agendaWeek-button').hide();
-   // $('.fc-agendaDay-button').hide();
-   // $('.fc-listWeek-button').hide();
-
+    // Update calendar language after initialization
+    setTimeout(() => {
+        updateCalendarContent(currentLang);
+    }, 500);
 
     var portlet = $('#m_portlet_tools').mPortlet();
     portlet.on('afterFullscreenOn', function(portlet) {
@@ -90,7 +131,6 @@ CoinDetails.prototype.init = function () {
     portlet.on('afterFullscreenOff', function(portlet) {
        $('tradingview_chart').css('height', '400px');
     });
-
 };
 
 $(document).ready(function() {

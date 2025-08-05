@@ -59,9 +59,40 @@ class DetailsController extends Controller
                 ->get();
         }
 
+        // Map common coin symbols to their full CoinGecko IDs
+        $coinIdMapping = [
+            'btc' => 'bitcoin',
+            'eth' => 'ethereum',
+            'bnb' => 'binancecoin',
+            'sol' => 'solana',
+            'ada' => 'cardano',
+            'xrp' => 'ripple',
+            'doge' => 'dogecoin',
+            'ton' => 'the-open-network',
+            'avax' => 'avalanche-2',
+            'shib' => 'shiba-inu',
+            'dot' => 'polkadot',
+            'trx' => 'tron',
+            'link' => 'chainlink',
+            'matic' => 'matic-network',
+            'bch' => 'bitcoin-cash',
+            'ltc' => 'litecoin',
+            'uni' => 'uniswap',
+            'atom' => 'cosmos',
+            'etc' => 'ethereum-classic',
+            'fil' => 'filecoin',
+            'icp' => 'internet-computer',
+            'near' => 'near',
+            'apt' => 'aptos'
+        ];
+
+        // Determine the coin name for API calls
+        $coinName = $coin ? strtolower($coin->name) : 'bitcoin';
+        $apiCoinId = $coinIdMapping[strtolower($symbol)] ?? $coinName;
+
         $data = [
             'symbol' => $symbol,
-            'name'   => $coin ? strtolower($coin->name) : 'bitcoin',
+            'name'   => $apiCoinId, // Use the mapped CoinGecko ID
             'coin'   => $coin,
             'events' => $events,
             'telegramMessages' => TelegramMessages::orderBy('created_at', 'desc')->get(),

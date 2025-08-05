@@ -38,7 +38,7 @@
                 <span class="m-portlet__head-icon">
                     <i class="flaticon-map-location"></i>
                 </span>
-                        <h3 class="m-portlet__head-text">
+                        <h3 class="m-portlet__head-text" data-lang-key="Coin Events">
                             Coin Events
                         </h3>
                     </div>
@@ -61,7 +61,7 @@
 
 
     <div class="row" style="padding: 3em 3em 1.5em 3em;">
-        <h2><a href="/tradingPairs">You can also add TradingView Pair here</a></h2>
+        <h2><a href="/tradingPairs" data-lang-key="You can also add TradingView Pair here">You can also add TradingView Pair here</a></h2>
     </div>
 
     <div class="row" style="padding: 3em 3em 1.5em 3em;">
@@ -178,7 +178,7 @@
                     <div style="display:flex; align-items:center; gap:1em;">
                         <img src="{{ $coin->logo }}" alt="{{ $coin->name }} Logo" style="width:38px; height:38px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(67,206,162,0.10);">
                         <div>
-                            <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;">TradingView Chart</div>
+                            <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;" data-lang-key="TradingView Chart">TradingView Chart</div>
                             <div style="font-size:1em; color:#888;">Live Price Chart for {{ $coin->name }} ({{ strtoupper($coin->symbol) }})</div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                 <div style="display:flex; align-items:center; gap:1em;">
                     <img src="{{ $coin->logo }}" alt="{{ $coin->name }} Logo" style="width:38px; height:38px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(67,206,162,0.10);">
                     <div>
-                        <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;">Mini Price Chart</div>
+                        <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;" data-lang-key="Mini Price Chart">Mini Price Chart</div>
                     </div>
                 </div>
                 <div style="display:flex; gap:0.7em;">
@@ -330,7 +330,7 @@
                 <div style="display:flex; align-items:center; gap:1em;">
                     <img src="{{ $coin->logo }}" alt="{{ $coin->name }} Logo" style="width:38px; height:38px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(67,206,162,0.10);">
                     <div>
-                        <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;">Technical Analysis</div>
+                        <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;" data-lang-key="Technical Analysis">Technical Analysis</div>
                     </div>
                 </div>
                 <div style="display:flex; gap:0.7em;">
@@ -393,7 +393,7 @@
                 <div style="display:flex; align-items:center; gap:1em;">
                     <img src="{{ $coin->logo }}" alt="{{ $coin->name }} Logo" style="width:38px; height:38px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(67,206,162,0.10);">
                     <div>
-                        <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;">Market Cap & Volume</div>
+                        <div class="modern-title-text" style="font-size:1.3em; font-weight:700; color:#43cea2;" data-lang-key="Market Cap & Volume">Market Cap & Volume</div>
                     </div>
                 </div>
                 <div style="display:flex; gap:0.7em;">
@@ -452,7 +452,7 @@
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 
     <div class="row" style="padding: 3em 3em 1.5em 3em;">
-        <h2><a href="/twitter">You can also relate a Twitter Account Here</a></h2>
+        <h2><a href="/twitter" data-lang-key="You can also relate a Twitter Account Here">You can also relate a Twitter Account Here</a></h2>
     </div>
 
     @if(isset($twitterMessages))
@@ -465,7 +465,7 @@
                                 <span class="m-portlet__head-icon">
                                     <i class="socicon-telegram"></i>
                                 </span>
-                            <h3 class="m-portlet__head-text">
+                            <h3 class="m-portlet__head-text" data-lang-key="Twitter messages">
                                 Twitter Messages
                             </h3>
                         </div>
@@ -510,7 +510,7 @@
 
 
     <div class="row" style="padding: 3em 3em 1.5em 3em;">
-        <h2><a href="/telegram">You can also relate a Telegram Account Here</a></h2>
+        <h2><a href="/telegram" data-lang-key="You can also relate a Telegram Account Here">You can also relate a Telegram Account Here</a></h2>
     </div>
 
     @if(isset($telegramMessages))
@@ -523,7 +523,7 @@
                                 <span class="m-portlet__head-icon">
                                     <i class="socicon-telegram"></i>
                                 </span>
-                            <h3 class="m-portlet__head-text">
+                            <h3 class="m-portlet__head-text" data-lang-key="Telegram messages">
                                 Telegram Channel
                             </h3>
                         </div>
@@ -574,7 +574,36 @@
         const coinId = '{{ $name ?? "monero" }}'; // fallback to monero for demo
         console.log(coinId);
 
-        let apiUrl = `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+        // Map common coin symbols to their full CoinGecko IDs
+        const coinIdMapping = {
+            'btc': 'bitcoin',
+            'eth': 'ethereum',
+            'bnb': 'binancecoin',
+            'sol': 'solana',
+            'ada': 'cardano',
+            'xrp': 'ripple',
+            'doge': 'dogecoin',
+            'ton': 'the-open-network',
+            'avax': 'avalanche-2',
+            'shib': 'shiba-inu',
+            'dot': 'polkadot',
+            'trx': 'tron',
+            'link': 'chainlink',
+            'matic': 'matic-network',
+            'bch': 'bitcoin-cash',
+            'ltc': 'litecoin',
+            'uni': 'uniswap',
+            'atom': 'cosmos',
+            'etc': 'ethereum-classic',
+            'fil': 'filecoin',
+            'icp': 'internet-computer',
+            'near': 'near',
+            'apt': 'aptos'
+        };
+
+        // Use mapped ID or fallback to the original coinId
+        const mappedCoinId = coinIdMapping[coinId.toLowerCase()] || coinId;
+        let apiUrl = `https://api.coingecko.com/api/v3/coins/${mappedCoinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
 
         function formatNumber(n) {
             if (!n && n !== 0) return '-';
@@ -593,64 +622,137 @@
             return str.replace(/<[^>]*>?/gm, '');
         }
 
+        function updateCoinElements(data) {
+            // Safely update coin logo
+            const coinLogo = document.getElementById('coinLogo');
+            if (coinLogo && data.image && (data.image.large || data.image.small)) {
+                coinLogo.src = data.image.large || data.image.small;
+                coinLogo.alt = data.name + ' logo';
+            }
+
+            // Safely update coin title
+            const coinTitle = document.getElementById('coinTitle');
+            if (coinTitle && data.name) {
+                coinTitle.textContent = data.name;
+            }
+
+            // Safely update coin symbol
+            const coinSymbol = document.getElementById('coinSymbol');
+            if (coinSymbol && data.symbol) {
+                coinSymbol.textContent = data.symbol.toUpperCase();
+            }
+
+            // Safely update coin description
+            const coinDesc = document.getElementById('coinDesc');
+            if (coinDesc && data.description && data.description.en) {
+                coinDesc.innerHTML = data.description.en.split('. ').slice(0,2).join('. ') + '.';
+            }
+
+            // Safely update coin price
+            const coinPrice = document.getElementById('coinPrice');
+            if (coinPrice && data.market_data && data.market_data.current_price && data.market_data.current_price.usd) {
+                coinPrice.textContent = formatCurrency(data.market_data.current_price.usd);
+            }
+
+            // Safely update market cap
+            const coinMarketCap = document.getElementById('coinMarketCap');
+            if (coinMarketCap && data.market_data && data.market_data.market_cap && data.market_data.market_cap.usd) {
+                coinMarketCap.textContent = formatCurrency(data.market_data.market_cap.usd);
+            }
+
+            // Safely update rank
+            const coinRank = document.getElementById('coinRank');
+            if (coinRank && data.market_cap_rank) {
+                coinRank.textContent = '#' + data.market_cap_rank;
+            }
+
+            // Safely update supply
+            const coinSupply = document.getElementById('coinSupply');
+            if (coinSupply && data.market_data) {
+                const circulating = data.market_data.circulating_supply;
+                const max = data.market_data.max_supply;
+                if (circulating !== null && circulating !== undefined) {
+                    const supplyText = formatNumber(circulating);
+                    if (max !== null && max !== undefined) {
+                        coinSupply.textContent = supplyText + ' / ' + formatNumber(max);
+                    } else {
+                        coinSupply.textContent = supplyText;
+                    }
+                }
+            }
+
+            // Safely update links
+            const coinLinks = document.getElementById('coinLinks');
+            if (coinLinks && data.links) {
+                let links = [];
+                if (data.links.homepage && data.links.homepage[0]) links.push(`<a class="coin-link" href="${data.links.homepage[0]}" target="_blank" rel="noopener">Website</a>`);
+                if (data.links.blockchain_site && data.links.blockchain_site[0]) links.push(`<a class="coin-link" href="${data.links.blockchain_site[0]}" target="_blank" rel="noopener">Blockchain</a>`);
+                if (data.links.repos_url && data.links.repos_url.github && data.links.repos_url.github[0]) links.push(`<a class="coin-link" href="${data.links.repos_url.github[0]}" target="_blank" rel="noopener">GitHub</a>`);
+                if (data.links.subreddit_url) links.push(`<a class="coin-link" href="${data.links.subreddit_url}" target="_blank" rel="noopener">Reddit</a>`);
+                if (data.links.twitter_screen_name) links.push(`<a class="coin-link" href="https://twitter.com/${data.links.twitter_screen_name}" target="_blank" rel="noopener">Twitter</a>`);
+                coinLinks.innerHTML = links.join(' ');
+            }
+
+            // Show the summary and hide loading
+            const coinInfoSummary = document.getElementById('coinInfoSummary');
+            const coinInfoLoading = document.getElementById('coinInfoLoading');
+            if (coinInfoSummary) coinInfoSummary.style.display = '';
+            if (coinInfoLoading) coinInfoLoading.style.display = 'none';
+        }
+
+        function handleApiError(error, fallbackCoinId = 'bitcoin') {
+            console.error('API Error:', error);
+            
+            // Try fallback to bitcoin if the original request failed
+            if (fallbackCoinId !== 'bitcoin') {
+                const fallbackUrl = `https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+                
+                fetch(fallbackUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        updateCoinElements(data);
+                    })
+                    .catch(fallbackError => {
+                        console.error('Fallback API call also failed:', fallbackError);
+                        // Show error message
+                        const coinInfoLoading = document.getElementById('coinInfoLoading');
+                        const coinInfoError = document.getElementById('coinInfoError');
+                        if (coinInfoLoading) coinInfoLoading.style.display = 'none';
+                        if (coinInfoError) {
+                            coinInfoError.style.display = '';
+                            coinInfoError.textContent = 'Failed to load coin data. Please try again later.';
+                        }
+                    });
+            } else {
+                // Show error message if even fallback fails
+                const coinInfoLoading = document.getElementById('coinInfoLoading');
+                const coinInfoError = document.getElementById('coinInfoError');
+                if (coinInfoLoading) coinInfoLoading.style.display = 'none';
+                if (coinInfoError) {
+                    coinInfoError.style.display = '';
+                    coinInfoError.textContent = 'Failed to load coin data. Please try again later.';
+                }
+            }
+        }
+
         fetch(apiUrl)
-            .then(r => r.json())
-        .then(data => {
-            document.getElementById('coinLogo').src = data.image.large || data.image.small || '';
-        document.getElementById('coinLogo').alt = data.name + ' logo';
-        document.getElementById('coinTitle').textContent = data.name;
-        document.getElementById('coinSymbol').textContent = data.symbol ? data.symbol.toUpperCase() : '';
-        document.getElementById('coinDesc').innerHTML = data.description.en ? data.description.en.split('. ').slice(0,2).join('. ') + '.' : '';
-        document.getElementById('coinPrice').textContent = formatCurrency(data.market_data.current_price.usd);
-        document.getElementById('coinMarketCap').textContent = formatCurrency(data.market_data.market_cap.usd);
-        document.getElementById('coinRank').textContent = data.market_cap_rank ? '#' + data.market_cap_rank : '-';
-        document.getElementById('coinSupply').textContent = formatNumber(data.market_data.circulating_supply) + (data.market_data.max_supply ? ' / ' + formatNumber(data.market_data.max_supply) : '');
-        // Links
-        let links = [];
-        if (data.links.homepage && data.links.homepage[0]) links.push(`<a class="coin-link" href="${data.links.homepage[0]}" target="_blank" rel="noopener">Website</a>`);
-        if (data.links.blockchain_site && data.links.blockchain_site[0]) links.push(`<a class="coin-link" href="${data.links.blockchain_site[0]}" target="_blank" rel="noopener">Blockchain</a>`);
-        if (data.links.repos_url && data.links.repos_url.github && data.links.repos_url.github[0]) links.push(`<a class="coin-link" href="${data.links.repos_url.github[0]}" target="_blank" rel="noopener">GitHub</a>`);
-        if (data.links.subreddit_url) links.push(`<a class="coin-link" href="${data.links.subreddit_url}" target="_blank" rel="noopener">Reddit</a>`);
-        if (data.links.twitter_screen_name) links.push(`<a class="coin-link" href="https://twitter.com/${data.links.twitter_screen_name}" target="_blank" rel="noopener">Twitter</a>`);
-        document.getElementById('coinLinks').innerHTML = links.join(' ');
-        document.getElementById('coinInfoSummary').style.display = '';
-        document.getElementById('coinInfoLoading').style.display = 'none';
-        })
-        .catch(e => {
-
-           apiUrl = `https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
-
-//            document.getElementById('coinInfoLoading').style.display = 'none';
-//        document.getElementById('coinInfoError').style.display = '';
-//        document.getElementById('coinInfoError').textContent = 'Failed to load coin data. Please try again later.';
-
-
-        fetch(apiUrl)
-            .then(r => r.json())
-        .then(data => {
-            document.getElementById('coinLogo').src = data.image.large || data.image.small || '';
-        document.getElementById('coinLogo').alt = data.name + ' logo';
-        document.getElementById('coinTitle').textContent = data.name;
-        document.getElementById('coinSymbol').textContent = data.symbol ? data.symbol.toUpperCase() : '';
-        document.getElementById('coinDesc').innerHTML = data.description.en ? data.description.en.split('. ').slice(0,2).join('. ') + '.' : '';
-        document.getElementById('coinPrice').textContent = formatCurrency(data.market_data.current_price.usd);
-        document.getElementById('coinMarketCap').textContent = formatCurrency(data.market_data.market_cap.usd);
-        document.getElementById('coinRank').textContent = data.market_cap_rank ? '#' + data.market_cap_rank : '-';
-        document.getElementById('coinSupply').textContent = formatNumber(data.market_data.circulating_supply) + (data.market_data.max_supply ? ' / ' + formatNumber(data.market_data.max_supply) : '');
-        // Links
-        let links = [];
-        if (data.links.homepage && data.links.homepage[0]) links.push(`<a class="coin-link" href="${data.links.homepage[0]}" target="_blank" rel="noopener">Website</a>`);
-        if (data.links.blockchain_site && data.links.blockchain_site[0]) links.push(`<a class="coin-link" href="${data.links.blockchain_site[0]}" target="_blank" rel="noopener">Blockchain</a>`);
-        if (data.links.repos_url && data.links.repos_url.github && data.links.repos_url.github[0]) links.push(`<a class="coin-link" href="${data.links.repos_url.github[0]}" target="_blank" rel="noopener">GitHub</a>`);
-        if (data.links.subreddit_url) links.push(`<a class="coin-link" href="${data.links.subreddit_url}" target="_blank" rel="noopener">Reddit</a>`);
-        if (data.links.twitter_screen_name) links.push(`<a class="coin-link" href="https://twitter.com/${data.links.twitter_screen_name}" target="_blank" rel="noopener">Twitter</a>`);
-        document.getElementById('coinLinks').innerHTML = links.join(' ');
-        document.getElementById('coinInfoSummary').style.display = '';
-        document.getElementById('coinInfoLoading').style.display = 'none';
-        });
-
-
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                updateCoinElements(data);
+            })
+            .catch(error => {
+                handleApiError(error, mappedCoinId);
+            });
     </script>
     <script>
         var events = {!! $events !!};

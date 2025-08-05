@@ -105,7 +105,7 @@ Route::get('/coinmarketcal',
 
 /** ===== Coin Details ====== */
 
-Route::get('/details/{coin}', 'DetailsController@index');
+Route::get('/details/{coin}', 'DetailsController@index')->name('coin_details');
 
 
 

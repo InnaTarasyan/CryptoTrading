@@ -21,11 +21,11 @@
                             <span></span>
                         </a>
                         <!-- END -->
-                        <!-- BEGIN: Topbar Toggler -->
-                        <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
-                            <i class="flaticon-more"></i>
-                        </a>
-                        <!-- BEGIN: Topbar Toggler -->
+                        {{--<!-- BEGIN: Topbar Toggler -->--}}
+                        {{--<a id="m_aside_header_topbar_mobile_toggle" href="javascript:;" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">--}}
+                            {{--<i class="flaticon-more"></i>--}}
+                        {{--</a>--}}
+                        {{--<!-- BEGIN: Topbar Toggler -->--}}
                     </div>
                 </div>
             </div>
