@@ -214,6 +214,7 @@
     </script>
     <script src="{{ url('js/base.js') }}"></script>
     <script src="{{ url('js/mobile-menu.js') }}"></script>
+    <script src="{{ url('js/translations.js') }}"></script>
 <!--end::Page Snippets -->
 </body>
 <!-- end::Body -->

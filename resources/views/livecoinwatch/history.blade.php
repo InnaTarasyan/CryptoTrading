@@ -1,5 +1,10 @@
 @extends('layouts.base')
 
+{{-- ======================== Page Title Section ======================== --}}
+@section('title')
+    Livecoin History - Crypto Trading
+@endsection
+
 {{-- ======================== Styles Section ======================== --}}
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -28,7 +33,7 @@
                         </defs>
                     </svg>
                 </span>
-                <span class="modern-title-text" data-lang-key="Livecoin History">Livecoin History</span>
+                <span class="modern-title-text" data-lang-key="livecoin_history">Livecoin History</span>
             </div>
             <button id="darkModeToggle" class="modern-tab darkmode-switch" title="Toggle dark mode" role="switch" aria-checked="false">
                 <span class="darkmode-switch-icon" id="darkModeIcon">
@@ -50,7 +55,7 @@
                         </g>
                     </svg>
                 </span>
-                <span id="darkModeText" class="darkmode-switch-label" data-lang-key="Dark Mode">Dark Mode</span>
+                <span id="darkModeText" class="darkmode-switch-label" data-lang-key="dark_mode">Dark Mode</span>
             </button>
         </div>
 
@@ -62,21 +67,21 @@
                         {{-- History Icon --}}
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 7v5l4 2" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </span>
-                    <span class="tab-label" data-lang-key="History">History</span>
+                    <span class="tab-label" data-lang-key="livecoin_history">History</span>
                 </a>
                 <a href="/livecoinexchangesindex" class="modern-tab beautiful-tab {{ request()->is('livecoinexchangesindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         {{-- Exchange Icon --}}
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#43cea2"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
                     </span>
-                    <span class="tab-label" data-lang-key="Exchanges">Exchanges</span>
+                    <span class="tab-label" data-lang-key="exchanges">Exchanges</span>
                 </a>
                 <a href="/livecoinfiatsindex" class="modern-tab beautiful-tab {{ request()->is('livecoinfiatsindex') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         {{-- Fiat Icon --}}
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#ff512f"/><text x="12" y="17" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text></svg>
                     </span>
-                    <span class="tab-label" data-lang-key="Fiats">Fiats</span>
+                    <span class="tab-label" data-lang-key="fiats">Fiats</span>
                 </a>
             </nav>
         </div>
@@ -92,7 +97,7 @@
                             <polyline points="17 2 17 7 22 7" stroke="#0d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         </svg>
                     </span>
-                    <span data-lang-key="Refresh">Refresh</span>
+                    <span data-lang-key="refresh">Refresh</span>
                 </button>
             </div>
             <div class="action-buttons-right">
@@ -115,7 +120,7 @@
                             <rect x="11" y="5" width="2" height="14" rx="1" fill="#ff512f"/>
                         </svg>
                     </span>
-                    <span id="fullscreenText" class="fullscreen-switch-label" data-lang-key="Fullscreen">Fullscreen</span>
+                    <span id="fullscreenText" class="fullscreen-switch-label" data-lang-key="fullscreen">Fullscreen</span>
                     </button>
                 </div>
             </div>
@@ -143,7 +148,7 @@
                                         <circle cx="16" cy="16" r="7" fill="#43cea2"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Coin">Coin</span>
+                                <span class="datatable-header-text" data-lang-key="coin">Coin</span>
                             </th>
                             <th title="Coin logo">
                                 <span class="datatable-header-icon">
@@ -153,7 +158,7 @@
                                         <circle cx="16" cy="16" r="8" fill="#fff"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Logo">Logo</span>
+                                <span class="datatable-header-text" data-lang-key="logo">Logo</span>
                             </th>
                             <th title="Current price in USD">
                                 <span class="datatable-header-icon">
@@ -163,7 +168,7 @@
                                         <text x="16" y="21" text-anchor="middle" font-size="16" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Rate">Rate</span>
+                                <span class="datatable-header-text" data-lang-key="rate">Rate</span>
                             </th>
                             <th title="How old the coin is">
                                 <span class="datatable-header-icon">
@@ -173,7 +178,7 @@
                                         <path d="M10 8h12M10 24h12M12 8c0 6 8 6 8 0M12 24c0-6 8-6 8 0" stroke="#185a9d" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Age">Age</span>
+                                <span class="datatable-header-text" data-lang-key="age">Age</span>
                             </th>
                             <th title="Number of trading pairs">
                                 <span class="datatable-header-icon">
@@ -183,7 +188,7 @@
                                         <path d="M12 16h8M16 12v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Pairs">Pairs</span>
+                                <span class="datatable-header-text" data-lang-key="pairs">Pairs</span>
                             </th>
                             <th title="24h trading volume">
                                 <span class="datatable-header-icon">
@@ -193,7 +198,7 @@
                                         <path d="M10 16h12M16 10v12" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Volume (24h)">Volume (24h)</span>
+                                <span class="datatable-header-text" data-lang-key="volume_24h">Volume (24h)</span>
                             </th>
                             <th title="Market capitalization">
                                 <span class="datatable-header-icon">
@@ -203,7 +208,7 @@
                                         <path d="M16 16V8A8 8 0 1 1 8 24" fill="#fff"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Market Cap">Market Cap</span>
+                                <span class="datatable-header-text" data-lang-key="market_cap">Market Cap</span>
                             </th>
                             <th title="Rank among all coins">
                                 <span class="datatable-header-icon">
@@ -213,7 +218,7 @@
                                         <path d="M12 20h8M16 20v4M10 8h12v4a6 6 0 0 1-12 0V8z" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Rank">Rank</span>
+                                <span class="datatable-header-text" data-lang-key="rank">Rank</span>
                             </th>
                             <th title="Number of markets">
                                 <span class="datatable-header-icon">
@@ -225,7 +230,7 @@
                                         <rect x="10" y="20" width="12" height="2" fill="#fff"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Markets">Markets</span>
+                                <span class="datatable-header-text" data-lang-key="markets">Markets</span>
                             </th>
                             <th title="Total supply of the coin">
                                 <span class="datatable-header-icon">
@@ -236,7 +241,7 @@
                                         <ellipse cx="16" cy="22" rx="10" ry="4" fill="#11998e"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Total Supply">Total Supply</span>
+                                <span class="datatable-header-text" data-lang-key="total_supply">Total Supply</span>
                             </th>
                             <th title="Maximum supply possible">
                                 <span class="datatable-header-icon">
@@ -249,7 +254,7 @@
                                         <rect x="18" y="18" width="4" height="4" fill="#fff"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Max Supply">Max Supply</span>
+                                <span class="datatable-header-text" data-lang-key="max_supply">Max Supply</span>
                             </th>
                             <th title="Currently circulating supply">
                                 <span class="datatable-header-icon">
@@ -259,7 +264,7 @@
                                         <circle cx="16" cy="16" r="7" fill="#fff"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Circulating Supply">Circulating Supply</span>
+                                <span class="datatable-header-text" data-lang-key="circulating_supply">Circulating Supply</span>
                             </th>
                             <th title="All-time high price">
                                 <span class="datatable-header-icon">
@@ -269,7 +274,7 @@
                                         <polyline points="8,24 14,18 18,22 24,10" stroke="#fff" stroke-width="2" fill="none"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="All-Time High">All-Time High</span>
+                                <span class="datatable-header-text" data-lang-key="all_time_high">All-Time High</span>
                             </th>
                             <th title="Coin categories">
                                 <span class="datatable-header-icon">
@@ -280,7 +285,7 @@
                                         <rect x="10" y="18" width="8" height="4" rx="2" fill="#fff"/>
                                     </svg>
                                 </span>
-                                <span class="datatable-header-text" data-lang-key="Categories">Categories</span>
+                                <span class="datatable-header-text" data-lang-key="categories">Categories</span>
                             </th>
                         </tr>
                         </thead>
@@ -388,7 +393,7 @@
                 </svg>
             </div>
             <div class="lcw-content">
-                <h2 data-lang-key="About Live Coin Watch">About Live Coin Watch</h2>
+                <h2 data-lang-key="about_live_coin_watch">About Live Coin Watch</h2>
                 <p>
                     <strong>Live Coin Watch</strong> is a real-time cryptocurrency market tracking platform, offering a clean and convenient interface for monitoring prices, market capitalizations, trading volumes, and rankings of hundreds of digital assets. Unlike many competitors, Live Coin Watch updates information in real time, making it ideal for users who want to see price changes as they happen.<br><br>
                     The platform allows users to view prices in various fiat and cryptocurrencies, track the total market capitalization, and explore detailed data for each coin and exchange. Live Coin Watch also offers portfolio tracking features for registered users, all within a modern, easy-to-navigate layout.<br><br>
@@ -397,7 +402,7 @@
                 <p>
                     <strong>Change History:</strong> The table above provides a comprehensive record of historical changes for various cryptocurrencies as tracked by Live Coin Watch. Each entry reflects updates in price, market capitalization, trading volume, and other key metrics over time. This change history enables users to analyze trends, monitor market movements, and make informed decisions based on past performance and data transparency. The regularly updated datatable ensures that users always have access to the latest and most accurate historical information available.
                 </p>
-                <a href="https://www.livecoinwatch.com" target="_blank" rel="noopener" data-lang-key="Visit Live Coin Watch">Visit Live Coin Watch</a>
+                <a href="https://www.livecoinwatch.com" target="_blank" rel="noopener" data-lang-key="visit_live_coin_watch">Visit Live Coin Watch</a>
             </div>
         </div>
     </div>
@@ -588,58 +593,58 @@
     <div class="modern-reviews-section">
         <h2 class="modern-reviews-title">
             <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16" fill="url(#reviewGradient)"/><path d="M10 22l2-2 4 4 8-8-2-2-6 6-2-2-2 2z" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="reviewGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd200"/><stop offset="1" stop-color="#43cea2"/></linearGradient></defs></svg>
-            <span data-lang-key="User Reviews">User Reviews</span>
+            <span data-lang-key="user_reviews">User Reviews</span>
         </h2>
         <div id="reviews-list" class="reviews-list"></div>
         <div class="modern-review-form-container">
             <h3 class="modern-review-form-title">
-                <span data-lang-key="Leave a Review">Leave a Review</span>
+                <span data-lang-key="leave_a_review">Leave a Review</span>
             </h3>
             <form id="reviewForm" method="POST" action="{{ url('/livecoinwatch/history/reviews') }}">
                 @csrf
                 <div class="modern-form-group">
                     <label for="name">
                         <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ffd200"/><path d="M4 20c0-4 8-4 8-4s8 0 8 4" stroke="#43cea2" stroke-width="2"/></svg>
-                        <span data-lang-key="Name">Name</span>
+                        <span data-lang-key="name">Name</span>
                     </label>
                     <input type="text" class="form-control" id="name" name="name" required maxlength="255">
             </div>
                 <div class="modern-form-group">
                     <label for="email">
                         <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="4" fill="#43cea2"/><path d="M2 6l10 7 10-7" stroke="#ffd200" stroke-width="2"/></svg>
-                        <span data-lang-key="Email">Email</span>
+                        <span data-lang-key="email">Email</span>
                     </label>
                     <input type="email" class="form-control" id="email" name="email" required maxlength="255">
         </div>
                 <div class="modern-form-group">
                     <label for="rating">
                         <svg viewBox="0 0 24 24" fill="none"><polygon points="12,2 15,9 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,9" fill="#ffd200"/></svg>
-                        <span data-lang-key="Rating">Rating</span>
+                        <span data-lang-key="rating">Rating</span>
                     </label>
                     <select class="form-control" id="rating" name="rating" required>
-                        <option value="" data-lang-key="Select">Select</option>
-                        <option value="1" data-lang-key="1 - Poor">1 - Poor</option>
-                        <option value="2" data-lang-key="2 - Fair">2 - Fair</option>
-                        <option value="3" data-lang-key="3 - Good">3 - Good</option>
-                        <option value="4" data-lang-key="4 - Very Good">4 - Very Good</option>
-                        <option value="5" data-lang-key="5 - Excellent">5 - Excellent</option>
+                        <option value="" data-lang-key="select">Select</option>
+                        <option value="1" data-lang-key="poor">1 - Poor</option>
+                        <option value="2" data-lang-key="fair">2 - Fair</option>
+                        <option value="3" data-lang-key="good">3 - Good</option>
+                        <option value="4" data-lang-key="very_good">4 - Very Good</option>
+                        <option value="5" data-lang-key="excellent">5 - Excellent</option>
                     </select>
             </div>
                 <div class="modern-form-group">
                     <label for="title">
                         <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" fill="#ffd200"/><path d="M8 12h8M8 16h4" stroke="#43cea2" stroke-width="2"/></svg>
-                        <span data-lang-key="Title">Title</span>
+                        <span data-lang-key="title">Title</span>
                     </label>
                     <input type="text" class="form-control" id="title" name="title" required maxlength="255">
                 </div>
                 <div class="modern-form-group">
                     <label for="comment">
                         <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="4" fill="#43cea2"/><path d="M6 8h12M6 12h8" stroke="#ffd200" stroke-width="2"/></svg>
-                        <span data-lang-key="Comment">Comment</span>
+                        <span data-lang-key="comment">Comment</span>
                     </label>
                     <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="btn modern-review-form-btn" data-lang-key="Submit Review">Submit Review</button>
+                <button type="submit" class="btn modern-review-form-btn" data-lang-key="submit_review">Submit Review</button>
                 <div id="reviewFormMsg" style="margin-top: 1em;"></div>
             </form>
         </div>

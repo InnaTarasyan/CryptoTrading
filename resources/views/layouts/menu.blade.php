@@ -21,7 +21,7 @@
             <li class="m-menu__item  m-menu__item--submenu mobile-only-tutorials" aria-haspopup="true"  data-menu-submenu-toggle="click" data-menu-dropdown-toggle-class="m-aside-menu-overlay--on">
                 <a  href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon la la-graduation-cap"></i>
-                    <span class="m-menu__link-text">
+                    <span class="m-menu__link-text" data-lang-key="trading_tutorials">
 						Trading Tutorials
 					</span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -35,7 +35,7 @@
                                     <i class="m-menu__link-bullet m-menu__link-bullet--custom">
                                         <i class="la la-chart-line"></i>
                                     </i>
-                                    <span class="m-menu__link-text p-2">
+                                    <span class="m-menu__link-text p-2" data-lang-key="binance_guide">
                                         Binance Trading Guide
                                     </span>
                                 </a>
@@ -45,7 +45,7 @@
                                     <i class="m-menu__link-bullet m-menu__link-bullet--custom">
                                         <i class="la la-university"></i>
                                     </i>
-                                    <span class="m-menu__link-text p-2">
+                                    <span class="m-menu__link-text p-2" data-lang-key="crypto_trading">
                                         How to Trade Cryptocurrency
                                     </span>
                                 </a>
@@ -55,7 +55,7 @@
                                     <i class="m-menu__link-bullet m-menu__link-bullet--custom">
                                         <i class="la la-book"></i>
                                     </i>
-                                    <span class="m-menu__link-text p-2">
+                                    <span class="m-menu__link-text p-2" data-lang-key="crypto_basics">
                                         Crypto Basics
                                     </span>
                                 </a>
@@ -65,7 +65,7 @@
                                     <i class="m-menu__link-bullet m-menu__link-bullet--custom">
                                         <i class="la la-chart-bar"></i>
                                     </i>
-                                    <span class="m-menu__link-text p-2">
+                                    <span class="m-menu__link-text p-2" data-lang-key="trading_strategy">
                                         Trading Strategy
                                     </span>
                                 </a>
@@ -75,7 +75,7 @@
                                     <i class="m-menu__link-bullet m-menu__link-bullet--custom">
                                         <i class="la la-lightbulb"></i>
                                     </i>
-                                    <span class="m-menu__link-text p-2">
+                                    <span class="m-menu__link-text p-2" data-lang-key="learn_center">
                                         Kraken Learning Center
                                     </span>
                                 </a>
@@ -85,7 +85,7 @@
                                     <i class="m-menu__link-bullet m-menu__link-bullet--custom">
                                         <i class="la la-chart-area"></i>
                                     </i>
-                                    <span class="m-menu__link-text p-2">
+                                    <span class="m-menu__link-text p-2" data-lang-key="chart_analysis">
                                         Chart Analysis
                                     </span>
                                 </a>
@@ -125,7 +125,7 @@
             <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom" aria-haspopup="true"  data-menu-submenu-toggle="click" data-redirect="true">
                 <a  href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon socicon-twitter"></i>
-                    <span class="m-menu__link-text">
+                    <span class="m-menu__link-text" data-lang-key="twitter">
 						Twitter
 					</span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -135,7 +135,7 @@
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item  m-menu__item--parent m-menu__item--bottom" aria-haspopup="true"  data-redirect="true">
                             <span class="m-menu__link">
-                                <span class="m-menu__link-text">
+                                <span class="m-menu__link-text" data-lang-key="twitter">
                                     Twitter
                                 </span>
                             </span>
@@ -145,7 +145,7 @@
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
-                                <span class="m-menu__link-text">
+                                <span class="m-menu__link-text" data-lang-key="twitter_account">
 									Twitter Account
 								</span>
                             </a>
@@ -157,7 +157,7 @@
             <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom" aria-haspopup="true"  data-menu-submenu-toggle="click" data-redirect="true">
                 <a  href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon socicon-telegram"></i>
-                    <span class="m-menu__link-text">
+                    <span class="m-menu__link-text" data-lang-key="telegram">
 						Telegram
 					</span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -167,7 +167,7 @@
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item  m-menu__item--parent m-menu__item--bottom" aria-haspopup="true"  data-redirect="true">
                             <span class="m-menu__link">
-                                <span class="m-menu__link-text">
+                                <span class="m-menu__link-text" data-lang-key="telegram">
                                     Telegram
                                 </span>
                             </span>
@@ -177,7 +177,7 @@
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
-                                <span class="m-menu__link-text">
+                                <span class="m-menu__link-text" data-lang-key="telegram_account">
 									Telegram Account
 								</span>
                             </a>
@@ -188,7 +188,7 @@
             <li class="m-menu__item  m-menu__item--submenu m-menu__item--bottom" aria-haspopup="true"  data-menu-submenu-toggle="click" data-redirect="true">
                 <a  href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon fa fa-bitcoin"></i>
-                    <span class="m-menu__link-text">
+                    <span class="m-menu__link-text" data-lang-key="trading_pair">
 						Trading Pair
 					</span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -198,7 +198,7 @@
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item  m-menu__item--parent m-menu__item--bottom" aria-haspopup="true"  data-redirect="true">
                             <span class="m-menu__link">
-                                <span class="m-menu__link-text">
+                                <span class="m-menu__link-text" data-lang-key="trading_pair">
                                     Trading Pair
                                 </span>
                             </span>
@@ -208,7 +208,7 @@
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
-                                <span class="m-menu__link-text">
+                                <span class="m-menu__link-text" data-lang-key="trading_pair">
 									Trading Pair
 								</span>
                             </a>

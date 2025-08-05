@@ -11,7 +11,7 @@
                 <div class="mobile-menu-icon">
                     <i class="la la-info-circle"></i>
                 </div>
-                <span class="mobile-menu-text">About</span>
+                <span class="mobile-menu-text" data-lang-key="about">About</span>
             </a>
         </div>
         
@@ -21,26 +21,26 @@
                 <div class="mobile-menu-icon">
                     <i class="la la-dashboard"></i>
                 </div>
-                <span class="mobile-menu-text">Dashboard</span>
+                <span class="mobile-menu-text" data-lang-key="dashboard">Dashboard</span>
                 <i class="mobile-menu-arrow la la-angle-down"></i>
             </div>
             <div class="mobile-submenu" id="dashboard-submenu">
                 <div class="mobile-submenu-item">
                     <a href="/" class="mobile-submenu-link">
                         <i class="la la-chart-line"></i>
-                        <span>Live Coin Watch</span>
+                        <span data-lang-key="live_coin_watch">Live Coin Watch</span>
                     </a>
                 </div>
                 <div class="mobile-submenu-item">
                     <a href="/coingeckomarketsindex" class="mobile-submenu-link">
                         <i class="la la-bitcoin"></i>
-                        <span>Coingecko</span>
+                        <span data-lang-key="coingecko">Coingecko</span>
                     </a>
                 </div>
                 <div class="mobile-submenu-item">
                     <a href="/coinmarketcalindex" class="mobile-submenu-link">
                         <i class="la la-calendar"></i>
-                        <span>Coin Market Cal</span>
+                        <span data-lang-key="coin_market_cal">Coin Market Cal</span>
                     </a>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="mobile-menu-icon">
                     <i class="la la-globe"></i>
                 </div>
-                <span class="mobile-menu-text">Language</span>
+                <span class="mobile-menu-text" data-lang-key="language">Language</span>
                 <i class="mobile-menu-arrow la la-angle-down"></i>
             </div>
             <div class="mobile-submenu" id="language-submenu">
