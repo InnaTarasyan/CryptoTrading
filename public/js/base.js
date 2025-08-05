@@ -655,6 +655,207 @@ Object.assign(languageTexts['fi'], {
     'Livecoin History': 'Livecoin-historia'
 });
 
+// Market Comparison Section Translations
+Object.assign(languageTexts['en'], {
+    'market_comparison': 'Market Comparison Analysis',
+    'total_coins': 'Total Coins',
+    'total_market_cap': 'Total Market Cap',
+    'total_volume': 'Total Volume',
+    'total_markets': 'Total Markets',
+    'total_exchanges': 'Total Exchanges',
+    'total_events': 'Total Events',
+    'top_10_ranked': 'Top 10 Ranked',
+    'market_cap_distribution': 'Market Cap Distribution',
+    'price_movement_trends': '24h Price Movement Trends',
+    'volume_distribution': 'Volume Distribution',
+    'platform_coverage': 'Platform Coverage',
+    'top_10_coins_by_market_cap': 'Top 10 Coins by Market Cap',
+    'market_trends_summary': 'Market Trends Summary',
+    'gaining': 'Gaining',
+    'losing': 'Losing',
+    'stable': 'Stable',
+    'search_for_coin': 'Search for a coin (e.g., bitcoin, ethereum)',
+    'search': 'Search',
+    'analysis_for': 'Analysis for',
+    'price': 'Price',
+    'market_cap': 'Market Cap',
+    'volume': 'Volume',
+    'last_updated': 'Last Updated',
+    'rank': 'Rank',
+    '24h_change': '24h Change',
+    'circulating_supply': 'Circulating Supply',
+    'max_supply': 'Max Supply',
+    'ath': 'ATH',
+    'hot_index': 'Hot Index',
+    'trending_index': 'Trending Index',
+    'significant_index': 'Significant Index',
+    'mega_cap': 'Mega Cap (>$10B)',
+    'large_cap': 'Large Cap ($1B-$10B)',
+    'mid_cap': 'Mid Cap ($100M-$1B)',
+    'small_cap': 'Small Cap ($10M-$100M)',
+    'micro_cap': 'Micro Cap (<$10M)',
+    'high_volume': 'High Volume (>$1B)',
+    'medium_volume': 'Medium Volume ($100M-$1B)',
+    'low_volume': 'Low Volume (<$100M)',
+    'livecoinwatch_only': 'LiveCoinWatch Only',
+    'coingecko_only': 'CoinGecko Only',
+    'both_platforms': 'Both Platforms',
+    'please_enter_coin_symbol': 'Please enter a coin symbol',
+    'no_data_found_for': 'No data found for',
+    'error_searching_for': 'Error searching for',
+    'searching_for_coin_data': 'Searching for coin data...'
+});
+
+Object.assign(languageTexts['ru'], {
+    'market_comparison': 'Анализ сравнения рынков',
+    'total_coins': 'Всего монет',
+    'total_market_cap': 'Общая рыночная капитализация',
+    'total_volume': 'Общий объем',
+    'total_markets': 'Всего рынков',
+    'total_exchanges': 'Всего бирж',
+    'total_events': 'Всего событий',
+    'top_10_ranked': 'Топ-10 по рангу',
+    'market_cap_distribution': 'Распределение рыночной капитализации',
+    'price_movement_trends': 'Тренды движения цен за 24ч',
+    'volume_distribution': 'Распределение объема',
+    'platform_coverage': 'Покрытие платформ',
+    'top_10_coins_by_market_cap': 'Топ-10 монет по рыночной капитализации',
+    'market_trends_summary': 'Сводка рыночных трендов',
+    'gaining': 'Растущие',
+    'losing': 'Падающие',
+    'stable': 'Стабильные',
+    'search_for_coin': 'Поиск монеты (например, bitcoin, ethereum)',
+    'search': 'Поиск',
+    'analysis_for': 'Анализ для',
+    'price': 'Цена',
+    'market_cap': 'Рыночная капитализация',
+    'volume': 'Объем',
+    'last_updated': 'Последнее обновление',
+    'rank': 'Ранг',
+    '24h_change': 'Изменение за 24ч',
+    'circulating_supply': 'Обращающееся предложение',
+    'max_supply': 'Максимальное предложение',
+    'ath': 'Исторический максимум',
+    'hot_index': 'Индекс популярности',
+    'trending_index': 'Индекс тренда',
+    'significant_index': 'Индекс значимости',
+    'mega_cap': 'Мега-капитализация (>$10 млрд)',
+    'large_cap': 'Большая капитализация ($1-10 млрд)',
+    'mid_cap': 'Средняя капитализация ($100 млн-1 млрд)',
+    'small_cap': 'Малая капитализация ($10-100 млн)',
+    'micro_cap': 'Микро-капитализация (<$10 млн)',
+    'high_volume': 'Высокий объем (>$1 млрд)',
+    'medium_volume': 'Средний объем ($100 млн-1 млрд)',
+    'low_volume': 'Низкий объем (<$100 млн)',
+    'livecoinwatch_only': 'Только LiveCoinWatch',
+    'coingecko_only': 'Только CoinGecko',
+    'both_platforms': 'Обе платформы',
+    'please_enter_coin_symbol': 'Пожалуйста, введите символ монеты',
+    'no_data_found_for': 'Данные не найдены для',
+    'error_searching_for': 'Ошибка поиска для',
+    'searching_for_coin_data': 'Поиск данных о монете...'
+});
+
+Object.assign(languageTexts['fi'], {
+    'market_comparison': 'Markkinoiden vertailuanalyysi',
+    'total_coins': 'Kokonaiskolikot',
+    'total_market_cap': 'Kokonaismarkkina-arvo',
+    'total_volume': 'Kokonaisvolyymi',
+    'total_markets': 'Kokonaismarkkinat',
+    'total_exchanges': 'Kokonaispörssit',
+    'total_events': 'Kokonaistapahtumat',
+    'top_10_ranked': 'Top 10 sijoituksessa',
+    'market_cap_distribution': 'Markkina-arvon jakautuminen',
+    'price_movement_trends': '24h hintaliikkeen trendit',
+    'volume_distribution': 'Volyymin jakautuminen',
+    'platform_coverage': 'Alustan kattavuus',
+    'top_10_coins_by_market_cap': 'Top 10 kolikkoa markkina-arvon mukaan',
+    'market_trends_summary': 'Markkinatrendien yhteenveto',
+    'gaining': 'Nousevat',
+    'losing': 'Laskevat',
+    'stable': 'Vakaat',
+    'search_for_coin': 'Etsi kolikkoa (esim. bitcoin, ethereum)',
+    'search': 'Etsi',
+    'analysis_for': 'Analyysi kohteelle',
+    'price': 'Hinta',
+    'market_cap': 'Markkina-arvo',
+    'volume': 'Volyymi',
+    'last_updated': 'Viimeksi päivitetty',
+    'rank': 'Sijoitus',
+    '24h_change': '24h muutos',
+    'circulating_supply': 'Liikkeessä oleva tarjonta',
+    'max_supply': 'Maksimitarjonta',
+    'ath': 'Kaikkien aikojen korkein',
+    'hot_index': 'Kuumuusindeksi',
+    'trending_index': 'Trendiindeksi',
+    'significant_index': 'Merkittävyysindeksi',
+    'mega_cap': 'Mega-arvo (>$10 mrd)',
+    'large_cap': 'Suuri arvo ($1-10 mrd)',
+    'mid_cap': 'Keskisuuri arvo ($100 milj-1 mrd)',
+    'small_cap': 'Pieni arvo ($10-100 milj)',
+    'micro_cap': 'Mikro-arvo (<$10 milj)',
+    'high_volume': 'Korkea volyymi (>$1 mrd)',
+    'medium_volume': 'Keskisuuri volyymi ($100 milj-1 mrd)',
+    'low_volume': 'Matala volyymi (<$100 milj)',
+    'livecoinwatch_only': 'Vain LiveCoinWatch',
+    'coingecko_only': 'Vain CoinGecko',
+    'both_platforms': 'Molemmat alustat',
+    'please_enter_coin_symbol': 'Syötä kolikon symboli',
+    'no_data_found_for': 'Tietoja ei löytynyt kohteelle',
+    'error_searching_for': 'Virhe etsittäessä',
+    'searching_for_coin_data': 'Etsitään kolikkotietoja...'
+});
+
+Object.assign(languageTexts['hy'], {
+    'market_comparison': 'Շուկաների համեմատական վերլուծություն',
+    'total_coins': 'Ընդհանուր մետաղադրամներ',
+    'total_market_cap': 'Ընդհանուր շուկայական կապիտալիզացիա',
+    'total_volume': 'Ընդհանուր ծավալ',
+    'total_markets': 'Ընդհանուր շուկաներ',
+    'total_exchanges': 'Ընդհանուր բորսաներ',
+    'total_events': 'Ընդհանուր իրադարձություններ',
+    'top_10_ranked': 'Թոփ 10 դիրքով',
+    'market_cap_distribution': 'Շուկայական կապիտալիզացիայի բաշխում',
+    'price_movement_trends': '24ժ գնային շարժումների միտումներ',
+    'volume_distribution': 'Ծավալի բաշխում',
+    'platform_coverage': 'Հարթակի ծածկույթ',
+    'top_10_coins_by_market_cap': 'Թոփ 10 մետաղադրամներ շուկայական կապիտալիզացիայով',
+    'market_trends_summary': 'Շուկայական միտումների ամփոփում',
+    'gaining': 'Աճող',
+    'losing': 'Նվազող',
+    'stable': 'Կայուն',
+    'search_for_coin': 'Որոնել մետաղադրամ (օր. bitcoin, ethereum)',
+    'search': 'Որոնել',
+    'analysis_for': 'Վերլուծություն համար',
+    'price': 'Գին',
+    'market_cap': 'Շուկայական կապիտալիզացիա',
+    'volume': 'Ծավալ',
+    'last_updated': 'Վերջին թարմացում',
+    'rank': 'Դիրք',
+    '24h_change': '24ժ փոփոխություն',
+    'circulating_supply': 'Շրջանառվող առաջարկ',
+    'max_supply': 'Առավելագույն առաջարկ',
+    'ath': 'Բոլոր ժամանակների բարձրագույն',
+    'hot_index': 'Տաք ինդեքս',
+    'trending_index': 'Միտումների ինդեքս',
+    'significant_index': 'Կարևորության ինդեքս',
+    'mega_cap': 'Մեգա կապիտալիզացիա (>$10 մլրդ)',
+    'large_cap': 'Մեծ կապիտալիզացիա ($1-10 մլրդ)',
+    'mid_cap': 'Միջին կապիտալիզացիա ($100 մլն-1 մլրդ)',
+    'small_cap': 'Փոքր կապիտալիզացիա ($10-100 մլն)',
+    'micro_cap': 'Միկրո կապիտալիզացիա (<$10 մլն)',
+    'high_volume': 'Բարձր ծավալ (>$1 մլրդ)',
+    'medium_volume': 'Միջին ծավալ ($100 մլն-1 մլրդ)',
+    'low_volume': 'Ցածր ծավալ (<$100 մլն)',
+    'livecoinwatch_only': 'Միայն LiveCoinWatch',
+    'coingecko_only': 'Միայն CoinGecko',
+    'both_platforms': 'Երկու հարթակներ',
+    'please_enter_coin_symbol': 'Խնդրում ենք մուտքագրել մետաղադրամի սիմվոլ',
+    'no_data_found_for': 'Տվյալներ չեն գտնվել համար',
+    'error_searching_for': 'Սխալ որոնելիս',
+    'searching_for_coin_data': 'Որոնվում են մետաղադրամի տվյալներ...'
+});
+
 function applyLanguageToPage(lang) {
     const texts = languageTexts[lang] || languageTexts.en;
     
@@ -678,6 +879,9 @@ function applyLanguageToPage(lang) {
         
         // Update page title
         updatePageTitle(lang);
+        
+        // Update market comparison section
+        updateMarketComparisonSection(lang);
     } catch (error) {
         console.error('Error applying language to page:', error);
     }
@@ -1342,6 +1546,139 @@ function showLanguageChangeMessage(lang) {
         }
     } catch (error) {
         console.error('Error showing language change message:', error);
+    }
+}
+
+function updateMarketComparisonSection(lang) {
+    const texts = languageTexts[lang] || languageTexts.en;
+    
+    try {
+        // Update main title
+        const mainTitle = document.querySelector('[data-lang-key="market_comparison"]');
+        if (mainTitle && texts['market_comparison']) {
+            mainTitle.textContent = texts['market_comparison'];
+        }
+        
+        // Update platform overview cards
+        const statLabels = document.querySelectorAll('.stat-label');
+        statLabels.forEach(label => {
+            const text = label.textContent.trim();
+            if (texts[text]) {
+                label.textContent = texts[text];
+            }
+        });
+        
+        // Update chart titles
+        const chartTitles = document.querySelectorAll('.chart-card h4');
+        chartTitles.forEach(title => {
+            const text = title.textContent.trim();
+            if (texts[text]) {
+                title.textContent = texts[text];
+            }
+        });
+        
+        // Update table headers
+        const tableHeaders = document.querySelectorAll('#topPerformersTable th');
+        tableHeaders.forEach(header => {
+            const text = header.textContent.trim();
+            if (texts[text]) {
+                header.textContent = texts[text];
+            }
+        });
+        
+        // Update trends summary labels
+        const trendLabels = document.querySelectorAll('.trend-label');
+        trendLabels.forEach(label => {
+            const text = label.textContent.trim();
+            if (texts[text]) {
+                label.textContent = texts[text];
+            }
+        });
+        
+        // Update search placeholder and button
+        const searchInput = document.getElementById('coinSearchInput');
+        if (searchInput && texts['search_for_coin']) {
+            searchInput.placeholder = texts['search_for_coin'];
+        }
+        
+        const searchBtn = document.getElementById('searchCoinBtn');
+        if (searchBtn && texts['search']) {
+            searchBtn.textContent = texts['search'];
+        }
+        
+        // Update elements with data-lang-key attributes
+        const langElements = document.querySelectorAll('[data-lang-key]');
+        langElements.forEach(element => {
+            const langKey = element.getAttribute('data-lang-key');
+            if (texts[langKey]) {
+                // Special handling for input placeholders
+                if (element.tagName === 'INPUT' && element.placeholder) {
+                    element.placeholder = texts[langKey];
+                } else {
+                    element.textContent = texts[langKey];
+                }
+            }
+        });
+        
+        // Update chart labels if charts exist
+        updateMarketComparisonCharts(lang);
+    } catch (error) {
+        console.error('Error updating market comparison section:', error);
+    }
+}
+
+function updateMarketComparisonCharts(lang) {
+    const texts = languageTexts[lang] || languageTexts.en;
+    
+    try {
+        // Update market cap distribution chart
+        if (window.comparisonCharts && window.comparisonCharts.marketCap) {
+            const chart = window.comparisonCharts.marketCap;
+            chart.data.labels = [
+                texts['mega_cap'] || 'Mega Cap (>$10B)',
+                texts['large_cap'] || 'Large Cap ($1B-$10B)',
+                texts['mid_cap'] || 'Mid Cap ($100M-$1B)',
+                texts['small_cap'] || 'Small Cap ($10M-$100M)',
+                texts['micro_cap'] || 'Micro Cap (<$10M)'
+            ];
+            chart.update();
+        }
+        
+        // Update price trends chart
+        if (window.comparisonCharts && window.comparisonCharts.priceTrends) {
+            const chart = window.comparisonCharts.priceTrends;
+            chart.data.labels = [
+                texts['gaining'] || 'Gaining',
+                texts['losing'] || 'Losing',
+                texts['stable'] || 'Stable'
+            ];
+            chart.update();
+        }
+        
+        // Update volume chart
+        if (window.comparisonCharts && window.comparisonCharts.volume) {
+            const chart = window.comparisonCharts.volume;
+            chart.data.labels = [
+                texts['high_volume'] || 'High Volume (>$1B)',
+                texts['medium_volume'] || 'Medium Volume ($100M-$1B)',
+                texts['low_volume'] || 'Low Volume (<$100M)'
+            ];
+            chart.update();
+        }
+        
+        // Update platform chart
+        if (window.comparisonCharts && window.comparisonCharts.platform) {
+            const chart = window.comparisonCharts.platform;
+            chart.data.labels = [
+                texts['livecoinwatch_only'] || 'LiveCoinWatch Only',
+                texts['coingecko_only'] || 'CoinGecko Only',
+                texts['both_platforms'] || 'Both Platforms'
+            ];
+            chart.update();
+        }
+        
+    } catch (error) {
+        console.error('Error updating market comparison charts:', error);
     }
 }
 

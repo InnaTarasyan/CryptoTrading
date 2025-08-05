@@ -312,7 +312,7 @@
                             </defs>
                         </svg>
                     </span>
-                    <span class="modern-title-text" data-lang-key="market_comparison">Market Comparison Analysis</span>
+                    <span class="modern-title-text" data-lang-key="market_comparison">{{ __('menu.market_comparison') }}</span>
                 </div>
                 <button id="refreshComparison" class="modern-tab darkmode-switch" title="Refresh Comparison Data" aria-label="Refresh Comparison Data">
                     <span class="darkmode-switch-icon">
@@ -339,8 +339,8 @@
                 {{-- Coin Search Section --}}
                 <div class="coin-search-section">
                     <div class="search-container">
-                        <input type="text" id="coinSearchInput" placeholder="Search for a coin (e.g., bitcoin, ethereum)" class="coin-search-input">
-                        <button id="searchCoinBtn" class="search-btn">Search</button>
+                        <input type="text" id="coinSearchInput" placeholder="{{ __('menu.search_for_coin') }}" class="coin-search-input" data-lang-key="search_for_coin">
+                        <button id="searchCoinBtn" class="search-btn" data-lang-key="search">{{ __('menu.search') }}</button>
                     </div>
                     <div id="coinAnalysisResult" class="coin-analysis-result" style="display:none;">
                         <!-- Coin analysis will be displayed here -->
@@ -356,15 +356,15 @@
                         </div>
                         <div class="platform-stats">
                             <div class="stat">
-                                <span class="stat-label">Total Coins</span>
+                                <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
                                 <span class="stat-value" id="lcw-total-coins">-</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-label">Total Market Cap</span>
+                                <span class="stat-label" data-lang-key="total_market_cap">{{ __('menu.total_market_cap') }}</span>
                                 <span class="stat-value" id="lcw-total-mcap">-</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-label">Total Volume</span>
+                                <span class="stat-label" data-lang-key="total_volume">{{ __('menu.total_volume') }}</span>
                                 <span class="stat-value" id="lcw-total-volume">-</span>
                             </div>
                         </div>
@@ -377,15 +377,15 @@
                         </div>
                         <div class="platform-stats">
                             <div class="stat">
-                                <span class="stat-label">Total Coins</span>
+                                <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
                                 <span class="stat-value" id="cg-total-coins">-</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-label">Total Markets</span>
+                                <span class="stat-label" data-lang-key="total_markets">{{ __('menu.total_markets') }}</span>
                                 <span class="stat-value" id="cg-total-markets">-</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-label">Total Exchanges</span>
+                                <span class="stat-label" data-lang-key="total_exchanges">{{ __('menu.total_exchanges') }}</span>
                                 <span class="stat-value" id="cg-total-exchanges">-</span>
                             </div>
                         </div>
@@ -398,15 +398,15 @@
                         </div>
                         <div class="platform-stats">
                             <div class="stat">
-                                <span class="stat-label">Total Coins</span>
+                                <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
                                 <span class="stat-value" id="cmc-total-coins">-</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-label">Total Events</span>
+                                <span class="stat-label" data-lang-key="total_events">{{ __('menu.total_events') }}</span>
                                 <span class="stat-value" id="cmc-total-events">-</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-label">Top 10 Ranked</span>
+                                <span class="stat-label" data-lang-key="top_10_ranked">{{ __('menu.top_10_ranked') }}</span>
                                 <span class="stat-value" id="cmc-top-10">-</span>
                             </div>
                         </div>
@@ -417,7 +417,7 @@
                 <div class="chart-grid">
                     {{-- Market Cap Distribution Chart --}}
                     <div class="chart-card">
-                        <h4>Market Cap Distribution</h4>
+                        <h4 data-lang-key="market_cap_distribution">{{ __('menu.market_cap_distribution') }}</h4>
                         <div class="chart-container" style="height: 300px; position: relative;">
                             <canvas id="marketCapChart"></canvas>
                         </div>
@@ -425,7 +425,7 @@
 
                     {{-- Price Movement Trends --}}
                     <div class="chart-card">
-                        <h4>24h Price Movement Trends</h4>
+                        <h4 data-lang-key="price_movement_trends">{{ __('menu.price_movement_trends') }}</h4>
                         <div class="chart-container" style="height: 300px; position: relative;">
                             <canvas id="priceTrendsChart"></canvas>
                         </div>
@@ -433,7 +433,7 @@
 
                     {{-- Volume Analysis --}}
                     <div class="chart-card">
-                        <h4>Volume Distribution</h4>
+                        <h4 data-lang-key="volume_distribution">{{ __('menu.volume_distribution') }}</h4>
                         <div class="chart-container" style="height: 300px; position: relative;">
                             <canvas id="volumeChart"></canvas>
                         </div>
@@ -441,7 +441,7 @@
 
                     {{-- Cross-Platform Comparison --}}
                     <div class="chart-card">
-                        <h4>Platform Coverage</h4>
+                        <h4 data-lang-key="platform_coverage">{{ __('menu.platform_coverage') }}</h4>
                         <div class="chart-container" style="height: 300px; position: relative;">
                             <canvas id="platformChart"></canvas>
                         </div>
@@ -449,17 +449,17 @@
 
                     {{-- Top Performers --}}
                     <div class="chart-card full-width">
-                        <h4>Top 10 Coins by Market Cap</h4>
+                        <h4 data-lang-key="top_10_coins_by_market_cap">{{ __('menu.top_10_coins_by_market_cap') }}</h4>
                         <div class="top-performers-table">
                             <table id="topPerformersTable" class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>Symbol</th>
-                                        <th>Market Cap</th>
-                                        <th>Price</th>
-                                        <th>24h Change</th>
+                                        <th data-lang-key="rank">{{ __('menu.rank') }}</th>
+                                        <th data-lang-key="name">{{ __('menu.name') }}</th>
+                                        <th data-lang-key="symbol">{{ __('menu.symbol') }}</th>
+                                        <th data-lang-key="market_cap">{{ __('menu.market_cap') }}</th>
+                                        <th data-lang-key="price">{{ __('menu.price') }}</th>
+                                        <th data-lang-key="24h_change">{{ __('menu.24h_change') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody id="topPerformersBody">
@@ -471,21 +471,21 @@
 
                     {{-- Market Trends Summary --}}
                     <div class="chart-card full-width">
-                        <h4>Market Trends Summary</h4>
+                        <h4 data-lang-key="market_trends_summary">{{ __('menu.market_trends_summary') }}</h4>
                         <div class="trends-summary">
                             <div class="trend-item positive">
                                 <span class="trend-icon">📈</span>
-                                <span class="trend-label">Gaining</span>
+                                <span class="trend-label" data-lang-key="gaining">{{ __('menu.gaining') }}</span>
                                 <span class="trend-value" id="trends-gaining">-</span>
                             </div>
                             <div class="trend-item negative">
                                 <span class="trend-icon">📉</span>
-                                <span class="trend-label">Losing</span>
+                                <span class="trend-label" data-lang-key="losing">{{ __('menu.losing') }}</span>
                                 <span class="trend-value" id="trends-losing">-</span>
                             </div>
                             <div class="trend-item neutral">
                                 <span class="trend-icon">➡️</span>
-                                <span class="trend-label">Stable</span>
+                                <span class="trend-label" data-lang-key="stable">{{ __('menu.stable') }}</span>
                                 <span class="trend-value" id="trends-stable">-</span>
                             </div>
                         </div>
@@ -1247,8 +1247,13 @@
                 .then(data => renderReviews(data));
         }
 
-        // Comparison Charts and Data Loading
-        let comparisonCharts = {};
+        // Global chart objects for language switching
+        window.comparisonCharts = {
+            marketCap: null,
+            priceTrends: null,
+            volume: null,
+            platform: null
+        };
 
         function formatNumber(num) {
             if (num >= 1e12) return (num / 1e12).toFixed(2) + 'T';
@@ -1324,14 +1329,14 @@
         function createMarketCapChart(data) {
             const ctx = document.getElementById('marketCapChart').getContext('2d');
             
-            if (comparisonCharts.marketCap) {
-                comparisonCharts.marketCap.destroy();
+            if (window.comparisonCharts.marketCap) {
+                window.comparisonCharts.marketCap.destroy();
             }
 
-            comparisonCharts.marketCap = new Chart(ctx, {
+            window.comparisonCharts.marketCap = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Mega Cap (>$10B)', 'Large Cap ($1B-$10B)', 'Mid Cap ($100M-$1B)', 'Small Cap ($10M-$100M)', 'Micro Cap (<$10M)'],
+                    labels: ['{{ __("menu.mega_cap") }}', '{{ __("menu.large_cap") }}', '{{ __("menu.mid_cap") }}', '{{ __("menu.small_cap") }}', '{{ __("menu.micro_cap") }}'],
                     datasets: [{
                         data: [
                             data.distribution.mega_cap,
@@ -1377,14 +1382,14 @@
         function createPriceTrendsChart(data) {
             const ctx = document.getElementById('priceTrendsChart').getContext('2d');
             
-            if (comparisonCharts.priceTrends) {
-                comparisonCharts.priceTrends.destroy();
+            if (window.comparisonCharts.priceTrends) {
+                window.comparisonCharts.priceTrends.destroy();
             }
 
-            comparisonCharts.priceTrends = new Chart(ctx, {
+            window.comparisonCharts.priceTrends = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Gaining', 'Losing', 'Stable'],
+                    labels: ['{{ __("menu.gaining") }}', '{{ __("menu.losing") }}', '{{ __("menu.stable") }}'],
                     datasets: [{
                         label: 'Price Movement (24h)',
                         data: [
@@ -1436,14 +1441,14 @@
         function createVolumeChart(data) {
             const ctx = document.getElementById('volumeChart').getContext('2d');
             
-            if (comparisonCharts.volume) {
-                comparisonCharts.volume.destroy();
+            if (window.comparisonCharts.volume) {
+                window.comparisonCharts.volume.destroy();
             }
 
-            comparisonCharts.volume = new Chart(ctx, {
+            window.comparisonCharts.volume = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['High Volume (>$1B)', 'Medium Volume ($100M-$1B)', 'Low Volume (<$100M)'],
+                    labels: ['{{ __("menu.high_volume") }}', '{{ __("menu.medium_volume") }}', '{{ __("menu.low_volume") }}'],
                     datasets: [{
                         data: [
                             data.volume_distribution.high,
@@ -1485,14 +1490,14 @@
         function createPlatformChart(data) {
             const ctx = document.getElementById('platformChart').getContext('2d');
             
-            if (comparisonCharts.platform) {
-                comparisonCharts.platform.destroy();
+            if (window.comparisonCharts.platform) {
+                window.comparisonCharts.platform.destroy();
             }
 
-            comparisonCharts.platform = new Chart(ctx, {
+            window.comparisonCharts.platform = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['LiveCoinWatch Only', 'CoinGecko Only', 'Both Platforms'],
+                    labels: ['{{ __("menu.livecoinwatch_only") }}', '{{ __("menu.coingecko_only") }}', '{{ __("menu.both_platforms") }}'],
                     datasets: [{
                         label: 'Platform Coverage',
                         data: [
@@ -1571,13 +1576,13 @@
         function searchCoin() {
             const symbol = document.getElementById('coinSearchInput').value.trim();
             if (!symbol) {
-                alert('Please enter a coin symbol');
+                alert('{{ __("menu.please_enter_coin_symbol") }}');
                 return;
             }
 
             const resultEl = document.getElementById('coinAnalysisResult');
             resultEl.style.display = 'block';
-            resultEl.innerHTML = '<div style="text-align: center; padding: 2em;"><div class="spinner-border text-warning" role="status"></div><p>Searching for coin data...</p></div>';
+            resultEl.innerHTML = '<div style="text-align: center; padding: 2em;"><div class="spinner-border text-warning" role="status"></div><p>{{ __("menu.searching_for_coin_data") }}</p></div>';
 
             fetch(`/livecoinwatch/coin-analysis?symbol=${encodeURIComponent(symbol)}`)
                 .then(response => response.json())
@@ -1585,12 +1590,12 @@
                     if (data.success) {
                         renderCoinAnalysis(data);
                     } else {
-                        resultEl.innerHTML = `<div class="alert alert-warning">No data found for ${symbol.toUpperCase()}</div>`;
+                        resultEl.innerHTML = `<div class="alert alert-warning">{{ __("menu.no_data_found_for") }} ${symbol.toUpperCase()}</div>`;
                     }
                 })
                 .catch(error => {
                     console.error('Error searching coin:', error);
-                    resultEl.innerHTML = `<div class="alert alert-danger">Error searching for ${symbol.toUpperCase()}</div>`;
+                    resultEl.innerHTML = `<div class="alert alert-danger">{{ __("menu.error_searching_for") }} ${symbol.toUpperCase()}</div>`;
                 });
         }
 
@@ -1600,7 +1605,7 @@
             
             let html = `
                 <div class="coin-analysis-header">
-                    <h3>📊 Analysis for ${data.symbol}</h3>
+                    <h3>📊 {{ __('menu.analysis_for') }} ${data.symbol}</h3>
                 </div>
                 <div class="coin-analysis-grid">
             `;
@@ -1612,19 +1617,19 @@
                         <h4>📈 LiveCoinWatch</h4>
                         <div class="coin-analysis-data">
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Price</span>
+                                <span class="coin-analysis-label">{{ __('menu.price') }}</span>
                                 <span class="coin-analysis-value">$${formatNumber(analysis.livecoinwatch.price)}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Market Cap</span>
+                                <span class="coin-analysis-label">{{ __('menu.market_cap') }}</span>
                                 <span class="coin-analysis-value">${formatCurrency(analysis.livecoinwatch.market_cap)}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Volume</span>
+                                <span class="coin-analysis-label">{{ __('menu.volume') }}</span>
                                 <span class="coin-analysis-value">${formatCurrency(analysis.livecoinwatch.volume)}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Last Updated</span>
+                                <span class="coin-analysis-label">{{ __('menu.last_updated') }}</span>
                                 <span class="coin-analysis-value">${new Date(analysis.livecoinwatch.last_updated).toLocaleString()}</span>
                             </div>
                         </div>
@@ -1642,39 +1647,39 @@
                         <h4>🦎 CoinGecko</h4>
                         <div class="coin-analysis-data">
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Name</span>
+                                <span class="coin-analysis-label">{{ __('menu.name') }}</span>
                                 <span class="coin-analysis-value">${analysis.coingecko.name}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Price</span>
+                                <span class="coin-analysis-label">{{ __('menu.price') }}</span>
                                 <span class="coin-analysis-value">$${formatNumber(analysis.coingecko.current_price)}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Market Cap</span>
+                                <span class="coin-analysis-label">{{ __('menu.market_cap') }}</span>
                                 <span class="coin-analysis-value">${formatCurrency(analysis.coingecko.market_cap)}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Rank</span>
+                                <span class="coin-analysis-label">{{ __('menu.rank') }}</span>
                                 <span class="coin-analysis-value">#${analysis.coingecko.market_cap_rank}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">24h Change</span>
+                                <span class="coin-analysis-label">{{ __('menu.24h_change') }}</span>
                                 <span class="coin-analysis-value ${priceChangeClass}">${priceChangeSign}${analysis.coingecko.price_change_percentage_24h.toFixed(2)}%</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Volume</span>
+                                <span class="coin-analysis-label">{{ __('menu.volume') }}</span>
                                 <span class="coin-analysis-value">${formatCurrency(analysis.coingecko.total_volume)}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Circulating Supply</span>
+                                <span class="coin-analysis-label">{{ __('menu.circulating_supply') }}</span>
                                 <span class="coin-analysis-value">${formatNumber(analysis.coingecko.circulating_supply)}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Max Supply</span>
+                                <span class="coin-analysis-label">{{ __('menu.max_supply') }}</span>
                                 <span class="coin-analysis-value">${analysis.coingecko.max_supply ? formatNumber(analysis.coingecko.max_supply) : 'N/A'}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">ATH</span>
+                                <span class="coin-analysis-label">{{ __('menu.ath') }}</span>
                                 <span class="coin-analysis-value">$${formatNumber(analysis.coingecko.ath)}</span>
                             </div>
                         </div>
@@ -1689,23 +1694,23 @@
                         <h4>📅 CoinMarketCal</h4>
                         <div class="coin-analysis-data">
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Name</span>
+                                <span class="coin-analysis-label">{{ __('menu.name') }}</span>
                                 <span class="coin-analysis-value">${analysis.coinmarketcal.name}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Rank</span>
+                                <span class="coin-analysis-label">{{ __('menu.rank') }}</span>
                                 <span class="coin-analysis-value">#${analysis.coinmarketcal.rank}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Hot Index</span>
+                                <span class="coin-analysis-label">{{ __('menu.hot_index') }}</span>
                                 <span class="coin-analysis-value">${analysis.coinmarketcal.hot_index || 'N/A'}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Trending Index</span>
+                                <span class="coin-analysis-label">{{ __('menu.trending_index') }}</span>
                                 <span class="coin-analysis-value">${analysis.coinmarketcal.trending_index || 'N/A'}</span>
                             </div>
                             <div class="coin-analysis-item">
-                                <span class="coin-analysis-label">Significant Index</span>
+                                <span class="coin-analysis-label">{{ __('menu.significant_index') }}</span>
                                 <span class="coin-analysis-value">${analysis.coinmarketcal.significant_index || 'N/A'}</span>
                             </div>
                         </div>
