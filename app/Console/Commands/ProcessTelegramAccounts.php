@@ -101,7 +101,7 @@ class ProcessTelegramAccounts extends Command
                 }
 
                 foreach ($messages_Messages['messages'] as $message) {
-                  //   print_r($message);
+                   //  print_r($message);
 
                     if(array_key_exists('message', $message)) {
                         $link = '';
@@ -116,8 +116,8 @@ class ProcessTelegramAccounts extends Command
                             'date'        => date('m/d/Y H:i:s', $message['date']),
                             'message'     => $message['message'],
                             'link'        => $link,
-                            'views'       => $message['views'],
-                            'forwards'    => $message['forwards'],
+                            'views'       => array_key_exists('views', $message) ? $message['views'] : null,
+                            'forwards'    => array_key_exists('forwards', $message) ? $message['forwards'] : null,
                             'post_author' => array_key_exists('post_author', $message) ? $message['post_author'] : null,
                             'title'       => ''
                         ];
