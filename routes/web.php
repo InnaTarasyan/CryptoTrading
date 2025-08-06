@@ -16,6 +16,7 @@
 
 // Coin markets comparison
 Route::get('/', 'MarketsComparizonController@index')->name('main');
+Route::get('/coinmpredictions', 'MarketsComparizonController@coinPredictions')->name('predictions');
 
 
 // live coin watch comparison data

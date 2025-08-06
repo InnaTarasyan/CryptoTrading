@@ -34,6 +34,13 @@
                         </span>
                     </a>
                 </li>
+                <li class="m-nav__item">
+                    <a href="/coinmpredictions" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                           Coin Predictions
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div>
