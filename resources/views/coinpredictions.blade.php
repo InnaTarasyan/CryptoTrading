@@ -10,7 +10,7 @@
 @endsection
 @section('content')
 <div class="container py-4">
-    <h2 class="mb-4">Cryptocurrency Price Predictions (AI + Advanced Models)</h2>
+    <h2 class="mb-4">Cryptocurrency Price Predictions</h2>
     @if(!empty($errors))
         <div class="alert alert-warning">
             @foreach($errors as $err)
@@ -32,12 +32,12 @@
                         <div class="mb-2">
                             <span class="legend-dot" style="background:#43cea2;"></span> Historical
                             <span class="legend-dot" style="background:#ffd200;"></span> Internal Prediction
-                            <span class="legend-dot" style="background:#ff6a88;"></span> AI/External Prediction
+                            <span class="legend-dot" style="background:#ff6a88;"></span> /External Prediction
                         </div>
                         <div class="mb-2">
                             <b>Last Price:</b> @if($result['history']->count()) ${{ number_format($result['history']->last()['rate'], 4) }} @else N/A @endif<br>
                             <b>Next 7d Model Prediction:</b> @if($result['predictions']) ${{ number_format($result['predictions'][0]['predicted_price'] ?? 0, 4) }} - ${{ number_format($result['predictions'][count($result['predictions'])-1]['predicted_price'] ?? 0, 4) }} @else N/A @endif<br>
-                            <b>External AI Prediction:</b> @if($result['external']) ${{ number_format($result['external'][0]['predicted_price'] ?? 0, 4) }} - ${{ number_format($result['external'][count($result['external'])-1]['predicted_price'] ?? 0, 4) }} @else N/A @endif
+                            {{--<b>External AI Prediction:</b> @if($result['external']) ${{ number_format($result['external'][0]['predicted_price'] ?? 0, 4) }} - ${{ number_format($result['external'][count($result['external'])-1]['predicted_price'] ?? 0, 4) }} @else N/A @endif--}}
                         </div>
                         <div class="row mb-2">
                             <div class="col-4">
@@ -55,7 +55,7 @@
                         </div>
                         <div class="alert alert-info p-2 mt-2">
                             <small>
-                                <b>Info:</b> Predictions are for informational purposes only. Internal predictions use polynomial regression on the last 60 days. External predictions are from Cryptics.tech AI.
+                                <b>Info:</b> Predictions are for informational purposes only. Internal predictions use polynomial regression on the last 60 days.
                             </small>
                         </div>
                     </div>
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (idx !== -1) extData[idx] = extPrices[i];
                 });
                 datasets.push({
-                    label: 'AI/External Prediction',
+                    label: '/External Prediction',
                     data: extData.concat(extPrices),
                     borderColor: '#ff6a88',
                     backgroundColor: 'rgba(255,106,136,0.1)',

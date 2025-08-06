@@ -5,7 +5,7 @@
             <h3 class="m-subheader__title m-subheader__title--separator" data-lang-key="dashboard">
                 Dashboard
             </h3>
-            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline enhanced-breadcrumbs">
                 <li class="m-nav__item">
                     <a href="/" class="m-nav__link">
                         <span class="m-nav__link-text">
@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="m-nav__item">
-                    <a href="/coinmpredictions" class="m-nav__link">
+                    <a href="/coinmpredictions" class="m-nav__link special-highlight">
                         <span class="m-nav__link-text">
                            Coin Predictions
                         </span>
@@ -55,6 +55,255 @@
                 </span>
             </button>
             <style>
+                /* Enhanced Breadcrumb Menu Styles */
+                .enhanced-breadcrumbs {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    flex-wrap: nowrap;
+                    overflow-x: auto;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                    white-space: nowrap;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 0;
+                }
+
+                .enhanced-breadcrumbs::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .enhanced-breadcrumbs .m-nav__item {
+                    position: relative;
+                    margin: 0;
+                    flex-shrink: 0;
+                    flex: 0 0 auto;
+                }
+
+                .enhanced-breadcrumbs .m-nav__item:not(:last-child)::after {
+                    content: '›';
+                    color: #a3a3a3;
+                    font-size: 14px;
+                    font-weight: 300;
+                    margin: 0 3px;
+                    opacity: 0.6;
+                    flex-shrink: 0;
+                }
+
+                .enhanced-breadcrumbs .m-nav__link {
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 4px 8px;
+                    color: #6c757d;
+                    text-decoration: none;
+                    border-radius: 12px;
+                    font-weight: 500;
+                    font-size: 12px;
+                    transition: all 0.2s ease;
+                    position: relative;
+                    background: transparent;
+                    border: 1px solid transparent;
+                    white-space: nowrap;
+                    min-width: fit-content;
+                    max-width: none;
+                }
+
+                .enhanced-breadcrumbs .m-nav__link:hover {
+                    color: #495057;
+                    background: rgba(108, 117, 125, 0.08);
+                    border-color: rgba(108, 117, 125, 0.2);
+                    transform: translateY(-1px);
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+                }
+
+                .enhanced-breadcrumbs .m-nav__link:focus {
+                    outline: none;
+                    color: #007bff;
+                    background: rgba(0, 123, 255, 0.1);
+                    border-color: rgba(0, 123, 255, 0.3);
+                    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+                }
+
+                .enhanced-breadcrumbs .m-nav__link:active {
+                    transform: translateY(0);
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                }
+
+                .enhanced-breadcrumbs .m-nav__link-text {
+                    position: relative;
+                    z-index: 1;
+                    overflow: visible;
+                    text-overflow: clip;
+                    white-space: nowrap;
+                }
+
+                /* Active state for current page */
+                .enhanced-breadcrumbs .m-nav__item.active .m-nav__link {
+                    color: #007bff;
+                    background: rgba(0, 123, 255, 0.1);
+                    border-color: rgba(0, 123, 255, 0.3);
+                    font-weight: 600;
+                }
+
+                /* Special highlight for Coin Predictions */
+                .enhanced-breadcrumbs .m-nav__link.special-highlight {
+                    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+                    color: #fff;
+                    border-color: #ff6b6b;
+                    font-weight: 700;
+                    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+                    position: relative;
+                    animation: specialPulse 2s ease-in-out infinite;
+                }
+
+                .enhanced-breadcrumbs .m-nav__link.special-highlight:hover {
+                    background: linear-gradient(135deg, #ff5252, #ff7043);
+                    color: #fff;
+                    border-color: #ff5252;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+                }
+
+                .enhanced-breadcrumbs .m-nav__link.special-highlight:focus {
+                    background: linear-gradient(135deg, #ff5252, #ff7043);
+                    color: #fff;
+                    border-color: #ff5252;
+                    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+                }
+
+                .enhanced-breadcrumbs .m-nav__link.special-highlight::before {
+                    content: '⭐';
+                    position: absolute;
+                    top: -8px;
+                    right: -8px;
+                    font-size: 12px;
+                    animation: starTwinkle 1.5s ease-in-out infinite;
+                    z-index: 2;
+                }
+
+                @keyframes specialPulse {
+                    0%, 100% {
+                        transform: scale(1);
+                    }
+                    50% {
+                        transform: scale(1.05);
+                    }
+                }
+
+                @keyframes starTwinkle {
+                    0%, 100% {
+                        opacity: 1;
+                        transform: scale(1) rotate(0deg);
+                    }
+                    50% {
+                        opacity: 0.7;
+                        transform: scale(1.2) rotate(180deg);
+                    }
+                }
+
+                /* Responsive design - keep horizontal layout but adjust sizing */
+                @media (max-width: 1400px) {
+                    .enhanced-breadcrumbs .m-nav__link {
+                        padding: 3px 6px;
+                        font-size: 11px;
+                    }
+                    
+                    .enhanced-breadcrumbs .m-nav__item:not(:last-child)::after {
+                        margin: 0 2px;
+                        font-size: 12px;
+                    }
+                }
+
+                @media (max-width: 1200px) {
+                    .enhanced-breadcrumbs .m-nav__link {
+                        padding: 2px 5px;
+                        font-size: 10px;
+                    }
+                    
+                    .enhanced-breadcrumbs .m-nav__item:not(:last-child)::after {
+                        margin: 0 2px;
+                        font-size: 10px;
+                    }
+                }
+
+                @media (max-width: 992px) {
+                    .enhanced-breadcrumbs .m-nav__link {
+                        padding: 2px 4px;
+                        font-size: 9px;
+                    }
+                    
+                    .enhanced-breadcrumbs .m-nav__item:not(:last-child)::after {
+                        margin: 0 1px;
+                        font-size: 8px;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .enhanced-breadcrumbs {
+                        gap: 3px;
+                    }
+                    
+                    .enhanced-breadcrumbs .m-nav__link {
+                        padding: 2px 3px;
+                        font-size: 8px;
+                        border-radius: 8px;
+                    }
+                    
+                    .enhanced-breadcrumbs .m-nav__item:not(:last-child)::after {
+                        margin: 0 1px;
+                        font-size: 7px;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .enhanced-breadcrumbs .m-nav__link {
+                        padding: 1px 2px;
+                        font-size: 7px;
+                        border-radius: 6px;
+                    }
+                    
+                    .enhanced-breadcrumbs .m-nav__item:not(:last-child)::after {
+                        margin: 0 1px;
+                        font-size: 6px;
+                    }
+                }
+
+                /* Animation for hover effects */
+                .enhanced-breadcrumbs .m-nav__link::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.05));
+                    border-radius: inherit;
+                    opacity: 0;
+                    transition: opacity 0.2s ease;
+                    z-index: 0;
+                }
+
+                .enhanced-breadcrumbs .m-nav__link:hover::before {
+                    opacity: 1;
+                }
+
+                /* Smooth scrolling for overflow */
+                .enhanced-breadcrumbs {
+                    scroll-behavior: smooth;
+                }
+
+                /* Container adjustments for better width utilization */
+                .m-subheader .mr-auto {
+                    flex: 1;
+                    min-width: 0;
+                    margin-right: 20px;
+                }
+
+                /* Existing button styles */
                 @keyframes gradientFlow {
                     0% {background-position: 0% 50%;}
                     50% {background-position: 100% 50%;}
@@ -145,4 +394,16 @@
         });
     });
 })();
+
+// Add active state detection for breadcrumb menu
+document.addEventListener('DOMContentLoaded', function() {
+    var currentPath = window.location.pathname;
+    var breadcrumbLinks = document.querySelectorAll('.enhanced-breadcrumbs .m-nav__link');
+    
+    breadcrumbLinks.forEach(function(link) {
+        if (link.getAttribute('href') === currentPath) {
+            link.parentElement.classList.add('active');
+        }
+    });
+});
 </script>
