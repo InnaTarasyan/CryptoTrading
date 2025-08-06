@@ -16,7 +16,8 @@ class TelegramAccount extends Model
     protected $fillable = [
             'coin',
             'rel_coins',
-            'account'
+            'account',
+            'processed',
     ];
 
     protected $casts = [

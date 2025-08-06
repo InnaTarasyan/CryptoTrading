@@ -7,6 +7,7 @@ use App\Models\CoinGecko\Derivatives;
 use App\Models\CoinMarketCal\CoinMarketCalEvents;
 use App\Models\LiveCoinWatch\LiveCoinHistory;
 use App\Models\LiveCoinWatch\LiveCoinWatch;
+use App\Models\TelegramAccount;
 use App\Models\TelegramMessages;
 use App\Models\TradingPair;
 use App\Models\TwitterAccount;
@@ -48,16 +49,40 @@ class DetailsController extends Controller
             $tradingPair = $tradingViewPair->trading_pair;
         }
 
-        $twitterAccount = null;
-        $twitterMessages = null;
-        $twitterAccountModel = TwitterAccount::where('coin', $coin->id)
-            ->orWhere('rel_coins', 'LIKE', '%' . $coin->id . '%')->first();
-        if($twitterAccountModel) {
-            $twitterMessages = TwitterMessages::with('author')
-                ->where('timeline', $twitterAccountModel->account)
-                ->orderBy('created_at', 'desc')
-                ->get();
+        try {
+            $twitterAccount = null;
+            $twitterMessages = null;
+            $twitterAccountModel = TwitterAccount::where('coin', $coin->id)
+                ->orWhere('rel_coins', 'LIKE', '%' . $coin->id . '%')->first();
+            if($twitterAccountModel) {
+                $twitterMessages = TwitterMessages::with('author')
+                    ->where('timeline', $twitterAccountModel->account)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+
+        } catch (\Exception $exception) {
+            $twitterMessages = TwitterMessages::with('author')->orderBy('created_at', 'desc')->get();
         }
+
+        try {
+            $telegramAccount = null;
+            $telegramMessages = null;
+            $telegramAccountModel = TelegramAccount::where('coin', $coin->id)
+                ->orWhere('rel_coins', 'LIKE', '%' . $coin->id . '%')->first();
+
+            if($telegramAccountModel) {
+                $lch = LiveCoinHistory::find($telegramAccountModel->coin);
+
+                $telegramMessages = TelegramMessages::query()
+                    ->where('slug', strtolower($lch->code))
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+        } catch (\Exception $exception) {
+           $telegramMessages = TelegramMessages::orderBy('created_at', 'desc')->get();
+        }
+
 
         // Map common coin symbols to their full CoinGecko IDs
         $coinIdMapping = [
@@ -95,7 +120,8 @@ class DetailsController extends Controller
             'name'   => $apiCoinId, // Use the mapped CoinGecko ID
             'coin'   => $coin,
             'events' => $events,
-            'telegramMessages' => TelegramMessages::orderBy('created_at', 'desc')->get(),
+            'telegramMessages' => (isset($telegramMessages) && ($telegramMessages->count() > 0)) ? $telegramMessages :
+                TelegramMessages::orderBy('created_at', 'desc')->get(),
             'twitterMessages' => (isset($twitterMessages) && ($twitterMessages->count() > 0)) ? $twitterMessages :
                 TwitterMessages::with('author')->orderBy('created_at', 'desc')->get(),
             'tradingPair' => $tradingPair,
