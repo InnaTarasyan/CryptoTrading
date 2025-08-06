@@ -137,4 +137,5 @@ return [
     'no_data_found_for' => 'No data found for',
     'error_searching_for' => 'Error searching for',
     'searching_for_coin_data' => 'Searching for coin data...',
+    'platforms_comparison_title' => 'Compare Data from LiveCoinWatch, CoinGecko, and CoinMarketCal',
 ]; 

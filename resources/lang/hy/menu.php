@@ -137,4 +137,5 @@ return [
     'no_data_found_for' => 'Տվյալներ չեն գտնվել համար',
     'error_searching_for' => 'Սխալ որոնելիս',
     'searching_for_coin_data' => 'Որոնվում են մետաղադրամի տվյալներ...',
+    'platforms_comparison_title' => 'LiveCoinWatch, CoinGecko և CoinMarketCal տվյալների համեմատություն',
 ]; 

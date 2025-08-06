@@ -137,4 +137,5 @@ return [
     'no_data_found_for' => 'Данные не найдены для',
     'error_searching_for' => 'Ошибка поиска для',
     'searching_for_coin_data' => 'Поиск данных о монете...',
+    'platforms_comparison_title' => 'Сравнение данных LiveCoinWatch, CoinGecko и CoinMarketCal',
 ]; 

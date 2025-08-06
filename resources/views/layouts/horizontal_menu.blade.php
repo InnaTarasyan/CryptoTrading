@@ -47,7 +47,7 @@
         </div>
         
         <!-- Language Switcher Item -->
-        @if( Route::is('home'))
+        @if( Route::is('home') || Route::is('main'))
         <div class="mobile-menu-item">
             <div class="mobile-menu-link mobile-menu-toggle" data-toggle="language-submenu">
                 <div class="mobile-menu-icon">
@@ -162,7 +162,7 @@
         {{--</li>--}}
     {{--</ul>--}}
     
-    @if(Route::is('home'))
+    @if(Route::is('home') || Route::is('main'))
         <!-- Desktop Language Switcher (unchanged) -->
         <div class="language-switcher-container desktop-language-switcher">
             <div class="language-switcher" id="languageSwitcher">
