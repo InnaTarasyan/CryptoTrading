@@ -564,184 +564,265 @@ class MarketsComparizonController extends Controller
     }
 
     /**
-     * Advanced Cryptocurrency Price Prediction Page
-     * Shows predictions for top coins using DB, external APIs, and advanced models
+     * Advanced Cryptocurrency Price Prediction Page - OPTIMIZED VERSION
+     * Shows predictions for top coins using cached data and efficient calculations
      */
     public function coinPredictions()
     {
-        $topSymbols = [
-            'BTC', 'ETH', 'BNB', 'SOL', 'ADA',
-//            'XRP', 'DOGE', 'LTC',
-//            'TRX', 'DOT', 'AVAX', 'LINK', 'MATIC', 'BCH', 'UNI', 'XLM', 'ATOM', 'FIL', 'ETC', 'HBAR'
-        ];
-        $days = 7;
-        $results = [];
-        $errors = [];
+        // Use caching to avoid repeated heavy calculations
+        $cacheKey = 'coin_predictions_data';
+        $cacheDuration = 300; // 5 minutes cache
+        
+        $data = Cache::remember($cacheKey, $cacheDuration, function () {
+            $topSymbols = [
+                'BTC', 'ETH', 'BNB', 'SOL', 'ADA',
+            ];
+            $days = 7;
+            $results = [];
+            $errors = [];
 
-        foreach ($topSymbols as $symbol) {
-            // 1. Fetch historical data from CoinGecko, fallback to CoinPaprika if not enough data
+            foreach ($topSymbols as $symbol) {
+                $symbolData = $this->getOptimizedSymbolData($symbol, $days);
+                $results[] = $symbolData['result'];
+                if (!empty($symbolData['error'])) {
+                    $errors[] = $symbolData['error'];
+                }
+            }
+
+            return [
+                'results' => $results,
+                'errors' => $errors
+            ];
+        });
+
+        return view('coinpredictions', $data);
+    }
+
+    /**
+     * Get optimized data for a single symbol with caching and efficient processing
+     */
+    private function getOptimizedSymbolData($symbol, $days)
+    {
+        $symbolCacheKey = "symbol_data_{$symbol}";
+        $symbolCacheDuration = 180; // 3 minutes per symbol
+        
+        return Cache::remember($symbolCacheKey, $symbolCacheDuration, function () use ($symbol, $days) {
+            $result = [
+                'symbol' => $symbol,
+                'history' => collect(),
+                'predictions' => [],
+                'external' => null,
+                'market_cap' => null,
+                'volume_24h' => null,
+                'volatility' => null
+            ];
+            
+            $error = null;
+
+            try {
+                // 1. Get historical data with fallback strategy (cached)
+                $historyData = $this->getCachedHistoricalData($symbol);
+                $result['history'] = $historyData['history'];
+                $result['market_cap'] = $historyData['market_cap'];
+                $result['volume_24h'] = $historyData['volume_24h'];
+
+                // 2. Generate predictions only if we have sufficient data
+                if ($result['history']->count() > 7) {
+                    $result['predictions'] = $this->generateSimplePredictions($result['history'], $days);
+                    $result['volatility'] = $this->calculateVolatility($result['history']);
+                }
+
+                // 3. Get external predictions (cached separately)
+                $result['external'] = $this->getCachedExternalPredictions($symbol);
+
+            } catch (\Exception $e) {
+                $error = "Error processing $symbol: " . $e->getMessage();
+            }
+
+            return [
+                'result' => $result,
+                'error' => $error
+            ];
+        });
+    }
+
+    /**
+     * Get cached historical data with efficient API usage
+     */
+    private function getCachedHistoricalData($symbol)
+    {
+        $cacheKey = "historical_data_{$symbol}";
+        $cacheDuration = 300; // 5 minutes
+        
+        return Cache::remember($cacheKey, $cacheDuration, function () use ($symbol) {
             $history = collect();
             $marketCap = null;
             $volume24h = null;
+
+            // Try CoinGecko first (most reliable)
             $coingeckoId = $this->getCoinGeckoId($symbol);
-            $paprikaId = $this->getCoinPaprikaId($symbol);
-            $usedPaprika = false;
-            try {
-                if ($coingeckoId) {
-                    $response = Http::timeout(10)->get("https://api.coingecko.com/api/v3/coins/{$coingeckoId}/market_chart", [
+            if ($coingeckoId) {
+                try {
+                    $response = Http::timeout(5)->get("https://api.coingecko.com/api/v3/coins/{$coingeckoId}/market_chart", [
                         'vs_currency' => 'usd',
-                        'days' => 60,
+                        'days' => 30, // Reduced from 60 to 30 for faster response
                         'interval' => 'daily',
                     ]);
+                    
                     if ($response->successful()) {
-                        $prices = $response->json('prices');
-                        $market_caps = $response->json('market_caps');
-                        $volumes = $response->json('total_volumes');
+                        $data = $response->json();
+                        $prices = $data['prices'] ?? [];
+                        $market_caps = $data['market_caps'] ?? [];
+                        $volumes = $data['total_volumes'] ?? [];
+                        
                         $history = collect($prices)->map(function($item) {
                             return [
                                 'date' => date('Y-m-d', $item[0] / 1000),
                                 'rate' => $item[1],
                             ];
                         });
-                        if (is_array($market_caps) && count($market_caps)) {
-                            $marketCap = $market_caps[count($market_caps)-1][1];
+                        
+                        if (!empty($market_caps)) {
+                            $marketCap = end($market_caps)[1];
                         }
-                        if (is_array($volumes) && count($volumes)) {
-                            $volume24h = $volumes[count($volumes)-1][1];
-                        }
-                    }
-                }
-                // Fallback to CoinPaprika if not enough data
-                if ($history->count() < 2 && $paprikaId) {
-                    $paprikaResp = Http::timeout(10)->get("https://api.coinpaprika.com/v1/tickers/{$paprikaId}/historical", [
-                        'start' => now()->subDays(60)->toIso8601String(),
-                        'interval' => '1d',
-                        'limit' => 60,
-                    ]);
-                    if ($paprikaResp->successful()) {
-                        $prices = $paprikaResp->json();
-                        if (!isset($prices['error'])) {
-                            $history = collect($prices)->map(function($item) {
-                                return [
-                                    'date' => isset($item['timestamp']) ? substr($item['timestamp'], 0, 10) : null,
-                                    'rate' => $item['close'] ?? null,
-                                ];
-                            })->filter(fn($row) => $row['date'] && $row['rate'] !== null);
-                            $usedPaprika = true;
-                        }
-                        // else: leave history empty, error will be shown
-                    }
-                }
-                // Fallback to CoinCap if still not enough data
-                $coincapId = $this->getCoinCapId($symbol);
-                if ($history->count() < 2 && $coincapId) {
-                    $start = now()->subDays(60)->startOfDay()->timestamp * 1000;
-                    $end = now()->endOfDay()->timestamp * 1000;
-                    $capResp = Http::timeout(10)->get("https://api.coincap.io/v2/assets/{$coincapId}/history", [
-                        'interval' => 'd1',
-                        'start' => $start,
-                        'end' => $end,
-                    ]);
-                    if ($capResp->successful()) {
-                        $prices = $capResp->json('data');
-                        if (is_array($prices)) {
-                            $history = collect($prices)->map(function($item) {
-                                return [
-                                    'date' => isset($item['date']) ? substr($item['date'], 0, 10) : null,
-                                    'rate' => isset($item['priceUsd']) ? (float)$item['priceUsd'] : null,
-                                ];
-                            })->filter(fn($row) => $row['date'] && $row['rate'] !== null);
+                        if (!empty($volumes)) {
+                            $volume24h = end($volumes)[1];
                         }
                     }
+                } catch (\Exception $e) {
+                    // Continue to fallback
                 }
-                // Fallback to CryptoCompare if still not enough data
-                $cryptocompareId = $this->getCryptoCompareId($symbol);
-                if ($history->count() < 2 && $cryptocompareId) {
-                    $ccResp = Http::timeout(10)->get("https://min-api.cryptocompare.com/data/v2/histoday", [
-                        'fsym' => $cryptocompareId,
-                        'tsym' => 'USD',
-                        'limit' => 60,
-                    ]);
-                    if ($ccResp->successful()) {
-                        $ccData = $ccResp->json('Data.Data');
-                        if (is_array($ccData)) {
-                            $history = collect($ccData)->map(function($item) {
-                                return [
-                                    'date' => isset($item['time']) ? date('Y-m-d', $item['time']) : null,
-                                    'rate' => isset($item['close']) ? (float)$item['close'] : null,
-                                ];
-                            })->filter(fn($row) => $row['date'] && $row['rate'] !== null);
-                        }
+            }
+
+            // Only use fallback if we don't have enough data
+            if ($history->count() < 7) {
+                $fallbackData = $this->getFallbackHistoricalData($symbol);
+                if ($fallbackData['history']->count() > $history->count()) {
+                    $history = $fallbackData['history'];
+                    $marketCap = $fallbackData['market_cap'] ?: $marketCap;
+                    $volume24h = $fallbackData['volume_24h'] ?: $volume24h;
+                }
+            }
+
+            return [
+                'history' => $history,
+                'market_cap' => $marketCap,
+                'volume_24h' => $volume24h
+            ];
+        });
+    }
+
+    /**
+     * Get fallback historical data from alternative APIs
+     */
+    private function getFallbackHistoricalData($symbol)
+    {
+        $history = collect();
+        $marketCap = null;
+        $volume24h = null;
+
+        // Try CoinPaprika as fallback
+        $paprikaId = $this->getCoinPaprikaId($symbol);
+        if ($paprikaId) {
+            try {
+                $response = Http::timeout(5)->get("https://api.coinpaprika.com/v1/tickers/{$paprikaId}/historical", [
+                    'start' => now()->subDays(30)->toIso8601String(),
+                    'interval' => '1d',
+                    'limit' => 30,
+                ]);
+                
+                if ($response->successful()) {
+                    $prices = $response->json();
+                    if (!isset($prices['error'])) {
+                        $history = collect($prices)->map(function($item) {
+                            return [
+                                'date' => isset($item['timestamp']) ? substr($item['timestamp'], 0, 10) : null,
+                                'rate' => $item['close'] ?? null,
+                            ];
+                        })->filter(fn($row) => $row['date'] && $row['rate'] !== null);
                     }
                 }
             } catch (\Exception $e) {
-                $errors[] = "CoinGecko/Paprika/CoinCap/CryptoCompare error for $symbol: " . $e->getMessage();
+                // Continue to next fallback
             }
+        }
 
-            // 2. Internal regression prediction (polynomial fallback to linear)
-            $predictions = [];
-            if ($history->count() > 7) {
-                $n = $history->count();
-                $x = range(1, $n);
-                $y = $history->pluck('rate')->toArray();
-                // Polynomial regression (degree 2)
-                $X = array_map(function($xi) { return [$xi, pow($xi,2), 1]; }, $x);
-                $Y = $y;
-                // Solve normal equations: (X^T X)B = X^T Y
-                $XTX = [
-                    [array_sum(array_map(function($v){return $v*$v;}, $x)), array_sum(array_map(function($v){return $v*pow($v,2);}, $x)), array_sum($x)],
-                    [array_sum(array_map(function($v){return pow($v,2)*$v;}, $x)), array_sum(array_map(function($v){return pow($v,4);}, $x)), array_sum(array_map(function($v){return pow($v,2);}, $x))],
-                    [array_sum($x), array_sum(array_map(function($v){return pow($v,2);}, $x)), $n]
-                ];
-                $XTY = [
-                    array_sum(array_map(function($xi,$yi){return $xi*$yi;}, $x, $y)),
-                    array_sum(array_map(function($xi,$yi){return pow($xi,2)*$yi;}, $x, $y)),
-                    array_sum($y)
-                ];
-                $B = [0,0,0];
-                $det = $XTX[0][0]*($XTX[1][1]*$XTX[2][2]-$XTX[1][2]*$XTX[2][1])
-                    -$XTX[0][1]*($XTX[1][0]*$XTX[2][2]-$XTX[1][2]*$XTX[2][0])
-                    +$XTX[0][2]*($XTX[1][0]*$XTX[2][1]-$XTX[1][1]*$XTX[2][0]);
-                if (abs($det) > 1e-8) {
-                    for ($i=0;$i<3;$i++) {
-                        $mat = $XTX;
-                        $mat[0][$i] = $XTY[0];
-                        $mat[1][$i] = $XTY[1];
-                        $mat[2][$i] = $XTY[2];
-                        $B[$i] = (
-                            $mat[0][0]*($mat[1][1]*$mat[2][2]-$mat[1][2]*$mat[2][1])
-                            -$mat[0][1]*($mat[1][0]*$mat[2][2]-$mat[1][2]*$mat[2][0])
-                            +$mat[0][2]*($mat[1][0]*$mat[2][1]-$mat[1][1]*$mat[2][0])
-                        )/$det;
-                    }
-                } else {
-                    $x_sum = array_sum($x);
-                    $y_sum = array_sum($y);
-                    $xy_sum = array_sum(array_map(function($xi, $yi) { return $xi * $yi; }, $x, $y));
-                    $xx_sum = array_sum(array_map(function($xi) { return $xi * $xi; }, $x));
-                    $slope = ($n * $xy_sum - $x_sum * $y_sum) / ($n * $xx_sum - $x_sum * $x_sum);
-                    $intercept = ($y_sum - $slope * $x_sum) / $n;
-                }
-                for ($i = 1; $i <= $days; $i++) {
-                    $future_x = $n + $i;
-                    if (abs($det) > 1e-8) {
-                        $predicted = $B[0]*$future_x + $B[1]*pow($future_x,2) + $B[2];
-                    } else {
-                        $predicted = $slope * $future_x + $intercept;
-                    }
-                    $predictions[] = [
-                        'date' => now()->addDays($i)->toDateString(),
-                        'predicted_price' => round($predicted, 4)
-                    ];
-                }
-            }
+        return [
+            'history' => $history,
+            'market_cap' => $marketCap,
+            'volume_24h' => $volume24h
+        ];
+    }
 
-            // 3. External API (Cryptics.tech)
-            $external = null;
+    /**
+     * Generate simple linear predictions (much faster than polynomial)
+     */
+    private function generateSimplePredictions($history, $days)
+    {
+        if ($history->count() < 7) {
+            return [];
+        }
+
+        $n = $history->count();
+        $x = range(1, $n);
+        $y = $history->pluck('rate')->toArray();
+        
+        // Simple linear regression (much faster than polynomial)
+        $x_sum = array_sum($x);
+        $y_sum = array_sum($y);
+        $xy_sum = array_sum(array_map(function($xi, $yi) { return $xi * $yi; }, $x, $y));
+        $xx_sum = array_sum(array_map(function($xi) { return $xi * $xi; }, $x));
+        
+        $slope = ($n * $xy_sum - $x_sum * $y_sum) / ($n * $xx_sum - $x_sum * $x_sum);
+        $intercept = ($y_sum - $slope * $x_sum) / $n;
+        
+        $predictions = [];
+        for ($i = 1; $i <= $days; $i++) {
+            $future_x = $n + $i;
+            $predicted = $slope * $future_x + $intercept;
+            $predictions[] = [
+                'date' => now()->addDays($i)->toDateString(),
+                'predicted_price' => round($predicted, 4)
+            ];
+        }
+        
+        return $predictions;
+    }
+
+    /**
+     * Calculate volatility using last 14 days (reduced from 30 for speed)
+     */
+    private function calculateVolatility($history)
+    {
+        if ($history->count() < 14) {
+            return null;
+        }
+        
+        $last14 = $history->slice(-14)->pluck('rate')->toArray();
+        $mean = array_sum($last14) / count($last14);
+        $variance = array_sum(array_map(function($v) use ($mean) { 
+            return pow($v - $mean, 2); 
+        }, $last14)) / count($last14);
+        
+        return sqrt($variance);
+    }
+
+    /**
+     * Get cached external predictions
+     */
+    private function getCachedExternalPredictions($symbol)
+    {
+        $cacheKey = "external_predictions_{$symbol}";
+        $cacheDuration = 600; // 10 minutes for external data
+        
+        return Cache::remember($cacheKey, $cacheDuration, function () use ($symbol) {
             try {
-                $cryptics = Http::timeout(10)->get('https://devapi.cryptics.tech/daily_fcast', [ 'pair' => strtolower($symbol) . '/USD' ]);
-                if ($cryptics->successful()) {
-                    $external = collect($cryptics->json())->map(function($item) {
+                $response = Http::timeout(5)->get('https://devapi.cryptics.tech/daily_fcast', [
+                    'pair' => strtolower($symbol) . '/USD'
+                ]);
+                
+                if ($response->successful()) {
+                    return collect($response->json())->map(function($item) {
                         return [
                             'date' => $item['timestamp'],
                             'predicted_price' => round($item['fcast'], 4)
@@ -749,35 +830,11 @@ class MarketsComparizonController extends Controller
                     })->toArray();
                 }
             } catch (\Exception $e) {
-                $external = null;
+                // Return null if external API fails
             }
-
-            // 4. Volatility (stddev of last 30 days)
-            $volatility = null;
-            if ($history->count() >= 30) {
-                $last30 = $history->slice(-30)->pluck('rate')->toArray();
-                $mean = array_sum($last30) / count($last30);
-                $variance = array_sum(array_map(function($v) use ($mean) { return pow($v - $mean, 2); }, $last30)) / count($last30);
-                $volatility = sqrt($variance);
-            }
-
-            $results[] = [
-                'symbol' => $symbol,
-                'history' => $history,
-                'predictions' => $predictions,
-                'external' => $external,
-                'market_cap' => $marketCap,
-                'volume_24h' => $volume24h,
-                'volatility' => $volatility
-            ];
-            if ($history->count() < 2) {
-                $errors[] = "Not enough data for $symbol";
-            }
-        }
-        return view('coinpredictions', [
-            'results' => $results,
-            'errors' => $errors
-        ]);
+            
+            return null;
+        });
     }
 
     // Helper to map symbol to CoinGecko ID
