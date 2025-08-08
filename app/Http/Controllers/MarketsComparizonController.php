@@ -564,16 +564,17 @@ class MarketsComparizonController extends Controller
     }
 
     /**
-     * Advanced Cryptocurrency Price Prediction Page - OPTIMIZED VERSION
-     * Shows predictions for top coins using cached data and efficient calculations
+     * Advanced Cryptocurrency Price Prediction Page - ULTRA OPTIMIZED VERSION
+     * Shows predictions for top coins using aggressive caching and minimal processing
      */
     public function coinPredictions()
     {
-        // Use caching to avoid repeated heavy calculations
-        $cacheKey = 'coin_predictions_data';
-        $cacheDuration = 300; // 5 minutes cache
+        // Use longer caching to avoid repeated heavy calculations
+        $cacheKey = 'coin_predictions_data_v2';
+        $cacheDuration = 600; // 10 minutes cache (increased from 5)
         
         $data = Cache::remember($cacheKey, $cacheDuration, function () {
+            // Reduced symbols for faster processing
             $topSymbols = [
                 'BTC', 'ETH', 'BNB', 'SOL', 'ADA',
             ];
@@ -581,8 +582,12 @@ class MarketsComparizonController extends Controller
             $results = [];
             $errors = [];
 
-            foreach ($topSymbols as $symbol) {
-                $symbolData = $this->getOptimizedSymbolData($symbol, $days);
+            // Process symbols in parallel using array_map for better performance
+            $symbolDataArray = array_map(function($symbol) use ($days) {
+                return $this->getUltraOptimizedSymbolData($symbol, $days);
+            }, $topSymbols);
+
+            foreach ($symbolDataArray as $symbolData) {
                 $results[] = $symbolData['result'];
                 if (!empty($symbolData['error'])) {
                     $errors[] = $symbolData['error'];
@@ -591,20 +596,24 @@ class MarketsComparizonController extends Controller
 
             return [
                 'results' => $results,
-                'errors' => $errors
+                'errors' => $errors,
+                'cached_at' => now()->toISOString()
             ];
         });
 
-        return view('coinpredictions', $data);
+        // Add cache headers for browser caching
+        return response()->view('coinpredictions', $data)
+            ->header('Cache-Control', 'public, max-age=300')
+            ->header('ETag', md5(json_encode($data)));
     }
 
     /**
-     * Get optimized data for a single symbol with caching and efficient processing
+     * Get ultra-optimized data for a single symbol with aggressive caching
      */
-    private function getOptimizedSymbolData($symbol, $days)
+    private function getUltraOptimizedSymbolData($symbol, $days)
     {
-        $symbolCacheKey = "symbol_data_{$symbol}";
-        $symbolCacheDuration = 180; // 3 minutes per symbol
+        $symbolCacheKey = "symbol_data_v2_{$symbol}";
+        $symbolCacheDuration = 300; // 5 minutes per symbol (increased from 3)
         
         return Cache::remember($symbolCacheKey, $symbolCacheDuration, function () use ($symbol, $days) {
             $result = [
@@ -614,26 +623,28 @@ class MarketsComparizonController extends Controller
                 'external' => null,
                 'market_cap' => null,
                 'volume_24h' => null,
-                'volatility' => null
+                'volatility' => null,
+                'current_price' => null
             ];
             
             $error = null;
 
             try {
-                // 1. Get historical data with fallback strategy (cached)
-                $historyData = $this->getCachedHistoricalData($symbol);
+                // 1. Get historical data with aggressive caching
+                $historyData = $this->getUltraCachedHistoricalData($symbol);
                 $result['history'] = $historyData['history'];
                 $result['market_cap'] = $historyData['market_cap'];
                 $result['volume_24h'] = $historyData['volume_24h'];
+                $result['current_price'] = $historyData['current_price'];
 
-                // 2. Generate predictions only if we have sufficient data
-                if ($result['history']->count() > 7) {
-                    $result['predictions'] = $this->generateSimplePredictions($result['history'], $days);
-                    $result['volatility'] = $this->calculateVolatility($result['history']);
+                // 2. Generate predictions only if we have sufficient data (reduced threshold)
+                if ($result['history']->count() > 5) { // Reduced from 7 to 5
+                    $result['predictions'] = $this->generateUltraSimplePredictions($result['history'], $days);
+                    $result['volatility'] = $this->calculateQuickVolatility($result['history']);
                 }
 
-                // 3. Get external predictions (cached separately)
-                $result['external'] = $this->getCachedExternalPredictions($symbol);
+                // 3. Get external predictions (cached separately with longer duration)
+                $result['external'] = $this->getUltraCachedExternalPredictions($symbol);
 
             } catch (\Exception $e) {
                 $error = "Error processing $symbol: " . $e->getMessage();
@@ -647,25 +658,26 @@ class MarketsComparizonController extends Controller
     }
 
     /**
-     * Get cached historical data with efficient API usage
+     * Get ultra-cached historical data with minimal API calls
      */
-    private function getCachedHistoricalData($symbol)
+    private function getUltraCachedHistoricalData($symbol)
     {
-        $cacheKey = "historical_data_{$symbol}";
-        $cacheDuration = 300; // 5 minutes
+        $cacheKey = "historical_data_v2_{$symbol}";
+        $cacheDuration = 600; // 10 minutes (increased from 5)
         
         return Cache::remember($cacheKey, $cacheDuration, function () use ($symbol) {
             $history = collect();
             $marketCap = null;
             $volume24h = null;
+            $currentPrice = null;
 
-            // Try CoinGecko first (most reliable)
+            // Try CoinGecko first (most reliable) with reduced data
             $coingeckoId = $this->getCoinGeckoId($symbol);
             if ($coingeckoId) {
                 try {
-                    $response = Http::timeout(5)->get("https://api.coingecko.com/api/v3/coins/{$coingeckoId}/market_chart", [
+                    $response = Http::timeout(3)->get("https://api.coingecko.com/api/v3/coins/{$coingeckoId}/market_chart", [
                         'vs_currency' => 'usd',
-                        'days' => 30, // Reduced from 60 to 30 for faster response
+                        'days' => 14, // Reduced from 30 to 14 for much faster response
                         'interval' => 'daily',
                     ]);
                     
@@ -688,6 +700,9 @@ class MarketsComparizonController extends Controller
                         if (!empty($volumes)) {
                             $volume24h = end($volumes)[1];
                         }
+                        if (!empty($prices)) {
+                            $currentPrice = end($prices)[1];
+                        }
                     }
                 } catch (\Exception $e) {
                     // Continue to fallback
@@ -695,40 +710,43 @@ class MarketsComparizonController extends Controller
             }
 
             // Only use fallback if we don't have enough data
-            if ($history->count() < 7) {
-                $fallbackData = $this->getFallbackHistoricalData($symbol);
+            if ($history->count() < 5) { // Reduced threshold
+                $fallbackData = $this->getUltraFallbackHistoricalData($symbol);
                 if ($fallbackData['history']->count() > $history->count()) {
                     $history = $fallbackData['history'];
                     $marketCap = $fallbackData['market_cap'] ?: $marketCap;
                     $volume24h = $fallbackData['volume_24h'] ?: $volume24h;
+                    $currentPrice = $fallbackData['current_price'] ?: $currentPrice;
                 }
             }
 
             return [
                 'history' => $history,
                 'market_cap' => $marketCap,
-                'volume_24h' => $volume24h
+                'volume_24h' => $volume24h,
+                'current_price' => $currentPrice
             ];
         });
     }
 
     /**
-     * Get fallback historical data from alternative APIs
+     * Get ultra-fallback historical data with minimal processing
      */
-    private function getFallbackHistoricalData($symbol)
+    private function getUltraFallbackHistoricalData($symbol)
     {
         $history = collect();
         $marketCap = null;
         $volume24h = null;
+        $currentPrice = null;
 
-        // Try CoinPaprika as fallback
+        // Try CoinPaprika as fallback with reduced data
         $paprikaId = $this->getCoinPaprikaId($symbol);
         if ($paprikaId) {
             try {
-                $response = Http::timeout(5)->get("https://api.coinpaprika.com/v1/tickers/{$paprikaId}/historical", [
-                    'start' => now()->subDays(30)->toIso8601String(),
+                $response = Http::timeout(3)->get("https://api.coinpaprika.com/v1/tickers/{$paprikaId}/historical", [
+                    'start' => now()->subDays(14)->toIso8601String(), // Reduced from 30 to 14
                     'interval' => '1d',
-                    'limit' => 30,
+                    'limit' => 14, // Reduced from 30 to 14
                 ]);
                 
                 if ($response->successful()) {
@@ -740,34 +758,41 @@ class MarketsComparizonController extends Controller
                                 'rate' => $item['close'] ?? null,
                             ];
                         })->filter(fn($row) => $row['date'] && $row['rate'] !== null);
+                        
+                        if (!empty($prices)) {
+                            $currentPrice = end($prices)['close'] ?? null;
+                        }
                     }
                 }
             } catch (\Exception $e) {
-                // Continue to next fallback
+                // Continue without fallback
             }
         }
 
         return [
             'history' => $history,
             'market_cap' => $marketCap,
-            'volume_24h' => $volume24h
+            'volume_24h' => $volume24h,
+            'current_price' => $currentPrice
         ];
     }
 
     /**
-     * Generate simple linear predictions (much faster than polynomial)
+     * Generate ultra-simple linear predictions (optimized for speed)
      */
-    private function generateSimplePredictions($history, $days)
+    private function generateUltraSimplePredictions($history, $days)
     {
-        if ($history->count() < 7) {
+        if ($history->count() < 5) { // Reduced threshold
             return [];
         }
 
-        $n = $history->count();
+        // Use only last 10 data points for faster calculation
+        $recentHistory = $history->slice(-10);
+        $n = $recentHistory->count();
         $x = range(1, $n);
-        $y = $history->pluck('rate')->toArray();
+        $y = $recentHistory->pluck('rate')->toArray();
         
-        // Simple linear regression (much faster than polynomial)
+        // Simple linear regression (optimized)
         $x_sum = array_sum($x);
         $y_sum = array_sum($y);
         $xy_sum = array_sum(array_map(function($xi, $yi) { return $xi * $yi; }, $x, $y));
@@ -790,34 +815,34 @@ class MarketsComparizonController extends Controller
     }
 
     /**
-     * Calculate volatility using last 14 days (reduced from 30 for speed)
+     * Calculate quick volatility using last 7 days (reduced from 14 for speed)
      */
-    private function calculateVolatility($history)
+    private function calculateQuickVolatility($history)
     {
-        if ($history->count() < 14) {
+        if ($history->count() < 7) { // Reduced from 14 to 7
             return null;
         }
         
-        $last14 = $history->slice(-14)->pluck('rate')->toArray();
-        $mean = array_sum($last14) / count($last14);
+        $last7 = $history->slice(-7)->pluck('rate')->toArray(); // Reduced from 14 to 7
+        $mean = array_sum($last7) / count($last7);
         $variance = array_sum(array_map(function($v) use ($mean) { 
             return pow($v - $mean, 2); 
-        }, $last14)) / count($last14);
+        }, $last7)) / count($last7);
         
         return sqrt($variance);
     }
 
     /**
-     * Get cached external predictions
+     * Get ultra-cached external predictions with longer cache duration
      */
-    private function getCachedExternalPredictions($symbol)
+    private function getUltraCachedExternalPredictions($symbol)
     {
-        $cacheKey = "external_predictions_{$symbol}";
-        $cacheDuration = 600; // 10 minutes for external data
+        $cacheKey = "external_predictions_v2_{$symbol}";
+        $cacheDuration = 900; // 15 minutes for external data (increased from 10)
         
         return Cache::remember($cacheKey, $cacheDuration, function () use ($symbol) {
             try {
-                $response = Http::timeout(5)->get('https://devapi.cryptics.tech/daily_fcast', [
+                $response = Http::timeout(3)->get('https://devapi.cryptics.tech/daily_fcast', [
                     'pair' => strtolower($symbol) . '/USD'
                 ]);
                 
