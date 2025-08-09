@@ -613,95 +613,6 @@ npm run hot
 
 ## 📸 Screenshots
 
-### 🖼️ **Interactive Screenshot Gallery**
-
-Click on any screenshot below to view it in full size. All screenshots are from the actual application running in production.
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
-    
-    <!-- Screenshot 1 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot.png" alt="Main Dashboard Overview" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">🏠 Main Dashboard</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Comprehensive market overview with real-time data</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 2 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot2.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot2.png" alt="Coin Predictions Interface" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">🔮 Coin Predictions</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Advanced price prediction system with charts</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 3 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot3.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot3.png" alt="LiveCoinWatch History" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">📊 LiveCoinWatch History</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Historical data analysis and market trends</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 4 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot4.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot4.png" alt="CoinGecko Markets" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">🦎 CoinGecko Markets</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Comprehensive cryptocurrency market data</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 5 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot5.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot5.png" alt="CoinGecko Exchanges" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">🏢 CoinGecko Exchanges</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Exchange rankings and performance metrics</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 6 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot6.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot6.png" alt="CoinGecko Trending" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">🔥 Trending Coins</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Real-time trending cryptocurrencies</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 7 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot7.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot7.png" alt="CoinMarketCal Events" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">📅 Events Calendar</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Crypto events and announcements</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 8 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot8.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot8.png" alt="Trading Pairs" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">💱 Trading Pairs</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Trading pair analysis and market data</p>
-        </a>
-    </div>
-
-    <!-- Screenshot 9 -->
-    <div style="text-align: center;">
-        <a href="/demo/Screenshot9.png" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="/demo/Screenshot9.png" alt="Coin Details" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <h4 style="margin: 10px 0 5px 0; color: #374151;">📈 Coin Details</h4>
-            <p style="margin: 0; color: #6B7280; font-size: 0.9em;">Detailed coin analysis with TradingView charts</p>
-        </a>
-    </div>
-
-</div>
-
 ### 📱 **Mobile Responsive Design**
 
 All screenshots above demonstrate the platform's mobile-first responsive design, ensuring optimal user experience across all devices.
@@ -721,15 +632,15 @@ For a more traditional view, you can also access the screenshots directly:
 
 | Screenshot | Description | Link |
 |------------|-------------|------|
-| **Main Dashboard** | Homepage with market overview | [View Full Size](/demo/Screenshot.png) |
-| **Coin Predictions** | Price prediction interface | [View Full Size](/demo/Screenshot2.png) |
-| **LiveCoinWatch History** | Historical data analysis | [View Full Size](/demo/Screenshot3.png) |
-| **CoinGecko Markets** | Cryptocurrency market data | [View Full Size](/demo/Screenshot4.png) |
-| **CoinGecko Exchanges** | Exchange rankings | [View Full Size](/demo/Screenshot5.png) |
-| **Trending Coins** | Real-time trending data | [View Full Size](/demo/Screenshot6.png) |
-| **Events Calendar** | Crypto events calendar | [View Full Size](/demo/Screenshot7.png) |
-| **Trading Pairs** | Trading pair analysis | [View Full Size](/demo/Screenshot8.png) |
-| **Coin Details** | Detailed coin analysis | [View Full Size](/demo/Screenshot9.png) |
+| **Top Coins** | Overview of top cryptocurrencies | [View Full Size](/demo/TopCoins.png) |
+| **Markets Comparison Charts** | Market comparison analytics | [View Full Size](/demo/MarketsComparisonCharts.png) |
+| **TradingView Charts** | Professional trading charts | [View Full Size](/demo/TradingViewCharts.png) |
+| **Coin Details** | Detailed coin analysis page | [View Full Size](/demo/details.png) |
+| **Events Calendar** | Crypto events calendar | [View Full Size](/demo/coinmarketcal.png) |
+| **CoinGecko Markets** | Cryptocurrency market data | [View Full Size](/demo/coingecko.png) |
+| **LiveCoinWatch** | LiveCoinWatch integration | [View Full Size](/demo/livecoinwatch.png) |
+| **Markets Comparison** | Market comparison view | [View Full Size](/demo/MarketsComparizon.png) |
+| **Price Predictions** | Coin price prediction system | [View Full Size](/demo/Predictions.png) |
 
 ---
 
