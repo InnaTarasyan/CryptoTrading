@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/notifications', [App\Http\Controllers\AccountController::class, 'notifications'])->name('account.notifications');
     Route::get('/account/connections', [App\Http\Controllers\AccountController::class, 'connections'])->name('account.connections');
     Route::get('/account/api-keys', [App\Http\Controllers\AccountController::class, 'apiKeys'])->name('account.api_keys');
+    Route::post('/account/api-keys', [App\Http\Controllers\AccountController::class, 'generateApiKey'])->name('account.api_keys.generate');
+    Route::delete('/account/api-keys/{apiKey}', [App\Http\Controllers\AccountController::class, 'deleteApiKey'])->name('account.api_keys.delete');
+    Route::patch('/account/api-keys/{apiKey}/toggle', [App\Http\Controllers\AccountController::class, 'toggleApiKey'])->name('account.api_keys.toggle');
     Route::get('/account/billing', [App\Http\Controllers\AccountController::class, 'billing'])->name('account.billing');
     Route::get('/account/support', [App\Http\Controllers\AccountController::class, 'support'])->name('account.support');
 });
