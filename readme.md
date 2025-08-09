@@ -611,6 +611,332 @@ npm run hot
 
 ---
 
+## 🚀 API Management System (`/account/api-keys`)
+
+### 🌟 **Revolutionary API Access Control**
+
+The CryptoTrading platform features a **state-of-the-art API management system** that provides secure, scalable, and user-friendly access to all cryptocurrency data endpoints. This system transforms how developers and traders access our comprehensive data services.
+
+![API Management](https://via.placeholder.com/800x400/8B5CF6/FFFFFF?text=API+Management+System)
+
+---
+
+### 🎯 **What is the API System?**
+
+Our **API Management System** is a sophisticated authentication and authorization platform that allows users to:
+
+- **Generate secure API keys** with custom permissions
+- **Access 15+ data endpoints** across multiple cryptocurrency services
+- **Control access levels** with granular permission settings
+- **Monitor usage statistics** and track API key activity
+- **Manage multiple keys** for different projects or applications
+
+---
+
+### 💎 **Key Benefits & Profits**
+
+#### 🔒 **Security Benefits**
+- **SHA-256 Encrypted Keys**: Military-grade encryption for API keys
+- **Permission-Based Access**: Granular control over endpoint access
+- **Instant Revocation**: Disable or delete keys immediately
+- **Usage Tracking**: Monitor when and how your keys are used
+- **Rate Limiting Ready**: Built-in protection against abuse
+
+#### 💰 **Business Value**
+- **Monetization Ready**: Foundation for premium API services
+- **Developer-Friendly**: Easy integration for third-party applications
+- **Scalable Architecture**: Handles thousands of concurrent requests
+- **Cost Optimization**: Reduce server load with efficient data access
+- **Analytics Foundation**: Track usage patterns and popular endpoints
+
+#### 🚀 **Technical Advantages**
+- **RESTful Design**: Industry-standard API architecture
+- **JSON Responses**: Structured, parseable data format
+- **Pagination Support**: Handle large datasets efficiently
+- **Error Handling**: Comprehensive error messages and status codes
+- **Multiple Auth Methods**: Header or query parameter authentication
+
+---
+
+### 🛠️ **Technologies Used**
+
+#### **Backend Framework**
+- **Laravel 10.x**: Modern PHP framework with elegant syntax
+- **Eloquent ORM**: Database abstraction and relationships
+- **Laravel Middleware**: Custom authentication and authorization
+- **Artisan Commands**: Command-line tools for development
+
+#### **Security Implementation**
+- **SHA-256 Hashing**: Cryptographic key generation
+- **Laravel Validation**: Robust input validation and sanitization
+- **CSRF Protection**: Cross-site request forgery prevention
+- **SQL Injection Prevention**: Parameterized queries and ORM protection
+
+#### **Database Technology**
+- **MySQL 8.0+**: Reliable relational database
+- **Foreign Key Constraints**: Data integrity and referential integrity
+- **JSON Columns**: Flexible permission storage
+- **Indexing Strategy**: Optimized for fast key lookups
+
+#### **Frontend Technologies**
+- **Bootstrap 5**: Modern responsive framework
+- **Vanilla JavaScript**: No framework dependencies
+- **AJAX**: Asynchronous requests for smooth UX
+- **FontAwesome Icons**: Professional iconography
+
+---
+
+### 📊 **Available Data Endpoints**
+
+Our API provides access to **15 comprehensive endpoints** across 5 major cryptocurrency data sources:
+
+#### 🟦 **CoinGecko Integration** (8 Endpoints)
+```bash
+GET /api/coingecko/exchanges          # Exchange data and rankings
+GET /api/coingecko/coins              # Comprehensive coin information
+GET /api/coingecko/exchange-rates     # Real-time exchange rates
+GET /api/coingecko/markets            # Market data and analytics
+GET /api/coingecko/trendings          # Trending cryptocurrencies
+GET /api/coingecko/derivatives        # Derivatives market data
+GET /api/coingecko/derivatives-exchanges  # Derivatives exchanges
+GET /api/coingecko/nfts               # NFT market information
+```
+
+#### 🟢 **CoinMarketCal Integration** (2 Endpoints)
+```bash
+GET /api/coinmarketcal/coinmarketcals # Market calendar data
+GET /api/coinmarketcal/events         # Upcoming crypto events
+```
+
+#### 🔵 **LiveCoinWatch Integration** (3 Endpoints)
+```bash
+GET /api/livecoinwatch/fiats          # Fiat currency data
+GET /api/livecoinwatch/live-coin-histories  # Historical price data
+GET /api/livecoinwatch/live-coin-watches    # Real-time coin tracking
+```
+
+#### 🟡 **Social Media Integration** (2 Endpoints)
+```bash
+GET /api/telegram/messages            # Telegram crypto discussions
+GET /api/twitter/messages             # Twitter crypto sentiment
+```
+
+---
+
+### 🔑 **How to Use the API System**
+
+#### **Step 1: Access API Management**
+1. **Login** to your account
+2. Navigate to **Account Settings** 
+3. Click on **"API Keys"** in the sidebar
+4. You'll see the comprehensive API management dashboard
+
+#### **Step 2: Generate Your First API Key**
+1. **Fill out the form**:
+   - **Name**: Give your key a descriptive name (e.g., "Trading Bot v1")
+   - **Permissions**: Select which endpoints you need access to
+2. **Choose Permissions** by service:
+   - **CoinGecko**: Market data, exchanges, trending coins
+   - **CoinMarketCal**: Events and calendar data
+   - **LiveCoinWatch**: Real-time prices and history
+   - **Social**: Telegram and Twitter sentiment
+3. **Click "Generate API Key"**
+4. **Copy your key immediately** - you won't see it again!
+
+#### **Step 3: Making API Requests**
+
+##### **Authentication Methods**
+```bash
+# Method 1: HTTP Header (Recommended)
+curl -H "X-API-Key: your_api_key_here" \
+     "https://yoursite.com/api/coingecko/coins"
+
+# Method 2: Query Parameter
+curl "https://yoursite.com/api/coingecko/coins?api_key=your_api_key_here"
+```
+
+##### **Example Requests**
+```bash
+# Get trending cryptocurrencies with pagination
+curl -H "X-API-Key: your_key" \
+     "https://yoursite.com/api/coingecko/trendings?per_page=20&page=1"
+
+# Get live coin data
+curl -H "X-API-Key: your_key" \
+     "https://yoursite.com/api/livecoinwatch/live-coin-watches?per_page=50"
+
+# Get upcoming crypto events
+curl -H "X-API-Key: your_key" \
+     "https://yoursite.com/api/coinmarketcal/events"
+```
+
+##### **Response Format**
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "price": 45000.00,
+      "market_cap": 850000000000
+    }
+  ],
+  "pagination": {
+    "current_page": 1,
+    "last_page": 10,
+    "per_page": 50,
+    "total": 500
+  }
+}
+```
+
+---
+
+### ⚙️ **Advanced Features**
+
+#### **Permission Management**
+- **Granular Control**: Select exactly which endpoints each key can access
+- **Service Grouping**: Permissions organized by data provider
+- **Easy Updates**: Enable/disable permissions without creating new keys
+
+#### **Key Management**
+- **Multiple Keys**: Create up to 10 API keys per account
+- **Enable/Disable**: Temporarily disable keys without deletion
+- **Usage Tracking**: See when each key was last used
+- **Key Rotation**: Delete old keys and create new ones for security
+
+#### **Security Features**
+- **Automatic Expiry**: Optional key expiration (coming soon)
+- **IP Restrictions**: Limit keys to specific IP addresses (coming soon)
+- **Rate Limiting**: Prevent abuse with request limits
+- **Activity Logging**: Track all API key usage
+
+---
+
+### 📈 **Performance & Scalability**
+
+#### **Optimized Performance**
+- **Database Indexing**: Fast API key lookups
+- **Efficient Queries**: Optimized database queries with pagination
+- **Caching Ready**: Prepared for Redis/Memcached integration
+- **Minimal Overhead**: Lightweight authentication middleware
+
+#### **Scalability Features**
+- **Horizontal Scaling**: Ready for load balancer distribution
+- **Database Optimization**: Efficient foreign key relationships
+- **JSON Storage**: Flexible permission system that scales
+- **Microservices Ready**: Modular architecture for future expansion
+
+---
+
+### 🛡️ **Security Best Practices**
+
+#### **For Developers**
+```bash
+# ✅ DO: Use environment variables
+export API_KEY="your_secret_key_here"
+curl -H "X-API-Key: $API_KEY" "https://api.example.com/data"
+
+# ❌ DON'T: Hardcode keys in your code
+curl -H "X-API-Key: abc123def456" "https://api.example.com/data"
+```
+
+#### **Key Management Tips**
+- **Rotate Regularly**: Create new keys every 3-6 months
+- **Minimal Permissions**: Only grant access to needed endpoints
+- **Monitor Usage**: Check the "Last Used" column regularly
+- **Secure Storage**: Store keys in environment variables or secure vaults
+- **Delete Unused Keys**: Remove keys you no longer need
+
+---
+
+### 🚀 **Real-World Use Cases**
+
+#### **Trading Bots**
+```javascript
+// Example: Automated trading bot
+const axios = require('axios');
+
+const apiKey = process.env.CRYPTO_API_KEY;
+const baseURL = 'https://yoursite.com/api';
+
+async function getTrendingCoins() {
+  const response = await axios.get(`${baseURL}/coingecko/trendings`, {
+    headers: { 'X-API-Key': apiKey },
+    params: { per_page: 10 }
+  });
+  return response.data;
+}
+```
+
+#### **Mobile Applications**
+```swift
+// Example: iOS app integration
+func fetchCoinData() {
+    let url = URL(string: "https://yoursite.com/api/livecoinwatch/live-coin-watches")!
+    var request = URLRequest(url: url)
+    request.setValue("your_api_key", forHTTPHeaderField: "X-API-Key")
+    
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        // Handle response
+    }.resume()
+}
+```
+
+#### **Data Analytics**
+```python
+# Example: Python data analysis
+import requests
+import pandas as pd
+
+API_KEY = "your_api_key_here"
+BASE_URL = "https://yoursite.com/api"
+
+def get_market_data():
+    headers = {"X-API-Key": API_KEY}
+    response = requests.get(f"{BASE_URL}/coingecko/markets", headers=headers)
+    return pd.DataFrame(response.json()['data'])
+
+# Analyze market trends
+df = get_market_data()
+print(df.describe())
+```
+
+---
+
+### 📞 **API Support & Documentation**
+
+#### **Getting Help**
+- **Built-in Documentation**: Complete API docs in the dashboard
+- **Response Examples**: See exactly what each endpoint returns
+- **Error Codes**: Comprehensive error handling and status codes
+- **Rate Limits**: Clear information about usage limits
+
+#### **Status Codes**
+```
+200 - Success: Request completed successfully
+401 - Unauthorized: Invalid or missing API key
+403 - Forbidden: Insufficient permissions for endpoint
+429 - Too Many Requests: Rate limit exceeded
+500 - Server Error: Internal server error
+```
+
+#### **Common Issues & Solutions**
+```bash
+# Issue: "API key is required"
+# Solution: Include X-API-Key header or api_key parameter
+
+# Issue: "Invalid or inactive API key"
+# Solution: Check if key is active in dashboard
+
+# Issue: "API key does not have permission"
+# Solution: Add required permissions in key settings
+```
+
+---
+
 ## 📸 Screenshots
 
 ### 📱 **Mobile Responsive Design**
