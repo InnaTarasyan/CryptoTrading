@@ -617,6 +617,130 @@ class MarketsComparizonController extends Controller
     }
 
     /**
+     * Get predictions for a single coin by name or symbol via AJAX
+     */
+    public function getSingleCoinPrediction(Request $request)
+    {
+        try {
+            $query = trim((string) $request->input('query'));
+            if ($query === '') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Missing query parameter.'
+                ], 400);
+            }
+
+            $resolvedSymbol = null;
+            $coinGeckoId = null;
+
+            // Try CoinGecko search API to resolve both names and symbols
+            try {
+                $response = Http::timeout(4)->get('https://api.coingecko.com/api/v3/search', [
+                    'query' => $query
+                ]);
+                if ($response->successful()) {
+                    $coins = $response->json('coins') ?? [];
+                    if (!empty($coins)) {
+                        $top = $coins[0];
+                        $coinGeckoId = $top['id'] ?? null;
+                        $resolvedSymbol = strtoupper($top['symbol'] ?? '');
+                    }
+                }
+            } catch (\Exception $e) {
+                // Continue with fallback resolution
+            }
+
+            // If still not resolved, treat the input as a symbol directly
+            if (!$resolvedSymbol) {
+                $resolvedSymbol = strtoupper(preg_replace('/[^A-Za-z]/', '', $query));
+            }
+
+            if (!$resolvedSymbol) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Could not resolve coin symbol from input.'
+                ], 404);
+            }
+
+            $days = 7;
+            $result = [
+                'symbol' => $resolvedSymbol,
+                'history' => collect(),
+                'predictions' => [],
+                'external' => null,
+                'market_cap' => null,
+                'volume_24h' => null,
+                'volatility' => null,
+                'current_price' => null
+            ];
+
+            // Fetch historical data (prefer CoinGecko ID if resolved)
+            $historyData = [
+                'history' => collect(),
+                'market_cap' => null,
+                'volume_24h' => null,
+                'current_price' => null,
+            ];
+
+            if ($coinGeckoId) {
+                try {
+                    $cgResponse = Http::timeout(4)->get("https://api.coingecko.com/api/v3/coins/{$coinGeckoId}/market_chart", [
+                        'vs_currency' => 'usd',
+                        'days' => 14,
+                        'interval' => 'daily',
+                    ]);
+                    if ($cgResponse->successful()) {
+                        $data = $cgResponse->json();
+                        $prices = $data['prices'] ?? [];
+                        $market_caps = $data['market_caps'] ?? [];
+                        $volumes = $data['total_volumes'] ?? [];
+                        $historyData['history'] = collect($prices)->map(function($item) {
+                            return [
+                                'date' => date('Y-m-d', $item[0] / 1000),
+                                'rate' => $item[1],
+                            ];
+                        });
+                        if (!empty($market_caps)) { $historyData['market_cap'] = end($market_caps)[1]; }
+                        if (!empty($volumes)) { $historyData['volume_24h'] = end($volumes)[1]; }
+                        if (!empty($prices)) { $historyData['current_price'] = end($prices)[1]; }
+                    }
+                } catch (\Exception $e) {
+                    // Fall back to symbol-based cached method below
+                }
+            }
+
+            // Fallback using existing cached historical method if needed
+            if (($historyData['history'] instanceof \Illuminate\Support\Collection ? $historyData['history']->count() : count($historyData['history'])) < 5) {
+                $historyData = $this->getUltraCachedHistoricalData($resolvedSymbol);
+            }
+
+            $result['history'] = $historyData['history'];
+            $result['market_cap'] = $historyData['market_cap'];
+            $result['volume_24h'] = $historyData['volume_24h'];
+            $result['current_price'] = $historyData['current_price'];
+
+            // Generate predictions and volatility if possible
+            if (($result['history'] instanceof \Illuminate\Support\Collection ? $result['history']->count() : count($result['history'])) > 5) {
+                $result['predictions'] = $this->generateUltraSimplePredictions($result['history'], $days);
+                $result['volatility'] = $this->calculateQuickVolatility($result['history']);
+            }
+
+            // External predictions reuse existing cache by symbol
+            $result['external'] = $this->getUltraCachedExternalPredictions($resolvedSymbol);
+
+            return response()->json([
+                'success' => true,
+                'result' => $result
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching coin prediction: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Get ultra-optimized data for a single symbol with aggressive caching
      */
     private function getUltraOptimizedSymbolData($symbol, $days)

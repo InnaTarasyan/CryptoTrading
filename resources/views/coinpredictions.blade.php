@@ -242,6 +242,54 @@
 @section('content')
 <div class="container py-4">
     <h2 class="mb-4">Cryptocurrency Price Predictions</h2>
+
+    <!-- Search Form: user-friendly input for coin name or symbol -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form id="coinSearchForm" class="row g-3 align-items-center" autocomplete="off">
+                <div class="col-md-8">
+                    <label for="coinQuery" class="form-label fw-semibold">Search coin by name or symbol</label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-white border-end-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10"/></svg></span>
+                        <input list="coinSuggestions" type="text" class="form-control border-start-0" id="coinQuery" placeholder="Try: BTC, ETH, SOL or 'Bitcoin'" aria-describedby="searchHelp" required>
+                        <datalist id="coinSuggestions">
+                            <option value="BTC">
+                            <option value="ETH">
+                            <option value="BNB">
+                            <option value="SOL">
+                            <option value="ADA">
+                            <option value="XRP">
+                            <option value="DOGE">
+                            <option value="LTC">
+                            <option value="DOT">
+                            <option value="LINK">
+                            <option value="Bitcoin">
+                            <option value="Ethereum">
+                            <option value="Binance Coin">
+                            <option value="Solana">
+                            <option value="Cardano">
+                            <option value="Ripple">
+                            <option value="Dogecoin">
+                            <option value="Litecoin">
+                            <option value="Polkadot">
+                            <option value="Chainlink">
+                        </datalist>
+                    </div>
+                    <div id="searchHelp" class="form-text">Type a symbol (e.g., BTC) or a coin name (e.g., Bitcoin), then press Enter or click Search.</div>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary btn-lg w-100" id="coinSearchBtn">
+                        <span class="default-label">Search & Predict</span>
+                        <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true" id="coinSearchSpinner"></span>
+                    </button>
+                </div>
+            </form>
+            <div id="coinSearchFeedback" class="mt-3"></div>
+        </div>
+    </div>
+
+    <!-- Dynamic single coin result will be injected here -->
+    <div id="singlePredictionContainer" class="mb-4"></div>
     
     <!-- Loading Interface -->
     <div id="loadingInterface" class="loading-container">
@@ -289,12 +337,64 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Start loading process
+    // Start loading process for top coins
     loadPredictions();
+
+    // Wire up search form
+    const form = document.getElementById('coinSearchForm');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        performCoinSearch();
+    });
 });
 
 let currentStep = 1;
 let loadingSteps = ['📊 Fetching Data', '🧮 Calculating Predictions', '📈 Generating Charts', '✅ Ready!'];
+
+function performCoinSearch() {
+    const input = document.getElementById('coinQuery');
+    const btn = document.getElementById('coinSearchBtn');
+    const spinner = document.getElementById('coinSearchSpinner');
+    const feedback = document.getElementById('coinSearchFeedback');
+    const container = document.getElementById('singlePredictionContainer');
+
+    const query = (input.value || '').trim();
+    if (!query) {
+        input.focus();
+        return;
+    }
+
+    // UI state
+    btn.disabled = true;
+    spinner.classList.remove('d-none');
+    feedback.innerHTML = '';
+    container.innerHTML = '';
+
+    fetch(`/api/coin-prediction?query=${encodeURIComponent(query)}`)
+        .then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            return r.json();
+        })
+        .then(data => {
+            if (!data.success || !data.result) {
+                throw new Error(data.message || 'No data returned');
+            }
+            const result = data.result;
+            // Render card and chart
+            const html = createSingleResultCard(result);
+            container.innerHTML = html;
+            setTimeout(() => {
+                initializeChartForResult(result, `chart-search-${result.symbol}`);
+            }, 50);
+        })
+        .catch(err => {
+            feedback.innerHTML = `<div class="alert alert-warning">Could not load prediction for "${query}". ${err.message}</div>`;
+        })
+        .finally(() => {
+            btn.disabled = false;
+            spinner.classList.add('d-none');
+        });
+}
 
 function loadPredictions() {
     // Show loading interface
@@ -453,98 +553,152 @@ function createResultCard(result, index) {
     `;
 }
 
+function createSingleResultCard(result) {
+    const lastPrice = result.history && result.history.length > 0 ? 
+        `$${parseFloat(result.history[result.history.length - 1].rate).toFixed(4)}` : 'N/A';
+    const predictionRange = result.predictions && result.predictions.length > 0 ? 
+        `$${parseFloat(result.predictions[0].predicted_price).toFixed(4)} - $${parseFloat(result.predictions[result.predictions.length - 1].predicted_price).toFixed(4)}` : 'N/A';
+    const marketCap = result.market_cap ? `$${parseInt(result.market_cap).toLocaleString()}` : 'N/A';
+    const volume24h = result.volume_24h ? `$${parseInt(result.volume_24h).toLocaleString()}` : 'N/A';
+    const volatility = result.volatility ? parseFloat(result.volatility).toFixed(4) : 'N/A';
+
+    return `
+        <div class="card shadow prediction-card fade-in-up">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+                    <div class="prediction-title flex-grow-1">Search: ${result.symbol} / USD</div>
+                </div>
+                <div class="chart-container mb-3">
+                    <canvas id="chart-search-${result.symbol}"></canvas>
+                </div>
+                <div class="mb-2">
+                    <span class="legend-dot" style="background:#43cea2;"></span> Historical
+                    <span class="legend-dot" style="background:#ffd200;"></span> Internal Prediction
+                    <span class="legend-dot" style="background:#ff6a88;"></span> External Prediction
+                </div>
+                <div class="mb-2">
+                    <b>Last Price:</b> ${lastPrice}<br>
+                    <b>Next 7d Model Prediction:</b> ${predictionRange}<br>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4">
+                        <span class="badge bg-primary">Market Cap</span><br>
+                        <span>${marketCap}</span>
+                    </div>
+                    <div class="col-4">
+                        <span class="badge bg-success">24h Volume</span><br>
+                        <span>${volume24h}</span>
+                    </div>
+                    <div class="col-4">
+                        <span class="badge bg-warning text-dark">Volatility</span><br>
+                        <span>${volatility}</span>
+                    </div>
+                </div>
+                <div class="alert alert-info p-2 mt-2">
+                    <small>
+                        <b>Info:</b> Predictions are for informational purposes only. Internal predictions use mathematical regression on historical data.
+                    </small>
+                </div>
+            </div>
+        </div>`
+}
+
 function initializeCharts(results) {
     results.forEach((result) => {
         if (!result.history || result.history.length === 0) return;
-        
-        const ctx = document.getElementById(`chart-${result.symbol}`);
-        if (!ctx) return;
-        
-        const history = result.history;
-        const predictions = result.predictions || [];
-        const external = result.external || [];
-        
-        // Prepare data
-        let labels = history.map(x => x.date);
-        let histPrices = history.map(x => x.rate);
-        let predLabels = predictions.map(x => x.date);
-        let predPrices = predictions.map(x => x.predicted_price);
-        let extLabels = external.map(x => x.date);
-        let extPrices = external.map(x => x.predicted_price);
-        
-        // Merge for full X axis
-        let allLabels = labels.concat(predLabels.filter(d => !labels.includes(d)));
-        
-        // Datasets
-        let internalPredictionData = [];
-        if (labels.length > 0) {
-            internalPredictionData = Array(labels.length - 1).fill(null)
-                .concat([histPrices[histPrices.length - 1]])
-                .concat(predPrices);
+        const canvasId = `chart-${result.symbol}`;
+        initializeChartForResult(result, canvasId);
+    });
+}
+
+function initializeChartForResult(result, canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const history = result.history || [];
+    const predictions = result.predictions || [];
+    const external = result.external || [];
+
+    // Prepare data
+    let labels = history.map(x => x.date);
+    let histPrices = history.map(x => x.rate);
+    let predLabels = predictions.map(x => x.date);
+    let predPrices = predictions.map(x => x.predicted_price);
+    let extLabels = Array.isArray(external) ? external.map(x => x.date) : [];
+    let extPrices = Array.isArray(external) ? external.map(x => x.predicted_price) : [];
+
+    // Merge for full X axis
+    let allLabels = labels.concat(predLabels.filter(d => !labels.includes(d)));
+
+    // Datasets
+    let internalPredictionData = [];
+    if (labels.length > 0) {
+        internalPredictionData = Array(labels.length - 1).fill(null)
+            .concat([histPrices[histPrices.length - 1]])
+            .concat(predPrices);
+    }
+
+    let datasets = [
+        {
+            label: 'Historical',
+            data: histPrices,
+            borderColor: '#43cea2',
+            backgroundColor: 'rgba(67,206,162,0.1)',
+            pointRadius: 2,
+            fill: false,
+            tension: 0.1,
+            spanGaps: true,
+        },
+        {
+            label: 'Internal Prediction',
+            data: internalPredictionData,
+            borderColor: '#ffd200',
+            backgroundColor: 'rgba(255,210,0,0.1)',
+            borderDash: [6, 4],
+            pointRadius: 2,
+            fill: false,
+            tension: 0.1,
+            spanGaps: true,
         }
-        
-        let datasets = [
-            {
-                label: 'Historical',
-                data: histPrices,
-                borderColor: '#43cea2',
-                backgroundColor: 'rgba(67,206,162,0.1)',
-                pointRadius: 2,
-                fill: false,
-                tension: 0.1,
-                spanGaps: true,
-            },
-            {
-                label: 'Internal Prediction',
-                data: internalPredictionData,
-                borderColor: '#ffd200',
-                backgroundColor: 'rgba(255,210,0,0.1)',
-                borderDash: [6, 4],
-                pointRadius: 2,
-                fill: false,
-                tension: 0.1,
-                spanGaps: true,
-            }
-        ];
-        
-        if (extPrices.length > 0) {
-            // Align external predictions to the same X axis
-            let extData = Array(labels.length).fill(null);
-            extLabels.forEach((d, i) => {
-                let idx = allLabels.indexOf(d);
-                if (idx !== -1) extData[idx] = extPrices[i];
-            });
-            datasets.push({
-                label: 'External Prediction',
-                data: extData.concat(extPrices),
-                borderColor: '#ff6a88',
-                backgroundColor: 'rgba(255,106,136,0.1)',
-                borderDash: [2, 2],
-                pointRadius: 2,
-                fill: false,
-                tension: 0.1,
-                spanGaps: true,
-            });
-        }
-        
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: allLabels.concat(predLabels.filter(d => !allLabels.includes(d))),
-                datasets: datasets
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: true },
-                    tooltip: { enabled: true }
-                },
-                scales: {
-                    x: { display: true, title: { display: true, text: 'Date' } },
-                    y: { display: true, title: { display: true, text: 'Price (USD)' } }
-                }
-            }
+    ];
+
+    if (extPrices.length > 0) {
+        // Align external predictions to the same X axis
+        let extData = Array(labels.length).fill(null);
+        extLabels.forEach((d, i) => {
+            let idx = allLabels.indexOf(d);
+            if (idx !== -1) extData[idx] = extPrices[i];
         });
+        datasets.push({
+            label: 'External Prediction',
+            data: extData.concat(extPrices),
+            borderColor: '#ff6a88',
+            backgroundColor: 'rgba(255,106,136,0.1)',
+            borderDash: [2, 2],
+            pointRadius: 2,
+            fill: false,
+            tension: 0.1,
+            spanGaps: true,
+        });
+    }
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: allLabels.concat(predLabels.filter(d => !allLabels.includes(d))),
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true },
+                tooltip: { enabled: true }
+            },
+            scales: {
+                x: { display: true, title: { display: true, text: 'Date' } },
+                y: { display: true, title: { display: true, text: 'Price (USD)' } }
+            }
+        }
     });
 }
 </script>
