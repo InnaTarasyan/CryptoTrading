@@ -20,6 +20,31 @@ Route::get('/coinmpredictions', 'MarketsComparizonController@coinPredictions')->
 Route::get('/api/coin-predictions', 'MarketsComparizonController@getCoinPredictionsData')->name('api.coin.predictions');
 Route::get('/api/coin-prediction', 'MarketsComparizonController@getSingleCoinPrediction')->name('api.coin.prediction');
 
+// Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+    Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+    Route::get('/password/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
+});
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
+// Personal Cabinet
+Route::middleware('auth')->group(function () {
+    Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index');
+    Route::get('/account/profile', [App\Http\Controllers\AccountController::class, 'profile'])->name('account.profile');
+    Route::get('/account/security', [App\Http\Controllers\AccountController::class, 'security'])->name('account.security');
+    Route::get('/account/notifications', [App\Http\Controllers\AccountController::class, 'notifications'])->name('account.notifications');
+    Route::get('/account/connections', [App\Http\Controllers\AccountController::class, 'connections'])->name('account.connections');
+    Route::get('/account/api-keys', [App\Http\Controllers\AccountController::class, 'apiKeys'])->name('account.api_keys');
+    Route::get('/account/billing', [App\Http\Controllers\AccountController::class, 'billing'])->name('account.billing');
+    Route::get('/account/support', [App\Http\Controllers\AccountController::class, 'support'])->name('account.support');
+});
+
 
 // live coin watch comparison data
 Route::get('/livecoinwatch/compare',
