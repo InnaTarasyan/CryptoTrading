@@ -569,6 +569,15 @@ class MarketsComparizonController extends Controller
      */
     public function coinPredictions()
     {
+        // Return the view without data - data will be loaded via AJAX
+        return view('coinpredictions');
+    }
+
+    /**
+     * Get coin predictions data via AJAX
+     */
+    public function getCoinPredictionsData()
+    {
         // Use longer caching to avoid repeated heavy calculations
         $cacheKey = 'coin_predictions_data_v2';
         $cacheDuration = 600; // 10 minutes cache (increased from 5)
@@ -601,8 +610,8 @@ class MarketsComparizonController extends Controller
             ];
         });
 
-        // Add cache headers for browser caching
-        return response()->view('coinpredictions', $data)
+        // Return JSON response for AJAX
+        return response()->json($data)
             ->header('Cache-Control', 'public, max-age=300')
             ->header('ETag', md5(json_encode($data)));
     }
