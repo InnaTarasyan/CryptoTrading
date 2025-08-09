@@ -7,7 +7,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KVZ960FP67"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag(){dataLayer.push(arguments);} 
         gtag('js', new Date());
 
         gtag('config', 'G-KVZ960FP67');
@@ -21,7 +21,7 @@
     </title>
     <meta name="title" content="@yield('meta_title', 'Crypto Trading - Live Cryptocurrency Tracking & Analysis Platform')">
     <meta name="description" content="@yield('meta_description', 'Track live cryptocurrency prices, social volume changes on Reddit and Twitter, and comprehensive crypto market analysis. Real-time data from CoinMarketCap, TradingView, and more.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'cryptocurrency, bitcoin, ethereum, crypto trading, live crypto prices, cryptocurrency tracking, crypto market analysis, bitcoin price, ethereum price, altcoins, crypto portfolio, trading view, coinmarketcap, crypto news, blockchain, digital currency, crypto investment, crypto signals, crypto charts, crypto trading platform')">
+    <meta name="keywords" content="@yield('meta_keywords', 'cryptocurrency, crypto, coin, coins, bitcoin, btc, ethereum, eth, binance coin, bnb, solana, sol, cardano, ada, ripple, xrp, litecoin, ltc, dogecoin, doge, polkadot, dot, chainlink, link, tron, trx, avalanche, avax, polygon, matic, uniswap, uni, stellar, xlm, cosmos, atom, filecoin, fil, hedera, hbar, bitcoin cash, bch, ethereum classic, etc, price, prices, live crypto prices, real-time crypto prices, crypto price today, crypto price prediction, coin price prediction, bitcoin price prediction, ethereum price prediction, altcoin price prediction, crypto forecast, crypto predictions, trading, crypto trading, day trading, swing trading, algorithmic trading, automated trading, trading bots, forex, forex trading, currency trading, derivatives, futures, options, spot, exchanges, exchange, binance, coinbase, kraken, kucoin, okx, bybit, bitfinex, market data, market cap, market capitalization, total volume, liquidity, volatility, technical analysis, ta, indicators, rsi, macd, moving average, sma, ema, bollinger bands, support resistance, order book, depth chart, chart, charts, crypto charts, candlestick chart, line chart, charting, tradingview, portfolio, portfolio tracker, watchlist, alerts, signals, crypto signals, arbitrage, defi, decentralized finance, nft, nfts, web3, blockchain, distributed ledger, smart contracts, token, tokens, stablecoin, usdt, usdc, dai, yield farming, staking, airdrop, ico, ieo, ido, launchpad, news, crypto news, on-chain analytics, sentiment, social volume, reddit, twitter, x.com, fear and greed index, education, guides, tutorials, how to buy bitcoin, how to buy ethereum, taxation, regulations, kyc, aml, wallets, wallet, hardware wallet, ledger, trezor, metamask, phantom, phantom wallet, address, tx, transaction, gas fees, miner fees, hash rate, mining, proof of work, proof of stake, nodes, validators, explorer, block explorer, livecoinwatch, coingecko, coinpaprika, cryptics, cryptics.tech, coinmarketcap, cmc, messari, glassnode, santiment, into the block, price alert, price tracker, crypto tracker, crypto app, crypto platform, best crypto tools')">
     <meta name="author" content="Inna Tarasyan">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="language" content="English">
