@@ -15,7 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'first_name', 'last_name', 'username', 'phone', 'bio',
+        'email_notifications', 'country', 'timezone', 'twitter', 'linkedin', 'github', 'website',
+        'profile_public', 'show_email', 'show_location', 'show_social'
     ];
 
     /**
@@ -26,6 +28,44 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'profile_public' => 'boolean',
+        'show_email' => 'boolean',
+        'show_location' => 'boolean',
+        'show_social' => 'boolean',
+    ];
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        if ($this->first_name && $this->last_name) {
+            return $this->first_name . ' ' . $this->last_name;
+        }
+        
+        return $this->name;
+    }
+
+    /**
+     * Get the user's display name.
+     *
+     * @return string
+     */
+    public function getDisplayNameAttribute()
+    {
+        return $this->username ?: $this->full_name;
+    }
 
     public function apiKeys()
     {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ApiKey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
@@ -22,6 +24,49 @@ class AccountController extends Controller
     public function profile()
     {
         return view('account.profile');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'username' => [
+                'nullable',
+                'string',
+                'max:255',
+                'alpha_dash',
+                Rule::unique('users')->ignore($user->id)
+            ],
+            'phone' => 'nullable|string|max:20',
+            'bio' => 'nullable|string|max:280',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id)
+            ],
+            'email_notifications' => 'required|in:all,important,none',
+            'country' => 'nullable|string|max:255',
+            'timezone' => 'nullable|string|max:255',
+            'twitter' => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
+            'github' => 'nullable|url|max:255',
+            'website' => 'nullable|url|max:255',
+            'profile_public' => 'boolean',
+            'show_email' => 'boolean',
+            'show_location' => 'boolean',
+            'show_social' => 'boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $user->update($request->all());
+
+        return back()->with('success', 'Profile updated successfully!');
     }
 
     public function security()

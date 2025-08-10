@@ -37,6 +37,7 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::middleware('auth')->group(function () {
     Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index');
     Route::get('/account/profile', [App\Http\Controllers\AccountController::class, 'profile'])->name('account.profile');
+    Route::put('/account/profile', [App\Http\Controllers\AccountController::class, 'updateProfile'])->name('account.profile.update');
     Route::get('/account/security', [App\Http\Controllers\AccountController::class, 'security'])->name('account.security');
     Route::get('/account/notifications', [App\Http\Controllers\AccountController::class, 'notifications'])->name('account.notifications');
     Route::get('/account/connections', [App\Http\Controllers\AccountController::class, 'connections'])->name('account.connections');

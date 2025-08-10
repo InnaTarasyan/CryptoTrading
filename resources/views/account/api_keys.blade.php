@@ -430,24 +430,24 @@
             <div class="col-lg-9 col-md-8">
                 <!-- Success/Error Messages -->
                 @if(session('success'))
-                    <div class="alert alert-success alert-modern alert-dismissible fade show" role="alert">
-                        <i class="fas fa-check-circle me-2"></i>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle mr-2"></i>
                         {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <button type="button" class="btn-close" data-dismiss="alert"></button>
                     </div>
                 @endif
 
                 @if(session('error'))
-                    <div class="alert alert-danger alert-modern alert-dismissible fade show" role="alert">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
                         {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <button type="button" class="btn-close" data-dismiss="alert"></button>
                     </div>
                 @endif
 
                 @if(session('new_api_key'))
-                    <div class="alert alert-warning alert-modern alert-dismissible fade show" role="alert">
-                        <i class="fas fa-key me-2"></i>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <i class="fas fa-key mr-2"></i>
                         <strong>Your new API key:</strong><br>
                         <div class="api-key-display mt-2">
                             <code class="fs-6">{{ session('new_api_key') }}</code>
@@ -456,7 +456,7 @@
                             </button>
                         </div>
                         <small class="text-muted d-block mt-2">Please copy this key now as you won't be able to see it again.</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <button type="button" class="btn-close" data-dismiss="alert"></button>
                     </div>
                 @endif
 
@@ -473,11 +473,10 @@
                             @csrf
                             <div class="mb-4">
                                 <label for="name" class="form-label fw-semibold">
-                                    <i class="fas fa-tag me-2"></i>API Key Name
+                                    <i class="fas fa-tag mr-2"></i>API Key Name
                                 </label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                                       id="name" name="name" value="{{ old('name') }}" 
-                                       placeholder="e.g. My Trading Bot" required>
+                                <input type="text" class="form-control form-control-lg" id="name" name="name" 
+                                       placeholder="e.g., Trading Bot, Mobile App, Analytics" required>
                                 @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -485,7 +484,7 @@
 
                             <div class="mb-4">
                                 <label class="form-label fw-semibold">
-                                    <i class="fas fa-shield-alt me-2"></i>Permissions
+                                    <i class="fas fa-shield-alt mr-2"></i>Permissions
                                 </label>
                                 <div class="permissions-grid">
                                     <!-- CoinGecko -->
@@ -561,8 +560,8 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-modern">
-                                <i class="fas fa-key me-2"></i>Generate API Key
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-key mr-2"></i>Generate API Key
                             </button>
                         </form>
                     </div>
@@ -920,7 +919,7 @@ function showToast(message, type = 'info') {
     toast.innerHTML = `
         <i class="fas fa-${type === 'success' ? 'check' : type === 'warning' ? 'exclamation-triangle' : 'info'}-circle me-2"></i>
         ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
     `;
     
     document.body.appendChild(toast);
