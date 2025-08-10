@@ -121,6 +121,8 @@ class Telegram extends Command
             $this->processChannels();
 
             $this->info('Telegram message fetching completed successfully!');
+            Log::channel('crabler')->info('Telegram message fetching completed successfully!');
+
             return Command::SUCCESS;
 
         } catch (Exception $e) {
