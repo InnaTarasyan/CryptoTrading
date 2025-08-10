@@ -17,7 +17,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'first_name', 'last_name', 'username', 'phone', 'bio',
         'email_notifications', 'country', 'timezone', 'twitter', 'linkedin', 'github', 'website',
-        'profile_public', 'show_email', 'show_location', 'show_social', 'password_changed_at'
+        'profile_public', 'show_email', 'show_location', 'show_social', 'password_changed_at',
+        'notification_preferences'
     ];
 
     /**
@@ -43,6 +44,7 @@ class User extends Authenticatable
         'show_location' => 'boolean',
         'show_social' => 'boolean',
         'two_factor_enabled' => 'boolean',
+        'notification_preferences' => 'array',
     ];
 
     /**
@@ -72,5 +74,21 @@ class User extends Authenticatable
     public function apiKeys()
     {
         return $this->hasMany(ApiKey::class);
+    }
+
+    /**
+     * Get the user's notifications.
+     */
+    public function notifications()
+    {
+        return $this->hasMany(UserNotification::class);
+    }
+
+    /**
+     * Get the user's unread notifications count.
+     */
+    public function getUnreadNotificationsCountAttribute()
+    {
+        return $this->notifications()->unread()->count();
     }
 }

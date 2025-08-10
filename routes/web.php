@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/security/2fa/recovery-codes', [App\Http\Controllers\AccountController::class, 'getRecoveryCodes'])->name('account.security.2fa.recovery-codes');
     Route::post('/account/security/sessions/terminate-all', [App\Http\Controllers\AccountController::class, 'terminateAllSessions'])->name('account.security.sessions.terminate-all');
     Route::get('/account/notifications', [App\Http\Controllers\AccountController::class, 'notifications'])->name('account.notifications');
+    Route::post('/account/notifications/save', [App\Http\Controllers\AccountController::class, 'saveNotificationSettings'])->name('account.notifications.save');
+    Route::post('/account/notifications/update-status/{id}', [App\Http\Controllers\AccountController::class, 'updateNotificationStatus'])->name('account.notifications.update-status');
+    Route::post('/account/notifications/delete/{id}', [App\Http\Controllers\AccountController::class, 'deleteNotification'])->name('account.notifications.delete');
     Route::get('/account/connections', [App\Http\Controllers\AccountController::class, 'connections'])->name('account.connections');
     Route::get('/account/api-keys', [App\Http\Controllers\AccountController::class, 'apiKeys'])->name('account.api_keys');
     Route::post('/account/api-keys', [App\Http\Controllers\AccountController::class, 'generateApiKey'])->name('account.api_keys.generate');

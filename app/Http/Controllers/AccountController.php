@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use App\Models\UserNotification;
 use PragmaRX\Google2FA\Google2FA;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
@@ -250,7 +251,215 @@ class AccountController extends Controller
 
     public function notifications()
     {
-        return view('account.notifications');
+        $user = Auth::user();
+        
+        // Get recent notifications
+        $recentNotifications = $user->notifications()
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get();
+        
+        // Get notification statistics
+        $stats = [
+            'unread' => $user->unread_notifications_count,
+            'today' => $user->notifications()->whereDate('created_at', today())->count(),
+            'this_week' => $user->notifications()->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count(),
+            'active_alerts' => $user->notifications()->where('type', 'price')->where('is_read', false)->count()
+        ];
+        
+        return view('account.notifications', compact('recentNotifications', 'stats'));
+    }
+
+    public function saveNotificationSettings(Request $request)
+    {
+        \Log::info('saveNotificationSettings called with data:', $request->all());
+        
+        // More flexible validation rules
+        $request->validate([
+            'price' => 'nullable|array',
+            'price.email' => 'nullable|boolean',
+            'price.push' => 'nullable|boolean',
+            'price.in_app' => 'nullable|boolean',
+            'price.frequency' => 'nullable|in:immediate,hourly,daily',
+            'portfolio' => 'nullable|array',
+            'portfolio.email' => 'nullable|boolean',
+            'portfolio.push' => 'nullable|boolean',
+            'portfolio.in_app' => 'nullable|boolean',
+            'portfolio.frequency' => 'nullable|in:immediate,hourly,daily',
+            'security' => 'nullable|array',
+            'security.email' => 'nullable|boolean',
+            'security.push' => 'nullable|boolean',
+            'security.in_app' => 'nullable|boolean',
+            'security.frequency' => 'nullable|in:immediate,hourly,daily',
+            'system' => 'nullable|array',
+            'system.email' => 'nullable|boolean',
+            'system.push' => 'nullable|boolean',
+            'system.in_app' => 'nullable|boolean',
+            'system.frequency' => 'nullable|in:immediate,hourly,daily',
+            'advanced' => 'nullable|array',
+            'advanced.quietHours' => 'nullable|boolean',
+            'advanced.quietStart' => 'nullable|date_format:H:i',
+            'advanced.quietEnd' => 'nullable|date_format:H:i',
+            'advanced.sound' => 'nullable|boolean',
+            'advanced.position' => 'nullable|in:top-right,top-left,bottom-right,bottom-left',
+            'advanced.autoDismiss' => 'nullable|boolean',
+            'advanced.groupNotifications' => 'nullable|boolean',
+        ]);
+
+        try {
+            $user = Auth::user();
+            \Log::info('User authenticated:', ['user_id' => $user->id, 'email' => $user->email]);
+            
+            // Process the form data and set defaults for missing values
+            $notificationData = $this->processNotificationData($request->all());
+            \Log::info('Processed notification data:', $notificationData);
+            
+            $user->notification_preferences = $notificationData;
+            $user->save();
+            
+            \Log::info('Notification preferences saved successfully for user:', ['user_id' => $user->id]);
+
+            // Force JSON response with explicit headers
+            $response = response()->json([
+                'success' => true,
+                'message' => 'Notification settings saved successfully!'
+            ]);
+            
+            $response->header('Content-Type', 'application/json');
+            $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+            $response->header('Pragma', 'no-cache');
+            $response->header('Expires', '0');
+            
+            \Log::info('Sending JSON response with headers:', [
+                'content_type' => $response->headers->get('Content-Type'),
+                'response_data' => ['success' => true, 'message' => 'Notification settings saved successfully!']
+            ]);
+            
+            return $response;
+        } catch (\Exception $e) {
+            \Log::error('Error saving notification settings: ' . $e->getMessage(), [
+                'user_id' => Auth::id(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            // Force JSON response with explicit headers for error case too
+            $response = response()->json([
+                'success' => false,
+                'message' => 'Error saving notification settings: ' . $e->getMessage()
+            ], 500);
+            
+            $response->header('Content-Type', 'application/json');
+            $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+            
+            return $response;
+        }
+    }
+
+    /**
+     * Process notification data and set defaults
+     */
+    private function processNotificationData($data)
+    {
+        $defaults = [
+            'price' => [
+                'email' => true,
+                'push' => true,
+                'in_app' => true,
+                'frequency' => 'immediate'
+            ],
+            'portfolio' => [
+                'email' => true,
+                'push' => true,
+                'in_app' => true,
+                'frequency' => 'daily'
+            ],
+            'security' => [
+                'email' => true,
+                'push' => true,
+                'in_app' => true,
+                'frequency' => 'immediate'
+            ],
+            'system' => [
+                'email' => false,
+                'push' => true,
+                'in_app' => true,
+                'frequency' => 'daily'
+            ],
+            'advanced' => [
+                'quietHours' => false,
+                'quietStart' => '22:00',
+                'quietEnd' => '08:00',
+                'sound' => true,
+                'position' => 'top-right',
+                'autoDismiss' => true,
+                'groupNotifications' => true
+            ]
+        ];
+
+        // Merge provided data with defaults
+        $result = [];
+        foreach ($defaults as $category => $categoryDefaults) {
+            if (isset($data[$category]) && is_array($data[$category])) {
+                $result[$category] = array_merge($categoryDefaults, $data[$category]);
+            } else {
+                $result[$category] = $categoryDefaults;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Update notification read status
+     */
+    public function updateNotificationStatus(Request $request, $id)
+    {
+        try {
+            $user = Auth::user();
+            $notification = $user->notifications()->findOrFail($id);
+            
+            $request->validate([
+                'is_read' => 'required|boolean'
+            ]);
+
+            if ($request->is_read) {
+                $notification->markAsRead();
+            } else {
+                $notification->markAsUnread();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Notification status updated successfully!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating notification status: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Delete a notification
+     */
+    public function deleteNotification(Request $request, $id)
+    {
+        try {
+            $user = Auth::user();
+            $notification = $user->notifications()->findOrFail($id);
+            $notification->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Notification deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting notification: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     public function connections()
