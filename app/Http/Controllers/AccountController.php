@@ -529,7 +529,57 @@ class AccountController extends Controller
 
     public function billing()
     {
-        return view('account.billing');
+        $user = Auth::user();
+        
+        // Mock data for demonstration - in a real app, this would come from your billing provider
+        $billingData = [
+            'current_plan' => [
+                'name' => 'Pro Trading',
+                'price' => 29.99,
+                'currency' => 'USD',
+                'billing_cycle' => 'monthly',
+                'status' => 'active',
+                'next_billing_date' => now()->addMonth()->format('M d, Y'),
+                'features' => [
+                    'Advanced trading tools',
+                    'Real-time market data',
+                    'Portfolio analytics',
+                    'Priority support',
+                    'API access'
+                ]
+            ],
+            'payment_method' => [
+                'type' => 'card',
+                'last4' => '4242',
+                'brand' => 'Visa',
+                'expiry' => '12/25',
+                'is_default' => true
+            ],
+            'billing_history' => [
+                [
+                    'date' => now()->subMonth()->format('M d, Y'),
+                    'amount' => 29.99,
+                    'currency' => 'USD',
+                    'status' => 'paid',
+                    'invoice_number' => 'INV-001'
+                ],
+                [
+                    'date' => now()->subMonths(2)->format('M d, Y'),
+                    'amount' => 29.99,
+                    'currency' => 'USD',
+                    'status' => 'paid',
+                    'invoice_number' => 'INV-002'
+                ]
+            ],
+            'usage' => [
+                'api_calls' => 1250,
+                'api_limit' => 10000,
+                'storage_used' => '2.5 GB',
+                'storage_limit' => '10 GB'
+            ]
+        ];
+        
+        return view('account.billing', compact('billingData'));
     }
 
     public function support()
