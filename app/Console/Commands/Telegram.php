@@ -81,23 +81,29 @@ class Telegram extends Command
             
             // Validate configuration
             if (!$this->validateConfiguration()) {
+                Log::channel('crabler')->error('validation error');
                 return Command::FAILURE;
             }
 
             // Initialize MadelineProto with proper settings
             if (!$this->initializeMadelineProto()) {
+                Log::channel('crabler')->error('validation error');
                 return Command::FAILURE;
             }
 
             // Perform authentication based on mode
             if (!$this->performAuthentication()) {
+                Log::channel('crabler')->error('validation error');
                 return Command::FAILURE;
             }
 
             // Verify authentication status
             if (!$this->verifyAuthenticationStatus()) {
+                Log::channel('crabler')->error('validation error');
                 return Command::FAILURE;
             }
+
+            Log::channel('crabler')->info('Telegram reading success');
 
             // Check if we need to setup webhook mode
             if ($this->option('setup-webhook')) {
