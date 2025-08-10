@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'first_name', 'last_name', 'username', 'phone', 'bio',
         'email_notifications', 'country', 'timezone', 'twitter', 'linkedin', 'github', 'website',
-        'profile_public', 'show_email', 'show_location', 'show_social'
+        'profile_public', 'show_email', 'show_location', 'show_social', 'password_changed_at'
     ];
 
     /**
@@ -36,11 +36,13 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password_changed_at' => 'datetime',
+        'last_login_at' => 'datetime',
         'profile_public' => 'boolean',
         'show_email' => 'boolean',
         'show_location' => 'boolean',
         'show_social' => 'boolean',
+        'two_factor_enabled' => 'boolean',
     ];
 
     /**

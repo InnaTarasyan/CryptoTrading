@@ -13,6 +13,7 @@
         "laravel/framework": "^10.0",
         "laravel/helpers": "*",
         "laravel/tinker": "^2.8",
+        "pragmarx/google2fa": "^8.0",
         "yajra/laravel-datatables-oracle": "^10.10"
     },
     "require-dev": {

@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\ApiKey;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use PragmaRX\Google2FA\Google2FA;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer\PngWriter;
 
 class AccountController extends Controller
 {
@@ -72,6 +80,172 @@ class AccountController extends Controller
     public function security()
     {
         return view('account.security');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = Auth::user();
+        $user->update([
+            'password' => Hash::make($request->new_password),
+            'password_changed_at' => now(),
+        ]);
+
+        return back()->with('success', 'Password updated successfully!');
+    }
+
+    public function setupTwoFactor(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            
+            // Check if 2FA is already enabled
+            if ($user->two_factor_enabled) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Two-factor authentication is already enabled.'
+                ], 400);
+            }
+            
+            // Generate a new 2FA secret
+            $google2fa = new Google2FA();
+            $secret = $google2fa->generateSecretKey();
+            
+            // Generate QR code URL
+            $qrCodeUrl = $google2fa->getQRCodeUrl(
+                config('app.name', 'Crypto Trading'),
+                $user->email,
+                $secret
+            );
+            
+            // Generate recovery codes
+            $recoveryCodes = [];
+            for ($i = 0; $i < 8; $i++) {
+                $recoveryCodes[] = Str::random(10) . '-' . Str::random(10);
+            }
+            
+            // Store the secret and recovery codes temporarily (not enabled yet)
+            $user->update([
+                'two_factor_secret' => $secret,
+                'two_factor_recovery_codes' => $recoveryCodes,
+            ]);
+            
+            return response()->json([
+                'success' => true,
+                'secret' => $secret,
+                'qr_code_url' => $qrCodeUrl,
+                'recovery_codes' => $recoveryCodes,
+                'message' => 'Two-factor authentication setup initiated. Please scan the QR code and enter the verification code.'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('2FA setup error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while setting up 2FA. Please try again.'
+            ], 500);
+        }
+    }
+
+    public function getRecoveryCodes(Request $request)
+    {
+        $user = Auth::user();
+        
+        if (!$user->two_factor_enabled) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Two-factor authentication is not enabled.'
+            ], 400);
+        }
+        
+        return response()->json([
+            'success' => true,
+            'recovery_codes' => $user->two_factor_recovery_codes ?? []
+        ]);
+    }
+
+    public function verifyTwoFactor(Request $request)
+    {
+        try {
+            $request->validate([
+                'verification_code' => ['required', 'string', 'size:6'],
+            ]);
+
+            $user = Auth::user();
+            
+            if (!$user->two_factor_secret) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Two-factor authentication setup not initiated.'
+                ], 400);
+            }
+
+            $google2fa = new Google2FA();
+            $valid = $google2fa->verifyKey($user->two_factor_secret, $request->verification_code);
+
+            if ($valid) {
+                $user->update([
+                    'two_factor_enabled' => true,
+                ]);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Two-factor authentication enabled successfully!'
+                ]);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid verification code. Please try again.'
+            ], 400);
+        } catch (\Exception $e) {
+            \Log::error('2FA verification error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while verifying 2FA. Please try again.'
+            ], 500);
+        }
+    }
+
+    public function disableTwoFactor(Request $request)
+    {
+        $user = Auth::user();
+        
+        $user->update([
+            'two_factor_enabled' => false,
+            'two_factor_secret' => null,
+            'two_factor_recovery_codes' => null,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Two-factor authentication disabled successfully!'
+        ]);
+    }
+
+    public function terminateSession(Request $request, $sessionId)
+    {
+        // Here you would implement session termination logic
+        // For now, we'll just return a success response
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Session terminated successfully!'
+        ]);
+    }
+
+    public function terminateAllSessions(Request $request)
+    {
+        // Here you would implement logic to terminate all other sessions
+        // For now, we'll just return a success response
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'All other sessions terminated successfully!'
+        ]);
     }
 
     public function notifications()

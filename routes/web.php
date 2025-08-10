@@ -39,6 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/profile', [App\Http\Controllers\AccountController::class, 'profile'])->name('account.profile');
     Route::put('/account/profile', [App\Http\Controllers\AccountController::class, 'updateProfile'])->name('account.profile.update');
     Route::get('/account/security', [App\Http\Controllers\AccountController::class, 'security'])->name('account.security');
+    Route::put('/account/security/password', [App\Http\Controllers\AccountController::class, 'updatePassword'])->name('account.security.password');
+    Route::post('/account/security/2fa/setup', [App\Http\Controllers\AccountController::class, 'setupTwoFactor'])->name('account.security.2fa.setup');
+    Route::post('/account/security/2fa/verify', [App\Http\Controllers\AccountController::class, 'verifyTwoFactor'])->name('account.security.2fa.verify');
+    Route::post('/account/security/2fa/disable', [App\Http\Controllers\AccountController::class, 'disableTwoFactor'])->name('account.security.2fa.disable');
+    Route::get('/account/security/2fa/recovery-codes', [App\Http\Controllers\AccountController::class, 'getRecoveryCodes'])->name('account.security.2fa.recovery-codes');
+    Route::post('/account/security/sessions/terminate-all', [App\Http\Controllers\AccountController::class, 'terminateAllSessions'])->name('account.security.sessions.terminate-all');
     Route::get('/account/notifications', [App\Http\Controllers\AccountController::class, 'notifications'])->name('account.notifications');
     Route::get('/account/connections', [App\Http\Controllers\AccountController::class, 'connections'])->name('account.connections');
     Route::get('/account/api-keys', [App\Http\Controllers\AccountController::class, 'apiKeys'])->name('account.api_keys');
