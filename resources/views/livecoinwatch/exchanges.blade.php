@@ -46,7 +46,7 @@
         <!-- Navigation Tabs -->
         <div class="modern-tabs-container gradient-tabs-bg">
             <nav class="modern-tabs beautiful-tabs" aria-label="Main navigation">
-                <a href="/" class="modern-tab beautiful-tab {{ request()->is('/') ? 'active' : '' }}" tabindex="0">
+                <a href="/history" class="modern-tab beautiful-tab {{ request()->is('/') ? 'active' : '' }}" tabindex="0">
                     <span class="tab-icon">
                         <!-- History Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffd200"/><path d="M12 7v5l4 2" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
