@@ -59,6 +59,54 @@
             </button>
         </div>
 
+        {{-- User-Friendly Navigation Explanation --}}
+        <div class="navigation-explanation">
+            <div class="explanation-content">
+                <div class="explanation-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </div>
+                <div class="explanation-text">
+                    <h4 class="explanation-title">💡 Interactive Table Navigation</h4>
+                    <p class="explanation-description">
+                        <strong>Click on any row</strong> in the table below to explore detailed information about that cryptocurrency. 
+                        You'll be taken to a comprehensive details page featuring:
+                    </p>
+                    <div class="explanation-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <span class="feature-text">TradingView Charts</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📅</span>
+                            <span class="feature-text">Events Calendar</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">💬</span>
+                            <span class="feature-text">Telegram Messages</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🐦</span>
+                            <span class="feature-text">Twitter Sentiment</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📈</span>
+                            <span class="feature-text">Market Analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔍</span>
+                            <span class="feature-text">Technical Indicators</span>
+                        </div>
+                    </div>
+                    <div class="explanation-tip">
+                        <span class="tip-icon">💡</span>
+                        <span class="tip-text">Pro tip: Use the search and filter options above to find specific cryptocurrencies quickly!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- ======================== Navigation Tabs ======================== --}}
         <div class="modern-tabs-container">
             <nav class="modern-tabs beautiful-tabs" aria-label="Main navigation">
