@@ -794,6 +794,298 @@ curl -H "X-API-Key: your_key" \
 
 ---
 
+### 📋 **Detailed Endpoint Documentation**
+
+#### 🟦 **CoinGecko API Endpoints**
+
+##### **1. Exchanges Data** (`/api/coingecko/exchanges`)
+```bash
+GET /api/coingecko/exchanges
+```
+**Description**: Comprehensive exchange information including rankings, trading volumes, and trust scores.
+
+**Query Parameters**:
+- `per_page` (optional): Number of results per page (default: 50, max: 250)
+- `page` (optional): Page number for pagination (default: 1)
+
+**Response Example**:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": "binance",
+      "name": "Binance",
+      "year_established": 2017,
+      "country": "Cayman Islands",
+      "trust_score": 10,
+      "trade_volume_24h_btc": 123456.789,
+      "url": "https://www.binance.com/"
+    }
+  ]
+}
+```
+
+##### **2. Coins Information** (`/api/coingecko/coins`)
+```bash
+GET /api/coingecko/coins
+```
+**Description**: Detailed information about cryptocurrencies including market data, community stats, and developer information.
+
+**Query Parameters**:
+- `vs_currency` (optional): Target currency (default: usd)
+- `order` (optional): Sort order (market_cap_desc, market_cap_asc, volume_desc, volume_asc, id_desc, id_asc)
+- `per_page` (optional): Results per page (default: 100, max: 250)
+- `page` (optional): Page number (default: 1)
+- `sparkline` (optional): Include sparkline data (true/false, default: false)
+
+**Response Example**:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": "bitcoin",
+      "symbol": "btc",
+      "name": "Bitcoin",
+      "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
+      "current_price": 45000,
+      "market_cap": 850000000000,
+      "market_cap_rank": 1,
+      "fully_diluted_valuation": 945000000000,
+      "total_volume": 25000000000,
+      "high_24h": 46000,
+      "low_24h": 44000,
+      "price_change_24h": 1000,
+      "price_change_percentage_24h": 2.27,
+      "market_cap_change_24h": 20000000000,
+      "market_cap_change_percentage_24h": 2.41,
+      "circulating_supply": 18800000,
+      "total_supply": 21000000,
+      "max_supply": 21000000,
+      "ath": 69045,
+      "ath_change_percentage": -34.85,
+      "ath_date": "2021-11-10T14:24:11.849Z",
+      "atl": 67.81,
+      "atl_change_percentage": 66263.74,
+      "atl_date": "2013-07-06T00:00:00.000Z",
+      "roi": null,
+      "last_updated": "2024-01-15T10:30:00.000Z"
+    }
+  ]
+}
+```
+
+##### **3. Exchange Rates** (`/api/coingecko/exchange-rates`)
+```bash
+GET /api/coingecko/exchange-rates
+```
+**Description**: Real-time exchange rates for all supported cryptocurrencies.
+
+**Response Example**:
+```json
+{
+  "status": "success",
+  "data": {
+    "rates": {
+      "btc": {
+        "name": "Bitcoin",
+        "unit": "BTC",
+        "value": 1,
+        "type": "crypto"
+      },
+      "eth": {
+        "name": "Ether",
+        "unit": "ETH",
+        "value": 0.022,
+        "type": "crypto"
+      },
+      "usd": {
+        "name": "US Dollar",
+        "unit": "$",
+        "value": 45000,
+        "type": "fiat"
+      }
+    }
+  }
+}
+```
+
+##### **4. Markets Data** (`/api/coingecko/markets`)
+```bash
+GET /api/coingecko/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false
+```
+**Description**: Market data for cryptocurrencies with comprehensive metrics and price information.
+
+**Query Parameters**:
+- `vs_currency` (required): Target currency (e.g., usd, eur, btc)
+- `order` (optional): Sort order (default: market_cap_desc)
+- `per_page` (optional): Results per page (default: 100, max: 250)
+- `page` (optional): Page number (default: 1)
+- `sparkline` (optional): Include sparkline data (default: false)
+
+##### **5. Trending Coins** (`/api/coingecko/trendings`)
+```bash
+GET /api/coingecko/trendings
+```
+**Description**: Top trending coins in the last 24 hours based on price and volume changes.
+
+**Response Example**:
+```json
+{
+  "status": "success",
+  "data": {
+    "coins": [
+      {
+        "item": {
+          "id": "shiba-inu",
+          "coin_id": 279,
+          "name": "Shiba Inu",
+          "symbol": "shib",
+          "market_cap_rank": 15,
+          "thumb": "https://assets.coingecko.com/coins/images/11939/thumb/shiba.png",
+          "small": "https://assets.coingecko.com/coins/images/11939/small/shiba.png",
+          "large": "https://assets.coingecko.com/coins/images/11939/large/shiba.png",
+          "slug": "shiba-inu",
+          "price_btc": 0.00000001,
+          "score": 0
+        }
+      }
+    ]
+  }
+}
+```
+
+##### **6. Derivatives Data** (`/api/coingecko/derivatives`)
+```bash
+GET /api/coingecko/derivatives
+```
+**Description**: Information about cryptocurrency derivatives including futures and options.
+
+##### **7. Derivatives Exchanges** (`/api/coingecko/derivatives-exchanges`)
+```bash
+GET /api/coingecko/derivatives-exchanges
+```
+**Description**: List of exchanges that offer cryptocurrency derivatives trading.
+
+##### **8. NFTs Data** (`/api/coingecko/nfts`)
+```bash
+GET /api/coingecko/nfts
+```
+**Description**: Non-fungible token market data and collections information.
+
+#### 🟢 **CoinMarketCal API Endpoints**
+
+##### **1. Market Calendar** (`/api/coinmarketcal/coinmarketcals`)
+```bash
+GET /api/coinmarketcal/coinmarketcals
+```
+**Description**: General market calendar information and metadata.
+
+##### **2. Events** (`/api/coinmarketcal/events`)
+```bash
+GET /api/coinmarketcal/events
+```
+**Description**: Upcoming cryptocurrency events, announcements, and important dates.
+
+**Query Parameters**:
+- `per_page` (optional): Results per page (default: 50)
+- `page` (optional): Page number (default: 1)
+
+**Response Example**:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 12345,
+      "title": "Bitcoin Halving Event",
+      "description": "Bitcoin block reward will be reduced from 6.25 BTC to 3.125 BTC",
+      "date_event": "2024-04-20T00:00:00.000Z",
+      "date_to": "2024-04-20T23:59:59.000Z",
+      "date_from": "2024-04-20T00:00:00.000Z",
+      "is_hot": true,
+      "vote_count": 150,
+      "positive_vote_count": 120,
+      "percentage": 80,
+      "categories": "Mining",
+      "tip_symbol": "BTC",
+      "tip_adress": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+    }
+  ]
+}
+```
+
+#### 🔵 **LiveCoinWatch API Endpoints**
+
+##### **1. Fiat Currencies** (`/api/livecoinwatch/fiats`)
+```bash
+GET /api/livecoinwatch/fiats
+```
+**Description**: List of supported fiat currencies and their exchange rates.
+
+##### **2. Live Coin Histories** (`/api/livecoinwatch/live-coin-histories`)
+```bash
+GET /api/livecoinwatch/live-coin-histories
+```
+**Description**: Historical price data for cryptocurrencies with customizable timeframes.
+
+**Query Parameters**:
+- `currency` (required): Cryptocurrency symbol (e.g., BTC, ETH)
+- `start` (optional): Start timestamp in milliseconds
+- `end` (optional): End timestamp in milliseconds
+
+##### **3. Live Coin Watches** (`/api/livecoinwatch/live-coin-watches`)
+```bash
+GET /api/livecoinwatch/live-coin-watches
+```
+**Description**: Real-time cryptocurrency data including prices, volumes, and market metrics.
+
+**Query Parameters**:
+- `per_page` (optional): Results per page (default: 50)
+- `page` (optional): Page number (default: 1)
+
+#### 🟡 **Social Media API Endpoints**
+
+##### **1. Telegram Messages** (`/api/telegram/messages`)
+```bash
+GET /api/telegram/messages
+```
+**Description**: Cryptocurrency-related discussions and sentiment from Telegram channels.
+
+**Query Parameters**:
+- `per_page` (optional): Results per page (default: 50)
+- `page` (optional): Page number (default: 1)
+
+**Response Example**:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "message": "Bitcoin showing strong support at $45,000 level",
+      "channel": "CryptoNews",
+      "date": "2024-01-15T10:30:00.000Z",
+      "sentiment": "positive",
+      "engagement": 150
+    }
+  ]
+}
+```
+
+##### **2. Twitter Messages** (`/api/twitter/messages`)
+```bash
+GET /api/twitter/messages
+```
+**Description**: Cryptocurrency tweets and social sentiment analysis from Twitter.
+
+**Query Parameters**:
+- `per_page` (optional): Results per page (default: 50)
+- `page` (optional): Page number (default: 1)
+
+---
+
 ### ⚙️ **Advanced Features**
 
 #### **Permission Management**
@@ -869,6 +1161,39 @@ async function getTrendingCoins() {
   });
   return response.data;
 }
+
+async function getMarketData(symbol) {
+  const response = await axios.get(`${baseURL}/livecoinwatch/live-coin-watches`, {
+    headers: { 'X-API-Key': apiKey },
+    params: { 
+      per_page: 1,
+      search: symbol 
+    }
+  });
+  return response.data;
+}
+
+// Example trading strategy
+async function analyzeMarket() {
+  const trending = await getTrendingCoins();
+  const analysis = [];
+  
+  for (const coin of trending.data.coins.slice(0, 5)) {
+    const marketData = await getMarketData(coin.item.symbol);
+    if (marketData.data.length > 0) {
+      const coinData = marketData.data[0];
+      analysis.push({
+        symbol: coin.item.symbol,
+        name: coin.item.name,
+        price: coinData.price,
+        volume_24h: coinData.volume_24h,
+        market_cap: coinData.market_cap
+      });
+    }
+  }
+  
+  return analysis;
+}
 ```
 
 #### **Mobile Applications**
@@ -883,6 +1208,24 @@ func fetchCoinData() {
         // Handle response
     }.resume()
 }
+
+// Example: SwiftUI integration
+struct CoinListView: View {
+    @State private var coins: [Coin] = []
+    
+    var body: some View {
+        List(coins, id: \.id) { coin in
+            CoinRowView(coin: coin)
+        }
+        .onAppear {
+            fetchCoins()
+        }
+    }
+    
+    func fetchCoins() {
+        // API call implementation
+    }
+}
 ```
 
 #### **Data Analytics**
@@ -890,6 +1233,7 @@ func fetchCoinData() {
 # Example: Python data analysis
 import requests
 import pandas as pd
+import matplotlib.pyplot as plt
 
 API_KEY = "your_api_key_here"
 BASE_URL = "https://yoursite.com/api"
@@ -899,9 +1243,265 @@ def get_market_data():
     response = requests.get(f"{BASE_URL}/coingecko/markets", headers=headers)
     return pd.DataFrame(response.json()['data'])
 
+def get_historical_data(currency, days=30):
+    headers = {"X-API-Key": API_KEY}
+    end_time = int(pd.Timestamp.now().timestamp() * 1000)
+    start_time = end_time - (days * 24 * 60 * 60 * 1000)
+    
+    params = {
+        "currency": currency,
+        "start": start_time,
+        "end": end_time
+    }
+    
+    response = requests.get(f"{BASE_URL}/livecoinwatch/live-coin-histories", 
+                           headers=headers, params=params)
+    return response.json()
+
 # Analyze market trends
 df = get_market_data()
-print(df.describe())
+print("Market Overview:")
+print(f"Total coins: {len(df)}")
+print(f"Total market cap: ${df['market_cap'].sum():,.0f}")
+print(f"Average 24h volume: ${df['total_volume'].mean():,.0f}")
+
+# Get Bitcoin historical data
+btc_data = get_historical_data("BTC", days=7)
+print(f"\nBitcoin 7-day data points: {len(btc_data['data'])}")
+
+# Create price trend visualization
+if 'data' in btc_data and btc_data['data']:
+    prices = [point['price'] for point in btc_data['data']]
+    dates = [pd.to_datetime(point['date']) for point in btc_data['data']]
+    
+    plt.figure(figsize=(12, 6))
+    plt.plot(dates, prices)
+    plt.title('Bitcoin Price Trend (7 Days)')
+    plt.xlabel('Date')
+    plt.ylabel('Price (USD)')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+```
+
+#### **Web Applications**
+```javascript
+// Example: React.js integration
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const API_KEY = process.env.REACT_APP_CRYPTO_API_KEY;
+const BASE_URL = 'https://yoursite.com/api';
+
+function CryptoDashboard() {
+  const [coins, setCoins] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchCoins();
+  }, []);
+
+  const fetchCoins = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${BASE_URL}/coingecko/markets`, {
+        headers: { 'X-API-Key': API_KEY },
+        params: { 
+          vs_currency: 'usd',
+          order: 'market_cap_desc',
+          per_page: 20,
+          page: 1
+        }
+      });
+      
+      setCoins(response.data.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to fetch coin data');
+      console.error('API Error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <div className="crypto-dashboard">
+      <h1>Cryptocurrency Dashboard</h1>
+      <div className="coins-grid">
+        {coins.map(coin => (
+          <div key={coin.id} className="coin-card">
+            <img src={coin.image} alt={coin.name} />
+            <h3>{coin.name}</h3>
+            <p>${coin.current_price.toLocaleString()}</p>
+            <p className={coin.price_change_percentage_24h > 0 ? 'positive' : 'negative'}>
+              {coin.price_change_percentage_24h.toFixed(2)}%
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default CryptoDashboard;
+```
+
+#### **Python Trading Bot**
+```python
+# Example: Advanced trading bot with multiple data sources
+import requests
+import time
+import json
+from datetime import datetime, timedelta
+
+class CryptoTradingBot:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://yoursite.com/api"
+        self.headers = {"X-API-Key": api_key}
+        
+    def get_trending_coins(self):
+        """Get trending coins for potential opportunities"""
+        response = requests.get(
+            f"{self.base_url}/coingecko/trendings",
+            headers=self.headers
+        )
+        return response.json()
+    
+    def get_market_data(self, symbol):
+        """Get comprehensive market data for a specific coin"""
+        response = requests.get(
+            f"{self.base_url}/coingecko/coins",
+            headers=self.headers,
+            params={"ids": symbol, "vs_currency": "usd"}
+        )
+        return response.json()
+    
+    def get_social_sentiment(self):
+        """Get social media sentiment for market analysis"""
+        telegram = requests.get(
+            f"{self.base_url}/telegram/messages",
+            headers=self.headers,
+            params={"per_page": 50}
+        ).json()
+        
+        twitter = requests.get(
+            f"{self.base_url}/twitter/messages",
+            headers=self.headers,
+            params={"per_page": 50}
+        ).json()
+        
+        return {"telegram": telegram, "twitter": twitter}
+    
+    def analyze_market_opportunity(self, symbol):
+        """Analyze if a coin presents a trading opportunity"""
+        try:
+            # Get market data
+            market_data = self.get_market_data(symbol)
+            if not market_data.get('data'):
+                return None
+            
+            coin = market_data['data'][0]
+            
+            # Get social sentiment
+            sentiment = self.get_social_sentiment()
+            
+            # Calculate opportunity score
+            score = 0
+            
+            # Price momentum (30% weight)
+            if coin['price_change_percentage_24h'] > 5:
+                score += 30
+            elif coin['price_change_percentage_24h'] > 0:
+                score += 15
+            
+            # Volume analysis (25% weight)
+            if coin['total_volume'] > 10000000:  # $10M+ volume
+                score += 25
+            elif coin['total_volume'] > 1000000:  # $1M+ volume
+                score += 15
+            
+            # Market cap analysis (20% weight)
+            if coin['market_cap'] < 1000000000:  # Under $1B (potential for growth)
+                score += 20
+            elif coin['market_cap'] < 10000000000:  # Under $10B
+                score += 10
+            
+            # Social sentiment (25% weight)
+            social_volume = len(sentiment['telegram'].get('data', [])) + len(sentiment['twitter'].get('data', []))
+            if social_volume > 100:
+                score += 25
+            elif social_volume > 50:
+                score += 15
+            
+            return {
+                "symbol": symbol,
+                "name": coin['name'],
+                "current_price": coin['current_price'],
+                "opportunity_score": score,
+                "analysis": {
+                    "price_momentum": coin['price_change_percentage_24h'],
+                    "volume": coin['total_volume'],
+                    "market_cap": coin['market_cap'],
+                    "social_volume": social_volume
+                }
+            }
+            
+        except Exception as e:
+            print(f"Error analyzing {symbol}: {e}")
+            return None
+    
+    def run_opportunity_scan(self):
+        """Scan for trading opportunities across trending coins"""
+        print("🔍 Scanning for trading opportunities...")
+        
+        trending = self.get_trending_coins()
+        opportunities = []
+        
+        for coin in trending['data']['coins'][:10]:  # Top 10 trending
+            symbol = coin['item']['id']
+            opportunity = self.analyze_market_opportunity(symbol)
+            
+            if opportunity and opportunity['opportunity_score'] > 60:
+                opportunities.append(opportunity)
+        
+        # Sort by opportunity score
+        opportunities.sort(key=lambda x: x['opportunity_score'], reverse=True)
+        
+        print(f"\n🎯 Found {len(opportunities)} high-opportunity coins:")
+        for opp in opportunities:
+            print(f"\n{opp['name']} ({opp['symbol'].upper()})")
+            print(f"  Opportunity Score: {opp['opportunity_score']}/100")
+            print(f"  Current Price: ${opp['current_price']:,.2f}")
+            print(f"  Analysis: {opp['analysis']}")
+        
+        return opportunities
+
+# Usage example
+if __name__ == "__main__":
+    bot = CryptoTradingBot("your_api_key_here")
+    
+    while True:
+        try:
+            opportunities = bot.run_opportunity_scan()
+            
+            if opportunities:
+                print(f"\n🚀 Top opportunity: {opportunities[0]['name']}")
+                print(f"   Score: {opportunities[0]['opportunity_score']}/100")
+            
+            print(f"\n⏰ Next scan in 5 minutes...")
+            time.sleep(300)  # Wait 5 minutes
+            
+        except KeyboardInterrupt:
+            print("\n🛑 Bot stopped by user")
+            break
+        except Exception as e:
+            print(f"❌ Error: {e}")
+            time.sleep(60)  # Wait 1 minute before retry
 ```
 
 ---
@@ -934,6 +1534,41 @@ print(df.describe())
 # Issue: "API key does not have permission"
 # Solution: Add required permissions in key settings
 ```
+
+#### **Rate Limiting & Best Practices**
+```bash
+# ✅ DO: Implement exponential backoff
+# ✅ DO: Cache responses when possible
+# ✅ DO: Use pagination for large datasets
+# ✅ DO: Monitor your API usage
+
+# ❌ DON'T: Make requests faster than 1 per second
+# ❌ DON'T: Ignore rate limit headers
+# ❌ DON'T: Make unnecessary requests
+```
+
+---
+
+### 🎯 **API Monetization Strategy**
+
+#### **Current Free Tier**
+- **15+ Endpoints**: Access to all major cryptocurrency data sources
+- **Unlimited Requests**: No artificial rate limiting
+- **Full Data Access**: Complete market data and analytics
+- **Professional Support**: Developer assistance and documentation
+
+#### **Future Premium Features** (Coming Soon)
+- **Higher Rate Limits**: Increased requests per minute
+- **WebSocket Support**: Real-time data streaming
+- **Advanced Analytics**: Machine learning insights and predictions
+- **Priority Support**: Dedicated technical support
+- **Custom Endpoints**: Tailored data solutions for enterprise clients
+
+#### **Enterprise Solutions**
+- **White-Label APIs**: Custom branding and endpoints
+- **Dedicated Infrastructure**: Isolated servers and databases
+- **Custom Integrations**: Tailored data solutions
+- **SLA Guarantees**: 99.9% uptime and response time guarantees
 
 ---
 
