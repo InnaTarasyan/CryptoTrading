@@ -144,3 +144,27 @@
     }
 }
 /* --- End Modern Responsive Header Styles --- */
+
+/* Footer Policy Links */
+.footer-policy-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.footer-policy-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.footer-friendly-note {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+.emoji {
+    margin-right: 5px;
+}

@@ -199,6 +199,19 @@ Route::get('/gettelegram', ['as' => 'datatable.gettelegram','uses' => 'TelegramC
 Route::get('/twitter', ['as' => 'twitter', 'uses' => 'TwitterController@index']);
 Route::resource('twitter', 'TwitterController');
 Route::get('/gettwitter', ['as' => 'datatable.gettwitter','uses' => 'TwitterController@getMessages']);
+//
+///** ===== Facebook ====== */
+//
+//Route::get('/facebook', ['as' => 'facebook', 'uses' => 'FacebookController@index']);
+//Route::resource('facebook', 'FacebookController');
+//Route::get('/getfacebook', ['as' => 'datatable.getfacebook','uses' => 'FacebookController@getPosts']);
+//Route::get('/facebook/groups', ['as' => 'facebook.groups', 'uses' => 'FacebookController@groups']);
+//Route::get('/facebook/posts', ['as' => 'facebook.posts', 'uses' => 'FacebookController@posts']);
+//Route::get('/facebook/users', ['as' => 'facebook.users', 'uses' => 'FacebookController@users']);
+//Route::get('/facebook/coin/{coin}', ['as' => 'facebook.coin.posts', 'uses' => 'FacebookController@coinPosts']);
+//Route::post('/facebook/fetch-data', ['as' => 'facebook.fetch.data', 'uses' => 'FacebookController@fetchData']);
+//Route::post('/facebook/search', ['as' => 'facebook.search', 'uses' => 'FacebookController@searchPosts']);
+//Route::get('/facebook/api-status', ['as' => 'facebook.api.status', 'uses' => 'FacebookController@checkApiStatus']);
 
 /** ===== Trading Pairs ====== */
 
@@ -247,5 +260,8 @@ Route::get('/coingecko/derivatives/reviews', [\App\Http\Controllers\Coingecko\De
 Route::post('/coingecko/derivatives/reviews', [\App\Http\Controllers\Coingecko\DerivativesReviewController::class, 'store'])->name('coingecko.derivatives.reviews.store');
 
 // Privacy Policy Page
-Route::view('/privacy-policy', 'privacy-policy');
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
+
+// Terms of Use Page
+Route::view('/terms-of-use', 'terms-of-use')->name('terms.of.use');
 

@@ -9,7 +9,8 @@
                     <span class="footer-friendly-note">
                         <span class="emoji">🤝</span>
                         We kindly ask that you do not use or share information from this site without first reaching out to the author. If you have questions or would like to use any content, please contact Inna Tarasyan—I'm always happy to connect!
-                        <a href="/privacy-policy" class="footer-policy-link">Privacy Policy</a>
+                        <a href="/privacy-policy" class="footer-policy-link">Privacy Policy</a> | 
+                        <a href="/terms-of-use" class="footer-policy-link">Terms of Use</a>
                     </span>
                 </span>
             </div>
