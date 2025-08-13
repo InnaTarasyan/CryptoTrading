@@ -172,6 +172,40 @@ Route::get('/getcoingeckonderivativesexchangesdata',
 
 
 
+/** ===== CryptoCompare ====== */
+
+// CryptoCompare Coins
+Route::get('/cryptocomparecoinsindex', 'CryptoCompare\CoinsController@index');
+Route::get('/getcryptocomparecoinsdata',
+    ['as' => 'datatable.cryptocompare.coins',
+        'uses' => 'CryptoCompare\CoinsController@getData']);
+
+// CryptoCompare Markets
+Route::get('/cryptocomparemarketsindex', 'CryptoCompare\MarketsController@index');
+Route::get('/getcryptocomparemarketsdata',
+    ['as' => 'datatable.cryptocompare.markets',
+        'uses' => 'CryptoCompare\MarketsController@getData']);
+
+// CryptoCompare Exchanges
+Route::get('/cryptocompareexchangesindex', 'CryptoCompare\ExchangesController@index');
+Route::get('/getcryptocompareexchangesdata',
+    ['as' => 'datatable.cryptocompare.exchanges',
+        'uses' => 'CryptoCompare\ExchangesController@getData']);
+
+// CryptoCompare News
+Route::get('/cryptocomparenewsindex', 'CryptoCompare\NewsController@index');
+Route::get('/getcryptocomparenewsdata',
+    ['as' => 'datatable.cryptocompare.news',
+        'uses' => 'CryptoCompare\NewsController@getData']);
+
+// CryptoCompare Top Pairs
+Route::get('/cryptocomparetopairsindex', 'CryptoCompare\TopPairsController@index');
+Route::get('/getcryptocomparetopairsdata',
+    ['as' => 'datatable.cryptocompare.top_pairs',
+        'uses' => 'CryptoCompare\TopPairsController@getData']);
+
+
+
 /** ===== Coin Market Cal ====== */
 
 Route::get('/coinmarketcalindex', 'CoinMarketCalController@index');

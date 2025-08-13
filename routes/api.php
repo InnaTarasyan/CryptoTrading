@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CryptoCompareController;
 use App\Http\Controllers\Api\CoinGeckoApiController;
 use App\Http\Controllers\Api\CoinMarketCalApiController;
 use App\Http\Controllers\Api\LiveCoinWatchApiController;
-use App\Http\Controllers\Api\TelegramApiController;
 use App\Http\Controllers\Api\TwitterApiController;
+use App\Http\Controllers\Api\TelegramApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +57,13 @@ Route::prefix('telegram')->group(function () {
 // Twitter API Routes
 Route::prefix('twitter')->group(function () {
     Route::get('/messages', [TwitterApiController::class, 'twitterMessages'])->middleware('api.key:twitter_messages');
+});
+
+// CryptoCompare API Routes
+Route::prefix('cryptocompare')->group(function () {
+    Route::get('/markets', [CryptoCompareController::class, 'getMarkets']);
+    Route::get('/news', [CryptoCompareController::class, 'getNews']);
+    Route::get('/coin', [CryptoCompareController::class, 'getCoin']);
+    Route::post('/fetch', [CryptoCompareController::class, 'fetchData']);
+    Route::get('/test', [CryptoCompareController::class, 'testConnection']);
 });
