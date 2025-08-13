@@ -62,32 +62,38 @@ class CryptoCompareService extends BaseService
 
         if (isset($response['Data'])) {
             foreach ($response['Data'] as $symbol => $item) {
-                CryptoCompareCoins::updateOrCreate([
-                    'symbol' => $symbol,
-                ], [
-                    'api_id' => $item['Id'],
-                    'name' => $item['Name'],
-                    'symbol' => $symbol,
-                    'full_name' => $item['FullName'],
-                    'internal' => array_key_exists('Internal', $item) ? $item['Internal'] : 0,
-                    'image_url' => $item['ImageUrl'],
-                    'url' => $item['Url'],
-                    'algorithm' => $item['Algorithm'] ?? null,
-                    'proof_type' => $item['ProofType'] ?? null,
-                    'net_hashes_per_second' => $item['NetHashesPerSecond'] ?? null,
-                    'block_number' => $item['BlockNumber'] ?? null,
-                    'block_time' => $item['BlockTime'] ?? null,
-                    'block_reward' => $item['BlockReward'] ?? null,
-                    'asset_launch_date' => isset($item['AssetLaunchDate']) ? new Carbon($item['AssetLaunchDate']) : null,
-                    'max_supply' => $item['MaxSupply'] ?? null,
-                    'mkt_cap_penalty' => $item['MktCapPenalty'] ?? null,
-                    'is_trading' => $item['IsTrading'] ?? false,
-                    'total_coin_supply' => $item['TotalCoinSupply'] ?? null,
-                    'pre_mined_value' => $item['PreMinedValue'] ?? null,
-                    'total_coins_free_float' => $item['TotalCoinsFreeFloat'] ?? null,
-                    'sort_order' => $item['SortOrder'] ?? null,
-                    'sponsored' => $item['Sponsored'] ?? false,
-                ]);
+
+                try {
+
+                    CryptoCompareCoins::updateOrCreate([
+                        'symbol' => $symbol,
+                    ], [
+                        'api_id' => $item['Id'],
+                        'name' => $item['Name'],
+                        'symbol' => $symbol,
+                        'full_name' => $item['FullName'],
+                        'internal' => array_key_exists('Internal', $item) ? $item['Internal'] : 0,
+                        'image_url' => $item['ImageUrl'],
+                        'url' => $item['Url'],
+                        'algorithm' => $item['Algorithm'] ?? null,
+                        'proof_type' => $item['ProofType'] ?? null,
+                        'net_hashes_per_second' => $item['NetHashesPerSecond'] ?? null,
+                        'block_number' => $item['BlockNumber'] ?? null,
+                        'block_time' => $item['BlockTime'] ?? null,
+                        'block_reward' => $item['BlockReward'] ?? null,
+                        'asset_launch_date' => isset($item['AssetLaunchDate']) ? new Carbon($item['AssetLaunchDate']) : null,
+                        'max_supply' => $item['MaxSupply'] ?? null,
+                        'mkt_cap_penalty' => $item['MktCapPenalty'] ?? null,
+                        'is_trading' => $item['IsTrading'] ?? false,
+                        'total_coin_supply' => $item['TotalCoinSupply'] ?? null,
+                        'pre_mined_value' => $item['PreMinedValue'] ?? null,
+                        'total_coins_free_float' => $item['TotalCoinsFreeFloat'] ?? null,
+                        'sort_order' => $item['SortOrder'] ?? null,
+                        'sponsored' => $item['Sponsored'] ?? false,
+                    ]);
+                } catch (\Exception $exception) {
+                    continue;
+                }
             }
         }
     }
