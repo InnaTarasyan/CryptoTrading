@@ -126,43 +126,43 @@
         <h1>Privacy Policy</h1>
         <p class="effective-date">Effective date: <b>{{ date('F d, Y') }}</b></p>
 
-        <p>Your privacy is important to us. This Privacy Policy explains how information about you is collected, used, and protected by Inna Tarasyan when you use this website.</p>
+        <p>We truly value your privacy and want you to feel safe and comfortable while using this website. This Privacy Policy explains how we collect, use, and protect the information you share with us.</p>
 
         <h2>Information We Collect</h2>
         <ul>
-            <li><strong>Personal Information:</strong> We may collect your name, email address, or other contact details if you contact us directly or sign up for updates.</li>
-            <li><strong>Usage Data:</strong> We automatically collect information about your device, browser, IP address, and how you interact with the site (such as pages visited and time spent).</li>
+            <li><strong>Personal Information:</strong> If you reach out to us or subscribe for updates, we may collect your name, email, or other contact info — and only with your permission.</li>
+            <li><strong>Usage Data:</strong> We automatically gather some details about your device, browser, IP address, and how you use our site to help us improve your experience.</li>
         </ul>
 
         <h2>How We Use Your Information</h2>
         <ul>
-            <li>To provide, operate, and maintain the website</li>
-            <li>To improve, personalize, and expand our website</li>
-            <li>To communicate with you, respond to inquiries, and provide support</li>
-            <li>To analyze usage and trends to improve user experience</li>
-            <li>To comply with legal obligations</li>
+            <li>To keep the website running smoothly and reliably</li>
+            <li>To make your experience more personalized and enjoyable</li>
+            <li>To respond to your questions, feedback, or requests quickly and helpfully</li>
+            <li>To understand how our site is used and find ways to improve it for you</li>
+            <li>To meet legal requirements and keep everything above board</li>
         </ul>
 
         <h2>Cookies</h2>
-        <p>This website uses cookies to enhance your browsing experience. Cookies are small data files stored on your device. You can disable cookies in your browser settings, but some features of the site may not function properly.</p>
+        <p>Our website uses cookies — small files stored on your device — to make browsing smoother and remember your preferences. You can disable cookies in your browser, but some features might not work as well without them.</p>
 
         <h2>Your Rights</h2>
         <ul>
-            <li>You have the right to access, update, or delete your personal information.</li>
-            <li>You may opt out of receiving communications at any time.</li>
-            <li>To exercise your rights, please contact us using the details below.</li>
+            <li>You have the right to see, update, or delete any personal information we have about you.</li>
+            <li>You can unsubscribe from our emails anytime — no hard feelings!</li>
+            <li>If you want to exercise these rights or have questions, please don’t hesitate to get in touch with us below.</li>
         </ul>
 
         <h2>Security</h2>
-        <p>We take reasonable steps to protect your information from unauthorized access, disclosure, or loss. However, no method of transmission over the Internet or electronic storage is 100% secure.</p>
+        <p>We do our best to protect your data with strong safeguards, but please remember that no method of online data transfer or storage is 100% risk-free.</p>
 
         <h2>Links to Other Sites</h2>
-        <p>This website may contain links to external sites not operated by us. We are not responsible for the privacy practices or content of those sites.</p>
+        <p>Sometimes, we link to other websites that we think you might find useful. We’re not responsible for how those sites handle your information, so please review their privacy policies directly.</p>
 
         <h2>Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+        <p>We may update this policy occasionally to reflect changes or improvements. When we do, we'll post the new version here with the latest effective date.</p>
 
         <h2>Contact</h2>
-        <p>If you have any questions or concerns about this Privacy Policy or your data, please contact Inna Tarasyan at <a href="mailto:inna.tarasyan@gmail.com">inna.tarasyan@gmail.com</a>.</p>
+        <p>If you have any questions, concerns, or just want to say hello, feel free to reach out to Inna Tarasyan at <a href="mailto:inna.tarasyan@gmail.com">inna.tarasyan@gmail.com</a>. We're here to help!</p>
     </div>
 @endsection
