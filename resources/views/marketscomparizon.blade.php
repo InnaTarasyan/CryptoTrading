@@ -201,48 +201,48 @@
                     </div>
 
                     {{-- CoinPaprika Platform --}}
-                    <div class="platform-card coinpaprika">
-                        <div class="platform-header">
-                            <h3 data-lang-key="coinpaprika">{{ __('menu.coinpaprika') }}</h3>
-                            <div class="platform-icon">🌶️</div>
-                        </div>
-                        <div class="platform-stats">
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
-                                <span class="stat-value" id="cp-total-coins">-</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="active_coins">{{ __('menu.active_coins') }}</span>
-                                <span class="stat-value" id="cp-active-coins">-</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="new_coins">{{ __('menu.new_coins') }}</span>
-                                <span class="stat-value" id="cp-new-coins">-</span>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="platform-card coinpaprika">--}}
+                        {{--<div class="platform-header">--}}
+                            {{--<h3 data-lang-key="coinpaprika">{{ __('menu.coinpaprika') }}</h3>--}}
+                            {{--<div class="platform-icon">🌶️</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="platform-stats">--}}
+                            {{--<div class="stat">--}}
+                                {{--<span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>--}}
+                                {{--<span class="stat-value" id="cp-total-coins">-</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="stat">--}}
+                                {{--<span class="stat-label" data-lang-key="active_coins">{{ __('menu.active_coins') }}</span>--}}
+                                {{--<span class="stat-value" id="cp-active-coins">-</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="stat">--}}
+                                {{--<span class="stat-label" data-lang-key="new_coins">{{ __('menu.new_coins') }}</span>--}}
+                                {{--<span class="stat-value" id="cp-new-coins">-</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     {{-- Cryptics.tech Platform --}}
-                    <div class="platform-card cryptics">
-                        <div class="platform-header">
-                            <h3 data-lang-key="cryptics_tech">{{ __('menu.cryptics_tech') }}</h3>
-                            <div class="platform-icon">🔮</div>
-                        </div>
-                        <div class="platform-stats">
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="total_predictions">{{ __('menu.total_predictions') }}</span>
-                                <span class="stat-value" id="ct-total-predictions">-</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="prediction_accuracy">{{ __('menu.prediction_accuracy') }}</span>
-                                <span class="stat-value" id="ct-accuracy">-</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="trending_up">{{ __('menu.trending_up') }}</span>
-                                <span class="stat-value" id="ct-trending-up">-</span>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="platform-card cryptics">--}}
+                        {{--<div class="platform-header">--}}
+                            {{--<h3 data-lang-key="cryptics_tech">{{ __('menu.cryptics_tech') }}</h3>--}}
+                            {{--<div class="platform-icon">🔮</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="platform-stats">--}}
+                            {{--<div class="stat">--}}
+                                {{--<span class="stat-label" data-lang-key="total_predictions">{{ __('menu.total_predictions') }}</span>--}}
+                                {{--<span class="stat-value" id="ct-total-predictions">-</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="stat">--}}
+                                {{--<span class="stat-label" data-lang-key="prediction_accuracy">{{ __('menu.prediction_accuracy') }}</span>--}}
+                                {{--<span class="stat-value" id="ct-accuracy">-</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="stat">--}}
+                                {{--<span class="stat-label" data-lang-key="trending_up">{{ __('menu.trending_up') }}</span>--}}
+                                {{--<span class="stat-value" id="ct-trending-up">-</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
 
                 {{-- Chart Grid --}}

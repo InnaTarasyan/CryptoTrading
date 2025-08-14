@@ -76,11 +76,11 @@ class MarketsComparizonController extends Controller
         // 4. CryptoCompare Data Analysis (NEW)
         $data['cryptocompare'] = $this->getCryptoCompareData();
 
-        // 5. CoinPaprika Data Analysis (ENHANCED)
-        $data['coinpaprika'] = $this->getCoinPaprikaData();
+//        // 5. CoinPaprika Data Analysis (ENHANCED)
+//        $data['coinpaprika'] = $this->getCoinPaprikaData();
 
-        // 6. Cryptics.tech Data Analysis (NEW)
-        $data['cryptics'] = $this->getCrypticsData();
+//        // 6. Cryptics.tech Data Analysis (NEW)
+//        $data['cryptics'] = $this->getCrypticsData();
 
         // 7. Cross-platform Comparison (ENHANCED)
         $data['comparison'] = $this->getCrossPlatformComparison();
