@@ -181,7 +181,7 @@
                     {{-- CryptoCompare Platform --}}
                     <div class="platform-card cryptocompare">
                         <div class="platform-header">
-                            <h3>CryptoCompare</h3>
+                            <h3 data-lang-key="cryptocompare">{{ __('menu.cryptocompare') }}</h3>
                             <div class="platform-icon">🔍</div>
                         </div>
                         <div class="platform-stats">
@@ -203,7 +203,7 @@
                     {{-- CoinPaprika Platform --}}
                     <div class="platform-card coinpaprika">
                         <div class="platform-header">
-                            <h3>CoinPaprika</h3>
+                            <h3 data-lang-key="coinpaprika">{{ __('menu.coinpaprika') }}</h3>
                             <div class="platform-icon">🌶️</div>
                         </div>
                         <div class="platform-stats">
@@ -225,7 +225,7 @@
                     {{-- Cryptics.tech Platform --}}
                     <div class="platform-card cryptics">
                         <div class="platform-header">
-                            <h3>Cryptics.tech</h3>
+                            <h3 data-lang-key="cryptics_tech">{{ __('menu.cryptics_tech') }}</h3>
                             <div class="platform-icon">🔮</div>
                         </div>
                         <div class="platform-stats">
@@ -283,21 +283,23 @@
                     <div class="chart-card full-width">
                         <h4 data-lang-key="top_10_coins_by_market_cap">{{ __('menu.top_10_coins_by_market_cap') }}</h4>
                         <div class="top-performers-table">
-                            <table id="topPerformersTable" class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th data-lang-key="rank">{{ __('menu.rank') }}</th>
-                                    <th data-lang-key="name">{{ __('menu.name') }}</th>
-                                    <th data-lang-key="symbol">{{ __('menu.symbol') }}</th>
-                                    <th data-lang-key="market_cap">{{ __('menu.market_cap') }}</th>
-                                    <th data-lang-key="price">{{ __('menu.price') }}</th>
-                                    <th data-lang-key="24h_change">{{ __('menu.24h_change') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody id="topPerformersBody">
-                                <!-- Data will be populated by JavaScript -->
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table id="topPerformersTable" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th data-lang-key="rank">{{ __('menu.rank') }}</th>
+                                        <th data-lang-key="name">{{ __('menu.name') }}</th>
+                                        <th data-lang-key="symbol">{{ __('menu.symbol') }}</th>
+                                        <th data-lang-key="market_cap">{{ __('menu.market_cap') }}</th>
+                                        <th data-lang-key="price">{{ __('menu.price') }}</th>
+                                        <th data-lang-key="24h_change">{{ __('menu.24h_change') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="topPerformersBody">
+                                    <!-- Data will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -345,6 +347,8 @@
                 padding: 1.5em;
                 margin-bottom: 2em;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .search-container {
@@ -352,6 +356,7 @@
                 gap: 1em;
                 align-items: center;
                 margin-bottom: 1em;
+                width: 100%;
             }
 
             .coin-search-input {
@@ -362,12 +367,15 @@
                 font-size: 1.1em;
                 background: #fff;
                 color: #333;
-                transition: border-color 0.3s ease;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                min-width: 0;
+                box-sizing: border-box;
             }
 
             .coin-search-input:focus {
                 outline: none;
                 border-color: #764ba2;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
             }
 
             .search-btn {
@@ -379,11 +387,188 @@
                 font-size: 1.1em;
                 font-weight: 600;
                 cursor: pointer;
-                transition: transform 0.2s ease;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                white-space: nowrap;
+                flex-shrink: 0;
+                min-width: 80px;
             }
 
             .search-btn:hover {
                 transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            }
+
+            .search-btn:active {
+                transform: translateY(0);
+            }
+
+            /* Mobile responsive styles for coin search */
+            @media (max-width: 768px) {
+                .coin-search-section {
+                    padding: 1em;
+                    border-radius: 1em;
+                    margin-bottom: 1.5em;
+                }
+
+                .search-container {
+                    flex-direction: column;
+                    gap: 0.8em;
+                    align-items: stretch;
+                }
+
+                .coin-search-input {
+                    padding: 0.9em 1em;
+                    font-size: 1rem;
+                    border-radius: 0.8em;
+                    border-width: 1.5px;
+                }
+
+                .search-btn {
+                    padding: 0.9em 1em;
+                    font-size: 1rem;
+                    border-radius: 0.8em;
+                    width: 100%;
+                    min-width: auto;
+                }
+            }
+
+            /* Small mobile devices */
+            @media (max-width: 480px) {
+                .coin-search-section {
+                    padding: 0.8em;
+                    border-radius: 0.8em;
+                    margin-bottom: 1em;
+                }
+
+                .search-container {
+                    gap: 0.6em;
+                }
+
+                .coin-search-input {
+                    padding: 0.8em 0.9em;
+                    font-size: 0.95rem;
+                    border-radius: 0.7em;
+                }
+
+                .search-btn {
+                    padding: 0.8em 0.9em;
+                    font-size: 0.95rem;
+                    border-radius: 0.7em;
+                }
+            }
+
+            /* Extra small devices */
+            @media (max-width: 360px) {
+                .coin-search-section {
+                    padding: 0.7em;
+                    border-radius: 0.7em;
+                }
+
+                .search-container {
+                    gap: 0.5em;
+                }
+
+                .coin-search-input {
+                    padding: 0.7em 0.8em;
+                    font-size: 0.9rem;
+                    border-radius: 0.6em;
+                }
+
+                .search-btn {
+                    padding: 0.7em 0.8em;
+                    font-size: 0.9rem;
+                    border-radius: 0.6em;
+                }
+            }
+
+            /* Tablet responsive adjustments */
+            @media (min-width: 769px) and (max-width: 1024px) {
+                .coin-search-section {
+                    padding: 1.2em;
+                }
+
+                .search-container {
+                    gap: 0.8em;
+                }
+
+                .coin-search-input {
+                    padding: 0.7em 1em;
+                    font-size: 1rem;
+                }
+
+                .search-btn {
+                    padding: 0.7em 1.2em;
+                    font-size: 1rem;
+                }
+            }
+
+            /* Large desktop screens */
+            @media (min-width: 1200px) {
+                .coin-search-section {
+                    padding: 2em;
+                    border-radius: 2em;
+                }
+
+                .search-container {
+                    gap: 1.2em;
+                }
+
+                .coin-search-input {
+                    padding: 1em 1.5em;
+                    font-size: 1.2em;
+                }
+
+                .search-btn {
+                    padding: 1em 2em;
+                    font-size: 1.2em;
+                }
+            }
+
+            /* Touch-friendly improvements for mobile */
+            @media (max-width: 768px) {
+                .coin-search-input {
+                    touch-action: manipulation;
+                    -webkit-appearance: none;
+                    appearance: none;
+                }
+
+                .search-btn {
+                    touch-action: manipulation;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    min-height: 44px; /* Minimum touch target size */
+                }
+
+                .coin-search-input:focus {
+                    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+                }
+            }
+
+            /* Improve accessibility */
+            .coin-search-input {
+                position: relative;
+            }
+
+            .coin-search-input:focus {
+                outline: none;
+            }
+
+            .search-btn:focus {
+                outline: 2px solid #667eea;
+                outline-offset: 2px;
+            }
+
+            /* Ensure proper text sizing */
+            .coin-search-input {
+                font-family: inherit;
+                line-height: 1.5;
+            }
+
+            /* Prevent zoom on iOS */
+            @media screen and (-webkit-min-device-pixel-ratio: 0) {
+                .coin-search-input {
+                    font-size: 16px;
+                }
             }
 
             .coin-analysis-result {
@@ -700,9 +885,171 @@
                 color: #333;
             }
 
+            /* Mobile-responsive table styles */
+            @media (max-width: 768px) {
+                .top-performers-table {
+                    overflow-x: visible;
+                }
+
+                .top-performers-table table {
+                    display: block;
+                    width: 100%;
+                }
+
+                .top-performers-table thead {
+                    display: none;
+                }
+
+                .top-performers-table tbody {
+                    display: block;
+                    width: 100%;
+                }
+
+                .top-performers-table tr {
+                    display: block;
+                    width: 100%;
+                    margin-bottom: 1rem;
+                    border: 1px solid #e9ecef;
+                    border-radius: 12px;
+                    background: #fff;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    padding: 1rem;
+                    position: relative;
+                }
+
+                .top-performers-table td {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0.5rem 0;
+                    border: none;
+                    border-bottom: 1px solid #f0f0f0;
+                    text-align: left;
+                    position: relative;
+                }
+
+                .top-performers-table td:last-child {
+                    border-bottom: none;
+                }
+
+                .top-performers-table td:before {
+                    content: attr(data-label);
+                    font-weight: 700;
+                    color: #666;
+                    min-width: 80px;
+                    margin-right: 1rem;
+                    font-size: 0.9rem;
+                }
+
+                /* Special styling for rank column */
+                .top-performers-table td[data-label="Rank"] {
+                    font-weight: 700;
+                    font-size: 1.1rem;
+                    color: #333;
+                    background: linear-gradient(135deg, #ffd200 0%, #43cea2 100%);
+                    margin: -1rem -1rem 0.5rem -1rem;
+                    padding: 0.75rem 1rem;
+                    border-radius: 12px 12px 0 0;
+                    border-bottom: 2px solid #e9ecef;
+                }
+
+                .top-performers-table td[data-label="Rank"]:before {
+                    display: none;
+                }
+
+                /* Special styling for symbol */
+                .top-performers-table td[data-label="Symbol"] {
+                    font-weight: 700;
+                    color: #667eea;
+                }
+
+                /* Special styling for market cap */
+                .top-performers-table td[data-label="Market Cap"] {
+                    font-weight: 600;
+                    color: #28a745;
+                }
+
+                /* Special styling for price */
+                .top-performers-table td[data-label="Price"] {
+                    font-weight: 600;
+                    color: #333;
+                }
+
+                /* Special styling for 24h change */
+                .top-performers-table td[data-label="24h Change"] {
+                    font-weight: 700;
+                }
+
+                .top-performers-table td[data-label="24h Change"].positive {
+                    color: #28a745;
+                }
+
+                .top-performers-table td[data-label="24h Change"].negative {
+                    color: #dc3545;
+                }
+
+                .top-performers-table td[data-label="24h Change"].neutral {
+                    color: #6c757d;
+                }
+            }
+
+            /* Tablet responsive adjustments */
+            @media (min-width: 769px) and (max-width: 1024px) {
+                .top-performers-table {
+                    overflow-x: auto;
+                }
+
+                .top-performers-table th,
+                .top-performers-table td {
+                    padding: 0.6em;
+                    font-size: 0.9rem;
+                }
+            }
+
+            /* Additional mobile improvements */
+            @media (max-width: 480px) {
+                .top-performers-table tr {
+                    margin-bottom: 0.8rem;
+                    padding: 0.8rem;
+                }
+
+                .top-performers-table td {
+                    padding: 0.4rem 0;
+                    font-size: 0.9rem;
+                }
+
+                .top-performers-table td:before {
+                    font-size: 0.8rem;
+                    min-width: 70px;
+                }
+
+                .top-performers-table td[data-label="Rank"] {
+                    font-size: 1rem;
+                    padding: 0.6rem 0.8rem;
+                }
+            }
+
+            /* Touch-friendly improvements */
+            @media (max-width: 768px) {
+                .top-performers-table tr {
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                }
+
+                .top-performers-table tr:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+                }
+
+                .top-performers-table tr:active {
+                    transform: translateY(0);
+                }
+            }
+
             .trends-summary {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 1.5em;
                 margin-top: 1em;
             }
@@ -711,9 +1058,16 @@
                 display: flex;
                 align-items: center;
                 gap: 1em;
-                padding: 1em;
+                padding: 1.2em;
                 border-radius: 1em;
                 background: #f8f9fa;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .trend-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
             }
 
             .trend-item.positive {
@@ -732,18 +1086,187 @@
             }
 
             .trend-icon {
-                font-size: 1.5em;
+                font-size: 1.8em;
+                flex-shrink: 0;
             }
 
             .trend-label {
                 font-weight: 600;
                 color: #333;
+                flex: 1;
+                font-size: 1rem;
             }
 
             .trend-value {
                 font-weight: 700;
-                font-size: 1.2em;
+                font-size: 1.3em;
                 color: #333;
+                flex-shrink: 0;
+                min-width: 60px;
+                text-align: right;
+            }
+
+            /* Mobile responsive styles for trends summary */
+            @media (max-width: 768px) {
+                .trends-summary {
+                    grid-template-columns: 1fr;
+                    gap: 1em;
+                    margin-top: 0.8em;
+                }
+
+                .trend-item {
+                    padding: 1em;
+                    gap: 0.8em;
+                    border-radius: 0.8em;
+                }
+
+                .trend-icon {
+                    font-size: 1.5em;
+                }
+
+                .trend-label {
+                    font-size: 0.95rem;
+                }
+
+                .trend-value {
+                    font-size: 1.1em;
+                    min-width: 50px;
+                }
+            }
+
+            /* Small mobile devices */
+            @media (max-width: 480px) {
+                .trends-summary {
+                    gap: 0.8em;
+                }
+
+                .trend-item {
+                    padding: 0.8em;
+                    gap: 0.6em;
+                    flex-wrap: wrap;
+                }
+
+                .trend-icon {
+                    font-size: 1.3em;
+                }
+
+                .trend-label {
+                    font-size: 0.9rem;
+                    flex: 1;
+                    min-width: 0;
+                }
+
+                .trend-value {
+                    font-size: 1rem;
+                    min-width: 40px;
+                    text-align: right;
+                }
+            }
+
+            /* Extra small devices */
+            @media (max-width: 360px) {
+                .trend-item {
+                    padding: 0.7em;
+                    gap: 0.5em;
+                }
+
+                .trend-icon {
+                    font-size: 1.2em;
+                }
+
+                .trend-label {
+                    font-size: 0.85rem;
+                }
+
+                .trend-value {
+                    font-size: 0.95rem;
+                    min-width: 35px;
+                }
+            }
+
+            /* Tablet responsive adjustments */
+            @media (min-width: 769px) and (max-width: 1024px) {
+                .trends-summary {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 1.2em;
+                }
+
+                .trend-item {
+                    padding: 1em;
+                }
+
+                .trend-icon {
+                    font-size: 1.6em;
+                }
+
+                .trend-label {
+                    font-size: 0.95rem;
+                }
+
+                .trend-value {
+                    font-size: 1.2em;
+                }
+            }
+
+            /* Large desktop screens */
+            @media (min-width: 1200px) {
+                .trends-summary {
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 2em;
+                }
+
+                .trend-item {
+                    padding: 1.5em;
+                }
+
+                .trend-icon {
+                    font-size: 2em;
+                }
+
+                .trend-label {
+                    font-size: 1.1rem;
+                }
+
+                .trend-value {
+                    font-size: 1.4em;
+                }
+            }
+
+            /* Touch-friendly improvements for mobile */
+            @media (max-width: 768px) {
+                .trend-item {
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    user-select: none;
+                }
+
+                .trend-item:active {
+                    transform: translateY(0);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                }
+            }
+
+            /* Ensure proper text wrapping and overflow handling */
+            .trend-item {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+
+            .trend-label {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            /* Improve accessibility */
+            .trend-item {
+                position: relative;
+            }
+
+            .trend-item:focus {
+                outline: 2px solid #667eea;
+                outline-offset: 2px;
             }
 
             @media (max-width: 768px) {
@@ -1345,17 +1868,21 @@
             let html = '';
 
             data.by_market_cap.forEach((coin, index) => {
+                // Determine 24h change class for mobile styling
+                const changeClass = coin.price_change_24h > 0 ? 'positive' : 
+                                  coin.price_change_24h < 0 ? 'negative' : 'neutral';
+                
                 html += `
                     <tr>
-                        <td>${index + 1}</td>
-                        <td>${coin.name}</td>
-                        <td><strong>${coin.symbol.toUpperCase()}</strong></td>
-                        <td>${formatCurrency(coin.market_cap)}</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td data-label="{{ __('menu.rank') }}">${index + 1}</td>
+                        <td data-label="{{ __('menu.name') }}">${coin.name}</td>
+                        <td data-label="{{ __('menu.symbol') }}"><strong>${coin.symbol.toUpperCase()}</strong></td>
+                        <td data-label="{{ __('menu.market_cap') }}">${formatCurrency(coin.market_cap)}</td>
+                        <td data-label="{{ __('menu.price') }}">${coin.price ? '$' + formatNumber(coin.price) : '-'}</td>
+                        <td data-label="{{ __('menu.24h_change') }}" class="${changeClass}">${coin.price_change_24h ? (coin.price_change_24h > 0 ? '+' : '') + coin.price_change_24h.toFixed(2) + '%' : '-'}</td>
                     </tr>
                 `;
-        });
+            });
 
             tbody.innerHTML = html;
         }
@@ -1516,6 +2043,14 @@
             resultEl.innerHTML = html;
         }
 
+        // Global function for external language switcher scripts to call
+        window.updateMarketsComparisonTranslations = function() {
+            if (typeof updatePlatformTranslations === 'function') {
+                updatePlatformTranslations();
+                console.log('External language switcher called - updating platform translations');
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', function() {
 
             // Load comparison data on page load
@@ -1554,6 +2089,124 @@
                     }
                 }, 250); // Debounce resize events
             });
+
+            // Language switcher functionality for platform data
+            function updatePlatformTranslations() {
+                // Update platform names
+                const platformNames = {
+                    'cryptocompare': '{{ __("menu.cryptocompare") }}',
+                    'coinpaprika': '{{ __("menu.coinpaprika") }}',
+                    'cryptics_tech': '{{ __("menu.cryptics_tech") }}'
+                };
+
+                // Update platform headers
+                document.querySelectorAll('[data-lang-key="cryptocompare"]').forEach(el => {
+                    el.textContent = platformNames.cryptocompare;
+                });
+                document.querySelectorAll('[data-lang-key="coinpaprika"]').forEach(el => {
+                    el.textContent = platformNames.coinpaprika;
+                });
+                document.querySelectorAll('[data-lang-key="cryptics_tech"]').forEach(el => {
+                    el.textContent = platformNames.cryptics_tech;
+                });
+
+                // Update stat labels - including the specific ones you mentioned
+                const statLabels = {
+                    'total_coins': '{{ __("menu.total_coins") }}',
+                    'total_market_cap': '{{ __("menu.total_market_cap") }}',
+                    'total_volume': '{{ __("menu.total_volume") }}',
+                    'active_coins': '{{ __("menu.active_coins") }}',
+                    'new_coins': '{{ __("menu.new_coins") }}',
+                    'total_predictions': '{{ __("menu.total_predictions") }}',
+                    'prediction_accuracy': '{{ __("menu.prediction_accuracy") }}',
+                    'trending_up': '{{ __("menu.trending_up") }}'
+                };
+
+                // Update all stat labels
+                Object.keys(statLabels).forEach(key => {
+                    document.querySelectorAll(`[data-lang-key="${key}"]`).forEach(el => {
+                        el.textContent = statLabels[key];
+                    });
+                });
+
+                // Update chart labels and legends
+                updateChartTranslations();
+            }
+
+            function updateChartTranslations() {
+                // Update chart labels if charts exist
+                if (window.comparisonCharts.marketCap) {
+                    window.comparisonCharts.marketCap.data.labels = [
+                        '{{ __("menu.mega_cap") }}',
+                        '{{ __("menu.large_cap") }}',
+                        '{{ __("menu.mid_cap") }}',
+                        '{{ __("menu.small_cap") }}',
+                        '{{ __("menu.micro_cap") }}'
+                    ];
+                    window.comparisonCharts.marketCap.update();
+                }
+
+                if (window.comparisonCharts.priceTrends) {
+                    window.comparisonCharts.priceTrends.data.labels = [
+                        '{{ __("menu.gaining") }}',
+                        '{{ __("menu.losing") }}',
+                        '{{ __("menu.stable") }}'
+                    ];
+                    window.comparisonCharts.priceTrends.data.datasets[0].label = '{{ __("menu.price_movement_24h") }}';
+                    window.comparisonCharts.priceTrends.update();
+                }
+
+                if (window.comparisonCharts.volume) {
+                    window.comparisonCharts.volume.data.labels = [
+                        '{{ __("menu.high_volume") }}',
+                        '{{ __("menu.medium_volume") }}',
+                        '{{ __("menu.low_volume") }}'
+                    ];
+                    window.comparisonCharts.volume.update();
+                }
+
+                if (window.comparisonCharts.platform) {
+                    window.comparisonCharts.platform.data.labels = [
+                        '{{ __("menu.livecoinwatch_only") }}',
+                        '{{ __("menu.coingecko_only") }}',
+                        '{{ __("menu.both_platforms") }}'
+                    ];
+                    window.comparisonCharts.platform.data.datasets[0].label = '{{ __("menu.platform_coverage") }}';
+                    window.comparisonCharts.platform.update();
+                }
+            }
+
+            // Enhanced language switcher event handling
+            function setupLanguageSwitcher() {
+                const languageSwitcher = document.getElementById('languageSwitcher');
+                if (languageSwitcher) {
+                    // Remove existing listeners to prevent duplicates
+                    languageSwitcher.removeEventListener('change', handleLanguageChange);
+                    languageSwitcher.addEventListener('change', handleLanguageChange);
+                }
+            }
+
+            function handleLanguageChange() {
+                // Wait for the page to reload with new language
+                setTimeout(function() {
+                    updatePlatformTranslations();
+                    console.log('Language switched - updating platform translations');
+                }, 100);
+            }
+
+            // Listen for language switcher changes
+            setupLanguageSwitcher();
+
+            // Also listen for custom language change events
+            document.addEventListener('languageChanged', function() {
+                setTimeout(function() {
+                    updatePlatformTranslations();
+                    console.log('Language changed event detected - updating translations');
+                }, 100);
+            });
+
+            // Initial translation update
+            updatePlatformTranslations();
 
         });
 

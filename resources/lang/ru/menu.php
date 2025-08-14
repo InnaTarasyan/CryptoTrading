@@ -138,4 +138,17 @@ return [
     'error_searching_for' => 'Ошибка поиска для',
     'searching_for_coin_data' => 'Поиск данных о монете...',
     'platforms_comparison_title' => 'Сравнение данных LiveCoinWatch, CoinGecko, CoinMarketCal,  CryptoCompare, CoinPaprika и Cryptics.tech',
+    
+    // Platform-specific metrics
+    'active_coins' => 'Активные монеты',
+    'new_coins' => 'Новые монеты',
+    'total_predictions' => 'Всего прогнозов',
+    'prediction_accuracy' => 'Точность прогнозов',
+    'trending_up' => 'Растущие тренды',
+    'price_movement_24h' => 'Движение цен (24ч)',
+    
+    // Platform names (for consistency)
+    'cryptocompare' => 'CryptoCompare',
+    'coinpaprika' => 'CoinPaprika',
+    'cryptics_tech' => 'Cryptics.tech',
 ]; 

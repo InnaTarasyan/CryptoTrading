@@ -138,4 +138,17 @@ return [
     'error_searching_for' => 'Սխալ որոնելիս',
     'searching_for_coin_data' => 'Որոնվում են մետաղադրամի տվյալներ...',
     'platforms_comparison_title' => 'LiveCoinWatch, CoinGecko, CoinMarketCal,  CryptoCompare, CoinPaprika and Cryptics.tech տվյալների համեմատություն',
+    
+    // Platform-specific metrics
+    'active_coins' => 'Ակտիվ մետաղադրամներ',
+    'new_coins' => 'Նոր մետաղադրամներ',
+    'total_predictions' => 'Ընդհանուր կանխատեսումներ',
+    'prediction_accuracy' => 'Կանխատեսման ճշգրտություն',
+    'trending_up' => 'Աճող միտումներ',
+    'price_movement_24h' => 'Գնային շարժում (24ժ)',
+    
+    // Platform names (for consistency)
+    'cryptocompare' => 'CryptoCompare',
+    'coinpaprika' => 'CoinPaprika',
+    'cryptics_tech' => 'Cryptics.tech',
 ]; 

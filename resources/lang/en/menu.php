@@ -138,4 +138,17 @@ return [
     'error_searching_for' => 'Error searching for',
     'searching_for_coin_data' => 'Searching for coin data...',
     'platforms_comparison_title' => 'Compare Data from LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika and Cryptics.tech',
+    
+    // Platform-specific metrics
+    'active_coins' => 'Active Coins',
+    'new_coins' => 'New Coins',
+    'total_predictions' => 'Total Predictions',
+    'prediction_accuracy' => 'Prediction Accuracy',
+    'trending_up' => 'Trending Up',
+    'price_movement_24h' => 'Price Movement (24h)',
+    
+    // Platform names (for consistency)
+    'cryptocompare' => 'CryptoCompare',
+    'coinpaprika' => 'CoinPaprika',
+    'cryptics_tech' => 'Cryptics.tech',
 ]; 

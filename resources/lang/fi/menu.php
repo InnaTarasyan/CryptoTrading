@@ -138,4 +138,17 @@ return [
     'error_searching_for' => 'Virhe etsittäessä',
     'searching_for_coin_data' => 'Etsitään kolikkotietoja...',
     'platforms_comparison_title' => 'LiveCoinWatch-, CoinGecko- ja CoinMarketCal-tietojen vertailu,  CryptoCompare, CoinPaprika, Cryptics.tech',
+    
+    // Platform-specific metrics
+    'active_coins' => 'Aktiiviset kolikot',
+    'new_coins' => 'Uudet kolikot',
+    'total_predictions' => 'Kokonaisennusteet',
+    'prediction_accuracy' => 'Ennusteen tarkkuus',
+    'trending_up' => 'Nousevat trendit',
+    'price_movement_24h' => 'Hintaliike (24h)',
+    
+    // Platform names (for consistency)
+    'cryptocompare' => 'CryptoCompare',
+    'coinpaprika' => 'CoinPaprika',
+    'cryptics_tech' => 'Cryptics.tech',
 ]; 

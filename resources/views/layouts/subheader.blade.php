@@ -5,7 +5,7 @@
             <h3 class="m-subheader__title" data-lang-key="dashboard">
                 Dashboard
             </h3>
-            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline enhanced-breadcrumbs modern-breadcrumbs">
+            <ul class="mt-5 m-subheader__breadcrumbs m-nav m-nav--inline enhanced-breadcrumbs modern-breadcrumbs">
                 <li class="breadcrumb-item">
                     <a href="/" class="breadcrumb-link" aria-label="Navigate to Markets Comparison">
                         <svg class="breadcrumb-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -477,6 +477,7 @@
             flex-direction: column;
             align-items: stretch;
             gap: 16px;
+            padding: 0 16px;
         }
         
         .subheader-left {
@@ -491,19 +492,24 @@
             margin-bottom: 8px;
         }
         
-        /* Mobile-friendly breadcrumb redesign */
+        /* Enhanced mobile-friendly breadcrumb redesign */
         .modern-breadcrumbs {
             width: 100%;
-            background: #f8fafc;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            backdrop-filter: none;
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
             overflow-x: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: nowrap;
+            min-height: 60px;
         }
         
         .modern-breadcrumbs::-webkit-scrollbar {
@@ -516,11 +522,12 @@
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 20px;
+            width: 24px;
             height: 100%;
             background: linear-gradient(90deg, #f8fafc 0%, transparent 100%);
             z-index: 1;
             pointer-events: none;
+            border-radius: 20px 0 0 20px;
         }
         
         .modern-breadcrumbs::after {
@@ -529,82 +536,106 @@
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 20px;
+            width: 24px;
             height: 100%;
             background: linear-gradient(270deg, #f8fafc 0%, transparent 100%);
             z-index: 1;
             pointer-events: none;
+            border-radius: 0 20px 20px 0;
         }
         
         .breadcrumb-item {
             position: relative;
             z-index: 2;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
         }
         
         .breadcrumb-item:not(:last-child)::after {
             content: '›';
             color: #94a3b8;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
-            margin: 0 8px;
-            opacity: 0.8;
+            margin: 0 6px;
+            opacity: 0.7;
+            flex-shrink: 0;
         }
         
         .breadcrumb-link {
-            padding: 10px 16px;
+            padding: 12px 16px;
             font-size: 14px;
             font-weight: 500;
             gap: 8px;
-            border-radius: 12px;
-            background: #fff;
-            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.8);
             color: #475569;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             min-width: fit-content;
             position: relative;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            touch-action: manipulation;
         }
         
         .breadcrumb-link:hover {
-            background: #f1f5f9;
+            background: rgba(255, 255, 255, 1);
             border-color: #cbd5e1;
-            transform: translateY(-1px);
+            color: #374151;
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .breadcrumb-link:active {
             transform: translateY(0);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+        
+        .breadcrumb-link:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 1);
+            border-color: #3b82f6;
+            color: #1e40af;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         
         .breadcrumb-icon {
             width: 18px;
             height: 18px;
             opacity: 0.8;
+            flex-shrink: 0;
         }
         
         .breadcrumb-text {
             font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 120px;
         }
         
-        /* Special highlight for mobile */
+        /* Enhanced special highlight for mobile */
         .breadcrumb-link.special-highlight {
             background: linear-gradient(135deg, #f59e0b, #f97316);
             color: #fff;
             border-color: #f59e0b;
+            font-weight: 600;
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-            animation: mobileGlow 2s ease-in-out infinite;
+            animation: specialGlow 3s ease-in-out infinite;
         }
         
         .breadcrumb-link.special-highlight:hover {
             background: linear-gradient(135deg, #d97706, #ea580c);
-            border-color: #d97706;
-            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
-        }
-        
-        .breadcrumb-link.special-highlight .breadcrumb-icon {
-            opacity: 1;
             color: #fff;
+            border-color: #d97706;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
         }
         
         .highlight-badge {
@@ -613,49 +644,20 @@
             right: -8px;
             background: #ef4444;
             color: #fff;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            padding: 3px 8px;
+            padding: 3px 6px;
             border-radius: 12px;
-            animation: mobileBadgePulse 1.5s ease-in-out infinite;
+            animation: badgePulse 2s ease-in-out infinite;
             z-index: 3;
-            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
-        }
-        
-        @keyframes mobileGlow {
-            0%, 100% {
-                box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-            }
-            50% {
-                box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
-            }
-        }
-        
-        @keyframes mobileBadgePulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.15);
-            }
-        }
-        
-        .subheader-right {
-            align-self: stretch;
-        }
-        
-        .modern-update-btn.modern-update-btn-fancy {
-            width: 100%;
-            justify-content: center;
-            padding: 16px 24px;
-            font-size: 1.1rem;
-            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
     }
 
     @media (max-width: 480px) {
         .subheader-container {
             gap: 12px;
+            padding: 0 12px;
         }
         
         .subheader-left {
@@ -667,20 +669,23 @@
         }
         
         .modern-breadcrumbs {
-            padding: 6px;
-            border-radius: 14px;
+            padding: 8px;
+            border-radius: 16px;
+            min-height: 56px;
+            gap: 6px;
         }
         
         .breadcrumb-link {
-            padding: 8px 12px;
+            padding: 10px 14px;
             font-size: 13px;
             gap: 6px;
-            border-radius: 10px;
+            border-radius: 12px;
+            min-height: 40px;
         }
         
         .breadcrumb-item:not(:last-child)::after {
-            margin: 0 6px;
-            font-size: 12px;
+            margin: 0 4px;
+            font-size: 14px;
         }
         
         .breadcrumb-icon {
@@ -688,11 +693,17 @@
             height: 16px;
         }
         
+        .breadcrumb-text {
+            max-width: 100px;
+            font-size: 13px;
+        }
+        
         .highlight-badge {
-            font-size: 10px;
-            padding: 2px 6px;
+            font-size: 9px;
+            padding: 2px 5px;
             top: -6px;
             right: -6px;
+            border-radius: 10px;
         }
         
         .modern-update-btn.modern-update-btn-fancy {
@@ -703,10 +714,37 @@
     }
 
     @media (max-width: 360px) {
+        .subheader-container {
+            gap: 10px;
+            padding: 0 8px;
+        }
+        
+        .subheader-left {
+            gap: 8px;
+        }
+        
+        .m-subheader__title {
+            font-size: 1.2rem;
+        }
+        
+        .modern-breadcrumbs {
+            padding: 6px;
+            border-radius: 14px;
+            min-height: 52px;
+            gap: 4px;
+        }
+        
         .breadcrumb-link {
-            padding: 6px 10px;
+            padding: 8px 12px;
             font-size: 12px;
             gap: 4px;
+            border-radius: 10px;
+            min-height: 36px;
+        }
+        
+        .breadcrumb-item:not(:last-child)::after {
+            margin: 0 3px;
+            font-size: 12px;
         }
         
         .breadcrumb-icon {
@@ -714,14 +752,87 @@
             height: 14px;
         }
         
-        .breadcrumb-item:not(:last-child)::after {
-            margin: 0 4px;
-            font-size: 11px;
+        .breadcrumb-text {
+            max-width: 80px;
+            font-size: 12px;
         }
         
         .highlight-badge {
-            font-size: 9px;
+            font-size: 8px;
             padding: 1px 4px;
+            top: -5px;
+            right: -5px;
+            border-radius: 8px;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy {
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            border-radius: 12px;
+        }
+    }
+
+    /* Additional touch-friendly improvements for all mobile devices */
+    @media (max-width: 768px) {
+        .breadcrumb-link {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .breadcrumb-link:active {
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+        }
+        
+        /* Improve scroll performance */
+        .modern-breadcrumbs {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        /* Better focus indicators for accessibility */
+        .breadcrumb-link:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    }
+
+    /* Ensure proper text sizing on iOS */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+        .breadcrumb-text {
+            font-size: 16px;
+        }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        .breadcrumb-link {
+            border-width: 2px;
+        }
+        
+        .breadcrumb-link:focus {
+            border-width: 3px;
+        }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .breadcrumb-link {
+            transition: none;
+        }
+        
+        .breadcrumb-link:hover {
+            transform: none;
+        }
+        
+        .breadcrumb-link.special-highlight {
+            animation: none;
+        }
+        
+        .highlight-badge {
+            animation: none;
         }
     }
 </style>
