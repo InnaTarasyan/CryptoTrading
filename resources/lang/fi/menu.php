@@ -137,5 +137,5 @@ return [
     'no_data_found_for' => 'Tietoja ei löytynyt kohteelle',
     'error_searching_for' => 'Virhe etsittäessä',
     'searching_for_coin_data' => 'Etsitään kolikkotietoja...',
-    'platforms_comparison_title' => 'LiveCoinWatch-, CoinGecko- ja CoinMarketCal-tietojen vertailu',
+    'platforms_comparison_title' => 'LiveCoinWatch-, CoinGecko- ja CoinMarketCal-tietojen vertailu,  CryptoCompare, CoinPaprika, Cryptics.tech',
 ]; 

@@ -176,6 +176,73 @@
                             </div>
                         </div>
                     </div>
+
+
+                    {{-- CryptoCompare Platform --}}
+                    <div class="platform-card cryptocompare">
+                        <div class="platform-header">
+                            <h3>CryptoCompare</h3>
+                            <div class="platform-icon">🔍</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
+                                <span class="stat-value" id="cc-total-coins">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="total_market_cap">{{ __('menu.total_market_cap') }}</span>
+                                <span class="stat-value" id="cc-total-mcap">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="total_volume">{{ __('menu.total_volume') }}</span>
+                                <span class="stat-value" id="cc-total-volume">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- CoinPaprika Platform --}}
+                    <div class="platform-card coinpaprika">
+                        <div class="platform-header">
+                            <h3>CoinPaprika</h3>
+                            <div class="platform-icon">🌶️</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
+                                <span class="stat-value" id="cp-total-coins">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="active_coins">{{ __('menu.active_coins') }}</span>
+                                <span class="stat-value" id="cp-active-coins">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="new_coins">{{ __('menu.new_coins') }}</span>
+                                <span class="stat-value" id="cp-new-coins">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Cryptics.tech Platform --}}
+                    <div class="platform-card cryptics">
+                        <div class="platform-header">
+                            <h3>Cryptics.tech</h3>
+                            <div class="platform-icon">🔮</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="total_predictions">{{ __('menu.total_predictions') }}</span>
+                                <span class="stat-value" id="ct-total-predictions">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="prediction_accuracy">{{ __('menu.prediction_accuracy') }}</span>
+                                <span class="stat-value" id="ct-accuracy">-</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-lang-key="trending_up">{{ __('menu.trending_up') }}</span>
+                                <span class="stat-value" id="ct-trending-up">-</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {{-- Chart Grid --}}
@@ -233,6 +300,10 @@
                             </table>
                         </div>
                     </div>
+
+
+
+
 
                     {{-- Market Trends Summary --}}
                     <div class="chart-card full-width">
@@ -465,8 +536,9 @@
 
             .chart-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-                gap: 2em;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 1.5em;
+                margin-bottom: 2em;
             }
 
             .chart-card {
@@ -474,9 +546,11 @@
                 border-radius: 1.5em;
                 padding: 1.5em;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                min-height: 400px;
+                min-height: 350px;
                 display: flex;
                 flex-direction: column;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .chart-card.full-width {
@@ -494,18 +568,114 @@
             }
 
             .chart-container {
-                width: 100%;
-                height: 300px !important;
+                width: 100% !important;
+                height: 280px !important;
                 position: relative;
                 overflow: hidden;
                 flex: 1;
-                min-height: 300px;
+                min-height: 280px;
+                max-height: 280px;
             }
 
             .chart-container canvas {
-                max-height: 100% !important;
                 max-width: 100% !important;
+                max-height: 100% !important;
+                width: 100% !important;
                 height: 100% !important;
+                object-fit: contain;
+            }
+
+            /* Mobile-specific chart adjustments */
+            @media (max-width: 768px) {
+                .chart-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1em;
+                }
+
+                .chart-card {
+                    padding: 1em;
+                    min-height: 300px;
+                    margin-bottom: 1em;
+                }
+
+                .chart-container {
+                    height: 250px !important;
+                    min-height: 250px;
+                    max-height: 250px;
+                }
+
+                .chart-card h4 {
+                    font-size: 1.1em;
+                    margin-bottom: 0.8em;
+                }
+            }
+
+            /* Small mobile devices */
+            @media (max-width: 480px) {
+                .chart-card {
+                    padding: 0.8em;
+                    min-height: 280px;
+                }
+
+                .chart-container {
+                    height: 220px !important;
+                    min-height: 220px;
+                    max-height: 220px;
+                }
+
+                .chart-card h4 {
+                    font-size: 1em;
+                    margin-bottom: 0.6em;
+                }
+            }
+
+            /* Extra small devices */
+            @media (max-width: 360px) {
+                .chart-container {
+                    height: 200px !important;
+                    min-height: 200px;
+                    max-height: 200px;
+                }
+            }
+
+            /* Touch-friendly improvements for mobile */
+            @media (max-width: 768px) {
+                .chart-container {
+                    touch-action: pan-x pan-y;
+                    -webkit-overflow-scrolling: touch;
+                }
+
+                .chart-card {
+                    touch-action: manipulation;
+                }
+            }
+
+            /* Ensure charts don't overflow on any device */
+            .chart-container {
+                overflow: hidden !important;
+                position: relative !important;
+            }
+
+            /* Better chart responsiveness */
+            .chart-container canvas {
+                touch-action: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            /* Improve chart grid layout on different screen sizes */
+            @media (min-width: 1200px) {
+                .chart-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (min-width: 768px) and (max-width: 1199px) {
+                .chart-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                }
             }
 
             .top-performers-table {
@@ -793,6 +963,29 @@
             document.getElementById('cmc-total-coins').textContent = data.coinmarketcal.total_coins.toLocaleString();
             document.getElementById('cmc-total-events').textContent = data.coinmarketcal.total_events.toLocaleString();
             document.getElementById('cmc-top-10').textContent = data.coinmarketcal.rank_distribution.top_10.toLocaleString();
+
+
+
+            // CryptoCompare
+            if (data.cryptocompare) {
+                $('#cc-total-coins').text(data.cryptocompare.total_coins?.toLocaleString() || '-');
+                $('#cc-total-mcap').text('$' + (data.cryptocompare.market_cap_stats?.total / 1e9).toFixed(2) + 'B');
+                $('#cc-total-volume').text('$' + (data.cryptocompare.volume_stats?.total / 1e9).toFixed(2) + 'B');
+            }
+
+            // CoinPaprika
+            if (data.coinpaprika) {
+                $('#cp-total-coins').text(data.coinpaprika.total_coins?.toLocaleString() || '-');
+                $('#cp-active-coins').text(data.coinpaprika.active_coins?.toLocaleString() || '-');
+                $('#cp-new-coins').text(data.coinpaprika.new_coins?.toLocaleString() || '-');
+            }
+
+            // Cryptics.tech
+            if (data.cryptics) {
+                $('#ct-total-predictions').text(data.cryptics.total_predictions?.toLocaleString() || '-');
+                $('#ct-accuracy').text((data.cryptics.prediction_accuracy * 100).toFixed(1) + '%');
+                $('#ct-trending-up').text(data.cryptics.prediction_trends?.trending_up || '-');
+            }
         }
 
         function createMarketCapChart(data) {
@@ -830,18 +1023,47 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'bottom',
+                            position: window.innerWidth < 768 ? 'bottom' : 'bottom',
                             labels: {
-                                padding: 20,
+                                padding: window.innerWidth < 768 ? 10 : 20,
                                 usePointStyle: true,
-                                boxWidth: 12
+                                boxWidth: window.innerWidth < 768 ? 8 : 12,
+                                font: {
+                                    size: window.innerWidth < 768 ? 11 : 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#fff',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || context.raw;
+                                    return `${label}: ${value.toLocaleString()}`;
+                                }
                             }
                         }
                     },
                     layout: {
                         padding: {
-                            top: 10,
-                            bottom: 10
+                            top: window.innerWidth < 768 ? 5 : 10,
+                            bottom: window.innerWidth < 768 ? 5 : 10,
+                            left: window.innerWidth < 768 ? 5 : 10,
+                            right: window.innerWidth < 768 ? 5 : 10
+                        }
+                    },
+                    elements: {
+                        arc: {
+                            borderWidth: window.innerWidth < 768 ? 1 : 2
                         }
                     }
                 }
@@ -860,7 +1082,7 @@
                 data: {
                     labels: ['{{ __("menu.gaining") }}', '{{ __("menu.losing") }}', '{{ __("menu.stable") }}'],
                     datasets: [{
-                        label: 'Price Movement (24h)',
+                        label: '{{ __("menu.price_movement_24h") }}',
                         data: [
                             data.price_movement.gaining,
                             data.price_movement.losing,
@@ -876,7 +1098,8 @@
                             'rgba(220, 53, 69, 1)',
                             'rgba(108, 117, 125, 1)'
                         ],
-                        borderWidth: 1
+                        borderWidth: 1,
+                        borderRadius: 4
                     }]
                 },
                 options: {
@@ -888,19 +1111,54 @@
                             ticks: {
                                 callback: function(value) {
                                     return value.toLocaleString();
+                                },
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
                                 }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
+                                }
+                            },
+                            grid: {
+                                display: false
                             }
                         }
                     },
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#fff',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed.y;
+                                    return `${context.dataset.label}: ${value.toLocaleString()}`;
+                                }
+                            }
                         }
                     },
                     layout: {
                         padding: {
-                            top: 10,
-                            bottom: 10
+                            top: window.innerWidth < 768 ? 5 : 10,
+                            bottom: window.innerWidth < 768 ? 5 : 10,
+                            left: window.innerWidth < 768 ? 5 : 10,
+                            right: window.innerWidth < 768 ? 5 : 10
                         }
                     }
                 }
@@ -938,18 +1196,47 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'bottom',
+                            position: window.innerWidth < 768 ? 'bottom' : 'bottom',
                             labels: {
-                                padding: 20,
+                                padding: window.innerWidth < 768 ? 10 : 20,
                                 usePointStyle: true,
-                                boxWidth: 12
+                                boxWidth: window.innerWidth < 768 ? 8 : 12,
+                                font: {
+                                    size: window.innerWidth < 768 ? 11 : 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#fff',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || context.raw;
+                                    return `${label}: ${value.toLocaleString()}`;
+                                }
                             }
                         }
                     },
                     layout: {
                         padding: {
-                            top: 10,
-                            bottom: 10
+                            top: window.innerWidth < 768 ? 5 : 10,
+                            bottom: window.innerWidth < 768 ? 5 : 10,
+                            left: window.innerWidth < 768 ? 5 : 10,
+                            right: window.innerWidth < 768 ? 5 : 10
+                        }
+                    },
+                    elements: {
+                        arc: {
+                            borderWidth: window.innerWidth < 768 ? 1 : 2
                         }
                     }
                 }
@@ -968,7 +1255,7 @@
                 data: {
                     labels: ['{{ __("menu.livecoinwatch_only") }}', '{{ __("menu.coingecko_only") }}', '{{ __("menu.both_platforms") }}'],
                     datasets: [{
-                        label: 'Platform Coverage',
+                        label: '{{ __("menu.platform_coverage") }}',
                         data: [
                             data.platform_coverage.livecoinwatch_only,
                             data.platform_coverage.coingecko_only,
@@ -984,7 +1271,8 @@
                             'rgba(40, 167, 69, 1)',
                             'rgba(13, 110, 253, 1)'
                         ],
-                        borderWidth: 1
+                        borderWidth: 1,
+                        borderRadius: 4
                     }]
                 },
                 options: {
@@ -996,19 +1284,56 @@
                             ticks: {
                                 callback: function(value) {
                                     return value.toLocaleString();
+                                },
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
                                 }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
+                                },
+                                maxRotation: window.innerWidth < 768 ? 45 : 0,
+                                minRotation: window.innerWidth < 768 ? 45 : 0
+                            },
+                            grid: {
+                                display: false
                             }
                         }
                     },
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#fff',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed.y;
+                                    return `${context.dataset.label}: ${value.toLocaleString()}`;
+                                }
+                            }
                         }
                     },
                     layout: {
                         padding: {
-                            top: 10,
-                            bottom: 10
+                            top: window.innerWidth < 768 ? 5 : 10,
+                            bottom: window.innerWidth < 768 ? 5 : 10,
+                            left: window.innerWidth < 768 ? 5 : 10,
+                            right: window.innerWidth < 768 ? 5 : 10
                         }
                     }
                 }
@@ -1209,6 +1534,28 @@
                 }
             });
 
+            // Handle window resize for responsive charts
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    // Resize all charts when window size changes
+                    if (window.comparisonCharts.marketCap) {
+                        window.comparisonCharts.marketCap.resize();
+                    }
+                    if (window.comparisonCharts.priceTrends) {
+                        window.comparisonCharts.priceTrends.resize();
+                    }
+                    if (window.comparisonCharts.volume) {
+                        window.comparisonCharts.volume.resize();
+                    }
+                    if (window.comparisonCharts.platform) {
+                        window.comparisonCharts.platform.resize();
+                    }
+                }, 250); // Debounce resize events
+            });
+
         });
+
     </script>
 @endsection
