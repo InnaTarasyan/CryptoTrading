@@ -141,40 +141,46 @@
 
                 <div class="space-y-8">
                     <section>
-                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">1. Welcome</h2>
+                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">1. Welcome — We're Glad You're Here</h2>
                         <p class="text-gray-700 dark:text-gray-300">
-                            Thanks for visiting Crypto Trading! These Terms of Use explain how you can use our website, mobile app, and services (called the "Service").
+                            Thanks for visiting Crypto Trading. We're excited to have you here and want to help you get the most out of your experience. These Terms of Use explain how you can use our website, apps, and services (which we’ll call the “Service”).
                         </p>
                         <p class="text-gray-700 dark:text-gray-300">
-                            By using our Service, you’re agreeing to these Terms. If you don’t agree, please don’t use our platform.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">2. Agreeing to These Terms</h2>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            To use our Service, you must be at least 18 years old and legally able to agree to these Terms. If you’re using the Service for a company, you confirm that you have the right to accept these Terms for that company.
+                            By using our Service, you're agreeing to these terms. If you ever feel unsure or uncomfortable about them, we encourage you to reach out — your understanding and trust are important to us.
                         </p>
                     </section>
 
                     <section>
-                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">3. What We Offer</h2>
+                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">2. Your Agreement Matters</h2>
                         <p class="text-gray-700 dark:text-gray-300">
-                            Crypto Trading provides tools, insights, and features to help you understand and manage cryptocurrency trading. Here’s what’s included:
+                            When you use our Service, you’re agreeing to follow these Terms. To do that, you need to be at least 18 years old and legally able to make this agreement. If you’re using the Service on behalf of a company or group, please make sure you’re allowed to do that — and that you’re okay taking responsibility on their behalf.
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            We know that legal language can feel heavy, but our goal is to make sure everyone using Crypto Trading is on the same page, so we can provide a safe, helpful experience for everyone.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">3. What You Can Expect From Us</h2>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Crypto Trading is designed to give you valuable tools, insights, and resources in the world of cryptocurrency. Whether you’re just starting or already experienced, we’re here to support you. Here’s a quick look at what we offer:
                         </p>
                         <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 ml-6 mb-4 space-y-2 custom-list">
-                            <li>Live market data and analysis</li>
-                            <li>Social media features like Facebook integration</li>
-                            <li>Trading tools and learning resources</li>
-                            <li>Community forums and discussion areas</li>
-                            <li>Tools to track and manage your portfolio</li>
+                            <li>Up-to-date cryptocurrency market data and analysis</li>
+                            <li>Connections to your favorite platforms like Facebook</li>
+                            <li>Educational tools and trading features to help you learn and grow</li>
+                            <li>A welcoming community where you can share, ask, and discuss</li>
+                            <li>Portfolio tracking tools to help you stay organized and in control</li>
                         </ul>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Everything we build is with you in mind — to help you make smart, informed decisions in the crypto space.
+                        </p>
                     </section>
 
                     <section class="bg-blue-50 dark:bg-blue-900 p-6 rounded-lg border-l-4 border-blue-400 dark:border-blue-300 acknowledgment">
-                        <h2 class="text-xl font-semibold text-blue-900 dark:text-blue-100 mb-3">Please Note</h2>
+                        <h2 class="text-xl font-semibold text-blue-900 dark:text-blue-100 mb-3">A Gentle Reminder</h2>
                         <p class="text-blue-800 dark:text-blue-200">
-                            By continuing to use our Service, you confirm that you’ve read and understood these Terms, and that you agree to follow them. If not, please stop using the Service.
+                            By continuing to use Crypto Trading, you're letting us know that you've read and understood these Terms — and that you're okay with them. If anything feels unclear or you're unsure about any part, don't hesitate to get in touch. We believe in transparency and want you to feel confident using our Service.
                         </p>
                     </section>
                 </div>
