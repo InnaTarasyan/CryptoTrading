@@ -65,33 +65,39 @@
                 
                 <!-- BEGIN: Tutorial Links Section (Right Side) -->
                 <div class="tutorial-links-container desktop-tutorial-links">
-                    <div class="tutorial-links-wrapper">
-                        <div class="tutorial-links-title">
+                    <div class="tutorial-dropdown">
+                        <button class="tutorial-dropdown-toggle" type="button" id="tutorialDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="la la-graduation-cap"></i>
                             <span data-lang-key="trading_tutorials">Trading Tutorials</span>
-                        </div>
-                        <div class="tutorial-links-grid">
-                            <a href="https://www.binance.com/en/blog/ecosystem/crypto-trading-guide-for-beginners-421499824684903654" target="_blank" class="tutorial-link" title="Binance Trading Guide">
+                            <i class="la la-angle-down dropdown-arrow"></i>
+                        </button>
+                        <div class="tutorial-dropdown-menu" aria-labelledby="tutorialDropdown">
+                            <div class="dropdown-header">
+                                <i class="la la-graduation-cap"></i>
+                                <span data-lang-key="trading_tutorials">Trading Tutorials</span>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="https://www.binance.com/en/blog/ecosystem/crypto-trading-guide-for-beginners-421499824684903654" target="_blank" class="dropdown-item" title="Binance Trading Guide">
                                 <i class="la la-chart-line"></i>
                                 <span data-lang-key="binance_guide">Binance Guide</span>
                             </a>
-                            <a href="https://academy.binance.com/en/articles/how-to-trade-cryptocurrency" target="_blank" class="tutorial-link" title="How to Trade Cryptocurrency">
+                            <a href="https://academy.binance.com/en/articles/how-to-trade-cryptocurrency" target="_blank" class="dropdown-item" title="How to Trade Cryptocurrency">
                                 <i class="la la-university"></i>
                                 <span data-lang-key="crypto_trading">Crypto Trading</span>
                             </a>
-                            <a href="https://www.coinbase.com/learn/crypto-basics" target="_blank" class="tutorial-link" title="Coinbase Learning">
+                            <a href="https://www.coinbase.com/learn/crypto-basics" target="_blank" class="dropdown-item" title="Coinbase Learning">
                                 <i class="la la-book"></i>
                                 <span data-lang-key="crypto_basics">Crypto Basics</span>
                             </a>
-                            <a href="https://www.investopedia.com/articles/forex/042015/why-cryptocurrency-trading-so-volatile.asp" target="_blank" class="tutorial-link" title="Investopedia Crypto Trading">
+                            <a href="https://www.investopedia.com/articles/forex/042015/why-cryptocurrency-trading-so-volatile.asp" target="_blank" class="dropdown-item" title="Investopedia Crypto Trading">
                                 <i class="la la-chart-bar"></i>
                                 <span data-lang-key="trading_strategy">Trading Strategy</span>
                             </a>
-                            <a href="https://www.kraken.com/learn" target="_blank" class="tutorial-link" title="Kraken Learning Center">
+                            <a href="https://www.kraken.com/learn" target="_blank" class="dropdown-item" title="Kraken Learning Center">
                                 <i class="la la-lightbulb"></i>
                                 <span data-lang-key="learn_center">Learn Center</span>
                             </a>
-                            <a href="https://www.tradingview.com/education/" target="_blank" class="tutorial-link" title="TradingView Education">
+                            <a href="https://www.tradingview.com/education/" target="_blank" class="dropdown-item" title="TradingView Education">
                                 <i class="la la-chart-area"></i>
                                 <span data-lang-key="chart_analysis">Chart Analysis</span>
                             </a>
@@ -107,3 +113,119 @@
     </div>
 </header>
 <!-- END: Header -->
+
+<script>
+// Tutorial Dropdown Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const tutorialDropdown = document.getElementById('tutorialDropdown');
+    const tutorialDropdownMenu = document.querySelector('.tutorial-dropdown-menu');
+    
+    if (tutorialDropdown && tutorialDropdownMenu) {
+        let isOpen = false;
+        
+        // Toggle dropdown on button click
+        tutorialDropdown.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleDropdown();
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!tutorialDropdown.contains(e.target) && !tutorialDropdownMenu.contains(e.target)) {
+                closeDropdown();
+            }
+        });
+        
+        // Keyboard navigation
+        tutorialDropdown.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleDropdown();
+            } else if (e.key === 'Escape') {
+                closeDropdown();
+            }
+        });
+        
+        // Close dropdown on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isOpen) {
+                closeDropdown();
+            }
+        });
+        
+        // Handle dropdown item clicks
+        const dropdownItems = tutorialDropdownMenu.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Allow the link to work normally
+                // The dropdown will close automatically due to document click handler
+            });
+            
+            // Keyboard navigation for dropdown items
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+        
+        function toggleDropdown() {
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        }
+        
+        function openDropdown() {
+            isOpen = true;
+            tutorialDropdown.setAttribute('aria-expanded', 'true');
+            tutorialDropdownMenu.classList.add('show');
+            
+            // Focus first dropdown item for keyboard navigation
+            const firstItem = tutorialDropdownMenu.querySelector('.dropdown-item');
+            if (firstItem) {
+                setTimeout(() => firstItem.focus(), 100);
+            }
+        }
+        
+        function closeDropdown() {
+            isOpen = false;
+            tutorialDropdown.setAttribute('aria-expanded', 'false');
+            tutorialDropdownMenu.classList.remove('show');
+        }
+        
+        // Hover effects for better UX
+        let hoverTimeout;
+        
+        tutorialDropdown.addEventListener('mouseenter', function() {
+            clearTimeout(hoverTimeout);
+            if (!isOpen) {
+                hoverTimeout = setTimeout(() => openDropdown(), 200);
+            }
+        });
+        
+        tutorialDropdownMenu.addEventListener('mouseenter', function() {
+            clearTimeout(hoverTimeout);
+        });
+        
+        tutorialDropdown.addEventListener('mouseleave', function() {
+            hoverTimeout = setTimeout(() => {
+                if (isOpen) {
+                    closeDropdown();
+                }
+            }, 300);
+        });
+        
+        tutorialDropdownMenu.addEventListener('mouseleave', function() {
+            hoverTimeout = setTimeout(() => {
+                if (isOpen) {
+                    closeDropdown();
+                }
+            }, 300);
+        });
+    }
+});
+</script>

@@ -913,84 +913,154 @@
 
 /* ======================== Tutorial Links Styles ======================== */
 
-/* Desktop Tutorial Links */
+/* Desktop Tutorial Links - Compact Dropdown Design */
 .tutorial-links-container {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 0.5rem 1rem !important;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    border-radius: 0.75rem !important;
     margin: 0.5rem 1rem !important;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
-    transition: all 0.3s ease !important;
+    position: relative !important;
 }
 
-.tutorial-links-container:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+.tutorial-dropdown {
+    position: relative !important;
+    display: inline-block !important;
 }
 
-.tutorial-links-wrapper {
-    display: flex !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    flex-wrap: wrap !important;
-}
-
-.tutorial-links-title {
+.tutorial-dropdown-toggle {
     display: flex !important;
     align-items: center !important;
     gap: 0.5rem !important;
+    padding: 0.75rem 1.25rem !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     color: white !important;
-    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 0.75rem !important;
     font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
     white-space: nowrap !important;
+    min-width: fit-content !important;
 }
 
-.tutorial-links-title i {
-    font-size: 1.1rem !important;
+.tutorial-dropdown-toggle:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+}
+
+.tutorial-dropdown-toggle:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3), 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+
+.tutorial-dropdown-toggle i {
+    font-size: 1rem !important;
     color: #fbbf24 !important;
 }
 
-.tutorial-links-grid {
+.dropdown-arrow {
+    font-size: 0.8rem !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: transform 0.3s ease !important;
+    margin-left: 0.25rem !important;
+}
+
+.tutorial-dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg) !important;
+}
+
+.tutorial-dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    min-width: 280px !important;
+    background: white !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    z-index: 1000 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    margin-top: 0.5rem !important;
+    overflow: hidden !important;
+}
+
+.tutorial-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+.dropdown-header {
     display: flex !important;
     align-items: center !important;
     gap: 0.75rem !important;
-    flex-wrap: wrap !important;
+    padding: 1rem 1.25rem 0.75rem !important;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
+    color: #374151 !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
 }
 
-.tutorial-link {
+.dropdown-header i {
+    color: #667eea !important;
+    font-size: 1.1rem !important;
+}
+
+.dropdown-divider {
+    height: 1px !important;
+    background: rgba(226, 232, 240, 0.8) !important;
+    margin: 0.5rem 0 !important;
+}
+
+.dropdown-item {
     display: flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
-    padding: 0.5rem 0.75rem !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
+    gap: 0.75rem !important;
+    padding: 0.875rem 1.25rem !important;
+    color: #4b5563 !important;
     text-decoration: none !important;
-    border-radius: 0.5rem !important;
-    font-size: 0.8rem !important;
-    font-weight: 500 !important;
-    transition: all 0.3s ease !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(10px) !important;
-}
-
-.tutorial-link:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    color: white !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-    text-decoration: none !important;
-}
-
-.tutorial-link i {
     font-size: 0.9rem !important;
-    color: #fbbf24 !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    text-align: left !important;
 }
 
-.tutorial-link span {
+.dropdown-item:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%) !important;
+    color: #1f2937 !important;
+    transform: translateX(4px) !important;
+    text-decoration: none !important;
+}
+
+.dropdown-item:active {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%) !important;
+    transform: translateX(2px) !important;
+}
+
+.dropdown-item i {
+    font-size: 1rem !important;
+    color: #667eea !important;
+    width: 1.25rem !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+}
+
+.dropdown-item span {
+    flex: 1 !important;
     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 /* Mobile Tutorial Links - Hide on mobile */
@@ -1002,90 +1072,134 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .tutorial-links-grid {
-        gap: 0.5rem !important;
+    .tutorial-dropdown-toggle {
+        padding: 0.7rem 1.1rem !important;
+        font-size: 0.85rem !important;
     }
     
-    .tutorial-link {
-        padding: 0.4rem 0.6rem !important;
-        font-size: 0.75rem !important;
+    .tutorial-dropdown-menu {
+        min-width: 260px !important;
     }
 }
 
 @media (max-width: 992px) {
-    .tutorial-links-wrapper {
-        gap: 0.75rem !important;
+    .tutorial-dropdown-toggle {
+        padding: 0.65rem 1rem !important;
+        font-size: 0.8rem !important;
     }
     
-    .tutorial-links-title {
+    .tutorial-dropdown-menu {
+        min-width: 240px !important;
+    }
+    
+    .dropdown-item {
+        padding: 0.75rem 1.1rem !important;
         font-size: 0.85rem !important;
     }
 }
 
-/* Mobile menu tutorial links styling */
-.m-menu__nav .m-menu__item .m-menu__link[href*="binance"],
-.m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"],
-.m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"],
-.m-menu__nav .m-menu__item .m-menu__link[href*="kraken"],
-.m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"] {
-    transition: all 0.3s ease !important;
+/* Dropdown animation and positioning */
+.tutorial-dropdown-menu::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -6px !important;
+    right: 20px !important;
+    width: 12px !important;
+    height: 12px !important;
+    background: white !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    transform: rotate(45deg) !important;
+    z-index: -1 !important;
 }
 
-.m-menu__nav .m-menu__item .m-menu__link[href*="binance"]:hover,
-.m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"]:hover,
-.m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"]:hover,
-.m-menu__nav .m-menu__item .m-menu__link[href*="kraken"]:hover,
-.m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"]:hover {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    color: white !important;
-    transform: translateX(5px) !important;
+/* Enhanced hover effects */
+.tutorial-dropdown-toggle:hover + .tutorial-dropdown-menu,
+.tutorial-dropdown-menu:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
 }
 
-/* Tutorial links in mobile menu */
-.m-menu__nav .m-menu__item .m-menu__link[href*="binance"] .m-menu__link-bullet,
-.m-menu__nav .m-menu__item .m-menu__link[href*="coinbase"] .m-menu__link-bullet,
-.m-menu__nav .m-menu__item .m-menu__link[href*="investopedia"] .m-menu__link-bullet,
-.m-menu__nav .m-menu__item .m-menu__link[href*="kraken"] .m-menu__link-bullet,
-.m-menu__nav .m-menu__item .m-menu__link[href*="tradingview"] .m-menu__link-bullet {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+/* Focus states for accessibility */
+.tutorial-dropdown-toggle:focus + .tutorial-dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-    .tutorial-links-container {
+    .tutorial-dropdown-toggle {
         background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
     }
     
-    .tutorial-link {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border-color: rgba(255, 255, 255, 0.1) !important;
+    .tutorial-dropdown-toggle:hover {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
     }
     
-    .tutorial-link:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
+    .tutorial-dropdown-menu {
+        background: #1f2937 !important;
+        border-color: rgba(75, 85, 99, 0.8) !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .dropdown-header {
+        background: linear-gradient(135deg, #374151 0%, #4b5563 100%) !important;
+        border-bottom-color: rgba(75, 85, 99, 0.8) !important;
+        color: #f9fafb !important;
+    }
+    
+    .dropdown-item {
+        color: #d1d5db !important;
+    }
+    
+    .dropdown-item:hover {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%) !important;
+        color: #f9fafb !important;
+    }
+    
+    .dropdown-divider {
+        background: rgba(75, 85, 99, 0.8) !important;
+    }
+    
+    .tutorial-dropdown-menu::before {
+        background: #1f2937 !important;
+        border-color: rgba(75, 85, 99, 0.8) !important;
     }
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-    .tutorial-links-container {
+    .tutorial-dropdown-toggle {
         border: 2px solid currentColor !important;
     }
     
-    .tutorial-link {
-        border: 1px solid currentColor !important;
+    .tutorial-dropdown-menu {
+        border: 2px solid currentColor !important;
+    }
+    
+    .dropdown-item {
+        border-bottom: 1px solid currentColor !important;
     }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-    .tutorial-links-container,
-    .tutorial-link {
+    .tutorial-dropdown-toggle,
+    .tutorial-dropdown-menu,
+    .dropdown-item,
+    .dropdown-arrow {
         transition: none !important;
     }
     
-    .tutorial-link:hover {
+    .tutorial-dropdown-toggle:hover {
+        transform: none !important;
+    }
+    
+    .dropdown-item:hover {
         transform: none !important;
     }
 } 
