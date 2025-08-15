@@ -69,6 +69,10 @@ Route::get('/livecoinwatch/enhanced-compare',
     ['as' => 'livecoinwatch.enhanced.compare',
         'uses' => 'MarketsComparizonController@getEnhancedComparison']);
 
+// Individual API endpoints for AJAX loading
+Route::get('/api/coinpaprika-data', 'MarketsComparizonController@getCoinPaprikaDataApi')->name('api.coinpaprika.data');
+Route::get('/api/cryptics-data', 'MarketsComparizonController@getCrypticsDataApi')->name('api.cryptics.data');
+
 // coin analysis across platforms
 Route::get('/livecoinwatch/coin-analysis',
     ['as' => 'livecoinwatch.coin.analysis',

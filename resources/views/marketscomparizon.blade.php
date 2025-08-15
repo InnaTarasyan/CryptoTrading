@@ -178,1214 +178,1250 @@
                     </div>
 
 
-                    {{-- CryptoCompare Platform --}}
-                    <div class="platform-card cryptocompare">
-                        <div class="platform-header">
-                            <h3 data-lang-key="cryptocompare">{{ __('menu.cryptocompare') }}</h3>
-                            <div class="platform-icon">🔍</div>
-                        </div>
-                        <div class="platform-stats">
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
-                                <span class="stat-value" id="cc-total-coins">-</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="total_market_cap">{{ __('menu.total_market_cap') }}</span>
-                                <span class="stat-value" id="cc-total-mcap">-</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label" data-lang-key="total_volume">{{ __('menu.total_volume') }}</span>
-                                <span class="stat-value" id="cc-total-volume">-</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    {{-- CoinPaprika Platform --}}
-                    {{--<div class="platform-card coinpaprika">--}}
-                        {{--<div class="platform-header">--}}
-                            {{--<h3 data-lang-key="coinpaprika">{{ __('menu.coinpaprika') }}</h3>--}}
-                            {{--<div class="platform-icon">🌶️</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="platform-stats">--}}
-                            {{--<div class="stat">--}}
-                                {{--<span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>--}}
-                                {{--<span class="stat-value" id="cp-total-coins">-</span>--}}
-                            {{--</div>--}}
-                            {{--<div class="stat">--}}
-                                {{--<span class="stat-label" data-lang-key="active_coins">{{ __('menu.active_coins') }}</span>--}}
-                                {{--<span class="stat-value" id="cp-active-coins">-</span>--}}
-                            {{--</div>--}}
-                            {{--<div class="stat">--}}
-                                {{--<span class="stat-label" data-lang-key="new_coins">{{ __('menu.new_coins') }}</span>--}}
-                                {{--<span class="stat-value" id="cp-new-coins">-</span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{-- Cryptics.tech Platform --}}
-                    {{--<div class="platform-card cryptics">--}}
-                        {{--<div class="platform-header">--}}
-                            {{--<h3 data-lang-key="cryptics_tech">{{ __('menu.cryptics_tech') }}</h3>--}}
-                            {{--<div class="platform-icon">🔮</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="platform-stats">--}}
-                            {{--<div class="stat">--}}
-                                {{--<span class="stat-label" data-lang-key="total_predictions">{{ __('menu.total_predictions') }}</span>--}}
-                                {{--<span class="stat-value" id="ct-total-predictions">-</span>--}}
-                            {{--</div>--}}
-                            {{--<div class="stat">--}}
-                                {{--<span class="stat-label" data-lang-key="prediction_accuracy">{{ __('menu.prediction_accuracy') }}</span>--}}
-                                {{--<span class="stat-value" id="ct-accuracy">-</span>--}}
-                            {{--</div>--}}
-                            {{--<div class="stat">--}}
-                                {{--<span class="stat-label" data-lang-key="trending_up">{{ __('menu.trending_up') }}</span>--}}
-                                {{--<span class="stat-value" id="ct-trending-up">-</span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+            {{-- CryptoCompare Platform --}}
+            <div class="platform-card cryptocompare">
+                <div class="platform-header">
+                    <h3 data-lang-key="cryptocompare">{{ __('menu.cryptocompare') }}</h3>
+                    <div class="platform-icon">🔍</div>
                 </div>
-
-                {{-- Chart Grid --}}
-                <div class="chart-grid">
-                    {{-- Market Cap Distribution Chart --}}
-                    <div class="chart-card">
-                        <h4 data-lang-key="market_cap_distribution">{{ __('menu.market_cap_distribution') }}</h4>
-                        <div class="chart-container" style="height: 300px; position: relative;">
-                            <canvas id="marketCapChart"></canvas>
-                        </div>
+                <div class="platform-stats">
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
+                        <span class="stat-value" id="cc-total-coins">-</span>
                     </div>
-
-                    {{-- Price Movement Trends --}}
-                    <div class="chart-card">
-                        <h4 data-lang-key="price_movement_trends">{{ __('menu.price_movement_trends') }}</h4>
-                        <div class="chart-container" style="height: 300px; position: relative;">
-                            <canvas id="priceTrendsChart"></canvas>
-                        </div>
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="total_market_cap">{{ __('menu.total_market_cap') }}</span>
+                        <span class="stat-value" id="cc-total-mcap">-</span>
                     </div>
-
-                    {{-- Volume Analysis --}}
-                    <div class="chart-card">
-                        <h4 data-lang-key="volume_distribution">{{ __('menu.volume_distribution') }}</h4>
-                        <div class="chart-container" style="height: 300px; position: relative;">
-                            <canvas id="volumeChart"></canvas>
-                        </div>
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="total_volume">{{ __('menu.total_volume') }}</span>
+                        <span class="stat-value" id="cc-total-volume">-</span>
                     </div>
+                </div>
+            </div>
 
-                    {{-- Cross-Platform Comparison --}}
-                    <div class="chart-card">
-                        <h4 data-lang-key="platform_coverage">{{ __('menu.platform_coverage') }}</h4>
-                        <div class="chart-container" style="height: 300px; position: relative;">
-                            <canvas id="platformChart"></canvas>
-                        </div>
+            {{-- CoinPaprika Platform --}}
+            <div class="platform-card coinpaprika">
+                <div class="platform-header">
+                    <h3 data-lang-key="coinpaprika">{{ __('menu.coinpaprika') }}</h3>
+                    <div class="platform-icon">🌶️</div>
+                </div>
+                <div class="platform-stats">
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="total_coins">{{ __('menu.total_coins') }}</span>
+                        <span class="stat-value" id="cp-total-coins">
+                            <div class="loader-spinner"></div>
+                        </span>
                     </div>
-
-                    {{-- Top Performers --}}
-                    <div class="chart-card full-width">
-                        <h4 data-lang-key="top_10_coins_by_market_cap">{{ __('menu.top_10_coins_by_market_cap') }}</h4>
-                        <div class="top-performers-table">
-                            <div class="table-responsive">
-                                <table id="topPerformersTable" class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th data-lang-key="rank">{{ __('menu.rank') }}</th>
-                                        <th data-lang-key="name">{{ __('menu.name') }}</th>
-                                        <th data-lang-key="symbol">{{ __('menu.symbol') }}</th>
-                                        <th data-lang-key="market_cap">{{ __('menu.market_cap') }}</th>
-                                        <th data-lang-key="price">{{ __('menu.price') }}</th>
-                                        <th data-lang-key="24h_change">{{ __('menu.24h_change') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="topPerformersBody">
-                                    <!-- Data will be populated by JavaScript -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="active_coins">{{ __('menu.active_coins') }}</span>
+                        <span class="stat-value" id="cp-active-coins">
+                            <div class="loader-spinner"></div>
+                        </span>
                     </div>
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="new_coins">{{ __('menu.new_coins') }}</span>
+                        <span class="stat-value" id="cp-new-coins">
+                            <div class="loader-spinner"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-
-
-
-
-                    {{-- Market Trends Summary --}}
-                    <div class="chart-card full-width">
-                        <h4 data-lang-key="market_trends_summary">{{ __('menu.market_trends_summary') }}</h4>
-                        <div class="trends-summary">
-                            <div class="trend-item positive">
-                                <span class="trend-icon">📈</span>
-                                <span class="trend-label" data-lang-key="gaining">{{ __('menu.gaining') }}</span>
-                                <span class="trend-value" id="trends-gaining">-</span>
-                            </div>
-                            <div class="trend-item negative">
-                                <span class="trend-icon">📉</span>
-                                <span class="trend-label" data-lang-key="losing">{{ __('menu.losing') }}</span>
-                                <span class="trend-value" id="trends-losing">-</span>
-                            </div>
-                            <div class="trend-item neutral">
-                                <span class="trend-icon">➡️</span>
-                                <span class="trend-label" data-lang-key="stable">{{ __('menu.stable') }}</span>
-                                <span class="trend-value" id="trends-stable">-</span>
-                            </div>
-                        </div>
+            {{-- Cryptics.tech Platform --}}
+            <div class="platform-card cryptics">
+                <div class="platform-header">
+                    <h3 data-lang-key="cryptics_tech">{{ __('menu.cryptics_tech') }}</h3>
+                    <div class="platform-icon">🔮</div>
+                </div>
+                <div class="platform-stats">
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="total_predictions">{{ __('menu.total_predictions') }}</span>
+                        <span class="stat-value" id="ct-total-predictions">
+                            <div class="loader-spinner"></div>
+                        </span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="prediction_accuracy">{{ __('menu.prediction_accuracy') }}</span>
+                        <span class="stat-value" id="ct-accuracy">
+                            <div class="loader-spinner"></div>
+                        </span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label" data-lang-key="trending_up">{{ __('menu.trending_up') }}</span>
+                        <span class="stat-value" id="ct-trending-up">
+                            <div class="loader-spinner"></div>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <style>
-            .comparison-section {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                border-radius: 2em;
-                padding: 2em;
-                margin: 2em 0;
-                box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
-            }
-
-            .coin-search-section {
-                background: rgba(255, 255, 255, 0.95);
-                border-radius: 1.5em;
-                padding: 1.5em;
-                margin-bottom: 2em;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            .search-container {
-                display: flex;
-                gap: 1em;
-                align-items: center;
-                margin-bottom: 1em;
-                width: 100%;
-            }
-
-            .coin-search-input {
-                flex: 1;
-                padding: 0.8em 1.2em;
-                border: 2px solid #667eea;
-                border-radius: 1em;
-                font-size: 1.1em;
-                background: #fff;
-                color: #333;
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-                min-width: 0;
-                box-sizing: border-box;
-            }
-
-            .coin-search-input:focus {
-                outline: none;
-                border-color: #764ba2;
-                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            }
-
-            .search-btn {
-                padding: 0.8em 1.5em;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: #fff;
-                border: none;
-                border-radius: 1em;
-                font-size: 1.1em;
-                font-weight: 600;
-                cursor: pointer;
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-                white-space: nowrap;
-                flex-shrink: 0;
-                min-width: 80px;
-            }
-
-            .search-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-            }
-
-            .search-btn:active {
-                transform: translateY(0);
-            }
-
-            /* Mobile responsive styles for coin search */
-            @media (max-width: 768px) {
-                .coin-search-section {
-                    padding: 1em;
-                    border-radius: 1em;
-                    margin-bottom: 1.5em;
-                }
-
-                .search-container {
-                    flex-direction: column;
-                    gap: 0.8em;
-                    align-items: stretch;
-                }
-
-                .coin-search-input {
-                    padding: 0.9em 1em;
-                    font-size: 1rem;
-                    border-radius: 0.8em;
-                    border-width: 1.5px;
-                }
-
-                .search-btn {
-                    padding: 0.9em 1em;
-                    font-size: 1rem;
-                    border-radius: 0.8em;
-                    width: 100%;
-                    min-width: auto;
-                }
-            }
-
-            /* Small mobile devices */
-            @media (max-width: 480px) {
-                .coin-search-section {
-                    padding: 0.8em;
-                    border-radius: 0.8em;
-                    margin-bottom: 1em;
-                }
-
-                .search-container {
-                    gap: 0.6em;
-                }
-
-                .coin-search-input {
-                    padding: 0.8em 0.9em;
-                    font-size: 0.95rem;
-                    border-radius: 0.7em;
-                }
-
-                .search-btn {
-                    padding: 0.8em 0.9em;
-                    font-size: 0.95rem;
-                    border-radius: 0.7em;
-                }
-            }
-
-            /* Extra small devices */
-            @media (max-width: 360px) {
-                .coin-search-section {
-                    padding: 0.7em;
-                    border-radius: 0.7em;
-                }
-
-                .search-container {
-                    gap: 0.5em;
-                }
-
-                .coin-search-input {
-                    padding: 0.7em 0.8em;
-                    font-size: 0.9rem;
-                    border-radius: 0.6em;
-                }
-
-                .search-btn {
-                    padding: 0.7em 0.8em;
-                    font-size: 0.9rem;
-                    border-radius: 0.6em;
-                }
-            }
-
-            /* Tablet responsive adjustments */
-            @media (min-width: 769px) and (max-width: 1024px) {
-                .coin-search-section {
-                    padding: 1.2em;
-                }
-
-                .search-container {
-                    gap: 0.8em;
-                }
-
-                .coin-search-input {
-                    padding: 0.7em 1em;
-                    font-size: 1rem;
-                }
-
-                .search-btn {
-                    padding: 0.7em 1.2em;
-                    font-size: 1rem;
-                }
-            }
-
-            /* Large desktop screens */
-            @media (min-width: 1200px) {
-                .coin-search-section {
-                    padding: 2em;
-                    border-radius: 2em;
-                }
-
-                .search-container {
-                    gap: 1.2em;
-                }
-
-                .coin-search-input {
-                    padding: 1em 1.5em;
-                    font-size: 1.2em;
-                }
-
-                .search-btn {
-                    padding: 1em 2em;
-                    font-size: 1.2em;
-                }
-            }
-
-            /* Touch-friendly improvements for mobile */
-            @media (max-width: 768px) {
-                .coin-search-input {
-                    touch-action: manipulation;
-                    -webkit-appearance: none;
-                    appearance: none;
-                }
-
-                .search-btn {
-                    touch-action: manipulation;
-                    -webkit-appearance: none;
-                    appearance: none;
-                    min-height: 44px; /* Minimum touch target size */
-                }
-
-                .coin-search-input:focus {
-                    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
-                }
-            }
-
-            /* Improve accessibility */
-            .coin-search-input {
-                position: relative;
-            }
-
-            .coin-search-input:focus {
-                outline: none;
-            }
-
-            .search-btn:focus {
-                outline: 2px solid #667eea;
-                outline-offset: 2px;
-            }
-
-            /* Ensure proper text sizing */
-            .coin-search-input {
-                font-family: inherit;
-                line-height: 1.5;
-            }
-
-            /* Prevent zoom on iOS */
-            @media screen and (-webkit-min-device-pixel-ratio: 0) {
-                .coin-search-input {
-                    font-size: 16px;
-                }
-            }
-
-            .coin-analysis-result {
-                background: #f8f9fa;
-                border-radius: 1em;
-                padding: 1.5em;
-                margin-top: 1em;
-            }
-
-            .coin-analysis-header {
-                display: flex;
-                align-items: center;
-                gap: 1em;
-                margin-bottom: 1em;
-                padding-bottom: 1em;
-                border-bottom: 2px solid #e9ecef;
-            }
-
-            .coin-analysis-header h3 {
-                margin: 0;
-                font-size: 1.5em;
-                font-weight: 700;
-                color: #333;
-            }
-
-            .coin-analysis-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 1.5em;
-            }
-
-            .coin-analysis-card {
-                background: #fff;
-                border-radius: 1em;
-                padding: 1.5em;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .coin-analysis-card h4 {
-                margin: 0 0 1em 0;
-                font-size: 1.2em;
-                font-weight: 700;
-                color: #333;
-                display: flex;
-                align-items: center;
-                gap: 0.5em;
-            }
-
-            .coin-analysis-data {
-                display: flex;
-                flex-direction: column;
-                gap: 0.8em;
-            }
-
-            .coin-analysis-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.5em 0;
-                border-bottom: 1px solid #eee;
-            }
-
-            .coin-analysis-item:last-child {
-                border-bottom: none;
-            }
-
-            .coin-analysis-label {
-                font-weight: 600;
-                color: #666;
-            }
-
-            .coin-analysis-value {
-                font-weight: 700;
-                color: #333;
-            }
-
-            .coin-analysis-value.positive {
-                color: #28a745;
-            }
-
-            .coin-analysis-value.negative {
-                color: #dc3545;
-            }
-
-            .platform-overview {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 1.5em;
-                margin-bottom: 2em;
-            }
-
-            .platform-card {
-                background: rgba(255, 255, 255, 0.95);
-                border-radius: 1.5em;
-                padding: 1.5em;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-
-            .platform-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            }
-
-            .platform-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 1em;
-            }
-
-            .platform-header h3 {
-                margin: 0;
-                font-size: 1.3em;
-                font-weight: 700;
-                color: #333;
-            }
-
-            .platform-icon {
-                font-size: 2em;
-            }
-
-            .platform-stats {
-                display: flex;
-                flex-direction: column;
-                gap: 0.8em;
-            }
-
-            .stat {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.5em 0;
-                border-bottom: 1px solid #eee;
-            }
-
-            .stat:last-child {
-                border-bottom: none;
-            }
-
-            .stat-label {
-                font-weight: 600;
-                color: #666;
-            }
-
-            .stat-value {
-                font-weight: 700;
-                color: #333;
-            }
-
-            .chart-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                gap: 1.5em;
-                margin-bottom: 2em;
-            }
-
-            .chart-card {
-                background: rgba(255, 255, 255, 0.95);
-                border-radius: 1.5em;
-                padding: 1.5em;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                min-height: 350px;
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            .chart-card.full-width {
-                grid-column: 1 / -1;
-                min-height: auto;
-            }
-
-            .chart-card h4 {
-                margin: 0 0 1em 0;
-                font-size: 1.2em;
-                font-weight: 700;
-                color: #333;
-                text-align: center;
-                flex-shrink: 0;
-            }
-
-            .chart-container {
-                width: 100% !important;
-                height: 280px !important;
-                position: relative;
-                overflow: hidden;
-                flex: 1;
-                min-height: 280px;
-                max-height: 280px;
-            }
-
-            .chart-container canvas {
-                max-width: 100% !important;
-                max-height: 100% !important;
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: contain;
-            }
-
-            /* Mobile-specific chart adjustments */
-            @media (max-width: 768px) {
-                .chart-grid {
-                    grid-template-columns: 1fr;
-                    gap: 1em;
-                }
-
-                .chart-card {
-                    padding: 1em;
-                    min-height: 300px;
-                    margin-bottom: 1em;
-                }
-
-                .chart-container {
-                    height: 250px !important;
-                    min-height: 250px;
-                    max-height: 250px;
-                }
-
-                .chart-card h4 {
-                    font-size: 1.1em;
-                    margin-bottom: 0.8em;
-                }
-            }
-
-            /* Small mobile devices */
-            @media (max-width: 480px) {
-                .chart-card {
-                    padding: 0.8em;
-                    min-height: 280px;
-                }
-
-                .chart-container {
-                    height: 220px !important;
-                    min-height: 220px;
-                    max-height: 220px;
-                }
-
-                .chart-card h4 {
-                    font-size: 1em;
-                    margin-bottom: 0.6em;
-                }
-            }
-
-            /* Extra small devices */
-            @media (max-width: 360px) {
-                .chart-container {
-                    height: 200px !important;
-                    min-height: 200px;
-                    max-height: 200px;
-                }
-            }
-
-            /* Touch-friendly improvements for mobile */
-            @media (max-width: 768px) {
-                .chart-container {
-                    touch-action: pan-x pan-y;
-                    -webkit-overflow-scrolling: touch;
-                }
-
-                .chart-card {
-                    touch-action: manipulation;
-                }
-            }
-
-            /* Ensure charts don't overflow on any device */
-            .chart-container {
-                overflow: hidden !important;
-                position: relative !important;
-            }
-
-            /* Better chart responsiveness */
-            .chart-container canvas {
-                touch-action: none;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-
-            /* Improve chart grid layout on different screen sizes */
-            @media (min-width: 1200px) {
-                .chart-grid {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-            }
-
-            @media (min-width: 768px) and (max-width: 1199px) {
-                .chart-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-                }
-            }
-
-            .top-performers-table {
-                overflow-x: auto;
-            }
-
-            .top-performers-table table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            .top-performers-table th,
-            .top-performers-table td {
-                padding: 0.8em;
-                text-align: left;
-                border-bottom: 1px solid #eee;
-            }
-
-            .top-performers-table th {
-                background: #f8f9fa;
-                font-weight: 700;
-                color: #333;
-            }
-
-            /* Mobile-responsive table styles */
-            @media (max-width: 768px) {
-                .top-performers-table {
-                    overflow-x: visible;
-                }
-
-                .top-performers-table table {
-                    display: block;
-                    width: 100%;
-                }
-
-                .top-performers-table thead {
-                    display: none;
-                }
-
-                .top-performers-table tbody {
-                    display: block;
-                    width: 100%;
-                }
-
-                .top-performers-table tr {
-                    display: block;
-                    width: 100%;
-                    margin-bottom: 1rem;
-                    border: 1px solid #e9ecef;
-                    border-radius: 12px;
-                    background: #fff;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                    padding: 1rem;
-                    position: relative;
-                }
-
-                .top-performers-table td {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 0.5rem 0;
-                    border: none;
-                    border-bottom: 1px solid #f0f0f0;
-                    text-align: left;
-                    position: relative;
-                }
-
-                .top-performers-table td:last-child {
-                    border-bottom: none;
-                }
-
-                .top-performers-table td:before {
-                    content: attr(data-label);
-                    font-weight: 700;
-                    color: #666;
-                    min-width: 80px;
-                    margin-right: 1rem;
-                    font-size: 0.9rem;
-                }
-
-                /* Special styling for rank column */
-                .top-performers-table td[data-label="Rank"] {
-                    font-weight: 700;
-                    font-size: 1.1rem;
-                    color: #333;
-                    background: linear-gradient(135deg, #ffd200 0%, #43cea2 100%);
-                    margin: -1rem -1rem 0.5rem -1rem;
-                    padding: 0.75rem 1rem;
-                    border-radius: 12px 12px 0 0;
-                    border-bottom: 2px solid #e9ecef;
-                }
-
-                .top-performers-table td[data-label="Rank"]:before {
-                    display: none;
-                }
-
-                /* Special styling for symbol */
-                .top-performers-table td[data-label="Symbol"] {
-                    font-weight: 700;
-                    color: #667eea;
-                }
-
-                /* Special styling for market cap */
-                .top-performers-table td[data-label="Market Cap"] {
-                    font-weight: 600;
-                    color: #28a745;
-                }
-
-                /* Special styling for price */
-                .top-performers-table td[data-label="Price"] {
-                    font-weight: 600;
-                    color: #333;
-                }
-
-                /* Special styling for 24h change */
-                .top-performers-table td[data-label="24h Change"] {
-                    font-weight: 700;
-                }
-
-                .top-performers-table td[data-label="24h Change"].positive {
-                    color: #28a745;
-                }
-
-                .top-performers-table td[data-label="24h Change"].negative {
-                    color: #dc3545;
-                }
-
-                .top-performers-table td[data-label="24h Change"].neutral {
-                    color: #6c757d;
-                }
-            }
-
-            /* Tablet responsive adjustments */
-            @media (min-width: 769px) and (max-width: 1024px) {
-                .top-performers-table {
-                    overflow-x: auto;
-                }
-
-                .top-performers-table th,
-                .top-performers-table td {
-                    padding: 0.6em;
-                    font-size: 0.9rem;
-                }
-            }
-
-            /* Additional mobile improvements */
-            @media (max-width: 480px) {
-                .top-performers-table tr {
-                    margin-bottom: 0.8rem;
-                    padding: 0.8rem;
-                }
-
-                .top-performers-table td {
-                    padding: 0.4rem 0;
-                    font-size: 0.9rem;
-                }
-
-                .top-performers-table td:before {
-                    font-size: 0.8rem;
-                    min-width: 70px;
-                }
-
-                .top-performers-table td[data-label="Rank"] {
-                    font-size: 1rem;
-                    padding: 0.6rem 0.8rem;
-                }
-            }
-
-            /* Touch-friendly improvements */
-            @media (max-width: 768px) {
-                .top-performers-table tr {
-                    touch-action: manipulation;
-                    cursor: pointer;
-                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                }
-
-                .top-performers-table tr:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-                }
-
-                .top-performers-table tr:active {
-                    transform: translateY(0);
-                }
-            }
-
-            .trends-summary {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5em;
-                margin-top: 1em;
-            }
-
-            .trend-item {
-                display: flex;
-                align-items: center;
-                gap: 1em;
-                padding: 1.2em;
-                border-radius: 1em;
-                background: #f8f9fa;
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            }
-
-            .trend-item:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            }
-
-            .trend-item.positive {
-                background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-                border-left: 4px solid #28a745;
-            }
-
-            .trend-item.negative {
-                background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-                border-left: 4px solid #dc3545;
-            }
-
-            .trend-item.neutral {
-                background: linear-gradient(135deg, #e2e3e5 0%, #d6d8db 100%);
-                border-left: 4px solid #6c757d;
-            }
-
-            .trend-icon {
-                font-size: 1.8em;
-                flex-shrink: 0;
-            }
-
-            .trend-label {
-                font-weight: 600;
-                color: #333;
-                flex: 1;
-                font-size: 1rem;
-            }
-
-            .trend-value {
-                font-weight: 700;
-                font-size: 1.3em;
-                color: #333;
-                flex-shrink: 0;
-                min-width: 60px;
-                text-align: right;
-            }
-
-            /* Mobile responsive styles for trends summary */
-            @media (max-width: 768px) {
-                .trends-summary {
-                    grid-template-columns: 1fr;
-                    gap: 1em;
-                    margin-top: 0.8em;
-                }
-
-                .trend-item {
-                    padding: 1em;
-                    gap: 0.8em;
-                    border-radius: 0.8em;
-                }
-
-                .trend-icon {
-                    font-size: 1.5em;
-                }
-
-                .trend-label {
-                    font-size: 0.95rem;
-                }
-
-                .trend-value {
-                    font-size: 1.1em;
-                    min-width: 50px;
-                }
-            }
-
-            /* Small mobile devices */
-            @media (max-width: 480px) {
-                .trends-summary {
-                    gap: 0.8em;
-                }
-
-                .trend-item {
-                    padding: 0.8em;
-                    gap: 0.6em;
-                    flex-wrap: wrap;
-                }
-
-                .trend-icon {
-                    font-size: 1.3em;
-                }
-
-                .trend-label {
-                    font-size: 0.9rem;
-                    flex: 1;
-                    min-width: 0;
-                }
-
-                .trend-value {
-                    font-size: 1rem;
-                    min-width: 40px;
-                    text-align: right;
-                }
-            }
-
-            /* Extra small devices */
-            @media (max-width: 360px) {
-                .trend-item {
-                    padding: 0.7em;
-                    gap: 0.5em;
-                }
-
-                .trend-icon {
-                    font-size: 1.2em;
-                }
-
-                .trend-label {
-                    font-size: 0.85rem;
-                }
-
-                .trend-value {
-                    font-size: 0.95rem;
-                    min-width: 35px;
-                }
-            }
-
-            /* Tablet responsive adjustments */
-            @media (min-width: 769px) and (max-width: 1024px) {
-                .trends-summary {
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: 1.2em;
-                }
-
-                .trend-item {
-                    padding: 1em;
-                }
-
-                .trend-icon {
-                    font-size: 1.6em;
-                }
-
-                .trend-label {
-                    font-size: 0.95rem;
-                }
-
-                .trend-value {
-                    font-size: 1.2em;
-                }
-            }
-
-            /* Large desktop screens */
-            @media (min-width: 1200px) {
-                .trends-summary {
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 2em;
-                }
-
-                .trend-item {
-                    padding: 1.5em;
-                }
-
-                .trend-icon {
-                    font-size: 2em;
-                }
-
-                .trend-label {
-                    font-size: 1.1rem;
-                }
-
-                .trend-value {
-                    font-size: 1.4em;
-                }
-            }
-
-            /* Touch-friendly improvements for mobile */
-            @media (max-width: 768px) {
-                .trend-item {
-                    touch-action: manipulation;
-                    cursor: pointer;
-                    user-select: none;
-                }
-
-                .trend-item:active {
-                    transform: translateY(0);
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                }
-            }
-
-            /* Ensure proper text wrapping and overflow handling */
-            .trend-item {
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .trend-label {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-
-            /* Improve accessibility */
-            .trend-item {
-                position: relative;
-            }
-
-            .trend-item:focus {
-                outline: 2px solid #667eea;
-                outline-offset: 2px;
-            }
-
-            @media (max-width: 768px) {
-                .platform-overview {
-                    grid-template-columns: 1fr;
-                }
-
-                .chart-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .trends-summary {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            /* Prevent chart height changes during scroll */
-            .comparison-section {
-                transform: translateZ(0);
-                will-change: auto;
-            }
-
-            .chart-card {
-                transform: translateZ(0);
-                will-change: auto;
-            }
-
-            .chart-container {
-                transform: translateZ(0);
-                will-change: auto;
-            }
-        </style>
-
-        {{-- ======================== Live Coin Watch Info Section ======================== --}}
-        <style>
-            .lcw-info-card {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 2.5em 2em;
-                background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
-                border-radius: 2em;
-                box-shadow: 0 6px 32px rgba(67, 206, 162, 0.13), 0 1.5px 6px rgba(67, 206, 162, 0.08);
-                color: #222;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 2em;
-                transition: box-shadow 0.2s, transform 0.2s;
-                margin: 2em 0;
-            }
-            .lcw-info-card:hover {
-                box-shadow: 0 12px 48px rgba(67, 206, 162, 0.18), 0 3px 12px rgba(67, 206, 162, 0.12);
-                transform: translateY(-2px) scale(1.01);
-            }
-            .lcw-info-card .lcw-icon {
-                flex-shrink: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: rgba(255,255,255,0.18);
-                border-radius: 50%;
-                padding: 1em;
-                box-shadow: 0 2px 8px rgba(67, 206, 162, 0.10);
-            }
-            .lcw-info-card .lcw-content {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                gap: 1.2em;
-            }
-            .lcw-info-card h2 {
-                margin: 0;
-                font-size: 2.1rem;
-                font-weight: 800;
-                letter-spacing: -1px;
-                color: #222;
-            }
-            .lcw-info-card p {
-                font-size: 1.15rem;
-                line-height: 1.7;
-                margin: 0;
-                max-width: 900px;
-                color: #222;
-            }
-            .lcw-info-card a {
-                display: inline-block !important;
-                width: auto !important;
-                min-width: 0 !important;
-                max-width: none !important;
-                align-self: flex-start;
-                background: #222;
-                color: #ffd200;
-                padding: 0.85em 1.2em;
-                border-radius: 2em;
-                font-weight: 700;
-                text-decoration: none;
-                font-size: 1.1rem;
-                box-shadow: 0 2px 8px rgba(34,34,34,0.08);
-                transition: background 0.2s, color 0.2s;
-                box-sizing: border-box;
-            }
-            .lcw-info-card a:hover {
-                background: #ffd200;
-                color: #222;
-            }
-            @media (max-width: 900px) {
-                .lcw-info-card {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    padding: 2em 1em;
-                    gap: 1.2em;
-                }
-                .lcw-info-card .lcw-icon {
-                    margin-bottom: 0.5em;
-                }
-            }
-        </style>
-
+        {{-- Chart Grid --}}
+        <div class="chart-grid">
+            {{-- Market Cap Distribution Chart --}}
+            <div class="chart-card">
+                <h4 data-lang-key="market_cap_distribution">{{ __('menu.market_cap_distribution') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="marketCapChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Price Movement Trends --}}
+            <div class="chart-card">
+                <h4 data-lang-key="price_movement_trends">{{ __('menu.price_movement_trends') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="priceTrendsChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Volume Analysis --}}
+            <div class="chart-card">
+                <h4 data-lang-key="volume_distribution">{{ __('menu.volume_distribution') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="volumeChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Cross-Platform Comparison --}}
+            <div class="chart-card">
+                <h4 data-lang-key="platform_coverage">{{ __('menu.platform_coverage') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="platformChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Top Performers --}}
+            <div class="chart-card full-width">
+                <h4 data-lang-key="top_10_coins_by_market_cap">{{ __('menu.top_10_coins_by_market_cap') }}</h4>
+                <div class="top-performers-table">
+                    <div class="table-responsive">
+                        <table id="topPerformersTable" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th data-lang-key="rank">{{ __('menu.rank') }}</th>
+                                <th data-lang-key="name">{{ __('menu.name') }}</th>
+                                <th data-lang-key="symbol">{{ __('menu.symbol') }}</th>
+                                <th data-lang-key="market_cap">{{ __('menu.market_cap') }}</th>
+                                <th data-lang-key="price">{{ __('menu.price') }}</th>
+                                <th data-lang-key="24h_change">{{ __('menu.24h_change') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="topPerformersBody">
+                            <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            {{-- Market Trends Summary --}}
+            <div class="chart-card full-width">
+                <h4 data-lang-key="market_trends_summary">{{ __('menu.market_trends_summary') }}</h4>
+                <div class="trends-summary">
+                    <div class="trend-item positive">
+                        <span class="trend-icon">📈</span>
+                        <span class="trend-label" data-lang-key="gaining">{{ __('menu.gaining') }}</span>
+                        <span class="trend-value" id="trends-gaining">-</span>
+                    </div>
+                    <div class="trend-item negative">
+                        <span class="trend-icon">📉</span>
+                        <span class="trend-label" data-lang-key="losing">{{ __('menu.losing') }}</span>
+                        <span class="trend-value" id="trends-losing">-</span>
+                    </div>
+                    <div class="trend-item neutral">
+                        <span class="trend-icon">➡️</span>
+                        <span class="trend-label" data-lang-key="stable">{{ __('menu.stable') }}</span>
+                        <span class="trend-value" id="trends-stable">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+<style>
+    .comparison-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 2em;
+        padding: 2em;
+        margin: 2em 0;
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+    }
+
+    .coin-search-section {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 1.5em;
+        padding: 1.5em;
+        margin-bottom: 2em;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .search-container {
+        display: flex;
+        gap: 1em;
+        align-items: center;
+        margin-bottom: 1em;
+        width: 100%;
+    }
+
+    .coin-search-input {
+        flex: 1;
+        padding: 0.8em 1.2em;
+        border: 2px solid #667eea;
+        border-radius: 1em;
+        font-size: 1.1em;
+        background: #fff;
+        color: #333;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .coin-search-input:focus {
+        outline: none;
+        border-color: #764ba2;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .search-btn {
+        padding: 0.8em 1.5em;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 1em;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-width: 80px;
+    }
+
+    .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .search-btn:active {
+        transform: translateY(0);
+    }
+
+    /* Mobile responsive styles for coin search */
+    @media (max-width: 768px) {
+        .coin-search-section {
+            padding: 1em;
+            border-radius: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        .search-container {
+            flex-direction: column;
+            gap: 0.8em;
+            align-items: stretch;
+        }
+
+        .coin-search-input {
+            padding: 0.9em 1em;
+            font-size: 1rem;
+            border-radius: 0.8em;
+            border-width: 1.5px;
+        }
+
+        .search-btn {
+            padding: 0.9em 1em;
+            font-size: 1rem;
+            border-radius: 0.8em;
+            width: 100%;
+            min-width: auto;
+        }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .coin-search-section {
+            padding: 0.8em;
+            border-radius: 0.8em;
+            margin-bottom: 1em;
+        }
+
+        .search-container {
+            gap: 0.6em;
+        }
+
+        .coin-search-input {
+            padding: 0.8em 0.9em;
+            font-size: 0.95rem;
+            border-radius: 0.7em;
+        }
+
+        .search-btn {
+            padding: 0.8em 0.9em;
+            font-size: 0.95rem;
+            border-radius: 0.7em;
+        }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 360px) {
+        .coin-search-section {
+            padding: 0.7em;
+            border-radius: 0.7em;
+        }
+
+        .search-container {
+            gap: 0.5em;
+        }
+
+        .coin-search-input {
+            padding: 0.7em 0.8em;
+            font-size: 0.9rem;
+            border-radius: 0.6em;
+        }
+
+        .search-btn {
+            padding: 0.7em 0.8em;
+            font-size: 0.9rem;
+            border-radius: 0.6em;
+        }
+    }
+
+    /* Tablet responsive adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .coin-search-section {
+            padding: 1.2em;
+        }
+
+        .search-container {
+            gap: 0.8em;
+        }
+
+        .coin-search-input {
+            padding: 0.7em 1em;
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            padding: 0.7em 1.2em;
+            font-size: 1rem;
+        }
+    }
+
+    /* Large desktop screens */
+    @media (min-width: 1200px) {
+        .coin-search-section {
+            padding: 2em;
+            border-radius: 2em;
+        }
+
+        .search-container {
+            gap: 1.2em;
+        }
+
+        .coin-search-input {
+            padding: 1em 1.5em;
+            font-size: 1.2em;
+        }
+
+        .search-btn {
+            padding: 1em 2em;
+            font-size: 1.2em;
+        }
+    }
+
+    /* Touch-friendly improvements for mobile */
+    @media (max-width: 768px) {
+        .coin-search-input {
+            touch-action: manipulation;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .search-btn {
+            touch-action: manipulation;
+            -webkit-appearance: none;
+            appearance: none;
+            min-height: 44px; /* Minimum touch target size */
+        }
+
+        .coin-search-input:focus {
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+    }
+
+    /* Improve accessibility */
+    .coin-search-input {
+        position: relative;
+    }
+
+    .coin-search-input:focus {
+        outline: none;
+    }
+
+    .search-btn:focus {
+        outline: 2px solid #667eea;
+        outline-offset: 2px;
+    }
+
+    /* Ensure proper text sizing */
+    .coin-search-input {
+        font-family: inherit;
+        line-height: 1.5;
+    }
+
+    /* Prevent zoom on iOS */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+        .coin-search-input {
+            font-size: 16px;
+        }
+    }
+
+    .coin-analysis-result {
+        background: #f8f9fa;
+        border-radius: 1em;
+        padding: 1.5em;
+        margin-top: 1em;
+    }
+
+    .coin-analysis-header {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        margin-bottom: 1em;
+        padding-bottom: 1em;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .coin-analysis-header h3 {
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .coin-analysis-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5em;
+    }
+
+    .coin-analysis-card {
+        background: #fff;
+        border-radius: 1em;
+        padding: 1.5em;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .coin-analysis-card h4 {
+        margin: 0 0 1em 0;
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .coin-analysis-data {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8em;
+    }
+
+    .coin-analysis-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5em 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .coin-analysis-item:last-child {
+        border-bottom: none;
+    }
+
+    .coin-analysis-label {
+        font-weight: 600;
+        color: #666;
+    }
+
+    .coin-analysis-value {
+        font-weight: 700;
+        color: #333;
+    }
+
+    .coin-analysis-value.positive {
+        color: #28a745;
+    }
+
+    .coin-analysis-value.negative {
+        color: #dc3545;
+    }
+
+    .platform-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5em;
+        margin-bottom: 2em;
+    }
+
+    .platform-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 1.5em;
+        padding: 1.5em;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .platform-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .platform-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1em;
+    }
+
+    .platform-header h3 {
+        margin: 0;
+        font-size: 1.3em;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .platform-icon {
+        font-size: 2em;
+    }
+
+    .platform-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8em;
+    }
+
+    .stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5em 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .stat:last-child {
+        border-bottom: none;
+    }
+
+    .stat-label {
+        font-weight: 600;
+        color: #666;
+    }
+
+    .stat-value {
+        font-weight: 700;
+        color: #333;
+    }
+
+    .chart-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5em;
+        margin-bottom: 2em;
+    }
+
+    .chart-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 1.5em;
+        padding: 1.5em;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        min-height: 350px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .chart-card.full-width {
+        grid-column: 1 / -1;
+        min-height: auto;
+    }
+
+    .chart-card h4 {
+        margin: 0 0 1em 0;
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .chart-container {
+        width: 100% !important;
+        height: 280px !important;
+        position: relative;
+        overflow: hidden;
+        flex: 1;
+        min-height: 280px;
+        max-height: 280px;
+    }
+
+    .chart-container canvas {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+    }
+
+    /* Mobile-specific chart adjustments */
+    @media (max-width: 768px) {
+        .chart-grid {
+            grid-template-columns: 1fr;
+            gap: 1em;
+        }
+
+        .chart-card {
+            padding: 1em;
+            min-height: 300px;
+            margin-bottom: 1em;
+        }
+
+        .chart-container {
+            height: 250px !important;
+            min-height: 250px;
+            max-height: 250px;
+        }
+
+        .chart-card h4 {
+            font-size: 1.1em;
+            margin-bottom: 0.8em;
+        }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .chart-card {
+            padding: 0.8em;
+            min-height: 280px;
+        }
+
+        .chart-container {
+            height: 220px !important;
+            min-height: 220px;
+            max-height: 220px;
+        }
+
+        .chart-card h4 {
+            font-size: 1em;
+            margin-bottom: 0.6em;
+        }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 360px) {
+        .chart-container {
+            height: 200px !important;
+            min-height: 200px;
+            max-height: 200px;
+        }
+    }
+
+    /* Touch-friendly improvements for mobile */
+    @media (max-width: 768px) {
+        .chart-container {
+            touch-action: pan-x pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .chart-card {
+            touch-action: manipulation;
+        }
+    }
+
+    /* Ensure charts don't overflow on any device */
+    .chart-container {
+        overflow: hidden !important;
+        position: relative !important;
+    }
+
+    /* Better chart responsiveness */
+    .chart-container canvas {
+        touch-action: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Improve chart grid layout on different screen sizes */
+    @media (min-width: 1200px) {
+        .chart-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+        .chart-grid {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+    }
+
+    .top-performers-table {
+        overflow-x: auto;
+    }
+
+    .top-performers-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .top-performers-table th,
+    .top-performers-table td {
+        padding: 0.8em;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .top-performers-table th {
+        background: #f8f9fa;
+        font-weight: 700;
+        color: #333;
+    }
+
+    /* Mobile-responsive table styles */
+    @media (max-width: 768px) {
+        .top-performers-table {
+            overflow-x: visible;
+        }
+
+        .top-performers-table table {
+            display: block;
+            width: 100%;
+        }
+
+        .top-performers-table thead {
+            display: none;
+        }
+
+        .top-performers-table tbody {
+            display: block;
+            width: 100%;
+        }
+
+        .top-performers-table tr {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            position: relative;
+        }
+
+        .top-performers-table td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            position: relative;
+        }
+
+        .top-performers-table td:last-child {
+            border-bottom: none;
+        }
+
+        .top-performers-table td:before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #666;
+            min-width: 80px;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Special styling for rank column */
+        .top-performers-table td[data-label="Rank"] {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #333;
+            background: linear-gradient(135deg, #ffd200 0%, #43cea2 100%);
+            margin: -1rem -1rem 0.5rem -1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .top-performers-table td[data-label="Rank"]:before {
+            display: none;
+        }
+
+        /* Special styling for symbol */
+        .top-performers-table td[data-label="Symbol"] {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Special styling for market cap */
+        .top-performers-table td[data-label="Market Cap"] {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        /* Special styling for price */
+        .top-performers-table td[data-label="Price"] {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Special styling for 24h change */
+        .top-performers-table td[data-label="24h Change"] {
+            font-weight: 700;
+        }
+
+        .top-performers-table td[data-label="24h Change"].positive {
+            color: #28a745;
+        }
+
+        .top-performers-table td[data-label="24h Change"].negative {
+            color: #dc3545;
+        }
+
+        .top-performers-table td[data-label="24h Change"].neutral {
+            color: #6c757d;
+        }
+    }
+
+    /* Tablet responsive adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .top-performers-table {
+            overflow-x: auto;
+        }
+
+        .top-performers-table th,
+        .top-performers-table td {
+            padding: 0.6em;
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Additional mobile improvements */
+    @media (max-width: 480px) {
+        .top-performers-table tr {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+        }
+
+        .top-performers-table td {
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+        }
+
+        .top-performers-table td:before {
+            font-size: 0.8rem;
+            min-width: 70px;
+        }
+
+        .top-performers-table td[data-label="Rank"] {
+            font-size: 1rem;
+            padding: 0.6rem 0.8rem;
+        }
+    }
+
+    /* Touch-friendly improvements */
+    @media (max-width: 768px) {
+        .top-performers-table tr {
+            touch-action: manipulation;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .top-performers-table tr:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .top-performers-table tr:active {
+            transform: translateY(0);
+        }
+    }
+
+    .trends-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5em;
+        margin-top: 1em;
+    }
+
+    .trend-item {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        padding: 1.2em;
+        border-radius: 1em;
+        background: #f8f9fa;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .trend-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .trend-item.positive {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        border-left: 4px solid #28a745;
+    }
+
+    .trend-item.negative {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        border-left: 4px solid #dc3545;
+    }
+
+    .trend-item.neutral {
+        background: linear-gradient(135deg, #e2e3e5 0%, #d6d8db 100%);
+        border-left: 4px solid #6c757d;
+    }
+
+    .trend-icon {
+        font-size: 1.8em;
+        flex-shrink: 0;
+    }
+
+    .trend-label {
+        font-weight: 600;
+        color: #333;
+        flex: 1;
+        font-size: 1rem;
+    }
+
+    .trend-value {
+        font-weight: 700;
+        font-size: 1.3em;
+        color: #333;
+        flex-shrink: 0;
+        min-width: 60px;
+        text-align: right;
+    }
+
+    /* Mobile responsive styles for trends summary */
+    @media (max-width: 768px) {
+        .trends-summary {
+            grid-template-columns: 1fr;
+            gap: 1em;
+            margin-top: 0.8em;
+        }
+
+        .trend-item {
+            padding: 1em;
+            gap: 0.8em;
+            border-radius: 0.8em;
+        }
+
+        .trend-icon {
+            font-size: 1.5em;
+        }
+
+        .trend-label {
+            font-size: 0.95rem;
+        }
+
+        .trend-value {
+            font-size: 1.1em;
+            min-width: 50px;
+        }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .trends-summary {
+            gap: 0.8em;
+        }
+
+        .trend-item {
+            padding: 0.8em;
+            gap: 0.6em;
+            flex-wrap: wrap;
+        }
+
+        .trend-icon {
+            font-size: 1.3em;
+        }
+
+        .trend-label {
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .trend-value {
+            font-size: 1rem;
+            min-width: 40px;
+            text-align: right;
+        }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 360px) {
+        .trend-item {
+            padding: 0.7em;
+            gap: 0.5em;
+        }
+
+        .trend-icon {
+            font-size: 1.2em;
+        }
+
+        .trend-label {
+            font-size: 0.85rem;
+        }
+
+        .trend-value {
+            font-size: 0.95rem;
+            min-width: 35px;
+        }
+    }
+
+    /* Tablet responsive adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .trends-summary {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2em;
+        }
+
+        .trend-item {
+            padding: 1em;
+        }
+
+        .trend-icon {
+            font-size: 1.6em;
+        }
+
+        .trend-label {
+            font-size: 0.95rem;
+        }
+
+        .trend-value {
+            font-size: 1.2em;
+        }
+    }
+
+    /* Large desktop screens */
+    @media (min-width: 1200px) {
+        .trends-summary {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2em;
+        }
+
+        .trend-item {
+            padding: 1.5em;
+        }
+
+        .trend-icon {
+            font-size: 2em;
+        }
+
+        .trend-label {
+            font-size: 1.1rem;
+        }
+
+        .trend-value {
+            font-size: 1.4em;
+        }
+    }
+
+    /* Touch-friendly improvements for mobile */
+    @media (max-width: 768px) {
+        .trend-item {
+            touch-action: manipulation;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .trend-item:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    /* Ensure proper text wrapping and overflow handling */
+    .trend-item {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .trend-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Improve accessibility */
+    .trend-item {
+        position: relative;
+    }
+
+    .trend-item:focus {
+        outline: 2px solid #667eea;
+        outline-offset: 2px;
+    }
+
+    @media (max-width: 768px) {
+        .platform-overview {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .trends-summary {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Prevent chart height changes during scroll */
+    .comparison-section {
+        transform: translateZ(0);
+        will-change: auto;
+    }
+
+    .chart-card {
+        transform: translateZ(0);
+        will-change: auto;
+    }
+
+    .chart-container {
+        transform: translateZ(0);
+        will-change: auto;
+    }
+
+    /* Loader spinner styles */
+    .loader-spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .stat-value {
+        min-height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+</style>
+
+{{-- ======================== Live Coin Watch Info Section ======================== --}}
+<style>
+    .lcw-info-card {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 2.5em 2em;
+        background: linear-gradient(90deg, #ffd200 0%, #43cea2 100%);
+        border-radius: 2em;
+        box-shadow: 0 6px 32px rgba(67, 206, 162, 0.13), 0 1.5px 6px rgba(67, 206, 162, 0.08);
+        color: #222;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2em;
+        transition: box-shadow 0.2s, transform 0.2s;
+        margin: 2em 0;
+    }
+    .lcw-info-card:hover {
+        box-shadow: 0 12px 48px rgba(67, 206, 162, 0.18), 0 3px 12px rgba(67, 206, 162, 0.12);
+        transform: translateY(-2px) scale(1.01);
+    }
+    .lcw-info-card .lcw-icon {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.18);
+        border-radius: 50%;
+        padding: 1em;
+        box-shadow: 0 2px 8px rgba(67, 206, 162, 0.10);
+    }
+    .lcw-info-card .lcw-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2em;
+    }
+    .lcw-info-card h2 {
+        margin: 0;
+        font-size: 2.1rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: #222;
+    }
+    .lcw-info-card p {
+        font-size: 1.15rem;
+        line-height: 1.7;
+        margin: 0;
+        max-width: 900px;
+        color: #222;
+    }
+    .lcw-info-card a {
+        display: inline-block !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        align-self: flex-start;
+        background: #222;
+        color: #ffd200;
+        padding: 0.85em 1.2em;
+        border-radius: 2em;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1rem;
+        box-shadow: 0 2px 8px rgba(34,34,34,0.08);
+        transition: background 0.2s, color 0.2s;
+        box-sizing: border-box;
+    }
+    .lcw-info-card a:hover {
+        background: #ffd200;
+        color: #222;
+    }
+    @media (max-width: 900px) {
+        .lcw-info-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 2em 1em;
+            gap: 1.2em;
+        }
+        .lcw-info-card .lcw-icon {
+            margin-bottom: 0.5em;
+        }
+    }
+</style>
+
+</div>
 @endsection
 
 {{-- ======================== Scripts Section ======================== --}}
@@ -1454,8 +1490,98 @@
         });
         }
 
+        // Load CoinPaprika data via AJAX
+        function loadCoinPaprikaData() {
+            fetch('/api/coinpaprika-data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateCoinPaprikaBlock(data.data);
+                    } else {
+                        console.error('Error loading CoinPaprika data:', data.message);
+                        updateCoinPaprikaBlock({ error: true });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching CoinPaprika data:', error);
+                    updateCoinPaprikaBlock({ error: true });
+                });
+        }
+
+        // Load Cryptics data via AJAX
+        function loadCrypticsData() {
+            fetch('/api/cryptics-data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateCrypticsBlock(data.data);
+                    } else {
+                        console.error('Error loading Cryptics data:', data.message);
+                        updateCrypticsBlock({ error: true });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching Cryptics data:', error);
+                    updateCrypticsBlock({ error: true });
+                });
+        }
+
+        // Update CoinPaprika block with data
+        function updateCoinPaprikaBlock(data) {
+            if (data.error) {
+                $('#cp-total-coins').text('Error');
+                $('#cp-active-coins').text('Error');
+                $('#cp-new-coins').text('Error');
+                return;
+            }
+
+            $('#cp-total-coins').text(data.total_coins?.toLocaleString() || '-');
+            $('#cp-active-coins').text(data.active_coins?.toLocaleString() || '-');
+            $('#cp-new-coins').text(data.new_coins?.toLocaleString() || '-');
+        }
+
+        // Update Cryptics block with data
+        function updateCrypticsBlock(data) {
+            if (data.error) {
+                $('#ct-total-predictions').text('Error');
+                $('#ct-accuracy').text('Error');
+                $('#ct-trending-up').text('Error');
+                return;
+            }
+
+            // Check if this is demo data
+            const isDemo = data.demo_data || false;
+            
+            // Update the values
+            $('#ct-total-predictions').text(data.total_predictions?.toLocaleString() || '-');
+            $('#ct-accuracy').text((data.prediction_accuracy * 100).toFixed(1) + '%');
+            $('#ct-trending-up').text(data.prediction_trends?.trending_up || '-');
+            
+            // Add visual indicator for demo data
+            if (isDemo) {
+                // Add a small indicator that this is demo data
+                const accuracyEl = document.getElementById('ct-accuracy');
+                if (accuracyEl) {
+                    accuracyEl.title = 'Demo data - API temporarily unavailable';
+                    accuracyEl.style.opacity = '0.7';
+                    accuracyEl.style.fontStyle = 'italic';
+                }
+                
+                // Log info about demo data
+                console.log('Cryptics.tech: Using demo data due to API connectivity issues');
+            } else {
+                // Remove demo data styling if it exists
+                const accuracyEl = document.getElementById('ct-accuracy');
+                if (accuracyEl) {
+                    accuracyEl.title = '';
+                    accuracyEl.style.opacity = '1';
+                    accuracyEl.style.fontStyle = 'normal';
+                }
+            }
+        }
+
         function renderComparisonData(data) {
-            // Update platform overview cards
+            // Update platform overview cards (excluding coinpaprika and cryptics)
             updatePlatformCards(data);
 
             // Create charts
@@ -1487,8 +1613,6 @@
             document.getElementById('cmc-total-events').textContent = data.coinmarketcal.total_events.toLocaleString();
             document.getElementById('cmc-top-10').textContent = data.coinmarketcal.rank_distribution.top_10.toLocaleString();
 
-
-
             // CryptoCompare
             if (data.cryptocompare) {
                 $('#cc-total-coins').text(data.cryptocompare.total_coins?.toLocaleString() || '-');
@@ -1496,19 +1620,7 @@
                 $('#cc-total-volume').text('$' + (data.cryptocompare.volume_stats?.total / 1e9).toFixed(2) + 'B');
             }
 
-            // CoinPaprika
-            if (data.coinpaprika) {
-                $('#cp-total-coins').text(data.coinpaprika.total_coins?.toLocaleString() || '-');
-                $('#cp-active-coins').text(data.coinpaprika.active_coins?.toLocaleString() || '-');
-                $('#cp-new-coins').text(data.coinpaprika.new_coins?.toLocaleString() || '-');
-            }
-
-            // Cryptics.tech
-            if (data.cryptics) {
-                $('#ct-total-predictions').text(data.cryptics.total_predictions?.toLocaleString() || '-');
-                $('#ct-accuracy').text((data.cryptics.prediction_accuracy * 100).toFixed(1) + '%');
-                $('#ct-trending-up').text(data.cryptics.prediction_trends?.trending_up || '-');
-            }
+            // Note: CoinPaprika and Cryptics data are loaded separately via AJAX
         }
 
         function createMarketCapChart(data) {
@@ -2056,9 +2168,16 @@
             // Load comparison data on page load
             loadComparisonData();
 
+            // Load individual block data via AJAX
+            loadCoinPaprikaData();
+            loadCrypticsData();
+
             // Refresh comparison data button
             document.getElementById('refreshComparison').addEventListener('click', function() {
                 loadComparisonData();
+                // Also refresh individual blocks
+                loadCoinPaprikaData();
+                loadCrypticsData();
             });
 
             // Coin search functionality
