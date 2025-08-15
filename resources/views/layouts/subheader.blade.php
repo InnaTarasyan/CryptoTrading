@@ -759,15 +759,24 @@
     /* Additional touch-friendly improvements for all mobile devices */
     @media (max-width: 768px) {
         .breadcrumb-link {
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
+            /* Remove conflicting properties that prevent link functionality */
+            -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+            -webkit-touch-callout: default;
+            -webkit-user-select: text;
+            user-select: text;
+            /* Ensure links are clickable */
+            pointer-events: auto;
+            cursor: pointer;
+            /* Remove transform that might interfere with clicks */
+            transform: none;
         }
         
         .breadcrumb-link:active {
-            -webkit-transform: scale(0.98);
-            transform: scale(0.98);
+            /* Remove scale transform that might interfere with clicks */
+            transform: none;
+            /* Add visual feedback instead */
+            background: rgba(59, 130, 246, 0.15);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
         }
         
         /* Improve scroll performance */
@@ -801,10 +810,13 @@
         .breadcrumb-item:nth-child(5) { animation-delay: 0.5s; }
         .breadcrumb-item:nth-child(6) { animation-delay: 0.6s; }
         
-        /* Enhanced touch feedback */
+        /* Enhanced touch feedback without interfering with links */
         .breadcrumb-link {
             position: relative;
             overflow: hidden;
+            /* Ensure proper link behavior */
+            display: block;
+            text-decoration: none;
         }
         
         .breadcrumb-link::before {
@@ -816,6 +828,7 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: left 0.5s;
+            pointer-events: none; /* Don't interfere with link clicks */
         }
         
         .breadcrumb-link:active::before {
@@ -853,7 +866,7 @@
         
         .breadcrumb-link.special-highlight:hover {
             background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
-            transform: translateY(-3px);
+            transform: none; /* Remove transform to ensure link functionality */
             box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
         }
         
@@ -934,7 +947,7 @@
             right: 0;
             bottom: 0;
             border-radius: 12px;
-            pointer-events: none;
+            pointer-events: none; /* Don't interfere with link clicks */
         }
         
         /* Better contrast for text */
@@ -966,6 +979,55 @@
     @media screen and (-webkit-min-device-pixel-ratio: 0) {
         .breadcrumb-text {
             font-size: 16px;
+        }
+    }
+
+    /* Mobile-specific link fixes */
+    @media (max-width: 768px) {
+        .breadcrumb-link {
+            /* Ensure links are clickable on mobile */
+            position: relative;
+            z-index: 10;
+            /* Remove any pointer-events restrictions */
+            pointer-events: auto !important;
+            /* Ensure proper touch handling */
+            touch-action: auto;
+            /* Remove any transform that might interfere */
+            transform: none !important;
+            /* Ensure proper display */
+            display: block !important;
+            /* Remove any overflow that might hide content */
+            overflow: visible;
+        }
+        
+        .breadcrumb-link * {
+            /* Ensure child elements don't interfere with clicks */
+            pointer-events: none;
+        }
+        
+        .breadcrumb-link {
+            /* Ensure the link itself receives all pointer events */
+            pointer-events: auto !important;
+        }
+        
+        /* Fix for iOS Safari */
+        .breadcrumb-link {
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Ensure proper touch target size */
+        .breadcrumb-link {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        /* Fix for Android Chrome */
+        .breadcrumb-link {
+            -webkit-touch-callout: default;
+            -webkit-user-select: text;
+            user-select: text;
         }
     }
 
@@ -1061,27 +1123,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Add smooth scrolling for mobile touch
+    // Add smooth scrolling for mobile touch without interfering with links
     var breadcrumbContainer = document.querySelector('.modern-breadcrumbs');
     if (breadcrumbContainer) {
         let isScrolling = false;
+        let scrollTimeout;
         
         breadcrumbContainer.addEventListener('touchstart', function() {
             isScrolling = true;
         });
         
-        breadcrumbContainer.addEventListener('touchend', function() {
-            setTimeout(() => {
-                isScrolling = false;
-            }, 100);
+        breadcrumbContainer.addEventListener('touchmove', function() {
+            isScrolling = true;
+            // Clear any existing timeout
+            clearTimeout(scrollTimeout);
         });
         
-        // Prevent link clicks during scroll on mobile
+        breadcrumbContainer.addEventListener('touchend', function() {
+            // Set a short delay to allow link clicks after scrolling stops
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 50); // Reduced from 100ms to 50ms for better responsiveness
+        });
+        
+        // Remove the click prevention that was blocking links
+        // Links should work normally on mobile
         breadcrumbLinks.forEach(function(link) {
+            // Ensure links are properly clickable on mobile
+            link.addEventListener('touchstart', function(e) {
+                // Allow touch events to propagate normally
+                e.stopPropagation();
+            });
+            
             link.addEventListener('click', function(e) {
-                if (isScrolling) {
-                    e.preventDefault();
-                }
+                // Ensure clicks work normally
+                console.log('Breadcrumb link clicked:', this.href);
             });
         });
     }
