@@ -137,7 +137,16 @@ return [
     'no_data_found_for' => 'Данные не найдены для',
     'error_searching_for' => 'Ошибка поиска для',
     'searching_for_coin_data' => 'Поиск данных о монете...',
-    'platforms_comparison_title' => 'Сравнение данных LiveCoinWatch, CoinGecko, CoinMarketCal,  CryptoCompare, CoinPaprika и Cryptics.tech',
+    'platforms_comparison_title' => 'Сравнение данных LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika и Cryptics.tech',
+    
+    // Breadcrumb menu items
+    'dashboard' => 'Панель управления',
+    'markets_comparison' => 'Сравнение рынков',
+    'live_coin_watch' => 'Live Coin Watch',
+    'coingecko' => 'Coingecko',
+    'coin_market_cal' => 'Coin Market Cal',
+    'crypto_compare' => 'Crypto Compare',
+    'coin_predictions' => 'Прогнозы монет',
     
     // Platform-specific metrics
     'active_coins' => 'Активные монеты',

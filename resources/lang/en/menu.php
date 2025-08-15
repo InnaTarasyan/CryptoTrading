@@ -139,6 +139,15 @@ return [
     'searching_for_coin_data' => 'Searching for coin data...',
     'platforms_comparison_title' => 'Compare Data from LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika and Cryptics.tech',
     
+    // Breadcrumb menu items
+    'dashboard' => 'Dashboard',
+    'markets_comparison' => 'Markets Comparison',
+    'live_coin_watch' => 'Live Coin Watch',
+    'coingecko' => 'Coingecko',
+    'coin_market_cal' => 'Coin Market Cal',
+    'crypto_compare' => 'Crypto Compare',
+    'coin_predictions' => 'Coin Predictions',
+    
     // Platform-specific metrics
     'active_coins' => 'Active Coins',
     'new_coins' => 'New Coins',
