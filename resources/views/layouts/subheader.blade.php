@@ -139,29 +139,44 @@
         width: 100%;
         max-width: 100%;
         min-width: 0;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 12px;
-        padding: 4px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+        border-radius: 16px;
+        padding: 8px 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
         flex: 1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .modern-breadcrumbs::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
     }
 
     .modern-breadcrumbs::-webkit-scrollbar {
-        height: 4px;
+        height: 6px;
     }
 
     .modern-breadcrumbs::-webkit-scrollbar-track {
-        background: transparent;
+        background: rgba(226, 232, 240, 0.3);
+        border-radius: 3px;
     }
 
     .modern-breadcrumbs::-webkit-scrollbar-thumb {
-        background: #d1d5db;
-        border-radius: 2px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        border-radius: 3px;
+        transition: background 0.3s ease;
     }
 
     .modern-breadcrumbs::-webkit-scrollbar-thumb:hover {
-        background: #9ca3af;
+        background: linear-gradient(90deg, #2563eb, #7c3aed);
     }
 
     .breadcrumb-item {
@@ -172,66 +187,70 @@
         align-items: center;
     }
 
+    /* Remove separators completely */
     .breadcrumb-item:not(:last-child)::after {
-        content: '';
-        width: 6px;
-        height: 6px;
-        background: #d1d5db;
-        border-radius: 50%;
-        margin: 0 8px;
-        flex-shrink: 0;
-        opacity: 0.6;
+        display: none;
     }
 
     .breadcrumb-link {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        padding: 8px 12px;
-        color: #6b7280;
+        gap: 8px;
+        padding: 12px 16px;
+        color: #4b5563;
         text-decoration: none;
-        border-radius: 8px;
+        border-radius: 12px;
         font-weight: 500;
         font-size: 14px;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-style: italic;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         background: transparent;
         border: 1px solid transparent;
         white-space: nowrap;
         min-width: fit-content;
         max-width: none;
-        overflow: hidden;
+        overflow: visible;
+        letter-spacing: 0.3px;
+        line-height: 1.4;
     }
 
     .breadcrumb-link:hover {
-        color: #374151;
-        background: rgba(59, 130, 246, 0.08);
+        color: #1f2937;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
         border-color: rgba(59, 130, 246, 0.2);
-        transform: translateY(-1px);
-        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .breadcrumb-link:focus {
         outline: none;
-        color: #2563eb;
-        background: rgba(59, 130, 246, 0.12);
-        border-color: rgba(59, 130, 246, 0.3);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        color: #1e40af;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(139, 92, 246, 0.12) 100%);
+        border-color: rgba(59, 130, 246, 0.4);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 4px 12px rgba(59, 130, 246, 0.15);
     }
 
     .breadcrumb-link:active {
-        transform: translateY(0);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
     }
 
     .breadcrumb-icon {
         flex-shrink: 0;
-        opacity: 0.7;
-        transition: opacity 0.2s ease;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        width: 18px;
+        height: 18px;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
     }
 
     .breadcrumb-link:hover .breadcrumb-icon {
         opacity: 1;
+        transform: scale(1.1);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
     }
 
     .breadcrumb-text {
@@ -240,68 +259,86 @@
         overflow: visible;
         text-overflow: clip;
         white-space: nowrap;
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-style: italic;
+        font-weight: 500;
+        letter-spacing: 0.3px;
     }
 
-    /* Special highlight for Coin Predictions */
+    /* Enhanced special highlight for Coin Predictions */
     .breadcrumb-link.special-highlight {
-        background: linear-gradient(135deg, #f59e0b, #f97316);
+        background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
         color: #fff;
         border-color: #f59e0b;
         font-weight: 600;
-        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
         position: relative;
         animation: specialGlow 3s ease-in-out infinite;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .breadcrumb-link.special-highlight:hover {
-        background: linear-gradient(135deg, #d97706, #ea580c);
+        background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
         color: #fff;
         border-color: #d97706;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .breadcrumb-link.special-highlight:focus {
-        background: linear-gradient(135deg, #d97706, #ea580c);
+        background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
         color: #fff;
         border-color: #d97706;
-        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3), 0 6px 20px rgba(245, 158, 11, 0.4);
     }
 
     .breadcrumb-link.special-highlight .breadcrumb-icon {
         opacity: 1;
         color: #fff;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
 
     .highlight-badge {
         position: absolute;
-        top: -6px;
-        right: -6px;
-        background: #ef4444;
+        top: -8px;
+        right: -8px;
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
         color: #fff;
         font-size: 10px;
         font-weight: 700;
-        padding: 2px 6px;
-        border-radius: 10px;
+        font-family: 'Arial', sans-serif;
+        font-style: normal;
+        padding: 4px 8px;
+        border-radius: 12px;
         animation: badgePulse 2s ease-in-out infinite;
-        z-index: 2;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        min-width: 32px;
+        text-align: center;
+        line-height: 1;
     }
 
     @keyframes specialGlow {
         0%, 100% {
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
         }
         50% {
-            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.5);
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.5);
         }
     }
 
     @keyframes badgePulse {
         0%, 100% {
             transform: scale(1);
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
         }
         50% {
             transform: scale(1.1);
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.6);
         }
     }
 
@@ -497,17 +534,17 @@
             width: 100%;
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
             overflow-x: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: nowrap;
             min-height: auto;
         }
@@ -539,15 +576,15 @@
         
         .breadcrumb-link {
             width: 100%;
-            padding: 16px 20px;
+            padding: 18px 24px;
             font-size: 16px;
             font-weight: 500;
-            gap: 12px;
-            border-radius: 12px;
+            gap: 14px;
+            border-radius: 16px;
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(226, 232, 240, 0.8);
             color: #475569;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             min-width: 100%;
             position: relative;
@@ -556,22 +593,27 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            min-height: 56px;
+            min-height: 60px;
             touch-action: manipulation;
             text-align: left;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+            letter-spacing: 0.4px;
+            line-height: 1.5;
         }
         
         .breadcrumb-link:hover {
             background: rgba(255, 255, 255, 1);
             border-color: #cbd5e1;
             color: #374151;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
         
         .breadcrumb-link:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
         
         .breadcrumb-link:focus {
@@ -579,15 +621,16 @@
             background: rgba(255, 255, 255, 1);
             border-color: #3b82f6;
             color: #1e40af;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 6px 16px rgba(0, 0, 0, 0.12);
         }
         
         .breadcrumb-icon {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             opacity: 0.8;
             flex-shrink: 0;
-            margin-right: 8px;
+            margin-right: 10px;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
         }
         
         .breadcrumb-text {
@@ -598,6 +641,9 @@
             max-width: none;
             flex: 1;
             font-size: 16px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+            letter-spacing: 0.4px;
         }
         
         /* Enhanced special highlight for mobile */
@@ -606,31 +652,41 @@
             color: #fff;
             border-color: #f59e0b;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
             animation: specialGlow 3s ease-in-out infinite;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
         
         .breadcrumb-link.special-highlight:hover {
             background: linear-gradient(135deg, #d97706, #ea580c);
             color: #fff;
             border-color: #d97706;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .highlight-badge {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ef4444;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: #fff;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
-            padding: 3px 6px;
-            border-radius: 12px;
+            font-family: 'Arial', sans-serif;
+            font-style: normal;
+            padding: 5px 10px;
+            border-radius: 14px;
             animation: badgePulse 2s ease-in-out infinite;
-            z-index: 3;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 15;
+            box-shadow: 0 3px 12px rgba(239, 68, 68, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            min-width: 36px;
+            text-align: center;
+            line-height: 1;
         }
         
         /* Enhanced mobile styles for Update All Data button */
@@ -703,19 +759,20 @@
         }
         
         .modern-breadcrumbs {
-            padding: 6px;
-            border-radius: 14px;
+            padding: 8px;
+            border-radius: 18px;
             min-height: auto;
-            gap: 6px;
+            gap: 8px;
         }
         
         .breadcrumb-link {
             width: 100%;
-            padding: 14px 16px;
+            padding: 16px 20px;
             font-size: 15px;
-            gap: 10px;
-            border-radius: 10px;
-            min-height: 52px;
+            gap: 12px;
+            border-radius: 14px;
+            min-height: 56px;
+            letter-spacing: 0.3px;
         }
         
         .breadcrumb-item {
@@ -723,23 +780,26 @@
         }
         
         .breadcrumb-icon {
-            width: 18px;
-            height: 18px;
-            margin-right: 6px;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
         
         .breadcrumb-text {
             max-width: none;
             flex: 1;
             font-size: 15px;
+            letter-spacing: 0.3px;
         }
         
         .highlight-badge {
-            font-size: 9px;
-            padding: 2px 5px;
-            top: -6px;
-            right: -6px;
-            border-radius: 10px;
+            font-size: 10px;
+            padding: 4px 8px;
+            top: -8px;
+            right: -8px;
+            border-radius: 12px;
+            min-width: 32px;
+            letter-spacing: 0.5px;
         }
         
         /* Enhanced mobile styles for Update All Data button on smaller screens */
@@ -787,19 +847,20 @@
         }
         
         .modern-breadcrumbs {
-            padding: 4px;
-            border-radius: 12px;
+            padding: 6px;
+            border-radius: 16px;
             min-height: auto;
-            gap: 4px;
+            gap: 6px;
         }
         
         .breadcrumb-link {
             width: 100%;
-            padding: 12px 14px;
+            padding: 14px 18px;
             font-size: 14px;
-            gap: 8px;
-            border-radius: 8px;
-            min-height: 48px;
+            gap: 10px;
+            border-radius: 12px;
+            min-height: 52px;
+            letter-spacing: 0.25px;
         }
         
         .breadcrumb-item {
@@ -807,23 +868,26 @@
         }
         
         .breadcrumb-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 4px;
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
         }
         
         .breadcrumb-text {
             max-width: none;
             flex: 1;
             font-size: 14px;
+            letter-spacing: 0.25px;
         }
         
         .highlight-badge {
-            font-size: 8px;
-            padding: 1px 4px;
-            top: -5px;
-            right: -5px;
-            border-radius: 8px;
+            font-size: 9px;
+            padding: 3px 6px;
+            top: -6px;
+            right: -6px;
+            border-radius: 10px;
+            min-width: 28px;
+            letter-spacing: 0.4px;
         }
         
         /* Enhanced mobile styles for Update All Data button on smallest screens */
