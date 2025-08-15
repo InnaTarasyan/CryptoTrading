@@ -352,6 +352,53 @@
         padding: 2em;
         margin: 2em 0;
         box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    /* Mobile constraints for comparison-section */
+    @media (max-width: 768px) {
+        .comparison-section {
+            border-radius: 1.5em;
+            padding: 1.5em;
+            margin: 1.5em 0.5em;
+            width: calc(100% - 1em);
+            max-width: calc(100% - 1em);
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .comparison-section {
+            border-radius: 1.2em;
+            padding: 1.2em;
+            margin: 1.2em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+        }
+    }
+
+    @media (max-width: 360px) {
+        .comparison-section {
+            border-radius: 1em;
+            padding: 1em;
+            margin: 1em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+        }
+    }
+
+    @media (max-width: 320px) {
+        .comparison-section {
+            border-radius: 0.8em;
+            padding: 0.8em;
+            margin: 0.8em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+        }
     }
 
     .coin-search-section {
@@ -362,6 +409,8 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         width: 100%;
         box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .search-container {
@@ -370,6 +419,7 @@
         align-items: center;
         margin-bottom: 1em;
         width: 100%;
+        box-sizing: border-box;
     }
 
     .coin-search-input {
@@ -383,6 +433,8 @@
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
         min-width: 0;
         box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
     }
 
     .coin-search-input:focus {
@@ -415,101 +467,149 @@
         transform: translateY(0);
     }
 
-    /* Mobile responsive styles for coin search */
+    /* ===== MOBILE-FIRST RESPONSIVE DESIGN ===== */
+    
+    /* Base mobile styles (default) */
     @media (max-width: 768px) {
-        .coin-search-section {
+        .comparison-section .coin-search-section {
+            /* Inherit parent constraints */
+            width: 100%;
+            max-width: 100%;
+            margin: 0 0 1.5em 0;
             padding: 1em;
             border-radius: 1em;
-            margin-bottom: 1.5em;
+            box-sizing: border-box;
+            /* Prevent horizontal overflow */
+            overflow: hidden;
+            /* Ensure proper sizing */
+            min-width: 0;
         }
 
-        .search-container {
+        .comparison-section .search-container {
             flex-direction: column;
             gap: 0.8em;
             align-items: stretch;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
-        .coin-search-input {
+        .comparison-section .coin-search-input {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
             padding: 0.9em 1em;
             font-size: 1rem;
             border-radius: 0.8em;
             border-width: 1.5px;
+            box-sizing: border-box;
         }
 
-        .search-btn {
+        .comparison-section .search-btn {
+            width: 100%;
+            max-width: 100%;
+            min-width: auto;
             padding: 0.9em 1em;
             font-size: 1rem;
             border-radius: 0.8em;
-            width: 100%;
-            min-width: auto;
+            box-sizing: border-box;
         }
     }
 
     /* Small mobile devices */
     @media (max-width: 480px) {
-        .coin-search-section {
+        .comparison-section .coin-search-section {
             padding: 0.8em;
             border-radius: 0.8em;
-            margin-bottom: 1em;
+            margin: 0 0 1.2em 0;
         }
 
-        .search-container {
+        .comparison-section .search-container {
             gap: 0.6em;
         }
 
-        .coin-search-input {
+        .comparison-section .coin-search-input {
             padding: 0.8em 0.9em;
             font-size: 0.95rem;
             border-radius: 0.7em;
         }
 
-        .search-btn {
+        .comparison-section .search-btn {
             padding: 0.8em 0.9em;
             font-size: 0.95rem;
             border-radius: 0.7em;
         }
     }
 
-    /* Extra small devices */
+    /* Extra small mobile devices */
     @media (max-width: 360px) {
-        .coin-search-section {
+        .comparison-section .coin-search-section {
             padding: 0.7em;
             border-radius: 0.7em;
+            margin: 0 0 1em 0;
         }
 
-        .search-container {
+        .comparison-section .search-container {
             gap: 0.5em;
         }
 
-        .coin-search-input {
+        .comparison-section .coin-search-input {
             padding: 0.7em 0.8em;
             font-size: 0.9rem;
             border-radius: 0.6em;
         }
 
-        .search-btn {
+        .comparison-section .search-btn {
             padding: 0.7em 0.8em;
             font-size: 0.9rem;
             border-radius: 0.6em;
         }
     }
 
-    /* Tablet responsive adjustments */
-    @media (min-width: 769px) and (max-width: 1024px) {
-        .coin-search-section {
-            padding: 1.2em;
+    /* Very small mobile devices */
+    @media (max-width: 320px) {
+        .comparison-section .coin-search-section {
+            padding: 0.6em;
+            border-radius: 0.6em;
+            margin: 0 0 0.8em 0;
         }
 
-        .search-container {
+        .comparison-section .search-container {
+            gap: 0.4em;
+        }
+
+        .comparison-section .coin-search-input {
+            padding: 0.6em 0.7em;
+            font-size: 0.85rem;
+            border-radius: 0.5em;
+        }
+
+        .comparison-section .search-btn {
+            padding: 0.6em 0.7em;
+            font-size: 0.85rem;
+            border-radius: 0.5em;
+        }
+    }
+
+    /* ===== TABLET AND DESKTOP STYLES ===== */
+    
+    /* Tablet responsive adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .comparison-section .coin-search-section {
+            padding: 1.2em;
+            margin: 0 0 1.8em 0;
+        }
+
+        .comparison-section .search-container {
             gap: 0.8em;
         }
 
-        .coin-search-input {
+        .comparison-section .coin-search-input {
             padding: 0.7em 1em;
             font-size: 1rem;
         }
 
-        .search-btn {
+        .comparison-section .search-btn {
             padding: 0.7em 1.2em;
             font-size: 1rem;
         }
@@ -517,70 +617,227 @@
 
     /* Large desktop screens */
     @media (min-width: 1200px) {
-        .coin-search-section {
+        .comparison-section .coin-search-section {
             padding: 2em;
             border-radius: 2em;
+            margin: 0 0 2.5em 0;
         }
 
-        .search-container {
+        .comparison-section .search-container {
             gap: 1.2em;
+            flex-direction: row;
         }
 
-        .coin-search-input {
+        .comparison-section .coin-search-input {
             padding: 1em 1.5em;
             font-size: 1.2em;
+            width: auto;
+            flex: 1;
         }
 
-        .search-btn {
+        .comparison-section .search-btn {
             padding: 1em 2em;
             font-size: 1.2em;
+            width: auto;
+            min-width: 80px;
         }
     }
 
+    /* ===== SPECIAL MOBILE CASES ===== */
+    
+    /* Landscape mobile orientation */
+    @media (max-width: 768px) and (orientation: landscape) {
+        .comparison-section .coin-search-section {
+            padding: 0.8em 1em;
+        }
+
+        .comparison-section .search-container {
+            flex-direction: row;
+            gap: 0.6em;
+        }
+
+        .comparison-section .coin-search-input {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .comparison-section .search-btn {
+            width: auto;
+            min-width: 80px;
+            flex-shrink: 0;
+        }
+    }
+
+    /* High DPI mobile devices */
+    @media (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px) {
+        .comparison-section .coin-search-input {
+            border-width: 1px;
+        }
+
+        .comparison-section .search-btn {
+            border-width: 1px;
+        }
+    }
+
+    /* ===== TOUCH AND INTERACTION IMPROVEMENTS ===== */
+    
     /* Touch-friendly improvements for mobile */
     @media (max-width: 768px) {
-        .coin-search-input {
+        .comparison-section .coin-search-input {
             touch-action: manipulation;
             -webkit-appearance: none;
             appearance: none;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            /* Prevent zoom on iOS */
+            font-size: 16px;
         }
 
-        .search-btn {
+        .comparison-section .search-btn {
             touch-action: manipulation;
             -webkit-appearance: none;
             appearance: none;
             min-height: 44px; /* Minimum touch target size */
+            width: 100%;
+            max-width: 100%;
         }
 
-        .coin-search-input:focus {
+        .comparison-section .coin-search-input:focus {
             box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
     }
 
+    /* ===== ACCESSIBILITY AND FOCUS STATES ===== */
+    
     /* Improve accessibility */
-    .coin-search-input {
+    .comparison-section .coin-search-input {
         position: relative;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
-    .coin-search-input:focus {
+    .comparison-section .coin-search-input:focus {
         outline: none;
     }
 
-    .search-btn:focus {
+    .comparison-section .search-btn:focus {
         outline: 2px solid #667eea;
         outline-offset: 2px;
     }
 
+    /* ===== UTILITY AND OVERFLOW PREVENTION ===== */
+    
     /* Ensure proper text sizing */
-    .coin-search-input {
+    .comparison-section .coin-search-input {
         font-family: inherit;
         line-height: 1.5;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     /* Prevent zoom on iOS */
     @media screen and (-webkit-min-device-pixel-ratio: 0) {
-        .coin-search-input {
+        .comparison-section .coin-search-input {
             font-size: 16px;
+        }
+    }
+
+    /* Ensure the section doesn't overflow on any device */
+    .comparison-section .coin-search-section {
+        overflow: hidden;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        /* Inherit parent width constraints */
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ===== MOBILE-SPECIFIC CONSTRAINTS ===== */
+    
+    /* Ensure coin-search-section fits within comparison-section */
+    @media (max-width: 768px) {
+        .comparison-section {
+            /* Parent container constraints */
+            width: calc(100% - 1em);
+            max-width: calc(100% - 1em);
+            margin: 1.5em 0.5em;
+            padding: 1.5em;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .comparison-section .coin-search-section {
+            /* Child container - inherit parent constraints */
+            width: 100%;
+            max-width: 100%;
+            margin: 0 0 1.5em 0;
+            padding: 1em;
+            border-radius: 1em;
+            box-sizing: border-box;
+            overflow: hidden;
+            /* Ensure it doesn't exceed parent */
+            min-width: 0;
+        }
+
+        .comparison-section .search-container {
+            /* Search container - inherit parent constraints */
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .comparison-section .coin-search-input,
+        .comparison-section .search-btn {
+            /* Input and button - inherit parent constraints */
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+    }
+
+    /* Very small screen constraints */
+    @media (max-width: 480px) {
+        .comparison-section {
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+            margin: 1.2em 0.3em;
+            padding: 1.2em;
+        }
+
+        .comparison-section .coin-search-section {
+            padding: 0.8em;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .comparison-section {
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+            margin: 1em 0.2em;
+            padding: 1em;
+        }
+
+        .comparison-section .coin-search-section {
+            padding: 0.7em;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .comparison-section {
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+            margin: 0.8em 0.1em;
+            padding: 0.8em;
+        }
+
+        .comparison-section .coin-search-section {
+            padding: 0.6em;
         }
     }
 
@@ -589,6 +846,10 @@
         border-radius: 1em;
         padding: 1.5em;
         margin-top: 1em;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .coin-analysis-header {
@@ -598,6 +859,8 @@
         margin-bottom: 1em;
         padding-bottom: 1em;
         border-bottom: 2px solid #e9ecef;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .coin-analysis-header h3 {
@@ -605,12 +868,16 @@
         font-size: 1.5em;
         font-weight: 700;
         color: #333;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .coin-analysis-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1.5em;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .coin-analysis-card {
@@ -618,6 +885,16 @@
         border-radius: 1em;
         padding: 1.5em;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .coin-analysis-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
     .coin-analysis-card h4 {
@@ -628,12 +905,16 @@
         display: flex;
         align-items: center;
         gap: 0.5em;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .coin-analysis-data {
         display: flex;
         flex-direction: column;
         gap: 0.8em;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .coin-analysis-item {
@@ -642,6 +923,10 @@
         align-items: center;
         padding: 0.5em 0;
         border-bottom: 1px solid #eee;
+        width: 100%;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        gap: 0.5em;
     }
 
     .coin-analysis-item:last-child {
@@ -651,11 +936,20 @@
     .coin-analysis-label {
         font-weight: 600;
         color: #666;
+        flex: 1;
+        min-width: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .coin-analysis-value {
         font-weight: 700;
         color: #333;
+        text-align: right;
+        flex-shrink: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 50%;
     }
 
     .coin-analysis-value.positive {
@@ -664,6 +958,573 @@
 
     .coin-analysis-value.negative {
         color: #dc3545;
+    }
+
+    /* ===== MOBILE-FIRST RESPONSIVE DESIGN ===== */
+    
+    /* Base mobile styles (default) */
+    .coin-analysis-result {
+        padding: 1em;
+        border-radius: 0.8em;
+        margin: 0.8em 0.5em;
+        width: calc(100% - 1em);
+        max-width: calc(100% - 1em);
+        box-sizing: border-box;
+    }
+
+    .coin-analysis-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8em;
+        padding-bottom: 0.8em;
+        margin-bottom: 0.8em;
+        text-align: center;
+    }
+
+    .coin-analysis-header h3 {
+        font-size: 1.3em;
+        text-align: center;
+        width: 100%;
+    }
+
+    .coin-analysis-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .coin-analysis-card {
+        padding: 1em;
+        border-radius: 0.8em;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        /* Ensure card doesn't exceed parent width */
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .coin-analysis-card h4 {
+        font-size: 1.1em;
+        margin-bottom: 0.8em;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .coin-analysis-data {
+        gap: 0.6em;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .coin-analysis-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3em;
+        padding: 0.6em 0;
+        text-align: left;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .coin-analysis-label {
+        font-size: 0.9rem;
+        color: #555;
+        font-weight: 600;
+        width: 100%;
+        text-align: left;
+        max-width: 100%;
+    }
+
+    .coin-analysis-value {
+        font-size: 1rem;
+        text-align: left;
+        width: 100%;
+        max-width: 100%;
+        font-weight: 700;
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .coin-analysis-result {
+            padding: 0.8em;
+            border-radius: 0.7em;
+            margin: 0.6em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+        }
+
+        .coin-analysis-header {
+            gap: 0.6em;
+            padding-bottom: 0.6em;
+            margin-bottom: 0.6em;
+        }
+
+        .coin-analysis-header h3 {
+            font-size: 1.2em;
+        }
+
+        .coin-analysis-grid {
+            gap: 0.8em;
+        }
+
+        .coin-analysis-card {
+            padding: 0.8em;
+            border-radius: 0.7em;
+        }
+
+        .coin-analysis-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.6em;
+        }
+
+        .coin-analysis-data {
+            gap: 0.5em;
+        }
+
+        .coin-analysis-item {
+            gap: 0.2em;
+            padding: 0.5em 0;
+        }
+
+        .coin-analysis-label {
+            font-size: 0.85rem;
+        }
+
+        .coin-analysis-value {
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Extra small mobile devices */
+    @media (max-width: 360px) {
+        .coin-analysis-result {
+            padding: 0.7em;
+            border-radius: 0.6em;
+            margin: 0.5em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+        }
+
+        .coin-analysis-header {
+            gap: 0.5em;
+            padding-bottom: 0.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .coin-analysis-header h3 {
+            font-size: 1.1em;
+        }
+
+        .coin-analysis-grid {
+            gap: 0.7em;
+        }
+
+        .coin-analysis-card {
+            padding: 0.7em;
+            border-radius: 0.6em;
+        }
+
+        .coin-analysis-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5em;
+        }
+
+        .coin-analysis-data {
+            gap: 0.4em;
+        }
+
+        .coin-analysis-item {
+            gap: 0.2em;
+            padding: 0.4em 0;
+        }
+
+        .coin-analysis-label {
+            font-size: 0.8rem;
+        }
+
+        .coin-analysis-value {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Very small mobile devices */
+    @media (max-width: 320px) {
+        .coin-analysis-result {
+            padding: 0.6em;
+            border-radius: 0.5em;
+            margin: 0.4em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+        }
+
+        .coin-analysis-header {
+            gap: 0.4em;
+            padding-bottom: 0.4em;
+            margin-bottom: 0.4em;
+        }
+
+        .coin-analysis-header h3 {
+            font-size: 1rem;
+        }
+
+        .coin-analysis-grid {
+            gap: 0.6em;
+        }
+
+        .coin-analysis-card {
+            padding: 0.6em;
+            border-radius: 0.5em;
+        }
+
+        .coin-analysis-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.4em;
+        }
+
+        .coin-analysis-data {
+            gap: 0.3em;
+        }
+
+        .coin-analysis-item {
+            gap: 0.1em;
+            padding: 0.3em 0;
+        }
+
+        .coin-analysis-label {
+            font-size: 0.75rem;
+        }
+
+        .coin-analysis-value {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* ===== TABLET AND DESKTOP STYLES ===== */
+    
+    /* Tablet responsive adjustments */
+    @media (min-width: 769px) {
+        .coin-analysis-result {
+            padding: 1.5em;
+            border-radius: 1em;
+            margin: 1em 0;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .coin-analysis-header {
+            flex-direction: row;
+            align-items: center;
+            gap: 1em;
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            text-align: left;
+        }
+
+        .coin-analysis-header h3 {
+            font-size: 1.5em;
+            text-align: left;
+        }
+
+        .coin-analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5em;
+        }
+
+        .coin-analysis-card {
+            padding: 1.5em;
+            border-radius: 1em;
+        }
+
+        .coin-analysis-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            text-align: left;
+            justify-content: flex-start;
+        }
+
+        .coin-analysis-data {
+            gap: 0.8em;
+        }
+
+        .coin-analysis-item {
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5em;
+            padding: 0.5em 0;
+            text-align: left;
+        }
+
+        .coin-analysis-label {
+            font-size: 1rem;
+            color: #666;
+            text-align: left;
+            max-width: 50%;
+        }
+
+        .coin-analysis-value {
+            font-size: 1rem;
+            text-align: right;
+            max-width: 50%;
+        }
+    }
+
+    /* Large tablet and small desktop */
+    @media (min-width: 1025px) {
+        .coin-analysis-grid {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2em;
+        }
+
+        .coin-analysis-card {
+            padding: 2em;
+            border-radius: 1.2em;
+        }
+
+        .coin-analysis-header h3 {
+            font-size: 1.6em;
+        }
+
+        .coin-analysis-card h4 {
+            font-size: 1.3em;
+        }
+    }
+
+    /* Large desktop screens */
+    @media (min-width: 1200px) {
+        .coin-analysis-result {
+            padding: 2em;
+            border-radius: 1.5em;
+        }
+
+        .coin-analysis-grid {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2em;
+        }
+
+        .coin-analysis-card {
+            padding: 2em;
+            border-radius: 1.5em;
+        }
+
+        .coin-analysis-header h3 {
+            font-size: 1.7em;
+        }
+
+        .coin-analysis-card h4 {
+            font-size: 1.4em;
+        }
+
+        .coin-analysis-data {
+            gap: 1em;
+        }
+
+        .coin-analysis-item {
+            padding: 0.7em 0;
+        }
+    }
+
+    /* ===== SPECIAL MOBILE CASES ===== */
+    
+    /* Landscape mobile orientation */
+    @media (max-width: 768px) and (orientation: landscape) {
+        .coin-analysis-result {
+            padding: 0.8em 1em;
+        }
+
+        .coin-analysis-grid {
+            gap: 0.8em;
+        }
+
+        .coin-analysis-card {
+            padding: 0.8em;
+        }
+    }
+
+    /* High DPI mobile devices */
+    @media (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px) {
+        .coin-analysis-card {
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    /* Dark mode support for mobile */
+    @media (prefers-color-scheme: dark) and (max-width: 768px) {
+        .coin-analysis-result {
+            background: rgba(30, 30, 30, 0.95);
+            color: #fff;
+        }
+
+        .coin-analysis-card {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .coin-analysis-header h3,
+        .coin-analysis-card h4 {
+            color: #fff;
+        }
+
+        .coin-analysis-label {
+            color: #ccc;
+        }
+
+        .coin-analysis-value {
+            color: #fff;
+        }
+
+        .coin-analysis-item {
+            border-bottom-color: #444;
+        }
+    }
+
+    /* ===== ACCESSIBILITY AND INTERACTION ===== */
+    
+    /* Focus states for mobile accessibility */
+    @media (max-width: 768px) {
+        .coin-analysis-card:focus-within {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+            transform: scale(1.01);
+        }
+    }
+
+    /* Loading states for mobile */
+    @media (max-width: 768px) {
+        .coin-analysis-result.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .coin-analysis-result.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #667eea;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+    }
+
+    /* Touch-friendly improvements */
+    @media (max-width: 768px) {
+        .coin-analysis-card {
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            /* Ensure proper touch targets */
+            min-height: 44px;
+        }
+
+        .coin-analysis-item {
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+    }
+
+    /* ===== UTILITY CLASSES ===== */
+    
+    /* Ensure proper text wrapping and overflow handling */
+    .coin-analysis-result,
+    .coin-analysis-card,
+    .coin-analysis-header,
+    .coin-analysis-grid,
+    .coin-analysis-data,
+    .coin-analysis-item {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    /* Improve accessibility */
+    .coin-analysis-card {
+        position: relative;
+    }
+
+    .coin-analysis-card:focus {
+        outline: 2px solid #667eea;
+        outline-offset: 2px;
+    }
+
+    /* ===== MOBILE-SPECIFIC CONSTRAINTS ===== */
+    
+    /* Ensure cards are properly constrained within comparison-section */
+    @media (max-width: 768px) {
+        .comparison-section .coin-analysis-result {
+            /* Inherit parent constraints */
+            width: 100%;
+            max-width: 100%;
+            margin: 0.8em 0.5em;
+            box-sizing: border-box;
+        }
+
+        .comparison-section .coin-analysis-grid {
+            /* Single column layout on mobile */
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .comparison-section .coin-analysis-card {
+            /* Full width within parent, but with proper margins */
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 1em;
+            box-sizing: border-box;
+            /* Prevent horizontal overflow */
+            overflow: hidden;
+            /* Ensure proper sizing */
+            min-width: 0;
+        }
+    }
+
+    /* Very small screen constraints */
+    @media (max-width: 480px) {
+        .comparison-section .coin-analysis-result {
+            margin: 0.6em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+        }
+
+        .comparison-section .coin-analysis-card {
+            padding: 0.8em;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .comparison-section .coin-analysis-result {
+            margin: 0.5em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+        }
+
+        .comparison-section .coin-analysis-card {
+            padding: 0.7em;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .comparison-section .coin-analysis-result {
+            margin: 0.4em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+        }
+
+        .comparison-section .coin-analysis-card {
+            padding: 0.6em;
+        }
     }
 
     .platform-overview {
@@ -2187,6 +3048,77 @@
                     searchCoin();
                 }
             });
+
+            // Mobile-specific enhancements for coin search
+            function enhanceMobileSearch() {
+                const searchSection = document.querySelector('.coin-search-section');
+                const searchInput = document.getElementById('coinSearchInput');
+                const searchBtn = document.getElementById('searchCoinBtn');
+
+                if (!searchSection || !searchInput || !searchBtn) return;
+
+                // Add mobile-specific classes
+                if (window.innerWidth <= 768) {
+                    searchSection.classList.add('mobile-view');
+                    
+                    // Prevent zoom on input focus (iOS)
+                    searchInput.addEventListener('focus', function() {
+                        if (window.innerWidth <= 768) {
+                            this.style.fontSize = '16px';
+                        }
+                    });
+
+                    // Restore font size on blur
+                    searchInput.addEventListener('blur', function() {
+                        if (window.innerWidth <= 768) {
+                            this.style.fontSize = '';
+                        }
+                    });
+
+                    // Add touch feedback
+                    searchBtn.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.95)';
+                    });
+
+                    searchBtn.addEventListener('touchend', function() {
+                        this.style.transform = 'scale(1)';
+                    });
+
+                    // Prevent double-tap zoom on mobile
+                    let lastTouchEnd = 0;
+                    searchSection.addEventListener('touchend', function(event) {
+                        const now = (new Date()).getTime();
+                        if (now - lastTouchEnd <= 300) {
+                            event.preventDefault();
+                        }
+                        lastTouchEnd = now;
+                    }, false);
+                }
+
+                // Handle orientation changes
+                window.addEventListener('orientationchange', function() {
+                    setTimeout(function() {
+                        // Recalculate mobile view after orientation change
+                        if (window.innerWidth <= 768) {
+                            searchSection.classList.add('mobile-view');
+                        } else {
+                            searchSection.classList.remove('mobile-view');
+                        }
+                    }, 100);
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth <= 768) {
+                        searchSection.classList.add('mobile-view');
+                    } else {
+                        searchSection.classList.remove('mobile-view');
+                    }
+                });
+            }
+
+            // Initialize mobile enhancements
+            enhanceMobileSearch();
 
             // Handle window resize for responsive charts
             let resizeTimeout;
