@@ -27,7 +27,7 @@ class MarketsComparizonController extends Controller
     }
 
     /**
-     * Compare data from LiveCoinWatch, CoinGecko, and CoinMarketCal sources
+     * Compare data from LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika and Cryptics.tech sources
      *
      * @return \Illuminate\Http\JsonResponse
      */

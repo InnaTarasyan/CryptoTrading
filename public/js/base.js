@@ -356,7 +356,7 @@ const languageTexts = {
         'Submit Review': 'Submit Review',
         'LCW Info Card Intro': 'Live Coin Watch is a real-time cryptocurrency market tracking platform, offering a clean and convenient interface for monitoring prices, market capitalizations, trading volumes, and rankings of hundreds of digital assets. Unlike many competitors, Live Coin Watch updates information in real time, making it ideal for users who want to see price changes as they happen.',
         'LCW Info Card Change History': 'Change History: The table above provides a comprehensive record of historical changes for various cryptocurrencies as tracked by Live Coin Watch. Each entry reflects updates in price, market capitalization, trading volume, and other key metrics over time. This change history enables users to analyze trends, monitor market movements, and make informed decisions based on past performance and data transparency. The regularly updated datatable ensures that users always have access to the latest and most accurate historical information available.',
-        'platforms_comparison_title': 'Compare Data from LiveCoinWatch, CoinGecko, and CoinMarketCal',
+        'platforms_comparison_title': 'Compare Data from LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika and Cryptics.tech',
     },
     ru: {
         // Page titles and headers
@@ -448,12 +448,12 @@ const languageTexts = {
         'Rank': 'Ранг',
         'Markets': 'Рынки',
         'Total Supply': 'Общее предложение',
-        'Max Supply': 'Макс. предложение',
-        'Circulating Supply': 'В обращении',
+        'Max Supply': 'Максимальное предложение',
+        'Circulating Supply': 'Обращающееся предложение',
         'All-Time High': 'Исторический максимум',
         'Categories': 'Категории',
         'About Live Coin Watch': 'О Live Coin Watch',
-        'Visit Live Coin Watch': 'Перейти на Live Coin Watch',
+        'Visit Live Coin Watch': 'Посетить Live Coin Watch',
         'User Reviews': 'Отзывы пользователей',
         'Leave a Review': 'Оставить отзыв',
         'Name': 'Имя',
@@ -470,7 +470,7 @@ const languageTexts = {
         'Submit Review': 'Отправить отзыв',
         'LCW Info Card Intro': 'Live Coin Watch — это платформа для отслеживания рынка криптовалют в реальном времени, предлагающая чистый и удобный интерфейс для мониторинга цен, рыночной капитализации, торговых объемов и рейтингов сотен цифровых активов. В отличие от многих конкурентов, Live Coin Watch обновляет информацию в реальном времени, что идеально подходит для пользователей, желающих видеть изменения цен по мере их появления.',
         'LCW Info Card Change History': 'История изменений: Таблица выше содержит полный учет исторических изменений различных криптовалют, отслеживаемых Live Coin Watch. Каждая запись отражает обновления цены, рыночной капитализации, торгового объема и других ключевых показателей с течением времени. Эта история изменений позволяет пользователям анализировать тренды, отслеживать рыночные движения и принимать обоснованные решения на основе прошлых данных и прозрачности информации. Регулярно обновляемая таблица гарантирует, что пользователи всегда имеют доступ к самой свежей и точной исторической информации.',
-        'platforms_comparison_title': 'Сравнение данных LiveCoinWatch, CoinGecko и CoinMarketCal',
+        'platforms_comparison_title': 'Сравнение данных LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika и Cryptics.tech',
     },
     hy: {
         'Language changed to': 'Լեզուն փոխվել է',
@@ -527,7 +527,7 @@ const languageTexts = {
         'Submit Review': 'Ուղարկել կարծիքը',
         'LCW Info Card Intro': 'Live Coin Watch-ը իրական ժամանակում կրիպտոարժույթների շուկայի հետևման հարթակ է, որն առաջարկում է մաքուր և հարմար ինտերֆեյս՝ գների, շուկայական կապիտալիզացիայի, առևտրի ծավալների և հարյուրավոր թվային ակտիվների դասակարգման մոնիտորինգի համար: Ի տարբերություն շատ մրցակիցների, Live Coin Watch-ը թարմացնում է տվյալները իրական ժամանակում, ինչը իդեալական է այն օգտատերերի համար, ովքեր ցանկանում են տեսնել գների փոփոխությունները անմիջապես:',
         'LCW Info Card Change History': 'Փոփոխությունների պատմություն. Վերևի աղյուսակը տրամադրում է տարբեր կրիպտոարժույթների պատմական փոփոխությունների համապարփակ գրանցում, որոնք հետևում է Live Coin Watch-ը: Յուրաքանչյուր գրառում արտացոլում է գնի, շուկայական կապիտալիզացիայի, առևտրի ծավալի և այլ հիմնական ցուցանիշների փոփոխությունները ժամանակի ընթացքում: Այս փոփոխությունների պատմությունը օգտատերերին հնարավորություն է տալիս վերլուծել միտումները, հետևել շուկայի շարժերին և կայացնել տեղեկացված որոշումներ՝ հիմնվելով անցյալի տվյալների և թափանցիկության վրա: Պարբերաբար թարմացվող աղյուսակը ապահովում է, որ օգտատերերը միշտ ունենան ամենավերջին և ճշգրիտ պատմական տեղեկատվությունը:',
-        'platforms_comparison_title': 'LiveCoinWatch, CoinGecko և CoinMarketCal տվյալների համեմատություն',
+        'platforms_comparison_title': 'LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika և Cryptics.tech տվյալների համեմատություն',
     },
     fi: {
         // Page titles and headers
@@ -641,7 +641,7 @@ const languageTexts = {
         'Submit Review': 'Lähetä arvostelu',
         'LCW Info Card Intro': 'Live Coin Watch on reaaliaikainen kryptovaluuttamarkkinoiden seurantapalvelu, joka tarjoaa selkeän ja kätevän käyttöliittymän hintojen, markkina-arvojen, kaupankäyntivolyymien ja satojen digitaalisten omaisuuserien sijoitusten seuraamiseen. Toisin kuin monet kilpailijat, Live Coin Watch päivittää tiedot reaaliajassa, mikä tekee siitä ihanteellisen käyttäjille, jotka haluavat nähdä hintamuutokset heti niiden tapahtuessa.',
         'LCW Info Card Change History': 'Muutosten historia: Yllä oleva taulukko tarjoaa kattavan tietueen eri kryptovaluuttojen historiallisista muutoksista, joita Live Coin Watch seuraa. Jokainen merkintä heijastaa hinnan, markkina-arvon, kaupankäyntivolyymin ja muiden keskeisten mittareiden päivityksiä ajan myötä. Tämä muutoshistoria mahdollistaa käyttäjille trendien analysoinnin, markkinaliikkeiden seuraamisen ja tietoon perustuvien päätösten tekemisen aiempien tietojen ja läpinäkyvyyden perusteella. Säännöllisesti päivitettävä taulukko varmistaa, että käyttäjillä on aina pääsy uusimpaan ja tarkimpaan historialliseen tietoon.',
-        'platforms_comparison_title': 'LiveCoinWatch-, CoinGecko- ja CoinMarketCal-tietojen vertailu',
+        'platforms_comparison_title': 'LiveCoinWatch-, CoinGecko-, CoinMarketCal-, CryptoCompare-, CoinPaprika- ja Cryptics.tech-tietojen vertailu',
     },
     hy: {
         'market_comparison': 'Շուկաների համեմատական վերլուծություն',
@@ -691,7 +691,7 @@ const languageTexts = {
         'no_data_found_for': 'Տվյալներ չեն գտնվել համար',
         'error_searching_for': 'Սխալ որոնելիս',
         'searching_for_coin_data': 'Որոնվում են մետաղադրամի տվյալներ...',
-        'platforms_comparison_title': 'LiveCoinWatch, CoinGecko և CoinMarketCal տվյալների համեմատություն',
+        'platforms_comparison_title': 'LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika և Cryptics.tech տվյալների համեմատություն',
     }
 };
 
@@ -808,7 +808,7 @@ Object.assign(languageTexts['ru'], {
     'no_data_found_for': 'Данные не найдены для',
     'error_searching_for': 'Ошибка поиска для',
     'searching_for_coin_data': 'Поиск данных о монете...',
-    'platforms_comparison_title': 'Сравнение данных LiveCoinWatch, CoinGecko и CoinMarketCal',
+    'platforms_comparison_title': 'Сравнение данных LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika и Cryptics.tech',
 });
 
 Object.assign(languageTexts['fi'], {
@@ -859,7 +859,7 @@ Object.assign(languageTexts['fi'], {
     'no_data_found_for': 'Tietoja ei löytynyt kohteelle',
     'error_searching_for': 'Virhe etsittäessä',
     'searching_for_coin_data': 'Etsitään kolikkotietoja...',
-    'platforms_comparison_title': 'LiveCoinWatch-, CoinGecko- ja CoinMarketCal-tietojen vertailu',
+    'platforms_comparison_title': 'LiveCoinWatch-, CoinGecko-, CoinMarketCal-, CryptoCompare-, CoinPaprika- ja Cryptics.tech-tietojen vertailu',
 });
 
 Object.assign(languageTexts['hy'], {
@@ -910,7 +910,7 @@ Object.assign(languageTexts['hy'], {
     'no_data_found_for': 'Տվյալներ չեն գտնվել համար',
     'error_searching_for': 'Սխալ որոնելիս',
     'searching_for_coin_data': 'Որոնվում են մետաղադրամի տվյալներ...',
-    'platforms_comparison_title': 'LiveCoinWatch, CoinGecko և CoinMarketCal տվյալների համեմատություն',
+    'platforms_comparison_title': 'LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika և Cryptics.tech տվյալների համեմատություն',
 });
 
 function applyLanguageToPage(lang) {
