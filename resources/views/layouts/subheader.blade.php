@@ -632,6 +632,60 @@
             z-index: 3;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+        
+        /* Enhanced mobile styles for Update All Data button */
+        .modern-update-btn.modern-update-btn-fancy {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 18px 24px !important;
+            font-size: 1.1rem !important;
+            border-radius: 16px !important;
+            margin: 0 auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 12px !important;
+            min-height: 60px !important;
+            box-shadow: 0 4px 16px rgba(67, 206, 162, 0.3) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            touch-action: manipulation !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(67, 206, 162, 0.4) !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 8px rgba(67, 206, 162, 0.3) !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy .btn-content {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 10px !important;
+            width: 100% !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy #updateAllDataText {
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.5px !important;
+            text-align: center !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy .btn-icon {
+            flex-shrink: 0 !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy svg {
+            width: 24px !important;
+            height: 24px !important;
+        }
     }
 
     @media (max-width: 480px) {
@@ -688,10 +742,33 @@
             border-radius: 10px;
         }
         
+        /* Enhanced mobile styles for Update All Data button on smaller screens */
         .modern-update-btn.modern-update-btn-fancy {
-            padding: 14px 20px;
-            font-size: 1rem;
-            border-radius: 14px;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 16px 20px !important;
+            font-size: 1rem !important;
+            border-radius: 14px !important;
+            margin: 0 auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 10px !important;
+            min-height: 56px !important;
+            box-shadow: 0 3px 12px rgba(67, 206, 162, 0.3) !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy .btn-content {
+            gap: 8px !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy #updateAllDataText {
+            font-size: 1rem !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy svg {
+            width: 22px !important;
+            height: 22px !important;
         }
     }
 
@@ -749,10 +826,33 @@
             border-radius: 8px;
         }
         
+        /* Enhanced mobile styles for Update All Data button on smallest screens */
         .modern-update-btn.modern-update-btn-fancy {
-            padding: 12px 16px;
-            font-size: 0.95rem;
-            border-radius: 12px;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 14px 16px !important;
+            font-size: 0.95rem !important;
+            border-radius: 12px !important;
+            margin: 0 auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            min-height: 52px !important;
+            box-shadow: 0 2px 8px rgba(67, 206, 162, 0.3) !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy .btn-content {
+            gap: 6px !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy #updateAllDataText {
+            font-size: 0.95rem !important;
+        }
+        
+        .modern-update-btn.modern-update-btn-fancy svg {
+            width: 20px !important;
+            height: 20px !important;
         }
     }
 
