@@ -14,7 +14,7 @@
                 <span class="mobile-menu-text" data-lang-key="about">About</span>
             </a>
         </div>
-        
+
         <!-- Dashboard Item -->
         <div class="mobile-menu-item">
             <div class="mobile-menu-link mobile-menu-toggle" data-toggle="dashboard-submenu">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Auth Links (Mobile) -->
         @guest
             <div class="mobile-menu-item">
@@ -77,7 +77,7 @@
                 </form>
             </div>
         @endguest
-        
+
         <!-- Language Switcher Item -->
         @if( Route::is('home') || Route::is('main'))
         <div class="mobile-menu-item">
@@ -146,7 +146,7 @@
         </div>
         @endif
     </div>
-    
+
     @if(Route::is('home') || Route::is('main'))
         <!-- Desktop Language Switcher (unchanged) -->
         <div class="language-switcher-container desktop-language-switcher">

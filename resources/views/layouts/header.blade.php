@@ -107,7 +107,7 @@
                 <!-- END: Tutorial Links Section -->
                 
                 @include('layouts.horizontal_menu')
-                @include('layouts.topbar')
+                {{--@include('layouts.topbar')--}}
             </div>
         </div>
     </div>

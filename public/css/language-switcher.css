@@ -330,8 +330,13 @@
 }
 
 @media (max-width: 768px) {
+
+    .desktop-auth-links {
+        display: none !important;
+    }
+
     .m-stack__item.m-stack__item--fluid.m-header-head {
-        padding: 0.5rem !important;
+        padding: 0.0rem !important;
         min-height: auto !important;
         flex-direction: row !important;
     }

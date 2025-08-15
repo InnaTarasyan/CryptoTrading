@@ -16,7 +16,7 @@
          data-menu-vertical="true"
          data-menu-scrollable="true" data-menu-dropdown-timeout="500">
         <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
-            
+
             <!-- BEGIN: Tutorial Links Section -->
             <li class="m-menu__item  m-menu__item--submenu mobile-only-tutorials" aria-haspopup="true"  data-menu-submenu-toggle="click" data-menu-dropdown-toggle-class="m-aside-menu-overlay--on">
                 <a  href="#" class="m-menu__link m-menu__toggle">
@@ -95,7 +95,7 @@
                 </div>
             </li>
             <!-- END: Tutorial Links Section -->
-            
+
             <!--
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="click" data-menu-dropdown-toggle-class="m-aside-menu-overlay--on">
                 <a  href="#" class="m-menu__link m-menu__toggle">
