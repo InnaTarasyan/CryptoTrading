@@ -30,6 +30,373 @@
     gap: 2em;
 }
 
+/* Mobile Responsive Styles for Title Bar */
+@media (max-width: 768px) {
+    .modern-title-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.2em 1em;
+        gap: 1em;
+        text-align: center;
+    }
+    
+    .modern-title-bar-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+    }
+    
+    .modern-title-main {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8em;
+        text-align: center;
+    }
+    
+    .modern-title-icon {
+        margin-right: 0;
+        margin-bottom: 0.5em;
+    }
+    
+    .modern-title-text {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    
+    .modern-title-actions {
+        flex-direction: column;
+        gap: 0.8em;
+        width: 100%;
+        align-items: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .modern-title-bar {
+        padding: 1em 0.8em;
+        gap: 0.8em;
+    }
+    
+    .modern-title-bar-row {
+        gap: 0.8em;
+    }
+    
+    .modern-title-main {
+        gap: 0.6em;
+    }
+    
+    .modern-title-text {
+        font-size: 1.4rem;
+    }
+    
+    .modern-title-actions {
+        gap: 0.6em;
+    }
+    
+    .modern-tab {
+        padding: 0.8em 1.2em;
+        font-size: 0.9rem;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modern-title-bar {
+        padding: 0.8em 0.6em;
+        gap: 0.6em;
+        border-radius: 1.2em;
+    }
+    
+    .modern-title-bar-row {
+        gap: 0.6em;
+    }
+    
+    .modern-title-main {
+        gap: 0.5em;
+    }
+    
+    .modern-title-text {
+        font-size: 1.2rem;
+        line-height: 1.3;
+    }
+    
+    .modern-title-actions {
+        gap: 0.5em;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .modern-tab {
+        padding: 0.7em 1em;
+        font-size: 0.85rem;
+        min-width: 100px;
+        flex: 1;
+        min-width: 0;
+        max-width: 140px;
+    }
+    
+    .modern-title-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 360px) {
+    .modern-title-bar {
+        padding: 0.6em 0.5em;
+        gap: 0.5em;
+        border-radius: 1em;
+    }
+    
+    .modern-title-bar-row {
+        gap: 0.5em;
+    }
+    
+    .modern-title-main {
+        gap: 0.4em;
+    }
+    
+    .modern-title-text {
+        font-size: 1.1rem;
+        line-height: 1.2;
+    }
+    
+    .modern-title-actions {
+        gap: 0.4em;
+    }
+    
+    .modern-tab {
+        padding: 0.6em 0.8em;
+        font-size: 0.8rem;
+        min-width: 90px;
+        max-width: 120px;
+    }
+    
+    .modern-title-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Enhanced Mobile Touch Interactions */
+@media (max-width: 768px) {
+    .modern-tab {
+        -webkit-tap-highlight-color: rgba(255, 106, 136, 0.1);
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    
+    .modern-tab:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+    
+    .modern-title-bar {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Ensure buttons are large enough for touch */
+    .modern-tab {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Improve button spacing for touch */
+    .modern-title-actions {
+        gap: 0.8em;
+        padding: 0.5em 0;
+    }
+    
+    /* Better button layout on very small screens */
+    .modern-title-actions .modern-tab {
+        margin: 0.2em;
+    }
+}
+
+/* Dark mode support for mobile */
+@media (max-width: 768px) {
+    body.dark-mode .modern-title-bar {
+        background: linear-gradient(90deg, #1f2937 0%, #374151 30%, #4b5563 60%, #6b7280 85%, #9ca3af 100%);
+        box-shadow: 0 8px 32px 0 rgba(31, 41, 55, 0.18), 0 3px 12px 0 rgba(55, 65, 81, 0.13);
+    }
+    
+    body.dark-mode .modern-title-text {
+        color: #f9fafb;
+    }
+    
+    body.dark-mode .modern-title-icon {
+        filter: brightness(1.1) contrast(1.1);
+    }
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 768px) {
+    /* Improve text readability on small screens */
+    .modern-title-text {
+        word-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
+    }
+    
+    /* Better button grouping on mobile */
+    .modern-title-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.8em;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    /* Ensure consistent button sizing */
+    .modern-title-actions .modern-tab {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    /* Improve icon and text alignment */
+    .modern-title-main {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Better spacing for the title bar row */
+    .modern-title-bar-row {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Extra small screen optimizations */
+@media (max-width: 480px) {
+    .modern-title-actions {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+    }
+    
+    .modern-title-actions .modern-tab {
+        max-width: 100%;
+    }
+    
+    /* Ensure buttons don't overflow */
+    .modern-title-bar {
+        overflow: hidden;
+    }
+    
+    /* Better text sizing for very small screens */
+    .modern-title-text {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        padding: 0 0.5em;
+    }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+    .modern-title-bar {
+        flex-direction: row;
+        padding: 1em 1.5em;
+        gap: 1.5em;
+    }
+    
+    .modern-title-bar-row {
+        flex-direction: row;
+        gap: 1.5em;
+        align-items: center;
+    }
+    
+    .modern-title-main {
+        flex-direction: row;
+        gap: 1em;
+    }
+    
+    .modern-title-actions {
+        flex-direction: row;
+        gap: 1em;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    
+    .modern-title-actions .modern-tab {
+        min-width: 100px;
+        max-width: 120px;
+    }
+}
+
+/* Mobile-specific button enhancements */
+@media (max-width: 768px) {
+    /* Dark mode switch mobile optimization */
+    .modern-title-actions .darkmode-switch {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 0.8em 1.2em;
+    }
+    
+    .modern-title-actions .darkmode-switch .darkmode-switch-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    /* Refresh button mobile optimization */
+    .modern-title-actions .refresh-btn {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 0.8em 1.2em;
+    }
+    
+    .modern-title-actions .refresh-btn .refresh-btn-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .modern-title-actions .refresh-btn .refresh-btn-icon {
+        min-width: 24px;
+        min-height: 24px;
+    }
+    
+    /* Fullscreen button mobile optimization */
+    .modern-title-actions .modern-fullscreen-btn {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 0.8em 1.2em;
+    }
+    
+    .modern-title-actions .modern-fullscreen-btn .fullscreen-switch-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .modern-title-actions .modern-fullscreen-btn .fullscreen-icon-bg {
+        min-width: 20px;
+        min-height: 20px;
+    }
+    
+    /* Ensure all buttons have consistent touch targets */
+    .modern-title-actions .modern-tab svg,
+    .modern-title-actions .modern-tab .darkmode-switch-icon,
+    .modern-title-actions .modern-tab .refresh-btn-icon,
+    .modern-title-actions .modern-tab .fullscreen-icon-bg {
+        pointer-events: none;
+    }
+    
+    /* Better button states for mobile */
+    .modern-title-actions .modern-tab:focus {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
+    }
+    
+    .modern-title-actions .modern-tab:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+}
+
 /* --- Enhanced Table Container and Table --- */
 .enhanced-table-container {
     position: relative;
