@@ -413,58 +413,60 @@
 </div>
 
 <style>
+    /* Ensure the main comparison section doesn't overflow on any device */
     .comparison-section {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 2em;
         padding: 2em;
         margin: 2em 0;
         box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        transform: translateZ(0);
+        will-change: auto;
         width: 100%;
         box-sizing: border-box;
         max-width: 100%;
         overflow: hidden;
     }
 
-    /* Mobile constraints for comparison-section */
+    .comparison-section * {
+        box-sizing: border-box;
+    }
+
+    /* Prevent horizontal scrolling on mobile */
     @media (max-width: 768px) {
+        body {
+            overflow-x: hidden;
+        }
+        
         .comparison-section {
-            border-radius: 1.5em;
-            padding: 1.5em;
-            margin: 1.5em 0.5em;
-            width: calc(100% - 1em);
-            max-width: calc(100% - 1em);
-            box-sizing: border-box;
-            overflow: hidden;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .comparison-section > * {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
         }
     }
 
+    /* Additional mobile constraints */
     @media (max-width: 480px) {
         .comparison-section {
-            border-radius: 1.2em;
-            padding: 1.2em;
-            margin: 1.2em 0.3em;
-            width: calc(100% - 0.6em);
-            max-width: calc(100% - 0.6em);
+            padding: 1.2em 0.8em;
         }
     }
 
     @media (max-width: 360px) {
         .comparison-section {
-            border-radius: 1em;
-            padding: 1em;
-            margin: 1em 0.2em;
-            width: calc(100% - 0.4em);
-            max-width: calc(100% - 0.4em);
+            padding: 1em 0.6em;
         }
     }
 
     @media (max-width: 320px) {
         .comparison-section {
-            border-radius: 0.8em;
-            padding: 0.8em;
-            margin: 0.8em 0.1em;
-            width: calc(100% - 0.2em);
-            max-width: calc(100% - 0.2em);
+            padding: 0.8em 0.4em;
         }
     }
 
@@ -1599,6 +1601,10 @@
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1.5em;
         margin-bottom: 2em;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .platform-card {
@@ -1607,6 +1613,10 @@
         padding: 1.5em;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .platform-card:hover {
@@ -1619,6 +1629,8 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1em;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .platform-header h3 {
@@ -1626,16 +1638,24 @@
         font-size: 1.3em;
         font-weight: 700;
         color: #333;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        flex: 1;
+        min-width: 0;
     }
 
     .platform-icon {
         font-size: 2em;
+        flex-shrink: 0;
+        margin-left: 0.5em;
     }
 
     .platform-stats {
         display: flex;
         flex-direction: column;
         gap: 0.8em;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .stat {
@@ -1644,6 +1664,8 @@
         align-items: center;
         padding: 0.5em 0;
         border-bottom: 1px solid #eee;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .stat:last-child {
@@ -1653,11 +1675,177 @@
     .stat-label {
         font-weight: 600;
         color: #666;
+        flex: 1;
+        min-width: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .stat-value {
         font-weight: 700;
         color: #333;
+        flex-shrink: 0;
+        margin-left: 0.5em;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        text-align: right;
+    }
+
+    /* Mobile responsive styles for platform overview */
+    @media (max-width: 768px) {
+        .platform-overview {
+            grid-template-columns: 1fr;
+            gap: 1em;
+            margin: 1em 0.5em;
+            width: calc(100% - 1em);
+            max-width: calc(100% - 1em);
+        }
+
+        .platform-card {
+            padding: 1em;
+            margin-bottom: 0.8em;
+            border-radius: 1.2em;
+        }
+
+        .platform-header {
+            margin-bottom: 0.8em;
+        }
+
+        .platform-header h3 {
+            font-size: 1.2em;
+        }
+
+        .platform-icon {
+            font-size: 1.6em;
+        }
+
+        .platform-stats {
+            gap: 0.6em;
+        }
+
+        .stat {
+            padding: 0.4em 0;
+        }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .platform-overview {
+            margin: 0.8em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+            gap: 0.8em;
+        }
+
+        .platform-card {
+            padding: 0.8em;
+            margin-bottom: 0.6em;
+            border-radius: 1em;
+        }
+
+        .platform-header h3 {
+            font-size: 1.1em;
+        }
+
+        .platform-icon {
+            font-size: 1.4em;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 360px) {
+        .platform-overview {
+            margin: 0.6em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+            gap: 0.6em;
+        }
+
+        .platform-card {
+            padding: 0.7em;
+            margin-bottom: 0.5em;
+            border-radius: 0.8em;
+        }
+
+        .platform-header h3 {
+            font-size: 1rem;
+        }
+
+        .platform-icon {
+            font-size: 1.2em;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+        }
+
+        .stat-value {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Very small devices */
+    @media (max-width: 320px) {
+        .platform-overview {
+            margin: 0.5em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+            gap: 0.5em;
+        }
+
+        .platform-card {
+            padding: 0.6em;
+            margin-bottom: 0.4em;
+            border-radius: 0.7em;
+        }
+
+        .platform-header h3 {
+            font-size: 0.95rem;
+        }
+
+        .platform-icon {
+            font-size: 1.1em;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+        }
+
+        .stat-value {
+            font-size: 0.8rem;
+        }
+    }
+
+    /* Tablet responsive adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .platform-overview {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2em;
+        }
+
+        .platform-card {
+            padding: 1.2em;
+        }
+    }
+
+    /* Large desktop screens */
+    @media (min-width: 1200px) {
+        .platform-overview {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2em;
+        }
+
+        .platform-card {
+            padding: 2em;
+        }
     }
 
     .chart-grid {
@@ -1665,6 +1853,10 @@
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         gap: 1.5em;
         margin-bottom: 2em;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .chart-card {
@@ -1677,11 +1869,16 @@
         flex-direction: column;
         width: 100%;
         box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .chart-card.full-width {
         grid-column: 1 / -1;
         min-height: auto;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .chart-card h4 {
@@ -1691,6 +1888,8 @@
         color: #333;
         text-align: center;
         flex-shrink: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .chart-container {
@@ -1701,6 +1900,7 @@
         flex: 1;
         min-height: 280px;
         max-height: 280px;
+        box-sizing: border-box;
     }
 
     .chart-container canvas {
@@ -1709,6 +1909,7 @@
         width: 100% !important;
         height: 100% !important;
         object-fit: contain;
+        box-sizing: border-box;
     }
 
     /* Mobile-specific chart adjustments */
@@ -1716,31 +1917,59 @@
         .chart-grid {
             grid-template-columns: 1fr;
             gap: 1em;
+            margin: 1em 0.5em;
+            width: calc(100% - 1em);
+            max-width: calc(100% - 1em);
+            box-sizing: border-box;
         }
 
         .chart-card {
             padding: 1em;
             min-height: 300px;
             margin-bottom: 1em;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .chart-card.full-width {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 0 1em 0;
+            box-sizing: border-box;
         }
 
         .chart-container {
             height: 250px !important;
             min-height: 250px;
             max-height: 250px;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box;
         }
 
         .chart-card h4 {
             font-size: 1.1em;
             margin-bottom: 0.8em;
+            padding: 0 0.5em;
         }
     }
 
     /* Small mobile devices */
     @media (max-width: 480px) {
+        .chart-grid {
+            margin: 0.8em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+            gap: 0.8em;
+        }
+
         .chart-card {
             padding: 0.8em;
             min-height: 280px;
+            margin-bottom: 0.8em;
+            border-radius: 1.2em;
         }
 
         .chart-container {
@@ -1752,15 +1981,65 @@
         .chart-card h4 {
             font-size: 1em;
             margin-bottom: 0.6em;
+            padding: 0 0.3em;
         }
     }
 
     /* Extra small devices */
     @media (max-width: 360px) {
+        .chart-grid {
+            margin: 0.6em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+            gap: 0.6em;
+        }
+
+        .chart-card {
+            padding: 0.7em;
+            min-height: 260px;
+            margin-bottom: 0.6em;
+            border-radius: 1em;
+        }
+
         .chart-container {
             height: 200px !important;
             min-height: 200px;
             max-height: 200px;
+        }
+
+        .chart-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5em;
+            padding: 0 0.2em;
+        }
+    }
+
+    /* Very small devices */
+    @media (max-width: 320px) {
+        .chart-grid {
+            margin: 0.5em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+            gap: 0.5em;
+        }
+
+        .chart-card {
+            padding: 0.6em;
+            min-height: 240px;
+            margin-bottom: 0.5em;
+            border-radius: 0.8em;
+        }
+
+        .chart-container {
+            height: 180px !important;
+            min-height: 180px;
+            max-height: 180px;
+        }
+
+        .chart-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.4em;
+            padding: 0 0.1em;
         }
     }
 
@@ -1780,6 +2059,7 @@
     .chart-container {
         overflow: hidden !important;
         position: relative !important;
+        box-sizing: border-box !important;
     }
 
     /* Better chart responsiveness */
@@ -1789,6 +2069,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        box-sizing: border-box !important;
     }
 
     /* Improve chart grid layout on different screen sizes */
@@ -1993,6 +2274,10 @@
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1.5em;
         margin-top: 1em;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .trend-item {
@@ -2004,6 +2289,10 @@
         background: #f8f9fa;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .trend-item:hover {
@@ -2036,6 +2325,9 @@
         color: #333;
         flex: 1;
         font-size: 1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        min-width: 0;
     }
 
     .trend-value {
@@ -2045,6 +2337,8 @@
         flex-shrink: 0;
         min-width: 60px;
         text-align: right;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     /* Mobile responsive styles for trends summary */
@@ -2053,12 +2347,18 @@
             grid-template-columns: 1fr;
             gap: 1em;
             margin-top: 0.8em;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .trend-item {
             padding: 1em;
             gap: 0.8em;
             border-radius: 0.8em;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .trend-icon {
@@ -2067,6 +2367,8 @@
 
         .trend-label {
             font-size: 0.95rem;
+            flex: 1;
+            min-width: 0;
         }
 
         .trend-value {
@@ -2079,12 +2381,16 @@
     @media (max-width: 480px) {
         .trends-summary {
             gap: 0.8em;
+            margin: 0.6em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
         }
 
         .trend-item {
             padding: 0.8em;
             gap: 0.6em;
             flex-wrap: wrap;
+            margin-bottom: 0.5em;
         }
 
         .trend-icon {
@@ -2106,9 +2412,17 @@
 
     /* Extra small devices */
     @media (max-width: 360px) {
+        .trends-summary {
+            margin: 0.5em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+            gap: 0.6em;
+        }
+
         .trend-item {
             padding: 0.7em;
             gap: 0.5em;
+            margin-bottom: 0.4em;
         }
 
         .trend-icon {
@@ -2125,15 +2439,48 @@
         }
     }
 
+    /* Very small devices */
+    @media (max-width: 320px) {
+        .trends-summary {
+            margin: 0.4em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+            gap: 0.5em;
+        }
+
+        .trend-item {
+            padding: 0.6em;
+            gap: 0.4em;
+            margin-bottom: 0.3em;
+        }
+
+        .trend-icon {
+            font-size: 1.1em;
+        }
+
+        .trend-label {
+            font-size: 0.8rem;
+        }
+
+        .trend-value {
+            font-size: 0.9rem;
+            min-width: 30px;
+        }
+    }
+
     /* Tablet responsive adjustments */
     @media (min-width: 769px) and (max-width: 1024px) {
         .trends-summary {
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.2em;
+            width: 100%;
+            max-width: 100%;
         }
 
         .trend-item {
             padding: 1em;
+            width: 100%;
+            max-width: 100%;
         }
 
         .trend-icon {
@@ -2154,10 +2501,14 @@
         .trends-summary {
             grid-template-columns: repeat(3, 1fr);
             gap: 2em;
+            width: 100%;
+            max-width: 100%;
         }
 
         .trend-item {
             padding: 1.5em;
+            width: 100%;
+            max-width: 100%;
         }
 
         .trend-icon {
@@ -2281,6 +2632,10 @@
 
     .platform-performance-table {
         margin-top: 1em;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .platform-performance-table .table {
@@ -2288,6 +2643,9 @@
         border-radius: 1em;
         overflow: hidden;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .platform-performance-table .table thead th {
@@ -2297,6 +2655,9 @@
         padding: 1em;
         font-weight: 600;
         text-align: center;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        font-size: 0.9rem;
     }
 
     .platform-performance-table .table tbody td {
@@ -2304,6 +2665,9 @@
         border-bottom: 1px solid #eee;
         text-align: center;
         vertical-align: middle;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        font-size: 0.9rem;
     }
 
     .platform-performance-table .table tbody tr:last-child td {
@@ -2312,6 +2676,220 @@
 
     .platform-performance-table .table tbody tr:hover {
         background: rgba(102, 126, 234, 0.1);
+    }
+
+    /* Mobile responsive styles for platform performance table */
+    @media (max-width: 768px) {
+        .platform-performance-table {
+            margin: 0.8em 0.5em;
+            width: calc(100% - 1em);
+            max-width: calc(100% - 1em);
+        }
+
+        .platform-performance-table .table {
+            border-radius: 0.8em;
+            font-size: 0.85rem;
+        }
+
+        .platform-performance-table .table thead {
+            display: none; /* Hide headers on mobile */
+        }
+
+        .platform-performance-table .table tbody {
+            display: block;
+            width: 100%;
+        }
+
+        .platform-performance-table .table tbody tr {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            position: relative;
+        }
+
+        .platform-performance-table .table tbody td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .platform-performance-table .table tbody td:last-child {
+            border-bottom: none;
+        }
+
+        .platform-performance-table .table tbody td:before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #666;
+            min-width: 100px;
+            margin-right: 1rem;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        /* Special styling for platform name */
+        .platform-performance-table .table tbody td[data-label="Platform"] {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: -1rem -1rem 0.5rem -1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .platform-performance-table .table tbody td[data-label="Platform"]:before {
+            display: none;
+        }
+
+        /* Special styling for gaining coins */
+        .platform-performance-table .table tbody td[data-label="Gaining Coins"] {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        /* Special styling for losing coins */
+        .platform-performance-table .table tbody td[data-label="Losing Coins"] {
+            font-weight: 600;
+            color: #dc3545;
+        }
+
+        /* Special styling for market cap and volume */
+        .platform-performance-table .table tbody td[data-label="Total Market Cap"],
+        .platform-performance-table .table tbody td[data-label="Total Volume"] {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* Special styling for total coins */
+        .platform-performance-table .table tbody td[data-label="Total Coins"] {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Special styling for last updated */
+        .platform-performance-table .table tbody td[data-label="Last Updated"] {
+            font-weight: 500;
+            color: #666;
+            font-size: 0.8rem;
+        }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .platform-performance-table {
+            margin: 0.6em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+        }
+
+        .platform-performance-table .table tbody tr {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+        }
+
+        .platform-performance-table .table tbody td {
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+        }
+
+        .platform-performance-table .table tbody td:before {
+            font-size: 0.8rem;
+            min-width: 90px;
+        }
+
+        .platform-performance-table .table tbody td[data-label="Platform"] {
+            font-size: 1rem;
+            padding: 0.6rem 0.8rem;
+        }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 360px) {
+        .platform-performance-table {
+            margin: 0.5em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+        }
+
+        .platform-performance-table .table tbody tr {
+            margin-bottom: 0.6rem;
+            padding: 0.6rem;
+        }
+
+        .platform-performance-table .table tbody td {
+            padding: 0.3rem 0;
+            font-size: 0.8rem;
+        }
+
+        .platform-performance-table .table tbody td:before {
+            font-size: 0.75rem;
+            min-width: 80px;
+        }
+
+        .platform-performance-table .table tbody td[data-label="Platform"] {
+            font-size: 0.95rem;
+            padding: 0.5rem 0.6rem;
+        }
+    }
+
+    /* Very small devices */
+    @media (max-width: 320px) {
+        .platform-performance-table {
+            margin: 0.4em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+        }
+
+        .platform-performance-table .table tbody tr {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .platform-performance-table .table tbody td {
+            padding: 0.25rem 0;
+            font-size: 0.75rem;
+        }
+
+        .platform-performance-table .table tbody td:before {
+            font-size: 0.7rem;
+            min-width: 70px;
+        }
+
+        .platform-performance-table .table tbody td[data-label="Platform"] {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.5rem;
+        }
+    }
+
+    /* Tablet responsive adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .platform-performance-table .table thead th,
+        .platform-performance-table .table tbody td {
+            padding: 0.8em;
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Large desktop screens */
+    @media (min-width: 1200px) {
+        .platform-performance-table .table thead th,
+        .platform-performance-table .table tbody td {
+            padding: 1.2em;
+            font-size: 1rem;
+        }
     }
 
     .text-success {
@@ -2326,6 +2904,53 @@
 
     .top-performers-table {
         margin-top: 1em;
+    }
+
+    /* Enhanced table styling for better visual hierarchy */
+    .platform-performance-table .table tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.2s ease;
+    }
+
+    /* Desktop table enhancements */
+    @media (min-width: 769px) {
+        .platform-performance-table .table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .platform-performance-table .table tbody tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .platform-performance-table .table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    }
+
+    /* Touch-friendly improvements for mobile */
+    @media (max-width: 768px) {
+        .platform-performance-table .table tbody tr {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .platform-performance-table .table tbody tr:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Improve touch targets */
+        .platform-performance-table .table tbody td {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
     }
 </style>
 
@@ -3020,13 +3645,13 @@
             platformData.forEach(platform => {
                 html += `
                     <tr>
-                        <td><strong>${platform.name}</strong></td>
-                        <td>${platform.coins.toLocaleString()}</td>
-                        <td>${formatCurrency(platform.marketCap)}</td>
-                        <td>${formatCurrency(platform.volume)}</td>
-                        <td class="text-success">+${platform.gaining.toLocaleString()}</td>
-                        <td class="text-danger">-${platform.losing.toLocaleString()}</td>
-                        <td>${now}</td>
+                        <td data-label="Platform"><strong>${platform.name}</strong></td>
+                        <td data-label="Total Coins">${platform.coins.toLocaleString()}</td>
+                        <td data-label="Total Market Cap">${formatCurrency(platform.marketCap)}</td>
+                        <td data-label="Total Volume">${formatCurrency(platform.volume)}</td>
+                        <td data-label="Gaining Coins" class="text-success">+${platform.gaining.toLocaleString()}</td>
+                        <td data-label="Losing Coins" class="text-danger">-${platform.losing.toLocaleString()}</td>
+                        <td data-label="Last Updated">${now}</td>
                     </tr>
                 `;
             });
