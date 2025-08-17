@@ -30,7 +30,22 @@ class TrendingsController extends Controller
                 return '<img src="'.$item->small.'" height=25 width=25 class="previewable-img">';
             })
             ->editColumn('price_btc', function ($item) {
-                return "<p class='warning'>".$item->price_btc."</p>";
+                $value = $item->price_btc;
+
+                if (!is_numeric($value)) {
+                    return '-';
+                }
+
+                // Convert to scientific format with 2 decimal places if too small
+                if (abs($value) < 0.0001 || stripos($value, 'e') !== false) {
+                    $short = sprintf('%.2E', $value);  // e.g. 2.68E-5
+                } elseif (abs($value) > 1000000) {
+                    $short = number_format($value, 0, '.', ',');  // e.g. 1,000,000
+                } else {
+                    $short = rtrim(rtrim(sprintf('%.8f', $value), '0'), '.');  // e.g. 0.00002678
+                }
+
+                return '<span class="price-btc-short" title="' . htmlspecialchars($value) . '">' . $short . '</span>';
             })
             ->editColumn('data', function ($item) {
                 if (empty($item->data)) {
@@ -71,68 +86,121 @@ class TrendingsController extends Controller
                 ];
 
                 $css = '
-    <style>
+<style>
+    .info-item {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .info-label-container {
+        flex-wrap: wrap;
+        word-break: break-word;
+    }
+    
+    .info-label {
+        white-space: normal !important;
+        word-break: break-word;
+        max-width: 100%;
+        display: inline-block;
+    }
+    .info-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        margin-top: 0.5em;
+    }
+
+    .info-item {
+        background: #f9f9fb;
+        border-radius: 1em;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+        font-size: 0.96em;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        flex: 1 1 260px;
+        max-width: 100%;
+        word-break: break-word;
+        transition: background 0.2s ease;
+    }
+
+    .info-item:hover {
+        background: #f0f0f5;
+    }
+
+    .info-label-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .info-label {
+        color: #444;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .info-value {
+        color: #333;
+    }
+
+    .info-item a {
+        color: #ff6a88;
+        text-decoration: none;
+        word-break: break-word;
+    }
+
+    .info-item a:hover {
+        text-decoration: underline;
+    }
+
+    .boolean-badge {
+        background: #43cea2;
+        color: #fff;
+        padding: 0.3em 0.8em;
+        border-radius: 999px;
+        font-size: 0.9em;
+    }
+
+    .boolean-badge.no {
+        background: #ff6a88;
+    }
+
+    @media (max-width: 768px) {
         .info-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7em;
-            margin-top: 0.5em;
+            flex-direction: column;
         }
+
         .info-item {
-            background: #f7f7fa;
-            border-radius: 1.2em;
-            padding: 0.6em 1em;
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-            font-size: 0.96em;
-            box-shadow: 0 1px 3px #eee;
-            flex: 1 1 260px;
-            max-width: 100%;
-            word-break: break-word;
+            font-size: 1em;
+            padding: 1em 1.2em;
         }
-        .info-item a {
-            color: #ff6a88;
-            text-decoration: underline;
-        }
+
         .info-label {
-            color: #ff6a88;
-            font-weight: 600;
+            font-size: 1em;
         }
-        .boolean-badge {
-            background: #43cea2;
-            color: #fff;
-            padding: 0.2em 0.6em;
-            border-radius: 1em;
-            font-size: 0.92em;
-        }
-        .boolean-badge.no {
-            background: #ff6a88;
-        }
-        @media (max-width: 768px) {
-            .info-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-    </style>
+    }
+</style>
 ';
 
                 $str = $css . '<div class="info-wrapper">';
 
                 foreach ($json as $key => $inner) {
                     $icon = $iconMap[strtolower($key)] ?? '';
-                    $label = ucwords(str_replace('_', ' ', $key)); // makes it more readable
+                    $label = ucwords(str_replace('_', ' ', $key));
                     $valueHtml = '';
 
                     if (is_array($inner)) {
-                        $valueHtml = '<span style="display:inline-block;">[';
+                        $valueHtml = '<ul style="margin: 0; padding-left: 1.2em;">';
                         $count = 0;
                         foreach ($inner as $v) {
                             if ($count >= 3) {
-                                $valueHtml .= '...';
+                                $valueHtml .= '<li>…</li>';
                                 break;
                             }
+
                             $vShort = mb_strlen($v) > 40
                                 ? '<span title="' . htmlspecialchars($v) . '">' . htmlspecialchars(mb_substr($v, 0, 40)) . '…</span>'
                                 : htmlspecialchars($v);
@@ -141,10 +209,10 @@ class TrendingsController extends Controller
                                 $vShort = '<a href="' . htmlspecialchars($v) . '" target="_blank" rel="noopener">' . $vShort . '</a>';
                             }
 
-                            $valueHtml .= ($count > 0 ? ', ' : '') . $vShort;
+                            $valueHtml .= '<li>' . $vShort . '</li>';
                             $count++;
                         }
-                        $valueHtml .= ']</span>';
+                        $valueHtml .= '</ul>';
                     } else {
                         $v = $inner;
                         $vShort = mb_strlen($v) > 40
@@ -158,10 +226,13 @@ class TrendingsController extends Controller
                             $vShort = '<span class="boolean-badge ' . ($isTrue ? '' : 'no') . '">' . ($isTrue ? 'Yes' : 'No') . '</span>';
                         }
 
-                        $valueHtml = $vShort;
+                        $valueHtml = '<span class="info-value">' . $vShort . '</span>';
                     }
 
-                    $str .= '<div class="info-item">' . $icon . '<span class="info-label">' . $label . ':</span> ' . $valueHtml . '</div>';
+                    $str .= '<div class="info-item">
+                <div class="info-label-container">' . $icon . '<span class="info-label" title="' . $label . '">' . $label . ':</span></div>
+                ' . $valueHtml . '
+            </div>';
                 }
 
                 $str .= '</div>';
