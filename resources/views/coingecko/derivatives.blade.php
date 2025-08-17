@@ -463,8 +463,8 @@
             </nav>
         </div>
         <!-- DataTable Section -->
-        <div class="m-portlet enhanced-portlet">
-            <div class="m-portlet__body mt-5 enhanced-portlet-body">
+        <div class="">
+            <div class="mt-5">
                 <input type="hidden" id="coingecko_derivatives_route" value="{{ route('datatable.coingecko.derivatives') }}">
                 <div id="datatableFullscreenContainer" class="table-responsive enhanced-table-container">
                     <table id="coingecko_derivatives" class="table table-hover table-condensed table-striped enhanced-table" style="width:100%; padding-top:1%">

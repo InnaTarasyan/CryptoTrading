@@ -1246,16 +1246,16 @@
         </style>
 
         <!-- DataTable Section -->
-        <div class="m-portlet enhanced-portlet modern-portlet" style="
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.8) 100%);
-            border-radius: 1.5em;
-            box-shadow: 0 8px 32px rgba(80,80,200,0.12);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99,102,241,0.1);
-            margin: 2em 0;
-            overflow: hidden;
-            position: relative;
-        ">
+        {{--<div class="m-portlet enhanced-portlet modern-portlet" style="--}}
+            {{--background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.8) 100%);--}}
+            {{--border-radius: 1.5em;--}}
+            {{--box-shadow: 0 8px 32px rgba(80,80,200,0.12);--}}
+            {{--backdrop-filter: blur(10px);--}}
+            {{--border: 1px solid rgba(99,102,241,0.1);--}}
+            {{--margin: 2em 0;--}}
+            {{--overflow: hidden;--}}
+            {{--position: relative;--}}
+        {{--">--}}
             <!-- Decorative gradient overlay -->
             <div style="
                 position: absolute;
@@ -1267,7 +1267,7 @@
                 z-index: 1;
             "></div>
 
-            <div class="m-portlet__body mt-5 enhanced-portlet-body modern-portlet-body" style="
+            <div class=" mt-5" style="
                 padding: 2.5em 2em;
                 position: relative;
                 z-index: 2;
@@ -1317,63 +1317,63 @@
                     border: 1px solid rgba(99,102,241,0.05);
                 ">
                     <!-- Table Status Bar -->
-                    <div class="table-status-bar modern-status-bar" id="tableStatusBar" style="
-                        background: linear-gradient(90deg, rgba(99,102,241,0.1) 0%, rgba(96,165,250,0.1) 100%);
-                        border-radius: 1em;
-                        padding: 1em 1.5em;
-                        margin-bottom: 1.5em;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        border: 1px solid rgba(99,102,241,0.1);
-                    ">
-                        <div class="status-info" style="display: flex; align-items: center; gap: 0.8em;">
-                            <span class="status-icon" style="font-size: 1.2em;">📊</span>
-                            <span class="status-text" style="color: #3730a3; font-weight: 600;">Ready to display derivatives exchanges data</span>
-                        </div>
-                        <div class="status-actions" style="display: flex; gap: 0.8em;">
-                            <button class="status-action-btn modern-action-btn" id="exportData" title="Export Data" style="
-                                background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
-                                border: none;
-                                border-radius: 0.8em;
-                                padding: 0.6em 1.2em;
-                                color: white;
-                                font-weight: 600;
-                                display: flex;
-                                align-items: center;
-                                gap: 0.5em;
-                                transition: all 0.2s;
-                                box-shadow: 0 2px 8px rgba(255,106,136,0.2);
-                            ">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                Export
-                            </button>
-                            <button class="status-action-btn modern-action-btn" id="printTable" title="Print Table" style="
-                                background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-                                border: none;
-                                border-radius: 0.8em;
-                                padding: 0.6em 1.2em;
-                                color: white;
-                                font-weight: 600;
-                                display: flex;
-                                align-items: center;
-                                gap: 0.5em;
-                                transition: all 0.2s;
-                                box-shadow: 0 2px 8px rgba(67,206,162,0.2);
-                            ">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <polyline points="6,9 6,2 18,2 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <rect x="6" y="14" width="12" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                                Print
-                            </button>
-                        </div>
-                    </div>
+                    {{--<div class="table-status-bar modern-status-bar" id="tableStatusBar" style="--}}
+                        {{--background: linear-gradient(90deg, rgba(99,102,241,0.1) 0%, rgba(96,165,250,0.1) 100%);--}}
+                        {{--border-radius: 1em;--}}
+                        {{--padding: 1em 1.5em;--}}
+                        {{--margin-bottom: 1.5em;--}}
+                        {{--display: flex;--}}
+                        {{--justify-content: space-between;--}}
+                        {{--align-items: center;--}}
+                        {{--border: 1px solid rgba(99,102,241,0.1);--}}
+                    {{--">--}}
+                        {{--<div class="status-info" style="display: flex; align-items: center; gap: 0.8em;">--}}
+                            {{--<span class="status-icon" style="font-size: 1.2em;">📊</span>--}}
+                            {{--<span class="status-text" style="color: #3730a3; font-weight: 600;">Ready to display derivatives exchanges data</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="status-actions" style="display: flex; gap: 0.8em;">--}}
+                            {{--<button class="status-action-btn modern-action-btn" id="exportData" title="Export Data" style="--}}
+                                {{--background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);--}}
+                                {{--border: none;--}}
+                                {{--border-radius: 0.8em;--}}
+                                {{--padding: 0.6em 1.2em;--}}
+                                {{--color: white;--}}
+                                {{--font-weight: 600;--}}
+                                {{--display: flex;--}}
+                                {{--align-items: center;--}}
+                                {{--gap: 0.5em;--}}
+                                {{--transition: all 0.2s;--}}
+                                {{--box-shadow: 0 2px 8px rgba(255,106,136,0.2);--}}
+                            {{--">--}}
+                                {{--<svg width="16" height="16" viewBox="0 0 24 24" fill="none">--}}
+                                    {{--<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>--}}
+                                    {{--<polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>--}}
+                                    {{--<line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>--}}
+                                {{--</svg>--}}
+                                {{--Export--}}
+                            {{--</button>--}}
+                            {{--<button class="status-action-btn modern-action-btn" id="printTable" title="Print Table" style="--}}
+                                {{--background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);--}}
+                                {{--border: none;--}}
+                                {{--border-radius: 0.8em;--}}
+                                {{--padding: 0.6em 1.2em;--}}
+                                {{--color: white;--}}
+                                {{--font-weight: 600;--}}
+                                {{--display: flex;--}}
+                                {{--align-items: center;--}}
+                                {{--gap: 0.5em;--}}
+                                {{--transition: all 0.2s;--}}
+                                {{--box-shadow: 0 2px 8px rgba(67,206,162,0.2);--}}
+                            {{--">--}}
+                                {{--<svg width="16" height="16" viewBox="0 0 24 24" fill="none">--}}
+                                    {{--<polyline points="6,9 6,2 18,2 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>--}}
+                                    {{--<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>--}}
+                                    {{--<rect x="6" y="14" width="12" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>--}}
+                                {{--</svg>--}}
+                                {{--Print--}}
+                            {{--</button>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     <!-- Enhanced Table -->
                     <div class="table-wrapper modern-table-wrapper" style="background: rgba(255,255,255,0.7); border-radius: 1em; overflow: hidden; box-shadow: 0 2px 12px rgba(80,80,200,0.06); border: 1px solid rgba(99,102,241,0.05);">
@@ -1999,7 +1999,7 @@
                 });
                 </script>
             </div>
-        </div>
+        {{--</div>--}}
     </div>
 @endsection
 @section('scripts')
