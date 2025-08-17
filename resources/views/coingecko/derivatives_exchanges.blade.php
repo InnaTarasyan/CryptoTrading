@@ -1311,7 +1311,7 @@
                 <div id="datatableFullscreenContainer" class="table-responsive enhanced-table-container modern-table-container" style="
                     background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(248,250,252,0.9) 100%);
                     border-radius: 1.2em;
-                    padding: 1.5em;
+                    padding: 0.2em;
                     box-shadow: 0 2px 16px rgba(80,80,200,0.08);
                     backdrop-filter: blur(5px);
                     border: 1px solid rgba(99,102,241,0.05);
