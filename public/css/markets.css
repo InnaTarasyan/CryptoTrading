@@ -2731,6 +2731,6 @@ body.dark-mode .highlight-row {
     width: 60px !important;
     min-width: 60px !important;
     max-width: 60px !important;
-    text-align: center;
+    /*text-align: center;*/
 }
 

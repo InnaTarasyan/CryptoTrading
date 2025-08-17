@@ -480,494 +480,493 @@
             </div>
         </div>
         <!-- DataTable Section -->
-        <div class="m-portlet enhanced-portlet">
-            <div class="m-portlet__body mt-5 enhanced-portlet-body">
-                <input type="hidden" id="coingecko_markets_route" value="{{ route('datatable.coingecko.markets') }}">
-                
-                <!-- Enhanced Loading State -->
-                <div id="datatableLoading" class="datatable-loading enhanced-loading" style="display:none;">
-                    <div class="loading-container">
-                        <div class="loading-spinner">
-                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="loadingGradient" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#ff6a88"/>
-                                        <stop offset="1" stop-color="#ff99ac"/>
-                                    </linearGradient>
-                                </defs>
-                                <circle cx="30" cy="30" r="25" fill="none" stroke="url(#loadingGradient)" stroke-width="4" stroke-linecap="round" stroke-dasharray="157 157" stroke-dashoffset="0">
-                                    <animateTransform attributeName="transform" type="rotate" from="0 30 30" to="360 30 30" dur="1.5s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="30" cy="30" r="15" fill="none" stroke="url(#loadingGradient)" stroke-width="3" stroke-linecap="round" stroke-dasharray="94 94" stroke-dashoffset="0" opacity="0.7">
-                                    <animateTransform attributeName="transform" type="rotate" from="360 30 30" to="0 30 30" dur="1s" repeatCount="indefinite"/>
-                                </circle>
-                            </svg>
-                        </div>
-                        <div class="loading-text">
-                            <h3>Loading Market Data</h3>
-                            <p>Fetching the latest cryptocurrency information...</p>
-                        </div>
+        <div class=" mt-5 ">
+            <input type="hidden" id="coingecko_markets_route" value="{{ route('datatable.coingecko.markets') }}">
+
+            <!-- Enhanced Loading State -->
+            <div id="datatableLoading" class="datatable-loading enhanced-loading" style="display:none;">
+                <div class="loading-container">
+                    <div class="loading-spinner">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="loadingGradient" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ff6a88"/>
+                                    <stop offset="1" stop-color="#ff99ac"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="30" cy="30" r="25" fill="none" stroke="url(#loadingGradient)" stroke-width="4" stroke-linecap="round" stroke-dasharray="157 157" stroke-dashoffset="0">
+                                <animateTransform attributeName="transform" type="rotate" from="0 30 30" to="360 30 30" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="30" cy="30" r="15" fill="none" stroke="url(#loadingGradient)" stroke-width="3" stroke-linecap="round" stroke-dasharray="94 94" stroke-dashoffset="0" opacity="0.7">
+                                <animateTransform attributeName="transform" type="rotate" from="360 30 30" to="0 30 30" dur="1s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
                     </div>
-                </div>
-                
-                <!-- Enhanced Table Container -->
-                <div id="datatableFullscreenContainer" class="table-responsive enhanced-table-container">
-                    <!-- Table Status Bar -->
-                    <div class="table-status-bar" id="tableStatusBar">
-                        <div class="status-info">
-                            <span class="status-icon">📊</span>
-                            <span class="status-text">Ready to display market data</span>
-                        </div>
-                        <div class="status-actions">
-                            <button class="status-action-btn" id="exportData" title="Export Data">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <polyline points="7,10 12,15 17,10" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="12" y1="15" x2="12" y2="3" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                Export
-                            </button>
-                            <button class="status-action-btn" id="printTable" title="Print Table">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <polyline points="6,9 6,2 18,2 18,9" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <rect x="6" y="14" width="12" height="8" rx="1" fill="none" stroke="#ff6a88" stroke-width="2"/>
-                                </svg>
-                                Print
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Enhanced Table -->
-                    <div class="table-wrapper">
-                        <table id="coingecko_markets" class="table table-hover table-condensed table-striped enhanced-table" style="width:100%; padding-top:1%">
-                            <thead class="enhanced-thead">
-                                <tr>
-                                    <th class="datatable-highlight-first enhanced-th">
-                                        <span class="datatable-header-text" style="display:block; text-align:center;">Coin</span>
-                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                            <!-- Modern Cryptocurrency Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="cryptoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff6a88"/>
-                                                        <stop offset="1" stop-color="#ff99ac"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#cryptoGradient)"/>
-                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <circle cx="12" cy="12" r="2" fill="#fff" opacity="0.3"/>
-                                            </svg>
-                                        </span>
-                                    </th>
-                                    <th title="Official logo or icon of the cryptocurrency" class="enhanced-th">
-                                        <span class="datatable-header-text" style="display:block; text-align:center;">Logo</span>
-                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                            <!-- Modern Logo Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="logoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff99ac"/>
-                                                        <stop offset="1" stop-color="#ff6a88"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <rect x="3" y="3" width="18" height="18" rx="6" fill="url(#logoGradient)"/>
-                                                <circle cx="12" cy="12" r="6" fill="#fff"/>
-                                                <circle cx="12" cy="12" r="3" fill="url(#logoGradient)"/>
-                                            </svg>
-                                        </span>
-                                    </th>
-                                    <th title="Current market price in USD" class="enhanced-th">
-                                        <span class="datatable-header-text" style="display:block; text-align:center;">Price</span>
-                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                            <!-- Modern Price Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="priceGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ffd200"/>
-                                                        <stop offset="1" stop-color="#ffb300"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#priceGradient)"/>
-                                                <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text>
-                                                <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.2"/>
-                                            </svg>
-                                        </span>
-                                    </th>
-                                    <th title="Total market value of all circulating coins" class="enhanced-th">
-                                        <span class="datatable-header-text" style="display:block; text-align:center;">Market Cap</span>
-                                        <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
-                                            <!-- Modern Market Cap Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="marketCapGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#43cea2"/>
-                                                        <stop offset="1" stop-color="#185a9d"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#marketCapGradient)"/>
-                                                <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <path d="M12 4v16" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/>
-                                            </svg>
-                                        </span>
-                                    </th>
-                                    <th title="Rank by market capitalization (1 = highest)" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Rank Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="rankGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#f7971e"/>
-                                                        <stop offset="1" stop-color="#ffd200"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#rankGradient)"/>
-                                                <path d="M8 6l2 4 3 1-2 2 1 3-4-2-4 2 1-3-2-2 3-1z" fill="#fff"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">#</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">Rank</span>
-                                    </th>
-                                    <th title="Market cap if all coins were in circulation" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Fully Diluted Value Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="fdvGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff6a88"/>
-                                                        <stop offset="1" stop-color="#ff99ac"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#fdvGradient)"/>
-                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <circle cx="12" cy="12" r="4" fill="#fff" opacity="0.3"/>
-                                                <text x="12" y="15" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">FDV</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">Fully Diluted</span>
-                                    </th>
-                                    <th title="Total trading volume in the last 24 hours" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Volume Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="volumeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ffd200"/>
-                                                        <stop offset="1" stop-color="#ffb300"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#volumeGradient)"/>
-                                                <path d="M7 9h10M7 15h10M8 9c0 3 8 3 8 0M8 15c0-3 8-3 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <path d="M12 6v12" stroke="#fff" stroke-width="1.5" stroke-dasharray="1 1"/>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">24h Volume</span>
-                                    </th>
-                                    <th title="Highest price reached in the last 24 hours" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern High Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="highGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#43cea2"/>
-                                                        <stop offset="1" stop-color="#185a9d"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#highGradient)"/>
-                                                <path d="M8 14l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">H</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">24h High</span>
-                                    </th>
-                                    <th title="Lowest price reached in the last 24 hours" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Low Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="lowGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff512f"/>
-                                                        <stop offset="1" stop-color="#ff6a88"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#lowGradient)"/>
-                                                <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">L</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">24h Low</span>
-                                    </th>
-                                    <th title="Absolute price change in the last 24 hours" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Change Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="changeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff6a88"/>
-                                                        <stop offset="1" stop-color="#ff99ac"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#changeGradient)"/>
-                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <circle cx="12" cy="12" r="2" fill="#fff"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Δ</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">24h Change</span>
-                                    </th>
-                                    <th title="Percentage price change in the last 24 hours" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Change % Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="changePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ffd200"/>
-                                                        <stop offset="1" stop-color="#ffb300"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#changePercentGradient)"/>
-                                                <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
-                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">24h %</span>
-                                    </th>
-                                    <th title="Market cap change in the last 24 hours" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Market Cap Change Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="mcapChangeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#43cea2"/>
-                                                        <stop offset="1" stop-color="#185a9d"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#mcapChangeGradient)"/>
-                                                <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <path d="M12 4v16" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Δ</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">MCap Change</span>
-                                    </th>
-                                    <th title="Percentage market cap change in the last 24 hours" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Market Cap Change % Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="mcapChangePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff6a88"/>
-                                                        <stop offset="1" stop-color="#ff99ac"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#mcapChangePercentGradient)"/>
-                                                <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
-                                                <path d="M7 7h10M7 17h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">MCap %</span>
-                                    </th>
-                                    <th title="Number of coins currently in circulation" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Circulating Supply Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="circSupplyGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#f7971e"/>
-                                                        <stop offset="1" stop-color="#ffd200"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#circSupplyGradient)"/>
-                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.5"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">C</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">Circulating</span>
-                                    </th>
-                                    <th title="Total number of coins that will ever exist" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Total Supply Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="totalSupplyGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ffd200"/>
-                                                        <stop offset="1" stop-color="#ffb300"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#totalSupplyGradient)"/>
-                                                <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <circle cx="12" cy="12" r="2" fill="#fff"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">T</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">Total Supply</span>
-                                    </th>
-                                    <th title="Maximum number of coins that can ever exist" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Max Supply Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="maxSupplyGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff512f"/>
-                                                        <stop offset="1" stop-color="#ff6a88"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#maxSupplyGradient)"/>
-                                                <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <path d="M12 4v16" stroke="#fff" stroke-width="1.5"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">M</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">Max Supply</span>
-                                    </th>
-                                    <th title="All-time highest price ever reached" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern ATH Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="athGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#43cea2"/>
-                                                        <stop offset="1" stop-color="#185a9d"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#athGradient)"/>
-                                                <path d="M8 14l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M6 6l12 12" stroke="#fff" stroke-width="1" stroke-dasharray="1 1"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">H</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">All-Time High</span>
-                                    </th>
-                                    <th title="Percentage change from all-time high price" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern ATH Change % Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="athChangePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff6a88"/>
-                                                        <stop offset="1" stop-color="#ff99ac"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#athChangePercentGradient)"/>
-                                                <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
-                                                <path d="M8 14l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">ATH %</span>
-                                    </th>
-                                    <th title="All-time lowest price ever reached" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern ATL Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="atlGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff512f"/>
-                                                        <stop offset="1" stop-color="#ff6a88"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#atlGradient)"/>
-                                                <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M6 6l12 12" stroke="#fff" stroke-width="1" stroke-dasharray="1 1"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">L</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">All-Time Low</span>
-                                    </th>
-                                    <th title="Percentage change from all-time low price" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern ATL Change % Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="atlChangePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ffd200"/>
-                                                        <stop offset="1" stop-color="#ffb300"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#atlChangePercentGradient)"/>
-                                                <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
-                                                <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">ATL %</span>
-                                    </th>
-                                    <th title="Return on investment data" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern ROI Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="roiGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#43cea2"/>
-                                                        <stop offset="1" stop-color="#185a9d"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#roiGradient)"/>
-                                                <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <path d="M7 7l10 10M17 7l-10 10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">R</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">ROI</span>
-                                    </th>
-                                    <th title="Date when the all-time high was reached" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern ATH Date Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="athDateGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#ff6a88"/>
-                                                        <stop offset="1" stop-color="#ff99ac"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#athDateGradient)"/>
-                                                <rect x="6" y="6" width="12" height="12" rx="2" fill="#fff" opacity="0.2"/>
-                                                <path d="M6 10h12M10 6v12" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">D</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">ATH Date</span>
-                                    </th>
-                                    <th title="Last time the data was updated" class="enhanced-th">
-                                        <span class="datatable-header-icon">
-                                            <!-- Modern Last Updated Icon with Gradient -->
-                                            <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                <defs>
-                                                    <linearGradient id="lastUpdatedGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#f7971e"/>
-                                                        <stop offset="1" stop-color="#ffd200"/>
-                                                    </linearGradient>
-                                                </defs>
-                                                <circle cx="12" cy="12" r="11" fill="url(#lastUpdatedGradient)"/>
-                                                <circle cx="12" cy="12" r="6" fill="none" stroke="#fff" stroke-width="2"/>
-                                                <path d="M12 8v4l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">U</text>
-                                            </svg>
-                                        </span>
-                                        <span class="datatable-header-text">Updated</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-                
-                <!-- Enhanced Table Footer -->
-                <div class="table-footer enhanced-footer">
-                    <div class="footer-info">
-                        <span class="footer-icon">📈</span>
-                        <span class="footer-text">Real-time cryptocurrency market data powered by CoinGecko</span>
-                    </div>
-                    <div class="footer-actions">
-                        <button class="footer-action-btn" id="scrollToTop" title="Scroll to Top">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                <path d="M18 15l-6-6-6 6" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Top
-                        </button>
+                    <div class="loading-text">
+                        <h3>Loading Market Data</h3>
+                        <p>Fetching the latest cryptocurrency information...</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Enhanced Table Container -->
+            <div id="datatableFullscreenContainer" class="table-responsive enhanced-table-container">
+                <!-- Table Status Bar -->
+                <div class="table-status-bar" id="tableStatusBar">
+                    <div class="status-info">
+                        <span class="status-icon">📊</span>
+                        <span class="status-text">Ready to display market data</span>
+                    </div>
+                    <div class="status-actions">
+                        <button class="status-action-btn" id="exportData" title="Export Data">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="7,10 12,15 17,10" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="12" y1="15" x2="12" y2="3" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Export
+                        </button>
+                        <button class="status-action-btn" id="printTable" title="Print Table">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <polyline points="6,9 6,2 18,2 18,9" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <rect x="6" y="14" width="12" height="8" rx="1" fill="none" stroke="#ff6a88" stroke-width="2"/>
+                            </svg>
+                            Print
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Enhanced Table -->
+                <div class="table-wrapper">
+                    <table id="coingecko_markets" class="table table-hover table-condensed table-striped enhanced-table" style="width:100%; padding-top:1%">
+                        <thead class="enhanced-thead">
+                            <tr>
+                                <th class="datatable-highlight-first enhanced-th">
+                                    <span class="datatable-header-text" style="display:block; text-align:center;">Coin</span>
+                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                        <!-- Modern Cryptocurrency Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="cryptoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff6a88"/>
+                                                    <stop offset="1" stop-color="#ff99ac"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#cryptoGradient)"/>
+                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <circle cx="12" cy="12" r="2" fill="#fff" opacity="0.3"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th title="Official logo or icon of the cryptocurrency" class="enhanced-th">
+                                    <span class="datatable-header-text" style="display:block; text-align:center;">Logo</span>
+                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                        <!-- Modern Logo Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="logoGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff99ac"/>
+                                                    <stop offset="1" stop-color="#ff6a88"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="3" y="3" width="18" height="18" rx="6" fill="url(#logoGradient)"/>
+                                            <circle cx="12" cy="12" r="6" fill="#fff"/>
+                                            <circle cx="12" cy="12" r="3" fill="url(#logoGradient)"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th title="Current market price in USD" class="enhanced-th">
+                                    <span class="datatable-header-text" style="display:block; text-align:center;">Price</span>
+                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                        <!-- Modern Price Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="priceGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ffd200"/>
+                                                    <stop offset="1" stop-color="#ffb300"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#priceGradient)"/>
+                                            <text x="12" y="16" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">$</text>
+                                            <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.2"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th title="Total market value of all circulating coins" class="enhanced-th">
+                                    <span class="datatable-header-text" style="display:block; text-align:center;">Market Cap</span>
+                                    <span class="datatable-header-icon" style="display:block; text-align:center; margin-top:2px;">
+                                        <!-- Modern Market Cap Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="marketCapGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#43cea2"/>
+                                                    <stop offset="1" stop-color="#185a9d"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#marketCapGradient)"/>
+                                            <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M12 4v16" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th title="Rank by market capitalization (1 = highest)" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Rank Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="rankGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#f7971e"/>
+                                                    <stop offset="1" stop-color="#ffd200"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#rankGradient)"/>
+                                            <path d="M8 6l2 4 3 1-2 2 1 3-4-2-4 2 1-3-2-2 3-1z" fill="#fff"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">#</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">Rank</span>
+                                </th>
+                                <th title="Market cap if all coins were in circulation" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Fully Diluted Value Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="fdvGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff6a88"/>
+                                                    <stop offset="1" stop-color="#ff99ac"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#fdvGradient)"/>
+                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <circle cx="12" cy="12" r="4" fill="#fff" opacity="0.3"/>
+                                            <text x="12" y="15" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">FDV</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">Fully Diluted</span>
+                                </th>
+                                <th title="Total trading volume in the last 24 hours" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Volume Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="volumeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ffd200"/>
+                                                    <stop offset="1" stop-color="#ffb300"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#volumeGradient)"/>
+                                            <path d="M7 9h10M7 15h10M8 9c0 3 8 3 8 0M8 15c0-3 8-3 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M12 6v12" stroke="#fff" stroke-width="1.5" stroke-dasharray="1 1"/>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">24h Volume</span>
+                                </th>
+                                <th title="Highest price reached in the last 24 hours" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern High Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="highGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#43cea2"/>
+                                                    <stop offset="1" stop-color="#185a9d"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#highGradient)"/>
+                                            <path d="M8 14l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">H</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">24h High</span>
+                                </th>
+                                <th title="Lowest price reached in the last 24 hours" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Low Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="lowGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff512f"/>
+                                                    <stop offset="1" stop-color="#ff6a88"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#lowGradient)"/>
+                                            <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">L</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">24h Low</span>
+                                </th>
+                                <th title="Absolute price change in the last 24 hours" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Change Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="changeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff6a88"/>
+                                                    <stop offset="1" stop-color="#ff99ac"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#changeGradient)"/>
+                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <circle cx="12" cy="12" r="2" fill="#fff"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Δ</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">24h Change</span>
+                                </th>
+                                <th title="Percentage price change in the last 24 hours" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Change % Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="changePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ffd200"/>
+                                                    <stop offset="1" stop-color="#ffb300"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#changePercentGradient)"/>
+                                            <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
+                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">24h %</span>
+                                </th>
+                                <th title="Market cap change in the last 24 hours" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Market Cap Change Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="mcapChangeGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#43cea2"/>
+                                                    <stop offset="1" stop-color="#185a9d"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#mcapChangeGradient)"/>
+                                            <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M12 4v16" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Δ</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">MCap Change</span>
+                                </th>
+                                <th title="Percentage market cap change in the last 24 hours" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Market Cap Change % Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="mcapChangePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff6a88"/>
+                                                    <stop offset="1" stop-color="#ff99ac"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#mcapChangePercentGradient)"/>
+                                            <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
+                                            <path d="M7 7h10M7 17h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">MCap %</span>
+                                </th>
+                                <th title="Number of coins currently in circulation" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Circulating Supply Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="circSupplyGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#f7971e"/>
+                                                    <stop offset="1" stop-color="#ffd200"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#circSupplyGradient)"/>
+                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <circle cx="12" cy="12" r="3" fill="#fff" opacity="0.5"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">C</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">Circulating</span>
+                                </th>
+                                <th title="Total number of coins that will ever exist" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Total Supply Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="totalSupplyGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ffd200"/>
+                                                    <stop offset="1" stop-color="#ffb300"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#totalSupplyGradient)"/>
+                                            <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <circle cx="12" cy="12" r="2" fill="#fff"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">T</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">Total Supply</span>
+                                </th>
+                                <th title="Maximum number of coins that can ever exist" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Max Supply Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="maxSupplyGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff512f"/>
+                                                    <stop offset="1" stop-color="#ff6a88"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#maxSupplyGradient)"/>
+                                            <path d="M7 7h10M7 17h10M8 7c0 5 8 5 8 0M8 17c0-5 8-5 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M12 4v16" stroke="#fff" stroke-width="1.5"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">M</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">Max Supply</span>
+                                </th>
+                                <th title="All-time highest price ever reached" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern ATH Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="athGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#43cea2"/>
+                                                    <stop offset="1" stop-color="#185a9d"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#athGradient)"/>
+                                            <path d="M8 14l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M6 6l12 12" stroke="#fff" stroke-width="1" stroke-dasharray="1 1"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">H</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">All-Time High</span>
+                                </th>
+                                <th title="Percentage change from all-time high price" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern ATH Change % Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="athChangePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff6a88"/>
+                                                    <stop offset="1" stop-color="#ff99ac"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#athChangePercentGradient)"/>
+                                            <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
+                                            <path d="M8 14l4-8 4 8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">ATH %</span>
+                                </th>
+                                <th title="All-time lowest price ever reached" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern ATL Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="atlGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff512f"/>
+                                                    <stop offset="1" stop-color="#ff6a88"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#atlGradient)"/>
+                                            <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M6 6l12 12" stroke="#fff" stroke-width="1" stroke-dasharray="1 1"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">L</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">All-Time Low</span>
+                                </th>
+                                <th title="Percentage change from all-time low price" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern ATL Change % Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="atlChangePercentGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ffd200"/>
+                                                    <stop offset="1" stop-color="#ffb300"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#atlChangePercentGradient)"/>
+                                            <text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">%</text>
+                                            <path d="M8 10l4 8 4-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">ATL %</span>
+                                </th>
+                                <th title="Return on investment data" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern ROI Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="roiGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#43cea2"/>
+                                                    <stop offset="1" stop-color="#185a9d"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#roiGradient)"/>
+                                            <path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M7 7l10 10M17 7l-10 10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">R</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">ROI</span>
+                                </th>
+                                <th title="Date when the all-time high was reached" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern ATH Date Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="athDateGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#ff6a88"/>
+                                                    <stop offset="1" stop-color="#ff99ac"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#athDateGradient)"/>
+                                            <rect x="6" y="6" width="12" height="12" rx="2" fill="#fff" opacity="0.2"/>
+                                            <path d="M6 10h12M10 6v12" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">D</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">ATH Date</span>
+                                </th>
+                                <th title="Last time the data was updated" class="enhanced-th">
+                                    <span class="datatable-header-icon">
+                                        <!-- Modern Last Updated Icon with Gradient -->
+                                        <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="lastUpdatedGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#f7971e"/>
+                                                    <stop offset="1" stop-color="#ffd200"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <circle cx="12" cy="12" r="11" fill="url(#lastUpdatedGradient)"/>
+                                            <circle cx="12" cy="12" r="6" fill="none" stroke="#fff" stroke-width="2"/>
+                                            <path d="M12 8v4l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <text x="12" y="20" text-anchor="middle" font-size="8" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">U</text>
+                                        </svg>
+                                    </span>
+                                    <span class="datatable-header-text">Updated</span>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Enhanced Table Footer -->
+            <div class="table-footer enhanced-footer">
+                <div class="footer-info">
+                    <span class="footer-icon">📈</span>
+                    <span class="footer-text">Real-time cryptocurrency market data powered by CoinGecko</span>
+                </div>
+                <div class="footer-actions">
+                    <button class="footer-action-btn" id="scrollToTop" title="Scroll to Top">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 15l-6-6-6 6" stroke="#ff6a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Top
+                    </button>
+                </div>
+            </div>
         </div>
+
         <!-- Info Block: About Coingecko Markets -->
         <div class="modern-info-block-upgraded upgraded-gradient-bg" style="border-radius: 1.5em; box-shadow: 0 8px 32px 0 rgba(255, 106, 136, 0.18), 0 3px 12px 0 rgba(255, 153, 172, 0.13); padding: 2.2em 2em 2.2em 2em; margin-top: 2.5em; margin-bottom: 2.5em; color: #fff; background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);">
             <div class="info-paragraph" style="display: flex; align-items: flex-start; gap: 1.5em; margin-bottom: 2.2em; flex-wrap: wrap;">
