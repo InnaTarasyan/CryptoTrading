@@ -180,6 +180,366 @@ body.dark-mode #coingecko_trendings td:first-child {
         font-size: 0.98em;
         letter-spacing: 0.01em;
     }
+
+    /* Special styling for Data column on mobile */
+    #coingecko_trendings td[data-label="Data"] {
+        padding-left: 0 !important;
+        padding: 1rem 0.5rem !important;
+        min-height: auto !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"]:before {
+        position: static !important;
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 0.8rem !important;
+        text-align: center !important;
+        font-size: 1.1em !important;
+        color: #ff6a88 !important;
+        background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+        color: #fff !important;
+        padding: 0.5rem !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Mobile-optimized info wrapper */
+    #coingecko_trendings td[data-label="Data"] .info-wrapper {
+        flex-direction: column !important;
+        gap: 0.8rem !important;
+        margin-top: 0 !important;
+    }
+
+    /* Mobile-optimized info items */
+    #coingecko_trendings td[data-label="Data"] .info-item {
+        flex: 1 1 auto !important;
+        max-width: 100% !important;
+        font-size: 0.95em !important;
+        padding: 0.8rem !important;
+        border-radius: 8px !important;
+        background: rgba(255, 255, 255, 0.8) !important;
+        border: 1px solid rgba(255, 106, 136, 0.1) !important;
+        box-shadow: 0 2px 8px rgba(255, 106, 136, 0.08) !important;
+    }
+
+    /* Mobile-optimized info labels */
+    #coingecko_trendings td[data-label="Data"] .info-label-container {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.4rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label {
+        font-size: 0.9em !important;
+        font-weight: 700 !important;
+        color: #ff6a88 !important;
+        background: rgba(255, 106, 136, 0.1) !important;
+        padding: 0.3rem 0.6rem !important;
+        border-radius: 6px !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
+    }
+
+    /* Mobile-optimized info values */
+    #coingecko_trendings td[data-label="Data"] .info-value {
+        font-size: 0.9em !important;
+        line-height: 1.4 !important;
+        color: #333 !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Mobile-optimized icons */
+    #coingecko_trendings td[data-label="Data"] .info-label-container svg {
+        width: 20px !important;
+        height: 20px !important;
+        margin-bottom: 0.2rem !important;
+    }
+
+    /* Mobile-optimized lists */
+    #coingecko_trendings td[data-label="Data"] ul {
+        margin: 0.5rem 0 0 0 !important;
+        padding-left: 1rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] li {
+        font-size: 0.85em !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.3rem !important;
+        word-break: break-word !important;
+    }
+
+    /* Mobile-optimized boolean badges */
+    #coingecko_trendings td[data-label="Data"] .boolean-badge {
+        font-size: 0.8em !important;
+        padding: 0.4rem 0.8rem !important;
+        border-radius: 12px !important;
+        display: inline-block !important;
+        text-align: center !important;
+        min-width: 60px !important;
+    }
+
+    /* Mobile-optimized links */
+    #coingecko_trendings td[data-label="Data"] a {
+        color: #ff6a88 !important;
+        text-decoration: none !important;
+        word-break: break-all !important;
+        display: inline-block !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] a:hover {
+        text-decoration: underline !important;
+        color: #ff99ac !important;
+    }
+}
+
+/* Additional mobile responsive styles for smaller screens */
+@media (max-width: 600px) {
+    #coingecko_trendings td[data-label="Data"] {
+        padding: 0.8rem 0.4rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"]:before {
+        font-size: 1em !important;
+        padding: 0.4rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-wrapper {
+        gap: 0.6rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-item {
+        font-size: 0.9em !important;
+        padding: 0.7rem !important;
+        border-radius: 6px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label {
+        font-size: 0.85em !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-value {
+        font-size: 0.85em !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label-container svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] li {
+        font-size: 0.8em !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .boolean-badge {
+        font-size: 0.75em !important;
+        padding: 0.3rem 0.6rem !important;
+        min-width: 50px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #coingecko_trendings td[data-label="Data"] {
+        padding: 0.6rem 0.3rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"]:before {
+        font-size: 0.95em !important;
+        padding: 0.35rem !important;
+        margin-bottom: 0.7rem !important;
+        border-radius: 6px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-wrapper {
+        gap: 0.5rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-item {
+        font-size: 0.85em !important;
+        padding: 0.6rem !important;
+        border-radius: 5px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label-container {
+        gap: 0.3rem !important;
+        margin-bottom: 0.4rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label {
+        font-size: 0.8em !important;
+        padding: 0.2rem 0.4rem !important;
+        border-radius: 5px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-value {
+        font-size: 0.8em !important;
+        line-height: 1.3 !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label-container svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] ul {
+        margin: 0.4rem 0 0 0 !important;
+        padding-left: 0.8rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] li {
+        font-size: 0.75em !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .boolean-badge {
+        font-size: 0.7em !important;
+        padding: 0.25rem 0.5rem !important;
+        min-width: 45px !important;
+        border-radius: 10px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    #coingecko_trendings td[data-label="Data"] {
+        padding: 0.5rem 0.25rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"]:before {
+        font-size: 0.9em !important;
+        padding: 0.3rem !important;
+        margin-bottom: 0.6rem !important;
+        border-radius: 5px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-wrapper {
+        gap: 0.4rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-item {
+        font-size: 0.8em !important;
+        padding: 0.5rem !important;
+        border-radius: 4px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label {
+        font-size: 0.75em !important;
+        padding: 0.15rem 0.35rem !important;
+        border-radius: 4px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-value {
+        font-size: 0.75em !important;
+        line-height: 1.2 !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label-container svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] li {
+        font-size: 0.7em !important;
+        line-height: 1.1 !important;
+        margin-bottom: 0.2rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .boolean-badge {
+        font-size: 0.65em !important;
+        padding: 0.2rem 0.4rem !important;
+        min-width: 40px !important;
+        border-radius: 8px !important;
+    }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 767px) and (orientation: landscape) {
+    #coingecko_trendings td[data-label="Data"] {
+        padding: 0.8rem 0.6rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"]:before {
+        font-size: 1em !important;
+        padding: 0.4rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-wrapper {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 0.8rem !important;
+        justify-content: space-between !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-item {
+        flex: 1 1 calc(50% - 0.4rem) !important;
+        max-width: calc(50% - 0.4rem) !important;
+        min-width: 200px !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label-container {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        margin-bottom: 0.4rem !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] .info-label-container svg {
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Dark mode support for mobile responsive Data column */
+@media (max-width: 767px) {
+    body.dark-mode #coingecko_trendings td[data-label="Data"]:before {
+        background: linear-gradient(90deg, #23272f 0%, #ff6a88 100%) !important;
+        color: #fff !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] .info-item {
+        background: rgba(35, 39, 47, 0.9) !important;
+        border: 1px solid rgba(255, 106, 136, 0.2) !important;
+        box-shadow: 0 2px 8px rgba(255, 106, 136, 0.15) !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] .info-label {
+        background: rgba(255, 106, 136, 0.2) !important;
+        color: #ff99ac !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] .info-value {
+        color: #eaeaea !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] a {
+        color: #ff99ac !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] a:hover {
+        color: #ff6a88 !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] .boolean-badge {
+        background: #43cea2 !important;
+        color: #23272f !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] .boolean-badge.no {
+        background: #ff6a88 !important;
+        color: #fff !important;
+    }
+
+    body.dark-mode #coingecko_trendings td[data-label="Data"] li {
+        color: #eaeaea !important;
+    }
 }
 
 body.dark-mode {
