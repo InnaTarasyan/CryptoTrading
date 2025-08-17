@@ -81,16 +81,18 @@ class HistoryController extends Controller
                 return number_format((float)$item->allTimeHighUSD, 2, ',', ' ');
             })
             ->editColumn('categories', function ($item) {
-                if(empty($item->categories)) {
+                if (empty($item->categories)) {
                     return '';
                 }
+
                 $categoriesList = json_decode($item->categories, true);
-                $str =  '<ul>';
-                  foreach($categoriesList as $category) {
-                      $str.= '<li>'.$category.'</li>';
-                  }
-                $str.=  '</ul>';
-                return $str;
+
+                $items = array_map(function($category) {
+                    $shortName = mb_strlen($category) > 5 ? mb_substr($category, 0, 5) . '…' : $category;
+                    return '<li>' . htmlspecialchars($shortName, ENT_QUOTES, 'UTF-8') . '</li>';
+                }, $categoriesList);
+
+                return '<ul>' . implode('', $items) . '</ul>';
             })
             ->rawColumns([ 'rate',  'maxSupply', 'totalSupply', 'circulatingSupply', 'categories'])
             ->make(true);
