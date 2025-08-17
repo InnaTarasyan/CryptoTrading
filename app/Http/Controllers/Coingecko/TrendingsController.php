@@ -33,11 +33,15 @@ class TrendingsController extends Controller
                 return "<p class='warning'>".$item->price_btc."</p>";
             })
             ->editColumn('data', function ($item) {
-                if(empty($item->data)) {
+
+                if (empty($item->data)) {
                     return ' - ';
                 }
+
                 $json = json_decode($item->data, true);
                 if (!$json || !is_array($json)) return ' - ';
+
+
                 $iconMap = [
                     'twitter' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="#1da1f2" style="vertical-align:middle;"><path d="M22.46 6c-.77.35-1.6.58-2.47.69a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 9.13 4.07 7.38 1.64 4.7c-.37.64-.58 1.38-.58 2.17 0 1.5.76 2.82 1.92 3.6-.7-.02-1.36-.21-1.94-.53v.05c0 2.1 1.5 3.85 3.5 4.25-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.7 2.1 2.94 3.95 2.97A8.6 8.6 0 0 1 2 19.54c-.32 0-.63-.02-.94-.06A12.13 12.13 0 0 0 8.29 21.5c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.18 8.18 0 0 0 24 4.59a8.36 8.36 0 0 1-2.54.7z"/></svg>',
                     'reddit' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="#ff4500" style="vertical-align:middle;"><circle cx="12" cy="12" r="12" fill="#ff4500"/><ellipse cx="8.5" cy="13.5" rx="2.5" ry="2" fill="#fff"/><ellipse cx="15.5" cy="13.5" rx="2.5" ry="2" fill="#fff"/><circle cx="8.5" cy="13.5" r="1" fill="#000"/><circle cx="15.5" cy="13.5" r="1" fill="#000"/><ellipse cx="12" cy="16" rx="3" ry="1.2" fill="#000"/><circle cx="5.5" cy="8.5" r="1.2" fill="#fff"/><circle cx="18.5" cy="8.5" r="1.2" fill="#fff"/></svg>',
@@ -67,37 +71,98 @@ class TrendingsController extends Controller
                     'address' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="#ff99ac" style="vertical-align:middle;"><rect x="2" y="6" width="20" height="12" rx="4" fill="#ff99ac"/><path d="M2 6l10 7 10-7" stroke="#ff6a88" stroke-width="2"/></svg>',
                     'status' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="#43cea2" style="vertical-align:middle;"><circle cx="12" cy="12" r="10" fill="#43cea2"/><path d="M8 12h8M8 16h4" stroke="#fff" stroke-width="2"/></svg>',
                 ];
-                $str = '<div style="display:flex;flex-wrap:wrap;gap:0.5em;">';
+
+                $css = '
+    <style>
+        .data-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5em;
+        }
+        .data-item {
+            background: #f7f7fa;
+            border-radius: 1.2em;
+            padding: 0.3em 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4em;
+            font-size: 0.98em;
+            box-shadow: 0 1px 3px #eee;
+            max-width: 100%;
+            word-break: break-word;
+        }
+        .data-item a {
+            color: #ff6a88;
+            text-decoration: underline;
+        }
+        .data-label {
+            color: #ff6a88;
+            font-weight: 600;
+        }
+        .boolean-badge {
+            background: #43cea2;
+            color: #fff;
+            padding: 0.1em 0.7em;
+            border-radius: 1em;
+            font-size: 0.95em;
+        }
+        .boolean-badge.no {
+            background: #ff6a88;
+        }
+        @media (max-width: 600px) {
+            .data-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+';
+
+                $str = $css . '<div class="data-wrapper">';
+
                 foreach ($json as $key => $inner) {
                     $icon = $iconMap[strtolower($key)] ?? '';
                     $label = ucfirst($key);
                     $valueHtml = '';
+
                     if (is_array($inner)) {
                         $valueHtml = '<span style="display:inline-block;min-width:2em;">[';
                         $count = 0;
                         foreach ($inner as $v) {
-                            if ($count >= 3) { $valueHtml .= '...'; break; }
-                            $vShort = mb_strlen($v) > 40 ? '<span title="'.htmlspecialchars($v).'">'.htmlspecialchars(mb_substr($v,0,40)).'…</span>' : htmlspecialchars($v);
-                            if (filter_var($v, FILTER_VALIDATE_URL)) {
-                                $vShort = '<a href="'.htmlspecialchars($v).'" target="_blank" rel="noopener" style="color:#ff6a88;text-decoration:underline;">'.$vShort.'</a>';
+                            if ($count >= 3) {
+                                $valueHtml .= '...';
+                                break;
                             }
+                            $vShort = mb_strlen($v) > 40
+                                ? '<span title="' . htmlspecialchars($v) . '">' . htmlspecialchars(mb_substr($v, 0, 40)) . '…</span>'
+                                : htmlspecialchars($v);
+
+                            if (filter_var($v, FILTER_VALIDATE_URL)) {
+                                $vShort = '<a href="' . htmlspecialchars($v) . '" target="_blank" rel="noopener">' . $vShort . '</a>';
+                            }
+
                             $valueHtml .= ($count > 0 ? ', ' : '') . $vShort;
                             $count++;
                         }
                         $valueHtml .= ']</span>';
                     } else {
                         $v = $inner;
-                        $vShort = mb_strlen($v) > 40 ? '<span title="'.htmlspecialchars($v).'">'.htmlspecialchars(mb_substr($v,0,40)).'…</span>' : htmlspecialchars($v);
+                        $vShort = mb_strlen($v) > 40
+                            ? '<span title="' . htmlspecialchars($v) . '">' . htmlspecialchars(mb_substr($v, 0, 40)) . '…</span>'
+                            : htmlspecialchars($v);
+
                         if (filter_var($v, FILTER_VALIDATE_URL)) {
-                            $vShort = '<a href="'.htmlspecialchars($v).'" target="_blank" rel="noopener" style="color:#ff6a88;text-decoration:underline;">'.$vShort.'</a>';
-                        } elseif (is_bool($v) || $v === 'true' || $v === 'false' || $v === 1 || $v === 0) {
+                            $vShort = '<a href="' . htmlspecialchars($v) . '" target="_blank" rel="noopener">' . $vShort . '</a>';
+                        } elseif (is_bool($v) || $v === 'true' || $v === 'false' || $v === 1 || $v === 0 || $v === '1') {
                             $isTrue = ($v === true || $v === 'true' || $v === 1 || $v === '1');
-                            $vShort = '<span style="background:'.($isTrue?'#43cea2':'#ff6a88').';color:#fff;padding:0.1em 0.7em;border-radius:1em;font-size:0.95em;">'.($isTrue?'Yes':'No').'</span>';
+                            $vShort = '<span class="boolean-badge ' . ($isTrue ? '' : 'no') . '">' . ($isTrue ? 'Yes' : 'No') . '</span>';
                         }
+
                         $valueHtml = $vShort;
                     }
-                    $str .= '<span style="background:#f7f7fa;border-radius:1.2em;padding:0.3em 0.9em;display:inline-flex;align-items:center;gap:0.4em;font-size:0.98em;box-shadow:0 1px 3px #eee;">'.$icon.'<span style="color:#ff6a88;font-weight:600;">'.$label.':</span> '.$valueHtml.'</span>';
+
+                    $str .= '<span class="data-item">' . $icon . '<span class="data-label">' . $label . ':</span> ' . $valueHtml . '</span>';
                 }
+
                 $str .= '</div>';
                 return $str;
             })
