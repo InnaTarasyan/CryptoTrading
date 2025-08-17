@@ -160,4 +160,17 @@ return [
     'cryptocompare' => 'CryptoCompare',
     'coinpaprika' => 'CoinPaprika',
     'cryptics_tech' => 'Cryptics.tech',
+
+    // New Platform Comparison Charts
+    'platform_data_comparison' => 'Հարթակների տվյալների համեմատություն',
+    'market_cap_comparison' => 'Շուկայական կապիտալիզացիայի համեմատություն',
+    'volume_comparison' => 'Ծավալի համեմատություն',
+    'coin_count_comparison' => 'Մետաղադրամների քանակի համեմատություն',
+    'price_movement_comparison' => 'Գնային շարժումների համեմատություն',
+    'platform_performance_summary' => 'Հարթակի աշխատանքի ամփոփում',
+    'gaining_coins' => 'Աճող մետաղադրամներ',
+    'losing_coins' => 'Նվազող մետաղադրամներ',
+    'name' => 'Անուն',
+    'symbol' => 'Սիմվոլ',
+    'platform' => 'Հարթակ',
 ]; 

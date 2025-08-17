@@ -119,11 +119,36 @@ class MarketsComparizonController extends Controller
 
         $fiats = Fiats::all();
 
+        // Calculate price changes (simplified - using current data)
+        $gainingCoins = 0;
+        $losingCoins = 0;
+        
+        // For demonstration, we'll use a simple calculation
+        // In a real scenario, you'd compare with historical data
+        foreach ($livecoinwatch as $coin) {
+            if ($coin->rate > 0) {
+                $gainingCoins++;
+            } else {
+                $losingCoins++;
+            }
+        }
+
         return [
             'total_coins' => $livecoinwatch->count(),
             'total_market_cap' => $livecoinwatch->sum('cap'),
             'total_volume' => $livecoinwatch->sum('volume'),
             'average_price' => $livecoinwatch->avg('rate'),
+            'gaining_coins' => $gainingCoins,
+            'losing_coins' => $losingCoins,
+            'market_cap_stats' => [
+                'total' => $livecoinwatch->sum('cap'),
+                'average' => $livecoinwatch->avg('cap'),
+                'median' => $livecoinwatch->median('cap')
+            ],
+            'volume_stats' => [
+                'total' => $livecoinwatch->sum('volume'),
+                'average' => $livecoinwatch->avg('volume')
+            ],
             'price_range' => [
                 'min' => $livecoinwatch->min('rate'),
                 'max' => $livecoinwatch->max('rate')
@@ -207,9 +232,24 @@ class MarketsComparizonController extends Controller
         $coinmarketcals = CoinMarketCal::all();
         $events = CoinMarketCalEvents::all();
 
+        // Calculate price changes (simplified - using hot_index as indicator)
+        $gainingCoins = $coinmarketcals->where('hot_index', '>', 50)->count();
+        $losingCoins = $coinmarketcals->where('hot_index', '<=', 50)->count();
+
         return [
             'total_coins' => $coinmarketcals->count(),
             'total_events' => $events->count(),
+            'gaining_coins' => $gainingCoins,
+            'losing_coins' => $losingCoins,
+            'market_cap_stats' => [
+                'total' => 0, // CoinMarketCal doesn't have market cap data
+                'average' => 0,
+                'median' => 0
+            ],
+            'volume_stats' => [
+                'total' => 0, // CoinMarketCal doesn't have volume data
+                'average' => 0
+            ],
             'rank_distribution' => [
                 'top_10' => $coinmarketcals->where('rank', '<=', 10)->count(),
                 'top_50' => $coinmarketcals->where('rank', '<=', 50)->count(),

@@ -160,4 +160,17 @@ return [
     'cryptocompare' => 'CryptoCompare',
     'coinpaprika' => 'CoinPaprika',
     'cryptics_tech' => 'Cryptics.tech',
+
+    // New Platform Comparison Charts
+    'platform_data_comparison' => 'Сравнение данных платформ',
+    'market_cap_comparison' => 'Сравнение рыночной капитализации',
+    'volume_comparison' => 'Сравнение объема',
+    'coin_count_comparison' => 'Сравнение количества монет',
+    'price_movement_comparison' => 'Сравнение движения цен',
+    'platform_performance_summary' => 'Сводка производительности платформ',
+    'gaining_coins' => 'Растущие монеты',
+    'losing_coins' => 'Падающие монеты',
+    'name' => 'Название',
+    'symbol' => 'Символ',
+    'platform' => 'Платформа',
 ]; 

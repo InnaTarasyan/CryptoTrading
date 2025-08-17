@@ -292,6 +292,73 @@
                 </div>
             </div>
 
+            {{-- ======================== NEW PLATFORM COMPARISON CHARTS ======================== --}}
+            
+            {{-- Platform Data Comparison Chart --}}
+            <div class="chart-card full-width">
+                <h4 data-lang-key="platform_data_comparison">{{ __('menu.platform_data_comparison') }}</h4>
+                <div class="chart-container" style="height: 400px; position: relative;">
+                    <canvas id="platformComparisonChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Market Cap Comparison by Platform --}}
+            <div class="chart-card">
+                <h4 data-lang-key="market_cap_comparison">{{ __('menu.market_cap_comparison') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="marketCapComparisonChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Volume Comparison by Platform --}}
+            <div class="chart-card">
+                <h4 data-lang-key="volume_comparison">{{ __('menu.volume_comparison') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="volumeComparisonChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Coin Count Comparison by Platform --}}
+            <div class="chart-card">
+                <h4 data-lang-key="coin_count_comparison">{{ __('menu.coin_count_comparison') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="coinCountComparisonChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Price Movement Comparison --}}
+            <div class="chart-card">
+                <h4 data-lang-key="price_movement_comparison">{{ __('menu.price_movement_comparison') }}</h4>
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="priceMovementComparisonChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Platform Performance Summary Table --}}
+            <div class="chart-card full-width">
+                <h4 data-lang-key="platform_performance_summary">{{ __('menu.platform_performance_summary') }}</h4>
+                <div class="platform-performance-table">
+                    <div class="table-responsive">
+                        <table id="platformPerformanceTable" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th data-lang-key="platform">{{ __('menu.platform') }}</th>
+                                <th data-lang-key="total_coins">{{ __('menu.total_coins') }}</th>
+                                <th data-lang-key="total_market_cap">{{ __('menu.total_market_cap') }}</th>
+                                <th data-lang-key="total_volume">{{ __('menu.total_volume') }}</th>
+                                <th data-lang-key="gaining_coins">{{ __('menu.gaining_coins') }}</th>
+                                <th data-lang-key="losing_coins">{{ __('menu.losing_coins') }}</th>
+                                <th data-lang-key="last_updated">{{ __('menu.last_updated') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="platformPerformanceBody">
+                            <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             {{-- Top Performers --}}
             <div class="chart-card full-width">
                 <h4 data-lang-key="top_10_coins_by_market_cap">{{ __('menu.top_10_coins_by_market_cap') }}</h4>
@@ -2195,6 +2262,71 @@
         align-items: center;
         justify-content: flex-end;
     }
+
+    .chart-container {
+        width: 100% !important;
+        height: 280px !important;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .chart-container canvas {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    .chart-container.full-width {
+        height: 350px !important;
+    }
+
+    .platform-performance-table {
+        margin-top: 1em;
+    }
+
+    .platform-performance-table .table {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1em;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .platform-performance-table .table thead th {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 1em;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .platform-performance-table .table tbody td {
+        padding: 1em;
+        border-bottom: 1px solid #eee;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .platform-performance-table .table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .platform-performance-table .table tbody tr:hover {
+        background: rgba(102, 126, 234, 0.1);
+    }
+
+    .text-success {
+        color: #28a745 !important;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+        font-weight: 600;
+    }
+
+    .top-performers-table {
+        margin-top: 1em;
+    }
 </style>
 
 {{-- ======================== Live Coin Watch Info Section ======================== --}}
@@ -2314,6 +2446,13 @@
             platform: null
         };
 
+        // Initialize new platform comparison chart variables
+        window.platformComparisonChart = null;
+        window.marketCapComparisonChart = null;
+        window.volumeComparisonChart = null;
+        window.coinCountComparisonChart = null;
+        window.priceMovementComparisonChart = null;
+
         function formatNumber(num) {
             if (num >= 1e12) return (num / 1e12).toFixed(2) + 'T';
             if (num >= 1e9) return (num / 1e9).toFixed(2) + 'B';
@@ -2329,6 +2468,11 @@
         function loadComparisonData() {
             const loadingEl = document.getElementById('comparisonLoading');
             const chartsEl = document.getElementById('comparisonCharts');
+
+            if (!loadingEl || !chartsEl) {
+                console.error('Required DOM elements not found for comparison data loading');
+                return;
+            }
 
             loadingEl.style.display = 'block';
             chartsEl.style.display = 'none';
@@ -2442,6 +2586,12 @@
         }
 
         function renderComparisonData(data) {
+            // Check if Chart.js is available
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js is not loaded. Cannot create charts.');
+                return;
+            }
+
             // Update platform overview cards (excluding coinpaprika and cryptics)
             updatePlatformCards(data);
 
@@ -2451,11 +2601,437 @@
             createVolumeChart(data.volume_analysis);
             createPlatformChart(data.comparison);
 
+            // Create new platform comparison charts
+            createPlatformComparisonChart(data);
+            createMarketCapComparisonChart(data);
+            createVolumeComparisonChart(data);
+            createCoinCountComparisonChart(data);
+            createPriceMovementComparisonChart(data);
+
+            // Update platform performance table
+            updatePlatformPerformanceTable(data);
+
             // Update top performers table
             updateTopPerformersTable(data.top_performers);
 
             // Update trends summary
             updateTrendsSummary(data.trends);
+        }
+
+        // ======================== NEW PLATFORM COMPARISON CHART FUNCTIONS ========================
+
+        function createPlatformComparisonChart(data) {
+            const canvas = document.getElementById('platformComparisonChart');
+            if (!canvas) {
+                console.warn('Platform comparison chart canvas not found');
+                return;
+            }
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Properly check if the chart exists and is a valid Chart.js instance
+            if (window.platformComparisonChart && typeof window.platformComparisonChart.destroy === 'function') {
+                window.platformComparisonChart.destroy();
+            }
+
+            const chartData = {
+                labels: ['LiveCoinWatch', 'CoinGecko', 'CoinMarketCal', 'CryptoCompare'],
+                datasets: [
+                    {
+                        label: 'Total Coins',
+                        data: [
+                            data.livecoinwatch?.total_coins || 0,
+                            data.coingecko?.total_coins || 0,
+                            data.coinmarketcal?.total_coins || 0,
+                            data.cryptocompare?.total_coins || 0
+                        ],
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Total Market Cap (Billion USD)',
+                        data: [
+                            (data.livecoinwatch?.total_market_cap || 0) / 1e9,
+                            (data.coingecko?.market_cap_stats?.total || 0) / 1e9,
+                            (data.coinmarketcal?.market_cap_stats?.total || 0) / 1e9,
+                            (data.cryptocompare?.market_cap_stats?.total || 0) / 1e9
+                        ],
+                        backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Total Volume (Billion USD)',
+                        data: [
+                            (data.livecoinwatch?.total_volume || 0) / 1e9,
+                            (data.coingecko?.volume_stats?.total || 0) / 1e9,
+                            (data.coinmarketcal?.volume_stats?.total || 0) / 1e9,
+                            (data.cryptocompare?.volume_stats?.total || 0) / 1e9
+                        ],
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            };
+
+            try {
+                window.platformComparisonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Value'
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Platform Data Comparison'
+                            },
+                            legend: {
+                                position: 'top'
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating platform comparison chart:', error);
+                window.platformComparisonChart = null;
+            }
+        }
+
+        function createMarketCapComparisonChart(data) {
+            const canvas = document.getElementById('marketCapComparisonChart');
+            if (!canvas) {
+                console.warn('Market cap comparison chart canvas not found');
+                return;
+            }
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Properly check if the chart exists and is a valid Chart.js instance
+            if (window.marketCapComparisonChart && typeof window.marketCapComparisonChart.destroy === 'function') {
+                window.marketCapComparisonChart.destroy();
+            }
+
+            const chartData = {
+                labels: ['LiveCoinWatch', 'CoinGecko', 'CoinMarketCal', 'CryptoCompare'],
+                datasets: [{
+                    data: [
+                        (data.livecoinwatch?.total_market_cap || 0) / 1e9,
+                        (data.coingecko?.market_cap_stats?.total || 0) / 1e9,
+                        (data.coinmarketcal?.market_cap_stats?.total || 0) / 1e9,
+                        (data.cryptocompare?.market_cap_stats?.total || 0) / 1e9
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            };
+
+            try {
+                window.marketCapComparisonChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Market Cap Distribution by Platform'
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating market cap comparison chart:', error);
+                window.marketCapComparisonChart = null;
+            }
+        }
+
+        function createVolumeComparisonChart(data) {
+            const canvas = document.getElementById('volumeComparisonChart');
+            if (!canvas) {
+                console.warn('Volume comparison chart canvas not found');
+                return;
+            }
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Properly check if the chart exists and is a valid Chart.js instance
+            if (window.volumeComparisonChart && typeof window.volumeComparisonChart.destroy === 'function') {
+                window.volumeComparisonChart.destroy();
+            }
+
+            const chartData = {
+                labels: ['LiveCoinWatch', 'CoinGecko', 'CoinMarketCal', 'CryptoCompare'],
+                datasets: [{
+                    data: [
+                        (data.livecoinwatch?.total_volume || 0) / 1e9,
+                        (data.coingecko?.volume_stats?.total || 0) / 1e9,
+                        (data.coinmarketcal?.volume_stats?.total || 0) / 1e9,
+                        (data.cryptocompare?.volume_stats?.total || 0) / 1e9
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 205, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            };
+
+            try {
+                window.volumeComparisonChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Volume Distribution by Platform'
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating volume comparison chart:', error);
+                window.volumeComparisonChart = null;
+            }
+        }
+
+        function createCoinCountComparisonChart(data) {
+            const canvas = document.getElementById('coinCountComparisonChart');
+            if (!canvas) {
+                console.warn('Coin count comparison chart canvas not found');
+                return;
+            }
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Properly check if the chart exists and is a valid Chart.js instance
+            if (window.coinCountComparisonChart && typeof window.coinCountComparisonChart.destroy === 'function') {
+                window.coinCountComparisonChart.destroy();
+            }
+
+            const chartData = {
+                labels: ['LiveCoinWatch', 'CoinGecko', 'CoinMarketCal', 'CryptoCompare'],
+                datasets: [{
+                    label: 'Total Coins',
+                    data: [
+                        data.livecoinwatch?.total_coins || 0,
+                        data.coingecko?.total_coins || 0,
+                        data.coinmarketcal?.total_coins || 0,
+                        data.cryptocompare?.total_coins || 0
+                    ],
+                    backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 2
+                }]
+            };
+
+            try {
+                window.coinCountComparisonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Coins'
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Coin Count by Platform'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating coin count comparison chart:', error);
+                window.coinCountComparisonChart = null;
+            }
+        }
+
+        function createPriceMovementComparisonChart(data) {
+            const canvas = document.getElementById('priceMovementComparisonChart');
+            if (!canvas) {
+                console.warn('Price movement comparison chart canvas not found');
+                return;
+            }
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Properly check if the chart exists and is a valid Chart.js instance
+            if (window.priceMovementComparisonChart && typeof window.priceMovementComparisonChart.destroy === 'function') {
+                window.priceMovementComparisonChart.destroy();
+            }
+
+            const chartData = {
+                labels: ['LiveCoinWatch', 'CoinGecko', 'CoinMarketCal', 'CryptoCompare'],
+                datasets: [
+                    {
+                        label: 'Gaining Coins',
+                        data: [
+                            data.livecoinwatch?.gaining_coins || 0,
+                            data.coingecko?.price_change_24h?.positive || 0,
+                            data.coinmarketcal?.gaining_coins || 0,
+                            data.cryptocompare?.price_change_24h?.positive || 0
+                        ],
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Losing Coins',
+                        data: [
+                            data.livecoinwatch?.losing_coins || 0,
+                            data.coingecko?.price_change_24h?.negative || 0,
+                            data.coinmarketcal?.losing_coins || 0,
+                            data.cryptocompare?.price_change_24h?.negative || 0
+                        ],
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            };
+
+            try {
+                window.priceMovementComparisonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Coins'
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Price Movement Analysis by Platform'
+                            },
+                            legend: {
+                                position: 'top'
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating price movement comparison chart:', error);
+                window.priceMovementComparisonChart = null;
+            }
+        }
+
+        function updatePlatformPerformanceTable(data) {
+            const tbody = document.getElementById('platformPerformanceBody');
+            if (!tbody) return;
+
+            const now = new Date().toLocaleString();
+            
+            const platformData = [
+                {
+                    name: 'LiveCoinWatch',
+                    coins: data.livecoinwatch?.total_coins || 0,
+                    marketCap: data.livecoinwatch?.total_market_cap || 0,
+                    volume: data.livecoinwatch?.total_volume || 0,
+                    gaining: data.livecoinwatch?.gaining_coins || 0,
+                    losing: data.livecoinwatch?.losing_coins || 0
+                },
+                {
+                    name: 'CoinGecko',
+                    coins: data.coingecko?.total_coins || 0,
+                    marketCap: data.coingecko?.market_cap_stats?.total || 0,
+                    volume: data.coingecko?.volume_stats?.total || 0,
+                    gaining: data.coingecko?.price_change_24h?.positive || 0,
+                    losing: data.coingecko?.price_change_24h?.negative || 0
+                },
+                {
+                    name: 'CoinMarketCal',
+                    coins: data.coinmarketcal?.total_coins || 0,
+                    marketCap: data.coinmarketcal?.market_cap_stats?.total || 0,
+                    volume: data.coinmarketcal?.volume_stats?.total || 0,
+                    gaining: data.coinmarketcal?.gaining_coins || 0,
+                    losing: data.coinmarketcal?.losing_coins || 0
+                },
+                {
+                    name: 'CryptoCompare',
+                    coins: data.cryptocompare?.total_coins || 0,
+                    marketCap: data.cryptocompare?.market_cap_stats?.total || 0,
+                    volume: data.cryptocompare?.volume_stats?.total || 0,
+                    gaining: data.cryptocompare?.price_change_24h?.positive || 0,
+                    losing: data.cryptocompare?.price_change_24h?.negative || 0
+                }
+            ];
+
+            let html = '';
+            platformData.forEach(platform => {
+                html += `
+                    <tr>
+                        <td><strong>${platform.name}</strong></td>
+                        <td>${platform.coins.toLocaleString()}</td>
+                        <td>${formatCurrency(platform.marketCap)}</td>
+                        <td>${formatCurrency(platform.volume)}</td>
+                        <td class="text-success">+${platform.gaining.toLocaleString()}</td>
+                        <td class="text-danger">-${platform.losing.toLocaleString()}</td>
+                        <td>${now}</td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
         }
 
         function updatePlatformCards(data) {
@@ -3035,6 +3611,9 @@
 
             // Refresh comparison data button
             document.getElementById('refreshComparison').addEventListener('click', function() {
+                // Cleanup existing charts before loading new data
+                cleanupAllCharts();
+                
                 loadComparisonData();
                 // Also refresh individual blocks
                 loadCoinPaprikaData();
@@ -3137,6 +3716,23 @@
                     }
                     if (window.comparisonCharts.platform) {
                         window.comparisonCharts.platform.resize();
+                    }
+                    
+                    // Resize new platform comparison charts
+                    if (window.platformComparisonChart && typeof window.platformComparisonChart.resize === 'function') {
+                        window.platformComparisonChart.resize();
+                    }
+                    if (window.marketCapComparisonChart && typeof window.marketCapComparisonChart.resize === 'function') {
+                        window.marketCapComparisonChart.resize();
+                    }
+                    if (window.volumeComparisonChart && typeof window.volumeComparisonChart.resize === 'function') {
+                        window.volumeComparisonChart.resize();
+                    }
+                    if (window.coinCountComparisonChart && typeof window.coinCountComparisonChart.resize === 'function') {
+                        window.coinCountComparisonChart.resize();
+                    }
+                    if (window.priceMovementComparisonChart && typeof window.priceMovementComparisonChart.resize === 'function') {
+                        window.priceMovementComparisonChart.resize();
                     }
                 }, 250); // Debounce resize events
             });
@@ -3260,6 +3856,49 @@
             updatePlatformTranslations();
 
         });
+
+        // Function to cleanup all charts
+        function cleanupAllCharts() {
+            // Cleanup existing comparison charts
+            if (window.comparisonCharts.marketCap && typeof window.comparisonCharts.marketCap.destroy === 'function') {
+                window.comparisonCharts.marketCap.destroy();
+                window.comparisonCharts.marketCap = null;
+            }
+            if (window.comparisonCharts.priceTrends && typeof window.comparisonCharts.priceTrends.destroy === 'function') {
+                window.comparisonCharts.priceTrends.destroy();
+                window.comparisonCharts.priceTrends = null;
+            }
+            if (window.comparisonCharts.volume && typeof window.comparisonCharts.volume.destroy === 'function') {
+                window.comparisonCharts.volume.destroy();
+                window.comparisonCharts.volume = null;
+            }
+            if (window.comparisonCharts.platform && typeof window.comparisonCharts.platform.destroy === 'function') {
+                window.comparisonCharts.platform.destroy();
+                window.comparisonCharts.platform = null;
+            }
+
+            // Cleanup new platform comparison charts
+            if (window.platformComparisonChart && typeof window.platformComparisonChart.destroy === 'function') {
+                window.platformComparisonChart.destroy();
+                window.platformComparisonChart = null;
+            }
+            if (window.marketCapComparisonChart && typeof window.marketCapComparisonChart.destroy === 'function') {
+                window.marketCapComparisonChart.destroy();
+                window.marketCapComparisonChart = null;
+            }
+            if (window.volumeComparisonChart && typeof window.volumeComparisonChart.destroy === 'function') {
+                window.volumeComparisonChart.destroy();
+                window.volumeComparisonChart = null;
+            }
+            if (window.coinCountComparisonChart && typeof window.coinCountComparisonChart.destroy === 'function') {
+                window.coinCountComparisonChart.destroy();
+                window.coinCountComparisonChart = null;
+            }
+            if (window.priceMovementComparisonChart && typeof window.priceMovementComparisonChart.destroy === 'function') {
+                window.priceMovementComparisonChart.destroy();
+                window.priceMovementComparisonChart = null;
+            }
+        }
 
     </script>
 @endsection

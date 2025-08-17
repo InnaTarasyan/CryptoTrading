@@ -160,4 +160,17 @@ return [
     'cryptocompare' => 'CryptoCompare',
     'coinpaprika' => 'CoinPaprika',
     'cryptics_tech' => 'Cryptics.tech',
+
+    // New Platform Comparison Charts
+    'platform_data_comparison' => 'Alustatietojen vertailu',
+    'market_cap_comparison' => 'Markkina-arvon vertailu',
+    'volume_comparison' => 'Volyymin vertailu',
+    'coin_count_comparison' => 'Kolikkomäärän vertailu',
+    'price_movement_comparison' => 'Hintaliikkeen vertailu',
+    'platform_performance_summary' => 'Alustan suorituskyvyn yhteenveto',
+    'gaining_coins' => 'Nousevat kolikot',
+    'losing_coins' => 'Laskevat kolikot',
+    'name' => 'Nimi',
+    'symbol' => 'Symboli',
+    'platform' => 'Alusta',
 ]; 
