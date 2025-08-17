@@ -98,6 +98,93 @@
                 </div>
             </div>
 
+            {{-- Enhanced Loading Interface --}}
+            <div id="enhancedLoading" class="enhanced-loading" style="display:block;">
+                <div class="loading-container">
+                    <div class="loading-header">
+                        <div class="loading-spinner">
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-ring"></div>
+                        </div>
+                        <h2 class="loading-title">Loading CryptoTrading Data</h2>
+                        <p class="loading-subtitle">Fetching comprehensive market data from multiple sources...</p>
+                    </div>
+                    
+                    <div class="loading-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">Initializing...</div>
+                    </div>
+                    
+                    <div class="loading-sources">
+                        <div class="source-item" data-source="livecoinwatch">
+                            <div class="source-icon">📊</div>
+                            <div class="source-info">
+                                <span class="source-name">LiveCoinWatch</span>
+                                <span class="source-status" id="livecoinwatch-status">Waiting...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-item" data-source="coingecko">
+                            <div class="source-icon">🦎</div>
+                            <div class="source-info">
+                                <span class="source-name">CoinGecko</span>
+                                <span class="source-status" id="coingecko-status">Waiting...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-item" data-source="coinmarketcal">
+                            <div class="source-icon">📅</div>
+                            <div class="source-info">
+                                <span class="source-name">CoinMarketCal</span>
+                                <span class="source-status" id="coinmarketcal-status">Waiting...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-item" data-source="cryptocompare">
+                            <div class="source-icon">🔍</div>
+                            <div class="source-info">
+                                <span class="source-name">CryptoCompare</span>
+                                <span class="source-status" id="cryptocompare-status">Waiting...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-item" data-source="coinpaprika">
+                            <div class="source-icon">🌶️</div>
+                            <div class="source-info">
+                                <span class="source-name">CoinPaprika</span>
+                                <span class="source-status" id="coinpaprika-status">Waiting...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-item" data-source="cryptics">
+                            <div class="source-icon">🔮</div>
+                            <div class="source-info">
+                                <span class="source-name">Cryptics.tech</span>
+                                <span class="source-status" id="cryptics-status">Waiting...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="loading-tips">
+                        <div class="tip-item">
+                            <span class="tip-icon">💡</span>
+                            <span class="tip-text">Data is being fetched from multiple cryptocurrency platforms</span>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-icon">⚡</span>
+                            <span class="tip-text">This ensures you get the most comprehensive market overview</span>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-icon">🔄</span>
+                            <span class="tip-text">Data refreshes automatically every few minutes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- Charts Container --}}
             <div id="comparisonCharts" class="charts-container" style="display:none;">
 
@@ -2952,6 +3039,356 @@
             align-items: center;
         }
     }
+
+    /* ======================== ENHANCED LOADING INTERFACE ======================== */
+    
+    .enhanced-loading {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 2em;
+        padding: 3em 2em;
+        margin: 2em 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .loading-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .loading-header {
+        margin-bottom: 2em;
+    }
+
+    .loading-spinner {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5em;
+    }
+
+    .spinner-ring {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 4px solid transparent;
+        border-top: 4px solid rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: spin 1.5s linear infinite;
+    }
+
+    .spinner-ring:nth-child(2) {
+        width: 70%;
+        height: 70%;
+        top: 15%;
+        left: 15%;
+        border-top-color: rgba(255, 255, 255, 0.6);
+        animation-delay: 0.5s;
+    }
+
+    .spinner-ring:nth-child(3) {
+        width: 60%;
+        height: 60%;
+        top: 20%;
+        left: 20%;
+        border-top-color: rgba(255, 255, 255, 0.4);
+        animation-delay: 1s;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loading-title {
+        font-size: 2.5em;
+        font-weight: 800;
+        margin: 0 0 0.5em 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .loading-subtitle {
+        font-size: 1.2em;
+        margin: 0;
+        opacity: 0.9;
+        font-weight: 400;
+    }
+
+    .loading-progress {
+        margin: 2em 0;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 1em;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #ffd200, #43cea2);
+        width: 0%;
+        transition: width 0.3s ease;
+        border-radius: 4px;
+    }
+
+    .progress-text {
+        font-size: 1.1em;
+        font-weight: 600;
+        opacity: 0.9;
+    }
+
+    .loading-sources {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1em;
+        margin: 2em 0;
+    }
+
+    .source-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1em;
+        padding: 1.2em;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .source-item.loading {
+        background: rgba(255, 193, 7, 0.2);
+        border-color: rgba(255, 193, 7, 0.4);
+    }
+
+    .source-item.success {
+        background: rgba(40, 167, 69, 0.2);
+        border-color: rgba(40, 167, 69, 0.4);
+    }
+
+    .source-item.error {
+        background: rgba(220, 53, 69, 0.2);
+        border-color: rgba(220, 53, 69, 0.4);
+    }
+
+    .source-icon {
+        font-size: 2em;
+        flex-shrink: 0;
+    }
+
+    .source-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1;
+    }
+
+    .source-name {
+        font-weight: 700;
+        font-size: 1.1em;
+        margin-bottom: 0.3em;
+    }
+
+    .source-status {
+        font-size: 0.9em;
+        opacity: 0.8;
+        font-weight: 500;
+    }
+
+    .loading-tips {
+        margin-top: 2em;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1em;
+    }
+
+    .tip-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1em;
+        padding: 1em;
+        display: flex;
+        align-items: center;
+        gap: 0.8em;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .tip-icon {
+        font-size: 1.5em;
+        flex-shrink: 0;
+    }
+
+    .tip-text {
+        font-size: 0.95em;
+        opacity: 0.9;
+        text-align: left;
+    }
+
+    /* Mobile responsive styles for loading interface */
+    @media (max-width: 768px) {
+        .enhanced-loading {
+            padding: 2em 1em;
+            border-radius: 1.5em;
+            margin: 1.5em 0.5em;
+            width: calc(100% - 1em);
+            max-width: calc(100% - 1em);
+        }
+
+        .loading-title {
+            font-size: 2em;
+        }
+
+        .loading-subtitle {
+            font-size: 1.1em;
+        }
+
+        .loading-sources {
+            grid-template-columns: 1fr;
+            gap: 0.8em;
+        }
+
+        .source-item {
+            padding: 1em;
+        }
+
+        .loading-tips {
+            grid-template-columns: 1fr;
+            gap: 0.8em;
+        }
+
+        .tip-item {
+            padding: 0.8em;
+        }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .enhanced-loading {
+            padding: 1.5em 0.8em;
+            border-radius: 1.2em;
+            margin: 1.2em 0.3em;
+            width: calc(100% - 0.6em);
+            max-width: calc(100% - 0.6em);
+        }
+
+        .loading-title {
+            font-size: 1.8em;
+        }
+
+        .loading-subtitle {
+            font-size: 1em;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+        }
+
+        .source-item {
+            padding: 0.8em;
+        }
+
+        .source-icon {
+            font-size: 1.6em;
+        }
+
+        .source-name {
+            font-size: 1em;
+        }
+
+        .source-status {
+            font-size: 0.85em;
+        }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 360px) {
+        .enhanced-loading {
+            padding: 1.2em 0.6em;
+            border-radius: 1em;
+            margin: 1em 0.2em;
+            width: calc(100% - 0.4em);
+            max-width: calc(100% - 0.4em);
+        }
+
+        .loading-title {
+            font-size: 1.6em;
+        }
+
+        .loading-subtitle {
+            font-size: 0.95em;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+        }
+
+        .source-item {
+            padding: 0.7em;
+        }
+
+        .source-icon {
+            font-size: 1.4em;
+        }
+
+        .tip-item {
+            padding: 0.7em;
+        }
+
+        .tip-text {
+            font-size: 0.9em;
+        }
+    }
+
+    /* Very small devices */
+    @media (max-width: 320px) {
+        .enhanced-loading {
+            padding: 1em 0.5em;
+            border-radius: 0.8em;
+            margin: 0.8em 0.1em;
+            width: calc(100% - 0.2em);
+            max-width: calc(100% - 0.2em);
+        }
+
+        .loading-title {
+            font-size: 1.4em;
+        }
+
+        .loading-subtitle {
+            font-size: 0.9em;
+        }
+
+        .loading-spinner {
+            width: 45px;
+            height: 45px;
+        }
+
+        .source-item {
+            padding: 0.6em;
+        }
+
+        .source-icon {
+            font-size: 1.2em;
+        }
+
+        .tip-item {
+            padding: 0.6em;
+        }
+
+        .tip-text {
+            font-size: 0.85em;
+        }
+    }
 </style>
 
 {{-- ======================== Live Coin Watch Info Section ======================== --}}
@@ -3093,67 +3530,158 @@
         function loadComparisonData() {
             const loadingEl = document.getElementById('comparisonLoading');
             const chartsEl = document.getElementById('comparisonCharts');
+            const enhancedLoadingEl = document.getElementById('enhancedLoading');
 
-            if (!loadingEl || !chartsEl) {
+            if (!loadingEl || !chartsEl || !enhancedLoadingEl) {
                 console.error('Required DOM elements not found for comparison data loading');
                 return;
             }
 
-            loadingEl.style.display = 'block';
+            // Show enhanced loading interface
+            enhancedLoadingEl.style.display = 'block';
             chartsEl.style.display = 'none';
+            loadingEl.style.display = 'none';
 
+            // Initialize progress tracking
+            let totalSources = 6; // Total data sources
+            let completedSources = 0;
+            let progressPercentage = 0;
+
+            // Update progress function
+            function updateProgress(sourceName, status, isComplete = false) {
+                const statusElement = document.getElementById(`${sourceName}-status`);
+                const sourceItem = document.querySelector(`[data-source="${sourceName}"]`);
+                
+                if (statusElement) {
+                    statusElement.textContent = status;
+                }
+                
+                if (sourceItem) {
+                    sourceItem.className = `source-item ${status.toLowerCase()}`;
+                }
+                
+                if (isComplete) {
+                    completedSources++;
+                    progressPercentage = Math.round((completedSources / totalSources) * 100);
+                    
+                    const progressFill = document.getElementById('progressFill');
+                    const progressText = document.getElementById('progressText');
+                    
+                    if (progressFill) {
+                        progressFill.style.width = `${progressPercentage}%`;
+                    }
+                    
+                    if (progressText) {
+                        progressText.textContent = `${completedSources} of ${totalSources} sources loaded`;
+                    }
+                }
+            }
+
+            // Start loading sequence
+            updateProgress('livecoinwatch', 'Loading...', false);
+            updateProgress('coingecko', 'Loading...', false);
+            updateProgress('coinmarketcal', 'Loading...', false);
+            updateProgress('cryptocompare', 'Loading...', false);
+            updateProgress('coinpaprika', 'Loading...', false);
+            updateProgress('cryptics', 'Loading...', false);
+
+            // Load main comparison data
             fetch('/livecoinwatch/compare')
                 .then(response => response.json())
-        .then(data => {
-                if (data.success) {
-                renderComparisonData(data.data);
-                loadingEl.style.display = 'none';
-                chartsEl.style.display = 'block';
-            } else {
-                console.error('Error loading comparison data:', data.message);
-                loadingEl.style.display = 'none';
-            }
-        })
-        .catch(error => {
-                console.error('Error fetching comparison data:', error);
-            loadingEl.style.display = 'none';
-        });
+                .then(data => {
+                    if (data.success) {
+                        updateProgress('livecoinwatch', 'Loaded', true);
+                        updateProgress('coingecko', 'Loaded', true);
+                        updateProgress('coinmarketcal', 'Loaded', true);
+                        updateProgress('cryptocompare', 'Loaded', true);
+                        
+                        // Render the main comparison data
+                        renderComparisonData(data.data);
+                        
+                        // Load additional data sources
+                        loadCoinPaprikaData();
+                        loadCrypticsData();
+                        
+                        // Hide loading and show charts after a short delay
+                        setTimeout(() => {
+                            enhancedLoadingEl.style.display = 'none';
+                            chartsEl.style.display = 'block';
+                        }, 1000);
+                    } else {
+                        console.error('Error loading comparison data:', data.message);
+                        updateProgress('livecoinwatch', 'Error', true);
+                        updateProgress('coingecko', 'Error', true);
+                        updateProgress('coinmarketcal', 'Error', true);
+                        updateProgress('cryptocompare', 'Error', true);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching comparison data:', error);
+                    updateProgress('livecoinwatch', 'Error', true);
+                    updateProgress('coingecko', 'Error', true);
+                    updateProgress('coinmarketcal', 'Error', true);
+                    updateProgress('cryptocompare', 'Error', true);
+                });
         }
 
         // Load CoinPaprika data via AJAX
         function loadCoinPaprikaData() {
+            updateSourceStatus('coinpaprika', 'Loading...', 'loading');
+            
             fetch('/api/coinpaprika-data')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         updateCoinPaprikaBlock(data.data);
+                        updateSourceStatus('coinpaprika', 'Loaded', 'success');
                     } else {
                         console.error('Error loading CoinPaprika data:', data.message);
                         updateCoinPaprikaBlock({ error: true });
+                        updateSourceStatus('coinpaprika', 'Error', 'error');
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching CoinPaprika data:', error);
                     updateCoinPaprikaBlock({ error: true });
+                    updateSourceStatus('coinpaprika', 'Error', 'error');
                 });
         }
 
         // Load Cryptics data via AJAX
         function loadCrypticsData() {
+            updateSourceStatus('cryptics', 'Loading...', 'loading');
+            
             fetch('/api/cryptics-data')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         updateCrypticsBlock(data.data);
+                        updateSourceStatus('cryptics', 'Loaded', 'success');
                     } else {
                         console.error('Error loading Cryptics data:', data.message);
                         updateCrypticsBlock({ error: true });
+                        updateSourceStatus('cryptics', 'Error', 'error');
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching Cryptics data:', error);
                     updateCrypticsBlock({ error: true });
+                    updateSourceStatus('cryptics', 'Error', 'error');
                 });
+        }
+
+        // Helper function to update source status
+        function updateSourceStatus(sourceName, status, className) {
+            const statusElement = document.getElementById(`${sourceName}-status`);
+            const sourceItem = document.querySelector(`[data-source="${sourceName}"]`);
+            
+            if (statusElement) {
+                statusElement.textContent = status;
+            }
+            
+            if (sourceItem) {
+                sourceItem.className = `source-item ${className}`;
+            }
         }
 
         // Update CoinPaprika block with data
@@ -4236,8 +4764,29 @@
 
             // Refresh comparison data button
             document.getElementById('refreshComparison').addEventListener('click', function() {
+                // Show enhanced loading interface
+                const enhancedLoadingEl = document.getElementById('enhancedLoading');
+                const chartsEl = document.getElementById('comparisonCharts');
+                
+                if (enhancedLoadingEl && chartsEl) {
+                    enhancedLoadingEl.style.display = 'block';
+                    chartsEl.style.display = 'none';
+                }
+                
                 // Cleanup existing charts before loading new data
                 cleanupAllCharts();
+                
+                // Reset progress
+                const progressFill = document.getElementById('progressFill');
+                const progressText = document.getElementById('progressText');
+                if (progressFill) progressFill.style.width = '0%';
+                if (progressText) progressText.textContent = 'Initializing...';
+                
+                // Reset all source statuses
+                const sources = ['livecoinwatch', 'coingecko', 'coinmarketcal', 'cryptocompare', 'coinpaprika', 'cryptics'];
+                sources.forEach(source => {
+                    updateSourceStatus(source, 'Waiting...', '');
+                });
                 
                 loadComparisonData();
                 // Also refresh individual blocks
