@@ -1268,7 +1268,7 @@
             "></div>
 
             <div class=" mt-5" style="
-                padding: 2.5em 2em;
+
                 position: relative;
                 z-index: 2;
             ">
