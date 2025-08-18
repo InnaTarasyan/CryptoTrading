@@ -103,16 +103,6 @@ class CoinMarketCalTable {
             '-webkit-user-select': 'none'
         });
 
-        // Optimize scroll performance on mobile
-        $('.table-responsive').on('scroll', function() {
-            if (this.scrollTimeout) {
-                clearTimeout(this.scrollTimeout);
-            }
-            this.scrollTimeout = setTimeout(function() {
-                // Handle scroll if needed
-            }, 16); // ~60fps
-        });
-
         // Add touch-friendly interactions
         $(this.tableSelector + ' tbody tr').css({
             'cursor': 'pointer',
@@ -147,16 +137,6 @@ class CoinMarketCalTable {
                 setTimeout(() => {
                     $(this).removeClass('mobile-touch-active');
                 }, 150);
-            });
-
-            // Prevent zoom on double tap
-            $(this.tableSelector + ' tbody tr').on('touchend', function(e) {
-                e.preventDefault();
-                var touch = e.originalEvent.changedTouches[0];
-                var element = document.elementFromPoint(touch.clientX, touch.clientY);
-                if (element) {
-                    element.click();
-                }
             });
         }
     }
@@ -207,7 +187,7 @@ class CoinMarketCalTable {
         const customSearch = `
             <div class="search-wrapper">
                 <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="#f7971e" stroke-width="2"/><line x1="16.018" y1="16.4853" x2="21" y2="21.4673" stroke="#f7971e" stroke-width="2" stroke-linecap="round"/></svg>
-                <input type="search" class="form-control" placeholder="Search coins..." aria-controls="coinmarketcal" style="padding-left:44px;" />
+                <input type="search" class="form-control" placeholder="Search coins..." aria-controls="coinmarketcal" style="padding-left:50px;" />
                 <button id="clear-search" class="ml-2" type="button">Clear</button>
             </div>
         `;
@@ -239,6 +219,26 @@ class CoinMarketCalTable {
             
             // Prevent zoom on iOS
             searchBox.css('font-size', '16px');
+            
+            // Ensure proper mobile styling
+            $('.search-wrapper').css({
+                'width': '100%',
+                'max-width': '100%'
+            });
+            
+            $('.search-wrapper input').css({
+                'width': '100%',
+                'max-width': '100%',
+                'font-size': '16px',
+                'padding': '12px 16px 12px 50px'
+            });
+            
+            $('.search-wrapper button').css({
+                'width': '100%',
+                'max-width': '100%',
+                'font-size': '16px',
+                'padding': '12px 16px'
+            });
         }
     }
 

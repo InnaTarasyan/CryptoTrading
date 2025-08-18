@@ -12,6 +12,11 @@
     <!-- Custom CoinMarketCal CSS -->
     <link href="{{ url('css/coinmarketcal.css') }}" rel="stylesheet">
     <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+        }
+
         /* --- Navigation Explanation Styles --- */
         .navigation-explanation {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -95,8 +100,8 @@
             gap: 0.5rem;
             padding: 0.5rem 0.75rem;
             background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
             border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 8px;
             transition: all 0.2s ease;
         }
 
@@ -136,7 +141,7 @@
             font-weight: 500;
         }
 
-        /* Dark mode support for navigation explanation */
+        /* Dark mode support */
         body.dark-mode .navigation-explanation {
             background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
             border-color: #4b5563;
@@ -175,6 +180,39 @@
 
         body.dark-mode .tip-text {
             color: #fef3c7;
+        }
+
+        /* Theme Toggle Button Styles - Moved outside portlet */
+        .theme-toggle-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+            padding: 0 0.5rem;
+        }
+
+        #theme-toggle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        #theme-toggle:active {
+            transform: translateY(0);
         }
 
         /* Mobile-First Responsive Design */
@@ -235,6 +273,22 @@
                 font-size: 0.75rem;
             }
 
+            /* Mobile-optimized theme toggle */
+            .theme-toggle-container {
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+
+            #theme-toggle {
+                width: 100%;
+                max-width: 300px;
+                padding: 12px 16px;
+                font-size: 16px;
+                border-radius: 12px;
+                justify-content: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+
             /* Mobile-optimized portlet */
             .m-portlet {
                 margin: 0.5rem;
@@ -243,7 +297,7 @@
 
             .m-portlet__head {
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 1rem;
                 padding: 1rem;
                 text-align: center;
             }
@@ -300,37 +354,35 @@
             .dataTables_wrapper .dataTables_filter {
                 text-align: center;
                 margin-bottom: 10px;
-            }
-
-            .search-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: center;
                 width: 100%;
             }
 
-            .search-wrapper input {
+            /* Mobile-optimized DataTables search - NO ICON */
+            .dataTables_filter {
+                position: relative;
+                margin-bottom: 1rem;
+            }
+
+            .dataTables_filter input[type="search"] {
                 width: 100%;
-                max-width: 300px;
-                font-size: 16px; /* Prevent zoom on iOS */
-                padding: 8px 12px 8px 44px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
+                padding: 12px 16px;
+                border: 2px solid #ddd;
+                border-radius: 12px;
+                font-size: 16px;
                 background: #fff;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                box-sizing: border-box;
+                text-align: center;
             }
 
-            .search-wrapper button {
-                width: 100%;
-                max-width: 100px;
-                padding: 8px 12px;
-                font-size: 14px;
-                background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
-                color: #333;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: all 0.2s ease;
+            .dataTables_filter input[type="search"]::placeholder {
+                color: #999;
+                font-style: italic;
+            }
+
+            /* Hide search icon on mobile */
+            .dataTables_filter::before {
+                display: none !important;
             }
 
             .dataTables_info {
@@ -433,6 +485,28 @@
             .datatable-info-text strong {
                 color: #1e293b;
             }
+
+            /* Force mobile layout for controls */
+            .m-portlet__head {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+
+            .m-portlet__head-title {
+                order: 1;
+                margin-bottom: 0.5rem;
+            }
+
+            .dataTables_filter {
+                order: 2;
+                margin-bottom: 1rem !important;
+            }
+
+            .dataTables_length {
+                order: 3;
+                margin-bottom: 1rem !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -509,15 +583,14 @@
                 padding: 3px 6px;
             }
 
-            .search-wrapper input {
-                font-size: 14px;
-                padding: 6px 10px 6px 36px;
+            .dataTables_filter input[type="search"] {
+                font-size: 16px;
+                padding: 10px 14px;
             }
 
-            .search-wrapper button {
-                font-size: 13px;
-                padding: 6px 10px;
-                max-width: 80px;
+            #theme-toggle {
+                font-size: 16px;
+                padding: 10px 14px;
             }
 
             .dataTables_info {
@@ -606,6 +679,7 @@
 
             .dtr-modal th {
                 background: #f8fafc !important;
+                border-bottom: 1px solid #e2e8f0 !important;
                 font-weight: 600 !important;
                 color: #1e293b !important;
             }
@@ -632,7 +706,7 @@
                     </p>
                     <div class="explanation-features">
                         <div class="feature-item">
-                            <span class="feature-icon">📊</span>
+                            <span class="feature-icon">🔍</span>
                             <span class="feature-text">TradingView Charts</span>
                         </div>
                         <div class="feature-item">
@@ -664,6 +738,14 @@
             </div>
         </div>
 
+        <!-- Theme Toggle Button - Moved outside portlet, above it -->
+        <div class="theme-toggle-container">
+            <button id="theme-toggle" class="modern-update-btn">
+                <span id="theme-toggle-icon">🌙</span>
+                <span id="theme-toggle-text">Dark Mode</span>
+            </button>
+        </div>
+
         <!-- Begin::Section -->
         <div class="m-portlet custom-modern">
             <div class="m-portlet__head custom-modern">
@@ -674,10 +756,6 @@
                 <div class="m-portlet__head-desc custom-modern">
                     <!-- Optional description -->
                 </div>
-                <button id="theme-toggle" class="modern-update-btn" style="margin-left:auto;">
-                    <span id="theme-toggle-icon">🌙</span>
-                    <span id="theme-toggle-text">Dark Mode</span>
-                </button>
             </div>
 
             <div class="m-portlet__body">
@@ -701,7 +779,7 @@
                                 </th>
                                 <th>
                                     <span style="font-weight:900; font-size:20px;">&#128196;</span>
-                                    <span style="font-weight:900;">Fullname</span>
+                                    <span class="font-weight:900;">Fullname</span>
                                 </th>
                             </tr>
                         </thead>
