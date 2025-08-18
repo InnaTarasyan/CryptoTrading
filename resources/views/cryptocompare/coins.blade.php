@@ -56,44 +56,47 @@
                 justify-content: center;
             }
             
-            /* Mobile-specific table styles */
+            /* Mobile-specific table styles - optimized for performance */
             .coins-table-responsive {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
                 touch-action: pan-x;
                 position: relative;
+                will-change: auto; /* Prevent performance issues */
             }
             
             .coins-table {
-                min-width: 800px; /* Ensure table doesn't get too narrow on mobile */
+                min-width: 600px; /* Reduced from 800px to prevent freezing */
                 table-layout: fixed; /* Better column control */
+                transform: translateZ(0); /* Hardware acceleration */
             }
             
-            /* Mobile-friendly column widths */
+            /* Mobile-friendly column widths - simplified */
             .coins-table th,
             .coins-table td {
-                padding: 8px 4px;
-                font-size: 14px;
+                padding: 6px 3px;
+                font-size: 13px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                border: none; /* Remove borders for performance */
             }
             
-            /* Fixed column widths for mobile */
+            /* Fixed column widths for mobile - optimized */
             .coins-table th:nth-child(1),
-            .coins-table td:nth-child(1) { width: 80px; }
+            .coins-table td:nth-child(1) { width: 70px; }
             .coins-table th:nth-child(2),
-            .coins-table td:nth-child(2) { width: 120px; }
+            .coins-table td:nth-child(2) { width: 100px; }
             .coins-table th:nth-child(3),
-            .coins-table td:nth-child(3) { width: 150px; }
+            .coins-table td:nth-child(3) { width: 120px; }
             .coins-table th:nth-child(4),
-            .coins-table td:nth-child(4) { width: 60px; }
+            .coins-table td:nth-child(4) { width: 50px; }
             .coins-table th:nth-child(7),
-            .coins-table td:nth-child(7) { width: 80px; }
+            .coins-table td:nth-child(7) { width: 70px; }
             .coins-table th:nth-child(8),
-            .coins-table td:nth-child(8) { width: 80px; }
+            .coins-table td:nth-child(8) { width: 70px; }
             .coins-table th:nth-child(9),
-            .coins-table td:nth-child(9) { width: 80px; }
+            .coins-table td:nth-child(9) { width: 70px; }
             
             /* Hide less important columns on mobile */
             .coins-table th:nth-child(5),
@@ -111,7 +114,7 @@
                 display: none;
             }
             
-            /* Mobile search and pagination */
+            /* Mobile search and pagination - simplified */
             .dataTables_filter input {
                 width: 100%;
                 margin-left: 0 !important;
@@ -148,48 +151,61 @@
                 justify-content: center;
             }
             
-            /* Mobile-friendly table wrapper */
+            /* Mobile-friendly table wrapper - simplified */
             .table-wrapper {
                 margin: 0 -15px;
                 padding: 0 15px;
             }
             
-            /* Ensure proper touch scrolling */
+            /* Simplified scrollbar for performance */
             .coins-table-responsive::-webkit-scrollbar {
-                height: 8px;
+                height: 6px;
             }
             
             .coins-table-responsive::-webkit-scrollbar-track {
                 background: #f1f1f1;
-                border-radius: 4px;
+                border-radius: 3px;
             }
             
             .coins-table-responsive::-webkit-scrollbar-thumb {
                 background: #667eea;
-                border-radius: 4px;
+                border-radius: 3px;
             }
             
-            .coins-table-responsive::-webkit-scrollbar-thumb:hover {
-                background: #5a6fd8;
-            }
-            
-            /* Mobile-specific DataTables wrapper styles */
+            /* Mobile-specific DataTables wrapper styles - optimized */
             .dataTables_wrapper {
                 overflow: hidden;
+                transform: translateZ(0); /* Hardware acceleration */
             }
             
-            .dataTables_scroll {
-                overflow-x: auto;
-                overflow-y: hidden;
-            }
-            
-            /* Ensure proper mobile layout */
+            /* Ensure proper mobile layout - simplified */
             .dataTables_processing {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 z-index: 1001;
+            }
+            
+            /* Disable hover effects on mobile for performance */
+            .coins-table tr:hover td {
+                background: #fff !important;
+            }
+            
+            /* Simplify table styling for mobile */
+            .coins-table th {
+                background: #667eea;
+                color: #fff;
+                font-weight: 600;
+                padding: 8px 4px;
+                text-align: left;
+                border: none;
+            }
+            
+            .coins-table td {
+                padding: 6px 3px;
+                border: none;
+                background: #fff;
             }
         }
         
@@ -238,365 +254,124 @@
                 padding: 6px 3px;
                 font-size: 13px;
             }
+            
+            /* Disable complex animations on mobile for performance */
+            .coins-table-responsive {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            .coins-table {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            /* Simplify mobile table appearance */
+            .coins-table th {
+                background: #667eea !important;
+                color: #fff !important;
+                font-weight: 600;
+                padding: 6px 3px;
+                text-align: left;
+                border: none;
+                box-shadow: none;
+            }
+            
+            .coins-table td {
+                padding: 6px 3px;
+                border: none;
+                background: #fff !important;
+                box-shadow: none;
+            }
+            
+            /* Remove complex gradients on mobile */
+            .coins-table th {
+                background: #667eea !important;
+            }
+            
+            /* Disable hover effects completely on mobile */
+            .coins-table tr:hover td {
+                background: #fff !important;
+                transform: none !important;
+            }
+            
+            /* Optimize mobile scrolling */
+            .coins-table-responsive {
+                -webkit-overflow-scrolling: touch;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-behavior: auto; /* Disable smooth scrolling for performance */
+            }
         }
         
-        body.coins-dark-mode, .coins-dark-mode .m-content {
-            background: #181a1b !important;
-            color: #f3f3f3 !important;
-        }
-        .coins-dark-mode .coins-table, .coins-dark-mode .dataTables_wrapper {
-            background: #23272b !important;
-            color: #f3f3f3 !important;
-        }
-        .coins-dark-mode .coins-table th, .coins-dark-mode .coins-table td {
-            background: #23272b !important;
-            color: #f3f3f3 !important;
-        }
-        .coins-dark-mode .coins-toolbar-btn {
-            background: linear-gradient(90deg, #23272b 0%, #181a1b 100%);
-            color: #667eea;
-        }
-        .coins-dark-mode .coins-toolbar-btn:hover, .coins-dark-mode .coins-toolbar-btn:focus {
-            background: linear-gradient(90deg, #181a1b 0%, #23272b 100%);
-            color: #764ba2;
-        }
-        .beautiful-modern-title-bar {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border-radius: 1.5em;
-            box-shadow: 0 4px 32px rgba(102,126,234,0.10), 0 1.5px 6px rgba(118,75,162,0.08);
-            padding: 1.5em 2em 1.2em 2em;
-            margin-bottom: 1.2em;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 70px;
-            position: relative;
-            z-index: 1;
-        }
-        .beautiful-modern-title-bar .modern-title-main {
-            display: flex;
-            align-items: center;
-            gap: 1.2em;
-        }
-        .beautiful-modern-title-bar .modern-title-icon {
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
-            padding: 0.4em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .beautiful-modern-title-bar .modern-title-text {
-            font-size: 2.1rem;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: 0.02em;
-            text-shadow: 0 2px 8px rgba(102,126,234,0.10);
-        }
-        @media (max-width: 900px) {
-            .beautiful-modern-title-bar {
-                padding: 1.2em 1em 1em 1em;
-            }
-            .beautiful-modern-title-bar .modern-title-text {
-                font-size: 1.5rem;
-            }
-        }
-        @media (max-width: 600px) {
-            .beautiful-modern-title-bar {
-                padding: 1em 0.5em 0.8em 0.5em;
-                min-height: 50px;
-            }
-            .beautiful-modern-title-bar .modern-title-main {
-                gap: 0.7em;
-            }
-            .beautiful-modern-title-bar .modern-title-text {
-                font-size: 1.1rem;
-            }
-        }
-        .modern-title-bar-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1.2em;
-        }
-        @media (max-width: 700px) {
-            .modern-title-bar-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.7em;
-            }
-            .coins-toolbar {
-                width: 100%;
-                justify-content: flex-start;
-            }
-        }
-        .modern-title-bar.beautiful-modern-title-bar {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border-radius: 1.5em;
-            box-shadow: 0 4px 32px rgba(102,126,234,0.10), 0 1.5px 6px rgba(118,75,162,0.08);
-            padding: 1.5em 2em 1.2em 2em;
-            margin-bottom: 1.2em;
-            display: flex;
-            align-items: center;
-            min-height: 70px;
-            position: relative;
-            z-index: 1;
-            transition: background 0.3s;
-        }
-        .modern-title-bar-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1.2em;
-            width: 100%;
-        }
-        .modern-title-main {
-            display: flex;
-            align-items: center;
-            gap: 1em;
-            min-width: 0;
-        }
-        .modern-title-icon {
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
-            padding: 0.4em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 40px;
-            min-height: 40px;
-        }
-        .modern-title-text {
-            font-size: 2.1rem;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: 0.02em;
-            text-shadow: 0 2px 8px rgba(102,126,234,0.10);
-        }
-        .modern-title-actions {
-            display: flex;
-            align-items: center;
-            gap: 1em;
-        }
-        .modern-title-actions-group {
-            display: flex;
-            align-items: center;
-            gap: 0.8em;
-        }
-        .modern-tab {
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            border: none;
-            border-radius: 0.7em;
-            padding: 0.55em 1.2em;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
-        .modern-tab:hover, .modern-tab:focus {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-1px);
-            outline: none;
-        }
-        .modern-tab:active {
-            transform: translateY(0);
-        }
-        .coins-table-responsive {
-            background: #fff;
-            border-radius: 1.5em;
-            box-shadow: 0 4px 24px rgba(102,126,234,0.08), 0 1.5px 6px rgba(118,75,162,0.06);
-            padding: 2em;
-            margin-top: 1.5em;
-        }
-        .coins-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: 1em;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(102,126,234,0.06);
-            background: #fff;
-        }
-        .coins-table th {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            font-weight: 700;
-            padding: 1.2em 1em;
-            text-align: left;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-            position: relative;
-        }
-        .coins-table th:first-child {
-            border-top-left-radius: 1em;
-        }
-        .coins-table th:last-child {
-            border-top-right-radius: 1em;
-        }
-        .coins-table td {
-            padding: 1em;
-            border-bottom: 1px solid #f3f3f3;
-            background: #fff;
-            transition: background 0.2s;
-        }
-        .coins-table tr:hover td {
-            background: #f8f9ff;
-        }
-        .coins-table tr:last-child td:first-child {
-            border-bottom-left-radius: 1em;
-        }
-        .coins-table tr:last-child td:last-child {
-            border-bottom-right-radius: 1em;
-        }
-        .success {
-            color: #28a745;
-            font-weight: 600;
-        }
-        .warning {
-            color: #ffc107;
-            font-weight: 600;
-        }
-        .danger {
-            color: #dc3545;
-            font-weight: 600;
-        }
-        .info {
-            color: #17a2b8;
-            font-weight: 600;
-        }
-        .text-muted {
-            color: #6c757d;
-        }
-        .badge {
-            display: inline-block;
-            padding: 0.25em 0.6em;
-            font-size: 0.75em;
-            font-weight: 700;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: 0.375rem;
-        }
-        .badge-success {
-            color: #fff;
-            background-color: #28a745;
-        }
-        .badge-danger {
-            color: #fff;
-            background-color: #dc3545;
-        }
-        .badge-warning {
-            color: #212529;
-            background-color: #ffc107;
-        }
-        .badge-info {
-            color: #fff;
-            background-color: #17a2b8;
-        }
-        .badge-secondary {
-            color: #fff;
-            background-color: #6c757d;
-        }
-        .previewable-img {
-            border-radius: 0.5em;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .previewable-img:hover {
-            transform: scale(1.1);
-        }
+        /* Global mobile performance optimizations */
         @media (max-width: 768px) {
+            /* Disable complex CSS effects on mobile */
+            * {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+            
+            /* Simplify table styling for mobile */
             .coins-table-responsive {
+                background: #fff;
+                border-radius: 0.5em;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 padding: 1em;
+                margin-top: 1em;
             }
-            .coins-table th, .coins-table td {
-                padding: 0.8em 0.5em;
+            
+            /* Remove complex shadows on mobile */
+            .coins-table {
+                box-shadow: none;
+                border-radius: 0.3em;
             }
-            #cryptocompare_coins td[data-label] {
-                display: block;
-                width: 100%;
-                box-sizing: border-box;
-                padding-left: 0.5em;
-                padding-right: 0.5em;
-                border-bottom: 1px solid #f3f3f3;
-                background: #f8f9ff;
-                position: relative;
+            
+            /* Simplify mobile table headers */
+            .coins-table th {
+                background: #667eea !important;
+                color: #fff !important;
+                font-weight: 600;
+                padding: 8px 4px;
+                text-align: left;
+                border: none;
+                border-radius: 0;
             }
-            #cryptocompare_coins td[data-label]:before {
-                content: attr(data-label) ": ";
-                font-weight: 700;
-                color: #667eea;
-                display: block;
-                margin-bottom: 0.2em;
+            
+            /* Simplify mobile table cells */
+            .coins-table td {
+                padding: 6px 3px;
+                border: none;
+                background: #fff !important;
+                border-radius: 0;
             }
-        }
-        /* Navigation Tabs Styles */
-        .modern-tabs-container {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border-radius: 1.5em;
-            box-shadow: 0 4px 24px rgba(102,126,234,0.08), 0 1.5px 6px rgba(118,75,162,0.06);
-            padding: 1.5em;
-            margin-bottom: 1.5em;
-        }
-        .modern-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8em;
-            justify-content: center;
-        }
-        .beautiful-tab {
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            border: none;
-            border-radius: 0.7em;
-            padding: 0.8em 1.2em;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-        }
-        .beautiful-tab:hover, .beautiful-tab:focus {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-2px);
-            outline: none;
-            box-shadow: 0 4px 16px rgba(255,255,255,0.2);
-        }
-        .beautiful-tab.active {
-            background: rgba(255,255,255,0.3);
-            box-shadow: 0 4px 16px rgba(255,255,255,0.3);
-        }
-        .beautiful-tab:active {
-            transform: translateY(0);
-        }
-        .tab-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tab-label {
-            font-weight: 600;
-        }
-        @media (max-width: 768px) {
-            .modern-tabs {
-                flex-direction: column;
-                align-items: stretch;
+            
+            /* Disable complex hover effects on mobile */
+            .coins-table tr:hover td {
+                background: #fff !important;
             }
-            .beautiful-tab {
-                justify-content: center;
+            
+            /* Optimize mobile pagination */
+            .dataTables_paginate .paginate_button {
+                margin: 0 1px;
+                padding: 6px 10px;
+                border: 1px solid #ddd;
+                background: #fff;
+                color: #333;
+                border-radius: 3px;
+            }
+            
+            .dataTables_paginate .paginate_button:hover {
+                background: #f8f9fa;
+                color: #333;
+            }
+            
+            .dataTables_paginate .paginate_button.current {
+                background: #667eea;
+                color: #fff;
+                border-color: #667eea;
             }
         }
         
@@ -691,6 +466,272 @@
             -moz-user-select: text;
             -ms-user-select: text;
             user-select: text;
+        }
+        
+        /* Essential styles for the page */
+        body.coins-dark-mode, .coins-dark-mode .m-content {
+            background: #181a1b !important;
+            color: #f3f3f3 !important;
+        }
+        .coins-dark-mode .coins-table, .coins-dark-mode .dataTables_wrapper {
+            background: #23272b !important;
+            color: #f3f3f3 !important;
+        }
+        .coins-dark-mode .coins-table th, .coins-dark-mode .coins-table td {
+            background: #23272b !important;
+            color: #f3f3f3 !important;
+        }
+        .coins-dark-mode .coins-toolbar-btn {
+            background: linear-gradient(90deg, #23272b 0%, #181a1b 100%);
+            color: #667eea;
+        }
+        .coins-dark-mode .coins-toolbar-btn:hover, .coins-dark-mode .coins-toolbar-btn:focus {
+            background: linear-gradient(90deg, #181a1b 0%, #23272b 100%);
+            color: #764ba2;
+        }
+        
+        .beautiful-modern-title-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 1.5em;
+            box-shadow: 0 4px 32px rgba(102,126,234,0.10), 0 1.5px 6px rgba(118,75,162,0.08);
+            padding: 1.5em 2em 1.2em 2em;
+            margin-bottom: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 70px;
+            position: relative;
+            z-index: 1;
+        }
+        .beautiful-modern-title-bar .modern-title-main {
+            display: flex;
+            align-items: center;
+            gap: 1.2em;
+        }
+        .beautiful-modern-title-bar .modern-title-icon {
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+            padding: 0.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .beautiful-modern-title-bar .modern-title-text {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 8px rgba(102,126,234,0.10);
+        }
+        
+        @media (max-width: 900px) {
+            .beautiful-modern-title-bar {
+                padding: 1.2em 1em 1em 1em;
+            }
+            .beautiful-modern-title-bar .modern-title-text {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .beautiful-modern-title-bar {
+                padding: 1em 0.5em 0.8em 0.5em;
+                min-height: 50px;
+            }
+            .beautiful-modern-title-bar .modern-title-main {
+                gap: 0.7em;
+            }
+            .beautiful-modern-title-bar .modern-title-text {
+                font-size: 1.1rem;
+            }
+        }
+        
+        .modern-title-bar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.2em;
+        }
+        @media (max-width: 700px) {
+            .modern-title-bar-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.7em;
+            }
+            .coins-toolbar {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+        
+        /* Navigation Tabs Styles */
+        .modern-tabs-container {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 1.5em;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.08), 0 1.5px 6px rgba(118,75,162,0.06);
+            padding: 1.5em;
+            margin-bottom: 1.5em;
+        }
+        .modern-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8em;
+            justify-content: center;
+        }
+        .beautiful-tab {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: none;
+            border-radius: 0.7em;
+            padding: 0.8em 1.2em;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+        }
+        .beautiful-tab:hover, .beautiful-tab:focus {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            outline: none;
+            box-shadow: 0 4px 16px rgba(255,255,255,0.2);
+        }
+        .beautiful-tab.active {
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 4px 16px rgba(255,255,255,0.3);
+        }
+        .beautiful-tab:active {
+            transform: translateY(0);
+        }
+        .tab-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tab-label {
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .modern-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .beautiful-tab {
+                justify-content: center;
+            }
+        }
+        
+        /* Essential table styles */
+        .coins-table-responsive {
+            background: #fff;
+            border-radius: 1.5em;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.08), 0 1.5px 6px rgba(118,75,162,0.06);
+            padding: 2em;
+            margin-top: 1.5em;
+        }
+        .coins-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 1em;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.06);
+            background: #fff;
+        }
+        .coins-table th {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            font-weight: 700;
+            padding: 1.2em 1em;
+            text-align: left;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .coins-table th:first-child {
+            border-top-left-radius: 1em;
+        }
+        .coins-table th:last-child {
+            border-top-right-radius: 1em;
+        }
+        .coins-table td {
+            padding: 1em;
+            border-bottom: 1px solid #f3f3f3;
+            background: #fff;
+            transition: background 0.2s;
+        }
+        .coins-table tr:hover td {
+            background: #f8f9ff;
+        }
+        .coins-table tr:last-child td:first-child {
+            border-bottom-left-radius: 1em;
+        }
+        .coins-table tr:last-child td:last-child {
+            border-bottom-right-radius: 1em;
+        }
+        
+        /* Essential utility classes */
+        .success {
+            color: #28a745;
+            font-weight: 600;
+        }
+        .warning {
+            color: #ffc107;
+            font-weight: 600;
+        }
+        .danger {
+            color: #dc3545;
+            font-weight: 600;
+        }
+        .info {
+            color: #17a2b8;
+            font-weight: 600;
+        }
+        .text-muted {
+            color: #6c757d;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.6em;
+            font-size: 0.75em;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.375rem;
+        }
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+        .badge-secondary {
+            color: #fff;
+            background-color: #6c757d;
+        }
+        .previewable-img {
+            border-radius: 0.5em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .previewable-img:hover {
+            transform: scale(1.1);
         }
     </style>
 @endsection
@@ -926,18 +967,26 @@
                 serverSide: false,
                 deferRender: true, // Better performance on mobile
                 autoWidth: false, // Better mobile layout
-                scrollX: true, // Enable horizontal scrolling on mobile
-                scrollCollapse: true,
+                scrollX: false, // Disable horizontal scrolling to prevent freezing
+                scrollCollapse: false, // Disable to prevent performance issues
                 ajax: {
                     url: '/getcryptocomparecoinsdata',
                     type: 'GET',
                     timeout: 30000, // 30 second timeout
                     dataSrc: function(json) {
                         console.log('Data received:', json);
+                        
+                        // Limit data for mobile to prevent freezing
+                        var data = json.data || [];
+                        if (isMobile && data.length > 100) {
+                            console.log('Limiting data for mobile performance');
+                            data = data.slice(0, 100);
+                        }
+                        
                         // Hide loading indicator
                         $('#coinsLoading').hide();
                         $('#coinsTableContainer').show();
-                        return json.data || [];
+                        return data;
                     },
                     error: function(xhr, error, thrown) {
                         console.error('DataTable AJAX error:', { xhr, error, thrown });
@@ -959,33 +1008,21 @@
                     }
                 },
                 columns: [
-                    {data: 'symbol', name: 'symbol', width: isMobile ? '80px' : 'auto'},
-                    {data: 'name', name: 'name', width: isMobile ? '120px' : 'auto'},
-                    {data: 'full_name', name: 'full_name', width: isMobile ? '150px' : 'auto'},
-                    {data: 'image_url', name: 'image_url', width: isMobile ? '60px' : 'auto'},
+                    {data: 'symbol', name: 'symbol', width: isMobile ? '70px' : 'auto'},
+                    {data: 'name', name: 'name', width: isMobile ? '100px' : 'auto'},
+                    {data: 'full_name', name: 'full_name', width: isMobile ? '120px' : 'auto'},
+                    {data: 'image_url', name: 'image_url', width: isMobile ? '50px' : 'auto'},
                     {data: 'algorithm', name: 'algorithm', className: 'desktop-only', width: 'auto'},
                     {data: 'proof_type', name: 'proof_type', className: 'desktop-only', width: 'auto'},
-                    {data: 'is_trading', name: 'is_trading', width: isMobile ? '80px' : 'auto'},
-                    {data: 'sponsored', name: 'sponsored', width: isMobile ? '80px' : 'auto'},
-                    {data: 'internal', name: 'internal', width: isMobile ? '80px' : 'auto'},
+                    {data: 'is_trading', name: 'is_trading', width: isMobile ? '70px' : 'auto'},
+                    {data: 'sponsored', name: 'sponsored', width: isMobile ? '70px' : 'auto'},
+                    {data: 'internal', name: 'internal', width: isMobile ? '70px' : 'auto'},
                     {data: 'sort_order', name: 'sort_order', className: 'desktop-only', width: 'auto'}
                 ],
-                responsive: {
-                    details: {
-                        display: $.fn.dataTable.Responsive.display.modal({
-                            header: function(row) {
-                                var data = row.data();
-                                return '<h3>Details for ' + data.symbol + '</h3>';
-                            }
-                        }),
-                        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-                            tableClass: 'table table-bordered table-striped'
-                        })
-                    }
-                },
+                responsive: false, // Disable responsive to prevent freezing
                 order: [[0, 'asc']],
                 pageLength: isMobile ? 5 : 25,
-                lengthMenu: isMobile ? [[10, 15, 25, -1], [10, 15, 25, "All"]] : [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                lengthMenu: isMobile ? [[5, 10, 15, -1], [5, 10, 15, "All"]] : [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 language: {
                     search: "Search coins:",
                     lengthMenu: "Show _MENU_ coins per page",
@@ -1057,29 +1094,20 @@
                 coinsTable.ajax.reload();
             });
 
-            // Handle window resize for responsive behavior
-            var resizeTimer;
-            $(window).resize(function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function() {
-                    var newIsMobile = window.innerWidth <= 768;
-                    var newIsTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
-                    
-                    console.log('Window resized:', { newIsMobile, newIsTablet, width: window.innerWidth });
-                    
-                    if (newIsMobile !== isMobile || newIsTablet !== isTablet) {
-                        isMobile = newIsMobile;
-                        isTablet = newIsTablet;
-                        adjustColumnsForDevice();
-                        
-                        // Redraw table for better mobile layout
-                        coinsTable.columns.adjust().draw();
-                    }
-                }, 250); // Debounce resize events
-            });
-
             // Add touch-friendly scrolling for mobile
             if (isMobile) {
+                // Throttle scroll events to prevent freezing
+                var scrollTimeout;
+                $('.coins-table-responsive').on('scroll', function() {
+                    if (scrollTimeout) {
+                        clearTimeout(scrollTimeout);
+                    }
+                    scrollTimeout = setTimeout(function() {
+                        // Minimal processing during scroll
+                    }, 16); // ~60fps
+                });
+                
+                // Optimize touch events
                 $('.coins-table-responsive').on('touchstart touchmove', function(e) {
                     e.stopPropagation();
                 });
@@ -1097,6 +1125,46 @@
             
             // Add error handling for DataTable
             $.fn.dataTable.ext.errMode = 'throw';
+            
+            // Optimize column adjustments for mobile
+            function optimizedColumnAdjust() {
+                if (isMobile) {
+                    // Use requestAnimationFrame for smooth performance
+                    requestAnimationFrame(function() {
+                        if (coinsTable && coinsTable.columns) {
+                            coinsTable.columns.adjust();
+                        }
+                    });
+                }
+            }
+            
+            // Throttle resize events to prevent freezing
+            var resizeTimeout;
+            $(window).resize(function() {
+                if (resizeTimeout) {
+                    clearTimeout(resizeTimeout);
+                }
+                resizeTimeout = setTimeout(function() {
+                    var newIsMobile = window.innerWidth <= 768;
+                    var newIsTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+                    
+                    console.log('Window resized:', { newIsMobile, newIsTablet, width: window.innerWidth });
+                    
+                    if (newIsMobile !== isMobile || newIsTablet !== isTablet) {
+                        isMobile = newIsMobile;
+                        isTablet = newIsTablet;
+                        adjustColumnsForDevice();
+                        
+                        // Use optimized column adjustment
+                        optimizedColumnAdjust();
+                        
+                        // Redraw table for better mobile layout
+                        if (coinsTable && coinsTable.draw) {
+                            coinsTable.draw();
+                        }
+                    }
+                }, 250); // Debounce resize events
+            });
             
             // Ensure table is visible after a short delay (mobile fix)
             setTimeout(function() {
