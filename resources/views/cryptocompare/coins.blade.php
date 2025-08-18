@@ -43,6 +43,8 @@
             width: 1.2em;
             height: 1.2em;
         }
+        
+        /* Enhanced Mobile Responsiveness */
         @media (max-width: 600px) {
             .coins-toolbar {
                 flex-direction: column;
@@ -53,7 +55,191 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            /* Mobile-specific table styles */
+            .coins-table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                touch-action: pan-x;
+                position: relative;
+            }
+            
+            .coins-table {
+                min-width: 800px; /* Ensure table doesn't get too narrow on mobile */
+                table-layout: fixed; /* Better column control */
+            }
+            
+            /* Mobile-friendly column widths */
+            .coins-table th,
+            .coins-table td {
+                padding: 8px 4px;
+                font-size: 14px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            /* Fixed column widths for mobile */
+            .coins-table th:nth-child(1),
+            .coins-table td:nth-child(1) { width: 80px; }
+            .coins-table th:nth-child(2),
+            .coins-table td:nth-child(2) { width: 120px; }
+            .coins-table th:nth-child(3),
+            .coins-table td:nth-child(3) { width: 150px; }
+            .coins-table th:nth-child(4),
+            .coins-table td:nth-child(4) { width: 60px; }
+            .coins-table th:nth-child(7),
+            .coins-table td:nth-child(7) { width: 80px; }
+            .coins-table th:nth-child(8),
+            .coins-table td:nth-child(8) { width: 80px; }
+            .coins-table th:nth-child(9),
+            .coins-table td:nth-child(9) { width: 80px; }
+            
+            /* Hide less important columns on mobile */
+            .coins-table th:nth-child(5),
+            .coins-table th:nth-child(6),
+            .coins-table th:nth-child(10),
+            .coins-table th:nth-child(11),
+            .coins-table th:nth-child(12),
+            .coins-table th:nth-child(13),
+            .coins-table td:nth-child(5),
+            .coins-table td:nth-child(6),
+            .coins-table td:nth-child(10),
+            .coins-table td:nth-child(11),
+            .coins-table td:nth-child(12),
+            .coins-table td:nth-child(13) {
+                display: none;
+            }
+            
+            /* Mobile search and pagination */
+            .dataTables_filter input {
+                width: 100%;
+                margin-left: 0 !important;
+                margin-bottom: 10px;
+                font-size: 16px; /* Prevent zoom on iOS */
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            
+            .dataTables_length select {
+                width: 100%;
+                margin-bottom: 10px;
+                font-size: 16px; /* Prevent zoom on iOS */
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            
+            .dataTables_info,
+            .dataTables_paginate {
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .dataTables_paginate .paginate_button {
+                padding: 8px 12px;
+                margin: 0 2px;
+                font-size: 14px;
+                min-width: 44px; /* Touch-friendly button size */
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Mobile-friendly table wrapper */
+            .table-wrapper {
+                margin: 0 -15px;
+                padding: 0 15px;
+            }
+            
+            /* Ensure proper touch scrolling */
+            .coins-table-responsive::-webkit-scrollbar {
+                height: 8px;
+            }
+            
+            .coins-table-responsive::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+            }
+            
+            .coins-table-responsive::-webkit-scrollbar-thumb {
+                background: #667eea;
+                border-radius: 4px;
+            }
+            
+            .coins-table-responsive::-webkit-scrollbar-thumb:hover {
+                background: #5a6fd8;
+            }
+            
+            /* Mobile-specific DataTables wrapper styles */
+            .dataTables_wrapper {
+                overflow: hidden;
+            }
+            
+            .dataTables_scroll {
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+            
+            /* Ensure proper mobile layout */
+            .dataTables_processing {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1001;
+            }
         }
+        
+        /* Tablet Responsiveness */
+        @media (min-width: 601px) and (max-width: 900px) {
+            .coins-table th:nth-child(10),
+            .coins-table th:nth-child(11),
+            .coins-table th:nth-child(12),
+            .coins-table th:nth-child(13),
+            .coins-table td:nth-child(10),
+            .coins-table td:nth-child(11),
+            .coins-table td:nth-child(12),
+            .coins-table td:nth-child(13) {
+                display: none;
+            }
+            
+            .coins-table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* Additional mobile optimizations */
+        @media (max-width: 480px) {
+            .beautiful-modern-title-bar {
+                padding: 1em;
+                flex-direction: column;
+                gap: 1em;
+            }
+            
+            .modern-title-main {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .coins-toolbar {
+                width: 100%;
+            }
+            
+            .dataTables_wrapper {
+                font-size: 14px;
+            }
+            
+            .coins-table th,
+            .coins-table td {
+                padding: 6px 3px;
+                font-size: 13px;
+            }
+        }
+        
         body.coins-dark-mode, .coins-dark-mode .m-content {
             background: #181a1b !important;
             color: #f3f3f3 !important;
@@ -413,6 +599,99 @@
                 justify-content: center;
             }
         }
+        
+        /* Loading indicator styles */
+        .coins-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2em;
+            font-size: 1.2em;
+            color: #667eea;
+            text-align: center;
+            flex-direction: column;
+            gap: 1em;
+        }
+        
+        .coins-loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Error message styles */
+        .coins-error {
+            display: none;
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 1em;
+            border-radius: 0.5em;
+            margin: 1em 0;
+            text-align: center;
+        }
+        
+        /* Mobile-specific loading and error styles */
+        @media (max-width: 600px) {
+            .coins-loading {
+                padding: 1.5em 1em;
+                font-size: 1.1em;
+            }
+            
+            .coins-loading-spinner {
+                width: 25px;
+                height: 25px;
+                border-width: 2px;
+            }
+            
+            .coins-error {
+                margin: 1em 0.5em;
+                padding: 0.8em;
+                font-size: 0.95em;
+            }
+            
+            .coins-error button {
+                margin-top: 0.5em;
+                width: 100%;
+            }
+        }
+        
+        /* Ensure proper z-index for mobile */
+        .coins-loading,
+        .coins-error {
+            position: relative;
+            z-index: 1000;
+        }
+        
+        /* Mobile-friendly button styles */
+        .coins-toolbar-btn {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Prevent text selection on mobile */
+        .coins-table-responsive {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Allow text selection in search inputs */
+        .dataTables_filter input {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
     </style>
 @endsection
 @section('content')
@@ -521,9 +800,29 @@
             </nav>
         </div>
 
+        <!-- Loading Indicator -->
+        <div id="coinsLoading" class="coins-loading">
+            <div class="coins-loading-spinner"></div>
+            <span>Loading coins data...</span>
+        </div>
+
+        <!-- Error Message -->
+        <div id="coinsError" class="coins-error">
+            <strong>Error loading data:</strong> <span id="errorMessage"></span>
+            <br><br>
+            <button id="retryBtn" class="coins-toolbar-btn">Retry</button>
+        </div>
+
+        <!-- Debug Info (hidden on production) -->
+        <div id="debugInfo" style="display: none; background: #f8f9fa; padding: 1em; margin: 1em 0; border-radius: 0.5em; font-family: monospace; font-size: 12px;">
+            <strong>Debug Info:</strong><br>
+            <span id="debugDevice"></span><br>
+            <span id="debugRoute"></span><br>
+            <span id="debugStatus"></span>
+        </div>
+
         <!-- DataTable Section -->
-        <div class="coins-table-responsive">
-            <input type="hidden" id="cryptocompare_coins_route" value="{{ route('datatable.cryptocompare.coins') }}">
+        <div class="coins-table-responsive" id="coinsTableContainer" style="display: none;">
             <!-- Enhanced Table -->
             <div class="table-wrapper" id="coinsTableWrapper">
                 <table id="cryptocompare_coins" class="coins-table table table-hover table-condensed table-striped" style="width:100%; padding-top:1%">
@@ -548,17 +847,12 @@
                             <th>Name</th>
                             <th>Full Name</th>
                             <th>Image</th>
-                            <th>Algorithm</th>
-                            <th>Proof Type</th>
-                            {{--<th>Block Number</th>--}}
-                            {{--<th>Block Time</th>--}}
-                            {{--<th>Block Reward</th>--}}
-                            {{--<th>Max Supply</th>--}}
-                            {{--<th>Total Coin Supply</th>--}}
+                            <th class="desktop-only">Algorithm</th>
+                            <th class="desktop-only">Proof Type</th>
                             <th>Is Trading</th>
                             <th>Sponsored</th>
                             <th>Internal</th>
-                            <th>Sort Order</th>
+                            <th class="desktop-only">Sort Order</th>
                         </tr>
                     </thead>
                 </table>
@@ -577,42 +871,165 @@
     
     <script>
         $(document).ready(function() {
-            // Initialize DataTable
+            // Check if device is mobile
+            var isMobile = window.innerWidth <= 768;
+            var isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+            
+            // Debug logging
+            console.log('Device detection:', { isMobile, isTablet, width: window.innerWidth });
+            console.log('jQuery version:', $.fn.jquery);
+            console.log('DataTables version:', $.fn.dataTable.version);
+            
+            // Show debug info in development
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                $('#debugInfo').show();
+                $('#debugDevice').text('Device: ' + (isMobile ? 'Mobile' : isTablet ? 'Tablet' : 'Desktop') + ' (Width: ' + window.innerWidth + 'px)');
+                $('#debugRoute').text('Route: /getcryptocomparecoinsdata');
+            }
+            
+            // Test route accessibility
+            $.ajax({
+                url: '/getcryptocomparecoinsdata',
+                type: 'HEAD',
+                timeout: 5000,
+                success: function() {
+                    console.log('Route is accessible');
+                    if ($('#debugInfo').is(':visible')) {
+                        $('#debugStatus').text('Route Status: Accessible');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Route test failed:', { xhr, status, error });
+                    if ($('#debugInfo').is(':visible')) {
+                        $('#debugStatus').text('Route Status: Failed - ' + status);
+                    }
+                }
+            });
+            
+            // Show/hide columns based on device
+            function adjustColumnsForDevice() {
+                if (isMobile) {
+                    $('.desktop-only').hide();
+                    console.log('Mobile mode: hiding desktop columns');
+                } else if (isTablet) {
+                    $('.desktop-only').hide();
+                    console.log('Tablet mode: hiding desktop columns');
+                } else {
+                    $('.desktop-only').show();
+                    console.log('Desktop mode: showing all columns');
+                }
+            }
+            
+            // Initialize DataTable with mobile-friendly configuration
             var coinsTable = $('#cryptocompare_coins').DataTable({
                 processing: true,
                 serverSide: false,
+                deferRender: true, // Better performance on mobile
+                autoWidth: false, // Better mobile layout
+                scrollX: true, // Enable horizontal scrolling on mobile
+                scrollCollapse: true,
                 ajax: {
-                    url: $('#cryptocompare_coins_route').val(),
-                    type: 'GET'
+                    url: '/getcryptocomparecoinsdata',
+                    type: 'GET',
+                    timeout: 30000, // 30 second timeout
+                    dataSrc: function(json) {
+                        console.log('Data received:', json);
+                        // Hide loading indicator
+                        $('#coinsLoading').hide();
+                        $('#coinsTableContainer').show();
+                        return json.data || [];
+                    },
+                    error: function(xhr, error, thrown) {
+                        console.error('DataTable AJAX error:', { xhr, error, thrown });
+                        // Show error message
+                        $('#coinsLoading').hide();
+                        $('#coinsError').show();
+                        $('#errorMessage').text('Failed to load data. Please check your connection and try again.');
+                        
+                        // Try to provide more specific error messages
+                        if (xhr.status === 0) {
+                            $('#errorMessage').text('Network error: Please check your internet connection.');
+                        } else if (xhr.status === 404) {
+                            $('#errorMessage').text('Data endpoint not found. Please contact support.');
+                        } else if (xhr.status === 500) {
+                            $('#errorMessage').text('Server error. Please try again later.');
+                        } else if (xhr.status === 403) {
+                            $('#errorMessage').text('Access denied. Please check your permissions.');
+                        }
+                    }
                 },
                 columns: [
-                    {data: 'symbol', name: 'symbol'},
-                    {data: 'name', name: 'name'},
-                    {data: 'full_name', name: 'full_name'},
-                    {data: 'image_url', name: 'image_url'},
-                    {data: 'algorithm', name: 'algorithm'},
-                    {data: 'proof_type', name: 'proof_type'},
-//                    {data: 'block_number', name: 'block_number'},
-//                    {data: 'block_time', name: 'block_time'},
-//                    {data: 'block_reward', name: 'block_reward'},
-//                    {data: 'max_supply', name: 'max_supply'},
-//                    {data: 'total_coin_supply', name: 'total_coin_supply'},
-                    {data: 'is_trading', name: 'is_trading'},
-                    {data: 'sponsored', name: 'sponsored'},
-                    {data: 'internal', name: 'internal'},
-                    {data: 'sort_order', name: 'sort_order'}
+                    {data: 'symbol', name: 'symbol', width: isMobile ? '80px' : 'auto'},
+                    {data: 'name', name: 'name', width: isMobile ? '120px' : 'auto'},
+                    {data: 'full_name', name: 'full_name', width: isMobile ? '150px' : 'auto'},
+                    {data: 'image_url', name: 'image_url', width: isMobile ? '60px' : 'auto'},
+                    {data: 'algorithm', name: 'algorithm', className: 'desktop-only', width: 'auto'},
+                    {data: 'proof_type', name: 'proof_type', className: 'desktop-only', width: 'auto'},
+                    {data: 'is_trading', name: 'is_trading', width: isMobile ? '80px' : 'auto'},
+                    {data: 'sponsored', name: 'sponsored', width: isMobile ? '80px' : 'auto'},
+                    {data: 'internal', name: 'internal', width: isMobile ? '80px' : 'auto'},
+                    {data: 'sort_order', name: 'sort_order', className: 'desktop-only', width: 'auto'}
                 ],
-                responsive: true,
+                responsive: {
+                    details: {
+                        display: $.fn.dataTable.Responsive.display.modal({
+                            header: function(row) {
+                                var data = row.data();
+                                return '<h3>Details for ' + data.symbol + '</h3>';
+                            }
+                        }),
+                        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                            tableClass: 'table table-bordered table-striped'
+                        })
+                    }
+                },
                 order: [[0, 'asc']],
-                pageLength: 25,
-                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                pageLength: isMobile ? 15 : 25,
+                lengthMenu: isMobile ? [[10, 15, 25, -1], [10, 15, 25, "All"]] : [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 language: {
                     search: "Search coins:",
                     lengthMenu: "Show _MENU_ coins per page",
                     info: "Showing _START_ to _END_ of _TOTAL_ coins",
                     infoEmpty: "Showing 0 to 0 of 0 coins",
                     infoFiltered: "(filtered from _MAX_ total coins)",
-                    zeroRecords: "No coins found"
+                    zeroRecords: "No coins found",
+                    processing: "Loading coins data...",
+                    searchPlaceholder: "Type to search..."
+                },
+                dom: isMobile ? 
+                    '<"top"lf>rt<"bottom"ip>' : 
+                    '<"top"lf>rt<"bottom"ip>',
+                initComplete: function() {
+                    console.log('DataTable initialization complete');
+                    // Adjust columns after table is initialized
+                    adjustColumnsForDevice();
+                    
+                    // Add mobile-friendly search
+                    if (isMobile) {
+                        $('.dataTables_filter input').attr('placeholder', 'Search coins...');
+                        $('.dataTables_filter input').attr('autocomplete', 'off');
+                        $('.dataTables_filter input').attr('type', 'search');
+                    }
+                    
+                    // Ensure proper column sizing
+                    this.api().columns.adjust();
+                    
+                    // Force redraw for mobile
+                    if (isMobile) {
+                        setTimeout(function() {
+                            coinsTable.columns.adjust().draw();
+                        }, 100);
+                    }
+                },
+                drawCallback: function() {
+                    console.log('DataTable draw complete');
+                    // Re-adjust columns after each draw
+                    adjustColumnsForDevice();
+                    
+                    // Ensure proper sizing on mobile
+                    if (isMobile) {
+                        this.api().columns.adjust();
+                    }
                 }
             });
 
@@ -625,7 +1042,134 @@
 
             // Refresh Button
             $('#refreshCoinsBtn').click(function() {
+                console.log('Refresh button clicked');
+                $('#coinsLoading').show();
+                $('#coinsTableContainer').hide();
+                $('#coinsError').hide();
                 coinsTable.ajax.reload();
+            });
+
+            // Retry Button
+            $('#retryBtn').click(function() {
+                console.log('Retry button clicked');
+                $('#coinsLoading').show();
+                $('#coinsError').hide();
+                coinsTable.ajax.reload();
+            });
+
+            // Handle window resize for responsive behavior
+            var resizeTimer;
+            $(window).resize(function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    var newIsMobile = window.innerWidth <= 768;
+                    var newIsTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+                    
+                    console.log('Window resized:', { newIsMobile, newIsTablet, width: window.innerWidth });
+                    
+                    if (newIsMobile !== isMobile || newIsTablet !== isTablet) {
+                        isMobile = newIsMobile;
+                        isTablet = newIsTablet;
+                        adjustColumnsForDevice();
+                        
+                        // Redraw table for better mobile layout
+                        coinsTable.columns.adjust().draw();
+                    }
+                }, 250); // Debounce resize events
+            });
+
+            // Add touch-friendly scrolling for mobile
+            if (isMobile) {
+                $('.coins-table-responsive').on('touchstart touchmove', function(e) {
+                    e.stopPropagation();
+                });
+                
+                // Prevent zoom on double tap for mobile
+                $('.coins-table-responsive').on('touchend', function(e) {
+                    e.preventDefault();
+                    var touch = e.originalEvent.changedTouches[0];
+                    var element = document.elementFromPoint(touch.clientX, touch.clientY);
+                    if (element) {
+                        element.click();
+                    }
+                });
+            }
+            
+            // Add error handling for DataTable
+            $.fn.dataTable.ext.errMode = 'throw';
+            
+            // Ensure table is visible after a short delay (mobile fix)
+            setTimeout(function() {
+                if ($('#coinsLoading').is(':visible')) {
+                    console.log('Loading indicator still visible, checking for issues...');
+                    // Force reload if loading takes too long
+                    if (coinsTable && coinsTable.ajax) {
+                        console.log('Forcing table reload...');
+                        coinsTable.ajax.reload();
+                    }
+                }
+            }, 10000); // 10 second timeout
+            
+            // Add network status detection
+            window.addEventListener('online', function() {
+                console.log('Network is online, attempting to reload data...');
+                if ($('#coinsError').is(':visible')) {
+                    $('#coinsError').hide();
+                    $('#coinsLoading').show();
+                    coinsTable.ajax.reload();
+                }
+            });
+            
+            window.addEventListener('offline', function() {
+                console.log('Network is offline');
+                if (!$('#coinsError').is(':visible')) {
+                    $('#coinsError').show();
+                    $('#errorMessage').text('Network is offline. Please check your internet connection.');
+                }
+            });
+            
+            // Check if we're offline initially
+            if (!navigator.onLine) {
+                $('#coinsError').show();
+                $('#errorMessage').text('Network is offline. Please check your internet connection.');
+                $('#coinsLoading').hide();
+            }
+            
+            // Add additional error handling for DataTable
+            $(document).on('error.dt', function(e, settings, techNote, message) {
+                console.error('DataTable error:', { e, settings, techNote, message });
+                $('#coinsError').show();
+                $('#errorMessage').text('DataTable error: ' + message);
+                $('#coinsLoading').hide();
+            });
+            
+            // Handle DataTable processing state
+            $(document).on('processing.dt', function(e, settings, processing) {
+                if (processing) {
+                    $('#coinsLoading').show();
+                    $('#coinsTableContainer').hide();
+                    $('#coinsError').hide();
+                } else {
+                    $('#coinsLoading').hide();
+                    $('#coinsTableContainer').show();
+                }
+            });
+            
+            // Add performance monitoring for mobile
+            if (isMobile) {
+                var startTime = performance.now();
+                $(document).on('draw.dt', function() {
+                    var endTime = performance.now();
+                    console.log('Table render time:', (endTime - startTime).toFixed(2) + 'ms');
+                    startTime = endTime;
+                });
+            }
+            
+            // Ensure proper cleanup on page unload
+            $(window).on('beforeunload', function() {
+                if (coinsTable) {
+                    coinsTable.destroy();
+                }
             });
         });
     </script>
