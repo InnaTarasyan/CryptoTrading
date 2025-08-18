@@ -290,16 +290,14 @@
             }
 
             /* Mobile-optimized portlet */
-            .m-portlet {
-                margin: 0.5rem;
-                border-radius: 16px;
-            }
-
             .m-portlet__head {
                 flex-direction: column;
                 gap: 1rem;
                 padding: 1rem;
                 text-align: center;
+                background: white;
+                border-radius: 16px 16px 0 0;
+                margin: 0;
             }
 
             .m-portlet__head-title {
@@ -308,26 +306,25 @@
                 justify-content: center;
             }
 
-            .m-portlet__body {
-                padding: 0.5rem;
-            }
-
-            /* Enhanced Mobile Datatable */
+            /* Performance-optimized Mobile Datatable */
             #coinmarketcal_wrapper {
-                margin-top: 1rem;
+                margin-top: 0;
+                background: white;
+                border-radius: 0 0 16px 16px;
+                overflow: hidden;
             }
 
             #coinmarketcal {
                 width: 100% !important;
                 min-width: 100% !important;
                 font-size: 14px;
-                border-radius: 12px;
-                overflow: hidden;
                 border-collapse: collapse;
+                background: white;
+                /* Remove heavy styling for performance */
             }
 
             #coinmarketcal thead {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: #667eea;
                 color: white;
             }
 
@@ -337,15 +334,15 @@
                 font-weight: 600;
                 text-align: center;
                 border: none;
-                position: relative;
+                /* Remove complex styling */
             }
 
             #coinmarketcal thead th:first-child {
-                border-top-left-radius: 12px;
+                border-top-left-radius: 0;
             }
 
             #coinmarketcal thead th:last-child {
-                border-top-right-radius: 12px;
+                border-top-right-radius: 0;
             }
 
             #coinmarketcal thead th .icon {
@@ -360,7 +357,7 @@
 
             #coinmarketcal tbody tr {
                 border-bottom: 1px solid #e2e8f0;
-                transition: all 0.15s ease;
+                /* Remove heavy transitions for performance */
                 cursor: pointer;
                 min-height: 50px;
             }
@@ -369,15 +366,10 @@
                 background-color: #f8fafc;
             }
 
+            /* Simplified hover effect for performance */
             #coinmarketcal tbody tr:hover {
-                background: linear-gradient(90deg, #e0c3fc 0%, #8ec5fc 100%);
-                transform: translateY(-1px);
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            }
-
-            #coinmarketcal tbody tr.mobile-touch-active {
-                background: linear-gradient(90deg, #d4b5f7 0%, #7db8f7 100%);
-                transform: scale(0.98);
+                background-color: #e0c3fc;
+                /* Remove transform and box-shadow for performance */
             }
 
             #coinmarketcal tbody td {
@@ -388,21 +380,21 @@
                 border: none;
             }
 
-            /* Enhanced Symbol Column (First Column) */
+            /* Simplified Symbol Column for performance */
             #coinmarketcal tbody td:first-child {
                 font-size: 18px;
                 font-weight: 700;
                 padding: 12px 8px;
-                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                background: #f8fafc;
                 border-left: 4px solid #667eea;
-                border-radius: 0 8px 8px 0;
                 color: #1e293b;
-                text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                /* Remove heavy styling for performance */
             }
 
+            /* Remove hover effects that cause freezing */
             #coinmarketcal tbody td:first-child:hover {
-                background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-                transform: scale(1.02);
+                background: #e0c3fc;
+                /* Remove transform for performance */
             }
 
             /* Mobile-optimized DataTables controls */
@@ -446,7 +438,7 @@
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 box-sizing: border-box;
                 text-align: center;
-                transition: all 0.3s ease;
+                /* Remove transition for performance */
             }
 
             .dataTables_filter input[type="search"]:focus {
@@ -492,7 +484,7 @@
                 color: #333;
                 border: 1px solid #dee2e6;
                 cursor: pointer;
-                transition: all 0.2s ease;
+                /* Remove transition for performance */
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -501,11 +493,11 @@
             .dataTables_paginate .paginate_button:hover {
                 background: #e9ecef;
                 border-color: #adb5bd;
-                transform: translateY(-1px);
+                /* Remove transform for performance */
             }
 
             .dataTables_paginate .paginate_button.current {
-                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                background: #667eea;
                 color: white;
                 border-color: #667eea;
                 box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
@@ -516,14 +508,15 @@
                 cursor: not-allowed;
             }
 
-            /* Mobile-optimized table layout */
+            /* Performance-optimized table layout */
             .table-responsive {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
-                border-radius: 12px;
+                border-radius: 0 0 16px 16px;
                 margin: 0;
                 background: white;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                /* Remove heavy box-shadow for performance */
+                border: 1px solid #e2e8f0;
             }
 
             /* Mobile-optimized processing indicator */
@@ -545,7 +538,7 @@
             .datatable-info-beautiful {
                 text-align: center;
                 padding: 0.5rem;
-                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                background: #f8fafc;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
                 margin-top: 0.5rem;
@@ -618,10 +611,6 @@
             }
 
             /* Ultra-mobile optimizations */
-            .m-portlet {
-                margin: 0.25rem;
-            }
-
             .m-portlet__head {
                 padding: 0.75rem;
             }
