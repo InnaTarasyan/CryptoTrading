@@ -831,7 +831,7 @@
         </div>
 
         <!-- Begin::Section -->
-        <div class="m-portlet custom-modern">
+        <div class="" style="background-color: white">
             <div class="m-portlet__head custom-modern">
                 <div class="m-portlet__head-title custom-modern">
                     <span class="icon">&#128202;</span>
@@ -842,7 +842,7 @@
                 </div>
             </div>
 
-            <div class="m-portlet__body">
+            <div class="">
                 <!-- Hidden route for AJAX -->
                 <input type="hidden" id="coinmarketcal_route" value="{{ route('datatable.coinmarketcal') }}">
                 <div id="coinmarketcal_wrapper" class="table-responsive mt-5">
