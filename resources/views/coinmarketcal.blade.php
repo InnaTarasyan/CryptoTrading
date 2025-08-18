@@ -103,19 +103,17 @@
         .feature-item:hover {
             background: rgba(255, 255, 255, 0.9);
             border-color: #667eea;
-            transform: translateX(4px);
+            transform: translateY(-1px);
         }
 
         .feature-icon {
             font-size: 1.25rem;
-            line-height: 1;
         }
 
         .feature-text {
             font-size: 0.875rem;
             font-weight: 500;
             color: #374151;
-            white-space: nowrap;
         }
 
         .explanation-tip {
@@ -125,20 +123,17 @@
             padding: 0.75rem 1rem;
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border: 1px solid #f59e0b;
-            border-radius: 12px;
-            margin-top: 0.5rem;
+            border-radius: 8px;
+            color: #92400e;
         }
 
         .tip-icon {
             font-size: 1.125rem;
-            line-height: 1;
         }
 
         .tip-text {
             font-size: 0.875rem;
             font-weight: 500;
-            color: #92400e;
-            line-height: 1.4;
         }
 
         /* Dark mode support for navigation explanation */
@@ -182,14 +177,18 @@
             color: #fef3c7;
         }
 
-        /* Responsive design for navigation explanation */
+        /* Mobile-First Responsive Design */
         @media (max-width: 768px) {
+            .navigation-explanation {
+                margin-bottom: 1rem;
+                border-radius: 12px;
+            }
+
             .explanation-content {
                 flex-direction: column;
-                align-items: center;
                 text-align: center;
-                padding: 1.25rem;
-                gap: 1rem;
+                padding: 1rem;
+                gap: 0.75rem;
             }
 
             .explanation-icon {
@@ -235,6 +234,205 @@
             .tip-text {
                 font-size: 0.75rem;
             }
+
+            /* Mobile-optimized portlet */
+            .m-portlet {
+                margin: 0.5rem;
+                border-radius: 16px;
+            }
+
+            .m-portlet__head {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .m-portlet__head-title {
+                font-size: 1.1rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .m-portlet__body {
+                padding: 0.5rem;
+            }
+
+            /* Mobile-optimized table */
+            #coinmarketcal {
+                margin-top: 16px;
+                font-size: 14px;
+                border-radius: 12px;
+                min-width: 400px;
+            }
+
+            #coinmarketcal thead th {
+                padding: 12px 8px;
+                font-size: 14px;
+                border-radius: 8px 8px 0 0;
+            }
+
+            #coinmarketcal thead th .icon {
+                font-size: 1.1em;
+                margin-right: 6px;
+            }
+
+            #coinmarketcal td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+
+            #coinmarketcal td:first-child {
+                font-size: 16px;
+                padding: 8px 6px;
+                border-left-width: 4px;
+            }
+
+            /* Mobile-optimized DataTables controls */
+            .dataTables_wrapper .dataTables_length {
+                float: none;
+                text-align: center;
+                margin-bottom: 10px;
+                width: 100%;
+                padding: 6px 12px;
+            }
+
+            .dataTables_wrapper .dataTables_filter {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .search-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+                width: 100%;
+            }
+
+            .search-wrapper input {
+                width: 100%;
+                max-width: 300px;
+                font-size: 16px; /* Prevent zoom on iOS */
+                padding: 8px 12px 8px 44px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                background: #fff;
+            }
+
+            .search-wrapper button {
+                width: 100%;
+                max-width: 100px;
+                padding: 8px 12px;
+                font-size: 14px;
+                background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+                color: #333;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .dataTables_info {
+                text-align: center;
+                margin-top: 10px;
+                font-size: 12px;
+                color: #666;
+            }
+
+            .dataTables_paginate {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .dataTables_paginate .paginate_button {
+                padding: 6px 10px;
+                margin: 0 2px;
+                font-size: 12px;
+                min-width: 36px;
+                min-height: 36px;
+                border-radius: 6px;
+                background: #f8f9fa;
+                color: #333;
+                border: 1px solid #dee2e6;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .dataTables_paginate .paginate_button.current {
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border-color: #667eea;
+            }
+
+            /* Mobile-optimized table layout */
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                border-radius: 12px;
+                margin: 0;
+            }
+
+            /* Mobile touch feedback */
+            #coinmarketcal tbody tr {
+                transition: all 0.15s ease;
+                cursor: pointer;
+                min-height: 44px;
+            }
+
+            #coinmarketcal tbody tr:hover {
+                background: linear-gradient(90deg, #e0c3fc 0%, #8ec5fc 100%);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+
+            #coinmarketcal tbody tr.mobile-touch-active {
+                background: linear-gradient(90deg, #d4b5f7 0%, #7db8f7 100%);
+                transform: scale(0.98);
+            }
+
+            /* Mobile-optimized processing indicator */
+            .dataTables_processing {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1001;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+                font-size: 14px;
+                color: #333;
+            }
+
+            /* Mobile-optimized beautiful info */
+            .datatable-info-beautiful {
+                text-align: center;
+                padding: 0.5rem;
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                margin-top: 0.5rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .datatable-info-icon {
+                font-size: 1rem;
+                margin-right: 0;
+                margin-bottom: 4px;
+            }
+
+            .datatable-info-text {
+                font-size: 0.875rem;
+                color: #475569;
+            }
+
+            .datatable-info-text strong {
+                color: #1e293b;
+            }
         }
 
         @media (max-width: 480px) {
@@ -260,6 +458,156 @@
                 flex-direction: column;
                 text-align: center;
                 gap: 0.375rem;
+            }
+
+            /* Ultra-mobile optimizations */
+            .m-portlet {
+                margin: 0.25rem;
+            }
+
+            .m-portlet__head {
+                padding: 0.75rem;
+            }
+
+            .m-portlet__head-title {
+                font-size: 1rem;
+            }
+
+            #coinmarketcal {
+                font-size: 13px;
+                min-width: 350px;
+                margin-top: 12px;
+            }
+
+            #coinmarketcal thead th {
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+
+            #coinmarketcal thead th .icon {
+                font-size: 1em;
+                margin-right: 4px;
+            }
+
+            #coinmarketcal td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+
+            #coinmarketcal td:first-child {
+                font-size: 14px;
+                padding: 6px 4px;
+                border-left-width: 3px;
+            }
+
+            .dataTables_wrapper .dataTables_length {
+                padding: 4px 8px;
+            }
+
+            .dataTables_wrapper .dataTables_length select {
+                font-size: 13px;
+                padding: 3px 6px;
+            }
+
+            .search-wrapper input {
+                font-size: 14px;
+                padding: 6px 10px 6px 36px;
+            }
+
+            .search-wrapper button {
+                font-size: 13px;
+                padding: 6px 10px;
+                max-width: 80px;
+            }
+
+            .dataTables_info {
+                font-size: 11px;
+            }
+
+            .dataTables_paginate .paginate_button {
+                padding: 4px 8px;
+                font-size: 11px;
+                min-width: 32px;
+                min-height: 32px;
+                margin: 0 1px;
+            }
+        }
+
+        /* Mobile-optimized responsive popup */
+        @media (max-width: 768px) {
+            .dtr-modal {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                max-width: none !important;
+                max-height: none !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                z-index: 9999 !important;
+                background: rgba(0, 0, 0, 0.8) !important;
+            }
+
+            .dtr-modal-content {
+                padding: 1rem !important;
+                max-height: 100vh !important;
+                overflow-y: auto !important;
+                background: white !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .dtr-modal-header {
+                padding: 0.5rem 0 !important;
+                margin-bottom: 1rem !important;
+                border-bottom: 1px solid #e2e8f0 !important;
+                position: relative !important;
+            }
+
+            .dtr-modal-header h3 {
+                font-size: 1.1em !important;
+                margin: 0 !important;
+                color: #1e293b !important;
+            }
+
+            .dtr-modal-close {
+                position: absolute !important;
+                top: 0.5rem !important;
+                right: 0 !important;
+                background: #667eea !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 50% !important;
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 16px !important;
+                cursor: pointer !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .dtr-modal table {
+                font-size: 12px !important;
+                width: 100% !important;
+            }
+
+            .dtr-modal th,
+            .dtr-modal td {
+                padding: 6px 4px !important;
+                font-size: 12px !important;
+                border-bottom: 1px solid #e2e8f0 !important;
+            }
+
+            .dtr-modal th {
+                background: #f8fafc !important;
+                font-weight: 600 !important;
+                color: #1e293b !important;
             }
         }
     </style>

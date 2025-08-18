@@ -9,6 +9,8 @@ class CoinMarketCalTable {
         this.tableSelector = '#coinmarketcal';
         this.routeSelector = '#coinmarketcal_route';
         this.table = null;
+        this.isMobile = window.innerWidth <= 768;
+        this.isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
     }
 
     /**
@@ -20,18 +22,38 @@ class CoinMarketCalTable {
         this.bindCustomSearchEvents();
         this.bindRowClick();
         this.bindHighlightOnDraw();
+        this.bindMobileOptimizations();
+        this.bindWindowResize();
     }
 
     /**
      * Initialize DataTable with server-side processing and custom callbacks
      */
     initDataTable() {
+        const mobileConfig = {
+            pageLength: this.isMobile ? 8 : 10,
+            lengthMenu: this.isMobile ? [[5, 8, 10, -1], [5, 8, 10, "All"]] : [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            dom: this.isMobile ? '<"top"lf>rt<"bottom"ip>' : '<"top"lf>rt<"bottom"ip>'
+        };
+
         this.table = $(this.tableSelector).DataTable({
             processing: true,
             bSort: false,
             serverSide: true,
-            responsive: true,
-            pageLength: 10,
+            responsive: {
+                details: {
+                    display: $.fn.dataTable.Responsive.display.modal({
+                        header: function(row) {
+                            var data = row.data();
+                            return '<h3>Details for ' + data.symbol + '</h3>';
+                        }
+                    }),
+                    renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                        tableClass: 'table table-bordered table-striped'
+                    })
+                }
+            },
+            ...mobileConfig,
             ajax: $(this.routeSelector).val(),
             columns: [
                 { data: 'symbol', name: 'symbol' },
@@ -39,9 +61,127 @@ class CoinMarketCalTable {
                 { data: 'rank', name: 'rank' },
                 { data: 'fullname', name: 'fullname' },
             ],
-            iDisplayLength: 20,
+            iDisplayLength: this.isMobile ? 15 : 20,
             infoCallback: this.infoCallback,
             fnDrawCallback: () => this.bindRowClick(), // Rebind row click after redraw
+            initComplete: () => this.onTableInitComplete()
+        });
+    }
+
+    /**
+     * Handle table initialization completion
+     */
+    onTableInitComplete() {
+        this.adjustColumnsForDevice();
+        
+        if (this.isMobile) {
+            // Mobile-specific optimizations
+            this.optimizeForMobile();
+        }
+    }
+
+    /**
+     * Adjust columns based on device type
+     */
+    adjustColumnsForDevice() {
+        if (this.isMobile) {
+            // Hide length selector on mobile for simplicity
+            $('.dataTables_length').hide();
+        } else {
+            $('.dataTables_length').show();
+        }
+    }
+
+    /**
+     * Optimize table for mobile devices
+     */
+    optimizeForMobile() {
+        // Mobile-specific table optimizations
+        $(this.tableSelector).css({
+            'touch-action': 'pan-x',
+            'user-select': 'none',
+            '-webkit-user-select': 'none'
+        });
+
+        // Optimize scroll performance on mobile
+        $('.table-responsive').on('scroll', function() {
+            if (this.scrollTimeout) {
+                clearTimeout(this.scrollTimeout);
+            }
+            this.scrollTimeout = setTimeout(function() {
+                // Handle scroll if needed
+            }, 16); // ~60fps
+        });
+
+        // Add touch-friendly interactions
+        $(this.tableSelector + ' tbody tr').css({
+            'cursor': 'pointer',
+            'min-height': '44px' // Touch-friendly row height
+        });
+
+        // Ensure proper mobile layout
+        setTimeout(() => {
+            if (this.table) {
+                this.table.columns.adjust().draw();
+            }
+        }, 100);
+    }
+
+    /**
+     * Bind mobile-specific optimizations
+     */
+    bindMobileOptimizations() {
+        if (this.isMobile) {
+            // Mobile-specific event handling
+            $(this.tableSelector + ' tbody tr').on('touchstart', function(e) {
+                // Prevent multiple touch events
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            });
+
+            // Mobile-friendly row highlighting
+            $(this.tableSelector + ' tbody tr').on('touchstart', function() {
+                $(this).addClass('mobile-touch-active');
+            }).on('touchend', function() {
+                setTimeout(() => {
+                    $(this).removeClass('mobile-touch-active');
+                }, 150);
+            });
+
+            // Prevent zoom on double tap
+            $(this.tableSelector + ' tbody tr').on('touchend', function(e) {
+                e.preventDefault();
+                var touch = e.originalEvent.changedTouches[0];
+                var element = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (element) {
+                    element.click();
+                }
+            });
+        }
+    }
+
+    /**
+     * Bind window resize events
+     */
+    bindWindowResize() {
+        let resizeTimer;
+        $(window).on('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const newIsMobile = window.innerWidth <= 768;
+                const newIsTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+                
+                if (newIsMobile !== this.isMobile || newIsTablet !== this.isTablet) {
+                    this.isMobile = newIsMobile;
+                    this.isTablet = newIsTablet;
+                    this.adjustColumnsForDevice();
+                    
+                    if (this.table) {
+                        this.table.columns.adjust().draw();
+                    }
+                }
+            }, 250);
         });
     }
 
@@ -80,15 +220,26 @@ class CoinMarketCalTable {
     bindCustomSearchEvents() {
         const filter = $('.dataTables_filter');
         const searchBox = filter.find('input[type="search"]');
+        
         // Sync DataTables search with custom input
         searchBox.on('input', () => {
             this.table.search(searchBox.val()).draw();
         });
+        
         // Clear button
         filter.on('click', '#clear-search', () => {
             searchBox.val('');
             this.table.search('').draw();
         });
+
+        // Mobile-specific search optimizations
+        if (this.isMobile) {
+            searchBox.attr('autocomplete', 'off');
+            searchBox.attr('type', 'search');
+            
+            // Prevent zoom on iOS
+            searchBox.css('font-size', '16px');
+        }
     }
 
     /**
