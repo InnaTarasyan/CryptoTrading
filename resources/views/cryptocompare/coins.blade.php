@@ -984,7 +984,7 @@
                     }
                 },
                 order: [[0, 'asc']],
-                pageLength: isMobile ? 15 : 25,
+                pageLength: isMobile ? 5 : 25,
                 lengthMenu: isMobile ? [[10, 15, 25, -1], [10, 15, 25, "All"]] : [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 language: {
                     search: "Search coins:",

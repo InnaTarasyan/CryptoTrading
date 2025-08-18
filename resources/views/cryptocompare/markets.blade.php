@@ -618,7 +618,7 @@
                 ],
                 responsive: true,
                 order: [[4, 'desc']], // Sort by market cap by default
-                pageLength: 25,
+                pageLength: 10,
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 language: {
                     search: "Search markets:",
