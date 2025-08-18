@@ -246,8 +246,16 @@ class CoinMarketCalTable {
      * Bind click event to table rows for navigation
      */
     bindRowClick() {
-        $(this.tableSelector + ' tbody tr').off('click').on('click', function () {
-            var coin = $(this).find('.id').val();
+        return;
+
+        const self = this;
+        $(this.tableSelector + ' tbody tr').off('click').on('click', function (e) {
+            // Check if the clicked element is inside the first td
+            if ($(e.target).closest('td').index() === 0) {
+                return; // Do nothing if it's the first column
+            }
+
+            const coin = $(this).find('.id').val();
             if (coin) {
                 window.location.href = `/details/${coin}`;
             }

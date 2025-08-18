@@ -312,48 +312,120 @@
                 padding: 0.5rem;
             }
 
-            /* Mobile-optimized table */
+            /* Enhanced Mobile Datatable */
+            #coinmarketcal_wrapper {
+                margin-top: 1rem;
+            }
+
             #coinmarketcal {
-                margin-top: 16px;
+                width: 100% !important;
+                min-width: 100% !important;
                 font-size: 14px;
                 border-radius: 12px;
-                min-width: 400px;
+                overflow: hidden;
+                border-collapse: collapse;
+            }
+
+            #coinmarketcal thead {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
             }
 
             #coinmarketcal thead th {
                 padding: 12px 8px;
                 font-size: 14px;
-                border-radius: 8px 8px 0 0;
+                font-weight: 600;
+                text-align: center;
+                border: none;
+                position: relative;
+            }
+
+            #coinmarketcal thead th:first-child {
+                border-top-left-radius: 12px;
+            }
+
+            #coinmarketcal thead th:last-child {
+                border-top-right-radius: 12px;
             }
 
             #coinmarketcal thead th .icon {
-                font-size: 1.1em;
+                font-size: 1.2em;
                 margin-right: 6px;
+                display: inline-block;
             }
 
-            #coinmarketcal td {
-                padding: 10px 8px;
+            #coinmarketcal tbody {
+                background: white;
+            }
+
+            #coinmarketcal tbody tr {
+                border-bottom: 1px solid #e2e8f0;
+                transition: all 0.15s ease;
+                cursor: pointer;
+                min-height: 50px;
+            }
+
+            #coinmarketcal tbody tr:nth-child(even) {
+                background-color: #f8fafc;
+            }
+
+            #coinmarketcal tbody tr:hover {
+                background: linear-gradient(90deg, #e0c3fc 0%, #8ec5fc 100%);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+
+            #coinmarketcal tbody tr.mobile-touch-active {
+                background: linear-gradient(90deg, #d4b5f7 0%, #7db8f7 100%);
+                transform: scale(0.98);
+            }
+
+            #coinmarketcal tbody td {
+                padding: 12px 8px;
                 font-size: 13px;
+                text-align: center;
+                vertical-align: middle;
+                border: none;
             }
 
-            #coinmarketcal td:first-child {
-                font-size: 16px;
-                padding: 8px 6px;
-                border-left-width: 4px;
+            /* Enhanced Symbol Column (First Column) */
+            #coinmarketcal tbody td:first-child {
+                font-size: 18px;
+                font-weight: 700;
+                padding: 12px 8px;
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                border-left: 4px solid #667eea;
+                border-radius: 0 8px 8px 0;
+                color: #1e293b;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            }
+
+            #coinmarketcal tbody td:first-child:hover {
+                background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+                transform: scale(1.02);
             }
 
             /* Mobile-optimized DataTables controls */
             .dataTables_wrapper .dataTables_length {
                 float: none;
                 text-align: center;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
                 width: 100%;
+                padding: 8px 12px;
+            }
+
+            .dataTables_wrapper .dataTables_length select {
                 padding: 6px 12px;
+                border: 2px solid #ddd;
+                border-radius: 8px;
+                font-size: 14px;
+                background: white;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
 
             .dataTables_wrapper .dataTables_filter {
                 text-align: center;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
                 width: 100%;
             }
 
@@ -365,6 +437,7 @@
 
             .dataTables_filter input[type="search"] {
                 width: 100%;
+                max-width: 300px;
                 padding: 12px 16px;
                 border: 2px solid #ddd;
                 border-radius: 12px;
@@ -373,6 +446,13 @@
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 box-sizing: border-box;
                 text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .dataTables_filter input[type="search"]:focus {
+                border-color: #667eea;
+                box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+                outline: none;
             }
 
             .dataTables_filter input[type="search"]::placeholder {
@@ -387,34 +467,53 @@
 
             .dataTables_info {
                 text-align: center;
-                margin-top: 10px;
-                font-size: 12px;
+                margin-top: 15px;
+                font-size: 13px;
                 color: #666;
+                padding: 8px;
+                background: #f8fafc;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
             }
 
             .dataTables_paginate {
                 text-align: center;
-                margin-top: 10px;
+                margin-top: 15px;
             }
 
             .dataTables_paginate .paginate_button {
-                padding: 6px 10px;
-                margin: 0 2px;
-                font-size: 12px;
-                min-width: 36px;
-                min-height: 36px;
-                border-radius: 6px;
+                padding: 8px 12px;
+                margin: 0 3px;
+                font-size: 13px;
+                min-width: 40px;
+                min-height: 40px;
+                border-radius: 8px;
                 background: #f8f9fa;
                 color: #333;
                 border: 1px solid #dee2e6;
                 cursor: pointer;
                 transition: all 0.2s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .dataTables_paginate .paginate_button:hover {
+                background: #e9ecef;
+                border-color: #adb5bd;
+                transform: translateY(-1px);
             }
 
             .dataTables_paginate .paginate_button.current {
                 background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
                 color: white;
                 border-color: #667eea;
+                box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            }
+
+            .dataTables_paginate .paginate_button.disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
             }
 
             /* Mobile-optimized table layout */
@@ -423,24 +522,8 @@
                 -webkit-overflow-scrolling: touch;
                 border-radius: 12px;
                 margin: 0;
-            }
-
-            /* Mobile touch feedback */
-            #coinmarketcal tbody tr {
-                transition: all 0.15s ease;
-                cursor: pointer;
-                min-height: 44px;
-            }
-
-            #coinmarketcal tbody tr:hover {
-                background: linear-gradient(90deg, #e0c3fc 0%, #8ec5fc 100%);
-                transform: translateY(-1px);
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            }
-
-            #coinmarketcal tbody tr.mobile-touch-active {
-                background: linear-gradient(90deg, #d4b5f7 0%, #7db8f7 100%);
-                transform: scale(0.98);
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             }
 
             /* Mobile-optimized processing indicator */
@@ -549,12 +632,11 @@
 
             #coinmarketcal {
                 font-size: 13px;
-                min-width: 350px;
-                margin-top: 12px;
+                min-width: 100% !important;
             }
 
             #coinmarketcal thead th {
-                padding: 8px 6px;
+                padding: 10px 6px;
                 font-size: 13px;
             }
 
@@ -563,29 +645,30 @@
                 margin-right: 4px;
             }
 
-            #coinmarketcal td {
-                padding: 8px 6px;
+            #coinmarketcal tbody td {
+                padding: 10px 6px;
                 font-size: 12px;
             }
 
-            #coinmarketcal td:first-child {
-                font-size: 14px;
-                padding: 6px 4px;
+            #coinmarketcal tbody td:first-child {
+                font-size: 16px;
+                padding: 10px 6px;
                 border-left-width: 3px;
             }
 
             .dataTables_wrapper .dataTables_length {
-                padding: 4px 8px;
+                padding: 6px 8px;
             }
 
             .dataTables_wrapper .dataTables_length select {
                 font-size: 13px;
-                padding: 3px 6px;
+                padding: 4px 8px;
             }
 
             .dataTables_filter input[type="search"] {
                 font-size: 16px;
                 padding: 10px 14px;
+                max-width: 100%;
             }
 
             #theme-toggle {
@@ -594,15 +677,16 @@
             }
 
             .dataTables_info {
-                font-size: 11px;
+                font-size: 12px;
+                padding: 6px;
             }
 
             .dataTables_paginate .paginate_button {
-                padding: 4px 8px;
-                font-size: 11px;
-                min-width: 32px;
-                min-height: 32px;
-                margin: 0 1px;
+                padding: 6px 10px;
+                font-size: 12px;
+                min-width: 36px;
+                min-height: 36px;
+                margin: 0 2px;
             }
         }
 
