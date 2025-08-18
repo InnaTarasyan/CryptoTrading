@@ -56,77 +56,73 @@
                 justify-content: center;
             }
             
-            /* Mobile-specific table styles */
+            /* Mobile-specific table styles - Simplified */
             .coins-table-responsive {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
                 touch-action: pan-x;
                 position: relative;
+                padding: 0.5em;
             }
             
             .coins-table {
-                min-width: 800px; /* Ensure table doesn't get too narrow on mobile */
-                table-layout: fixed; /* Better column control */
+                min-width: 400px; /* Reduced from 800px for better mobile performance */
+                table-layout: fixed;
+                font-size: 13px;
             }
             
-            /* Mobile-friendly column widths */
+            /* Mobile-friendly column widths - Only essential columns */
             .coins-table th,
             .coins-table td {
-                padding: 8px 4px;
-                font-size: 14px;
+                padding: 6px 3px;
+                font-size: 13px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
             
-            /* Fixed column widths for mobile */
+            /* Fixed column widths for mobile - Only 4 essential columns */
             .coins-table th:nth-child(1),
-            .coins-table td:nth-child(1) { width: 80px; }
+            .coins-table td:nth-child(1) { width: 60px; } /* Symbol */
             .coins-table th:nth-child(2),
-            .coins-table td:nth-child(2) { width: 120px; }
+            .coins-table td:nth-child(2) { width: 100px; } /* Name */
             .coins-table th:nth-child(3),
-            .coins-table td:nth-child(3) { width: 150px; }
+            .coins-table td:nth-child(3) { width: 120px; } /* Full Name */
             .coins-table th:nth-child(4),
-            .coins-table td:nth-child(4) { width: 60px; }
-            .coins-table th:nth-child(7),
-            .coins-table td:nth-child(7) { width: 80px; }
-            .coins-table th:nth-child(8),
-            .coins-table td:nth-child(8) { width: 80px; }
-            .coins-table th:nth-child(9),
-            .coins-table td:nth-child(9) { width: 80px; }
+            .coins-table td:nth-child(4) { width: 50px; } /* Image */
             
-            /* Hide less important columns on mobile */
+            /* Hide ALL other columns on mobile for simplicity */
             .coins-table th:nth-child(5),
             .coins-table th:nth-child(6),
+            .coins-table th:nth-child(7),
+            .coins-table th:nth-child(8),
+            .coins-table th:nth-child(9),
             .coins-table th:nth-child(10),
-            .coins-table th:nth-child(11),
-            .coins-table th:nth-child(12),
-            .coins-table th:nth-child(13),
             .coins-table td:nth-child(5),
             .coins-table td:nth-child(6),
-            .coins-table td:nth-child(10),
-            .coins-table td:nth-child(11),
-            .coins-table td:nth-child(12),
-            .coins-table td:nth-child(13) {
-                display: none;
+            .coins-table td:nth-child(7),
+            .coins-table td:nth-child(8),
+            .coins-table td:nth-child(9),
+            .coins-table td:nth-child(10) {
+                display: none !important;
             }
             
-            /* Mobile search and pagination */
+            /* Mobile search and pagination - Simplified */
             .dataTables_filter input {
                 width: 100%;
                 margin-left: 0 !important;
-                margin-bottom: 10px;
-                font-size: 16px; /* Prevent zoom on iOS */
-                padding: 8px;
+                margin-bottom: 8px;
+                font-size: 16px;
+                padding: 6px;
                 border: 1px solid #ddd;
                 border-radius: 4px;
             }
             
             .dataTables_length select {
                 width: 100%;
-                margin-bottom: 10px;
-                font-size: 16px; /* Prevent zoom on iOS */
-                padding: 8px;
+                margin-bottom: 8px;
+                font-size: 16px;
+                padding: 6px;
                 border: 1px solid #ddd;
                 border-radius: 4px;
             }
@@ -134,15 +130,16 @@
             .dataTables_info,
             .dataTables_paginate {
                 text-align: center;
-                margin-top: 10px;
+                margin-top: 8px;
+                font-size: 12px;
             }
             
             .dataTables_paginate .paginate_button {
-                padding: 8px 12px;
-                margin: 0 2px;
-                font-size: 14px;
-                min-width: 44px; /* Touch-friendly button size */
-                min-height: 44px;
+                padding: 6px 8px;
+                margin: 0 1px;
+                font-size: 12px;
+                min-width: 36px;
+                min-height: 36px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -150,23 +147,23 @@
             
             /* Mobile-friendly table wrapper */
             .table-wrapper {
-                margin: 0 -15px;
-                padding: 0 15px;
+                margin: 0;
+                padding: 0;
             }
             
             /* Ensure proper touch scrolling */
             .coins-table-responsive::-webkit-scrollbar {
-                height: 8px;
+                height: 6px;
             }
             
             .coins-table-responsive::-webkit-scrollbar-track {
                 background: #f1f1f1;
-                border-radius: 4px;
+                border-radius: 3px;
             }
             
             .coins-table-responsive::-webkit-scrollbar-thumb {
                 background: #667eea;
-                border-radius: 4px;
+                border-radius: 3px;
             }
             
             .coins-table-responsive::-webkit-scrollbar-thumb:hover {
@@ -176,6 +173,7 @@
             /* Mobile-specific DataTables wrapper styles */
             .dataTables_wrapper {
                 overflow: hidden;
+                font-size: 13px;
             }
             
             .dataTables_scroll {
@@ -190,25 +188,52 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 z-index: 1001;
+                font-size: 14px;
+            }
+            
+            /* Mobile-optimized table styling */
+            .coins-table th {
+                padding: 8px 4px;
+                font-size: 12px;
+            }
+            
+            .coins-table td {
+                padding: 6px 3px;
+                font-size: 12px;
+            }
+            
+            /* Optimize images for mobile */
+            .previewable-img {
+                height: 30px !important;
+                width: 30px !important;
+            }
+            
+            /* Mobile-friendly badges */
+            .badge {
+                font-size: 10px;
+                padding: 2px 4px;
             }
         }
         
-        /* Tablet Responsiveness */
+        /* Tablet Responsiveness - Simplified */
         @media (min-width: 601px) and (max-width: 900px) {
+            /* Show only essential columns on tablet */
+            .coins-table th:nth-child(5),
+            .coins-table th:nth-child(6),
             .coins-table th:nth-child(10),
-            .coins-table th:nth-child(11),
-            .coins-table th:nth-child(12),
-            .coins-table th:nth-child(13),
-            .coins-table td:nth-child(10),
-            .coins-table td:nth-child(11),
-            .coins-table td:nth-child(12),
-            .coins-table td:nth-child(13) {
+            .coins-table td:nth-child(5),
+            .coins-table td:nth-child(6),
+            .coins-table td:nth-child(10) {
                 display: none;
             }
             
             .coins-table-responsive {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
+            }
+            
+            .coins-table {
+                min-width: 600px;
             }
         }
         
@@ -230,13 +255,102 @@
             }
             
             .dataTables_wrapper {
-                font-size: 14px;
+                font-size: 12px;
             }
             
             .coins-table th,
             .coins-table td {
-                padding: 6px 3px;
-                font-size: 13px;
+                padding: 4px 2px;
+                font-size: 11px;
+            }
+            
+            /* Ultra-mobile optimizations */
+            .coins-table-responsive {
+                padding: 0.3em;
+            }
+            
+            .coins-table {
+                min-width: 350px;
+            }
+            
+            /* Even smaller column widths for ultra-mobile */
+            .coins-table th:nth-child(1),
+            .coins-table td:nth-child(1) { width: 50px; }
+            .coins-table th:nth-child(2),
+            .coins-table td:nth-child(2) { width: 80px; }
+            .coins-table th:nth-child(3),
+            .coins-table td:nth-child(3) { width: 100px; }
+            .coins-table th:nth-child(4),
+            .coins-table td:nth-child(4) { width: 40px; }
+            
+            /* Optimize images for ultra-mobile */
+            .previewable-img {
+                height: 25px !important;
+                width: 25px !important;
+            }
+            
+            /* Mobile-friendly search */
+            .dataTables_filter input {
+                font-size: 14px;
+                padding: 4px;
+            }
+        }
+        
+        /* Mobile-optimized responsive popup */
+        @media (max-width: 600px) {
+            .dtr-modal {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                max-width: none !important;
+                max-height: none !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                z-index: 9999 !important;
+            }
+            
+            .dtr-modal-content {
+                padding: 1em !important;
+                max-height: 100vh !important;
+                overflow-y: auto !important;
+            }
+            
+            .dtr-modal-header {
+                padding: 0.5em 0 !important;
+                margin-bottom: 1em !important;
+            }
+            
+            .dtr-modal-header h3 {
+                font-size: 1.2em !important;
+                margin: 0 !important;
+            }
+            
+            .dtr-modal-close {
+                position: absolute !important;
+                top: 1em !important;
+                right: 1em !important;
+                background: #667eea !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 50% !important;
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 16px !important;
+                cursor: pointer !important;
+            }
+            
+            .dtr-modal table {
+                font-size: 12px !important;
+            }
+            
+            .dtr-modal th,
+            .dtr-modal td {
+                padding: 6px 4px !important;
+                font-size: 12px !important;
             }
         }
         
@@ -662,6 +776,116 @@
                 margin-top: 0.5em;
                 width: 100%;
             }
+            
+            /* Hide unnecessary elements on mobile */
+            .coins-toolbar {
+                gap: 0.5em;
+            }
+            
+            .coins-toolbar-btn {
+                padding: 0.4em 1em;
+                font-size: 0.95em;
+            }
+            
+            /* Simplify title bar on mobile */
+            .beautiful-modern-title-bar {
+                padding: 1em 0.8em;
+                min-height: 60px;
+            }
+            
+            .modern-title-text {
+                font-size: 1.3rem;
+            }
+            
+            /* Simplify navigation tabs on mobile */
+            .modern-tabs-container {
+                padding: 1em;
+            }
+            
+            .modern-tabs {
+                gap: 0.5em;
+            }
+            
+            .beautiful-tab {
+                padding: 0.6em 1em;
+                font-size: 0.9em;
+            }
+            
+            /* Mobile-optimized table container */
+            .coins-table-responsive {
+                margin-top: 1em;
+                padding: 0.5em;
+                background: #fff;
+                border-radius: 1em;
+                box-shadow: 0 2px 12px rgba(102,126,234,0.06);
+            }
+            
+            /* Ultra-simple mobile table */
+            .coins-table {
+                border-radius: 0.8em;
+                overflow: hidden;
+            }
+            
+            .coins-table th {
+                padding: 8px 4px;
+                font-size: 11px;
+                font-weight: 600;
+            }
+            
+            .coins-table td {
+                padding: 6px 3px;
+                font-size: 11px;
+            }
+            
+            /* Mobile-optimized badges */
+            .badge {
+                font-size: 9px;
+                padding: 1px 3px;
+                border-radius: 3px;
+            }
+            
+            /* Mobile-friendly pagination */
+            .dataTables_paginate {
+                margin-top: 8px;
+            }
+            
+            .dataTables_paginate .paginate_button {
+                margin: 0 1px;
+                padding: 4px 6px;
+                font-size: 11px;
+                min-width: 32px;
+                min-height: 32px;
+            }
+            
+            .dataTables_paginate .paginate_button.current {
+                background: #667eea !important;
+                color: white !important;
+                border: none !important;
+            }
+            
+            /* Mobile-optimized search */
+            .dataTables_filter {
+                margin-bottom: 8px;
+            }
+            
+            .dataTables_filter input {
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 4px 6px;
+                font-size: 14px;
+            }
+            
+            /* Hide length selector on mobile for simplicity */
+            .dataTables_length {
+                display: none !important;
+            }
+            
+            /* Mobile-optimized info display */
+            .dataTables_info {
+                font-size: 11px;
+                margin-top: 6px;
+                color: #666;
+            }
         }
         
         /* Ensure proper z-index for mobile */
@@ -928,6 +1152,9 @@
                 autoWidth: false, // Better mobile layout
                 scrollX: true, // Enable horizontal scrolling on mobile
                 scrollCollapse: true,
+                // Mobile-optimized settings
+                pageLength: isMobile ? 5 : 25, // Reduced from 15 to 10 for mobile
+                lengthMenu: isMobile ? [[5, 10, 15, -1], [5, 10, 15, "All"]] : [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 ajax: {
                     url: '/getcryptocomparecoinsdata',
                     type: 'GET',
@@ -959,10 +1186,10 @@
                     }
                 },
                 columns: [
-                    {data: 'symbol', name: 'symbol', width: isMobile ? '80px' : 'auto'},
-                    {data: 'name', name: 'name', width: isMobile ? '120px' : 'auto'},
-                    {data: 'full_name', name: 'full_name', width: isMobile ? '150px' : 'auto'},
-                    {data: 'image_url', name: 'image_url', width: isMobile ? '60px' : 'auto'},
+                    {data: 'symbol', name: 'symbol', width: isMobile ? '60px' : 'auto'},
+                    {data: 'name', name: 'name', width: isMobile ? '100px' : 'auto'},
+                    {data: 'full_name', name: 'full_name', width: isMobile ? '120px' : 'auto'},
+                    {data: 'image_url', name: 'image_url', width: isMobile ? '50px' : 'auto'},
                     {data: 'algorithm', name: 'algorithm', className: 'desktop-only', width: 'auto'},
                     {data: 'proof_type', name: 'proof_type', className: 'desktop-only', width: 'auto'},
                     {data: 'is_trading', name: 'is_trading', width: isMobile ? '80px' : 'auto'},
@@ -984,8 +1211,6 @@
                     }
                 },
                 order: [[0, 'asc']],
-                pageLength: isMobile ? 5 : 25,
-                lengthMenu: isMobile ? [[10, 15, 25, -1], [10, 15, 25, "All"]] : [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 language: {
                     search: "Search coins:",
                     lengthMenu: "Show _MENU_ coins per page",
@@ -1009,6 +1234,9 @@
                         $('.dataTables_filter input').attr('placeholder', 'Search coins...');
                         $('.dataTables_filter input').attr('autocomplete', 'off');
                         $('.dataTables_filter input').attr('type', 'search');
+                        
+                        // Simplify mobile interface
+                        $('.dataTables_length').hide(); // Hide length selector on mobile for simplicity
                     }
                     
                     // Ensure proper column sizing
@@ -1093,6 +1321,24 @@
                         element.click();
                     }
                 });
+                
+                // Mobile-specific optimizations
+                $('.coins-table-responsive').css({
+                    'touch-action': 'pan-x',
+                    'user-select': 'none',
+                    '-webkit-user-select': 'none'
+                });
+                
+                // Optimize scroll performance on mobile
+                $('.coins-table-responsive').on('scroll', function() {
+                    // Throttle scroll events for better performance
+                    if (this.scrollTimeout) {
+                        clearTimeout(this.scrollTimeout);
+                    }
+                    this.scrollTimeout = setTimeout(function() {
+                        // Handle scroll if needed
+                    }, 16); // ~60fps
+                });
             }
             
             // Add error handling for DataTable
@@ -1163,6 +1409,37 @@
                     console.log('Table render time:', (endTime - startTime).toFixed(2) + 'ms');
                     startTime = endTime;
                 });
+                
+                // Mobile-specific performance optimizations
+                $(document).on('responsive-display.dt', function(e, settings, row, show) {
+                    if (show && isMobile) {
+                        // Optimize popup for mobile
+                        var modal = $('.dtr-modal');
+                        if (modal.length) {
+                            modal.css({
+                                'position': 'fixed',
+                                'top': '0',
+                                'left': '0',
+                                'right': '0',
+                                'bottom': '0',
+                                'width': '100%',
+                                'height': '100%',
+                                'max-width': 'none',
+                                'max-height': 'none',
+                                'margin': '0',
+                                'border-radius': '0',
+                                'z-index': '9999'
+                            });
+                            
+                            // Add mobile-friendly close button
+                            if (!modal.find('.dtr-modal-close').length) {
+                                modal.find('.dtr-modal-header').append(
+                                    '<button class="dtr-modal-close" onclick="$(this).closest(\'.dtr-modal\').hide()">×</button>'
+                                );
+                            }
+                        }
+                    }
+                });
             }
             
             // Ensure proper cleanup on page unload
@@ -1171,6 +1448,27 @@
                     coinsTable.destroy();
                 }
             });
+            
+            // Add mobile-specific event optimizations
+            if (isMobile) {
+                // Reduce event listeners for better performance
+                $(document).off('click.dt').on('click.dt', '.coins-table tbody tr', function(e) {
+                    // Handle row clicks for mobile
+                    var row = coinsTable.row(this);
+                    if (row.length) {
+                        // Show responsive details
+                        row.child.show();
+                    }
+                });
+                
+                // Optimize touch events
+                $('.coins-table-responsive').on('touchstart', function(e) {
+                    // Prevent multiple touch events
+                    if (e.touches.length > 1) {
+                        e.preventDefault();
+                    }
+                });
+            }
         });
     </script>
 @endsection 
