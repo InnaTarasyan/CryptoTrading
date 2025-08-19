@@ -538,6 +538,22 @@
                                         @endforeach
                                     </div>
 
+                                    <!-- CryptoCompare -->
+                                    <div class="permission-section cryptocompare" style="border-left-color:#0ea5e9;">
+                                        <h6 class="text-info">
+                                            <i class="fas fa-chart-pie"></i>CryptoCompare
+                                        </h6>
+                                        @foreach(['cryptocompare_markets', 'cryptocompare_news', 'cryptocompare_coins', 'cryptocompare_exchanges', 'cryptocompare_top_pairs'] as $permission)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="permissions[]"
+                                                       value="{{ $permission }}" id="{{ $permission }}"
+                                                       {{ is_array(old('permissions')) && in_array($permission, old('permissions')) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="{{ $permission }}">
+                                                    {{ ucwords(str_replace('_', ' ', $permission)) }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                     <!-- Social -->
                                     <div class="permission-section social">
                                         <h6 class="text-warning">
@@ -823,6 +839,15 @@
                                             <li><code>GET /api/livecoinwatch/fiats</code></li>
                                             <li><code>GET /api/livecoinwatch/live-coin-histories</code></li>
                                             <li><code>GET /api/livecoinwatch/live-coin-watches</code></li>
+                                        </ul>
+
+                                        <h6 class="text-info mt-3"><i class="fas fa-chart-pie me-1"></i>CryptoCompare</h6>
+                                        <ul class="list-unstyled small">
+                                            <li><code>GET /api/cryptocompare/markets</code></li>
+                                            <li><code>GET /api/cryptocompare/news</code></li>
+                                            <li><code>GET /api/cryptocompare/coin?symbol=BTC</code></li>
+                                            <li><code>POST /api/cryptocompare/fetch</code></li>
+                                            <li><code>GET /api/cryptocompare/test</code></li>
                                         </ul>
 
                                         <h6 class="text-warning mt-3"><i class="fas fa-share-alt me-1"></i>Social</h6>

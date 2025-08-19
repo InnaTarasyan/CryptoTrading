@@ -79,6 +79,13 @@ class ApiKey extends Model
             'live_coin_histories',
             'live_coin_watches',
             
+            // CryptoCompare
+            'cryptocompare_markets',
+            'cryptocompare_news',
+            'cryptocompare_coins',
+            'cryptocompare_exchanges',
+            'cryptocompare_top_pairs',
+            
             // Telegram
             'telegram_messages',
             

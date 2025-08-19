@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CoinMarketCalApiController;
 use App\Http\Controllers\Api\LiveCoinWatchApiController;
 use App\Http\Controllers\Api\TwitterApiController;
 use App\Http\Controllers\Api\TelegramApiController;
+use App\Http\Controllers\Api\CryptoCompareApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,9 +62,9 @@ Route::prefix('twitter')->group(function () {
 
 // CryptoCompare API Routes
 Route::prefix('cryptocompare')->group(function () {
-    Route::get('/markets', [CryptoCompareController::class, 'getMarkets']);
-    Route::get('/news', [CryptoCompareController::class, 'getNews']);
-    Route::get('/coin', [CryptoCompareController::class, 'getCoin']);
-    Route::post('/fetch', [CryptoCompareController::class, 'fetchData']);
-    Route::get('/test', [CryptoCompareController::class, 'testConnection']);
+	Route::get('/markets', [CryptoCompareApiController::class, 'markets'])->middleware('api.key:cryptocompare_markets');
+	Route::get('/news', [CryptoCompareApiController::class, 'news'])->middleware('api.key:cryptocompare_news');
+	Route::get('/exchanges', [CryptoCompareApiController::class, 'exchanges'])->middleware('api.key:cryptocompare_exchanges');
+	Route::get('/coins', [CryptoCompareApiController::class, 'coins'])->middleware('api.key:cryptocompare_coins');
+	Route::get('/top-pairs', [CryptoCompareApiController::class, 'topPairs'])->middleware('api.key:cryptocompare_top_pairs');
 });
