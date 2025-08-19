@@ -69,9 +69,29 @@ class CoinMarketCalTable {
             ajax: $(this.routeSelector).val(),
             columns: [
                 { data: 'symbol', name: 'symbol' },
-                { data: 'name', name: 'name' },
+                { 
+                    data: 'name', 
+                    name: 'name',
+                    render: (data, type, row) => {
+                        if (data && data.length > (this.isMobile ? 15 : 25)) {
+                            const limit = this.isMobile ? 15 : 25;
+                            return `<span class="mobile-truncate" title="${data}">${data.substring(0, limit)}...</span>`;
+                        }
+                        return data;
+                    }
+                },
                 { data: 'rank', name: 'rank' },
-                { data: 'fullname', name: 'fullname' },
+                { 
+                    data: 'fullname', 
+                    name: 'fullname',
+                    render: (data, type, row) => {
+                        if (data && data.length > (this.isMobile ? 15 : 25)) {
+                            const limit = this.isMobile ? 15 : 25;
+                            return `<span class="mobile-truncate" title="${data}">${data.substring(0, limit)}...</span>`;
+                        }
+                        return data;
+                    }
+                },
             ],
             fnCreatedRow: function(row, data, dataIndex) {
                 // Set data-label attributes for mobile responsiveness
@@ -85,6 +105,7 @@ class CoinMarketCalTable {
             fnDrawCallback: () => {
                 this.bindRowClick(); // Rebind row click after redraw
                 this.setDataLabels(); // Set data labels after redraw
+                this.addTruncationStyles(); // Add truncation styles
             },
             initComplete: () => this.onTableInitComplete()
         });
@@ -182,6 +203,7 @@ class CoinMarketCalTable {
                     
                     if (this.table) {
                         this.table.columns.adjust().draw();
+                        this.addTruncationStyles(); // Reapply truncation styles after resize
                     }
                 }
             }, 250);
@@ -296,6 +318,17 @@ class CoinMarketCalTable {
             if (searchTerm) {
                 body.highlight(searchTerm);
             }
+        });
+    }
+
+    /**
+     * Add mobile truncation styles to the table
+     */
+    addTruncationStyles() {
+        $(this.tableSelector + ' .mobile-truncate').css({
+            'overflow': 'hidden',
+            'text-overflow': 'ellipsis',
+            'white-space': 'nowrap'
         });
     }
 }

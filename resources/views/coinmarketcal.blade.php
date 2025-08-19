@@ -584,6 +584,25 @@
                 background: #e0c3fc;
             }
 
+            /* Mobile Text Truncation for Name and Fullname Columns */
+            #coinmarketcal tbody td:nth-child(2),
+            #coinmarketcal tbody td:nth-child(4) {
+                max-width: 120px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #coinmarketcal tbody td:nth-child(2) .mobile-truncate,
+            #coinmarketcal tbody td:nth-child(4) .mobile-truncate {
+                display: inline-block;
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                cursor: help;
+            }
+
             /* Mobile-optimized DataTables controls */
             .dataTables_wrapper .dataTables_length {
                 float: none;
@@ -1352,6 +1371,27 @@
             overflow: visible;
             touch-action: pan-y;
             -webkit-overflow-scrolling: touch;
+        }
+
+        /* Desktop Text Truncation for Name and Fullname Columns */
+        @media (min-width: 769px) {
+            #coinmarketcal tbody td:nth-child(2),
+            #coinmarketcal tbody td:nth-child(4) {
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #coinmarketcal tbody td:nth-child(2) .mobile-truncate,
+            #coinmarketcal tbody td:nth-child(4) .mobile-truncate {
+                display: inline-block;
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                cursor: help;
+            }
         }
     </style>
 @endsection
