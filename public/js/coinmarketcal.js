@@ -27,6 +27,18 @@ class CoinMarketCalTable {
     }
 
     /**
+     * Set data-label attributes for mobile responsiveness
+     */
+    setDataLabels() {
+        $(this.tableSelector + ' tbody tr').each(function() {
+            $(this).find('td:eq(0)').attr('data-label', 'Symbol');
+            $(this).find('td:eq(1)').attr('data-label', 'Name');
+            $(this).find('td:eq(2)').attr('data-label', 'Rank');
+            $(this).find('td:eq(3)').attr('data-label', 'Fullname');
+        });
+    }
+
+    /**
      * Initialize DataTable with server-side processing and custom callbacks
      */
     initDataTable() {
@@ -61,9 +73,19 @@ class CoinMarketCalTable {
                 { data: 'rank', name: 'rank' },
                 { data: 'fullname', name: 'fullname' },
             ],
+            fnCreatedRow: function(row, data, dataIndex) {
+                // Set data-label attributes for mobile responsiveness
+                $(row).find('td:eq(0)').attr('data-label', 'Symbol');
+                $(row).find('td:eq(1)').attr('data-label', 'Name');
+                $(row).find('td:eq(2)').attr('data-label', 'Rank');
+                $(row).find('td:eq(3)').attr('data-label', 'Fullname');
+            },
             iDisplayLength: this.isMobile ? 15 : 20,
             infoCallback: this.infoCallback,
-            fnDrawCallback: () => this.bindRowClick(), // Rebind row click after redraw
+            fnDrawCallback: () => {
+                this.bindRowClick(); // Rebind row click after redraw
+                this.setDataLabels(); // Set data labels after redraw
+            },
             initComplete: () => this.onTableInitComplete()
         });
     }
@@ -73,6 +95,7 @@ class CoinMarketCalTable {
      */
     onTableInitComplete() {
         this.adjustColumnsForDevice();
+        this.setDataLabels(); // Set data labels after initialization
         
         if (this.isMobile) {
             // Mobile-specific optimizations

@@ -306,6 +306,53 @@
                 justify-content: center;
             }
 
+            /* Responsive DataTable for mobile - EXACTLY like history.blade.php */
+            #coinmarketcal thead {
+                display: none;
+            }
+
+            #coinmarketcal tbody, #coinmarketcal tr, #coinmarketcal td {
+                display: block;
+                width: 100%;
+            }
+
+            #coinmarketcal tr {
+                margin-bottom: 1rem;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+                background: #fff;
+                padding: 0.5rem 0.75rem;
+            }
+
+            #coinmarketcal td {
+                text-align: left;
+                padding-left: 50%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #eee;
+                min-height: 40px;
+                box-sizing: border-box;
+                font-size: 13px;
+                vertical-align: middle;
+            }
+
+            #coinmarketcal td:last-child {
+                border-bottom: none;
+            }
+
+            #coinmarketcal td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0.75rem;
+                top: 0;
+                width: 45%;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #333;
+                font-size: 0.95em;
+            }
+
             /* Performance-optimized Mobile Datatable */
             #coinmarketcal_wrapper {
                 margin-top: 0;
@@ -320,35 +367,6 @@
                 font-size: 14px;
                 border-collapse: collapse;
                 background: white;
-                /* Remove heavy styling for performance */
-            }
-
-            #coinmarketcal thead {
-                background: #667eea;
-                color: white;
-            }
-
-            #coinmarketcal thead th {
-                padding: 12px 8px;
-                font-size: 14px;
-                font-weight: 600;
-                text-align: center;
-                border: none;
-                /* Remove complex styling */
-            }
-
-            #coinmarketcal thead th:first-child {
-                border-top-left-radius: 0;
-            }
-
-            #coinmarketcal thead th:last-child {
-                border-top-right-radius: 0;
-            }
-
-            #coinmarketcal thead th .icon {
-                font-size: 1.2em;
-                margin-right: 6px;
-                display: inline-block;
             }
 
             #coinmarketcal tbody {
@@ -356,8 +374,6 @@
             }
 
             #coinmarketcal tbody tr {
-                border-bottom: 1px solid #e2e8f0;
-                /* Remove heavy transitions for performance */
                 cursor: pointer;
                 min-height: 50px;
             }
@@ -366,35 +382,21 @@
                 background-color: #f8fafc;
             }
 
-            /* Simplified hover effect for performance */
             #coinmarketcal tbody tr:hover {
                 background-color: #e0c3fc;
-                /* Remove transform and box-shadow for performance */
-            }
-
-            #coinmarketcal tbody td {
-                padding: 12px 8px;
-                font-size: 13px;
-                text-align: center;
-                vertical-align: middle;
-                border: none;
             }
 
             /* Simplified Symbol Column for performance */
             #coinmarketcal tbody td:first-child {
                 font-size: 18px;
                 font-weight: 700;
-                padding: 12px 8px;
                 background: #f8fafc;
                 border-left: 4px solid #667eea;
                 color: #1e293b;
-                /* Remove heavy styling for performance */
             }
 
-            /* Remove hover effects that cause freezing */
             #coinmarketcal tbody td:first-child:hover {
                 background: #e0c3fc;
-                /* Remove transform for performance */
             }
 
             /* Mobile-optimized DataTables controls */
@@ -438,7 +440,6 @@
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 box-sizing: border-box;
                 text-align: center;
-                /* Remove transition for performance */
             }
 
             .dataTables_filter input[type="search"]:focus {
@@ -484,7 +485,6 @@
                 color: #333;
                 border: 1px solid #dee2e6;
                 cursor: pointer;
-                /* Remove transition for performance */
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -493,7 +493,6 @@
             .dataTables_paginate .paginate_button:hover {
                 background: #e9ecef;
                 border-color: #adb5bd;
-                /* Remove transform for performance */
             }
 
             .dataTables_paginate .paginate_button.current {
@@ -515,7 +514,6 @@
                 border-radius: 0 0 16px 16px;
                 margin: 0;
                 background: white;
-                /* Remove heavy box-shadow for performance */
                 border: 1px solid #e2e8f0;
             }
 
@@ -622,27 +620,6 @@
             #coinmarketcal {
                 font-size: 13px;
                 min-width: 100% !important;
-            }
-
-            #coinmarketcal thead th {
-                padding: 10px 6px;
-                font-size: 13px;
-            }
-
-            #coinmarketcal thead th .icon {
-                font-size: 1em;
-                margin-right: 4px;
-            }
-
-            #coinmarketcal tbody td {
-                padding: 10px 6px;
-                font-size: 12px;
-            }
-
-            #coinmarketcal tbody td:first-child {
-                font-size: 16px;
-                padding: 10px 6px;
-                border-left-width: 3px;
             }
 
             .dataTables_wrapper .dataTables_length {
