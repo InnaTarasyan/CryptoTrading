@@ -83,17 +83,38 @@ CoingeckoTrendings.prototype.init = function () {
             var $input = $filter.find('input[type="search"]');
             $input.attr('placeholder', 'Search...');
             $input.wrap('<div class="search-wrapper"></div>');
-            $input.before('<span class="search-icon">\
+            $input.after('<button id="clear-search" type="button" tabindex="0">Clear</button>');
+            $filter.css({width: '100%', 'max-width': '400px', 'margin-bottom': '0', float: 'none', display: 'flex', 'align-items': 'center', 'justify-content': 'flex-end', background: 'none', padding: 0});
+            $filter.find('.search-wrapper').css({display: 'flex', 'align-items': 'center', width: '100%', position: 'relative'});
+
+            // Conditionally add/remove search icon based on viewport (hide on mobile)
+            var iconMarkup = '<span class="search-icon">\
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
                     <circle cx="11" cy="11" r="8" stroke="#ff6a88" stroke-width="2"/>\
                     <line x1="18" y1="18" x2="22" y2="22" stroke="#ff99ac" stroke-width="2" stroke-linecap="round"/>\
                 </svg>\
-            </span>');
-            $input.after('<button id="clear-search" type="button" tabindex="0">Clear</button>');
-            $filter.css({width: '100%', 'max-width': '400px', 'margin-bottom': '0', float: 'none', display: 'flex', 'align-items': 'center', 'justify-content': 'flex-end', background: 'none', padding: 0});
-            $filter.find('.search-wrapper').css({display: 'flex', 'align-items': 'center', width: '100%', position: 'relative'});
-            $filter.find('.search-icon').css({position: 'absolute', left: '16px', width: '22px', height: '22px', 'pointer-events': 'none', top: '50%', transform: 'translateY(-50%)'});
-            $input.css({'padding-left': '44px', 'padding-right': '44px'});
+            </span>';
+            var mql = window.matchMedia('(max-width: 700px)');
+            function applySearchIconState() {
+                if (mql.matches) {
+                    // Mobile: remove icon and use compact padding
+                    $filter.find('.search-icon').remove();
+                    $input.css({'padding-left': '16px', 'padding-right': '16px'});
+                } else {
+                    // Desktop: ensure icon exists and adjust padding
+                    if (!$filter.find('.search-icon').length) {
+                        $input.before(iconMarkup);
+                    }
+                    $filter.find('.search-icon').css({position: 'absolute', left: '16px', width: '22px', height: '22px', 'pointer-events': 'none', top: '50%', transform: 'translateY(-50%)'});
+                    $input.css({'padding-left': '44px', 'padding-right': '44px'});
+                }
+            }
+            applySearchIconState();
+            if (mql.addEventListener) {
+                mql.addEventListener('change', applySearchIconState);
+            } else if (mql.addListener) {
+                mql.addListener(applySearchIconState);
+            }
             $filter.find('#clear-search').on('click', function() {
                 $input.val('');
                 $input.trigger('input');

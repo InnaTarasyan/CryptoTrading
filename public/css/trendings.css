@@ -1209,3 +1209,184 @@ body.dark-mode .modern-title-text {
     margin-right: 0.3em;
     display: inline-block;
 }
+
+/* Responsive layout for action buttons and search (Trendings) */
+@media (max-width: 900px) {
+	.action-buttons-row {
+		display: flex !important;
+		flex-wrap: wrap !important;
+		align-items: stretch !important;
+		gap: 0.8em !important;
+	}
+	.action-buttons-left,
+	.action-buttons-right {
+		flex: 1 1 100% !important;
+		min-width: 0 !important;
+	}
+	.action-buttons-right {
+		display: flex !important;
+		justify-content: flex-start !important;
+	}
+	#trendings-search-container,
+	#coingecko_trendings_filter.dataTables_filter {
+		width: 100% !important;
+		max-width: none !important;
+		float: none !important;
+		margin-bottom: 0.6em !important;
+		justify-content: flex-start !important;
+	}
+	#trendings-search-container .search-wrapper,
+	#coingecko_trendings_filter.dataTables_filter .search-wrapper {
+		width: 100% !important;
+	}
+	#coingecko_trendings_filter.dataTables_filter input[type="search"] {
+		width: 100% !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.action-buttons-row {
+		flex-direction: column !important;
+		align-items: stretch !important;
+		justify-content: flex-start !important;
+	}
+	.action-buttons-left,
+	.action-buttons-right {
+		flex: 1 1 auto !important;
+		min-width: 0 !important;
+	}
+	/* Ensure export buttons wrap nicely */
+	#trendings-export-buttons {
+		display: flex !important;
+		flex-wrap: wrap !important;
+		gap: 0.5em !important;
+	}
+	/* Make search bar full width and avoid overflow */
+	#coingecko_trendings_filter.dataTables_filter {
+		max-width: 100% !important;
+		padding: 0 !important;
+	}
+	#coingecko_trendings_filter .search-wrapper {
+		width: 100% !important;
+	}
+	#coingecko_trendings_filter input[type="search"] {
+		box-sizing: border-box !important;
+	}
+	#coingecko_trendings_filter #clear-search {
+		flex: 0 0 auto !important;
+	}
+}
+
+@media (max-width: 400px) {
+	/* Compact search paddings for very small screens */
+	#coingecko_trendings_filter .search-icon {
+		left: 12px !important;
+		width: 20px !important;
+		height: 20px !important;
+	}
+	#coingecko_trendings_filter input[type="search"] {
+		padding-left: 40px !important;
+		padding-right: 40px !important;
+	}
+	#coingecko_trendings_filter #clear-search {
+		padding: 6px 12px !important;
+		font-size: 0.95em !important;
+	}
+}
+
+/* Dark mode alignment for trendings action row */
+@media (max-width: 900px) {
+	body.dark-mode #coingecko_trendings_filter.dataTables_filter {
+		float: none !important;
+	}
+}
+
+@media (max-width: 700px) {
+    /* Ensure search wrapper wraps and has spacing on mobile */
+    #coingecko_trendings_filter .search-wrapper {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: stretch !important;
+        gap: 0.5em !important;
+        padding: 0.25em 0 !important;
+    }
+    /* Full-width, comfortable input */
+    #coingecko_trendings_filter input[type="search"] {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 48px !important;
+        font-size: 16px !important;
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+        border-radius: 12px !important;
+    }
+    /* Hide search icon on mobile and reset input padding */
+	#coingecko_trendings_filter .search-icon {
+		display: none !important;
+	}
+	#coingecko_trendings_filter input[type="search"] {
+		padding-left: 16px !important;
+	}
+    /* Place Clear button below as full-width */
+    #coingecko_trendings_filter #clear-search {
+        order: 2 !important;
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-top: 8px !important;
+        min-height: 44px !important;
+        font-size: 16px !important;
+        border-radius: 12px !important;
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 400px) {
+	#coingecko_trendings_filter input[type="search"] {
+		min-height: 44px !important;
+		font-size: 15px !important;
+		padding-top: 10px !important;
+		padding-bottom: 10px !important;
+	}
+	#coingecko_trendings_filter #clear-search {
+		min-height: 42px !important;
+		font-size: 15px !important;
+	}
+}
+
+/* Center icon inside input on mobile and adjust input padding */
+@media (max-width: 700px) {
+	#coingecko_trendings_filter .search-wrapper {
+		position: relative !important;
+	}
+	#coingecko_trendings_filter .search-icon {
+		position: absolute !important;
+		left: 16px !important;
+		top: 0 !important;
+		bottom: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		height: 100% !important;
+		pointer-events: none !important;
+	}
+	#coingecko_trendings_filter .search-icon svg {
+		width: 20px !important;
+		height: 20px !important;
+	}
+	#coingecko_trendings_filter input[type="search"] {
+		padding-left: 52px !important;
+	}
+}
+@media (max-width: 400px) {
+	#coingecko_trendings_filter .search-icon {
+		left: 12px !important;
+	}
+	#coingecko_trendings_filter .search-icon svg {
+		width: 18px !important;
+		height: 18px !important;
+	}
+	#coingecko_trendings_filter input[type="search"] {
+		padding-left: 48px !important;
+	}
+}
