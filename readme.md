@@ -29,7 +29,7 @@
 
 ### 🎯 Key Highlights
 
-- **Real-time Data Integration** from 3 major crypto data providers
+- **Real-time Data Integration** from 4 major crypto data providers
 - **Advanced Price Predictions** using mathematical models and external APIs
 - **Interactive Charts** powered by TradingView integration
 - **Social Media Sentiment Analysis** from Telegram and Twitter
@@ -436,6 +436,7 @@
 | **LiveCoinWatch** | Real-time price data and market metrics | 10,000 requests/month |
 | **CoinGecko** | Comprehensive crypto data and rankings | 50 calls/minute |
 | **CoinMarketCal** | Crypto events and announcements | 100 requests/hour |
+| **CryptoCompare** | Markets, exchanges, coins metadata, news, top pairs | Varies by endpoint |
 | **Twitter API** | Social media sentiment analysis | 300 requests/15min |
 | **Telegram** | Community sentiment via MadelineProto | Real-time |
 
@@ -564,6 +565,17 @@ $response = Http::get('https://api.coingecko.com/api/v3/coins/markets', [
 ]);
 ```
 
+### CryptoCompare API
+
+```php
+// Example: Fetch CryptoCompare markets from internal API
+$response = Http::withHeaders([
+    'X-API-Key' => $yourApiKey,
+])->get(url('/api/cryptocompare/markets'), [
+    'per_page' => 50,
+]);
+```
+
 ### Twitter API Integration
 
 ```php
@@ -688,7 +700,7 @@ Our **API Management System** is a sophisticated authentication and authorizatio
 
 ### 📊 **Available Data Endpoints**
 
-Our API provides access to **15 comprehensive endpoints** across 5 major cryptocurrency data sources:
+Our API provides access to **20+ comprehensive endpoints** across major cryptocurrency data sources:
 
 #### 🟦 **CoinGecko Integration** (8 Endpoints)
 ```bash
@@ -713,6 +725,15 @@ GET /api/coinmarketcal/events         # Upcoming crypto events
 GET /api/livecoinwatch/fiats          # Fiat currency data
 GET /api/livecoinwatch/live-coin-histories  # Historical price data
 GET /api/livecoinwatch/live-coin-watches    # Real-time coin tracking
+```
+
+#### 🟪 **CryptoCompare Integration** (5 Endpoints)
+```bash
+GET /api/cryptocompare/markets        # Aggregated market coverage
+GET /api/cryptocompare/news           # Crypto news feed
+GET /api/cryptocompare/exchanges      # Exchanges metadata
+GET /api/cryptocompare/coins          # Coins metadata
+GET /api/cryptocompare/top-pairs      # Top trading pairs
 ```
 
 #### 🟡 **Social Media Integration** (2 Endpoints)
@@ -1648,6 +1669,7 @@ This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.t
 - **LiveCoinWatch** for real-time market data
 - **CoinGecko** for comprehensive crypto information
 - **CoinMarketCal** for crypto events calendar
+- **CryptoCompare** for markets, exchanges, coins, news and pairs data
 - **TradingView** for professional charting tools
 - **Bootstrap** for responsive design framework
 
