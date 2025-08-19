@@ -52,6 +52,7 @@
                     <span class="about-badge">AJAX</span>
                     <span class="about-badge">REST APIs</span>
                     <span class="about-badge">Google Maps API</span>
+                    <span class="about-badge">CryptoCompare API</span>
                 </div>
                 <div style="font-size:1.04em; color:#444; margin-bottom:1.2em;">
                     <b>What data is shown in our tables?</b><br>
@@ -72,6 +73,7 @@
                             <li><b>LiveCoinWatch:</b> Provides real-time and historical price data, market capitalization, volume, and liquidity metrics for thousands of cryptocurrencies across multiple exchanges. Its API enables up-to-the-second updates and deep market analytics.</li>
                             <li><b>CoinGecko:</b> Offers comprehensive crypto data including prices, trading volume, developer activity, community stats, and on-chain metrics. CoinGecko is known for its wide coverage of coins and tokens, as well as detailed project information and rankings.</li>
                             <li><b>CoinMarketCal:</b> The leading economic calendar for crypto, aggregating upcoming events, project announcements, forks, exchange listings, and more. This helps users anticipate market-moving news and plan their trading strategies accordingly.</li>
+                            <li><b>CryptoCompare:</b> Supplies additional market coverage including aggregated markets, exchanges, news feeds, coins metadata, and top trading pairs. Used as a complementary dataset for market analytics and as a fallback where appropriate.</li>
                         </ul>
                         By integrating these trusted sources, the platform ensures users have access to the most accurate, timely, and actionable information in the crypto space.
                     </div>
@@ -131,6 +133,7 @@
                         <li>livecoinwatch.com - Real-time price tracking and market data</li>
                         <li>coingecko.com - Comprehensive crypto information and rankings</li>
                         <li>coinmarketcal.com - Crypto events and announcements calendar</li>
+                        <li>cryptocompare.com - Markets, exchanges, news and top pairs coverage</li>
                     </ul>
                     
                     <p><strong>How it works:</strong> Information is automatically updated every 3 hours, but you can get the latest updates instantly by clicking the "Update All Data" button on any page. The system update takes about one minute and provides you with up-to-date cryptocurrency capitalization results. Click on any row in the data tables to see detailed information about a particular crypto coin.</p>
