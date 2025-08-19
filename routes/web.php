@@ -73,6 +73,11 @@ Route::get('/livecoinwatch/enhanced-compare',
 Route::get('/api/coinpaprika-data', 'MarketsComparizonController@getCoinPaprikaDataApi')->name('api.coinpaprika.data');
 Route::get('/api/cryptics-data', 'MarketsComparizonController@getCrypticsDataApi')->name('api.cryptics.data');
 
+// New: Main page analytics endpoints
+Route::get('/api/main/timeseries-prices', 'MarketsComparizonController@getTimeSeriesPrices')->name('api.main.ts_prices');
+Route::get('/api/main/market-dominance', 'MarketsComparizonController@getMarketDominance')->name('api.main.market_dominance');
+Route::get('/api/main/top-volume-markets', 'MarketsComparizonController@getTopVolumeMarkets')->name('api.main.top_volume_markets');
+
 // coin analysis across platforms
 Route::get('/livecoinwatch/coin-analysis',
     ['as' => 'livecoinwatch.coin.analysis',

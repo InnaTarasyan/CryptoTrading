@@ -1722,4 +1722,193 @@ class MarketsComparizonController extends Controller
             ], 500);
         }
     }
+
+    public function getTimeSeriesPrices(Request $request)
+    {
+        try {
+            $symbols = collect(explode(',', (string) $request->query('symbols', 'BTC,ETH')))
+                ->filter()
+                ->map(fn($s) => strtoupper(trim($s)))
+                ->take(5)
+                ->values();
+            $days = (int) $request->query('days', 30);
+            $days = $days > 0 && $days <= 365 ? $days : 30;
+
+            $end = now();
+            $start = now()->subDays($days);
+
+            $historyRows = \App\Models\LiveCoinWatch\LiveCoinHistory::query()
+                ->whereIn('code', $symbols)
+                ->get(['code', 'history', 'updated_at']);
+
+            $series = [];
+            foreach ($symbols as $sym) {
+                $series[$sym] = [];
+            }
+
+            foreach ($historyRows as $row) {
+                $code = strtoupper($row->code);
+                $historyJson = $row->history;
+                if (empty($historyJson)) {
+                    continue;
+                }
+                $decoded = is_array($historyJson) ? $historyJson : json_decode($historyJson, true);
+                if (!is_array($decoded)) {
+                    continue;
+                }
+                if (array_key_exists('history', $decoded) && is_array($decoded['history'])) {
+                    $decoded = $decoded['history'];
+                }
+
+                foreach ($decoded as $point) {
+                    if (!is_array($point)) { continue; }
+                    $timestampMs = $point['t'] ?? $point['timestamp'] ?? $point['time'] ?? null;
+                    $dateStr = $point['date'] ?? null;
+                    $price = $point['rate'] ?? $point['price'] ?? $point['value'] ?? $point['close'] ?? null;
+                    try {
+                        if ($timestampMs !== null) {
+                            $pointTime = \Carbon\Carbon::createFromTimestampMs((int) $timestampMs);
+                        } elseif ($dateStr !== null) {
+                            $pointTime = \Carbon\Carbon::parse($dateStr);
+                        } else {
+                            continue;
+                        }
+                    } catch (\Throwable $e) {
+                        continue;
+                    }
+                    if ($price === null) { continue; }
+                    if ($pointTime->lt($start) || $pointTime->gt($end)) { continue; }
+                    $series[$code][] = [
+                        't' => $pointTime->toIso8601String(),
+                        'y' => (float) $price,
+                    ];
+                }
+            }
+
+            // CoinGecko fallback for symbols with insufficient points
+            foreach ($symbols as $sym) {
+                if (count($series[$sym]) < 2) {
+                    $cgId = $this->getCoinGeckoId($sym);
+                    if ($cgId) {
+                        try {
+                            $resp = \Illuminate\Support\Facades\Http::timeout(6)->get("https://api.coingecko.com/api/v3/coins/{$cgId}/market_chart", [
+                                'vs_currency' => 'usd',
+                                'days' => $days,
+                                'interval' => 'daily',
+                            ]);
+                            if ($resp->successful()) {
+                                $data = $resp->json();
+                                $prices = $data['prices'] ?? [];
+                                $points = [];
+                                foreach ($prices as $pair) {
+                                    if (is_array($pair) && count($pair) >= 2) {
+                                        $tsMs = (int) $pair[0];
+                                        $val = (float) $pair[1];
+                                        $pt = \Carbon\Carbon::createFromTimestampMs($tsMs);
+                                        if ($pt->betweenIncluded($start, $end)) {
+                                            $points[] = [ 't' => $pt->toIso8601String(), 'y' => $val ];
+                                        }
+                                    }
+                                }
+                                if (count($points) >= 2) {
+                                    $series[$sym] = $points;
+                                }
+                            }
+                        } catch (\Throwable $e) {
+                            // ignore
+                        }
+                    }
+                }
+            }
+
+            // Last resort: synthesize flat line using current snapshot
+            foreach ($symbols as $sym) {
+                if (count($series[$sym]) < 2) {
+                    $current = \App\Models\LiveCoinWatch\LiveCoinWatch::where('code', $sym)->first();
+                    if ($current && $current->rate !== null) {
+                        $series[$sym] = [
+                            ['t' => $start->copy()->toIso8601String(), 'y' => (float) $current->rate],
+                            ['t' => $end->copy()->toIso8601String(), 'y' => (float) $current->rate],
+                        ];
+                    }
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => $series,
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching time series prices: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getMarketDominance(Request $request)
+    {
+        try {
+            $top = (int) $request->query('top', 5);
+            $top = $top > 0 && $top <= 10 ? $top : 5;
+
+            $latest = \App\Models\LiveCoinWatch\LiveCoinWatch::query()
+                ->where('cap', '>', 0)
+                ->orderByDesc('cap')
+                ->limit($top)
+                ->get(['code','cap']);
+
+            $totalCap = max(1, (float) \App\Models\LiveCoinWatch\LiveCoinWatch::sum('cap'));
+
+            $labels = $latest->pluck('code')->toArray();
+            $values = $latest->pluck('cap')->map(fn($c) => round(($c / $totalCap) * 100, 2))->toArray();
+            $othersPct = max(0, 100 - array_sum($values));
+            $labels[] = 'OTHERS';
+            $values[] = round($othersPct, 2);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'labels' => $labels,
+                    'values' => $values,
+                ],
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching market dominance: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getTopVolumeMarkets(Request $request)
+    {
+        try {
+            $limit = (int) $request->query('limit', 10);
+            $limit = $limit > 0 && $limit <= 25 ? $limit : 10;
+
+            $markets = \App\Models\CoinGecko\CoinGeckoMarkets::query()
+                ->orderByDesc('total_volume')
+                ->limit($limit)
+                ->get(['name','api_id','total_volume','current_price']);
+
+            $labels = $markets->pluck('name')->toArray();
+            $volumes = $markets->pluck('total_volume')->map(fn($v) => (float) $v)->toArray();
+            $prices = $markets->pluck('current_price')->map(fn($v) => (float) $v)->toArray();
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'labels' => $labels,
+                    'volumes' => $volumes,
+                    'prices' => $prices,
+                ],
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching top volume markets: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }

@@ -12,6 +12,27 @@
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
     <link href="{{ asset('css/history.css') }}" rel="stylesheet">
+    <style>
+        .charts-grid { display: block; }
+        .chart-block canvas { width: 100% !important; height: 100% !important; }
+        @media (max-width: 640px) {
+            .chart-row { grid-template-columns: 1fr !important; }
+            .chart-block h4 { font-size: 14px; }
+        }
+        /* Lighten comparison section background */
+        .comparison-section {
+            background-color: #f9fafb;
+            border-radius: 12px;
+            padding: 1.25em;
+        }
+        /* Give charts a light card background */
+        #comparisonCharts .chart-block {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px;
+        }
+    </style>
 @endsection
 
 {{-- ======================== Content Section ======================== --}}
@@ -199,8 +220,41 @@
                     </div>
                 </div>
 
+                {{-- Main DB-backed Charts --}}
+                <div class="main-db-charts" style="margin-top: 2em;">
+                    <div class="modern-title-bar">
+                        <div class="m-portlet__head-title custom-modern">
+                            <span class="modern-title-text">Market Overview Charts</span>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-block" style="margin-bottom: 1.5em;">
+                            <h4 style="margin-bottom: 0.5em;">Time Series Prices</h4>
+                            <div style="position: relative; height: 360px;">
+                                <canvas id="tsPricesChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5em;">
+                            <div class="chart-block">
+                                <h4 style="margin-bottom: 0.5em;">Market Dominance</h4>
+                                <div style="position: relative; height: 320px;">
+                                    <canvas id="marketDominanceChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-block">
+                                <h4 style="margin-bottom: 0.5em;">Top Volume Markets</h4>
+                                <div style="position: relative; height: 320px;">
+                                    <canvas id="topVolumeMarketsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Platform Overview Cards --}}
-                <div class="platform-overview">
+                <div class="platform-overview mt-5">
                     <div class="platform-card livecoinwatch">
                         <div class="platform-header">
                             <h3>LiveCoinWatch</h3>
@@ -4010,6 +4064,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="{{ url('js/livecoin/history.js') }}"></script>
     <script>
         function getInitials(name) {
@@ -5561,6 +5616,12 @@
             // Initial translation update
             updatePlatformTranslations();
 
+            // Initialize mobile enhancements
+            enhanceMobileSearch();
+
+            // Load DB-backed main charts
+            loadMainDbCharts();
+
         });
 
         // Function to cleanup all charts
@@ -6242,6 +6303,204 @@
             });
 
             tbody.innerHTML = html;
+        }
+
+        // === New: fetch DB-backed main charts ===
+        async function loadMainDbCharts() {
+            try {
+
+                const safeParseJson = async (res, label) => {
+                    const contentType = res.headers.get('content-type') || '';
+                    if (!res.ok || contentType.indexOf('application/json') === -1) {
+                        const body = await res.text();
+                        console.error(`${label} endpoint returned non-JSON`, res.status, body.slice(0, 500));
+                        return null;
+                    }
+                    try {
+                        return await res.json();
+                    } catch (err) {
+                        const body = await res.text();
+                        console.error(`${label} JSON parse failed`, err, body.slice(0, 500));
+                        return null;
+                    }
+                };
+
+                // Time series prices
+                const tsRes = await fetch(`/api/main/timeseries-prices?symbols=BTC,ETH&days=60`, { headers: { 'Accept': 'application/json' }});
+                const tsJson = await safeParseJson(tsRes, 'timeseries-prices');
+                if (tsJson && tsJson.success) {
+                    renderTsPricesChart(tsJson.data);
+                }
+
+                // Market dominance
+                const domRes = await fetch(`/api/main/market-dominance?top=5`, { headers: { 'Accept': 'application/json' }});
+                const domJson = await safeParseJson(domRes, 'market-dominance');
+                if (domJson && domJson.success) {
+                    renderMarketDominance(domJson.data.labels, domJson.data.values);
+                }
+
+                // Top volume markets
+                const topRes = await fetch(`/api/main/top-volume-markets?limit=10`, { headers: { 'Accept': 'application/json' }});
+                const topJson = await safeParseJson(topRes, 'top-volume-markets');
+                if (topJson && topJson.success) {
+                    renderTopVolumeMarkets(topJson.data.labels, topJson.data.volumes, topJson.data.prices);
+                }
+            } catch (e) {
+                console.error('Error loading main DB charts', e);
+            }
+        }
+
+        // Chart instances
+        let tsPricesChart, marketDominanceChart, topVolumeMarketsChart;
+
+        function renderTsPricesChart(series) {
+            const ctx = document.getElementById('tsPricesChart');
+            if (!ctx) return;
+            if (tsPricesChart && typeof tsPricesChart.destroy === 'function') tsPricesChart.destroy();
+
+            const labels = [];
+            const datasets = [];
+            const palette = ['#2563eb','#10b981','#f59e0b','#ef4444','#8b5cf6'];
+            let colorIndex = 0;
+            Object.keys(series).forEach(symbol => {
+                const points = series[symbol] || [];
+                if (points.length) {
+                    if (labels.length === 0) {
+                        points.forEach(p => labels.push(p.t));
+                    }
+                    const color = palette[colorIndex++ % palette.length];
+                    datasets.push({
+                        label: symbol,
+                        data: points.map(p => p.y),
+                        borderColor: color,
+                        backgroundColor: color + '33',
+                        tension: 0.3,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    });
+                }
+            });
+
+            // Empty-state guard
+            if (!datasets.length) {
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No time series data available</div>';
+                return;
+            }
+
+            tsPricesChart = new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { position: 'top', labels: { boxWidth: 12 } },
+                        tooltip: {
+                            mode: 'index', intersect: false,
+                            callbacks: { label: (ctx) => `${ctx.dataset.label}: ${Number(ctx.parsed.y).toLocaleString()}` }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'day', tooltipFormat: 'yyyy-MM-dd' },
+                            adapters: { date: {} },
+                            ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 8 },
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            title: { display: true, text: 'Price (USD)' },
+                            grid: { color: 'rgba(0,0,0,0.06)' }
+                        }
+                    },
+                    layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } }
+                }
+            });
+        }
+
+        function renderMarketDominance(labels, values) {
+            const ctx = document.getElementById('marketDominanceChart');
+            if (!ctx) return;
+            if (marketDominanceChart && typeof marketDominanceChart.destroy === 'function') marketDominanceChart.destroy();
+
+            // Empty-state guard
+            if (!labels || !labels.length) {
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No dominance data</div>';
+                return;
+            }
+
+            marketDominanceChart = new Chart(ctx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#94a3b8'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } },
+                    layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } }
+                }
+            });
+        }
+
+        function renderTopVolumeMarkets(labels, volumes, prices) {
+            const ctx = document.getElementById('topVolumeMarketsChart');
+            if (!ctx) return;
+            if (topVolumeMarketsChart && typeof topVolumeMarketsChart.destroy === 'function') topVolumeMarketsChart.destroy();
+
+            // Empty-state guard
+            if (!labels || !labels.length) {
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No top markets data</div>';
+                return;
+            }
+
+            topVolumeMarketsChart = new Chart(ctx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            type: 'bar',
+                            label: '24h Volume',
+                            data: volumes.map(v => v / 1e9),
+                            yAxisID: 'y',
+                            backgroundColor: 'rgba(59,130,246,0.7)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1
+                        },
+                        {
+                            type: 'line',
+                            label: 'Price',
+                            data: prices,
+                            yAxisID: 'y1',
+                            borderColor: '#10b981',
+                            backgroundColor: '#10b98133',
+                            tension: 0.3,
+                            pointRadius: 0,
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Volume (B USD)' }, grid: { color: 'rgba(0,0,0,0.06)' } },
+                        y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Price (USD)' } },
+                        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } }
+                    },
+                    plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+                    layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } }
+                }
+            });
         }
     </script>
 @endsection

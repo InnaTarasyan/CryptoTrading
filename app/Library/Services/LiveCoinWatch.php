@@ -80,7 +80,7 @@ class LiveCoinWatch
                'totalSupply' => $datum['totalSupply'],
                'maxSupply' => $datum['maxSupply'],
                'categories' => array_key_exists('categories', $datum) ? json_encode($datum['categories'], true) : null,
-               'history' => json_encode('history', true),
+               'history' => array_key_exists('history', $datum) ? json_encode($datum['history'], true) : null,
            ]);
        }
     }
