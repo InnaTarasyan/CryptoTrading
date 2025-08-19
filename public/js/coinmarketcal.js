@@ -119,20 +119,24 @@ class CoinMarketCalTable {
      * Optimize table for mobile devices
      */
     optimizeForMobile() {
-        // Mobile-specific table optimizations
+        // Mobile-specific table optimizations - REMOVE conflicting touch handling
         $(this.tableSelector).css({
-            'touch-action': 'pan-x',
-            'user-select': 'none',
-            '-webkit-user-select': 'none'
+            'touch-action': 'pan-y', // Allow vertical scrolling
+            'user-select': 'auto', // Allow text selection
+            '-webkit-user-select': 'auto',
+            'overflow': 'visible', // Ensure no overflow conflicts
+            '-webkit-overflow-scrolling': 'touch' // Smooth scrolling
         });
 
-        // Add touch-friendly interactions
+        // Remove conflicting touch interactions that cause freezing
         $(this.tableSelector + ' tbody tr').css({
             'cursor': 'pointer',
-            'min-height': '44px' // Touch-friendly row height
+            'min-height': '44px', // Touch-friendly row height
+            'touch-action': 'pan-y', // Allow vertical scrolling
+            'overflow': 'visible' // Ensure no overflow conflicts
         });
 
-        // Ensure proper mobile layout
+        // Ensure proper mobile layout without freezing
         setTimeout(() => {
             if (this.table) {
                 this.table.columns.adjust().draw();
@@ -145,22 +149,18 @@ class CoinMarketCalTable {
      */
     bindMobileOptimizations() {
         if (this.isMobile) {
-            // Mobile-specific event handling
-            $(this.tableSelector + ' tbody tr').on('touchstart', function(e) {
-                // Prevent multiple touch events
-                if (e.touches.length > 1) {
-                    e.preventDefault();
-                }
+            // REMOVE conflicting touch event handling that causes freezing
+            // Only keep essential mobile optimizations
+            
+            // Ensure smooth scrolling
+            $(this.tableSelector).css({
+                'touch-action': 'pan-y',
+                '-webkit-overflow-scrolling': 'touch',
+                'overscroll-behavior': 'contain'
             });
 
-            // Mobile-friendly row highlighting
-            $(this.tableSelector + ' tbody tr').on('touchstart', function() {
-                $(this).addClass('mobile-touch-active');
-            }).on('touchend', function() {
-                setTimeout(() => {
-                    $(this).removeClass('mobile-touch-active');
-                }, 150);
-            });
+            // Remove the problematic touchstart/touchend handlers that cause freezing
+            // $(this.tableSelector + ' tbody tr').off('touchstart touchend');
         }
     }
 

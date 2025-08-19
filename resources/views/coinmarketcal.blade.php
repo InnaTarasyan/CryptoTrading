@@ -17,6 +17,19 @@
             box-sizing: border-box;
         }
 
+        /* Ensure proper mobile scrolling */
+        html, body {
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+        }
+
+        .m-content {
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+        }
+
         /* --- Navigation Explanation Styles --- */
         .navigation-explanation {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -26,12 +39,19 @@
             margin-bottom: 1.5rem;
             overflow: hidden;
             transition: all 0.3s ease;
+            /* Ensure no scrolling conflicts */
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .navigation-explanation:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
             border-color: #667eea;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .explanation-content {
@@ -39,6 +59,10 @@
             align-items: flex-start;
             padding: 1.5rem;
             gap: 1rem;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .explanation-icon {
@@ -51,6 +75,10 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
             flex-shrink: 0;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .explanation-icon svg {
@@ -63,6 +91,10 @@
         .explanation-text {
             flex: 1;
             min-width: 0;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .explanation-title {
@@ -72,6 +104,10 @@
             margin: 0 0 0.75rem 0;
             font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
             letter-spacing: 0.025em;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .explanation-description {
@@ -80,6 +116,10 @@
             line-height: 1.6;
             margin: 0 0 1rem 0;
             font-weight: 400;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .explanation-description strong {
@@ -92,6 +132,10 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 0.75rem;
             margin-bottom: 1.25rem;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .feature-item {
@@ -103,22 +147,38 @@
             border: 1px solid rgba(226, 232, 240, 0.8);
             border-radius: 8px;
             transition: all 0.2s ease;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .feature-item:hover {
             background: rgba(255, 255, 255, 0.9);
             border-color: #667eea;
             transform: translateY(-1px);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .feature-icon {
             font-size: 1.25rem;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .feature-text {
             font-size: 0.875rem;
             font-weight: 500;
             color: #374151;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .explanation-tip {
@@ -130,56 +190,104 @@
             border: 1px solid #f59e0b;
             border-radius: 8px;
             color: #92400e;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .tip-icon {
             font-size: 1.125rem;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .tip-text {
             font-size: 0.875rem;
             font-weight: 500;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Dark mode support */
         body.dark-mode .navigation-explanation {
             background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
             border-color: #4b5563;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .explanation-title {
             color: #f9fafb;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .explanation-description {
             color: #d1d5db;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .explanation-description strong {
             color: #f9fafb;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .feature-item {
             background: rgba(55, 65, 81, 0.7);
             border-color: rgba(75, 85, 99, 0.8);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .feature-item:hover {
             background: rgba(55, 65, 81, 0.9);
             border-color: #667eea;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .feature-text {
             color: #e5e7eb;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .explanation-tip {
             background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
             border-color: #f59e0b;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.dark-mode .tip-text {
             color: #fef3c7;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Theme Toggle Button Styles - Moved outside portlet */
@@ -188,6 +296,10 @@
             justify-content: flex-end;
             margin-bottom: 1.5rem;
             padding: 0 0.5rem;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         #theme-toggle {
@@ -204,22 +316,51 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         #theme-toggle:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         #theme-toggle:active {
             transform: translateY(0);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Mobile-First Responsive Design */
         @media (max-width: 768px) {
+            /* Ensure proper mobile scrolling */
+            body {
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+
+            .m-content {
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+
             .navigation-explanation {
                 margin-bottom: 1rem;
                 border-radius: 12px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .explanation-content {
@@ -227,6 +368,10 @@
                 text-align: center;
                 padding: 1rem;
                 gap: 0.75rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .explanation-icon {
@@ -258,25 +403,45 @@
             .feature-item {
                 padding: 0.375rem 0.5rem;
                 justify-content: center;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .feature-text {
                 font-size: 0.75rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .explanation-tip {
                 padding: 0.5rem 0.75rem;
                 text-align: left;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .tip-text {
                 font-size: 0.75rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             /* Mobile-optimized theme toggle */
             .theme-toggle-container {
                 justify-content: center;
                 margin-bottom: 1rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             #theme-toggle {
@@ -287,6 +452,10 @@
                 border-radius: 12px;
                 justify-content: center;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             /* Mobile-optimized portlet */
@@ -298,12 +467,20 @@
                 background: white;
                 border-radius: 16px 16px 0 0;
                 margin: 0;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .m-portlet__head-title {
                 font-size: 1.1rem;
                 width: 100%;
                 justify-content: center;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             /* Responsive DataTable for mobile - EXACTLY like history.blade.php */
@@ -323,6 +500,10 @@
                 box-shadow: 0 2px 6px rgba(0,0,0,0.03);
                 background: #fff;
                 padding: 0.5rem 0.75rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             #coinmarketcal td {
@@ -335,6 +516,10 @@
                 box-sizing: border-box;
                 font-size: 13px;
                 vertical-align: middle;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             #coinmarketcal td:last-child {
@@ -406,6 +591,10 @@
                 margin-bottom: 15px;
                 width: 100%;
                 padding: 8px 12px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_wrapper .dataTables_length select {
@@ -415,18 +604,30 @@
                 font-size: 14px;
                 background: white;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_wrapper .dataTables_filter {
                 text-align: center;
                 margin-bottom: 15px;
                 width: 100%;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             /* Mobile-optimized DataTables search - NO ICON */
             .dataTables_filter {
                 position: relative;
                 margin-bottom: 1rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_filter input[type="search"] {
@@ -440,12 +641,34 @@
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 box-sizing: border-box;
                 text-align: center;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Ensure search wrapper doesn't interfere with scrolling */
+            .search-wrapper {
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .search-wrapper input,
+            .search-wrapper button {
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_filter input[type="search"]:focus {
                 border-color: #667eea;
                 box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
                 outline: none;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_filter input[type="search"]::placeholder {
@@ -467,11 +690,19 @@
                 background: #f8fafc;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_paginate {
                 text-align: center;
                 margin-top: 15px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_paginate .paginate_button {
@@ -493,6 +724,10 @@
             .dataTables_paginate .paginate_button:hover {
                 background: #e9ecef;
                 border-color: #adb5bd;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_paginate .paginate_button.current {
@@ -509,12 +744,38 @@
 
             /* Performance-optimized table layout */
             .table-responsive {
-                overflow-x: auto;
+                overflow: visible;
                 -webkit-overflow-scrolling: touch;
                 border-radius: 0 0 16px 16px;
                 margin: 0;
                 background: white;
                 border: 1px solid #e2e8f0;
+                /* Fix mobile touch scrolling */
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+
+            /* Fix mobile scrolling issues */
+            #coinmarketcal_wrapper {
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+
+            #coinmarketcal {
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+
+            #coinmarketcal tbody {
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
             }
 
             /* Mobile-optimized processing indicator */
@@ -530,6 +791,10 @@
                 box-shadow: 0 4px 16px rgba(0,0,0,0.1);
                 font-size: 14px;
                 color: #333;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             /* Mobile-optimized beautiful info */
@@ -543,6 +808,10 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 6px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .datatable-info-icon {
@@ -565,86 +834,163 @@
                 display: flex !important;
                 flex-direction: column !important;
                 gap: 1rem !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .m-portlet__head-title {
                 order: 1;
                 margin-bottom: 0.5rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_filter {
                 order: 2;
                 margin-bottom: 1rem !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_length {
                 order: 3;
                 margin-bottom: 1rem !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
         }
 
         @media (max-width: 480px) {
             .navigation-explanation {
                 margin-bottom: 1rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .explanation-content {
                 padding: 1rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .explanation-features {
                 grid-template-columns: 1fr;
                 gap: 0.375rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .feature-item {
                 padding: 0.5rem;
                 justify-content: flex-start;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .explanation-tip {
                 flex-direction: column;
                 text-align: center;
                 gap: 0.375rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             /* Ultra-mobile optimizations */
             .m-portlet__head {
                 padding: 0.75rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .m-portlet__head-title {
                 font-size: 1rem;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             #coinmarketcal {
                 font-size: 13px;
                 min-width: 100% !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_wrapper .dataTables_length {
                 padding: 6px 8px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_wrapper .dataTables_length select {
                 font-size: 13px;
                 padding: 4px 8px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .dataTables_wrapper .dataTables_length select:focus {
+                border: 1.5px solid #f7971e;
+                box-shadow: 0 2px 8px rgba(247,151,30,0.08);
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_filter input[type="search"] {
                 font-size: 16px;
                 padding: 10px 14px;
                 max-width: 100%;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             #theme-toggle {
                 font-size: 16px;
                 padding: 10px 14px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_info {
                 font-size: 12px;
                 padding: 6px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dataTables_paginate .paginate_button {
@@ -653,6 +999,10 @@
                 min-width: 36px;
                 min-height: 36px;
                 margin: 0 2px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
         }
 
@@ -672,6 +1022,10 @@
                 border-radius: 0 !important;
                 z-index: 9999 !important;
                 background: rgba(0, 0, 0, 0.8) !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dtr-modal-content {
@@ -683,6 +1037,10 @@
                 margin: 0 !important;
                 width: 100% !important;
                 height: 100% !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dtr-modal-header {
@@ -690,12 +1048,20 @@
                 margin-bottom: 1rem !important;
                 border-bottom: 1px solid #e2e8f0 !important;
                 position: relative !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dtr-modal-header h3 {
                 font-size: 1.1em !important;
                 margin: 0 !important;
                 color: #1e293b !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dtr-modal-close {
@@ -713,11 +1079,19 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dtr-modal table {
                 font-size: 12px !important;
                 width: 100% !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dtr-modal th,
@@ -725,6 +1099,10 @@
                 padding: 6px 4px !important;
                 font-size: 12px !important;
                 border-bottom: 1px solid #e2e8f0 !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
 
             .dtr-modal th {
@@ -732,7 +1110,248 @@
                 border-bottom: 1px solid #e2e8f0 !important;
                 font-weight: 600 !important;
                 color: #1e293b !important;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
             }
+        }
+
+        /* Custom DataTable Search Bar (like CoinMarketCal) */
+        .dataTables_filter {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 18px;
+            float: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_filter .search-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_filter .search-icon {
+            position: absolute;
+            left: 16px;
+            width: 22px;
+            height: 22px;
+            pointer-events: none;
+            top: 50%;
+            transform: translateY(-50%);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_filter input[type="search"] {
+            border-radius: 24px;
+            border: 1.5px solid #ffd200;
+            padding: 8px 44px 8px 44px;
+            background: #fffbe7;
+            transition: border 0.2s, box-shadow 0.2s;
+            font-size: 15px;
+            outline: none;
+            color: #333;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.08);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_filter input[type="search"]:focus {
+            border: 1.5px solid #f7971e;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(247,151,30,0.08);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .dataTables_filter #clear-search {
+            margin-left: 8px;
+            border: none;
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+            color: #fff;
+            border-radius: 16px;
+            padding: 8px 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(221,36,118,0.12);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_filter #clear-search:hover {
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 600px) {
+            .datatable-info-beautiful {
+                font-size: 1rem;
+                padding: 10px 8px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+            }
+            .datatable-info-beautiful .datatable-info-icon {
+                font-size: 1.2rem;
+                padding: 6px;
+                margin-right: 0;
+                margin-bottom: 4px;
+                /* Ensure no scrolling conflicts */
+                overflow: visible;
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* --- CoinMarketCal-style DataTables Length Selector --- */
+        .dataTables_wrapper .dataTables_length {
+            margin-bottom: 18px;
+            float: left;
+            background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+            padding: 8px 18px;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.08);
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_wrapper .dataTables_length label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* --- CoinMarketCal-style DataTables Pagination --- */
+        .dataTables_wrapper .dataTables_paginate {
+            margin-top: 18px;
+            float: right;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            border: none;
+            border-radius: 8px;
+            margin: 0 4px;
+            color: #fff !important;
+            padding: 8px 18px;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(67,206,162,0.08);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+            color: #fff !important;
+            box-shadow: 0 4px 16px rgba(221,36,118,0.12);
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* --- CoinMarketCal-style DataTables Info Box --- */
+        .datatable-info-beautiful {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
+            color: #4a4e69;
+            border-radius: 18px;
+            padding: 12px 28px;
+            margin: 18px 0 0 0;
+            font-size: 1.15rem;
+            font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+            box-shadow: 0 2px 12px rgba(106,17,203,0.08);
+            font-weight: 500;
+            gap: 16px;
+            min-height: 48px;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+        .datatable-info-beautiful .datatable-info-icon {
+            font-size: 1.7rem;
+            margin-right: 10px;
+            color: #6a11cb;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(106,17,203,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .datatable-info-beautiful .datatable-info-text {
+            color: #5f6caf;
+            font-size: 1.15rem;
+            font-weight: 600;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .datatable-info-beautiful strong {
+            color: #f7971e;
+            font-weight: 700;
+            font-size: 1.1em;
+            /* Ensure no scrolling conflicts */
+            overflow: visible;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 @endsection
