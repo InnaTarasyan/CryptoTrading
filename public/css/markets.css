@@ -1233,7 +1233,7 @@ body.dark-mode .table td:first-child {
     border-right: 2px solid #ff6a88 !important;
 }
 
-/* Responsive DataTable for mobile (pinky modern gradient) */
+/* Responsive DataTable for mobile (pinky modern gradient) - FIXED VERSION */
 @media (max-width: 767px) {
     .enhanced-thead {
         display: none !important;
@@ -1252,7 +1252,7 @@ body.dark-mode .table td:first-child {
     }
     #coingecko_markets td {
         text-align: left;
-        padding-left: 48%;
+        padding: 0.75rem 0.75rem 0.75rem 0;
         position: relative;
         border: none;
         border-bottom: 1px solid #ffdde1;
@@ -1261,21 +1261,93 @@ body.dark-mode .table td:first-child {
         font-size: 1em;
         color: #d72660;
         background: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
     }
     #coingecko_markets td:last-child {
         border-bottom: none;
     }
     #coingecko_markets td:before {
         content: attr(data-label);
-        position: absolute;
-        left: 1rem;
-        top: 0;
+        position: static;
         width: 45%;
         white-space: nowrap;
         font-weight: bold;
         color: #ff6a88;
         font-size: 0.98em;
         letter-spacing: 0.01em;
+        flex-shrink: 0;
+        margin-right: 0.5rem;
+        word-break: break-word;
+        hyphens: auto;
+        max-width: 50%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+    
+    /* Ensure data content takes remaining space */
+    #coingecko_markets td > *:not(:before) {
+        flex: 1;
+        text-align: right;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    /* Special handling for multiline labels */
+    #coingecko_markets td.mobile-multiline-label:before {
+        white-space: normal;
+        line-height: 1.3;
+        display: flex;
+        align-items: center;
+        min-height: 2.5em;
+    }
+    
+    /* Ensure proper spacing for long labels */
+    #coingecko_markets td:nth-child(11):before, /* Price change percentage 24h */
+    #coingecko_markets td:nth-child(13):before { /* Market cap change percentage 24h */
+        width: 50%;
+        font-size: 0.9em;
+        line-height: 1.2;
+    }
+}
+
+/* Additional mobile optimizations for smaller screens */
+@media (max-width: 480px) {
+    #coingecko_markets td {
+        padding: 0.5rem 0.5rem 0.5rem 0;
+        font-size: 0.9em;
+    }
+    
+    #coingecko_markets td:before {
+        font-size: 0.85em;
+        width: 48%;
+    }
+    
+    #coingecko_markets td:nth-child(11):before,
+    #coingecko_markets td:nth-child(13):before {
+        width: 48%;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 360px) {
+    #coingecko_markets td {
+        padding: 0.4rem 0.4rem 0.4rem 0;
+        font-size: 0.85em;
+    }
+    
+    #coingecko_markets td:before {
+        font-size: 0.8em;
+        width: 45%;
+    }
+    
+    #coingecko_markets td:nth-child(11):before,
+    #coingecko_markets td:nth-child(13):before {
+        width: 45%;
+        font-size: 0.75em;
     }
 }
 
