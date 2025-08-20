@@ -220,38 +220,7 @@
                     </div>
                 </div>
 
-                {{-- Main DB-backed Charts --}}
-                <div class="main-db-charts" style="margin-top: 2em;">
-                    <div class="modern-title-bar">
-                        <div class="m-portlet__head-title custom-modern">
-                            <span class="modern-title-text">Market Overview Charts</span>
-                        </div>
-                    </div>
 
-                    <div class="charts-grid">
-                        <div class="chart-block" style="margin-bottom: 1.5em;">
-                            <h4 style="margin-bottom: 0.5em;">Time Series Prices</h4>
-                            <div style="position: relative; height: 360px;">
-                                <canvas id="tsPricesChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="chart-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5em;">
-                            <div class="chart-block">
-                                <h4 style="margin-bottom: 0.5em;">Market Dominance</h4>
-                                <div style="position: relative; height: 320px;">
-                                    <canvas id="marketDominanceChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="chart-block">
-                                <h4 style="margin-bottom: 0.5em;">Top Volume Markets</h4>
-                                <div style="position: relative; height: 320px;">
-                                    <canvas id="topVolumeMarketsChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 {{-- Platform Overview Cards --}}
                 <div class="platform-overview mt-5">
@@ -398,6 +367,8 @@
                 </div>
             </div>
         </div>
+
+
 
         {{-- Chart Grid --}}
         <div class="chart-grid">
@@ -700,6 +671,40 @@
                 </div>
             </div>
         </div>
+
+
+                {{-- Main DB-backed Charts --}}
+                <div class="main-db-charts" style="margin-top: 2em;">
+                    <div class="modern-title-bar">
+                        <div class="m-portlet__head-title custom-modern">
+                            <span class="modern-title-text">Market Overview Charts</span>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-block" style="margin-bottom: 1.5em;">
+                            <h4 style="margin-bottom: 0.5em;">Time Series Prices</h4>
+                            <div style="position: relative; height: 360px;">
+                                <canvas id="tsPricesChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5em;">
+                            <div class="chart-block">
+                                <h4 style="margin-bottom: 0.5em;">Market Dominance</h4>
+                                <div style="position: relative; height: 320px;">
+                                    <canvas id="marketDominanceChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-block">
+                                <h4 style="margin-bottom: 0.5em;">Top Volume Markets</h4>
+                                <div style="position: relative; height: 320px;">
+                                    <canvas id="topVolumeMarketsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </div>
 </div>
 
