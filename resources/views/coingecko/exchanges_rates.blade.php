@@ -443,7 +443,7 @@
             <div id="datatableFullscreenContainer" class="table-responsive enhanced-table-container">
                 <!-- DataTable Search Bar -->
                 <!-- Removed duplicate search bar markup here. Let DataTables/JS handle the search bar. -->
-                <div class="table-wrapper">
+                <div class="">
                     <table id="coingecko_exchange_rates" class="table table-hover table-condensed table-striped enhanced-table" style="width:100%; padding-top:1%">
                         <thead class="enhanced-thead">
                         <tr>
