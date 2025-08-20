@@ -6337,6 +6337,9 @@
                 const domJson = await safeParseJson(domRes, 'market-dominance');
                 if (domJson && domJson.success) {
                     renderMarketDominance(domJson.data.labels, domJson.data.values);
+                } else {
+                    // Render an explicit empty state if API fails
+                    renderMarketDominance([], []);
                 }
 
                 // Top volume markets
@@ -6344,6 +6347,9 @@
                 const topJson = await safeParseJson(topRes, 'top-volume-markets');
                 if (topJson && topJson.success) {
                     renderTopVolumeMarkets(topJson.data.labels, topJson.data.volumes, topJson.data.prices);
+                } else {
+                    // Render an explicit empty state if API fails
+                    renderTopVolumeMarkets([], [], []);
                 }
             } catch (e) {
                 console.error('Error loading main DB charts', e);
