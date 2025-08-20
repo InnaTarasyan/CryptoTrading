@@ -715,7 +715,29 @@
                         </div>
                     </div>
                     <div class="calendar-wrapper">
+                        <div id="calendarLoading" style="display:none;text-align:center;padding:12px;">
+                            <div class="loader-spinner"></div>
+                        </div>
                         <div id="coinEventCalendar"></div>
+                        <div id="eventModal" class="event-modal" style="display:none;">
+                            <div class="event-modal__backdrop" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()"></div>
+                            <div class="event-modal__content">
+                                <div class="event-modal__header">
+                                    <h3 id="eventModalTitle">Event</h3>
+                                    <button type="button" class="event-modal__close" aria-label="Close" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">×</button>
+                                </div>
+                                <div class="event-modal__body">
+                                    <div class="event-modal__row" id="eventModalDate"></div>
+                                    <div class="event-modal__row" id="eventModalCoins"></div>
+                                    <div class="event-modal__row" id="eventModalCategories"></div>
+                                    <div class="event-modal__row" id="eventModalProof"></div>
+                                </div>
+                                <div class="event-modal__footer">
+                                    <a id="eventModalLink" href="#" target="_blank" rel="noopener" class="event-modal__btn" style="display:none;">Open Source</a>
+                                    <button type="button" class="event-modal__btn secondary" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
     </div>
@@ -4002,6 +4024,46 @@
         .calendar-wrapper { padding: 8px; border-radius: 10px; }
         #coinEventCalendar .fc-toolbar-title { font-size: 1em; }
     }
+    /* Improve toolbar touch targets on mobile */
+    #coinEventCalendar .fc .fc-button {
+        padding: 0.5em 0.8em;
+    }
+    /* Coin and category badges */
+    .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 0.75rem;
+        border-radius: 9999px;
+        background: #eef2ff;
+        color: #3730a3;
+        margin-right: 6px;
+        margin-bottom: 4px;
+        white-space: nowrap;
+    }
+    .badge.cat-listing { background:#ecfdf5; color:#065f46; }
+    .badge.cat-airdrop { background:#eff6ff; color:#1e40af; }
+    .badge.cat-partnership { background:#fffbeb; color:#92400e; }
+    .badge.cat-ama { background:#f5f3ff; color:#5b21b6; }
+    .badge.coin { background:#f1f5f9; color:#0f172a; }
+
+    /* Event modal */
+    .event-modal { position: fixed; inset: 0; z-index: 1000; }
+    .event-modal__backdrop { position: absolute; inset:0; background: rgba(0,0,0,0.5); }
+    .event-modal__content { position: relative; max-width: 520px; margin: 10vh auto; background:#fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
+    .event-modal__header { display:flex; align-items:center; justify-content:space-between; padding: 12px 16px; border-bottom:1px solid #eee; }
+    .event-modal__body { padding: 12px 16px; }
+    .event-modal__footer { padding: 12px 16px; border-top:1px solid #eee; display:flex; gap:8px; justify-content:flex-end; }
+    .event-modal__close { background: none; border: none; font-size: 20px; cursor: pointer; line-height: 1; }
+    .event-modal__btn { background:#4f46e5; color:#fff; border:none; border-radius:8px; padding:8px 12px; text-decoration:none; display:inline-block; }
+    .event-modal__btn.secondary { background:#e5e7eb; color:#111827; }
+    .event-modal__row { margin: 6px 0; font-size: 0.95rem; }
+
+    @media (max-width: 768px) {
+        .calendar-wrapper { padding: 8px; border-radius: 10px; }
+        #coinEventCalendar .fc-toolbar-title { font-size: 1em; }
+        #coinEventCalendar .fc .fc-button { padding: 0.45em 0.7em; }
+        .event-modal__content { margin: 0; position: absolute; bottom: 0; left:0; right:0; max-width: 100%; border-bottom-left-radius:0; border-bottom-right-radius:0; }
+    }
 </style>
 
 {{-- ======================== Live Coin Watch Info Section ======================== --}}
@@ -6619,13 +6681,20 @@
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: isMobile ? 'listWeek,dayGridMonth' : 'dayGridMonth,listMonth'
+                    right: isMobile ? 'listDay,listWeek,dayGridMonth' : 'dayGridMonth,listWeek,listMonth'
                 },
+                buttonText: { today: 'Today', month: 'Month', week: 'Week', day: 'Day', list: 'List' },
+                stickyHeaderDates: true,
                 height: 'auto',
                 contentHeight: 'auto',
                 aspectRatio: 1.6,
                 navLinks: true,
                 dayMaxEvents: true,
+                displayEventTime: false,
+                loading: function(isLoading) {
+                    const l = document.getElementById('calendarLoading');
+                    if (l) l.style.display = isLoading ? 'block' : 'none';
+                },
                 eventSources: [
                     {
                         url: '/api/main/events-calendar',
@@ -6635,11 +6704,57 @@
                         }
                     }
                 ],
-                eventClick: function(info) {
-                    if (info.event.url) {
-                        window.open(info.event.url, '_blank');
-                        info.jsEvent.preventDefault();
+                eventContent: function(arg) {
+                    try {
+                        const coins = (arg.event.extendedProps && Array.isArray(arg.event.extendedProps.coins)) ? arg.event.extendedProps.coins : [];
+                        const cats = (arg.event.extendedProps && arg.event.extendedProps.categories) ? JSON.stringify(arg.event.extendedProps.categories).toLowerCase() : '';
+                        const catClass = cats.includes('listing') ? 'cat-listing' : cats.includes('airdrop') ? 'cat-airdrop' : cats.includes('partnership') ? 'cat-partnership' : cats.includes('ama') ? 'cat-ama' : '';
+                        const wrapper = document.createElement('div');
+                        wrapper.style.display = 'flex';
+                        wrapper.style.flexDirection = 'column';
+                        const title = document.createElement('div');
+                        title.textContent = arg.event.title;
+                        title.style.fontWeight = '600';
+                        title.style.fontSize = '0.9rem';
+                        const row = document.createElement('div');
+                        row.style.marginTop = '4px';
+                        // category badge
+                        if (catClass) {
+                            const b = document.createElement('span');
+                            b.className = 'badge ' + catClass;
+                            b.textContent = catClass.replace('cat-','');
+                            row.appendChild(b);
+                        }
+                        // coin badges (max 3)
+                        coins.slice(0,3).forEach(c => {
+                            const b = document.createElement('span');
+                            b.className = 'badge coin';
+                            b.textContent = c;
+                            row.appendChild(b);
+                        });
+                        wrapper.appendChild(title);
+                        wrapper.appendChild(row);
+                        return { domNodes: [wrapper] };
+                    } catch (e) {
+                        return { text: arg.event.title };
                     }
+                },
+                eventClick: function(info) {
+                    info.jsEvent.preventDefault();
+                    const modal = document.getElementById('eventModal');
+                    if (!modal) return;
+                    // Populate modal
+                    const ex = info.event.extendedProps || {};
+                    document.getElementById('eventModalTitle').textContent = info.event.title || 'Event';
+                    document.getElementById('eventModalDate').innerHTML = '<strong>Date:</strong> ' + (ex.displayed_date || new Date(info.event.start).toLocaleString());
+                    const coins = Array.isArray(ex.coins) ? ex.coins : [];
+                    document.getElementById('eventModalCoins').innerHTML = coins.length ? ('<strong>Coins:</strong> ' + coins.map(c => '<span class="badge coin">' + c + '</span>').join(' ')) : '';
+                    const catsStr = ex.categories ? JSON.stringify(ex.categories) : '';
+                    document.getElementById('eventModalCategories').innerHTML = catsStr ? ('<strong>Categories:</strong> ' + catsStr) : '';
+                    document.getElementById('eventModalProof').innerHTML = ex.proof ? ('<strong>Proof:</strong> ' + ex.proof) : '';
+                    const link = document.getElementById('eventModalLink');
+                    if (info.event.url) { link.href = info.event.url; link.style.display = 'inline-block'; } else { link.removeAttribute('href'); link.style.display = 'none'; }
+                    modal.style.display = 'block';
                 },
                 eventDidMount: function(arg) {
                     const coins = (arg.event.extendedProps && arg.event.extendedProps.coins) ? arg.event.extendedProps.coins.join(', ') : '';
