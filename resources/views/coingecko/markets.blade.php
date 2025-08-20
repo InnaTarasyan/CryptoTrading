@@ -256,6 +256,36 @@
                 gap: 0.375rem;
             }
         }
+
+        /* Mobile table container fixes */
+        @media (max-width: 768px) {
+            .enhanced-table-container,
+            #datatableFullscreenContainer,
+            .table-wrapper {
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            #coingecko_markets {
+                width: 100% !important;
+            }
+            #coingecko_markets td img,
+            #coingecko_markets td svg {
+                max-width: 100%;
+                height: auto;
+            }
+            /* Prevent header controls from forcing width */
+            .datatable-toolbar,
+            .dataTables_length,
+            .dataTables_filter,
+            .dataTables_info,
+            .dataTables_paginate {
+                max-width: 100% !important;
+                overflow: hidden;
+                box-sizing: border-box;
+            }
+        }
     </style>
 @endsection
 @section('content')

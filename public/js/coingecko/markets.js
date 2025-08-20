@@ -35,6 +35,8 @@ Coingecko.prototype.init = function () {
         "serverSide": true,
         "ajax": $('#coingecko_markets_route').val(),
         "scrollX": true,
+        responsive: true,
+        autoWidth: false,
         "columns": [
             {data: 'name', name: 'name'},
             {data: 'image', name: 'image'},
