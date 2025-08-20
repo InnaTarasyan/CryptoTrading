@@ -1985,4 +1985,100 @@ class MarketsComparizonController extends Controller
             ], 500);
         }
     }
+
+    public function getEventsCalendar(Request $request)
+    {
+        try {
+            $startParam = $request->query('start');
+            $endParam = $request->query('end');
+
+            $start = $startParam ? \Carbon\Carbon::parse($startParam) : \Carbon\Carbon::now()->subDays(30);
+            $end = $endParam ? \Carbon\Carbon::parse($endParam) : \Carbon\Carbon::now()->addDays(60);
+
+            if ($end->lessThan($start)) {
+                [$start, $end] = [$end, $start];
+            }
+
+            $events = \App\Models\CoinMarketCal\CoinMarketCalEvents::query()
+                ->whereBetween('date_event', [$start, $end])
+                ->orderBy('date_event')
+                ->limit(1000)
+                ->get(['id','title','coins','date_event','displayed_date','categories','proof','source','api_id','created_date']);
+
+            $items = $events->map(function ($evt) {
+                $titleRaw = $evt->title;
+                $coinsRaw = $evt->coins;
+                $catsRaw = $evt->categories;
+
+                $titleText = '';
+                if (is_string($titleRaw)) {
+                    $decoded = json_decode($titleRaw, true);
+                    if (json_last_error() === JSON_ERROR_NONE) {
+                        if (is_array($decoded)) {
+                            // Try common keys or first string value
+                            $titleText = $decoded['en'] ?? $decoded['title'] ?? (is_string(reset($decoded)) ? reset($decoded) : '');
+                        }
+                    } else {
+                        $titleText = $titleRaw;
+                    }
+                } elseif (is_array($titleRaw)) {
+                    $titleText = $titleRaw['en'] ?? $titleRaw['title'] ?? (is_string(reset($titleRaw)) ? reset($titleRaw) : '');
+                }
+
+                $coinSymbols = [];
+                if (is_string($coinsRaw)) {
+                    $decoded = json_decode($coinsRaw, true);
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                        foreach ($decoded as $c) {
+                            if (!empty($c['symbol'])) $coinSymbols[] = strtoupper($c['symbol']);
+                            elseif (!empty($c['name'])) $coinSymbols[] = strtoupper($c['name']);
+                        }
+                    }
+                } elseif (is_array($coinsRaw)) {
+                    foreach ($coinsRaw as $c) {
+                        if (!empty($c['symbol'])) $coinSymbols[] = strtoupper($c['symbol']);
+                        elseif (!empty($c['name'])) $coinSymbols[] = strtoupper($c['name']);
+                    }
+                }
+
+                $coinPrefix = count($coinSymbols) ? (implode(', ', array_slice($coinSymbols, 0, 3)) . (count($coinSymbols) > 3 ? '…' : '') . ' — ') : '';
+                $title = trim($coinPrefix . ($titleText ?: 'Event'));
+
+                $categories = [];
+                if (is_string($catsRaw)) {
+                    $decoded = json_decode($catsRaw, true);
+                    if (json_last_error() === JSON_ERROR_NONE) $categories = $decoded;
+                } elseif (is_array($catsRaw)) {
+                    $categories = $catsRaw;
+                }
+
+                $color = null;
+                $catString = strtolower(json_encode($categories));
+                if (strpos($catString, 'listing') !== false) $color = '#10b981';
+                elseif (strpos($catString, 'airdrop') !== false) $color = '#3b82f6';
+                elseif (strpos($catString, 'partnership') !== false) $color = '#f59e0b';
+                elseif (strpos($catString, 'ama') !== false) $color = '#8b5cf6';
+
+                return [
+                    'id' => (string) $evt->id,
+                    'title' => $title,
+                    'start' => \Carbon\Carbon::parse($evt->date_event)->toIso8601String(),
+                    'url' => $evt->source ?: null,
+                    'color' => $color,
+                    'extendedProps' => [
+                        'displayed_date' => $evt->displayed_date,
+                        'categories' => $categories,
+                        'proof' => $evt->proof,
+                        'api_id' => $evt->api_id,
+                        'created_date' => $evt->created_date,
+                        'coins' => $coinSymbols,
+                    ],
+                ];
+            });
+
+            return response()->json($items);
+        } catch (\Throwable $e) {
+            return response()->json(['error' => 'Failed to load events: ' . $e->getMessage()], 500);
+        }
+    }
 }

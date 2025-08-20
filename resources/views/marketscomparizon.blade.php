@@ -12,6 +12,7 @@
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="{{url('css/datatables.css')}}" rel="stylesheet">
     <link href="{{ asset('css/history.css') }}" rel="stylesheet">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css' rel='stylesheet'>
     <style>
         .charts-grid { display: block; }
         .chart-block canvas { width: 100% !important; height: 100% !important; }
@@ -703,6 +704,18 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {{-- Coin Event Calendar Section --}}
+                <div class="coin-event-calendar" style="margin-top: 2em;">
+                    <div class="modern-title-bar">
+                        <div class="m-portlet__head-title custom-modern">
+                            <span class="modern-title-text">Coin Event Calendar</span>
+                        </div>
+                    </div>
+                    <div class="calendar-wrapper">
+                        <div id="coinEventCalendar"></div>
                     </div>
                 </div>
     </div>
@@ -3967,6 +3980,28 @@
             align-items: center;
         }
     }
+
+    /* Calendar styles */
+    .calendar-wrapper {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 12px;
+        overflow: hidden;
+    }
+    #coinEventCalendar .fc-toolbar-title {
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #333;
+    }
+    #coinEventCalendar .fc-daygrid-event, 
+    #coinEventCalendar .fc-list-event {
+        font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+        .calendar-wrapper { padding: 8px; border-radius: 10px; }
+        #coinEventCalendar .fc-toolbar-title { font-size: 1em; }
+    }
 </style>
 
 {{-- ======================== Live Coin Watch Info Section ======================== --}}
@@ -4070,6 +4105,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
     <script src="{{ url('js/livecoin/history.js') }}"></script>
     <script>
         function getInitials(name) {
@@ -4187,6 +4223,8 @@
                             chartsEl.style.display = 'block';
                             // Now that charts are visible, load DB-backed charts to avoid zero-size rendering
                             try { loadMainDbCharts(); } catch (e) { console.error('Failed to load main DB charts after show', e); }
+                            // Initialize Coin Event Calendar
+                            try { initCoinEventCalendar(); } catch (e) { console.error('Failed to init Coin Event Calendar', e); }
                         }, 1000);
                     } else {
                         console.error('Error loading comparison data:', data.message);
@@ -6566,6 +6604,65 @@
                 console.error('Failed to render Top Volume Markets chart', err);
                 ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No top markets data</div>';
             }
+        }
+
+        // ======================== Coin Event Calendar ========================
+        function initCoinEventCalendar() {
+            const el = document.getElementById('coinEventCalendar');
+            if (!el) return;
+            // Clear existing if reinitializing
+            el.innerHTML = '';
+
+            const isMobile = window.innerWidth < 768;
+            const calendar = new FullCalendar.Calendar(el, {
+                initialView: isMobile ? 'listWeek' : 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: isMobile ? 'listWeek,dayGridMonth' : 'dayGridMonth,listMonth'
+                },
+                height: 'auto',
+                contentHeight: 'auto',
+                aspectRatio: 1.6,
+                navLinks: true,
+                dayMaxEvents: true,
+                eventSources: [
+                    {
+                        url: '/api/main/events-calendar',
+                        method: 'GET',
+                        failure: function() {
+                            console.error('Failed to load events');
+                        }
+                    }
+                ],
+                eventClick: function(info) {
+                    if (info.event.url) {
+                        window.open(info.event.url, '_blank');
+                        info.jsEvent.preventDefault();
+                    }
+                },
+                eventDidMount: function(arg) {
+                    const coins = (arg.event.extendedProps && arg.event.extendedProps.coins) ? arg.event.extendedProps.coins.join(', ') : '';
+                    const date = (arg.event.extendedProps && arg.event.extendedProps.displayed_date) ? arg.event.extendedProps.displayed_date : '';
+                    arg.el.title = [arg.event.title, coins, date].filter(Boolean).join('\n');
+                }
+            });
+            calendar.render();
+
+            // Responsive switch on resize
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    const wantMobile = window.innerWidth < 768;
+                    const current = calendar.view.type;
+                    const target = wantMobile ? 'listWeek' : 'dayGridMonth';
+                    if (current !== target) {
+                        calendar.changeView(target);
+                    }
+                    calendar.updateSize();
+                }, 200);
+            });
         }
     </script>
 @endsection

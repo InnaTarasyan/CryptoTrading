@@ -77,6 +77,7 @@ Route::get('/api/cryptics-data', 'MarketsComparizonController@getCrypticsDataApi
 Route::get('/api/main/timeseries-prices', 'MarketsComparizonController@getTimeSeriesPrices')->name('api.main.ts_prices');
 Route::get('/api/main/market-dominance', 'MarketsComparizonController@getMarketDominance')->name('api.main.market_dominance');
 Route::get('/api/main/top-volume-markets', 'MarketsComparizonController@getTopVolumeMarkets')->name('api.main.top_volume_markets');
+Route::get('/api/main/events-calendar', 'MarketsComparizonController@getEventsCalendar')->name('api.main.events_calendar');
 
 // coin analysis across platforms
 Route::get('/livecoinwatch/coin-analysis',
