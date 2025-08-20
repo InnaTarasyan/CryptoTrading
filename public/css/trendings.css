@@ -155,7 +155,7 @@ body.dark-mode #coingecko_trendings td:first-child {
     }
     #coingecko_trendings td {
         text-align: left;
-        padding-left: 48%;
+        padding-left: 44%;
         position: relative;
         border: none;
         border-bottom: 1px solid #ffdde1;
@@ -164,6 +164,8 @@ body.dark-mode #coingecko_trendings td:first-child {
         font-size: 1em;
         color: #d72660;
         background: none;
+        word-break: break-word;
+        white-space: normal;
     }
     #coingecko_trendings td:last-child {
         border-bottom: none;
@@ -173,7 +175,7 @@ body.dark-mode #coingecko_trendings td:first-child {
         position: absolute;
         left: 1rem;
         top: 0;
-        width: 45%;
+        width: 40%;
         white-space: nowrap;
         font-weight: bold;
         color: #ff6a88;
@@ -1388,5 +1390,19 @@ body.dark-mode .modern-title-text {
 	}
 	#coingecko_trendings_filter input[type="search"] {
 		padding-left: 48px !important;
+	}
+}
+
+/* Ensure full-width table and prevent horizontal scroll on mobile */
+@media (max-width: 768px) {
+	.enhanced-table-container,
+	.table-wrapper {
+		overflow-x: hidden !important;
+	}
+	.enhanced-table,
+	#coingecko_trendings {
+		width: 100% !important;
+		min-width: 0 !important;
+		table-layout: fixed;
 	}
 }
