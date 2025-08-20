@@ -34,7 +34,7 @@ Coingecko.prototype.init = function () {
         "processing": true,
         "serverSide": true,
         "ajax": $('#coingecko_markets_route').val(),
-        "scrollX": true,
+        "scrollX": window.innerWidth > 768,
         responsive: true,
         autoWidth: false,
         "columns": [
@@ -108,12 +108,15 @@ Coingecko.prototype.init = function () {
             });
         },
         "infoCallback": function(settings, start, end, max, total, pre) {
-            return `\n                <div class=\"datatable-info-beautiful pinky-gradient\">\n                    <span class=\"datatable-info-icon\">💖</span>\n                    <span class=\"datatable-info-text\">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
+            return `\n                <div class="datatable-info-beautiful pinky-gradient">\n                    <span class="datatable-info-icon">💖</span>\n                    <span class="datatable-info-text">\n                        Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total.toLocaleString()}</strong> entries\n                    </span>\n                </div>\n            `;
         },
         "createdRow": function(row, data, dataIndex) {
             // Set data-label for each cell
             $(row).find('td').each(function(idx) {
                 $(this).attr('data-label', columnLabels[idx]);
+                if(idx === 0) {
+                    $(this).addClass('datatable-highlight-first');
+                }
             });
         }
     });

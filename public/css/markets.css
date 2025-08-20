@@ -2686,18 +2686,24 @@ body.dark-mode .footer-info {
 @media (max-width: 768px) {
     .enhanced-table-container,
     .table-wrapper {
-        overflow-x: unset !important;
-        /* Or use overflow-x: hidden if you want to completely prevent horizontal scroll */
-        /* overflow-x: hidden !important; */
+        overflow-x: hidden !important;
+    }
+    .enhanced-table,
+    #coingecko_markets {
+        width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed;
+    }
+    #coingecko_markets td {
+        word-break: break-word;
+        white-space: normal;
     }
 }
 
 @media (max-width: 480px) {
     .enhanced-table-container,
     .table-wrapper {
-        overflow-x: unset !important;
-        /* Or use overflow-x: hidden if you want to completely prevent horizontal scroll */
-        /* overflow-x: hidden !important; */
+        overflow-x: hidden !important;
     }
 }
 
