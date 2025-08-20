@@ -4180,6 +4180,8 @@
                         setTimeout(() => {
                             enhancedLoadingEl.style.display = 'none';
                             chartsEl.style.display = 'block';
+                            // Now that charts are visible, load DB-backed charts to avoid zero-size rendering
+                            try { loadMainDbCharts(); } catch (e) { console.error('Failed to load main DB charts after show', e); }
                         }, 1000);
                     } else {
                         console.error('Error loading comparison data:', data.message);
@@ -6432,28 +6434,54 @@
             if (marketDominanceChart && typeof marketDominanceChart.destroy === 'function') marketDominanceChart.destroy();
 
             // Empty-state guard
-            if (!labels || !labels.length) {
+            if (!Array.isArray(labels) || !Array.isArray(values)) {
                 ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No dominance data</div>';
                 return;
             }
 
-            marketDominanceChart = new Chart(ctx.getContext('2d'), {
-                type: 'doughnut',
-                data: {
-                    labels,
-                    datasets: [{
-                        data: values,
-                        backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#94a3b8'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } },
-                    layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } }
-                }
-            });
+            // Sanitize data: ensure same length, numeric and non-negative, and sum > 0
+            const sanitized = [];
+            const len = Math.min(labels.length, values.length);
+            for (let i = 0; i < len; i++) {
+                const v = Number(values[i]);
+                if (Number.isFinite(v) && v >= 0 && labels[i]) sanitized.push({ label: String(labels[i]), value: v });
+            }
+            if (!sanitized.length) {
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No dominance data</div>';
+                return;
+            }
+            const domLabels = sanitized.map(s => s.label);
+            const domValues = sanitized.map(s => s.value);
+
+            // If everything is zero, render empty-state
+            const total = domValues.reduce((a,b)=>a+b,0);
+            if (total <= 0) {
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No dominance data</div>';
+                return;
+            }
+
+            try {
+                marketDominanceChart = new Chart(ctx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: domLabels,
+                        datasets: [{
+                            data: domValues,
+                            backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#94a3b8'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } },
+                        layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } }
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to render Market Dominance chart', err);
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No dominance data</div>';
+            }
         }
 
         function renderTopVolumeMarkets(labels, volumes, prices) {
@@ -6462,51 +6490,77 @@
             if (topVolumeMarketsChart && typeof topVolumeMarketsChart.destroy === 'function') topVolumeMarketsChart.destroy();
 
             // Empty-state guard
-            if (!labels || !labels.length) {
+            if (!Array.isArray(labels) || !Array.isArray(volumes) || !Array.isArray(prices)) {
                 ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No top markets data</div>';
                 return;
             }
 
-            topVolumeMarketsChart = new Chart(ctx.getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels,
-                    datasets: [
-                        {
-                            type: 'bar',
-                            label: '24h Volume',
-                            data: volumes.map(v => v / 1e9),
-                            yAxisID: 'y',
-                            backgroundColor: 'rgba(59,130,246,0.7)',
-                            borderColor: '#3b82f6',
-                            borderWidth: 1
-                        },
-                        {
-                            type: 'line',
-                            label: 'Price',
-                            data: prices,
-                            yAxisID: 'y1',
-                            borderColor: '#10b981',
-                            backgroundColor: '#10b98133',
-                            tension: 0.3,
-                            pointRadius: 0,
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    scales: {
-                        y: { beginAtZero: true, title: { display: true, text: 'Volume (B USD)' }, grid: { color: 'rgba(0,0,0,0.06)' } },
-                        y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Price (USD)' } },
-                        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } }
+            // Sanitize data: align lengths and ensure numbers are finite and non-negative for volumes
+            const len = Math.min(labels.length, volumes.length, prices.length);
+            const sLabels = [];
+            const sVolumes = [];
+            const sPrices = [];
+            for (let i = 0; i < len; i++) {
+                const vol = Number(volumes[i]);
+                const price = Number(prices[i]);
+                const name = labels[i];
+                if (!name) continue;
+                if (!Number.isFinite(vol) || vol < 0) continue;
+                if (!Number.isFinite(price)) continue;
+                sLabels.push(String(name));
+                sVolumes.push(vol);
+                sPrices.push(price);
+            }
+            if (!sLabels.length) {
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No top markets data</div>';
+                return;
+            }
+
+            try {
+                topVolumeMarketsChart = new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: sLabels,
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: '24h Volume',
+                                data: sVolumes.map(v => v / 1e9),
+                                yAxisID: 'y',
+                                backgroundColor: 'rgba(59,130,246,0.7)',
+                                borderColor: '#3b82f6',
+                                borderWidth: 1
+                            },
+                            {
+                                type: 'line',
+                                label: 'Price',
+                                data: sPrices,
+                                yAxisID: 'y1',
+                                borderColor: '#10b981',
+                                backgroundColor: '#10b98133',
+                                tension: 0.3,
+                                pointRadius: 0,
+                                borderWidth: 2
+                            }
+                        ]
                     },
-                    plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
-                    layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } }
-                }
-            });
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Volume (B USD)' }, grid: { color: 'rgba(0,0,0,0.06)' } },
+                            y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Price (USD)' } },
+                            x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } }
+                        },
+                        plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+                        layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } }
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to render Top Volume Markets chart', err);
+                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;">No top markets data</div>';
+            }
         }
     </script>
 @endsection
