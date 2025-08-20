@@ -33,6 +33,17 @@
             border-radius: 12px;
             padding: 12px;
         }
+        /* Target mobile screens */
+        @media (max-width: 768px) {
+            td.fc-list-event-title {
+                color: black; /* Change this to your desired text color */
+            }
+
+            /* Optionally, target the inner div or span if needed */
+            td.fc-list-event-title div {
+                color: black;
+            }
+        }
     </style>
 @endsection
 
@@ -369,6 +380,39 @@
             </div>
         </div>
 
+                {{-- Coin Event Calendar Section --}}
+                <div class="coin-event-calendar mb-5" style="margin-top: 2em;">
+                    <div class="modern-title-bar">
+                        <div class="m-portlet__head-title custom-modern">
+                            <span class="modern-title-text">Coin Event Calendar</span>
+                        </div>
+                    </div>
+                    <div class="calendar-wrapper">
+                        <div id="calendarLoading" style="display:none;text-align:center;padding:12px;">
+                            <div class="loader-spinner"></div>
+                        </div>
+                        <div id="coinEventCalendar"></div>
+                        <div id="eventModal" class="event-modal" style="display:none;">
+                            <div class="event-modal__backdrop" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()"></div>
+                            <div class="event-modal__content">
+                                <div class="event-modal__header">
+                                    <h3 id="eventModalTitle">Event</h3>
+                                    <button type="button" class="event-modal__close" aria-label="Close" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">×</button>
+                                </div>
+                                <div class="event-modal__body">
+                                    <div class="event-modal__row" id="eventModalDate"></div>
+                                    <div class="event-modal__row" id="eventModalCoins"></div>
+                                    <div class="event-modal__row" id="eventModalCategories"></div>
+                                    <div class="event-modal__row" id="eventModalProof"></div>
+                                </div>
+                                <div class="event-modal__footer">
+                                    <a id="eventModalLink" href="#" target="_blank" rel="noopener" class="event-modal__btn" style="display:none;">Open Source</a>
+                                    <button type="button" class="event-modal__btn secondary" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
         {{-- Chart Grid --}}
@@ -707,39 +751,7 @@
                     </div>
                 </div>
 
-                {{-- Coin Event Calendar Section --}}
-                <div class="coin-event-calendar" style="margin-top: 2em;">
-                    <div class="modern-title-bar">
-                        <div class="m-portlet__head-title custom-modern">
-                            <span class="modern-title-text">Coin Event Calendar</span>
-                        </div>
-                    </div>
-                    <div class="calendar-wrapper">
-                        <div id="calendarLoading" style="display:none;text-align:center;padding:12px;">
-                            <div class="loader-spinner"></div>
-                        </div>
-                        <div id="coinEventCalendar"></div>
-                        <div id="eventModal" class="event-modal" style="display:none;">
-                            <div class="event-modal__backdrop" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()"></div>
-                            <div class="event-modal__content">
-                                <div class="event-modal__header">
-                                    <h3 id="eventModalTitle">Event</h3>
-                                    <button type="button" class="event-modal__close" aria-label="Close" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">×</button>
-                                </div>
-                                <div class="event-modal__body">
-                                    <div class="event-modal__row" id="eventModalDate"></div>
-                                    <div class="event-modal__row" id="eventModalCoins"></div>
-                                    <div class="event-modal__row" id="eventModalCategories"></div>
-                                    <div class="event-modal__row" id="eventModalProof"></div>
-                                </div>
-                                <div class="event-modal__footer">
-                                    <a id="eventModalLink" href="#" target="_blank" rel="noopener" class="event-modal__btn" style="display:none;">Open Source</a>
-                                    <button type="button" class="event-modal__btn secondary" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
     </div>
 </div>
 
