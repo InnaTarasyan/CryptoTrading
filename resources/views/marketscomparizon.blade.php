@@ -6752,10 +6752,14 @@
                     }
                 },
                 eventClick: function(info) {
+                    // If the event has a URL, allow default anchor navigation (we set target in eventDidMount)
+                    if (info.event.url) {
+                        return;
+                    }
+                    // Otherwise show our modal with details
                     info.jsEvent.preventDefault();
                     const modal = document.getElementById('eventModal');
                     if (!modal) return;
-                    // Populate modal
                     const ex = info.event.extendedProps || {};
                     document.getElementById('eventModalTitle').textContent = info.event.title || 'Event';
                     document.getElementById('eventModalDate').innerHTML = '<strong>Date:</strong> ' + (ex.displayed_date || new Date(info.event.start).toLocaleString());
@@ -6765,13 +6769,21 @@
                     document.getElementById('eventModalCategories').innerHTML = catsStr ? ('<strong>Categories:</strong> ' + catsStr) : '';
                     document.getElementById('eventModalProof').innerHTML = ex.proof ? ('<strong>Proof:</strong> ' + ex.proof) : '';
                     const link = document.getElementById('eventModalLink');
-                    if (info.event.url) { link.href = info.event.url; link.style.display = 'inline-block'; } else { link.removeAttribute('href'); link.style.display = 'none'; }
+                    link.style.display = 'none';
                     modal.style.display = 'block';
                 },
                 eventDidMount: function(arg) {
                     const coins = (arg.event.extendedProps && arg.event.extendedProps.coins) ? arg.event.extendedProps.coins.join(', ') : '';
                     const date = (arg.event.extendedProps && arg.event.extendedProps.displayed_date) ? arg.event.extendedProps.displayed_date : '';
                     arg.el.title = [arg.event.title, coins, date].filter(Boolean).join('\n');
+                    // If the event has a URL, force opening in a new tab for better UX
+                    if (arg.event.url) {
+                        const anchor = arg.el.tagName === 'A' ? arg.el : arg.el.querySelector('a');
+                        if (anchor) {
+                            anchor.setAttribute('target', '_blank');
+                            anchor.setAttribute('rel', 'noopener');
+                        }
+                    }
                 }
             });
             calendar.render();
