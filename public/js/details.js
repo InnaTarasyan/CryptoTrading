@@ -26,11 +26,8 @@ CoinDetails.prototype.init = function () {
         return;
     }
 
-    if (window.innerWidth >= 768 ) {
-        $('#m_calendar').fullCalendar('changeView', 'agendaDay');
-    } else {
-        $('#m_calendar').fullCalendar('changeView', 'month');
-    }
+    // Determine initial view based on screen size
+    var isMobile = window.innerWidth < 768;
 
     // Get current language from localStorage or default to English
     const currentLang = localStorage.getItem('selectedLanguage') || 'en';
@@ -100,6 +97,15 @@ CoinDetails.prototype.init = function () {
             center: 'title',
             right: 'month,agendaWeek,agendaDay,listWeek'
         },
+        defaultView: isMobile ? 'listWeek' : 'month',
+        handleWindowResize: true,
+        windowResize: function(view) {
+            var shouldUseMobile = window.innerWidth < 768;
+            var newView = shouldUseMobile ? 'listWeek' : 'month';
+            $('#m_calendar').fullCalendar('changeView', newView);
+        },
+        displayEventTime: false,
+        contentHeight: 'auto',
         buttonText: config.buttonText,
         allDayText: config.allDayText,
         noEventsMessage: config.noEventsMessage,
@@ -109,6 +115,11 @@ CoinDetails.prototype.init = function () {
         navLinks: true,
         defaultDate: todayDate,
         events: ev_list,
+        eventRender: function(event, element) {
+            // Improve readability of long titles
+            element.attr('title', event.title);
+            element.find('.fc-title').css({ 'white-space': 'normal', 'overflow': 'visible' });
+        },
         viewRender: function(view, element) {
             // Update calendar language when view changes
             setTimeout(() => {

@@ -2807,3 +2807,101 @@ body {
   }
 }
 
+/* Coin Events calendar mobile readability */
+@media (max-width: 767px) {
+  /* Make event titles wrap and increase touch targets */
+  #m_calendar .fc-event,
+  #m_calendar .fc-list-item-title,
+  #m_calendar .fc-list-item-marker,
+  #m_calendar .fc-list-item-time {
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+  #m_calendar .fc-list-item-title a,
+  #m_calendar .fc-title {
+    white-space: normal !important;
+    line-height: 1.3 !important;
+    font-size: 0.98em !important;
+  }
+  /* Add padding and spacing in list view */
+  #m_calendar .fc-viewport,
+  #m_calendar .fc-scroller {
+    overflow: visible !important;
+  }
+  #m_calendar .fc-list-table td,
+  #m_calendar .fc-list-table th {
+    padding: 0.8em 0.8em !important;
+  }
+  #m_calendar .fc-toolbar {
+    flex-wrap: wrap !important;
+    gap: 0.6em !important;
+  }
+  #m_calendar .fc-toolbar .fc-center,
+  #m_calendar .fc-toolbar .fc-left,
+  #m_calendar .fc-toolbar .fc-right {
+    float: none !important;
+  }
+}
+
+/* --- Mobile UX for Twitter/Telegram timelines --- */
+@media (max-width: 767px) {
+  /* Soften heavy inline paddings on portlets used by Twitter/Telegram blocks */
+  .m-portlet[style] {
+    padding: 1em 0.8em 0.8em 0.8em !important;
+  }
+  .m-portlet .m-portlet__head {
+    border-radius: 1em !important;
+    padding: 0.8em 0.9em !important;
+  }
+  .m-portlet .m-portlet__body {
+    padding: 0.8em 0.9em !important;
+  }
+  /* Make scrollable container auto-size on phones */
+  .m-scrollable.mCustomScrollbar {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  /* Timeline layout: vertical, airy, fully readable */
+  .m-timeline-2 {
+    padding: 0.8em 0.4em 0.4em 0.4em !important;
+  }
+  .m-timeline-2::before {
+    display: none !important;
+  }
+  .m-timeline-2__items {
+    margin-bottom: 1em !important;
+  }
+  .m-timeline-2__item {
+    flex-direction: column !important;
+    padding: 0.9em 0.9em !important;
+    min-height: auto !important;
+    gap: 0.6em !important;
+  }
+  /* Show date as a normal badge at the top inside the card */
+  .m-timeline-2__item-time {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 0 0.5em 0 !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+  /* Compact icon */
+  .m-timeline-2__item-cricle {
+    width: 2.2em !important;
+    height: 2.2em !important;
+    margin: 0 !important;
+  }
+  /* Ensure tweet/telegram text wraps nicely */
+  .m-timeline-2__item-text {
+    font-size: 0.98em !important;
+    line-height: 1.45 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
