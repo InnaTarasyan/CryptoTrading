@@ -2748,3 +2748,62 @@ body {
     height: 300px;
 }
 
+/* --- Mobile fixes for coin details page --- */
+@media (max-width: 767px) {
+  .modern-title-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.6em !important;
+  }
+  .modern-title-bar > div:last-child {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.6em !important;
+  }
+  .modern-title-bar .modern-fullscreen-btn {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    font-size: 1em !important;
+    border-radius: 1em !important;
+  }
+  .modern-title-text {
+    font-size: 1.1em !important;
+  }
+  /* Reduce side paddings on rows for mobile to avoid overflow */
+  .row {
+    padding: 1em 0.7em 0.8em 0.7em !important;
+  }
+}
+
+/* Ensure TV charts are full-width and neatly contained */
+#tradingview_chart,
+#tv-mini-chart,
+#tv-ta-chart,
+#tv-volume-chart {
+  width: 100% !important;
+  min-height: 320px;
+  border-radius: 1.2em;
+  overflow: hidden;
+  background: rgba(255,255,255,0.92);
+}
+@media (max-width: 767px) {
+  #tradingview_chart,
+  #tv-mini-chart,
+  #tv-ta-chart,
+  #tv-volume-chart {
+    min-height: 360px;
+  }
+}
+
+/* Dark mode support for chart backgrounds */
+@media (prefers-color-scheme: dark) {
+  #tradingview_chart,
+  #tv-mini-chart,
+  #tv-ta-chart,
+  #tv-volume-chart {
+    background: #23272f;
+  }
+}
+
