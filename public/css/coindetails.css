@@ -2905,3 +2905,40 @@ body {
   }
 }
 
+/* --- Additional mobile enhancements for /details --- */
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+  .m-content {
+    padding: 0.8em 0.7em !important;
+  }
+  .trading_view_chart_section {
+    margin: 1em auto 1em auto !important;
+  }
+  /* Stack chart stats nicely */
+  .coin-chart-stats {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.7em !important;
+    padding: 0.9em 0.9em !important;
+    font-size: 0.98em !important;
+  }
+  .coin-chart-stats > div {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    line-height: 1.35 !important;
+  }
+  /* Softer title subtitle */
+  .modern-title-bar .modern-title-text + div,
+  .modern-title-subtitle {
+    font-size: 0.95em !important;
+  }
+  /* Links wrap fully */
+  .coin-info-summary .coin-links,
+  .coin-info-summary .coin-link {
+    max-width: 100% !important;
+    word-break: break-word !important;
+  }
+}
+

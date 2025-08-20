@@ -198,24 +198,28 @@
                     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                     <script type="text/javascript">
                         function resizeTVChart() {
+                            var mobile = window.innerWidth < 700;
+                            var mobileHeightPx = Math.max(360, Math.floor(window.innerHeight * 0.58)) + 'px';
+                            var desktopHeightPx = '520px';
+                            var targetHeight = mobile ? mobileHeightPx : desktopHeightPx;
                             var el = document.getElementById('tradingview_chart');
                             if (el) {
-                                el.style.height = (window.innerWidth < 700 ? '600px' : '500px');
+                                el.style.height = targetHeight;
                             }
 
                             var el2 = document.getElementById('tv-mini-chart');
                             if (el2) {
-                                el2.style.height = (window.innerWidth < 700 ? '600px' : '500px');
+                                el2.style.height = targetHeight;
                             }
 
                             var el3 = document.getElementById('tv-ta-chart');
                             if (el3) {
-                                el3.style.height = (window.innerWidth < 700 ? '600px' : '500px');
+                                el3.style.height = targetHeight;
                             }
 
                             var el4 = document.getElementById('tv-volume-chart');
                             if (el4) {
-                                el4.style.height = (window.innerWidth < 700 ? '600px' : '500px');
+                                el4.style.height = targetHeight;
                             }
                         }
                         new TradingView.widget({
