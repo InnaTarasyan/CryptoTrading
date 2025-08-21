@@ -1971,3 +1971,22 @@ body {
     overscroll-behavior: contain;
 }
 
+@media (max-width: 767px) {
+  /* Enforce native touch scrolling and disable costly effects */
+  .m-timeline-2,
+  .m-scrollable {
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .m-timeline-2__item,
+  .m-timeline-2__items,
+  .m-timeline-2__item * {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .m-timeline-2__item-cricle {
+    pointer-events: none !important;
+  }
+}
+

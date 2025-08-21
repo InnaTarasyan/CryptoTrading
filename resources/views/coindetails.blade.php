@@ -769,6 +769,12 @@
             if (!isTouch) return;
 
             var destroyOnce = function() {
+                document.querySelectorAll('.m-scrollable').forEach(function(el) {
+                    // Remove attributes that trigger vendor auto-init
+                    el.removeAttribute('data-scrollable');
+                    el.removeAttribute('data-max-height');
+                    el.removeAttribute('data-scrollbar-shown');
+                });
                 document.querySelectorAll('.m-scrollable.mCustomScrollbar').forEach(function(el) {
                     try {
                         if (window.jQuery && jQuery(el).mCustomScrollbar) {
@@ -784,6 +790,16 @@
             };
 
             destroyOnce();
+            // Prevent any future initializations by stubbing the plugin on touch devices
+            try {
+                if (window.jQuery && jQuery.fn) {
+                    jQuery.fn.mCustomScrollbar = function() { return this; };
+                }
+                if (window.mCustomScrollbar) {
+                    window.mCustomScrollbar = function() {};
+                }
+            } catch(e) {}
+
             // In case vendor scripts re-init after load, destroy again shortly after
             setTimeout(destroyOnce, 800);
 
@@ -791,13 +807,23 @@
             var observer = new MutationObserver(function(mutations) {
                 var needsDestroy = false;
                 mutations.forEach(function(m) {
-                    if (m.type === 'attributes' && m.target.classList && m.target.classList.contains('mCustomScrollbar')) {
-                        needsDestroy = true;
+                    if (m.type === 'attributes') {
+                        if (m.target && m.target.getAttribute && m.target.getAttribute('data-scrollable') === 'true') {
+                            needsDestroy = true;
+                        }
+                        if (m.target.classList && m.target.classList.contains('mCustomScrollbar')) {
+                            needsDestroy = true;
+                        }
                     }
                     if (m.addedNodes && m.addedNodes.length) {
                         m.addedNodes.forEach(function(node) {
-                            if (node.nodeType === 1 && node.classList && node.classList.contains('mCustomScrollbar')) {
-                                needsDestroy = true;
+                            if (node.nodeType === 1) {
+                                if (node.getAttribute && node.getAttribute('data-scrollable') === 'true') {
+                                    needsDestroy = true;
+                                }
+                                if (node.classList && node.classList.contains('mCustomScrollbar')) {
+                                    needsDestroy = true;
+                                }
                             }
                         });
                     }
