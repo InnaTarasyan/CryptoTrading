@@ -60,7 +60,7 @@ Disallow: /LICENSE
 Allow: /about
 Allow: /contact
 Allow: /privacy-policy
-Allow: /terms-of-service
+Allow: /terms-of-use
 Allow: /sitemap.xml
 Allow: /feed
 
@@ -68,7 +68,7 @@ Allow: /feed
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://cryptotrading.website/sitemap.xml
 
 # Host
-Host: https://yourdomain.com
+Host: cryptotrading.website

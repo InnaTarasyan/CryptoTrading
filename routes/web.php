@@ -309,3 +309,12 @@ Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
 // Terms of Use Page
 Route::view('/terms-of-use', 'terms-of-use')->name('terms.of.use');
 
+// Contact Page
+Route::view('/contact', 'contact')->name('contact');
+
+// RSS Feed page (basic RSS XML)
+Route::get('/feed', function () {
+    return response()->view('feed')
+        ->header('Content-Type', 'application/rss+xml; charset=UTF-8');
+})->name('feed');
+
