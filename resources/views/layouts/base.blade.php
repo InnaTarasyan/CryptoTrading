@@ -17,13 +17,13 @@
     
     <!-- Primary Meta Tags -->
     <title>
-        @yield('title', 'CryptoTrading | Learn & Trade Bitcoin, Ethereum, Altcoins')
+        @yield('title', 'Crypto Trading - Live Cryptocurrency Tracking & Analysis Platform')
     </title>
-    <meta name="title" content="@yield('meta_title', 'CryptoTrading | Learn & Trade Bitcoin, Ethereum, Altcoins')">
-    <meta name="description" content="@yield('meta_description', 'Trade safely with CryptoTrading. Learn, analyze, and profit from BTC, ETH, and altcoins.')">
+    <meta name="title" content="@yield('meta_title', 'Crypto Trading - Live Cryptocurrency Tracking & Analysis Platform')">
+    <meta name="description" content="@yield('meta_description', 'Track live cryptocurrency prices, social volume changes on Reddit and Twitter, and comprehensive crypto market analysis. Real-time data from CoinMarketCap, TradingView, and more.')">
     <meta name="keywords" content="@yield('meta_keywords', 'cryptocurrency, crypto, coin, coins, bitcoin, btc, ethereum, eth, binance coin, bnb, solana, sol, cardano, ada, ripple, xrp, litecoin, ltc, dogecoin, doge, polkadot, dot, chainlink, link, tron, trx, avalanche, avax, polygon, matic, uniswap, uni, stellar, xlm, cosmos, atom, filecoin, fil, hedera, hbar, bitcoin cash, bch, ethereum classic, etc, price, prices, live crypto prices, real-time crypto prices, crypto price today, crypto price prediction, coin price prediction, bitcoin price prediction, ethereum price prediction, altcoin price prediction, crypto forecast, crypto predictions, trading, crypto trading, day trading, swing trading, algorithmic trading, automated trading, trading bots, forex, forex trading, currency trading, derivatives, futures, options, spot, exchanges, exchange, binance, coinbase, kraken, kucoin, okx, bybit, bitfinex, market data, market cap, market capitalization, total volume, liquidity, volatility, technical analysis, ta, indicators, rsi, macd, moving average, sma, ema, bollinger bands, support resistance, order book, depth chart, chart, charts, crypto charts, candlestick chart, line chart, charting, tradingview, portfolio, portfolio tracker, watchlist, alerts, signals, crypto signals, arbitrage, defi, decentralized finance, nft, nfts, web3, blockchain, distributed ledger, smart contracts, token, tokens, stablecoin, usdt, usdc, dai, yield farming, staking, airdrop, ico, ieo, ido, launchpad, news, crypto news, on-chain analytics, sentiment, social volume, reddit, twitter, x.com, fear and greed index, education, guides, tutorials, how to buy bitcoin, how to buy ethereum, taxation, regulations, kyc, aml, wallets, wallet, hardware wallet, ledger, trezor, metamask, phantom, phantom wallet, address, tx, transaction, gas fees, miner fees, hash rate, mining, proof of work, proof of stake, nodes, validators, explorer, block explorer, livecoinwatch, coingecko, coinpaprika, cryptics, cryptics.tech, coinmarketcap, cmc, messari, glassnode, santiment, into the block, price alert, price tracker, crypto tracker, crypto app, crypto platform, best crypto tools')">
     <meta name="author" content="Inna Tarasyan">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
     <meta name="rating" content="general">
@@ -40,8 +40,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('og_title', 'CryptoTrading Platform')">
-    <meta property="og:description" content="@yield('og_description', 'Start trading crypto securely with our tools and guides.')">
+    <meta property="og:title" content="@yield('og_title', 'Crypto Trading - Live Cryptocurrency Tracking & Analysis Platform')">
+    <meta property="og:description" content="@yield('og_description', 'Track live cryptocurrency prices, social volume changes on Reddit and Twitter, and comprehensive crypto market analysis. Real-time data from CoinMarketCap, TradingView, and more.')">
     <meta property="og:image" content="@yield('og_image', url('assets/demo/demo7/media/img/logo/logo.png'))">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -55,8 +55,8 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
-    <meta property="twitter:title" content="@yield('twitter_title', 'CryptoTrading Platform')">
-    <meta property="twitter:description" content="@yield('twitter_description', 'Trade BTC, ETH & more with ease and safety.')">
+    <meta property="twitter:title" content="@yield('twitter_title', 'Crypto Trading - Live Cryptocurrency Tracking & Analysis Platform')">
+    <meta property="twitter:description" content="@yield('twitter_description', 'Track live cryptocurrency prices, social volume changes on Reddit and Twitter, and comprehensive crypto market analysis. Real-time data from CoinMarketCap, TradingView, and more.')">
     <meta property="twitter:image" content="@yield('twitter_image', url('assets/demo/demo7/media/img/logo/logo.png'))">
     <meta property="twitter:site" content="@cryptotrading">
     <meta property="twitter:creator" content="@cryptotrading">
@@ -223,15 +223,6 @@
     <!--begin::Page Snippets -->
     <script src="{{ url('assets/app/js/dashboard.js') }}" type="text/javascript"></script>
     @yield('scripts')
-    <script>
-        // Add lazy-loading to images that don't opt-out via .critical-img
-        (function(){
-            try {
-                var imgs = document.querySelectorAll('img:not([loading]):not(.critical-img)');
-                imgs.forEach(function(img){ img.setAttribute('loading','lazy'); });
-            } catch(e) {}
-        })();
-    </script>
     <script type="text/javascript">
         $(function(){
 
