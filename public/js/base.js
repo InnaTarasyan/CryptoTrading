@@ -429,6 +429,21 @@ const languageTexts = {
         'symbol': 'Symbol',
         'gaining_coins': 'gaining coins',
         'losing_coins': 'losing coins',
+        // Interactive Table Navigation
+        'interactive_table_navigation_title': '💡 Interactive Table Navigation',
+        'interactive_table_navigation_click_on_any_row': 'Click on any row',
+        'interactive_table_navigation_desc_tail': 'in the table below to explore detailed information about that cryptocurrency.',
+        'interactive_table_navigation_youll_be_taken': "You'll be taken to a comprehensive details page featuring:",
+        'interactive_feature_tradingview_charts': 'TradingView Charts',
+        'interactive_feature_events_calendar': 'Events Calendar',
+        'interactive_feature_telegram_messages': 'Telegram Messages',
+        'interactive_feature_twitter_sentiment': 'Twitter Sentiment',
+        'interactive_feature_market_analysis': 'Market Analysis',
+        'interactive_feature_technical_indicators': 'Technical Indicators',
+        'interactive_pro_tip': 'Pro tip: Use the search and filter options above to find specific cryptocurrencies quickly!',
+        // Duplicate keys used by data-lang-key in markup
+        'about_live_coin_watch': 'About Live Coin Watch',
+        'visit_live_coin_watch': 'Visit Live Coin Watch',
     },
     ru: {
         // Page titles and headers
@@ -621,6 +636,21 @@ const languageTexts = {
         'symbol': 'символ',
         'gaining_coins': 'Дорожающие монеты',
         'losing_coins': 'Дешевеющие монеты',
+        // Interactive Table Navigation
+        'interactive_table_navigation_title': '💡 Интерактивная навигация по таблице',
+        'interactive_table_navigation_click_on_any_row': 'Нажмите на любую строку',
+        'interactive_table_navigation_desc_tail': 'в таблице ниже, чтобы просмотреть подробную информацию об этой криптовалюте.',
+        'interactive_table_navigation_youll_be_taken': 'Вы попадете на подробную страницу, где представлены:',
+        'interactive_feature_tradingview_charts': 'Графики TradingView',
+        'interactive_feature_events_calendar': 'Календарь событий',
+        'interactive_feature_telegram_messages': 'Сообщения Telegram',
+        'interactive_feature_twitter_sentiment': 'Анализ настроений в Twitter',
+        'interactive_feature_market_analysis': 'Рыночный анализ',
+        'interactive_feature_technical_indicators': 'Технические индикаторы',
+        'interactive_pro_tip': 'Совет: используйте поиск и фильтры выше, чтобы быстро найти нужные криптовалюты!',
+        // Duplicate keys used by data-lang-key in markup
+        'about_live_coin_watch': 'О Live Coin Watch',
+        'visit_live_coin_watch': 'Посетить Live Coin Watch',
     },
     hy: {
         'Language changed to': 'Լեզուն փոխվել է',
@@ -661,6 +691,21 @@ const languageTexts = {
         'Categories': 'Կատեգորիաներ',
         'About Live Coin Watch': 'Live Coin Watch-ի մասին',
         'Visit Live Coin Watch': 'Այցելել Live Coin Watch',
+        // Duplicate keys used by data-lang-key in markup
+        'about_live_coin_watch': 'Live Coin Watch-ի մասին',
+        'visit_live_coin_watch': 'Այցելել Live Coin Watch',
+        // Interactive Table Navigation
+        'interactive_table_navigation_title': '💡 Ինտերակտիվ նավիգացիա աղյուսակում',
+        'interactive_table_navigation_click_on_any_row': 'Սեղմեք ցանկացած տողի վրա',
+        'interactive_table_navigation_desc_tail': 'ներքևի աղյուսակում՝ տվյալ կրիպտոարժույթի մանրամասն տեղեկությունները տեսնելու համար։',
+        'interactive_table_navigation_youll_be_taken': 'Դուք կանցնեք մանրամասն էջ, որտեղ հասանելի է հետևյալը.',
+        'interactive_feature_tradingview_charts': 'TradingView գրաֆիկներ',
+        'interactive_feature_events_calendar': 'Իրադարձությունների օրացույց',
+        'interactive_feature_telegram_messages': 'Telegram հաղորդագրություններ',
+        'interactive_feature_twitter_sentiment': 'Twitter-ի տրամադրությունների վերլուծություն',
+        'interactive_feature_market_analysis': 'Շուկայի վերլուծություն',
+        'interactive_feature_technical_indicators': 'Տեխնիկական ցուցանիշներ',
+        'interactive_pro_tip': 'Խորհուրդ. Օգտագործեք վերևի որոնումն ու ֆիլտրերը՝ արագ գտնելու համար ձեզ անհրաժեշտ կրիպտոարժույթները։',
         'User Reviews': 'Օգտատերերի կարծիքներ',
         'Leave a Review': 'Թողնել կարծիք',
         'Name': 'Անուն',
@@ -678,7 +723,7 @@ const languageTexts = {
         'LCW Info Card Intro': 'Live Coin Watch-ը իրական ժամանակում կրիպտոարժույթների շուկայի հետևման հարթակ է, որն առաջարկում է մաքուր և հարմար ինտերֆեյս՝ գների, շուկայական կապիտալիզացիայի, առևտրի ծավալների և հարյուրավոր թվային ակտիվների դասակարգման մոնիտորինգի համար: Ի տարբերություն շատ մրցակիցների, Live Coin Watch-ը թարմացնում է տվյալները իրական ժամանակում, ինչը իդեալական է այն օգտատերերի համար, ովքեր ցանկանում են տեսնել գների փոփոխությունները անմիջապես:',
         'LCW Info Card Change History': 'Փոփոխությունների պատմություն. Վերևի աղյուսակը տրամադրում է տարբեր կրիպտոարժույթների պատմական փոփոխությունների համապարփակ գրանցում, որոնք հետևում է Live Coin Watch-ը: Յուրաքանչյուր գրառում արտացոլում է գնի, շուկայական կապիտալիզացիայի, առևտրի ծավալի և այլ հիմնական ցուցանիշների փոփոխությունները ժամանակի ընթացքում: Այս փոփոխությունների պատմությունը օգտատերերին հնարավորություն է տալիս վերլուծել միտումները, հետևել շուկայի շարժերին և կայացնել տեղեկացված որոշումներ՝ հիմնվելով անցյալի տվյալների և թափանցիկության վրա: Պարբերաբար թարմացվող աղյուսակը ապահովում է, որ օգտատերերը միշտ ունենան ամենավերջին և ճշգրիտ պատմական տեղեկատվությունը:',
         'platforms_comparison_title': 'LiveCoinWatch, CoinGecko, CoinMarketCal, CryptoCompare, CoinPaprika և Cryptics.tech տվյալների համեմատություն',
-        
+
         // Breadcrumb menu items
         'dashboard': 'Վահանակ',
         'markets_comparison': 'Շուկաների համեմատություն',
@@ -750,6 +795,19 @@ const languageTexts = {
         'symbol': 'խորհրդանիշ',
         'gaining_coins': 'մետաղադրամների ստացում',
         'losing_coins': 'կորցնող մետաղադրամներ',
+
+        // Interactive Table Navigation
+        'interactive_table_navigation_title': '💡 Ինտերակտիվ նավիգացիա աղյուսակում',
+        'interactive_table_navigation_click_on_any_row': 'Սեղմեք ցանկացած տողի վրա',
+        'interactive_table_navigation_desc_tail': 'ներքևի աղյուսակում՝ տվյալ կրիպտոարժույթի մանրամասն տեղեկությունները տեսնելու համար։',
+        'interactive_table_navigation_youll_be_taken': 'Դուք կանցնեք մանրամասն էջ, որտեղ հասանելի է հետևյալը.',
+        'interactive_feature_tradingview_charts': 'TradingView գրաֆիկներ',
+        'interactive_feature_events_calendar': 'Իրադարձությունների օրացույց',
+        'interactive_feature_telegram_messages': 'Telegram հաղորդագրություններ',
+        'interactive_feature_twitter_sentiment': 'Twitter-ի տրամադրությունների վերլուծություն',
+        'interactive_feature_market_analysis': 'Շուկայի վերլուծություն',
+        'interactive_feature_technical_indicators': 'Տեխնիկական ցուցանիշներ',
+        'interactive_pro_tip': 'Խորհուրդ. Օգտագործեք վերևի որոնումն ու ֆիլտրերը՝ արագ գտնելու համար ձեզ անհրաժեշտ կրիպտոարժույթները։',
     },
     fi: {
         'Language changed to': 'Kieli vaihdettu',
@@ -775,6 +833,21 @@ const languageTexts = {
         'Categories': 'Kategoriat',
         'About Live Coin Watch': 'Tietoa Live Coin Watchista',
         'Visit Live Coin Watch': 'Siirry Live Coin Watchiin',
+        // Duplicate keys used by data-lang-key in markup
+        'about_live_coin_watch': 'Tietoja Live Coin Watchista',
+        'visit_live_coin_watch': 'Siirry Live Coin Watchiin',
+        // Interactive Table Navigation
+        'interactive_table_navigation_title': '💡 Interaktiivinen taulukonavigointi',
+        'interactive_table_navigation_click_on_any_row': 'Napsauta mitä tahansa riviä',
+        'interactive_table_navigation_desc_tail': 'alla olevassa taulukossa nähdäksesi kryptovaluutan tarkemmat tiedot.',
+        'interactive_table_navigation_youll_be_taken': 'Sinut ohjataan yksityiskohtaiselle sivulle, jossa on:',
+        'interactive_feature_tradingview_charts': 'TradingView-kaaviot',
+        'interactive_feature_events_calendar': 'Tapahtumakalenteri',
+        'interactive_feature_telegram_messages': 'Telegram-viestit',
+        'interactive_feature_twitter_sentiment': 'Twitter-sentimentti',
+        'interactive_feature_market_analysis': 'Markkina-analyysi',
+        'interactive_feature_technical_indicators': 'Tekniset indikaattorit',
+        'interactive_pro_tip': 'Vinkki: Käytä yllä olevia haku- ja suodatustoimintoja löytääksesi nopeasti haluamasi kryptovaluutat!',
         'User Reviews': 'Käyttäjäarvostelut',
         'Leave a Review': 'Jätä arvostelu',
         'Name': 'Nimi',
@@ -864,7 +937,7 @@ const languageTexts = {
         'symbol': 'symboli',
         'gaining_coins': 'kolikoiden vastaanottaminen',
         'losing_coins': 'kolikoiden häviäminen',
-    }
+    },
 };
 
 // Add translation for page title 'Livecoin History'

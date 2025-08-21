@@ -68,40 +68,40 @@
                     </svg>
                 </div>
                 <div class="explanation-text">
-                    <h4 class="explanation-title">💡 Interactive Table Navigation</h4>
+                    <h4 class="explanation-title" data-lang-key="interactive_table_navigation_title">💡 Interactive Table Navigation</h4>
                     <p class="explanation-description">
-                        <strong>Click on any row</strong> in the table below to explore detailed information about that cryptocurrency. 
-                        You'll be taken to a comprehensive details page featuring:
+                        <strong data-lang-key="interactive_table_navigation_click_on_any_row">Click on any row</strong> <span data-lang-key="interactive_table_navigation_desc_tail">in the table below to explore detailed information about that cryptocurrency.</span>
+                        <span data-lang-key="interactive_table_navigation_youll_be_taken">You'll be taken to a comprehensive details page featuring:</span>
                     </p>
                     <div class="explanation-features">
                         <div class="feature-item">
                             <span class="feature-icon">📊</span>
-                            <span class="feature-text">TradingView Charts</span>
+                            <span class="feature-text" data-lang-key="interactive_feature_tradingview_charts">TradingView Charts</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">📅</span>
-                            <span class="feature-text">Events Calendar</span>
+                            <span class="feature-text" data-lang-key="interactive_feature_events_calendar">Events Calendar</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">💬</span>
-                            <span class="feature-text">Telegram Messages</span>
+                            <span class="feature-text" data-lang-key="interactive_feature_telegram_messages">Telegram Messages</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">🐦</span>
-                            <span class="feature-text">Twitter Sentiment</span>
+                            <span class="feature-text" data-lang-key="interactive_feature_twitter_sentiment">Twitter Sentiment</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">📈</span>
-                            <span class="feature-text">Market Analysis</span>
+                            <span class="feature-text" data-lang-key="interactive_feature_market_analysis">Market Analysis</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">🔍</span>
-                            <span class="feature-text">Technical Indicators</span>
+                            <span class="feature-text" data-lang-key="interactive_feature_technical_indicators">Technical Indicators</span>
                         </div>
                     </div>
                     <div class="explanation-tip">
                         <span class="tip-icon">💡</span>
-                        <span class="tip-text">Pro tip: Use the search and filter options above to find specific cryptocurrencies quickly!</span>
+                        <span class="tip-text" data-lang-key="interactive_pro_tip">Pro tip: Use the search and filter options above to find specific cryptocurrencies quickly!</span>
                     </div>
                 </div>
             </div>
