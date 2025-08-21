@@ -787,6 +787,28 @@
             // In case vendor scripts re-init after load, destroy again shortly after
             setTimeout(destroyOnce, 800);
 
+            // Mutation observer to catch dynamic re-inits
+            var observer = new MutationObserver(function(mutations) {
+                var needsDestroy = false;
+                mutations.forEach(function(m) {
+                    if (m.type === 'attributes' && m.target.classList && m.target.classList.contains('mCustomScrollbar')) {
+                        needsDestroy = true;
+                    }
+                    if (m.addedNodes && m.addedNodes.length) {
+                        m.addedNodes.forEach(function(node) {
+                            if (node.nodeType === 1 && node.classList && node.classList.contains('mCustomScrollbar')) {
+                                needsDestroy = true;
+                            }
+                        });
+                    }
+                });
+                if (needsDestroy) destroyOnce();
+            });
+
+            document.querySelectorAll('.m-portlet__body').forEach(function(root){
+                observer.observe(root, { attributes: true, childList: true, subtree: true });
+            });
+
             // Specifically target Twitter/Telegram timelines if present
             var timeLines = document.querySelectorAll('.m-timeline-2');
             timeLines.forEach(function(tl){
