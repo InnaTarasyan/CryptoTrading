@@ -787,6 +787,25 @@
                     el.style.height = 'auto';
                     el.style.webkitOverflowScrolling = 'touch';
                 });
+
+                // Neutralize hover/animation on chart sections
+                document.querySelectorAll('.trading_view_chart_section, .modern-title-bar, .tv-action-btn, .modern-fullscreen-btn').forEach(function(el){
+                    el.style.transition = 'none';
+                    el.style.transform = 'none';
+                    el.style.animation = 'none';
+                    el.style.filter = 'none';
+                    el.style.touchAction = 'pan-y';
+                });
+
+                // TV containers: remove any inline heights that could cause layout thrash during hover
+                ['tradingview_chart','tv-mini-chart','tv-ta-chart','tv-volume-chart'].forEach(function(id){
+                    var el = document.getElementById(id);
+                    if (el) {
+                        el.style.willChange = 'auto';
+                        // keep height but disable transforms
+                        el.style.transform = 'none';
+                    }
+                });
             };
 
             destroyOnce();
@@ -831,15 +850,8 @@
                 if (needsDestroy) destroyOnce();
             });
 
-            document.querySelectorAll('.m-portlet__body').forEach(function(root){
+            document.querySelectorAll('.m-portlet__body, .trading_view_chart_section').forEach(function(root){
                 observer.observe(root, { attributes: true, childList: true, subtree: true });
-            });
-
-            // Specifically target Twitter/Telegram timelines if present
-            var timeLines = document.querySelectorAll('.m-timeline-2');
-            timeLines.forEach(function(tl){
-                tl.style.willChange = 'auto';
-                tl.style.transform = 'none';
             });
 
             // Add a class to disable hover-only styles if any remain

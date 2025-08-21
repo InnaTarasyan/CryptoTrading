@@ -1990,3 +1990,44 @@ body {
   }
 }
 
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover/animation and blur in chart sections on touch devices */
+  .trading_view_chart_section,
+  .trading_view_chart_section *,
+  .modern-title-bar,
+  .modern-title-bar *,
+  .tv-action-btn,
+  .modern-fullscreen-btn {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+    filter: none !important;
+  }
+  .trading_view_chart_section .tv-chart-embed,
+  #tradingview_chart,
+  #tv-mini-chart,
+  #tv-ta-chart,
+  #tv-volume-chart {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .trading_view_chart_section:hover,
+  .tv-action-btn:hover,
+  .modern-fullscreen-btn:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Fallback when body has no-hover flag */
+.no-hover .trading_view_chart_section *,
+.no-hover .modern-title-bar *,
+.no-hover .tv-action-btn,
+.no-hover .modern-fullscreen-btn {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
