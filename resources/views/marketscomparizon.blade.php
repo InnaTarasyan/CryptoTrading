@@ -140,63 +140,63 @@
                             <div class="spinner-ring"></div>
                             <div class="spinner-ring"></div>
                         </div>
-                        <h2 class="loading-title">Loading CryptoTrading Data</h2>
-                        <p class="loading-subtitle">Fetching comprehensive market data from multiple sources...</p>
+                        <h2 class="loading-title" data-lang-key="loading_title">Loading CryptoTrading Data</h2>
+                        <p class="loading-subtitle" data-lang-key="loading_subtitle">Fetching comprehensive market data from multiple sources...</p>
                     </div>
                     
                     <div class="loading-progress">
                         <div class="progress-bar">
                             <div class="progress-fill" id="progressFill"></div>
                         </div>
-                        <div class="progress-text" id="progressText">Initializing...</div>
+                        <div class="progress-text" id="progressText" data-lang-key="initializing">Initializing...</div>
                     </div>
                     
                     <div class="loading-sources">
                         <div class="source-item" data-source="livecoinwatch">
                             <div class="source-icon">📊</div>
                             <div class="source-info">
-                                <span class="source-name">LiveCoinWatch</span>
-                                <span class="source-status" id="livecoinwatch-status">Waiting...</span>
+                                <span class="source-name" data-lang-key="LiveCoinWatch">LiveCoinWatch</span>
+                                <span class="source-status" id="livecoinwatch-status" data-lang-key="waiting">Waiting...</span>
                             </div>
                         </div>
                         
                         <div class="source-item" data-source="coingecko">
                             <div class="source-icon">🦎</div>
                             <div class="source-info">
-                                <span class="source-name">CoinGecko</span>
-                                <span class="source-status" id="coingecko-status">Waiting...</span>
+                                <span class="source-name" data-lang-key="CoinGecko">CoinGecko</span>
+                                <span class="source-status" id="coingecko-status" data-lang-key="waiting">Waiting...</span>
                             </div>
                         </div>
                         
                         <div class="source-item" data-source="coinmarketcal">
                             <div class="source-icon">📅</div>
                             <div class="source-info">
-                                <span class="source-name">CoinMarketCal</span>
-                                <span class="source-status" id="coinmarketcal-status">Waiting...</span>
+                                <span class="source-name" data-lang-key="CoinMarketCal">CoinMarketCal</span>
+                                <span class="source-status" id="coinmarketcal-status" data-lang-key="waiting">Waiting...</span>
                             </div>
                         </div>
                         
                         <div class="source-item" data-source="cryptocompare">
                             <div class="source-icon">🔍</div>
                             <div class="source-info">
-                                <span class="source-name">CryptoCompare</span>
-                                <span class="source-status" id="cryptocompare-status">Waiting...</span>
+                                <span class="source-name" data-lang-key="CryptoCompare">CryptoCompare</span>
+                                <span class="source-status" id="cryptocompare-status" data-lang-key="waiting">Waiting...</span>
                             </div>
                         </div>
                         
                         <div class="source-item" data-source="coinpaprika">
                             <div class="source-icon">🌶️</div>
                             <div class="source-info">
-                                <span class="source-name">CoinPaprika</span>
-                                <span class="source-status" id="coinpaprika-status">Waiting...</span>
+                                <span class="source-name" data-lang-key="CoinPaprika">CoinPaprika</span>
+                                <span class="source-status" id="coinpaprika-status" data-lang-key="waiting">Waiting...</span>
                             </div>
                         </div>
                         
                         <div class="source-item" data-source="cryptics">
                             <div class="source-icon">🔮</div>
                             <div class="source-info">
-                                <span class="source-name">Cryptics.tech</span>
-                                <span class="source-status" id="cryptics-status">Waiting...</span>
+                                <span class="source-name" data-lang-key="Cryptics.tech">Cryptics.tech</span>
+                                <span class="source-status" id="cryptics-status" data-lang-key="waiting">Waiting...</span>
                             </div>
                         </div>
                     </div>
@@ -204,15 +204,15 @@
                     <div class="loading-tips">
                         <div class="tip-item">
                             <span class="tip-icon">💡</span>
-                            <span class="tip-text">Data is being fetched from multiple cryptocurrency platforms</span>
+                            <span class="tip-text" data-lang-key="tip_data_fetch">Data is being fetched from multiple cryptocurrency platforms</span>
                         </div>
                         <div class="tip-item">
                             <span class="tip-icon">⚡</span>
-                            <span class="tip-text">This ensures you get the most comprehensive market overview</span>
+                            <span class="tip-text" data-lang-key="tip_comprehensive">This ensures you get the most comprehensive market overview</span>
                         </div>
                         <div class="tip-item">
                             <span class="tip-icon">🔄</span>
-                            <span class="tip-text">Data refreshes automatically every few minutes</span>
+                            <span class="tip-text" data-lang-key="tip_refresh">Data refreshes automatically every few minutes</span>
                         </div>
                     </div>
                 </div>
@@ -384,7 +384,7 @@
                 <div class="coin-event-calendar mb-5" style="margin-top: 2em;">
                     <div class="modern-title-bar">
                         <div class="m-portlet__head-title custom-modern">
-                            <span class="modern-title-text">Coin Event Calendar</span>
+                            <span class="modern-title-text" data-lang-key="coin_event_calendar">Coin Event Calendar</span>
                         </div>
                     </div>
                     <div class="calendar-wrapper">
@@ -396,7 +396,7 @@
                             <div class="event-modal__backdrop" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()"></div>
                             <div class="event-modal__content">
                                 <div class="event-modal__header">
-                                    <h3 id="eventModalTitle">Event</h3>
+                                    <h3 id="eventModalTitle" data-lang-key="event">Event</h3>
                                     <button type="button" class="event-modal__close" aria-label="Close" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">×</button>
                                 </div>
                                 <div class="event-modal__body">
@@ -406,8 +406,8 @@
                                     <div class="event-modal__row" id="eventModalProof"></div>
                                 </div>
                                 <div class="event-modal__footer">
-                                    <a id="eventModalLink" href="#" target="_blank" rel="noopener" class="event-modal__btn" style="display:none;">Open Source</a>
-                                    <button type="button" class="event-modal__btn secondary" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">Close</button>
+                                    <a id="eventModalLink" href="#" target="_blank" rel="noopener" class="event-modal__btn" style="display:none;" data-lang-key="open_source">Open Source</a>
+                                    <button type="button" class="event-modal__btn secondary" data-lang-key="close" onclick="(function(){ const m=document.getElementById('eventModal'); if(m) m.style.display='none'; })()">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -722,13 +722,13 @@
                 <div class="main-db-charts" style="margin-top: 2em;">
                     <div class="modern-title-bar">
                         <div class="m-portlet__head-title custom-modern">
-                            <span class="modern-title-text">Market Overview Charts</span>
+                            <span class="modern-title-text" data-lang-key="market_overview_charts">Market Overview Charts</span>
                         </div>
                     </div>
 
                     <div class="charts-grid">
                         <div class="chart-block" style="margin-bottom: 1.5em;">
-                            <h4 style="margin-bottom: 0.5em;">Time Series Prices</h4>
+                            <h4 style="margin-bottom: 0.5em;" data-lang-key="time_series_prices">Time Series Prices</h4>
                             <div style="position: relative; height: 360px;">
                                 <canvas id="tsPricesChart"></canvas>
                             </div>
@@ -736,13 +736,13 @@
 
                         <div class="chart-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5em;">
                             <div class="chart-block">
-                                <h4 style="margin-bottom: 0.5em;">Market Dominance</h4>
+                                <h4 style="margin-bottom: 0.5em;" data-lang-key="market_dominance">Market Dominance</h4>
                                 <div style="position: relative; height: 320px;">
                                     <canvas id="marketDominanceChart"></canvas>
                                 </div>
                             </div>
                             <div class="chart-block">
-                                <h4 style="margin-bottom: 0.5em;">Top Volume Markets</h4>
+                                <h4 style="margin-bottom: 0.5em;" data-lang-key="top_volume_markets">Top Volume Markets</h4>
                                 <div style="position: relative; height: 320px;">
                                     <canvas id="topVolumeMarketsChart"></canvas>
                                 </div>
