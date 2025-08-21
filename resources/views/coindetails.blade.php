@@ -762,4 +762,40 @@
         var events = {!! $events !!};
     </script>
     <script src="{{ url('js/details.js') }}"></script>
+    <script>
+        // Mobile-specific: disable heavy custom scrollbars and hover effects in timelines
+        document.addEventListener('DOMContentLoaded', function() {
+            var isTouch = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+            if (!isTouch) return;
+
+            var destroyOnce = function() {
+                document.querySelectorAll('.m-scrollable.mCustomScrollbar').forEach(function(el) {
+                    try {
+                        if (window.jQuery && jQuery(el).mCustomScrollbar) {
+                            jQuery(el).mCustomScrollbar('destroy');
+                        }
+                    } catch(e) {}
+                    el.classList.remove('mCustomScrollbar');
+                    el.style.overflowY = 'auto';
+                    el.style.maxHeight = 'none';
+                    el.style.height = 'auto';
+                    el.style.webkitOverflowScrolling = 'touch';
+                });
+            };
+
+            destroyOnce();
+            // In case vendor scripts re-init after load, destroy again shortly after
+            setTimeout(destroyOnce, 800);
+
+            // Specifically target Twitter/Telegram timelines if present
+            var timeLines = document.querySelectorAll('.m-timeline-2');
+            timeLines.forEach(function(tl){
+                tl.style.willChange = 'auto';
+                tl.style.transform = 'none';
+            });
+
+            // Add a class to disable hover-only styles if any remain
+            document.body.classList.add('no-hover');
+        });
+    </script>
 @endsection
