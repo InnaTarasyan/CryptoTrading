@@ -8,14 +8,64 @@ TradingPairs.prototype.init = function () {
         "processing": true,
         "serverSide": true,
         "ajax": $('#tradingPair_route').val(),
+        "responsive": {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal({
+                    header: function (row) {
+                        var data = row.data();
+                        return '<h4 class="modal-title">Trading Pair Details</h4>';
+                    }
+                }),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                    tableClass: 'table table-striped table-bordered'
+                })
+            }
+        },
         "columns": [
-            {data: 'coin', name: 'coin', "defaultContent" : 'Not Set'},
-            {data: 'trading_pair', name: 'trading_pair', "defaultContent" : 'Not Set'},
-            {data: 'action', name: 'action'}
-
+            {
+                data: 'coin', 
+                name: 'coin', 
+                "defaultContent": 'Not Set',
+                "responsivePriority": 1,
+                "className": "dtr-control"
+            },
+            {
+                data: 'trading_pair', 
+                name: 'trading_pair', 
+                "defaultContent": 'Not Set',
+                "responsivePriority": 2
+            },
+            {
+                data: 'action', 
+                name: 'action',
+                "responsivePriority": 3,
+                "orderable": false,
+                "searchable": false
+            }
         ],
-        "iDisplayLength": 10,
-        "aaSorting": [[ 1, "asc" ]]
+        "pageLength": 10,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "language": {
+            "lengthMenu": "Show _MENU_ entries per page",
+            "zeroRecords": "No matching records found",
+            "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+            "infoEmpty": "Showing 0 to 0 of 0 entries",
+            "infoFiltered": "(filtered from _MAX_ total entries)",
+            "search": "Search:",
+            "processing": "Processing...",
+            "paginate": {
+                "first": "First",
+                "last": "Last",
+                "next": "Next",
+                "previous": "Previous"
+            }
+        },
+        "dom": "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+               "<'row'<'col-sm-12'tr>>" +
+               "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        "autoWidth": false,
+        "scrollX": true,
+        "scrollCollapse": true
     });
 };
 
@@ -227,6 +277,41 @@ $(document).ready(function() {
     var coins = new TradingPairs();
     coins.init();
     coins.bindEvents();
+
+    // Mobile-specific enhancements
+    function enhanceMobileExperience() {
+        var isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            // Optimize for mobile devices
+            $('.dataTables_wrapper').addClass('mobile-optimized');
+            
+            // Add touch-friendly scrolling
+            $('.table-responsive').css({
+                '-webkit-overflow-scrolling': 'touch',
+                'overflow-x': 'auto'
+            });
+            
+            // Ensure proper button sizing for touch
+            $('.btn-edit, .btn-delete').css({
+                'min-height': '44px',
+                'min-width': '44px'
+            });
+        }
+    }
+
+    // Call on load and resize
+    enhanceMobileExperience();
+    $(window).on('resize', enhanceMobileExperience);
+
+    // Touch event handling for mobile
+    if ('ontouchstart' in window) {
+        $('.btn-edit, .btn-delete').on('touchstart', function() {
+            $(this).addClass('touch-active');
+        }).on('touchend', function() {
+            $(this).removeClass('touch-active');
+        });
+    }
 
     $('#coin').select2({
         placeholder: "Select an Option",
