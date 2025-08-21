@@ -1,6 +1,10 @@
 @extends('layouts.base')
 @section('styles')
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" rel="stylesheet" />
+    <!-- DataTables CSS with Responsive features -->
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" rel="stylesheet" />
     <style>
         /* Modern DataTable Styles for Twitter Page */
         .modern-datatable-container {
@@ -215,16 +219,18 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
         }
 
-        /* Responsive Design */
+        /* Enhanced Mobile Responsive Design */
         @media (max-width: 768px) {
             .modern-datatable-container {
                 margin: 10px 0;
                 border-radius: 12px;
+                overflow-x: auto;
             }
 
             #twitter thead th {
                 padding: 12px 8px;
                 font-size: 12px;
+                white-space: nowrap;
             }
 
             #twitter tbody td {
@@ -233,19 +239,129 @@
             }
 
             .dataTables_wrapper .dataTables_filter input {
-                width: 200px;
+                width: 100%;
+                max-width: 200px;
                 padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            .dataTables_wrapper .dataTables_length select {
+                padding: 6px 8px;
+                font-size: 14px;
             }
 
             .action-buttons {
                 flex-direction: column;
                 gap: 4px;
+                min-width: 80px;
             }
 
             .btn-edit, .btn-delete {
                 padding: 6px 12px;
                 font-size: 11px;
+                width: 100%;
+                justify-content: center;
             }
+
+            /* Mobile-specific table styling */
+            .table-responsive {
+                border: none;
+                border-radius: 12px;
+            }
+
+            /* Ensure proper spacing on mobile */
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter,
+            .dataTables_wrapper .dataTables_info,
+            .dataTables_wrapper .dataTables_paginate {
+                margin: 8px;
+                text-align: center;
+            }
+
+            /* Stack pagination buttons on mobile */
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                margin: 2px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 576px) {
+            .modern-datatable-container {
+                margin: 5px 0;
+                border-radius: 8px;
+            }
+
+            #twitter thead th {
+                padding: 8px 4px;
+                font-size: 11px;
+            }
+
+            #twitter tbody td {
+                padding: 8px 4px;
+                font-size: 11px;
+            }
+
+            .dataTables_wrapper .dataTables_filter input {
+                max-width: 150px;
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+
+            .dataTables_wrapper .dataTables_length select {
+                padding: 4px 6px;
+                font-size: 12px;
+            }
+
+            .btn-edit, .btn-delete {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+
+            /* Hide less important elements on very small screens */
+            .dataTables_wrapper .dataTables_length {
+                display: none;
+            }
+        }
+
+        /* Responsive DataTables specific styling */
+        .dtr-title {
+            font-weight: 600;
+            color: #374151;
+            background: #f8fafc;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .dtr-data {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        /* Mobile card-like layout for responsive rows */
+        .dtr-bs-modal .modal-body {
+            padding: 20px;
+        }
+
+        .dtr-bs-modal .dtr-title {
+            display: block;
+            width: 100%;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .dtr-bs-modal .dtr-data {
+            display: block;
+            width: 100%;
+            margin-bottom: 16px;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
         }
 
         /* Dark Mode Support */
@@ -283,6 +399,15 @@
                 background: #374151;
                 border-color: #4b5563;
                 color: #d1d5db !important;
+            }
+
+            .dtr-title {
+                background: #374151;
+                color: #d1d5db;
+            }
+
+            .dtr-data {
+                color: #9ca3af;
             }
         }
 
@@ -369,6 +494,194 @@
 
         .table-responsive::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+
+        /* Mobile-first responsive utilities */
+        .d-none-mobile {
+            display: block;
+        }
+
+        .d-block-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .d-none-mobile {
+                display: none;
+            }
+            
+            .d-block-mobile {
+                display: block;
+            }
+        }
+
+        /* Touch-friendly mobile interactions */
+        @media (max-width: 768px) {
+            /* Ensure buttons are large enough for touch */
+            .btn-edit, .btn-delete {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            /* Improve table cell touch targets */
+            #twitter tbody td {
+                min-height: 44px;
+                vertical-align: middle;
+            }
+
+            /* Better spacing for mobile */
+            .modern-datatable-container {
+                padding: 10px;
+            }
+
+            /* Optimize search input for mobile */
+            .dataTables_wrapper .dataTables_filter input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                -webkit-appearance: none;
+                border-radius: 8px;
+            }
+
+            /* Mobile-friendly pagination */
+            .dataTables_wrapper .dataTables_paginate {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                margin: 3px;
+                min-width: 44px;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Hide/show elements based on screen size */
+            .dataTables_wrapper .dataTables_info {
+                text-align: center;
+                margin: 10px 0;
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .modern-datatable-container {
+                margin: 5px 0;
+            }
+
+            #twitter thead th,
+            #twitter tbody td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+
+            .action-buttons {
+                flex-direction: row;
+                gap: 6px;
+            }
+
+            .btn-edit, .btn-delete {
+                padding: 4px 8px;
+                font-size: 10px;
+                min-height: 36px;
+                min-width: 36px;
+            }
+        }
+
+        /* High DPI mobile devices */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            #twitter thead th,
+            #twitter tbody td {
+                border-width: 0.5px;
+            }
+        }
+
+        /* Print styles for mobile */
+        @media print {
+            .modern-datatable-container {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+
+            #twitter thead th {
+                background: #f0f0f0 !important;
+                color: #000 !important;
+            }
+
+            .action-buttons {
+                display: none;
+            }
+        }
+
+        /* Mobile-optimized class styles */
+        .mobile-optimized .dataTables_wrapper {
+            padding: 10px;
+        }
+
+        .mobile-optimized .dataTables_filter {
+            margin-bottom: 15px;
+        }
+
+        .mobile-optimized .dataTables_length {
+            margin-bottom: 10px;
+        }
+
+        /* Touch interaction styles */
+        .touch-active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+
+        /* Mobile-specific table improvements */
+        @media (max-width: 768px) {
+            .mobile-optimized #twitter {
+                font-size: 12px;
+            }
+
+            .mobile-optimized .dtr-title {
+                font-size: 11px;
+                padding: 3px 6px;
+            }
+
+            .mobile-optimized .dtr-data {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            /* Improve modal display on mobile */
+            .dtr-bs-modal .modal-dialog {
+                margin: 10px;
+                max-width: calc(100% - 20px);
+            }
+
+            .dtr-bs-modal .modal-body {
+                padding: 15px;
+            }
+        }
+
+        /* Accessibility improvements for mobile */
+        @media (max-width: 768px) {
+            /* Ensure sufficient color contrast */
+            #twitter tbody td {
+                color: #1f2937;
+            }
+
+            /* Improve focus indicators */
+            .btn-edit:focus,
+            .btn-delete:focus,
+            .dataTables_filter input:focus,
+            .dataTables_length select:focus {
+                outline: 2px solid #667eea;
+                outline-offset: 2px;
+            }
+
+            /* Better visual hierarchy */
+            .dtr-title {
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-size: 10px;
+            }
         }
     </style>
 @endsection
@@ -468,7 +781,8 @@
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>
     <script src="{{ url('assets/demo/default/custom/components/base/sweetalert2.js') }}" type="text/javascript" defer></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables JavaScript with Responsive features -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="{{ url('js/twitter.js') }}"></script>
 @endsection
