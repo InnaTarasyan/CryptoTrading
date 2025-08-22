@@ -1280,3 +1280,13 @@
         line-height: 1.1;
     }
 }
+
+
+
+
+/* Optional: Full-width buttons on mobile */
+@media (max-width: 600px) {
+    .dt-buttons {
+        display: none;
+    }
+}
