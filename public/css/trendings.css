@@ -1406,3 +1406,47 @@ body.dark-mode .modern-title-text {
 		table-layout: fixed;
 	}
 }
+
+
+
+/* Optional: Full-width buttons on mobile */
+@media (max-width: 768px) {
+    .dt-buttons {
+        display: none;
+    }
+
+    .m-portlet {
+        padding: 0 !important;
+    }
+
+    .m-portlet .m-portlet__body {
+        padding: 0 !important;
+    }
+
+    #coingecko_trendings td[data-label="Data"] {
+        padding: 0 !important;
+    }
+
+    #coingecko_trendings tr {
+        padding: 0 !important;
+    }
+
+    .dark-mode-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        align-items: stretch;
+        width: 100%; /* Optional: ensures container can stretch */
+        max-width: 400px; /* Optional: limit width if needed */
+        margin: 0 auto; /* Optional: center container */
+    }
+
+    .dark-mode-container button {
+        width: 90%;
+        padding: 1em;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+}
+
+

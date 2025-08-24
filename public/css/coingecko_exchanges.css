@@ -829,7 +829,7 @@ body.dark-mode .dataTables_wrapper .dataTables_length select:focus {
         content: attr(data-label);
         position: absolute;
         left: 1rem;
-        top: 0;
+        //top: 0;
         width: 45%;
         white-space: nowrap;
         font-weight: bold;
@@ -1476,4 +1476,26 @@ body.dark-mode #coingecko_exchanges td:first-child, body.dark-mode #coingecko_ex
     margin-right: 0.3em;
     display: inline-block;
 }
+
+
+/* Optional: Full-width buttons on mobile */
+@media (max-width: 768px) {
+    .dt-buttons {
+        display: none;
+    }
+
+    .m-portlet {
+        padding: 0 !important;
+    }
+
+    .m-portlet .m-portlet__body {
+        padding: 0 !important;
+    }
+
+    #coingecko_exchanges td {
+        text-align: center !important;
+    }
+
+}
+
 

@@ -2812,3 +2812,20 @@ body.dark-mode .highlight-row {
     /*text-align: center;*/
 }
 
+
+
+/* Optional: Full-width buttons on mobile */
+@media (max-width: 768px) {
+    .dt-buttons {
+        display: none;
+    }
+
+    .m-portlet {
+        padding: 0 !important;
+    }
+
+    .m-portlet .m-portlet__body {
+        padding: 0 !important;
+    }
+}
+

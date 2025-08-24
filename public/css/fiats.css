@@ -1295,3 +1295,24 @@ body.dark-mode .fiats-info-block ul.fiats-datatable-columns-list li {
         line-height: 1.1;
     }
 }
+
+
+
+/* Optional: Full-width buttons on mobile */
+@media (max-width: 768px) {
+    .dt-buttons {
+        display: none;
+    }
+
+    .m-portlet {
+        padding: 0 !important;
+    }
+
+    .m-portlet .m-portlet__body {
+        padding: 0 !important;
+    }
+
+    .modern-reviews-section {
+        padding: 0 !important;
+    }
+}

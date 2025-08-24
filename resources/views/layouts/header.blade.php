@@ -58,6 +58,10 @@
                                 <i class="la la-calendar"></i>
                                 <span data-lang-key="coin_market_cal">Coin Market Cal</span>
                             </a>
+                            <a href="/cryptocomparecoinsindex" class="dropdown-item">
+                                <i class="la la-calendar"></i>
+                                <span>Crypto Compare</span>
+                            </a>
                         </div>
                     </div>
                 </div>

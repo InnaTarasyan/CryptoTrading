@@ -1792,3 +1792,28 @@ body.dark-mode .info-title {
     }
 }
 /* --- End Derivatives Review Block Styles --- */
+
+
+/* Optional: Full-width buttons on mobile */
+@media (max-width: 768px) {
+    .dt-buttons {
+        display: none;
+    }
+
+    .m-portlet {
+        padding: 0 !important;
+    }
+
+    .m-portlet .m-portlet__body {
+        padding: 0 !important;
+    }
+
+    .review-form-group {
+        flex: none; /* or flex: 0 0 auto; */
+        width: 100%; /* Optional: ensure full width on small screens */
+    }
+
+    td {
+        text-align: center !important;
+    }
+}
