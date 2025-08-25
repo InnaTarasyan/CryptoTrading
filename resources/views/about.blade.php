@@ -1,6 +1,53 @@
 @extends('layouts.base')
 @section('styles')
     <link href="{{ url('css/about.css') }}" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 2em;
+            color: #555;
+        }
+        p {
+            font-size: 1.1em;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+        .ownership-info {
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-top: 30px;
+        }
+        .contact-info {
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+        .contact-info a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
 @endsection
 @section('content')
 <div class="about-hero text-center">
@@ -13,6 +60,19 @@
     <h1 style="margin-top: 0.7em; font-weight: 700; color: #3730a3;">Inna Tarasyan</h1>
     <p class="lead" style="color: #6366f1; font-size: 1.2em;">Web Developer & Crypto Enthusiast</p>
     <p style="color: #555; max-width: 500px; margin: 0 auto 1.2em auto;">Hello! I'm a passionate web developer from Armenia, dedicated to creating tools that make crypto trading more accessible and informed. I believe in the power of real-time data and user-friendly interfaces to help traders make better decisions.</p>
+
+
+    <div class="ownership-info">
+        <h2>Ownership Information</h2>
+        <p>"Coin Trading Project" is owned and operated solely by me, Inna Tarasyan, a web developer from Armenia. It is not affiliated with any company or corporation, and I take full responsibility for all aspects of the site, including its content and functionality.</p>
+    </div>
+
+    <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>If you have any questions or would like to connect with me directly, feel free to reach out:</p>
+        <p>Email me at: <a href="mailto:innatarasyancryptotrading@gmail.com">innatarasyancryptotrading@gmail.com</a></p>
+    </div>
+
 </div>
 <div class="container-fluid" style="max-width: 1100px;">
     <div class="row">
