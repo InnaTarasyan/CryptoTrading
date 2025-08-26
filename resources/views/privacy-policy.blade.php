@@ -120,6 +120,84 @@
                 font-size: 1.25rem;
             }
         }
+
+        .safety-notice {
+            background-color: #f1f8f5;
+            border-left: 4px solid #34a853;
+            padding: 15px 20px;
+            margin: 20px auto;
+            max-width: 700px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #202124;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .safety-notice a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .safety-notice a:hover {
+            text-decoration: underline;
+        }
+
+        .safe-browsing-badge {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #34a853;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        .safe-browsing-badge:hover {
+            background-color: #2c8a44;
+        }
+        .security-rating {
+            max-width: 320px;
+            background: #f9f9f9;
+            border: 2px solid #28a745; /* green border for success */
+            padding: 1em 1.5em;
+            border-radius: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3);
+            margin: 1em auto;
+            text-align: center;
+        }
+
+        .security-rating h2 {
+            margin-top: 0;
+            color: #28a745;
+        }
+
+        .security-rating a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .security-rating a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            margin-top: 1em;
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            font-weight: bold;
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.6);
+            user-select: none;
+        }
     </style>
 
     <div class="privacy-card">
@@ -164,5 +242,38 @@
 
         <h2>Contact</h2>
         <p>If you have any questions, concerns, or just want to say hello, feel free to reach out to Inna Tarasyan at <a href="mailto:inna.tarasyan@gmail.com">inna.tarasyan@gmail.com</a>. We're here to help!</p>
+
+        <div class="safety-notice">
+            ✅ As of our last check, Google Safe Browsing has not detected any unsafe content on this site.
+            You can view the current status <a href="https://transparencyreport.google.com/safe-browsing/search" target="_blank" rel="noopener noreferrer">here</a>.
+        </div>
+
+        <a href="https://transparencyreport.google.com/safe-browsing/search?url=cryptotrading.website" target="_blank" class="safe-browsing-badge">
+            ✔ Verified Clean by Google Safe Browsing
+        </a>
+
+        <section class="security-rating">
+            <h2>Website Security</h2>
+            <p>We’re proud to have earned an <strong>A+</strong> rating on
+                <a href="https://securityheaders.com/?q=https%3A%2F%2Fcryptotrading.website&followRedirects=on"
+                   target="_blank" rel="noopener noreferrer">SecurityHeaders.com</a> — ensuring your data is well protected.</p>
+            <div class="badge">
+                <span>A+</span>
+            </div>
+        </section>
+
+        <div style="background-color:#f3f4f6; padding:10px; border-left:5px solid #28a745; font-family:sans-serif;">
+            <p style="margin:0;">🔐 <strong>SSL Rating:</strong> <span style="color:#28a745;">A (IPv4 & IPv6)</span> — Verified by
+                <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cryptotrading.website" target="_blank" rel="noopener noreferrer">
+                    SSL Labs
+                </a> on August 26, 2025.
+            </p>
+        </div>
+
+        <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cryptotrading.website" target="_blank" rel="noopener noreferrer">
+            <img src="screen__.png" alt="SSL Labs Grade A" style="max-width:150px;"/>
+        </a>
+
+
     </div>
 @endsection

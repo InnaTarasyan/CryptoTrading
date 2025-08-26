@@ -20,7 +20,7 @@
         @yield('title', 'CryptoTrading | Learn & Trade Bitcoin, Ethereum, Altcoins')
     </title>
     <meta name="title" content="@yield('meta_title', 'CryptoTrading | Learn & Trade Bitcoin, Ethereum, Altcoins')">
-    <meta name="description" content="@yield('meta_description', 'Trade safely with CryptoTrading. Learn, analyze, and profit from BTC, ETH, and altcoins.')">
+    <meta name="description" content="@yield('meta_description', 'Trade safely with CryptoTrading. Learn, analyze, and profit from BTC, ETH, and altcoins. Secure cryptocurrency trading platform. Rated A for SSL/TLS security by SSL Labs on August 26, 2025. Verified clean by Google Safe Browsing')">
     <meta name="keywords" content="@yield('meta_keywords', 'cryptocurrency, crypto, coin, coins, bitcoin, btc, ethereum, eth, binance coin, bnb, solana, sol, cardano, ada, ripple, xrp, litecoin, ltc, dogecoin, doge, polkadot, dot, chainlink, link, tron, trx, avalanche, avax, polygon, matic, uniswap, uni, stellar, xlm, cosmos, atom, filecoin, fil, hedera, hbar, bitcoin cash, bch, ethereum classic, etc, price, prices, live crypto prices, real-time crypto prices, crypto price today, crypto price prediction, coin price prediction, bitcoin price prediction, ethereum price prediction, altcoin price prediction, crypto forecast, crypto predictions, trading, crypto trading, day trading, swing trading, algorithmic trading, automated trading, trading bots, forex, forex trading, currency trading, derivatives, futures, options, spot, exchanges, exchange, binance, coinbase, kraken, kucoin, okx, bybit, bitfinex, market data, market cap, market capitalization, total volume, liquidity, volatility, technical analysis, ta, indicators, rsi, macd, moving average, sma, ema, bollinger bands, support resistance, order book, depth chart, chart, charts, crypto charts, candlestick chart, line chart, charting, tradingview, portfolio, portfolio tracker, watchlist, alerts, signals, crypto signals, arbitrage, defi, decentralized finance, nft, nfts, web3, blockchain, distributed ledger, smart contracts, token, tokens, stablecoin, usdt, usdc, dai, yield farming, staking, airdrop, ico, ieo, ido, launchpad, news, crypto news, on-chain analytics, sentiment, social volume, reddit, twitter, x.com, fear and greed index, education, guides, tutorials, how to buy bitcoin, how to buy ethereum, taxation, regulations, kyc, aml, wallets, wallet, hardware wallet, ledger, trezor, metamask, phantom, phantom wallet, address, tx, transaction, gas fees, miner fees, hash rate, mining, proof of work, proof of stake, nodes, validators, explorer, block explorer, livecoinwatch, coingecko, coinpaprika, cryptics, cryptics.tech, coinmarketcap, cmc, messari, glassnode, santiment, into the block, price alert, price tracker, crypto tracker, crypto app, crypto platform, best crypto tools')">
     <meta name="author" content="Inna Tarasyan">
     <meta name="robots" content="index, follow">
@@ -185,6 +185,45 @@
     <link rel="preload" href="{{url('assets/vendors/base/vendors.bundle.js')}}" as="script">
     
     @yield('styles')
+    <style>
+        .trust-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f1f8f5;
+            border-left: 4px solid #34a853;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #202124;
+            z-index: 9999;
+            max-width: 280px;
+        }
+
+        .trust-badge a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .trust-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .trust-badge-icon {
+            margin-right: 6px;
+        }
+
+        @media (max-width: 600px) {
+            .trust-badge {
+                bottom: 10px;
+                right: 10px;
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+        }
+    </style>
 </head>
 <!-- end::Head -->
 <!-- end::Body -->
@@ -202,7 +241,14 @@
             @yield('content')
         </div>
     </div>
-    <!-- end:: Body -->
+
+    <div class="trust-badge">
+        ✅ <span>Checked by <a href="https://transparencyreport.google.com/safe-browsing/search" target="_blank" rel="noopener noreferrer">Google Safe Browsing</a></span>
+    </div>
+
+
+
+        <!-- end:: Body -->
     @include('layouts.footer')
 </div>
 <!-- end:: Page -->

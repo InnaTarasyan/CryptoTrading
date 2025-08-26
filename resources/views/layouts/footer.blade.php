@@ -13,6 +13,11 @@
                         <a href="/terms-of-use" class="footer-policy-link">Terms of Use</a>
                     </span>
                 </span>
+                <footer>
+                    <p>✅ Site status: No unsafe content detected by <a href="https://transparencyreport.google.com/safe-browsing/search" target="_blank">Google Safe Browsing</a>.</p>
+                    <p>🔒 Our SSL security has been rated <strong>A</strong> by <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cryptotrading.website" target="_blank" rel="noopener noreferrer">Qualys SSL Labs</a>.</p>
+                </footer>
+
             </div>
         </div>
     </div>

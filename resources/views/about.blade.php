@@ -47,6 +47,43 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
+
+
+
+        ul {
+            max-width: 700px;
+            padding-left: 1.2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .sources-list li {
+            margin-bottom: 0.5rem;
+        }
+        .feature-list li {
+            margin-bottom: 0.6rem;
+        }
+        .privacy-note {
+            background-color: #eaf4f9;
+            border-left: 4px solid #2980b9;
+            padding: 1rem 1.2rem;
+            margin: 2rem 0 1rem 0;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 0.8rem;
+            }
+            .container {
+                padding: 1.5rem 1.5rem;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -248,6 +285,11 @@
                         
                         <div style="background: linear-gradient(120deg, #fff3e0 0%, #ffe0b2 100%); border: 1px solid #ff9800; border-radius: 0.5em; padding: 1em; margin-top: 1em;">
                             <p style="font-size: 1em; color: #e65100; margin: 0; line-height: 1.5;"><strong>Note:</strong> Predictions are based on historical data analysis and mathematical models. They should be used as one of many tools in your trading strategy, not as the sole basis for investment decisions. Market conditions can change rapidly, and past performance does not guarantee future results.</p>
+                        </div>
+
+
+                        <div class="privacy-note" role="note" aria-live="polite">
+                            <strong>Privacy Notice:</strong> We do not collect or store personal data. All cryptocurrency data is fetched via public APIs from trusted sources like CoinGecko and LiveCoinWatch.
                         </div>
                     </div>
                     
