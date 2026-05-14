@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Coingecko;
 
+use App\Contracts\Repositories\PublicReviewRepositoryInterface;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Reviews\StoreCoinGeckoTrendingsReviewRequest;
 use App\Models\CoinGecko\CoinGeckoTrendingsReview;
+use Illuminate\Http\Request;
 
 class CoinGeckoTrendingsReviewController extends Controller
 {
+    public function __construct(
+        private readonly PublicReviewRepositoryInterface $publicReviews
+    ) {
+    }
+
     public function index(Request $request)
     {
         $trendingCode = $request->query('trending_code');
@@ -16,25 +23,14 @@ class CoinGeckoTrendingsReviewController extends Controller
             $query->where('trending_code', $trendingCode);
         }
         $reviews = $query->orderBy('created_at', 'desc')->get();
+
         return response()->json($reviews);
     }
 
-    public function store(Request $request)
+    public function store(StoreCoinGeckoTrendingsReviewRequest $request)
     {
-        $validated = $request->validate([
-            'trending_code' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'rating' => 'required|integer|min:1|max:5',
-            'title' => 'required|string|max:255',
-            'comment' => 'required|string',
-            'country' => 'nullable|string|max:255',
-            'experience_level' => 'nullable|string|max:255',
-            'pros' => 'nullable|string',
-            'cons' => 'nullable|string',
-            'recommend' => 'nullable|in:0,1,true,false',
-        ]);
-        $review = CoinGeckoTrendingsReview::create($validated);
+        $review = $this->publicReviews->createCoinGeckoTrendingsReview($request->validated());
+
         return response()->json(['success' => true, 'review' => $review]);
     }
-} 
+}

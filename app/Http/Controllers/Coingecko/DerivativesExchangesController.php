@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\CoinGecko;
+namespace App\Http\Controllers\Coingecko;
 
+use App\Contracts\Repositories\PublicReviewRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Reviews\StoreDerivativeExchangeReviewRequest;
 use App\Models\CoinGecko\DerivativesExchanges;
-use Yajra\DataTables\Facades\DataTables as Datatables;
 use App\Models\CoinGecko\DerivativesExchangesReview;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables as Datatables;
 
 class DerivativesExchangesController extends Controller
 {
+    public function __construct(
+        private readonly PublicReviewRepositoryInterface $publicReviews
+    ) {
+    }
+
     /**
      * @return \Illuminate\Http\Response
      */
@@ -131,24 +138,11 @@ class DerivativesExchangesController extends Controller
             ->make(true);
     }
 
-    public function storeReview(Request $request)
+    public function storeReview(StoreDerivativeExchangeReviewRequest $request)
     {
-        $validated = $request->validate([
-            'exchange_code' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'rating' => 'required|integer|min:1|max:5',
-            'title' => 'required|string|max:255',
-            'comment' => 'required|string|max:2000',
-            'country' => 'nullable|string|max:100',
-            'experience_level' => 'nullable|string|max:100',
-            'pros' => 'nullable|string|max:1000',
-            'cons' => 'nullable|string|max:1000',
-            'recommend' => 'nullable|boolean',
-        ]);
-
         try {
-            DerivativesExchangesReview::create($validated);
+            $this->publicReviews->createDerivativeExchangeReview($request->validated());
+
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);

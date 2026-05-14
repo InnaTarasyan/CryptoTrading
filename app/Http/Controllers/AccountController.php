@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Repositories\ApiKeyRepositoryInterface;
+use App\Contracts\Repositories\UserRepositoryInterface;
+use App\Http\Requests\GenerateApiKeyRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\ApiKey;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use App\Models\UserNotification;
 use PragmaRX\Google2FA\Google2FA;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer\PngWriter;
 
 class AccountController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly ApiKeyRepositoryInterface $apiKeyRepository
+    ) {
         $this->middleware('auth');
     }
 
@@ -35,45 +33,11 @@ class AccountController extends Controller
         return view('account.profile');
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UpdateProfileRequest $request)
     {
         $user = Auth::user();
-        
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'nullable|string|max:255',
-            'last_name' => 'nullable|string|max:255',
-            'username' => [
-                'nullable',
-                'string',
-                'max:255',
-                'alpha_dash',
-                Rule::unique('users')->ignore($user->id)
-            ],
-            'phone' => 'nullable|string|max:20',
-            'bio' => 'nullable|string|max:280',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users')->ignore($user->id)
-            ],
-            'email_notifications' => 'required|in:all,important,none',
-            'country' => 'nullable|string|max:255',
-            'timezone' => 'nullable|string|max:255',
-            'twitter' => 'nullable|url|max:255',
-            'linkedin' => 'nullable|url|max:255',
-            'github' => 'nullable|url|max:255',
-            'website' => 'nullable|url|max:255',
-            'profile_public' => 'boolean',
-            'show_email' => 'boolean',
-            'show_location' => 'boolean',
-            'show_social' => 'boolean',
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
-        $user->update($request->all());
+        $this->authorize('update', $user);
+        $this->userRepository->updateProfile($user, $request->validated());
 
         return back()->with('success', 'Profile updated successfully!');
     }
@@ -83,16 +47,13 @@ class AccountController extends Controller
         return view('account.security');
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(UpdatePasswordRequest $request)
     {
-        $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
         $user = Auth::user();
+        $this->authorize('updatePassword', $user);
+        $validated = $request->validated();
         $user->update([
-            'password' => Hash::make($request->new_password),
+            'password' => Hash::make($validated['new_password']),
             'password_changed_at' => now(),
         ]);
 
@@ -103,50 +64,51 @@ class AccountController extends Controller
     {
         try {
             $user = Auth::user();
-            
+
             // Check if 2FA is already enabled
             if ($user->two_factor_enabled) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Two-factor authentication is already enabled.'
+                    'message' => 'Two-factor authentication is already enabled.',
                 ], 400);
             }
-            
+
             // Generate a new 2FA secret
             $google2fa = new Google2FA();
             $secret = $google2fa->generateSecretKey();
-            
+
             // Generate QR code URL
             $qrCodeUrl = $google2fa->getQRCodeUrl(
                 config('app.name', 'Crypto Trading'),
                 $user->email,
                 $secret
             );
-            
+
             // Generate recovery codes
             $recoveryCodes = [];
             for ($i = 0; $i < 8; $i++) {
-                $recoveryCodes[] = Str::random(10) . '-' . Str::random(10);
+                $recoveryCodes[] = Str::random(10).'-'.Str::random(10);
             }
-            
+
             // Store the secret and recovery codes temporarily (not enabled yet)
             $user->update([
                 'two_factor_secret' => $secret,
                 'two_factor_recovery_codes' => $recoveryCodes,
             ]);
-            
+
             return response()->json([
                 'success' => true,
                 'secret' => $secret,
                 'qr_code_url' => $qrCodeUrl,
                 'recovery_codes' => $recoveryCodes,
-                'message' => 'Two-factor authentication setup initiated. Please scan the QR code and enter the verification code.'
+                'message' => 'Two-factor authentication setup initiated. Please scan the QR code and enter the verification code.',
             ]);
         } catch (\Exception $e) {
-            \Log::error('2FA setup error: ' . $e->getMessage());
+            \Log::error('2FA setup error: '.$e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'An error occurred while setting up 2FA. Please try again.'
+                'message' => 'An error occurred while setting up 2FA. Please try again.',
             ], 500);
         }
     }
@@ -154,17 +116,17 @@ class AccountController extends Controller
     public function getRecoveryCodes(Request $request)
     {
         $user = Auth::user();
-        
-        if (!$user->two_factor_enabled) {
+
+        if (! $user->two_factor_enabled) {
             return response()->json([
                 'success' => false,
-                'message' => 'Two-factor authentication is not enabled.'
+                'message' => 'Two-factor authentication is not enabled.',
             ], 400);
         }
-        
+
         return response()->json([
             'success' => true,
-            'recovery_codes' => $user->two_factor_recovery_codes ?? []
+            'recovery_codes' => $user->two_factor_recovery_codes ?? [],
         ]);
     }
 
@@ -176,11 +138,11 @@ class AccountController extends Controller
             ]);
 
             $user = Auth::user();
-            
-            if (!$user->two_factor_secret) {
+
+            if (! $user->two_factor_secret) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Two-factor authentication setup not initiated.'
+                    'message' => 'Two-factor authentication setup not initiated.',
                 ], 400);
             }
 
@@ -194,19 +156,20 @@ class AccountController extends Controller
 
                 return response()->json([
                     'success' => true,
-                    'message' => 'Two-factor authentication enabled successfully!'
+                    'message' => 'Two-factor authentication enabled successfully!',
                 ]);
             }
 
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid verification code. Please try again.'
+                'message' => 'Invalid verification code. Please try again.',
             ], 400);
         } catch (\Exception $e) {
-            \Log::error('2FA verification error: ' . $e->getMessage());
+            \Log::error('2FA verification error: '.$e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'An error occurred while verifying 2FA. Please try again.'
+                'message' => 'An error occurred while verifying 2FA. Please try again.',
             ], 500);
         }
     }
@@ -214,7 +177,7 @@ class AccountController extends Controller
     public function disableTwoFactor(Request $request)
     {
         $user = Auth::user();
-        
+
         $user->update([
             'two_factor_enabled' => false,
             'two_factor_secret' => null,
@@ -223,7 +186,7 @@ class AccountController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Two-factor authentication disabled successfully!'
+            'message' => 'Two-factor authentication disabled successfully!',
         ]);
     }
 
@@ -231,10 +194,10 @@ class AccountController extends Controller
     {
         // Here you would implement session termination logic
         // For now, we'll just return a success response
-        
+
         return response()->json([
             'success' => true,
-            'message' => 'Session terminated successfully!'
+            'message' => 'Session terminated successfully!',
         ]);
     }
 
@@ -242,38 +205,38 @@ class AccountController extends Controller
     {
         // Here you would implement logic to terminate all other sessions
         // For now, we'll just return a success response
-        
+
         return response()->json([
             'success' => true,
-            'message' => 'All other sessions terminated successfully!'
+            'message' => 'All other sessions terminated successfully!',
         ]);
     }
 
     public function notifications()
     {
         $user = Auth::user();
-        
+
         // Get recent notifications
         $recentNotifications = $user->notifications()
             ->orderBy('created_at', 'desc')
             ->limit(10)
             ->get();
-        
+
         // Get notification statistics
         $stats = [
             'unread' => $user->unread_notifications_count,
             'today' => $user->notifications()->whereDate('created_at', today())->count(),
             'this_week' => $user->notifications()->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count(),
-            'active_alerts' => $user->notifications()->where('type', 'price')->where('is_read', false)->count()
+            'active_alerts' => $user->notifications()->where('type', 'price')->where('is_read', false)->count(),
         ];
-        
+
         return view('account.notifications', compact('recentNotifications', 'stats'));
     }
 
     public function saveNotificationSettings(Request $request)
     {
         \Log::info('saveNotificationSettings called with data:', $request->all());
-        
+
         // More flexible validation rules
         $request->validate([
             'price' => 'nullable|array',
@@ -309,48 +272,48 @@ class AccountController extends Controller
         try {
             $user = Auth::user();
             \Log::info('User authenticated:', ['user_id' => $user->id, 'email' => $user->email]);
-            
+
             // Process the form data and set defaults for missing values
             $notificationData = $this->processNotificationData($request->all());
             \Log::info('Processed notification data:', $notificationData);
-            
+
             $user->notification_preferences = $notificationData;
             $user->save();
-            
+
             \Log::info('Notification preferences saved successfully for user:', ['user_id' => $user->id]);
 
             // Force JSON response with explicit headers
             $response = response()->json([
                 'success' => true,
-                'message' => 'Notification settings saved successfully!'
+                'message' => 'Notification settings saved successfully!',
             ]);
-            
+
             $response->header('Content-Type', 'application/json');
             $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
             $response->header('Pragma', 'no-cache');
             $response->header('Expires', '0');
-            
+
             \Log::info('Sending JSON response with headers:', [
                 'content_type' => $response->headers->get('Content-Type'),
-                'response_data' => ['success' => true, 'message' => 'Notification settings saved successfully!']
+                'response_data' => ['success' => true, 'message' => 'Notification settings saved successfully!'],
             ]);
-            
+
             return $response;
         } catch (\Exception $e) {
-            \Log::error('Error saving notification settings: ' . $e->getMessage(), [
+            \Log::error('Error saving notification settings: '.$e->getMessage(), [
                 'user_id' => Auth::id(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
             ]);
-            
+
             // Force JSON response with explicit headers for error case too
             $response = response()->json([
                 'success' => false,
-                'message' => 'Error saving notification settings: ' . $e->getMessage()
+                'message' => 'Error saving notification settings: '.$e->getMessage(),
             ], 500);
-            
+
             $response->header('Content-Type', 'application/json');
             $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
-            
+
             return $response;
         }
     }
@@ -365,25 +328,25 @@ class AccountController extends Controller
                 'email' => true,
                 'push' => true,
                 'in_app' => true,
-                'frequency' => 'immediate'
+                'frequency' => 'immediate',
             ],
             'portfolio' => [
                 'email' => true,
                 'push' => true,
                 'in_app' => true,
-                'frequency' => 'daily'
+                'frequency' => 'daily',
             ],
             'security' => [
                 'email' => true,
                 'push' => true,
                 'in_app' => true,
-                'frequency' => 'immediate'
+                'frequency' => 'immediate',
             ],
             'system' => [
                 'email' => false,
                 'push' => true,
                 'in_app' => true,
-                'frequency' => 'daily'
+                'frequency' => 'daily',
             ],
             'advanced' => [
                 'quietHours' => false,
@@ -392,8 +355,8 @@ class AccountController extends Controller
                 'sound' => true,
                 'position' => 'top-right',
                 'autoDismiss' => true,
-                'groupNotifications' => true
-            ]
+                'groupNotifications' => true,
+            ],
         ];
 
         // Merge provided data with defaults
@@ -417,9 +380,10 @@ class AccountController extends Controller
         try {
             $user = Auth::user();
             $notification = $user->notifications()->findOrFail($id);
-            
+            $this->authorize('update', $notification);
+
             $request->validate([
-                'is_read' => 'required|boolean'
+                'is_read' => 'required|boolean',
             ]);
 
             if ($request->is_read) {
@@ -430,12 +394,12 @@ class AccountController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Notification status updated successfully!'
+                'message' => 'Notification status updated successfully!',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error updating notification status: ' . $e->getMessage()
+                'message' => 'Error updating notification status: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -448,16 +412,17 @@ class AccountController extends Controller
         try {
             $user = Auth::user();
             $notification = $user->notifications()->findOrFail($id);
+            $this->authorize('delete', $notification);
             $notification->delete();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Notification deleted successfully!'
+                'message' => 'Notification deleted successfully!',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error deleting notification: ' . $e->getMessage()
+                'message' => 'Error deleting notification: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -471,66 +436,47 @@ class AccountController extends Controller
     {
         $apiKeys = Auth::user()->apiKeys()->orderBy('created_at', 'desc')->get();
         $availablePermissions = ApiKey::getAvailablePermissions();
-        
+
         return view('account.api_keys', compact('apiKeys', 'availablePermissions'));
     }
 
-    public function generateApiKey(Request $request)
+    public function generateApiKey(GenerateApiKeyRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'permissions' => 'required|array|min:1',
-            'permissions.*' => [
-                'string',
-                Rule::in(ApiKey::getAvailablePermissions())
-            ]
-        ]);
+        $validated = $request->validated();
 
-        // Check if user already has 10 API keys (limit)
-        if (Auth::user()->apiKeys()->count() >= 10) {
-            return back()->with('error', 'You can only have a maximum of 10 API keys.');
-        }
-
-        $apiKey = Auth::user()->apiKeys()->create([
-            'name' => $request->name,
+        $apiKey = $this->apiKeyRepository->createForUser(Auth::user(), [
+            'name' => $validated['name'],
             'key' => ApiKey::generateKey(),
-            'permissions' => $request->permissions,
-            'is_active' => true
+            'permissions' => $validated['permissions'],
+            'is_active' => true,
         ]);
 
         return back()->with('success', 'API key generated successfully!')
-                    ->with('new_api_key', $apiKey->key);
+            ->with('new_api_key', $apiKey->key);
     }
 
     public function deleteApiKey(ApiKey $apiKey)
     {
-        // Ensure the API key belongs to the authenticated user
-        if ($apiKey->user_id !== Auth::id()) {
-            abort(403);
-        }
-
-        $apiKey->delete();
+        $this->authorize('delete', $apiKey);
+        $this->apiKeyRepository->delete($apiKey);
 
         return back()->with('success', 'API key deleted successfully.');
     }
 
     public function toggleApiKey(ApiKey $apiKey)
     {
-        // Ensure the API key belongs to the authenticated user
-        if ($apiKey->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $apiKey);
+        $this->apiKeyRepository->toggleActive($apiKey);
 
-        $apiKey->update(['is_active' => !$apiKey->is_active]);
+        $status = $apiKey->fresh()->is_active ? 'activated' : 'deactivated';
 
-        $status = $apiKey->is_active ? 'activated' : 'deactivated';
         return back()->with('success', "API key {$status} successfully.");
     }
 
     public function billing()
     {
         $user = Auth::user();
-        
+
         // Mock data for demonstration - in a real app, this would come from your billing provider
         $billingData = [
             'current_plan' => [
@@ -545,15 +491,15 @@ class AccountController extends Controller
                     'Real-time market data',
                     'Portfolio analytics',
                     'Priority support',
-                    'API access'
-                ]
+                    'API access',
+                ],
             ],
             'payment_method' => [
                 'type' => 'card',
                 'last4' => '4242',
                 'brand' => 'Visa',
                 'expiry' => '12/25',
-                'is_default' => true
+                'is_default' => true,
             ],
             'billing_history' => [
                 [
@@ -561,24 +507,24 @@ class AccountController extends Controller
                     'amount' => 29.99,
                     'currency' => 'USD',
                     'status' => 'paid',
-                    'invoice_number' => 'INV-001'
+                    'invoice_number' => 'INV-001',
                 ],
                 [
                     'date' => now()->subMonths(2)->format('M d, Y'),
                     'amount' => 29.99,
                     'currency' => 'USD',
                     'status' => 'paid',
-                    'invoice_number' => 'INV-002'
-                ]
+                    'invoice_number' => 'INV-002',
+                ],
             ],
             'usage' => [
                 'api_calls' => 1250,
                 'api_limit' => 10000,
                 'storage_used' => '2.5 GB',
-                'storage_limit' => '10 GB'
-            ]
+                'storage_limit' => '10 GB',
+            ],
         ];
-        
+
         return view('account.billing', compact('billingData'));
     }
 
@@ -586,4 +532,4 @@ class AccountController extends Controller
     {
         return view('account.support');
     }
-} 
+}
