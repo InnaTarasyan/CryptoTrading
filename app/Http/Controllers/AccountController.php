@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Repositories\ApiKeyRepositoryInterface;
 use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Http\Requests\GenerateApiKeyRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\ApiKey;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class AccountController extends Controller
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = Auth::user();
+        $this->authorize('update', $user);
         $this->userRepository->updateProfile($user, $request->validated());
 
         return back()->with('success', 'Profile updated successfully!');
@@ -45,16 +47,13 @@ class AccountController extends Controller
         return view('account.security');
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(UpdatePasswordRequest $request)
     {
-        $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
         $user = Auth::user();
+        $this->authorize('updatePassword', $user);
+        $validated = $request->validated();
         $user->update([
-            'password' => Hash::make($request->new_password),
+            'password' => Hash::make($validated['new_password']),
             'password_changed_at' => now(),
         ]);
 

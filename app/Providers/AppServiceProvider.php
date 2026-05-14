@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Contracts\Repositories\ApiKeyRepositoryInterface;
+use App\Contracts\Repositories\PublicReviewRepositoryInterface;
+use App\Contracts\Repositories\TradingPairRepositoryInterface;
 use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Repositories\ApiKeyRepository;
+use App\Repositories\PublicReviewRepository;
+use App\Repositories\TradingPairRepository;
 use App\Repositories\UserRepository;
 use Blade;
 use Illuminate\Support\Facades\Schema;
@@ -37,5 +41,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
         $this->app->singleton(ApiKeyRepositoryInterface::class, ApiKeyRepository::class);
+        $this->app->singleton(PublicReviewRepositoryInterface::class, PublicReviewRepository::class);
+        $this->app->singleton(TradingPairRepositoryInterface::class, TradingPairRepository::class);
     }
 }

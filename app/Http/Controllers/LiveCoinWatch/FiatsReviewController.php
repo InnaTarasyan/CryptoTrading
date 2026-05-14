@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\LiveCoinWatch;
 
+use App\Contracts\Repositories\PublicReviewRepositoryInterface;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Reviews\StoreFiatsReviewRequest;
 use App\Models\LiveCoinWatch\FiatsReview;
+use Illuminate\Http\Request;
 
 class FiatsReviewController extends Controller
 {
+    public function __construct(
+        private readonly PublicReviewRepositoryInterface $publicReviews
+    ) {
+    }
+
     public function index(Request $request)
     {
         $fiatCode = $request->query('fiat_code');
@@ -16,25 +23,14 @@ class FiatsReviewController extends Controller
             $query->where('fiat_code', $fiatCode);
         }
         $reviews = $query->orderBy('created_at', 'desc')->get();
+
         return response()->json($reviews);
     }
 
-    public function store(Request $request)
+    public function store(StoreFiatsReviewRequest $request)
     {
-        $validated = $request->validate([
-            'fiat_code' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'rating' => 'required|integer|min:1|max:5',
-            'title' => 'required|string|max:255',
-            'comment' => 'required|string',
-            'country' => 'nullable|string|max:255',
-            'experience_level' => 'nullable|string|max:255',
-            'pros' => 'nullable|string',
-            'cons' => 'nullable|string',
-            'recommend' => 'nullable|boolean',
-        ]);
-        $review = FiatsReview::create($validated);
+        $review = $this->publicReviews->createFiatsReview($request->validated());
+
         return response()->json(['success' => true, 'review' => $review]);
     }
-} 
+}

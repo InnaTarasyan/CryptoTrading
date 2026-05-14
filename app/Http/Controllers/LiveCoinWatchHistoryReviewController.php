@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Contracts\Repositories\PublicReviewRepositoryInterface;
+use App\Http\Requests\Reviews\StoreLiveCoinWatchHistoryReviewRequest;
 use App\Models\LiveCoinWatchHistoryReview;
 
 class LiveCoinWatchHistoryReviewController extends Controller
 {
+    public function __construct(
+        private readonly PublicReviewRepositoryInterface $publicReviews
+    ) {
+    }
+
     public function index()
     {
         $reviews = LiveCoinWatchHistoryReview::orderBy('created_at', 'desc')->get();
+
         return response()->json($reviews);
     }
 
-    public function store(Request $request)
+    public function store(StoreLiveCoinWatchHistoryReviewRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'rating' => 'required|integer|min:1|max:5',
-            'title' => 'required|string|max:255',
-            'comment' => 'required|string',
-        ]);
-        $review = LiveCoinWatchHistoryReview::create($validated);
+        $review = $this->publicReviews->createHistoryReview($request->validated());
+
         return response()->json(['success' => true, 'review' => $review]);
     }
 }

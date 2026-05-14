@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserNotification;
 use App\Policies\ApiKeyPolicy;
 use App\Policies\UserNotificationPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -20,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         ApiKey::class => ApiKeyPolicy::class,
         UserNotification::class => UserNotificationPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
@@ -39,6 +41,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('viewBilling', function (User $user) {
             return $user->hasVerifiedEmail() || app()->environment(['local', 'testing']);
+        });
+
+        Gate::define('submitPublicMarketReview', function (?User $user) {
+            return true;
         });
     }
 }

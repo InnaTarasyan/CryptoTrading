@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\ApiKeyCreated;
 use App\Events\ProfileUpdated;
+use App\Events\PublicReviewSubmitted;
 use App\Listeners\CreateInAppNotificationForNewApiKey;
 use App\Listeners\LogProfileUpdatedActivity;
+use App\Listeners\LogPublicReviewSubmission;
 use App\Listeners\RecordUserLoginActivity;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProfileUpdated::class => [
             LogProfileUpdatedActivity::class,
+        ],
+        PublicReviewSubmitted::class => [
+            LogPublicReviewSubmission::class,
         ],
     ];
 
