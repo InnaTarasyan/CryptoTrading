@@ -469,6 +469,7 @@
                         </h5>
                     </div>
                     <div class="card-body">
+                        @can('create', \App\Models\ApiKey::class)
                         <form method="POST" action="{{ route('account.api_keys.generate') }}">
                             @csrf
                             <div class="mb-4">
@@ -580,6 +581,9 @@
                                 <i class="fas fa-key mr-2"></i>Generate API Key
                             </button>
                         </form>
+                        @else
+                        <p class="text-muted mb-0">You have reached the maximum of {{ \App\Policies\ApiKeyPolicy::MAX_KEYS_PER_USER }} API keys. Delete an existing key to create a new one.</p>
+                        @endcan
                     </div>
                 </div>
 
@@ -658,6 +662,7 @@
                                                 </td>
                                                 <td data-label="Actions">
                                                     <div class="btn-group btn-group-sm">
+                                                        @can('update', $apiKey)
                                                         <form method="POST" action="{{ route('account.api_keys.toggle', $apiKey) }}" class="d-inline">
                                                             @csrf
                                                             @method('PATCH')
@@ -666,6 +671,8 @@
                                                                 {{ $apiKey->is_active ? 'Disable' : 'Enable' }}
                                                             </button>
                                                         </form>
+                                                        @endcan
+                                                        @can('delete', $apiKey)
                                                         <form method="POST" action="{{ route('account.api_keys.delete', $apiKey) }}" 
                                                               class="d-inline" onsubmit="return confirm('Are you sure you want to delete this API key?')">
                                                             @csrf
@@ -674,6 +681,7 @@
                                                                 <i class="fas fa-trash me-1"></i>Delete
                                                             </button>
                                                         </form>
+                                                        @endcan
                                                     </div>
                                                 </td>
                                             </tr>
@@ -756,6 +764,7 @@
                                     </div>
                                     
                                     <div class="api-key-actions">
+                                        @can('update', $apiKey)
                                         <form method="POST" action="{{ route('account.api_keys.toggle', $apiKey) }}" class="d-inline">
                                             @csrf
                                             @method('PATCH')
@@ -764,6 +773,8 @@
                                                 {{ $apiKey->is_active ? 'Disable' : 'Enable' }}
                                             </button>
                                         </form>
+                                        @endcan
+                                        @can('delete', $apiKey)
                                         <form method="POST" action="{{ route('account.api_keys.delete', $apiKey) }}" 
                                               class="d-inline" onsubmit="return confirm('Are you sure you want to delete this API key?')">
                                             @csrf
@@ -772,6 +783,7 @@
                                                 <i class="fas fa-trash me-1"></i>Delete
                                             </button>
                                         </form>
+                                        @endcan
                                     </div>
                                 </div>
                             @endforeach

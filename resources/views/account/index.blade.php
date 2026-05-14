@@ -13,6 +13,16 @@
                 <div class="card-body">
                     <h3 class="mb-3">Welcome, {{ auth()->user()->name }}</h3>
                     <p class="text-muted">This is your personal cabinet. Use the left menu to navigate your account settings and tools.</p>
+                    @cannot('hasCompletedProfile')
+                        <div class="alert alert-info mt-2 mb-0" role="alert">
+                            Add your first and last name under Profile to complete your public profile.
+                        </div>
+                    @endcannot
+                    @can('accessApiBasedFeatures')
+                        <div class="alert alert-success mt-2 mb-0" role="alert">
+                            You have at least one active API key — programmatic market data access is enabled.
+                        </div>
+                    @endcan
                     <hr>
                     <div class="row g-3">
                         <div class="col-md-4">
